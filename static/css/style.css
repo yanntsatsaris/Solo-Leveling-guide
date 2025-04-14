@@ -6,6 +6,7 @@ body {
     padding: 0;
 }
 
+/* Styles par défaut (ordinateurs) */
 .navbar {
     background-color: #1e1e1e;
     padding: 10px 20px;
@@ -25,17 +26,17 @@ body {
 
 .navbar ul li {
     display: inline-block;
-    padding: 15px 30px; /* Augmente l'espace autour du texte dans chaque cellule */
-    position: relative; /* Nécessaire pour positionner le rectangle */
+    padding: 15px 20px; /* Ajuste l'espace autour du texte */
+    position: relative;
 }
 
 .navbar ul li a {
     text-decoration: none;
-    color: #ffffff; /* Texte blanc par défaut */
+    color: #ffffff;
     font-weight: bold;
     transition: all 0.3s ease-in-out;
-    display: block; /* Permet au lien de remplir toute la cellule */
-    text-align: center; /* Centre le texte dans la cellule */
+    display: block;
+    text-align: center;
 }
 
 .navbar ul li a:hover,
@@ -59,23 +60,25 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
+/* Logo utilisateur */
 .user-logo {
     display: flex;
     align-items: center;
 }
 
 .user-logo img {
-    width: 40px; /* Taille de l'icône */
+    width: 40px;
     height: 40px;
-    border-radius: 50%; /* Rond si l'image est carrée */
+    border-radius: 50%;
     cursor: pointer;
     transition: transform 0.3s ease;
 }
 
 .user-logo img:hover {
-    transform: scale(1.1); /* Agrandit légèrement au survol */
+    transform: scale(1.1);
 }
 
+/* Conteneur principal */
 .container {
     max-width: 600px;
     margin: 50px auto;
@@ -85,10 +88,11 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Titre principal */
 h1 {
-    color: #ffffff; /* Texte blanc */
+    color: #ffffff;
     text-align: center;
-    text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff; /* Glow violet */
+    text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff;
     font-size: 2.5rem;
     margin-bottom: 20px;
 }
@@ -114,4 +118,50 @@ button {
 
 button:hover {
     background-color: #e6b800;
+}
+
+/* Media Queries pour les petits écrans (tablettes et téléphones) */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Empile les éléments verticalement */
+        align-items: center;
+    }
+
+    .navbar ul {
+        flex-direction: column; /* Les liens sont empilés verticalement */
+        width: 100%; /* Prend toute la largeur */
+    }
+
+    .navbar ul li {
+        padding: 10px 0; /* Réduit l'espace autour des liens */
+    }
+
+    .user-logo {
+        margin-top: 10px; /* Ajoute un espace entre les liens et le logo utilisateur */
+    }
+
+    .container {
+        width: 90%; /* Réduit la largeur pour s'adapter aux petits écrans */
+        margin: 20px auto;
+    }
+
+    h1 {
+        font-size: 2rem; /* Réduit la taille du titre */
+    }
+}
+
+/* Media Queries pour les très petits écrans (téléphones) */
+@media (max-width: 480px) {
+    .navbar ul li {
+        padding: 8px 0; /* Réduit encore l'espace autour des liens */
+    }
+
+    .user-logo img {
+        width: 30px; /* Réduit la taille du logo utilisateur */
+        height: 30px;
+    }
+
+    h1 {
+        font-size: 1.8rem; /* Réduit encore la taille du titre */
+    }
 }
