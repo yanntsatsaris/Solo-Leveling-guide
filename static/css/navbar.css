@@ -1,0 +1,111 @@
+/* Style pour la navbar */
+.navbar {
+    background-color: #1e1e1e;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between; /* Sépare les éléments à gauche et à droite */
+    align-items: center;
+}
+
+/* Liste des liens */
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+/* Liens individuels */
+.navbar ul li {
+    display: inline-block;
+    padding: 15px 20px; /* Ajuste l'espace autour du texte */
+    position: relative;
+}
+
+/* Style des liens */
+.navbar ul li a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    display: block;
+    text-align: center;
+}
+
+/* Effet hover et lien actif */
+.navbar ul li a:hover,
+.navbar ul li a.active {
+    color: #ffffff; /* Texte blanc */
+    text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff; /* Glow violet sur le texte */
+}
+
+/* Rectangle sous le lien actif ou au survol */
+.navbar ul li a:hover::after,
+.navbar ul li a.active::after {
+    content: '';
+    display: block;
+    width: 80%; /* Réduit la largeur du rectangle à 80% de la cellule */
+    height: 3px; /* Réduit la hauteur du rectangle */
+    background-color: #ffffff; /* Rectangle blanc */
+    position: absolute;
+    bottom: 5px; /* Légèrement au-dessus du bord inférieur */
+    left: 10%; /* Centre le rectangle horizontalement */
+    border-radius: 2px;
+    box-shadow: 0 0 10px 2px #8000ff; /* Glow violet sur le rectangle */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Logo utilisateur */
+.user-logo {
+    display: flex;
+    align-items: center;
+}
+
+.user-logo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.user-logo img:hover {
+    transform: scale(1.1); /* Agrandit légèrement le logo au survol */
+}
+
+/* Responsive Design */
+
+/* Pour les écrans de taille moyenne (tablettes) */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column; /* Empile les éléments verticalement */
+        align-items: center;
+    }
+
+    .navbar ul {
+        flex-direction: column; /* Les liens sont empilés verticalement */
+        width: 100%; /* Prend toute la largeur */
+    }
+
+    .navbar ul li {
+        padding: 10px 0; /* Réduit l'espace autour des liens */
+    }
+
+    .user-logo {
+        margin-top: 10px; /* Ajoute un espace entre les liens et le logo utilisateur */
+    }
+}
+
+/* Pour les écrans de petite taille (téléphones) */
+@media (max-width: 480px) {
+    .navbar ul li {
+        padding: 8px 0; /* Réduit encore l'espace autour des liens */
+    }
+
+    .user-logo img {
+        width: 30px; /* Réduit la taille du logo utilisateur */
+        height: 30px;
+    }
+}
