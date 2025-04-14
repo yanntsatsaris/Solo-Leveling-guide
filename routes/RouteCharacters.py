@@ -41,11 +41,13 @@ def characters(app: Flask):
                     if name in character_folder:  # Vérifie si le nom correspond au dossier
                         character_path = os.path.join(type_path, character_folder)
                         if os.path.isdir(character_path):
+                            # Construire le nom de l'image attendu
+                            type_prefix = type_folder.split('_')[-1]  # Extraire le type du dossier
+                            expected_image = f'{type_prefix}_{name}.png'
                             for file in os.listdir(character_path):
-                                # Vérifier que le fichier correspond au format "Type_NomPersonnage.png"
-                                if file == f'{character_folder}.png':
+                                if file == expected_image:  # Vérifie si le fichier correspond
                                     character_image = f'images/Personnages/{type_folder}/{character_folder}/{file}'
-                                    character_type = type_folder.split('_')[-1]  # Extraire le type du dossier
+                                    character_type = type_prefix  # Extraire le type
                                     break
 
         # Exemple de données fictives pour un personnage
