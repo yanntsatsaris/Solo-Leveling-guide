@@ -4,17 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Flask App</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
     <div class="container">
         <h1>Welcome to My Flask App</h1>
         <p>This is a simple Flask application.</p>
-        <form action="{{ url_for('submit') }}" method="post">
             <input type="text" name="name" placeholder="Enter your name" required>
             <button type="submit">Submit</button>
-        </form>
         {% if message %}
             <p>{{ message }}</p>
         {% endif %}
