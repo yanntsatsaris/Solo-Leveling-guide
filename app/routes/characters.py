@@ -1,7 +1,6 @@
-from flask import Blueprint, render_template
+from flask import Flask, render_template
 
-characters = Blueprint('characters', __name__)
-
-@characters.route('/characters')
-def characters_page():
-    return render_template('characters.html')
+def init_routes(app: Flask):
+    @app.route('/characters')
+    def characters():
+        return render_template('characters.html')

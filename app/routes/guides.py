@@ -1,7 +1,6 @@
-from flask import Blueprint, render_template
+from flask import Flask, render_template
 
-guides = Blueprint('guides', __name__)
-
-@guides.route('/guides')
-def guides_page():
-    return render_template('guides.html')
+def init_routes(app: Flask):
+    @app.route('/guides')
+    def guides():
+        return render_template('guides.html')

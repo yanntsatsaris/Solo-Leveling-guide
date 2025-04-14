@@ -1,7 +1,6 @@
-from flask import Blueprint, render_template
+from flask import Flask, render_template
 
-game_contents = Blueprint('game_contents', __name__)
-
-@game_contents.route('/game-contents')
-def game_contents_page():
-    return render_template('game_contents.html')
+def init_routes(app: Flask):
+    @app.route('/game-contents')
+    def game_contents():
+        return render_template('game_contents.html')
