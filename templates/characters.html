@@ -13,6 +13,20 @@
         <p style="color: #ffcc00; font-weight: bold; text-align: center; margin-top: 20px;">
             Discover the characters from Solo Leveling Arise.
         </p>
+        <table style="width: 100%; text-align: center;">
+            <tr>
+                {% for image in images %}
+                    <td>
+                        <a href="{{ url_for('static', filename=image) }}" target="_blank">
+                            <img src="{{ url_for('static', filename=image) }}" alt="Character Image" style="width: 150px; height: auto; margin: 10px;">
+                        </a>
+                    </td>
+                    {% if loop.index % 5 == 0 %}
+            </tr><tr>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        </table>
     </div>
 </body>
 </html>
