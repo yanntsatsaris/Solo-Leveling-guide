@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 
-def register_routes(app: Flask):
+def home(app: Flask):
     @app.route('/')
-    def home():
+    def inner_home():
         return render_template('index.html')

@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 
-def register_routes(app: Flask):
+def characters(app: Flask):
     @app.route('/characters')
-    def characters():
+    def inner_characters():
         return render_template('characters.html')

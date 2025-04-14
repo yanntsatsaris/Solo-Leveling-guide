@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 
-def register_routes(app: Flask):
+def guides(app: Flask):
     @app.route('/guides')
-    def guides():
+    def inner_guides():
         return render_template('guides.html')
