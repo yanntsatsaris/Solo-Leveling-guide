@@ -26,16 +26,35 @@ body {
 
 .navbar ul li a {
     text-decoration: none;
-    color: #ffcc00;
+    color: #ffffff; /* Texte blanc par défaut */
     font-weight: bold;
     padding: 10px 15px;
     border-radius: 4px;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease-in-out;
+    position: relative;
 }
 
 .navbar ul li a:hover {
     background-color: #ffcc00;
     color: #121212;
+}
+
+/* Style pour le lien actif */
+.navbar ul li a.active {
+    color: #ffffff; /* Texte blanc */
+    font-weight: bold;
+}
+
+.navbar ul li a.active::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: #ffffff; /* Rectangle blanc */
+    margin-top: 5px;
+    border-radius: 2px;
+    box-shadow: 0 0 10px 2px #8000ff; /* Glow violet */
+    transition: all 0.3s ease-in-out;
 }
 
 .container {
