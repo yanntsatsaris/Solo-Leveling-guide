@@ -16,7 +16,8 @@ def characters(app: Flask):
                     character_path = os.path.join(type_path, character_folder)
                     if os.path.isdir(character_path):
                         for file in os.listdir(character_path):
-                            if file.endswith('_Codex.png'):
+                            # Vérifier que le fichier se termine par "_Codex.png" mais pas "_Weapon_Codex.png"
+                            if file.endswith('_Codex.png') and not file.endswith('_Weapon_Codex.png'):
                                 # Ajouter le chemin relatif de l'image
                                 image_path = f'images/Personnages/{type_folder}/{character_folder}/{file}'
                                 images.append(image_path)
