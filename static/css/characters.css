@@ -88,6 +88,10 @@ p {
         padding: 10px; /* Réduit le padding */
     }
 
+    table {
+        width: 100%; /* S'assure que le tableau occupe toute la largeur */
+    }
+
     table img {
         width: 100px; /* Réduit encore la taille des images */
     }
@@ -96,11 +100,15 @@ p {
         padding: 5px; /* Réduit davantage l'espacement des cellules */
     }
 
-    h1 {
-        font-size: 1.5rem; /* Réduit la taille du titre */
+    /* Réorganise les images pour afficher moins d'images par ligne */
+    tr {
+        display: flex;
+        flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
+        justify-content: center; /* Centre les images sur la ligne */
     }
 
-    p {
-        font-size: 0.9rem; /* Réduit la taille du texte */
+    td {
+        flex: 1 1 45%; /* Chaque image occupe environ 45% de la largeur */
+        max-width: 45%; /* Limite la largeur maximale */
     }
 }
