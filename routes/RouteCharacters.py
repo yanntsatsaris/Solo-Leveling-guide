@@ -5,7 +5,7 @@ def characters(app: Flask):
     @app.route('/characters')
     def inner_characters():
         # Chemin vers le dossier "personnages"
-        base_path = os.path.join(app.static_folder, 'images', 'personnages')
+        base_path = os.path.join(app.static_folder, 'images', 'Personnages')
         images = []
 
         # Parcourir les sous-dossiers pour trouver les images
@@ -18,7 +18,7 @@ def characters(app: Flask):
                         for file in os.listdir(character_path):
                             if file.endswith('_Codex.png'):
                                 # Ajouter le chemin relatif de l'image
-                                image_path = f'images/personnages/{type_folder}/{character_folder}/{file}'
+                                image_path = f'images/Personnages/{type_folder}/{character_folder}/{file}'
                                 images.append(image_path)
 
         return render_template('characters.html', images=images)
