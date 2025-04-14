@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ character.name }} - Solo Leveling Arise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/characters.css') }}">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <h1>{{ character.name }}</h1>
+        <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}" style="width: 300px; height: auto; margin: 20px auto; display: block;">
+        <p style="text-align: center; color: #ffcc00;">{{ character.description }}</p>
+    </div>
+</body>
+</html>

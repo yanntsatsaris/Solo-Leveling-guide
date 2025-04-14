@@ -17,8 +17,8 @@
             <tr>
                 {% for image in images %}
                     <td>
-                        <a href="{{ url_for('static', filename=image) }}" target="_blank">
-                            <img src="{{ url_for('static', filename=image) }}" alt="Character Image" style="width: 150px; height: auto; margin: 10px;">
+                        <a href="{{ url_for('character_details', name=image.name) }}">
+                            <img src="{{ url_for('static', filename=image.path) }}" alt="{{ image.name }}" style="width: 150px; height: auto; margin: 10px;">
                         </a>
                     </td>
                     {% if loop.index % 5 == 0 %}
