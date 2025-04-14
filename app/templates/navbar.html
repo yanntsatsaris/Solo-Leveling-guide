@@ -1,0 +1,11 @@
+<nav class="navbar">
+    <ul>
+        <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+        <li><a href="/game-contents" class="{% if request.path == '/game-contents' %}active{% endif %}">Game Contents</a></li>
+        <li><a href="/characters" class="{% if request.path == '/characters' %}active{% endif %}">Characters</a></li>
+        <li><a href="/guides" class="{% if request.path == '/guides' %}active{% endif %}">Guides</a></li>
+    </ul>
+    <div class="user-logo">
+        <img src="{{ url_for('static', filename='images/utilisateur.png') }}" alt="User" />
+    </div>
+</nav>

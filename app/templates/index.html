@@ -7,17 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
-    <nav class="navbar">
-        <ul>
-            <li><a href="/" class="active">Home</a></li>
-            <li><a href="/game-contents">Game Contents</a></li>
-            <li><a href="/characters">Characters</a></li>
-            <li><a href="/guides">Guides</a></li>
-        </ul>
-        <div class="user-logo">
-            <img src="{{ url_for('static', filename='images/utilisateur.png') }}" alt="User" />
-        </div>
-    </nav>
+    {% include 'navbar.html' %}
     <div class="container">
         <h1>Welcome to Solo Leveling Arise</h1>
         <p style="color: #ffcc00; font-weight: bold; text-align: center; margin-top: 20px;">
