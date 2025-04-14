@@ -10,14 +10,15 @@ body {
     background-color: #1e1e1e;
     padding: 10px 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center; /* Centre la barre de navigation */
 }
 
 .navbar ul {
     list-style: none;
-    margin: 0;
+    margin: 0 auto; /* Centre horizontalement la liste */
     padding: 0;
-    display: flex;
-    justify-content: space-around;
+    display: inline-flex; /* Affiche les éléments en ligne */
+    justify-content: center;
 }
 
 .navbar ul li {
@@ -43,6 +44,7 @@ body {
 .navbar ul li a.active {
     color: #ffffff; /* Texte blanc */
     font-weight: bold;
+    text-shadow: 0 0 10px #8000ff; /* Glow violet sur le texte */
 }
 
 .navbar ul li a.active::after {
@@ -53,7 +55,7 @@ body {
     background-color: #ffffff; /* Rectangle blanc */
     margin-top: 5px;
     border-radius: 2px;
-    box-shadow: 0 0 10px 2px #8000ff; /* Glow violet */
+    box-shadow: 0 0 10px 2px #8000ff; /* Glow violet sur la barre */
     transition: all 0.3s ease-in-out;
 }
 
