@@ -100,7 +100,7 @@ p {
         padding: 5px; /* Réduit davantage l'espacement des cellules */
     }
 
-    /* Réorganise les images pour afficher moins d'images par ligne */
+    /* Réorganise les images pour afficher 2 images par ligne */
     tr {
         display: flex;
         flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
@@ -108,7 +108,8 @@ p {
     }
 
     td {
-        flex: 1 1 45%; /* Chaque image occupe environ 45% de la largeur */
-        max-width: 45%; /* Limite la largeur maximale */
+        flex: 1 1 50%; /* Chaque image occupe environ 50% de la largeur */
+        max-width: 50%; /* Limite la largeur maximale */
+        box-sizing: border-box; /* Inclut le padding dans la largeur */
     }
 }
