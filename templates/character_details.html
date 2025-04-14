@@ -10,6 +10,9 @@
     {% include 'navbar.html' %}
     <div class="container">
         <h1>{{ character.name }}</h1>
+        <p style="text-align: center; color: #ffcc00; font-weight: bold;">
+            Type: {{ character.type }}
+        </p>
         <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}" style="width: 300px; height: auto; margin: 20px auto; display: block;">
         <p style="text-align: center; color: #ffcc00;">{{ character.description }}</p>
     </div>

@@ -31,6 +31,7 @@ def characters(app: Flask):
         # Chemin vers le dossier "personnages"
         base_path = os.path.join(app.static_folder, 'images', 'Personnages')
         character_image = None
+        character_type = None
 
         # Parcourir les sous-dossiers pour trouver l'image "Type_NomPersonnage.png"
         for type_folder in os.listdir(base_path):
@@ -44,12 +45,14 @@ def characters(app: Flask):
                                 # Vérifier que le fichier correspond au format "Type_NomPersonnage.png"
                                 if file == f'{character_folder}.png':
                                     character_image = f'images/Personnages/{type_folder}/{character_folder}/{file}'
+                                    character_type = type_folder.split('_')[-1]  # Extraire le type du dossier
                                     break
 
         # Exemple de données fictives pour un personnage
         character_info = {
             'name': name,
-            'description': f'{name} is a powerful character in Solo Leveling Arise.',
+            'type': character_type,
+            'description': f'{name} is a powerful character of type {character_type} in Solo Leveling Arise.',
             'image': character_image
         }
         return render_template('character_details.html', character=character_info)
