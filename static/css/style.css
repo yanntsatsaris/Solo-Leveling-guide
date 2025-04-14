@@ -10,7 +10,9 @@ body {
     background-color: #1e1e1e;
     padding: 10px 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center; /* Centre la barre de navigation */
+    display: flex;
+    justify-content: space-between; /* Sépare les éléments à gauche et à droite */
+    align-items: center;
 }
 
 .navbar ul {
@@ -53,6 +55,23 @@ body {
     border-radius: 2px;
     box-shadow: 0 0 10px 2px #8000ff; /* Glow violet sur le rectangle */
     transition: all 0.3s ease-in-out;
+}
+
+.user-logo {
+    display: flex;
+    align-items: center;
+}
+
+.user-logo img {
+    width: 40px; /* Taille de l'icône */
+    height: 40px;
+    border-radius: 50%; /* Rond si l'image est carrée */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.user-logo img:hover {
+    transform: scale(1.1); /* Agrandit légèrement au survol */
 }
 
 .container {
