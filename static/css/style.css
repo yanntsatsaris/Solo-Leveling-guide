@@ -15,63 +15,43 @@ body {
 
 .navbar ul {
     list-style: none;
-    margin: 0 auto; /* Centre horizontalement la liste */
+    margin: 0;
     padding: 0;
-    display: inline-flex; /* Affiche les éléments en ligne */
+    display: flex;
     justify-content: center;
 }
 
 .navbar ul li {
-    display: inline;
+    display: inline-block;
+    padding: 10px 20px; /* Ajoute une cellule invisible autour du texte */
+    position: relative; /* Nécessaire pour positionner le rectangle */
 }
 
 .navbar ul li a {
     text-decoration: none;
     color: #ffffff; /* Texte blanc par défaut */
     font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 4px;
-    transition: all 0.3s ease-in-out;
-    position: relative;
-}
-
-.navbar ul li a:hover {
-    color: #ffffff; /* Texte blanc */
-    text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff; /* Glow violet sur le texte */
-    position: relative; /* Nécessaire pour positionner le pseudo-élément */
-}
-
-.navbar ul li a:hover::after {
-    content: '';
-    display: block;
-    width: 50%; /* Ajuste la largeur pour centrer sous le texte */
-    height: 4px;
-    background-color: #ffffff; /* Rectangle blanc */
-    margin: 0 auto; /* Centre horizontalement le rectangle */
-    margin-top: 5px;
-    border-radius: 2px;
-    box-shadow: 0 0 10px 2px #8000ff; /* Glow violet sur la barre */
     transition: all 0.3s ease-in-out;
 }
 
-/* Style pour le lien actif */
+.navbar ul li a:hover,
 .navbar ul li a.active {
     color: #ffffff; /* Texte blanc */
-    font-weight: bold;
     text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff; /* Glow violet sur le texte */
-    position: relative; /* Nécessaire pour positionner le pseudo-élément */
 }
 
+.navbar ul li a:hover::after,
 .navbar ul li a.active::after {
     content: '';
     display: block;
-    width: 50%; /* Ajuste la largeur pour centrer sous le texte */
+    width: 100%; /* Rectangle fait la taille de la cellule */
     height: 4px;
     background-color: #ffffff; /* Rectangle blanc */
-    margin: 0 auto; /* Centre horizontalement le rectangle */
-    margin-top: 5px;
+    position: absolute;
+    bottom: 0; /* Place le rectangle en bas de la cellule */
+    left: 0;
     border-radius: 2px;
-    box-shadow: 0 0 10px 2px #8000ff; /* Glow violet sur la barre */
+    box-shadow: 0 0 10px 2px #8000ff; /* Glow violet sur le rectangle */
     transition: all 0.3s ease-in-out;
 }
 
@@ -85,7 +65,11 @@ body {
 }
 
 h1 {
-    color: #ffcc00;
+    color: #ffffff; /* Texte blanc */
+    text-align: center;
+    text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff; /* Glow violet */
+    font-size: 2.5rem;
+    margin-bottom: 20px;
 }
 
 input[type="text"] {
