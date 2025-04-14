@@ -1,0 +1,98 @@
+/* Style pour le conteneur */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centre le contenu horizontalement */
+    justify-content: center; /* Centre le contenu verticalement si nécessaire */
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 20px auto;
+    width: fit-content; /* Adapte la largeur à la taille du tableau */
+}
+
+/* Style pour le tableau */
+table {
+    border-collapse: collapse;
+    margin: 0 auto; /* Centre le tableau horizontalement */
+    width: 100%; /* S'assure que le tableau occupe toute la largeur disponible */
+    text-align: center;
+}
+
+/* Style pour les cellules du tableau */
+td {
+    padding: 10px;
+}
+
+/* Style pour les images */
+table img {
+    display: block;
+    margin: 10px auto; /* Centre les images dans leurs cellules */
+    width: 150px;
+    height: auto;
+    border-radius: 8px; /* Ajoute des coins arrondis aux images */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre aux images */
+    transition: transform 0.3s ease; /* Ajoute un effet au survol */
+}
+
+table img:hover {
+    transform: scale(1.1); /* Agrandit légèrement l'image au survol */
+}
+
+/* Style pour le titre */
+h1 {
+    color: #ffffff;
+    text-align: center;
+    text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff; /* Glow violet */
+    margin-bottom: 20px;
+}
+
+/* Style pour le paragraphe */
+p {
+    color: #ffcc00;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Responsive Design */
+
+/* Pour les écrans de taille moyenne (tablettes) */
+@media (max-width: 768px) {
+    .container {
+        width: 90%; /* Réduit la largeur pour s'adapter aux écrans plus petits */
+    }
+
+    table img {
+        width: 120px; /* Réduit la taille des images */
+    }
+
+    td {
+        padding: 8px; /* Réduit l'espacement des cellules */
+    }
+}
+
+/* Pour les écrans de petite taille (téléphones) */
+@media (max-width: 480px) {
+    .container {
+        width: 100%; /* Utilise toute la largeur disponible */
+        padding: 10px; /* Réduit le padding */
+    }
+
+    table img {
+        width: 100px; /* Réduit encore la taille des images */
+    }
+
+    td {
+        padding: 5px; /* Réduit davantage l'espacement des cellules */
+    }
+
+    h1 {
+        font-size: 1.5rem; /* Réduit la taille du titre */
+    }
+
+    p {
+        font-size: 0.9rem; /* Réduit la taille du texte */
+    }
+}
