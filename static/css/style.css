@@ -48,12 +48,12 @@ body {
 .navbar ul li a.active::after {
     content: '';
     display: block;
-    width: 100%; /* Rectangle fait la taille de la cellule */
-    height: 4px;
+    width: 80%; /* Réduit la largeur du rectangle à 80% de la cellule */
+    height: 3px; /* Réduit la hauteur du rectangle */
     background-color: #ffffff; /* Rectangle blanc */
     position: absolute;
-    bottom: 0; /* Place le rectangle en bas de la cellule */
-    left: 0;
+    bottom: 5px; /* Légèrement au-dessus du bord inférieur */
+    left: 10%; /* Centre le rectangle horizontalement */
     border-radius: 2px;
     box-shadow: 0 0 10px 2px #8000ff; /* Glow violet sur le rectangle */
     transition: all 0.3s ease-in-out;
