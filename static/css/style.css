@@ -44,15 +44,17 @@ body {
 .navbar ul li a.active {
     color: #ffffff; /* Texte blanc */
     font-weight: bold;
-    text-shadow: 0 0 10px #8000ff; /* Glow violet sur le texte */
+    text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff; /* Glow violet sur le texte */
+    position: relative; /* Nécessaire pour positionner le pseudo-élément */
 }
 
 .navbar ul li a.active::after {
     content: '';
     display: block;
-    width: 100%;
+    width: 50%; /* Ajuste la largeur pour centrer sous le texte */
     height: 4px;
     background-color: #ffffff; /* Rectangle blanc */
+    margin: 0 auto; /* Centre horizontalement le rectangle */
     margin-top: 5px;
     border-radius: 2px;
     box-shadow: 0 0 10px 2px #8000ff; /* Glow violet sur la barre */
