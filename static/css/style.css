@@ -25,7 +25,7 @@ body {
 
 .navbar ul li {
     display: inline-block;
-    padding: 10px 20px; /* Ajoute une cellule invisible autour du texte */
+    padding: 15px 30px; /* Augmente l'espace autour du texte dans chaque cellule */
     position: relative; /* Nécessaire pour positionner le rectangle */
 }
 
@@ -34,6 +34,8 @@ body {
     color: #ffffff; /* Texte blanc par défaut */
     font-weight: bold;
     transition: all 0.3s ease-in-out;
+    display: block; /* Permet au lien de remplir toute la cellule */
+    text-align: center; /* Centre le texte dans la cellule */
 }
 
 .navbar ul li a:hover,
