@@ -17,7 +17,9 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     margin: 20px auto;
-    width: fit-content; /* Adapte la largeur à la taille du tableau */
+    width: 800px; /* Fixe une largeur constante */
+    max-width: 90%; /* S'assure que la largeur ne dépasse pas 90% de l'écran */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
 }
 
 /* Conteneur pour l'image et les onglets */
@@ -124,6 +126,11 @@ p {
         min-height: 500px; /* Ajuste la hauteur minimale pour les écrans larges */
         max-width: 900px; /* Fixe une largeur maximale constante pour les écrans larges */
     }
+
+    .container {
+        width: 900px; /* Fixe une largeur constante pour les écrans larges */
+        max-width: 90%; /* S'assure que la largeur ne dépasse pas 90% de l'écran */
+    }
 }
 
 /* Affichage sur téléphone (écrans étroits) */
@@ -137,5 +144,10 @@ p {
         width: 100%; /* Prend toute la largeur */
         min-height: 400px; /* Ajuste la hauteur minimale pour les téléphones */
         max-width: 100%; /* Prend toute la largeur disponible */
+    }
+
+    .container {
+        width: 100%; /* Prend toute la largeur disponible */
+        max-width: 100%; /* S'assure que la largeur ne dépasse pas l'écran */
     }
 }
