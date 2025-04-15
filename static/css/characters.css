@@ -31,6 +31,7 @@ table {
 /* Style pour les cellules du tableau */
 td {
     padding: 10px;
+    text-align: center; /* Centre le contenu dans les cellules */
 }
 
 /* Style pour les images */
@@ -111,5 +112,15 @@ p {
         flex: 1 1 50%; /* Chaque image occupe environ 50% de la largeur */
         max-width: 50%; /* Limite la largeur maximale */
         box-sizing: border-box; /* Inclut le padding dans la largeur */
+    }
+
+    td p {
+        margin-top: 5px;
+        font-size: 0.9rem; /* Réduit légèrement la taille du texte */
+        text-align: center; /* Centre le texte sous l'image */
+    }
+
+    td img {
+        margin: 0 auto; /* Centre l'image horizontalement */
     }
 }
