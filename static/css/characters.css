@@ -35,6 +35,14 @@ td {
     vertical-align: top; /* Aligne le texte en haut de la cellule */
 }
 
+/* Centrer le texte sous l'image */
+td p {
+    margin: 5px 0 0 0; /* Réduit l'espacement au-dessus du texte */
+    font-size: 0.9rem; /* Réduit légèrement la taille du texte */
+    text-align: center; /* Centre le texte sous l'image */
+    width: 100%; /* S'assure que le texte occupe toute la largeur de la cellule */
+}
+
 /* Style pour les images */
 table img {
     display: block;
@@ -112,15 +120,10 @@ p {
     }
 
     td p {
-        margin: 5px 0 0 0; /* Réduit l'espacement au-dessus du texte */
+        margin: 5px auto 0 auto; /* Centre le texte sous l'image */
         font-size: 0.9rem; /* Réduit légèrement la taille du texte */
-        text-align: center; /* Centre le texte sous l'image */
-    }
-
-    td p {
-        margin-top: 5px;
-        font-size: 0.9rem; /* Réduit légèrement la taille du texte */
-        text-align: center; /* Centre le texte sous l'image */
+        text-align: center; /* Centre le texte */
+        width: 100%; /* S'assure que le texte occupe toute la largeur de la cellule */
     }
 
     tr {
