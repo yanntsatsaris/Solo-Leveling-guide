@@ -117,6 +117,14 @@ p {
     vertical-align: middle; /* Aligne les images avec le texte */
 }
 
+/* Images à côté du nom des passifs */
+.passive > img {
+    height: 1em; /* Définit la hauteur des images à la taille de la police */
+    width: auto; /* Maintient les proportions de l'image */
+    vertical-align: middle; /* Aligne les images avec le texte */
+    margin-right: 10px; /* Ajoute un espacement entre l'image et le texte */
+}
+
 /* Affichage sur PC (écrans larges) */
 @media (min-width: 768px) {
     .character-info {
