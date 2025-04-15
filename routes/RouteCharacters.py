@@ -42,4 +42,15 @@ def characters(app: Flask):
         character_info['image'] = image_path
         character_info['description'] = f"{character_info['name']} is a powerful character of type {character_info['type']} in Solo Leveling Arise."
 
+        # Construire les chemins des images des passifs
+        for passive in character_info.get('passives', []):
+            if 'image' in passive:
+                passive['image'] = f'images/Personnages/{type_folder}/{character_folder}/{passive["image"]}'
+            # Remplacer les chemins relatifs dans les descriptions
+            if 'description' in passive:
+                passive['description'] = passive['description'].replace(
+                    "src='",
+                    f"src='images/Personnages/{type_folder}/{character_folder}/"
+                )
+
         return render_template('character_details.html', character=character_info)

@@ -32,7 +32,23 @@
                 <!-- Contenu des onglets -->
                 <div id="passives" class="tab-content active">
                     <h2>Passifs</h2>
-                    <p>Informations sur les passifs du personnage.</p>
+                    {% if character.passives and character.passives|length > 0 %}
+                        {% for passive in character.passives %}
+                            <div class="passive" style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                                {% if passive.image %}
+                                    <img src="{{ url_for('static', filename=passive.image) }}" alt="{{ passive.name or 'Passive Image' }}" style="width: 50px; height: 50px; margin-right: 10px;">
+                                {% endif %}
+                                <div>
+                                    {% if passive.name %}
+                                        <strong>{{ passive.name }}</strong><br>
+                                    {% endif %}
+                                    <p>{{ passive.description|safe }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>Informations sur les passifs du personnage.</p>
+                    {% endif %}
                 </div>
                 <div id="skills" class="tab-content">
                     <h2>Skills</h2>

@@ -105,7 +105,42 @@
         "type": "Light",
         "name": "Thomas Andre",
         "alias": "Thomas",
-        "folder": "SSR_Light_ThomasAndre"
+        "folder": "SSR_Light_ThomasAndre",
+        "passives": [
+            {
+                "description": "+16% DEF"
+            },
+            {
+                "name": "[GAIN DE SHIELD] +8%",
+                "description": "ACTIVATION <img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +10% CRIT HIT & CRIT DMG TEAMFIGHT +24% DMG INC.",
+                "image": "Light_Thomas_BuffGainShield.png"
+            },
+            {
+                "name": "[GAIN DE SHIELD]",
+                "description": "AUGEMENT L'ACQUISITION DE LA  QUNATITÉ DU <img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD].",
+                "image": "Light_Thomas_BuffGainShield.png"
+            },
+            {
+                "name": "[SHIELD]",
+                "description": "EMPECHE LE KNOCKBACK ET PROTEGE DES DEGATS ACTIVATION <img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='PuissanceEcrasante'> [PUISSANCE ECRASANTE].",
+                "image": "Light_Thomas_BuffShield.png"
+            },
+            {
+                "name": "[PUISSANCE ECRASANTE] (5x)",
+                "description": "+50% DEF\n <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD] +10% (25 SECONDES).",
+                "image": "Light_Thomas_BuffShield.png"
+            },
+            {
+                "name": "[TYRAN D'ACIER]",
+                "description": "<img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] & <img src='Light_Thomas_Skill2.png' alt='Skill2'> +100% DMG INC.\n<img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIMATE] +125% DMG INC.\n+20%DMG RED.\n+20% DEF.\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +10%.",
+                "image": "Light_Thomas_Buff_Tyrandacier.png"
+            },
+            {
+                "name": "[ARMURE D'ACIER]",
+                "description": "<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +10%\n+10 CRIT HIT & CRIT DMG (25 SECONDES).",
+                "image": "Light_Thomas_Buff_Armuredacier.png"
+            }
+        ]
     },
     {
         "type": "Water",
