@@ -69,9 +69,9 @@ p {
 /* Onglets */
 .tabs {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center; /* Centre les onglets horizontalement */
     background-color: #1e1e1e;
-    padding: 0;
+    padding: 10px 0; /* Ajoute un peu de padding pour l'espacement vertical */
 }
 
 .tab {
