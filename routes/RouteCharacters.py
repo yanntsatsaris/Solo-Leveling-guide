@@ -1,60 +1,45 @@
 import os
+import json
 from flask import Flask, render_template
 
 def characters(app: Flask):
+    # Charger les données des personnages depuis le fichier JSON
+    with open('data/character.json', 'r') as f:
+        characters_data = json.load(f)
+
     @app.route('/characters')
     def inner_characters():
-        # Chemin vers le dossier "personnages"
-        base_path = os.path.join(app.static_folder, 'images', 'Personnages')
         images = []
 
-        # Parcourir les sous-dossiers pour trouver les images
-        for type_folder in os.listdir(base_path):
-            type_path = os.path.join(base_path, type_folder)
-            if os.path.isdir(type_path):
-                for character_folder in os.listdir(type_path):
-                    character_path = os.path.join(type_path, character_folder)
-                    if os.path.isdir(character_path):
-                        for file in os.listdir(character_path):
-                            # Vérifier que le fichier correspond au format "Type_NomPersonnage_Codex.png"
-                            if file.endswith('_Codex.png') and not ('_Weapon_Codex.png' in file or '_Arme_Codex.png' in file):
-                                character_name = character_folder.split('_')[-1]  # Extraire le nom du personnage
-                                images.append({
-                                    'path': f'images/Personnages/{type_folder}/{character_folder}/{file}',
-                                    'name': character_name
-                                })
+        # Parcourir les données des personnages pour construire les chemins des images
+        for character in characters_data:
+            type_folder = f"SLA_Personnages_{character['type']}"
+            character_folder = character['folder']
+            # Utiliser l'alias pour construire le chemin de l'image Codex
+            image_path = f'images/Personnages/{type_folder}/{character_folder}/{character["type"]}_{character["alias"]}_Codex.png'
+            images.append({
+                'path': image_path,
+                'name': character['name'],  # Utilisé pour l'affichage
+                'alias': character['alias']  # Utilisé pour les liens
+            })
 
         return render_template('characters.html', images=images)
 
-    @app.route('/characters/<name>')
-    def character_details(name):
-        # Chemin vers le dossier "personnages"
-        base_path = os.path.join(app.static_folder, 'images', 'Personnages')
-        character_image = None
-        character_type = None
+    @app.route('/characters/<alias>')
+    def character_details(alias):
+        # Trouver les informations du personnage correspondant
+        character_info = next((char for char in characters_data if char['alias'] == alias), None)
 
-        # Parcourir les sous-dossiers pour trouver l'image "Type_NomPersonnage.png"
-        for type_folder in os.listdir(base_path):
-            type_path = os.path.join(base_path, type_folder)
-            if os.path.isdir(type_path):
-                for character_folder in os.listdir(type_path):
-                    if name in character_folder:  # Vérifie si le nom correspond au dossier
-                        character_path = os.path.join(type_path, character_folder)
-                        if os.path.isdir(character_path):
-                            # Construire le nom de l'image attendu
-                            type_prefix = type_folder.split('_')[-1]  # Extraire le type du dossier
-                            expected_image = f'{type_prefix}_{name}.png'
-                            for file in os.listdir(character_path):
-                                if file == expected_image:  # Vérifie si le fichier correspond
-                                    character_image = f'images/Personnages/{type_folder}/{character_folder}/{file}'
-                                    character_type = type_prefix  # Extraire le type
-                                    break
+        if not character_info:
+            return "Character not found", 404
 
-        # Exemple de données fictives pour un personnage
-        character_info = {
-            'name': name,
-            'type': character_type,
-            'description': f'{name} is a powerful character of type {character_type} in Solo Leveling Arise.',
-            'image': character_image
-        }
+        # Construire le chemin de l'image principale
+        type_folder = f"SLA_Personnages_{character_info['type']}"
+        character_folder = character_info['folder']
+        image_path = f'images/Personnages/{type_folder}/{character_folder}/{character_info["type"]}_{character_info["alias"]}.png'
+
+        # Ajouter les informations supplémentaires pour le rendu
+        character_info['image'] = image_path
+        character_info['description'] = f"{character_info['name']} is a powerful character of type {character_info['type']} in Solo Leveling Arise."
+
         return render_template('character_details.html', character=character_info)

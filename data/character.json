@@ -1,0 +1,158 @@
+[
+    {
+        "type": "Dark",
+        "name": "Beak Beast",
+        "alias": "BeakBeast",
+        "folder": "SSR_Dark_BeakBeast"
+    },
+    {
+        "type": "Dark",
+        "name": "Charlotte",
+        "alias": "Charlotte",
+        "folder": "SSR_Dark_Charlotte"
+    },
+    {
+        "type": "Dark",
+        "name": "Harper",
+        "alias": "Harper",
+        "folder": "SSR_Dark_Harper"
+    },
+    {
+        "type": "Dark",
+        "name": "Isla Wright",
+        "alias": "Isla",
+        "folder": "SSR_Dark_IslaWright"
+    },
+    {
+        "type": "Dark",
+        "name": "Lee Bora",
+        "alias": "LeeBora",
+        "folder": "SSR_Dark_LeeBora"
+    },
+    {
+        "type": "Dark",
+        "name": "Lim Taegyu",
+        "alias": "Lim",
+        "folder": "SSR_Dark_LimTaegyu"
+    },
+    {
+        "type": "Fire",
+        "name": "Choi",
+        "alias": "Choi",
+        "folder": "SSR_Fire_Choi"
+    },
+    {
+        "type": "Fire",
+        "name": "Emma Laurent",
+        "alias": "Emma",
+        "folder": "SSR_Fire_EmmaLaurent"
+    },
+    {
+        "type": "Fire",
+        "name": "Esil Radir",
+        "alias": "Esil",
+        "folder": "SSR_Fire_EsilRadir"
+    },
+    {
+        "type": "Fire",
+        "name": "Gina",
+        "alias": "Gina",
+        "folder": "SSR_Fire_Gina"
+    },
+    {
+        "type": "Fire",
+        "name": "Tawata Kanae",
+        "alias": "Kanae",
+        "folder": "SSR_Fire_TawataKanae"
+    },
+    {
+        "type": "Fire",
+        "name": "Yoo Soohyun",
+        "alias": "Soohyun",
+        "folder": "SSR_Fire_YooSoohyun"
+    },
+    {
+        "type": "Light",
+        "name": "Akari",
+        "alias": "Akari",
+        "folder": "SSR_Light_Akari"
+    },
+    {
+        "type": "Light",
+        "name": "Beak",
+        "alias": "Beak",
+        "folder": "SSR_Light_Beak"
+    },
+    {
+        "type": "Light",
+        "name": "Cha Healn",
+        "alias": "Chae",
+        "folder": "SSR_Light_ChaHealn"
+    },
+    {
+        "type": "Light",
+        "name": "Go Gun Hee",
+        "alias": "GGH",
+        "folder": "SSR_Light_GGH"
+    },
+    {
+        "type": "Light",
+        "name": "Min",
+        "alias": "Min",
+        "folder": "SSR_Light_Min"
+    },
+    {
+        "type": "Light",
+        "name": "Thomas Andre",
+        "alias": "Thomas",
+        "folder": "SSR_Light_ThomasAndre"
+    },
+    {
+        "type": "Water",
+        "name": "Alicia Blanche",
+        "alias": "Alicia",
+        "folder": "SSR_Water_AliciaBlanche"
+    },
+    {
+        "type": "Water",
+        "name": "Meilin Fisher",
+        "alias": "Meilin",
+        "folder": "SSR_Water_MeilinFisher"
+    },
+    {
+        "type": "Water",
+        "name": "Seo Jiwoo",
+        "alias": "Seo",
+        "folder": "SSR_Water_SeoJiwoo"
+    },
+    {
+        "type": "Wind",
+        "name": "Goto Eyuji",
+        "alias": "Goto",
+        "folder": "SSR_Wind_GotoEyuji"
+    },
+    {
+        "type": "Wind",
+        "name": "Hansemi",
+        "alias": "Hansemi",
+        "folder": "SSR_Wind_Hansemi"
+    },
+    {
+        "type": "Wind",
+        "name": "Hwang Dongsoo",
+        "alias": "Dongsoo",
+        "folder": "SSR_Wind_HwangDongsoo"
+    },
+    {
+        "type": "Wind",
+        "name": "Mirei",
+        "alias": "Mirei",
+        "folder": "SSR_Wind_Mirei"
+    },
+    {
+        "type": "Wind",
+        "name": "Woo Jincheol",
+        "alias": "Woo",
+        "folder": "SSR_Wind_WooJincheol"
+    }
+]
