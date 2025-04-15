@@ -41,6 +41,7 @@ body {
     display: flex;
     flex-direction: column; /* Par défaut, empile les onglets et le contenu */
     flex: 1;
+    min-height: 300px; /* Définit une hauteur minimale basée sur l'onglet "Skills" */
 }
 
 /* Style pour le titre */
@@ -115,6 +116,7 @@ p {
 
     .tabs-and-content {
         margin-left: 20px; /* Ajoute un espace entre l'image et les onglets */
+        min-height: 400px; /* Ajuste la hauteur minimale pour les écrans larges */
     }
 }
 
