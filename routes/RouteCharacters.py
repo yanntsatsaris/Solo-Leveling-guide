@@ -50,7 +50,7 @@ def characters(app: Flask):
             if 'description' in passive:
                 passive['description'] = passive['description'].replace(
                     "src='",
-                    f"src='static/images/Personnages/{type_folder}/{character_folder}/"
+                    f"src='/static/images/Personnages/{type_folder}/{character_folder}/"
                 )
 
         return render_template('character_details.html', character=character_info)
