@@ -1,8 +1,11 @@
 /* Styles pour les onglets */
 .tabs {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start; /* Aligne les onglets de gauche à droite */
+    background-color: #1e1e1e;
+    border-bottom: 2px solid #333;
     margin-bottom: 20px;
+    padding: 0;
 }
 
 .tab {
@@ -10,24 +13,37 @@
     cursor: pointer;
     background-color: #1e1e1e;
     color: #ffffff;
-    border: 1px solid #333;
-    border-radius: 4px 4px 0 0;
-    margin-right: 5px;
+    border: none;
+    border-right: 1px solid #333; /* Ajoute une séparation entre les onglets */
     transition: background-color 0.3s ease;
+    flex: 1; /* Permet aux onglets de prendre une largeur égale */
+    text-align: center;
+}
+
+.tab:last-child {
+    border-right: none; /* Supprime la bordure droite du dernier onglet */
 }
 
 .tab.active {
     background-color: #ffcc00;
     color: #121212;
+    font-weight: bold;
+    border-bottom: 2px solid #ffcc00; /* Indique l'onglet actif */
 }
 
+.tab:hover {
+    background-color: #ffcc00;
+    color: #121212;
+}
+
+/* Contenu des onglets */
 .tab-content {
     display: none;
     background-color: #1e1e1e;
     color: #ffffff;
     padding: 20px;
     border: 1px solid #333;
-    border-radius: 0 0 4px 4px;
+    border-radius: 4px;
 }
 
 .tab-content.active {

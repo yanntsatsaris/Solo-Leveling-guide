@@ -10,18 +10,18 @@
 <body>
     {% include 'navbar.html' %}
     <div class="container">
-        <h1>{{ character.name }}</h1>
-        <p style="text-align: center; color: #ffcc00; font-weight: bold;">
-            Type: {{ character.type }}
-        </p>
-        <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}" style="width: 300px; height: auto; margin: 20px auto; display: block;">
-
         <!-- Système d'onglets -->
         <div class="tabs">
             <div class="tab active" data-tab="passives">Passifs</div>
             <div class="tab" data-tab="skills">Skills</div>
             <div class="tab" data-tab="artefacts">Artefacts</div>
         </div>
+
+        <h1>{{ character.name }}</h1>
+        <p style="text-align: center; color: #ffcc00; font-weight: bold;">
+            Type: {{ character.type }}
+        </p>
+        <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}" style="width: 300px; height: auto; margin: 20px auto; display: block;">
 
         <!-- Contenu des onglets -->
         <div id="passives" class="tab-content active">
