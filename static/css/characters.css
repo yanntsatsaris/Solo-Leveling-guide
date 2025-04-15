@@ -32,6 +32,7 @@ table {
 td {
     padding: 10px;
     text-align: center; /* Centre le contenu dans les cellules */
+    vertical-align: top; /* Aligne le texte en haut de la cellule */
 }
 
 /* Style pour les images */
@@ -85,7 +86,8 @@ p {
 /* Pour les écrans de petite taille (téléphones) */
 @media (max-width: 480px) {
     .container {
-        width: 100%; /* Utilise toute la largeur disponible */
+        width: 95%; /* Réduit légèrement la largeur du conteneur */
+        margin: 0 auto; /* Centre le conteneur */
         padding: 10px; /* Réduit le padding */
     }
 
@@ -98,20 +100,21 @@ p {
     }
 
     td {
-        padding: 5px; /* Réduit davantage l'espacement des cellules */
-    }
-
-    /* Réorganise les images pour afficher 2 images par ligne */
-    tr {
-        display: flex;
-        flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
-        justify-content: center; /* Centre les images sur la ligne */
-    }
-
-    td {
+        padding: 5px; /* Réduit l'espacement dans les cellules */
         flex: 1 1 50%; /* Chaque image occupe environ 50% de la largeur */
         max-width: 50%; /* Limite la largeur maximale */
         box-sizing: border-box; /* Inclut le padding dans la largeur */
+    }
+
+    td img {
+        margin: 0 auto; /* Centre l'image horizontalement */
+        display: block; /* S'assure que l'image est un bloc centré */
+    }
+
+    td p {
+        margin: 5px 0 0 0; /* Réduit l'espacement au-dessus du texte */
+        font-size: 0.9rem; /* Réduit légèrement la taille du texte */
+        text-align: center; /* Centre le texte sous l'image */
     }
 
     td p {
@@ -120,7 +123,9 @@ p {
         text-align: center; /* Centre le texte sous l'image */
     }
 
-    td img {
-        margin: 0 auto; /* Centre l'image horizontalement */
+    tr {
+        display: flex;
+        flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
+        justify-content: center; /* Centre les images sur la ligne */
     }
 }
