@@ -4,36 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ character.name }} - Solo Leveling Arise</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/characters.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/character_details.css') }}">
 </head>
 <body>
     {% include 'navbar.html' %}
     <div class="container">
-        <!-- Système d'onglets -->
-        <div class="tabs">
-            <div class="tab active" data-tab="passives">Passifs</div>
-            <div class="tab" data-tab="skills">Skills</div>
-            <div class="tab" data-tab="artefacts">Artefacts</div>
-        </div>
-
         <h1>{{ character.name }}</h1>
         <p style="text-align: center; color: #ffcc00; font-weight: bold;">
             Type: {{ character.type }}
         </p>
-        <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}" style="width: 300px; height: auto; margin: 20px auto; display: block;">
 
-        <!-- Contenu des onglets -->
-        <div id="passives" class="tab-content active">
-            <h2>Passifs</h2>
-            <p>Informations sur les passifs du personnage.</p>
-        </div>
-        <div id="skills" class="tab-content">
-            <h2>Skills</h2>
-            <p>Informations sur les compétences du personnage.</p>
-        </div>
-        <div id="artefacts" class="tab-content">
-            <h2>Artefacts</h2>
-            <p>Informations sur les artefacts du personnage.</p>
+        <!-- Conteneur pour l'image et les onglets -->
+        <div class="character-info">
+            <!-- Image du personnage -->
+            <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}">
+
+            <!-- Conteneur des onglets et du contenu -->
+            <div class="tabs-and-content">
+                <!-- Système d'onglets -->
+                <div class="tabs">
+                    <div class="tab active" data-tab="passives">Passifs</div>
+                    <div class="tab" data-tab="skills">Skills</div>
+                    <div class="tab" data-tab="artefacts">Artefacts</div>
+                </div>
+
+                <!-- Contenu des onglets -->
+                <div id="passives" class="tab-content active">
+                    <h2>Passifs</h2>
+                    <p>Informations sur les passifs du personnage.</p>
+                </div>
+                <div id="skills" class="tab-content">
+                    <h2>Skills</h2>
+                    <p>Informations sur les compétences du personnage.</p>
+                </div>
+                <div id="artefacts" class="tab-content">
+                    <h2>Artefacts</h2>
+                    <p>Informations sur les artefacts du personnage.</p>
+                </div>
+            </div>
         </div>
     </div>
 
