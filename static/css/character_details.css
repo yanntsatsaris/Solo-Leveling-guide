@@ -41,9 +41,9 @@ body {
     display: flex;
     flex-direction: column; /* Par défaut, empile les onglets et le contenu */
     flex: 1;
-    min-height: 300px; /* Définit une hauteur minimale basée sur l'onglet "Skills" */
+    min-height: 400px; /* Définit une hauteur minimale basée sur l'onglet le plus grand */
     width: 100%; /* Définit une largeur par défaut */
-    max-width: 600px; /* Fixe une largeur maximale constante */
+    max-width: 800px; /* Fixe une largeur maximale constante */
     margin: 0 auto; /* Centre le conteneur horizontalement */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
 }
@@ -101,6 +101,7 @@ p {
     padding: 20px;
     border: none; /* Supprime les bordures */
     border-radius: 0; /* Supprime les coins arrondis */
+    height: 100%; /* S'assure que le contenu occupe toute la hauteur disponible */
 }
 
 .tab-content.active {
@@ -120,8 +121,8 @@ p {
 
     .tabs-and-content {
         margin-left: 20px; /* Ajoute un espace entre l'image et les onglets */
-        min-height: 400px; /* Ajuste la hauteur minimale pour les écrans larges */
-        max-width: 800px; /* Fixe une largeur maximale constante pour les écrans larges */
+        min-height: 500px; /* Ajuste la hauteur minimale pour les écrans larges */
+        max-width: 900px; /* Fixe une largeur maximale constante pour les écrans larges */
     }
 }
 
@@ -134,5 +135,7 @@ p {
 
     .tabs-and-content {
         width: 100%; /* Prend toute la largeur */
+        min-height: 400px; /* Ajuste la hauteur minimale pour les téléphones */
+        max-width: 100%; /* Prend toute la largeur disponible */
     }
 }
