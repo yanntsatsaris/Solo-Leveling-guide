@@ -64,7 +64,6 @@ p {
     display: flex;
     justify-content: flex-start;
     background-color: #1e1e1e;
-    border-bottom: 2px solid #333;
     padding: 0;
 }
 
@@ -73,21 +72,15 @@ p {
     cursor: pointer;
     background-color: #1e1e1e;
     color: #ffffff;
-    border: none;
-    border-right: 1px solid #333;
+    border: none; /* Supprime les bordures */
     transition: background-color 0.3s ease;
     text-align: center;
-}
-
-.tab:last-child {
-    border-right: none;
 }
 
 .tab.active {
     background-color: #ffcc00;
     color: #121212;
     font-weight: bold;
-    border-bottom: 2px solid #ffcc00;
 }
 
 .tab:hover {
@@ -101,8 +94,8 @@ p {
     background-color: #1e1e1e;
     color: #ffffff;
     padding: 20px;
-    border: 1px solid #333;
-    border-radius: 4px;
+    border: none; /* Supprime les bordures */
+    border-radius: 0; /* Supprime les coins arrondis */
 }
 
 .tab-content.active {
