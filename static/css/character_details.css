@@ -110,6 +110,13 @@ p {
     display: block;
 }
 
+/* Images dans les descriptions des passifs */
+.passive img {
+    height: 1em; /* Définit la hauteur des images à la taille de la police */
+    width: auto; /* Maintient les proportions de l'image */
+    vertical-align: middle; /* Aligne les images avec le texte */
+}
+
 /* Affichage sur PC (écrans larges) */
 @media (min-width: 768px) {
     .character-info {
