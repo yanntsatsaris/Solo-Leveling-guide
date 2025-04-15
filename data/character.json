@@ -85,15 +85,15 @@
     },
     {
         "type": "Light",
-        "name": "Cha Healn",
+        "name": "Cha Haeln",
         "alias": "Chae",
-        "folder": "SSR_Light_ChaHealn"
+        "folder": "SSR_Light_ChaHaeln"
     },
     {
         "type": "Light",
         "name": "Go Gun Hee",
         "alias": "GGH",
-        "folder": "SSR_Light_GGH"
+        "folder": "SSR_Light_GoGunHee"
     },
     {
         "type": "Light",
