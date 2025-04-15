@@ -36,7 +36,7 @@ def characters(app: Flask):
         # Construire le chemin de l'image principale
         type_folder = f"SLA_Personnages_{character_info['type']}"
         character_folder = character_info['folder']
-        image_path = f'images/Personnages/{type_folder}/{character_folder}/{character_info["type"]}_{character_info["alias"]}.png'
+        image_path = f'images/Personnages/{type_folder}/{character_folder}/{character_info["type"]}_{character_info["alias"]}_Personnage.png'
 
         # Ajouter les informations supplémentaires pour le rendu
         character_info['image'] = image_path
