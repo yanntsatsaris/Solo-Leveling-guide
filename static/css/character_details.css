@@ -331,6 +331,20 @@ p {
     border-radius: 8px; /* Arrondit légèrement les coins */
 }
 
+/* Image des statistiques principales des noyaux */
+.core-item .stat-main img {
+    width: 150px; /* Définit la largeur à 150px */
+    height: auto; /* Conserve les proportions */
+    display: block;
+}
+
+/* Image des statistiques secondaires des noyaux */
+.core-item .stat-secondary img {
+    width: 120px; /* Définit la largeur à 120px */
+    height: auto; /* Conserve les proportions */
+    display: block;
+}
+
 .core-item .stats {
     display: flex;
     flex-direction: column; /* Affiche les stats en colonne */
