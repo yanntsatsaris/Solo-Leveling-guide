@@ -187,9 +187,10 @@ p {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start; /* Aligne les stats secondaires à gauche */
-    gap: 5px; /* Réduit l'espace entre les éléments */
+    gap: 2px; /* Réduit encore l'espace entre les éléments */
 }
 
+/* Conteneur pour chaque statistique secondaire */
 .stat-secondary {
     display: flex;
     justify-content: center;
@@ -202,7 +203,7 @@ p {
     font-weight: bold;
     font-size: 16px;
     text-align: center; /* Centre le contenu */
-    margin: 2px 0; /* Réduit l'espacement vertical entre les statistiques */
+    margin: 1px 0; /* Réduit encore l'espacement vertical entre les statistiques */
 }
 
 /* Image des statistiques secondaires */
