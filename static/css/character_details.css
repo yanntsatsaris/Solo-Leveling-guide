@@ -41,7 +41,6 @@ body {
 .content-column {
     flex: 2; /* Prend environ 2/3 de la largeur */
     padding: 20px;
-    background-color: rgba(30, 30, 30, 0.9); /* Fond semi-transparent pour le conteneur */
     border-radius: 8px; /* Arrondit les coins */
     max-width: 900px; /* Limite la largeur maximale */
     width: 100%; /* Prend toute la largeur disponible */
