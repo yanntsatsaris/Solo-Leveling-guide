@@ -52,5 +52,6 @@ def characters(app: Flask):
                     "src='",
                     f"src='/static/images/Personnages/{type_folder}/{character_folder}/"
                 )
+                passive['description'] = passive['description'].replace("\n", "<br>")  # Remplace \n par <br>
 
         return render_template('character_details.html', character=character_info)
