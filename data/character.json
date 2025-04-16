@@ -108,16 +108,11 @@
         "folder": "SSR_Light_ThomasAndre",
         "passives": [
             {
-                "description": "+16% DEF"
-            },
-            {
-                "name": "[GAIN DE SHIELD] +8%",
-                "description": "ACTIVATION <img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +10% CRIT HIT & CRIT DMG TEAMFIGHT +24% DMG INC.",
-                "image": "Light_Thomas_BuffGainShield.png"
+                "description": "+16% DEF.\n[GAIN DE SHIELD] +8%.\nACTIVATION <img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +10% CRIT HIT & CRIT DMG TEAMFIGHT +24% DMG INC."
             },
             {
                 "name": "[GAIN DE SHIELD]",
-                "description": "AUGEMENT L'ACQUISITION DE LA  QUNATITÉ DU <img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD].",
+                "description": "AUGMENTE L'ACQUISITION DE LA  QUANTITE DU <img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD].",
                 "image": "Light_Thomas_BuffGainShield.png"
             },
             {
