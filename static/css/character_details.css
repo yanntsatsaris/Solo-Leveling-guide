@@ -36,8 +36,8 @@ body {
     display: flex; /* Active Flexbox pour centrer l'image */
     justify-content: center; /* Centre horizontalement */
     align-items: center; /* Centre verticalement */
-    position: fixed; /* Fixe l'image à gauche de l'écran */
-    left: 380px; /* Augmente l'espace pour éviter que l'image dépasse sur la gauche */
+    position: absolute; /* Change de fixed à absolute pour qu'elle ne bouge pas au scroll */
+    left: 380px; /* Positionne l'image horizontalement */
     top: 50%; /* Centre verticalement */
     transform: translateY(-50%); /* Ajuste pour centrer parfaitement */
     z-index: 10; /* Place l'image au-dessus des autres éléments */
