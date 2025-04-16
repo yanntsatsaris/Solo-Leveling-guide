@@ -308,20 +308,21 @@ p {
 
 .cores-container {
     display: flex;
-    flex-wrap: wrap; /* Permet de passer à la ligne si nécessaire */
+    flex-wrap: wrap; /* Permet de passer à la ligne après 3 éléments */
     gap: 20px; /* Ajoute un espacement entre les noyaux */
-    justify-content: center; /* Centre les noyaux horizontalement */
+    justify-content: space-between; /* Répartit les noyaux sur la ligne */
 }
 
 .core-item {
     display: flex;
-    align-items: center; /* Aligne l'image et les stats verticalement */
-    gap: 20px; /* Ajoute un espacement entre l'image et les stats */
-    border: 1px solid #ccc; /* Ajoute une bordure légère */
+    flex-direction: column; /* Aligne l'image et les stats verticalement */
+    align-items: center; /* Centre les éléments horizontalement */
+    gap: 10px; /* Ajoute un espacement entre l'image et les stats */
     padding: 10px; /* Ajoute un padding interne */
     border-radius: 8px; /* Arrondit les coins */
-    background-color: #1e1e1e; /* Ajoute un fond sombre */
-    width: 300px; /* Définit une largeur fixe pour chaque noyau */
+    background-color: transparent; /* Supprime le fond */
+    width: calc(33.33% - 20px); /* Permet d'afficher 3 éléments par ligne avec un espacement */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
 }
 
 .core-item img {
@@ -334,6 +335,7 @@ p {
     display: flex;
     flex-direction: column; /* Affiche les stats en colonne */
     gap: 10px; /* Ajoute un espacement entre les stats */
+    text-align: center; /* Centre le texte */
 }
 
 .core-item .stat-container {
