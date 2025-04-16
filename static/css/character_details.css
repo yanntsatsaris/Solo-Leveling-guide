@@ -182,12 +182,12 @@ p {
     display: block;
 }
 
-/* Style pour les statistiques secondaires */
+/* Conteneur pour les statistiques secondaires */
 .stat-secondary-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start; /* Aligne les stats secondaires à gauche */
-    gap: 2px; /* Réduit encore l'espace entre les éléments */
+    flex-direction: column; /* Aligne les stats secondaires verticalement */
+    justify-content: flex-start; /* Aligne les stats secondaires en haut */
+    gap: 5px; /* Ajoute un espacement vertical entre les éléments */
 }
 
 /* Conteneur pour chaque statistique secondaire */
@@ -198,19 +198,7 @@ p {
     flex-direction: column; /* Aligne le texte et l'image verticalement */
     width: auto; /* Permet à l'image secondaire de définir sa largeur */
     height: auto; /* Ajuste automatiquement la hauteur */
-    background: none; /* Supprime le fond */
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    text-align: center; /* Centre le contenu */
-    margin: 1px 0; /* Réduit encore l'espacement vertical entre les statistiques */
-}
-
-/* Image des statistiques secondaires */
-.stat-secondary img {
-    width: 100px !important;
-    height: auto; /* Conserve les proportions */
-    display: block;
+    margin: 0; /* Supprime les marges inutiles */
 }
 
 /* Conteneur pour le texte et l'image */
