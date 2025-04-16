@@ -316,7 +316,7 @@ p {
 .core-item {
     display: flex;
     flex-direction: row; /* Place l'image et les stats côte à côte */
-    align-items: center; /* Centre verticalement l'image et les stats */
+    align-items: flex-start; /* Aligne l'image et les stats en haut */
     gap: 20px; /* Ajoute un espacement entre l'image et les stats */
     padding: 10px; /* Ajoute un padding interne */
     border-radius: 8px; /* Arrondit légèrement les coins */
@@ -336,13 +336,13 @@ p {
     flex-direction: column; /* Affiche les stats en colonne */
     gap: 10px; /* Ajoute un espacement entre les stats */
     text-align: left; /* Aligne le texte à gauche */
+    flex: 1; /* Permet aux stats de prendre toute la largeur disponible */
 }
 
 .core-item .stat-container {
-    position: relative;
-    text-align: left; /* Aligne le texte à gauche */
-    width: 100%; /* Prend toute la largeur disponible */
-    height: auto;
+    display: flex;
+    justify-content: space-between; /* Aligne les stats sur une seule ligne */
+    align-items: center; /* Centre verticalement le texte et l'image */
     padding: 10px; /* Ajoute un padding interne */
     background-color: #1e1e1e; /* Ajoute un fond sombre */
     border-radius: 4px; /* Coins légèrement arrondis */
@@ -350,6 +350,7 @@ p {
     font-weight: bold;
     font-size: 14px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
+    width: 100%; /* Prend toute la largeur disponible */
 }
 
 .core-item .stat-container span {
