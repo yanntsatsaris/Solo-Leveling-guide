@@ -177,7 +177,7 @@ p {
 
 /* Image de la statistique principale */
 .stat-main img {
-    width: 125px !important;
+    width: 125px;
     height: auto; /* Conserve les proportions */
     display: block;
 }
@@ -207,7 +207,7 @@ p {
 
 /* Image des statistiques secondaires */
 .stat-secondary img {
-    width: 100px !important;
+    width: 100px;
     height: auto; /* Conserve les proportions */
     display: block;
 }
@@ -229,7 +229,7 @@ p {
     transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
     color: white; /* Couleur du texte */
     font-weight: bold;
-    font-size: 14px; /* Ajustez la taille du texte */
+    font-size: 12px; /* Réduit la taille du texte */
     z-index: 2; /* Assure que le texte est au-dessus de l'image */
     text-shadow: 1px 1px 2px black; /* Ajoute une ombre pour améliorer la lisibilité */
 }
