@@ -161,22 +161,22 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100px;
-    height: 50px;
+    width: 120px; /* Largeur du losange */
+    height: 60px; /* Hauteur du losange */
     background-color: violet;
     color: white;
     font-weight: bold;
     text-align: center;
-    transform: rotate(45deg);
     margin: 10px auto;
     border: 2px solid gray;
     border-width: 1px 4px; /* Bordure fine en haut/bas, épaisse sur les côtés */
     box-shadow: 0 0 5px gray;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); /* Forme losange */
 }
 
 /* Texte à l'intérieur du losange principal */
 .stat-main span {
-    transform: rotate(-45deg); /* Réoriente le texte pour qu'il soit lisible */
+    transform: none; /* Pas de rotation du texte */
 }
 
 /* Style pour les statistiques secondaires */
@@ -191,22 +191,22 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80px;
-    height: 40px;
+    width: 100px; /* Largeur du losange */
+    height: 50px; /* Hauteur du losange */
     background-color: blue;
     color: white;
     font-weight: bold;
     text-align: center;
-    transform: rotate(45deg);
     margin: 5px;
     border: 2px solid gray;
     border-width: 1px 4px; /* Bordure fine en haut/bas, épaisse sur les côtés */
     box-shadow: 0 0 5px gray;
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); /* Forme losange */
 }
 
 /* Texte à l'intérieur des losanges secondaires */
 .stat-secondary span {
-    transform: rotate(-45deg); /* Réoriente le texte pour qu'il soit lisible */
+    transform: none; /* Pas de rotation du texte */
 }
 
 /* Affichage sur PC (écrans larges) */
