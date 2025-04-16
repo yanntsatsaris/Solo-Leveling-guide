@@ -112,12 +112,12 @@
             },
             {
                 "name": "[GAIN DE SHIELD]",
-                "description": "AUGMENTE L'ACQUISITION DE LA  QUANTITE DU <img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD].",
+                "description": "AUGMENTE L'ACQUISITION DE LA  QUANTITE DU <img src='Light_Thomas_BuffShield.png' alt='Shield'>[SHIELD].",
                 "image": "Light_Thomas_BuffGainShield.png"
             },
             {
                 "name": "[SHIELD]",
-                "description": "EMPECHE LE KNOCKBACK ET PROTEGE DES DEGATS ACTIVATION <img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='PuissanceEcrasante'> [PUISSANCE ECRASANTE].",
+                "description": "EMPECHE LE KNOCKBACK ET PROTEGE DES DEGATS\nACTIVATION <img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='PuissanceEcrasante'> [PUISSANCE ECRASANTE].",
                 "image": "Light_Thomas_BuffShield.png"
             },
             {
@@ -127,7 +127,7 @@
             },
             {
                 "name": "[TYRAN D'ACIER]",
-                "description": "<img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] & <img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2] +100% DMG INC.\n<img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIMATE] +125% DMG INC.\n+20%DMG RED.\n+20% DEF.\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +10%.",
+                "description": "<img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] & <img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2] +100% DMG INC.\n<img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIMATE] +125% DMG INC.\n+20% DMG RED.\n+20% DEF.\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +10%.",
                 "image": "Light_Thomas_Buff_Tyrandacier.png"
             },
             {
