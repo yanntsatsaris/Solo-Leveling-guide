@@ -161,13 +161,13 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 160px; /* Largeur du rectangle */
-    height: 50px; /* Hauteur du rectangle */
-    background-color: violet;
+    width: 180px; /* Largeur augmentée */
+    height: 35px; /* Hauteur réduite */
+    background-color: #4b0082; /* Violet plus foncé */
     color: white;
     font-weight: bold;
     text-align: center;
-    margin: 10px auto;
+    margin: 10px 0; /* Alignement à gauche */
     border: 2px solid gray;
     border-width: 1px 4px; /* Bordure fine en haut/bas, épaisse sur les côtés */
     box-shadow: 0 0 5px gray;
@@ -183,7 +183,7 @@ p {
 .stat-secondary-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start; /* Alignement à gauche */
     gap: 10px;
 }
 
@@ -191,13 +191,13 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 140px; /* Largeur du rectangle */
-    height: 40px; /* Hauteur du rectangle */
+    width: 160px; /* Largeur augmentée */
+    height: 30px; /* Hauteur réduite */
     background-color: blue;
     color: white;
     font-weight: bold;
     text-align: center;
-    margin: 5px;
+    margin: 5px 0; /* Alignement à gauche */
     border: 2px solid gray;
     border-width: 1px 4px; /* Bordure fine en haut/bas, épaisse sur les côtés */
     box-shadow: 0 0 5px gray;
