@@ -161,8 +161,8 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 160px; /* Largeur du losange */
-    height: 50px; /* Hauteur du losange */
+    width: 160px; /* Largeur du rectangle */
+    height: 50px; /* Hauteur du rectangle */
     background-color: violet;
     color: white;
     font-weight: bold;
@@ -171,10 +171,10 @@ p {
     border: 2px solid gray;
     border-width: 1px 4px; /* Bordure fine en haut/bas, épaisse sur les côtés */
     box-shadow: 0 0 5px gray;
-    clip-path: polygon(10% 50%, 50% 0%, 90% 50%, 50% 100%); /* Forme losange aplati */
+    clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%); /* Forme rectangle avec côtés obliques */
 }
 
-/* Texte à l'intérieur du losange principal */
+/* Texte à l'intérieur du rectangle principal */
 .stat-main span {
     transform: none; /* Pas de rotation du texte */
 }
@@ -191,8 +191,8 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 140px; /* Largeur du losange */
-    height: 40px; /* Hauteur du losange */
+    width: 140px; /* Largeur du rectangle */
+    height: 40px; /* Hauteur du rectangle */
     background-color: blue;
     color: white;
     font-weight: bold;
@@ -201,10 +201,10 @@ p {
     border: 2px solid gray;
     border-width: 1px 4px; /* Bordure fine en haut/bas, épaisse sur les côtés */
     box-shadow: 0 0 5px gray;
-    clip-path: polygon(10% 50%, 50% 0%, 90% 50%, 50% 100%); /* Forme losange aplati */
+    clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%); /* Forme rectangle avec côtés obliques */
 }
 
-/* Texte à l'intérieur des losanges secondaires */
+/* Texte à l'intérieur des rectangles secondaires */
 .stat-secondary span {
     transform: none; /* Pas de rotation du texte */
 }
