@@ -84,15 +84,19 @@
                                             <div>
                                                 <!-- Statistique principale -->
                                                 <div class="stat-main">
-                                                    <span>{{ artefact.main_stat.name }}</span>
-                                                    <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
+                                                    <div class="stat-container">
+                                                        <span>{{ artefact.main_stat.name }}</span>
+                                                        <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
+                                                    </div>
                                                 </div>
                                                 <!-- Statistiques secondaires -->
                                                 <div class="stat-secondary-container">
                                                     {% for stat in artefact.secondary_stats %}
                                                         <div class="stat-secondary">
-                                                            <span>{{ stat.name }}</span>
-                                                            <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
+                                                            <div class="stat-container">
+                                                                <span>{{ stat.name }}</span>
+                                                                <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
+                                                            </div>
                                                         </div>
                                                     {% endfor %}
                                                 </div>
@@ -112,15 +116,19 @@
                                             <div>
                                                 <!-- Statistique principale -->
                                                 <div class="stat-main">
-                                                    <span>{{ artefact.main_stat.name }}</span>
-                                                    <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
+                                                    <div class="stat-container">
+                                                        <span>{{ artefact.main_stat.name }}</span>
+                                                        <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
+                                                    </div>
                                                 </div>
                                                 <!-- Statistiques secondaires -->
                                                 <div class="stat-secondary-container">
                                                     {% for stat in artefact.secondary_stats %}
                                                         <div class="stat-secondary">
-                                                            <span>{{ stat.name }}</span>
-                                                            <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
+                                                            <div class="stat-container">
+                                                                <span>{{ stat.name }}</span>
+                                                                <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
+                                                            </div>
                                                         </div>
                                                     {% endfor %}
                                                 </div>

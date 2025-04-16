@@ -210,6 +210,35 @@ p {
     margin-top: 5px; /* Ajoute un espacement entre le texte et l'image */
 }
 
+/* Conteneur pour le texte et l'image */
+.stat-container {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width: 140px; /* Ajustez selon la taille de l'image */
+    height: auto;
+}
+
+/* Texte positionné au-dessus de l'image */
+.stat-container span {
+    position: absolute;
+    top: 50%; /* Centre verticalement */
+    left: 50%; /* Centre horizontalement */
+    transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
+    color: white; /* Couleur du texte */
+    font-weight: bold;
+    font-size: 14px; /* Ajustez la taille du texte */
+    z-index: 2; /* Assure que le texte est au-dessus de l'image */
+    text-shadow: 1px 1px 2px black; /* Ajoute une ombre pour améliorer la lisibilité */
+}
+
+/* Image de fond */
+.stat-container img {
+    width: 100%; /* S'adapte à la largeur du conteneur */
+    height: auto; /* Conserve les proportions */
+    display: block;
+}
+
 /* Affichage sur PC (écrans larges) */
 @media (min-width: 768px) {
     .character-info {
