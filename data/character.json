@@ -93,7 +93,12 @@
         "type": "Light",
         "name": "Go Gun Hee",
         "alias": "GGH",
-        "folder": "SSR_Light_GoGunHee"
+        "folder": "SSR_Light_GoGunHee",
+        "skills": [
+            {
+                "description": "<img src='Light_Thomas_Skill_QTE.png' alt='QTE'> [QTE] > <img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME] > <img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Base.png' alt='Base'> [BASE ATK] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Base.png' alt='Base'> [BASE ATK] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2] > <img src='Light_Thomas_Skill_Base.png' alt='Base'> [BASE ATK] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE]"
+            }
+        ]
     },
     {
         "type": "Light",
@@ -138,7 +143,7 @@
         ],
         "skills": [
             {
-                "description": "<img src='Light_Thomas_Skill_QTE.png' alt='QTE'> [QTE] > <img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME] > <img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Base.png' alt='Base'> [BASE ATK] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Base.png' alt='Base'> [BASE ATK] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2] > <img src='Light_Thomas_Skill_Base.png' alt='Base'> [BASE ATK] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE]"
+                "description": "<img src='Light_Thomas_Skill_QTE.png' alt='QTE'> [QTE] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME] <img src='Light_Thomas_Buff_Tyrandacier.png' alt='Tyrandacier'>"
             },
             {
                 "name": "[TYRAN D'ACIER]",
