@@ -153,6 +153,36 @@
                                 <p>Informations sur les artefacts du personnage.</p>
                             {% endif %}
                         </div>
+                        <!-- Section des noyaux -->
+                        {% if character.cores and character.cores|length > 0 %}
+                            <div class="cores-section">
+                                <h2>Noyaux</h2>
+                                <div class="cores-container" style="display: flex; gap: 20px; justify-content: center;">
+                                    {% for core in character.cores %}
+                                        <div class="core-item" style="text-align: center;">
+                                            <img src="{{ url_for('static', filename=core.image) }}" alt="{{ core.name }}" style="width: 100px; height: 100px; border-radius: 8px; margin-bottom: 10px;">
+                                            <!--<p><strong>{{ core.name }}</strong></p> -->
+                                            
+                                            <!-- Statistique principale -->
+                                            <div class="stat-main">
+                                                <div class="stat-container">
+                                                    <span>{{ core.main_stat.name }}</span>
+                                                    <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
+                                                </div>
+                                            </div>
+
+                                            <!-- Statistique secondaire -->
+                                            <div class="stat-secondary">
+                                                <div class="stat-container">
+                                                    <span>{{ core.secondary_stat.name }}</span>
+                                                    <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

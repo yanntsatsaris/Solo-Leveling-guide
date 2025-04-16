@@ -367,6 +367,41 @@
                     }
                 ]
             }
+        ],
+        "cores": [
+            {
+                "name": "Noyau Orange 01",
+                "number": "01",
+                "image": "Noyaux/Orange01.webp",
+                "main_stat": {
+                    "name": "ATK"
+                },
+                "secondary_stat": {
+                    "name": "CRIT DMG"
+                }
+            },
+            {
+                "name": "Noyau Orange 02",
+                "number": "02",
+                "image": "Noyaux/Orange02.webp",
+                "main_stat": {
+                    "name": "HP"
+                },
+                "secondary_stat": {
+                    "name": "DEF"
+                }
+            },
+            {
+                "name": "Noyau Violet 03",
+                "number": "03",
+                "image": "Noyaux/Violet03.webp",
+                "main_stat": {
+                    "name": "SPD"
+                },
+                "secondary_stat": {
+                    "name": "RES"
+                }
+            }
         ]
     },
     {

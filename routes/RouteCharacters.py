@@ -76,4 +76,8 @@ def characters(app: Flask):
         for artefact in character_info.get('artefacts', []):
             artefact['image'] = f'images/Artefacts/{artefact["image"]}'
 
+        # Construire les chemins des images des noyaux
+        for core in character_info.get('cores', []):
+            core['image'] = f'images/Noyaux/{core["image"]}'
+
         return render_template('character_details.html', character=character_info)
