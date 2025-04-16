@@ -127,6 +127,12 @@ p {
     margin-right: 10px; /* Ajoute un espacement entre l'image et le texte */
 }
 
+/* Texte des descriptions des passifs */
+.passive p {
+    text-align: justify; /* Justifie le texte */
+    margin: 0; /* Supprime les marges inutiles */
+}
+
 /* Affichage sur PC (écrans larges) */
 @media (min-width: 768px) {
     .character-info {
