@@ -37,7 +37,7 @@ body {
     justify-content: center; /* Centre horizontalement */
     align-items: center; /* Centre verticalement */
     position: fixed; /* Fixe l'image à gauche de l'écran */
-    left: 20px; /* Augmente l'espace pour éviter que l'image dépasse sur la gauche */
+    left: 380px; /* Augmente l'espace pour éviter que l'image dépasse sur la gauche */
     top: 50%; /* Centre verticalement */
     transform: translateY(-50%); /* Ajuste pour centrer parfaitement */
     z-index: 10; /* Place l'image au-dessus des autres éléments */
