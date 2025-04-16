@@ -147,17 +147,17 @@
             },
             {
                 "name": "[CORE] COUP DE MARTEAU GEANT",
-                "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='Puissanceecrasante'> [PUISSANCE ECRASSNTE] (1x)\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +2%",
+                "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='Puissanceecrasante'> [PUISSANCE ECRASANTE] (1x)\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +2%",
                 "image": "Light_Thomas_Skill_Core.png"
             },
             {
                 "name": "[SKILL1] DEMOLITION ABSOLUE",
-                "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='Puissanceecrasante'> [PUISSANCE ECRASSNTE] (1x)\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +2%",
+                "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='Puissanceecrasante'> [PUISSANCE ECRASANTE] (1x)\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +2%",
                 "image": "Light_Thomas_Skill1.png"
             },
             {
                 "name": "[SKILL2] ECRASEMENT COLOSSAL",
-                "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='Puissanceecrasante'> [PUISSANCE ECRASSNTE] (1x)\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +2%",
+                "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='Puissanceecrasante'> [PUISSANCE ECRASANTE] (1x)\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +2%",
                 "image": "Light_Thomas_Skill2.png"
             },
             {
@@ -167,7 +167,7 @@
             },
             {
                 "name": "[QTE] COUP A LA VOLEE",
-                "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='Puissanceecrasante'> [PUISSANCE ECRASSNTE] (1x).",
+                "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='Puissanceecrasante'> [PUISSANCE ECRASANTE] (1x).",
                 "image": "Light_Thomas_Skill_QTE.png"
             },
             {
