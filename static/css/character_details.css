@@ -27,7 +27,12 @@ body {
 }
 
 /* Image du personnage */
-
+.character-info img {
+    max-width: 300px;
+    height: auto;
+    margin: 0 auto;
+    display: block;
+}
 
 /* Image du personnage à gauche */
 .character-image {
@@ -36,7 +41,7 @@ body {
     top: 50%; /* Centre verticalement */
     transform: translateY(-50%); /* Ajuste pour centrer parfaitement */
     z-index: 10; /* Place l'image au-dessus des autres éléments */
-    width: 150px; /* Réduit la largeur de l'image du personnage */
+    width: 100px; /* Réduit davantage la largeur de l'image */
     height: auto; /* Conserve les proportions */
     padding: 5px; /* Réduit le padding autour de l'image */
     background-color: rgba(0, 0, 0, 0.4); /* Optionnel : ajustez la transparence */
