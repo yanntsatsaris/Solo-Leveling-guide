@@ -82,13 +82,17 @@
                                         <div style="display: flex; align-items: center;">
                                             <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" style="width: 100px; height: 100px; margin-right: 10px;">
                                             <div>
+                                                <!-- Statistique principale -->
                                                 <div class="stat-main">
-                                                    {{ artefact.main_stat.name }}
+                                                    <span>{{ artefact.main_stat.name }}</span>
+                                                    <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
                                                 </div>
+                                                <!-- Statistiques secondaires -->
                                                 <div class="stat-secondary-container">
                                                     {% for stat in artefact.secondary_stats %}
                                                         <div class="stat-secondary">
-                                                            {{ stat.name }}
+                                                            <span>{{ stat.name }}</span>
+                                                            <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
                                                         </div>
                                                     {% endfor %}
                                                 </div>
@@ -106,13 +110,17 @@
                                         <div style="display: flex; align-items: center;">
                                             <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" style="width: 100px; height: 100px; margin-right: 10px;">
                                             <div>
+                                                <!-- Statistique principale -->
                                                 <div class="stat-main">
-                                                    {{ artefact.main_stat.name }}
+                                                    <span>{{ artefact.main_stat.name }}</span>
+                                                    <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
                                                 </div>
+                                                <!-- Statistiques secondaires -->
                                                 <div class="stat-secondary-container">
                                                     {% for stat in artefact.secondary_stats %}
                                                         <div class="stat-secondary">
-                                                            {{ stat.name }}
+                                                            <span>{{ stat.name }}</span>
+                                                            <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
                                                         </div>
                                                     {% endfor %}
                                                 </div>
