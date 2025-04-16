@@ -260,7 +260,7 @@ p {
 .artefact-item {
     display: flex;
     flex-direction: column;
-    margin-bottom: 10px; /* Réduit l'espacement entre les artefacts */
+    margin-bottom: 5px; /* Réduit l'espacement entre les artefacts */
 }
 
 /* Conteneur pour le texte et l'image */
