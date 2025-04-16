@@ -293,7 +293,41 @@ p {
 }
 
 /* Affichage sur PC (écrans larges) */ 
+@media (min-width: 768px) {
+    .character-info {
+        flex-direction: row; /* Affiche l'image et les onglets côte à côte */
+        align-items: flex-start;
+    }
 
+    .character-info img {
+        margin: 0; /* Supprime le centrage de l'image */
+    }
+
+    .tabs-and-content {
+        margin-left: 20px; /* Ajoute un espace entre l'image et les onglets */
+        min-height: 500px; /* Ajuste la hauteur minimale pour les écrans larges */
+        max-width: 900px; /* Fixe une largeur maximale constante pour les écrans larges */
+    }
+
+    .container {
+        width: 1100px; /* Augmente la largeur du conteneur principal */
+        max-width: 95%; /* S'assure que la largeur ne dépasse pas 95% de l'écran */
+    }
+
+    .stat-main img {
+        width: 150px; /* Augmente la taille de l'image principale proportionnellement */
+        height: auto; /* Conserve les proportions */
+    }
+
+    .stat-secondary img {
+        width: 120px; /* Augmente la taille des images secondaires proportionnellement */
+        height: auto; /* Conserve les proportions */
+    }
+
+    .stat-secondary-container {
+        gap: 5px; /* Ajuste l'espacement entre les images secondaires */
+    }
+}
 
 /* Affichage sur téléphone (écrans étroits) */
 @media (max-width: 767px) {
