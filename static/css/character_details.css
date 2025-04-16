@@ -17,8 +17,8 @@ body {
     flex-direction: row; /* Affiche les colonnes côte à côte */
     width: 100%;
     height: 100vh; /* Prend toute la hauteur de la fenêtre */
-    justify-content: center; /* Centre horizontalement le conteneur */
-    align-items: center; /* Centre verticalement le conteneur */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
 }
 
 /* Colonne pour l'image */
@@ -32,7 +32,7 @@ body {
 
 /* Image du personnage */
 .character-image img {
-    max-width: 300px; /* Augmente la taille de l'image */
+    max-width: 300px; /* Ajuste la taille de l'image */
     height: auto; /* Conserve les proportions */
     border-radius: 8px; /* Arrondit légèrement les coins */
 }
@@ -42,7 +42,7 @@ body {
     flex: 2; /* Prend environ 2/3 de la largeur */
     padding: 20px;
     border-radius: 8px; /* Arrondit les coins */
-    max-width: 900px; /* Limite la largeur maximale */
+    max-width: 66%; /* Limite la largeur à 66% */
     width: 100%; /* Prend toute la largeur disponible */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
     overflow-y: auto; /* Ajoute un défilement si le contenu dépasse la hauteur */
@@ -54,8 +54,6 @@ body {
     max-width: 900px; /* Limite la largeur maximale */
     margin: 0 auto; /* Centre le contenu horizontalement */
     padding: 20px;
-    background-color: #1e1e1e;
-    border-radius: 8px;
     box-sizing: border-box; /* Inclut le padding dans la largeur */
 }
 
