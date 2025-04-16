@@ -28,12 +28,11 @@ body {
     display: flex;
     justify-content: center; /* Centre l'image horizontalement */
     align-items: center; /* Centre l'image verticalement */
-    background-color: rgba(0, 0, 0, 0.5); /* Optionnel : ajoute un fond semi-transparent */
 }
 
 /* Image du personnage */
 .character-image img {
-    max-width: 200px; /* Augmente la taille de l'image */
+    max-width: 300px; /* Augmente la taille de l'image */
     height: auto; /* Conserve les proportions */
     border-radius: 8px; /* Arrondit légèrement les coins */
 }
@@ -44,7 +43,6 @@ body {
     padding: 20px;
     background-color: rgba(30, 30, 30, 0.9); /* Fond semi-transparent pour le conteneur */
     border-radius: 8px; /* Arrondit les coins */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre */
     max-width: 900px; /* Limite la largeur maximale */
     width: 100%; /* Prend toute la largeur disponible */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
@@ -59,7 +57,6 @@ body {
     padding: 20px;
     background-color: #1e1e1e;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     box-sizing: border-box; /* Inclut le padding dans la largeur */
 }
 
@@ -70,14 +67,6 @@ body {
     align-items: flex-start;
     width: 100%;
     gap: 20px; /* Espacement entre l'image et les onglets */
-}
-
-/* Image du personnage */
-.character-info img {
-    max-width: 300px;
-    height: auto;
-    margin: 0 auto;
-    display: block;
 }
 
 /* Image du personnage à gauche */
