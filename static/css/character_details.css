@@ -42,7 +42,7 @@ body {
     top: 50%; /* Centre verticalement */
     transform: translateY(-50%); /* Ajuste pour centrer parfaitement */
     z-index: 10; /* Place l'image au-dessus des autres éléments */
-    width: 100px !important; /* Réduit davantage la largeur de l'image */
+    width: 80px; /* Réduit la largeur de l'image */
     height: auto; /* Conserve les proportions */
     padding: 5px; /* Réduit le padding autour de l'image */
     background-color: rgba(0, 0, 0, 0.4); /* Optionnel : ajustez la transparence */
