@@ -372,7 +372,7 @@
             {
                 "name": "Noyau Orange 01",
                 "number": "01",
-                "image": "Noyaux/Orange01.webp",
+                "image": "Orange01.webp",
                 "main_stat": {
                     "name": "ATK"
                 },
@@ -383,7 +383,7 @@
             {
                 "name": "Noyau Orange 02",
                 "number": "02",
-                "image": "Noyaux/Orange02.webp",
+                "image": "Orange02.webp",
                 "main_stat": {
                     "name": "HP"
                 },
@@ -394,7 +394,7 @@
             {
                 "name": "Noyau Violet 03",
                 "number": "03",
-                "image": "Noyaux/Violet03.webp",
+                "image": "Violet03.webp",
                 "main_stat": {
                     "name": "SPD"
                 },
