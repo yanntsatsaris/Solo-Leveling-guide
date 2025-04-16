@@ -177,7 +177,7 @@ p {
 
 /* Image de la statistique principale */
 .stat-main img {
-    width: 200px; /* Augmente la largeur de l'image principale */
+    width: 250px; /* Augmente la largeur de l'image principale */
     height: auto; /* Conserve les proportions */
     display: block;
 }
@@ -207,7 +207,7 @@ p {
 
 /* Image des statistiques secondaires */
 .stat-secondary img {
-    width: 100px; /* Réduit la largeur des images secondaires */
+    width: 80px; /* Réduit davantage la largeur des images secondaires */
     height: auto; /* Conserve les proportions */
     display: block;
 }
@@ -217,7 +217,7 @@ p {
     position: relative;
     display: inline-block;
     text-align: center;
-    width: 140px; /* Ajustez selon la taille de l'image */
+    width: auto; /* Permet aux images de définir leur propre largeur */
     height: auto;
 }
 
