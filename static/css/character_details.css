@@ -230,6 +230,15 @@ p {
     display: block;
 }
 
+/* Classe pour l'image de fond */
+.background-image {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh; /* Prend toute la hauteur de l'écran */
+    margin: 0;
+}
+
 /* Affichage sur PC (écrans larges) */
 @media (min-width: 768px) {
     .character-info {

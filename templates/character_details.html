@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/character_details.css') }}">
 </head>
 <body 
-    {% if character.background_image %}
-        style="background-image: url('{{ url_for('static', filename=character.background_image) }}'); background-size: cover; background-position: center;"
-    {% endif %}
+    class="{% if character.background_image %}background-image{% endif %}"
+    style="{% if character.background_image %}background-image: url('{{ url_for('static', filename=character.background_image) }}');{% endif %}"
 >
     {% include 'navbar.html' %}
     <div class="container">
