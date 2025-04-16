@@ -72,47 +72,49 @@
                 </div>
                 <div id="artefacts" class="tab-content">
                     <h2>Artefacts</h2>
-                    <div class="artefacts-container" style="display: flex; justify-content: space-between;">
-                        <!-- Colonne gauche -->
-                        <div class="artefacts-column">
-                            {% for artefact in character.artefacts[:4] %}
-                                <div class="artefact-item" style="display: flex; margin-bottom: 20px;">
-                                    <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" style="width: 100px; height: 100px; margin-right: 10px;">
-                                    <div>
-                                        <p><strong>{{ artefact.name }}</strong></p>
-                                        <p>Panoplie : {{ artefact.set }}</p>
-                                        <p><strong>Stat principale :</strong> {{ artefact.main_stat.name }}</p>
-                                        <p><strong>Stats secondaires :</strong></p>
-                                        <ul style="list-style: none; padding: 0;">
-                                            {% for stat in artefact.secondary_stats %}
-                                                <li>{{ stat.name }}</li>
-                                            {% endfor %}
-                                        </ul>
+                    {% if character.artefacts and character.artefacts|length > 0 %}
+                        <div class="artefacts-container" style="display: flex; justify-content: space-between;">
+                            <!-- Colonne gauche -->
+                            <div class="artefacts-column">
+                                {% for artefact in character.artefacts[:4] %}
+                                    <div class="artefact-item" style="display: flex; margin-bottom: 20px;">
+                                        <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" style="width: 100px; height: 100px; margin-right: 10px;">
+                                        <div>
+                                            <p><strong>{{ artefact.name }}</strong></p>
+                                            <p>{{ artefact.set }}</p>
+                                            <p>{{ artefact.main_stat.name }}</p>
+                                            <ul style="list-style: none; padding: 0;">
+                                                {% for stat in artefact.secondary_stats %}
+                                                    <li>{{ stat.name }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                            {% endfor %}
-                        </div>
+                                {% endfor %}
+                            </div>
 
-                        <!-- Colonne droite -->
-                        <div class="artefacts-column">
-                            {% for artefact in character.artefacts[4:] %}
-                                <div class="artefact-item" style="display: flex; margin-bottom: 20px;">
-                                    <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" style="width: 100px; height: 100px; margin-right: 10px;">
-                                    <div>
-                                        <p><strong>{{ artefact.name }}</strong></p>
-                                        <p>Panoplie : {{ artefact.set }}</p>
-                                        <p><strong>Stat principale :</strong> {{ artefact.main_stat.name }}</p>
-                                        <p><strong>Stats secondaires :</strong></p>
-                                        <ul style="list-style: none; padding: 0;">
-                                            {% for stat in artefact.secondary_stats %}
-                                                <li>{{ stat.name }}</li>
-                                            {% endfor %}
-                                        </ul>
+                            <!-- Colonne droite -->
+                            <div class="artefacts-column">
+                                {% for artefact in character.artefacts[4:] %}
+                                    <div class="artefact-item" style="display: flex; margin-bottom: 20px;">
+                                        <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" style="width: 100px; height: 100px; margin-right: 10px;">
+                                        <div>
+                                            <p><strong>{{ artefact.name }}</strong></p>
+                                            <p>{{ artefact.set }}</p>
+                                            <p>{{ artefact.main_stat.name }}</p>
+                                            <ul style="list-style: none; padding: 0;">
+                                                {% for stat in artefact.secondary_stats %}
+                                                    <li>{{ stat.name }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                            {% endfor %}
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
+                    {% else %}
+                        <p>Informations sur les artefacts du personnage.</p>
+                    {% endif %}
                 </div>
             </div>
         </div>
