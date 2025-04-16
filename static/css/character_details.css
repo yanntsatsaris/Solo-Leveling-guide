@@ -46,6 +46,9 @@ body {
     width: 100%; /* Prend toute la largeur disponible */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
     overflow-y: auto; /* Ajoute un défilement si le contenu dépasse la hauteur */
+    display: flex; /* Active Flexbox pour aligner le contenu */
+    flex-direction: column; /* Empile les éléments verticalement */
+    align-items: flex-start; /* Aligne le contenu à gauche */
 }
 
 /* Conteneur principal */
