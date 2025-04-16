@@ -17,8 +17,8 @@ body {
     flex-direction: row; /* Affiche les colonnes côte à côte */
     width: 100%;
     height: 100vh; /* Prend toute la hauteur de la fenêtre */
-    justify-content: center; /* Centre horizontalement */
-    align-items: center; /* Centre verticalement */
+    justify-content: center; /* Centre horizontalement le conteneur */
+    align-items: center; /* Centre verticalement le conteneur */
 }
 
 /* Colonne pour l'image */
