@@ -37,11 +37,11 @@ body {
     justify-content: center; /* Centre horizontalement */
     align-items: center; /* Centre verticalement */
     position: fixed; /* Fixe l'image à gauche de l'écran */
-    left: 10px; /* Ajoute un espace pour éviter que l'image dépasse sur la gauche */
+    left: 20px; /* Augmente l'espace pour éviter que l'image dépasse sur la gauche */
     top: 50%; /* Centre verticalement */
     transform: translateY(-50%); /* Ajuste pour centrer parfaitement */
     z-index: 10; /* Place l'image au-dessus des autres éléments */
-    width: 250px; /* Réduit légèrement la largeur de l'image */
+    width: 250px; /* Taille de l'image */
     height: auto; /* Conserve les proportions */
     padding: 5px; /* Réduit le padding autour de l'image */
     border-radius: 8px; /* Arrondit légèrement les coins */
@@ -77,19 +77,6 @@ body {
     align-items: flex-start;
     width: 100%;
     gap: 20px; /* Espacement entre l'image et les onglets */
-}
-
-/* Image du personnage à gauche */
-.character-image {
-    position: fixed; /* Fixe l'image à gauche de l'écran */
-    left: 10px; /* Ajoute un espace pour éviter que l'image dépasse sur la gauche */
-    top: 50%; /* Centre verticalement */
-    transform: translateY(-50%); /* Ajuste pour centrer parfaitement */
-    z-index: 10; /* Place l'image au-dessus des autres éléments */
-    width: 250px; /* Réduit légèrement la largeur de l'image */
-    height: auto; /* Conserve les proportions */
-    padding: 5px; /* Réduit le padding autour de l'image */
-    border-radius: 8px; /* Arrondit légèrement les coins */
 }
 
 /* Conteneur des onglets et du contenu */
