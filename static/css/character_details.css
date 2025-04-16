@@ -171,7 +171,7 @@ p {
     border: 2px solid gray;
     border-width: 1px 4px; /* Bordure fine en haut/bas, épaisse sur les côtés */
     box-shadow: 0 0 5px gray;
-    clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%); /* Forme rectangle avec côtés obliques */
+    clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%); /* Forme rectangle avec côtés inclinés dans le même sens */
 }
 
 /* Texte à l'intérieur du rectangle principal */
@@ -201,7 +201,7 @@ p {
     border: 2px solid gray;
     border-width: 1px 4px; /* Bordure fine en haut/bas, épaisse sur les côtés */
     box-shadow: 0 0 5px gray;
-    clip-path: polygon(10% 0%, 90% 0%, 100% 100%, 0% 100%); /* Forme rectangle avec côtés obliques */
+    clip-path: polygon(15% 0%, 100% 0%, 85% 100%, 0% 100%); /* Forme rectangle avec côtés inclinés dans le même sens */
 }
 
 /* Texte à l'intérieur des rectangles secondaires */
