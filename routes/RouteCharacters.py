@@ -68,6 +68,6 @@ def characters(app: Flask):
 
         # Construire les chemins des images des artefacts
         for artefact in character_info.get('artefacts', []):
-            artefact['image'] = f'/static/images/Artefacts/{artefact["image"]}'
+            artefact['image'] = f'images/Artefacts/{artefact["image"]}'
 
         return render_template('character_details.html', character=character_info)
