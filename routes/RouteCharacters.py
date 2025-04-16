@@ -66,4 +66,8 @@ def characters(app: Flask):
                 )
                 skill['description'] = skill['description'].replace("\n", "<br>")  # Remplace \n par <br>
 
+        # Construire les chemins des images des artefacts
+        for artefact in character_info.get('artefacts', []):
+            artefact['image'] = f'static/images/Artefacts/{artefact["image"]}'
+
         return render_template('character_details.html', character=character_info)

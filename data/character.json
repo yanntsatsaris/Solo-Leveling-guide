@@ -180,6 +180,192 @@
                 "description": "<img src='Light_Thomas_Buff_Armuredacier.png' alt='Armuredacier'> [ARMURE D'ACIER].",
                 "image": "Light_Thomas_Skill_Soutien.png"
             }
+        ],
+        "artefacts": [
+            {
+                "name": "Casque",
+                "number": "01",
+                "set": "Malédiction Ardente",
+                "image": "Malediction_Ardente/Malediction_Ardente01.webp",
+                "main_stat": {
+                    "name": "ATK"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "CRIT DMG"
+                    },
+                    {
+                        "name": "HP"
+                    },
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "SPD"
+                    }
+                ]
+            },
+            {
+                "name": "Plastron",
+                "number": "02",
+                "set": "Malédiction Ardente",
+                "image": "Malediction_Ardente/Malediction_Ardente02.webp",
+                "main_stat": {
+                    "name": "HP"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "ATK"
+                    },
+                    {
+                        "name": "CRIT RATE"
+                    },
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "RES"
+                    }
+                ]
+            },
+            {
+                "name": "Gants",
+                "number": "03",
+                "set": "Malédiction Ardente",
+                "image": "Malediction_Ardente/Malediction_Ardente03.webp",
+                "main_stat": {
+                    "name": "CRIT RATE"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "ATK"
+                    },
+                    {
+                        "name": "HP"
+                    },
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "SPD"
+                    }
+                ]
+            },
+            {
+                "name": "Bottes",
+                "number": "04",
+                "set": "Malédiction Ardente",
+                "image": "Malediction_Ardente/Malediction_Ardente04.webp",
+                "main_stat": {
+                    "name": "SPD"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "ATK"
+                    },
+                    {
+                        "name": "HP"
+                    },
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "CRIT RATE"
+                    }
+                ]
+            },
+            {
+                "name": "Collier",
+                "number": "05",
+                "set": "Obsidian",
+                "image": "Obsidian/Obsidian05.webp",
+                "main_stat": {
+                    "name": "CRIT DMG"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "ATK"
+                    },
+                    {
+                        "name": "HP"
+                    },
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "SPD"
+                    }
+                ]
+            },
+            {
+                "name": "Bracelet",
+                "number": "06",
+                "set": "Obsidian",
+                "image": "Obsidian/Obsidian06.webp",
+                "main_stat": {
+                    "name": "HP"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "ATK"
+                    },
+                    {
+                        "name": "CRIT RATE"
+                    },
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "RES"
+                    }
+                ]
+            },
+            {
+                "name": "Bague",
+                "number": "07",
+                "set": "Obsidian",
+                "image": "Obsidian/Obsidian07.webp",
+                "main_stat": {
+                    "name": "ATK"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "CRIT DMG"
+                    },
+                    {
+                        "name": "HP"
+                    },
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "SPD"
+                    }
+                ]
+            },
+            {
+                "name": "Boucle d'oreille",
+                "number": "08",
+                "set": "Obsidian",
+                "image": "Obsidian/Obsidian08.webp",
+                "main_stat": {
+                    "name": "RES"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "ATK"
+                    },
+                    {
+                        "name": "HP"
+                    },
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "CRIT RATE"
+                    }
+                ]
+            }
         ]
     },
     {

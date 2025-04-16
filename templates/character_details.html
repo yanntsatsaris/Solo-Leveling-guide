@@ -72,7 +72,47 @@
                 </div>
                 <div id="artefacts" class="tab-content">
                     <h2>Artefacts</h2>
-                    <p>Informations sur les artefacts du personnage.</p>
+                    <div class="artefacts-container" style="display: flex; justify-content: space-between;">
+                        <!-- Colonne gauche -->
+                        <div class="artefacts-column">
+                            {% for artefact in character.artefacts[:4] %}
+                                <div class="artefact-item" style="display: flex; margin-bottom: 20px;">
+                                    <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" style="width: 100px; height: 100px; margin-right: 10px;">
+                                    <div>
+                                        <p><strong>{{ artefact.name }}</strong></p>
+                                        <p>Panoplie : {{ artefact.set }}</p>
+                                        <p><strong>Stat principale :</strong> {{ artefact.main_stat.name }}</p>
+                                        <p><strong>Stats secondaires :</strong></p>
+                                        <ul style="list-style: none; padding: 0;">
+                                            {% for stat in artefact.secondary_stats %}
+                                                <li>{{ stat.name }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Colonne droite -->
+                        <div class="artefacts-column">
+                            {% for artefact in character.artefacts[4:] %}
+                                <div class="artefact-item" style="display: flex; margin-bottom: 20px;">
+                                    <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" style="width: 100px; height: 100px; margin-right: 10px;">
+                                    <div>
+                                        <p><strong>{{ artefact.name }}</strong></p>
+                                        <p>Panoplie : {{ artefact.set }}</p>
+                                        <p><strong>Stat principale :</strong> {{ artefact.main_stat.name }}</p>
+                                        <p><strong>Stats secondaires :</strong></p>
+                                        <ul style="list-style: none; padding: 0;">
+                                            {% for stat in artefact.secondary_stats %}
+                                                <li>{{ stat.name }}</li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
