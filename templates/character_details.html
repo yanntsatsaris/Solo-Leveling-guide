@@ -82,12 +82,16 @@
                                         <div style="display: flex; align-items: center;">
                                             <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" style="width: 100px; height: 100px; margin-right: 10px;">
                                             <div>
-                                                <p>{{ artefact.main_stat.name }}</p>
-                                                <ul style="list-style: none; padding: 0;">
+                                                <div class="stat-main">
+                                                    {{ artefact.main_stat.name }}
+                                                </div>
+                                                <div class="stat-secondary-container">
                                                     {% for stat in artefact.secondary_stats %}
-                                                        <li>{{ stat.name }}</li>
+                                                        <div class="stat-secondary">
+                                                            {{ stat.name }}
+                                                        </div>
                                                     {% endfor %}
-                                                </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -102,12 +106,16 @@
                                         <div style="display: flex; align-items: center;">
                                             <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" style="width: 100px; height: 100px; margin-right: 10px;">
                                             <div>
-                                                <p>{{ artefact.main_stat.name }}</p>
-                                                <ul style="list-style: none; padding: 0;">
+                                                <div class="stat-main">
+                                                    {{ artefact.main_stat.name }}
+                                                </div>
+                                                <div class="stat-secondary-container">
                                                     {% for stat in artefact.secondary_stats %}
-                                                        <li>{{ stat.name }}</li>
+                                                        <div class="stat-secondary">
+                                                            {{ stat.name }}
+                                                        </div>
                                                     {% endfor %}
-                                                </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

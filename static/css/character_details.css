@@ -156,6 +156,59 @@ p {
     margin: 0; /* Supprime les marges inutiles */
 }
 
+/* Style pour la statistique principale */
+.stat-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 50px;
+    background-color: violet;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    transform: rotate(45deg);
+    margin: 10px auto;
+    border: 2px solid gray;
+    border-width: 1px 4px; /* Bordure fine en haut/bas, épaisse sur les côtés */
+    box-shadow: 0 0 5px gray;
+}
+
+/* Texte à l'intérieur du losange principal */
+.stat-main span {
+    transform: rotate(-45deg); /* Réoriente le texte pour qu'il soit lisible */
+}
+
+/* Style pour les statistiques secondaires */
+.stat-secondary-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.stat-secondary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 40px;
+    background-color: blue;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    transform: rotate(45deg);
+    margin: 5px;
+    border: 2px solid gray;
+    border-width: 1px 4px; /* Bordure fine en haut/bas, épaisse sur les côtés */
+    box-shadow: 0 0 5px gray;
+}
+
+/* Texte à l'intérieur des losanges secondaires */
+.stat-secondary span {
+    transform: rotate(-45deg); /* Réoriente le texte pour qu'il soit lisible */
+}
+
 /* Affichage sur PC (écrans larges) */
 @media (min-width: 768px) {
     .character-info {
