@@ -135,6 +135,46 @@
                 "description": "<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +10%\n+10 CRIT HIT & CRIT DMG (25 SECONDES).",
                 "image": "Light_Thomas_Buff_Armuredacier.png"
             }
+        ],
+        "skills": [
+            {
+                "description": "<img src='Light_Thomas_Skill_QTE.png' alt='QTE'> [QTE]><img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME]><img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2] ><img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1]><img src='Light_Thomas_Skill_QTE.png' alt='QTE'> [QTE]><img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME]><img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2] ><img src='Light_Thomas_Skill_Base.png' alt='Base'> [BASE ATK] ><img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1]><img src='Light_Thomas_Skill_Base.png' alt='Base'> [BASE ATK]><img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1]><img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE] ><img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] ><img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2]><img src='Light_Thomas_Skill_Base.png' alt='Base'> [Base]><img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1]><img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE]"
+            },
+            {
+                "name": "[TYRAN D'ACIER]",
+                "description": "<img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE]><img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1]><img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE]><img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2]><img src='Light_Thomas_Buff_Tyrandacier.png' alt='Tyrandacier'> CLINIOTE><img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME]><img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE]><img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1]><img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME]>",
+                "image": "Light_Thomas_Buff_Tyrandacier.png"
+            },
+            {
+                "name": "[CORE] COUP DE MARTEAU GEANT",
+                "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='Puissanceecrasante'> [PUISSANCE ECRASSNTE] (1x)\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +2%",
+                "image": "Light_Thomas_Skill_Core.png"
+            },
+            {
+                "name": "[SKILL1] DEMOLITION ABSOLUE",
+                "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='Puissanceecrasante'> [PUISSANCE ECRASSNTE] (1x)\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +2%",
+                "image": "Light_Thomas_Skill1.png"
+            },
+            {
+                "name": "[SKILL2] ECRASEMENT COLOSSAL",
+                "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='Puissanceecrasante'> [PUISSANCE ECRASSNTE] (1x)\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +2%",
+                "image": "Light_Thomas_Skill2.png"
+            },
+            {
+                "name": "[ULTIME] JUGEMENT DU CHEF",
+                "description": "TRANSFORMATION <img src='Light_Thomas_Buff_Tyrandacier.png' alt='Tyrandacier'> [TYRAN D'ACIER] 10000 POINTS <img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] = <img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME] +1020% DMG INC.",
+                "image": "Light_Thomas_Skill_Ultime.png"
+            },
+            {
+                "name": "[QTE] COUP A LA VOLEE",
+                "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='Puissanceecrasante'> [PUISSANCE ECRASSNTE] (1x).",
+                "image": "Light_Thomas_Skill_QTE.png"
+            },
+            {
+                "name": "[SOUTIEN] RETOUR DU ROI",
+                "description": "<img src='Light_Thomas_Buff_Armuredacier.png' alt='Armuredacier'> [ARMURE D'ACIER].",
+                "image": "Light_Thomas_Skill_Soutien.png"
+            }
         ]
     },
     {

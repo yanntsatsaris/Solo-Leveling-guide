@@ -54,4 +54,16 @@ def characters(app: Flask):
                 )
                 passive['description'] = passive['description'].replace("\n", "<br>")  # Remplace \n par <br>
 
+        # Construire les chemins des images des skills
+        for skill in character_info.get('skills', []):
+            if 'image' in skill:
+                skill['image'] = f'images/Personnages/{type_folder}/{character_folder}/{skill["image"]}'
+            # Remplacer les chemins relatifs dans les descriptions
+            if 'description' in skill:
+                skill['description'] = skill['description'].replace(
+                    "src='",
+                    f"src='/static/images/Personnages/{type_folder}/{character_folder}/"
+                )
+                skill['description'] = skill['description'].replace("\n", "<br>")  # Remplace \n par <br>
+
         return render_template('character_details.html', character=character_info)
