@@ -301,6 +301,67 @@ p {
     margin: 0;
 }
 
+/* Section des noyaux */
+.cores-section {
+    margin-top: 20px;
+}
+
+.cores-container {
+    display: flex;
+    flex-direction: column; /* Affiche les noyaux en colonne */
+    gap: 20px; /* Ajoute un espacement entre chaque noyau */
+}
+
+.core-item {
+    display: flex;
+    align-items: center; /* Aligne l'image et les stats verticalement */
+    gap: 20px; /* Ajoute un espacement entre l'image et les stats */
+    border: 1px solid #ccc; /* Ajoute une bordure légère */
+    padding: 10px; /* Ajoute un padding interne */
+    border-radius: 8px; /* Arrondit les coins */
+    background-color: #1e1e1e; /* Ajoute un fond sombre */
+}
+
+/* Image du noyau */
+.core-item img {
+    width: 100px;
+    height: 100px;
+    border-radius: 8px; /* Arrondit légèrement les coins */
+}
+
+/* Conteneur des statistiques */
+.core-item .stat-main,
+.core-item .stat-secondary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 5px;
+}
+
+.core-item .stat-container {
+    position: relative;
+    text-align: center;
+    width: 80px;
+    height: 80px;
+}
+
+.core-item .stat-container img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Rend l'image circulaire */
+}
+
+.core-item .stat-container span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black; /* Ajoute une ombre pour améliorer la lisibilité */
+}
+
 /* Affichage sur téléphone (écrans étroits) */
 @media (max-width: 767px) {
     .character-info {
