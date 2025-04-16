@@ -169,7 +169,7 @@ p {
     text-align: center;
     margin: 10px 0; /* Alignement à gauche */
     box-shadow: 0 0 5px gray;
-    clip-path: polygon(15% 0%, 85% 0%, 100% 50%, 85% 100%, 15% 100%, 0% 50%); /* Coins haut droite et bas gauche plats vers l'intérieur */
+    clip-path: polygon(10% 0%, 90% 0%, 95% 50%, 90% 100%, 10% 100%, 5% 50%); /* Coins haut droite et bas gauche plats, mais moins prononcés */
     outline: 2px solid gray; /* Bordure qui suit la forme du polygon */
     outline-offset: -2px; /* Ajuste la position de la bordure pour qu'elle colle à la forme */
 }
@@ -199,7 +199,7 @@ p {
     text-align: center;
     margin: 5px 0; /* Alignement à gauche */
     box-shadow: 0 0 5px gray;
-    clip-path: polygon(15% 0%, 85% 0%, 100% 50%, 85% 100%, 15% 100%, 0% 50%); /* Coins haut droite et bas gauche plats vers l'intérieur */
+    clip-path: polygon(10% 0%, 90% 0%, 95% 50%, 90% 100%, 10% 100%, 5% 50%); /* Coins haut droite et bas gauche plats, mais moins prononcés */
     outline: 2px solid gray; /* Bordure qui suit la forme du polygon */
     outline-offset: -2px; /* Ajuste la position de la bordure pour qu'elle colle à la forme */
 }
