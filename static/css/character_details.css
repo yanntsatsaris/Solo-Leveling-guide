@@ -32,9 +32,18 @@ body {
 }
 
 /* Image du personnage */
-.character-image img {
-    max-width: 300px; /* Ajuste la taille de l'image */
+.character-image {
+    display: flex; /* Active Flexbox pour centrer l'image */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    position: fixed; /* Fixe l'image à gauche de l'écran */
+    left: 0; /* Positionne l'image à gauche */
+    top: 50%; /* Centre verticalement */
+    transform: translateY(-50%); /* Ajuste pour centrer parfaitement */
+    z-index: 10; /* Place l'image au-dessus des autres éléments */
+    width: 300px; /* Ajuste la largeur de la div contenant l'image */
     height: auto; /* Conserve les proportions */
+    padding: 5px; /* Réduit le padding autour de l'image */
     border-radius: 8px; /* Arrondit légèrement les coins */
 }
 
@@ -271,7 +280,7 @@ p {
     transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
     color: white; /* Couleur du texte */
     font-weight: bold;
-    font-size: 10px; /* Réduit encore la taille du texte */
+    font-size: 16px; /* Augmente la taille du texte */
     z-index: 2; /* Assure que le texte est au-dessus de l'image */
     text-shadow: 1px 1px 2px black; /* Ajoute une ombre pour améliorer la lisibilité */
 }
