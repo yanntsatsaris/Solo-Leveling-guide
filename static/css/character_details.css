@@ -229,7 +229,7 @@ p {
     transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
     color: white; /* Couleur du texte */
     font-weight: bold;
-    font-size: 12px; /* Réduit la taille du texte */
+    font-size: 10px; /* Réduit encore la taille du texte */
     z-index: 2; /* Assure que le texte est au-dessus de l'image */
     text-shadow: 1px 1px 2px black; /* Ajoute une ombre pour améliorer la lisibilité */
 }
