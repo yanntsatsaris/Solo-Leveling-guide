@@ -27,12 +27,7 @@ body {
 }
 
 /* Image du personnage */
-.character-info img {
-    max-width: 300px;
-    height: auto;
-    margin: 0 auto;
-    display: block;
-}
+
 
 /* Image du personnage à gauche */
 .character-image {
