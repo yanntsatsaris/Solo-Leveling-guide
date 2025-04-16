@@ -177,7 +177,7 @@ p {
 
 /* Image de la statistique principale */
 .stat-main img {
-    width: 125px;
+    width: 125px !important;
     height: auto; /* Conserve les proportions */
     display: block;
 }
@@ -207,7 +207,7 @@ p {
 
 /* Image des statistiques secondaires */
 .stat-secondary img {
-    width: 100px;
+    width: 100px !important;
     height: auto; /* Conserve les proportions */
     display: block;
 }
