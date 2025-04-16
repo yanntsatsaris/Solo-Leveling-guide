@@ -308,8 +308,9 @@ p {
 
 .cores-container {
     display: flex;
-    flex-direction: column; /* Affiche les noyaux en colonne */
-    gap: 20px; /* Ajoute un espacement entre chaque noyau */
+    flex-wrap: wrap; /* Permet de passer à la ligne si nécessaire */
+    gap: 20px; /* Ajoute un espacement entre les noyaux */
+    justify-content: center; /* Centre les noyaux horizontalement */
 }
 
 .core-item {
@@ -320,23 +321,19 @@ p {
     padding: 10px; /* Ajoute un padding interne */
     border-radius: 8px; /* Arrondit les coins */
     background-color: #1e1e1e; /* Ajoute un fond sombre */
+    width: 300px; /* Définit une largeur fixe pour chaque noyau */
 }
 
-/* Image du noyau */
 .core-item img {
     width: 100px;
     height: 100px;
     border-radius: 8px; /* Arrondit légèrement les coins */
 }
 
-/* Conteneur des statistiques */
-.core-item .stat-main,
-.core-item .stat-secondary {
+.core-item .stats {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 5px;
+    flex-direction: column; /* Affiche les stats en colonne */
+    gap: 10px; /* Ajoute un espacement entre les stats */
 }
 
 .core-item .stat-container {
