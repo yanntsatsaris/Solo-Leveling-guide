@@ -78,11 +78,10 @@
                             <div class="artefacts-column">
                                 {% for artefact in character.artefacts[:4] %}
                                     <div class="artefact-item" style="display: flex; flex-direction: column; margin-bottom: 20px;">
-                                        <p style="text-align: center; font-weight: bold;">{{ artefact.name }}</p>
+                                        <p style="text-align: center; font-weight: bold;">{{ artefact.name }} : {{ artefact.set }}</p>
                                         <div style="display: flex; align-items: center;">
                                             <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" style="width: 100px; height: 100px; margin-right: 10px;">
                                             <div>
-                                                <p>{{ artefact.set }}</p>
                                                 <p>{{ artefact.main_stat.name }}</p>
                                                 <ul style="list-style: none; padding: 0;">
                                                     {% for stat in artefact.secondary_stats %}
@@ -99,11 +98,10 @@
                             <div class="artefacts-column">
                                 {% for artefact in character.artefacts[4:] %}
                                     <div class="artefact-item" style="display: flex; flex-direction: column; margin-bottom: 20px;">
-                                        <p style="text-align: center; font-weight: bold;">{{ artefact.name }}</p>
+                                        <p style="text-align: center; font-weight: bold;">{{ artefact.name }} : {{ artefact.set }}</p>
                                         <div style="display: flex; align-items: center;">
                                             <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" style="width: 100px; height: 100px; margin-right: 10px;">
                                             <div>
-                                                <p>{{ artefact.set }}</p>
                                                 <p>{{ artefact.main_stat.name }}</p>
                                                 <ul style="list-style: none; padding: 0;">
                                                     {% for stat in artefact.secondary_stats %}
