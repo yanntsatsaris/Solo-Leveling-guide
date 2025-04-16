@@ -8,17 +8,13 @@ body {
 
 /* Conteneur principal */
 .container {
-    display: flex;
-    flex-direction: column; /* Par défaut, les éléments sont empilés */
-    align-items: center;
-    gap: 20px; /* Espacement entre les éléments */
+    width: 700px; /* Réduit la largeur du conteneur principal */
+    max-width: 85%; /* S'assure que la largeur ne dépasse pas 85% de l'écran */
+    margin: 20px auto; /* Centre le conteneur horizontalement */
     padding: 20px;
     background-color: #1e1e1e;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin: 20px auto;
-    width: 800px; /* Fixe une largeur constante */
-    max-width: 90%; /* S'assure que la largeur ne dépasse pas 90% de l'écran */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
 }
 
@@ -45,11 +41,11 @@ body {
     top: 50%; /* Centre verticalement */
     transform: translateY(-50%); /* Ajuste pour centrer parfaitement */
     z-index: 10; /* Place l'image au-dessus des autres éléments */
-    width: 200px; /* Largeur de l'image (ajustez selon vos besoins) */
+    width: 150px; /* Réduit la largeur de l'image du personnage */
     height: auto; /* Conserve les proportions */
-    padding: 10px; /* Ajoute un peu d'espace autour de l'image */
-    background-color: rgba(0, 0, 0, 0.5); /* Optionnel : ajoute un fond semi-transparent */
-    border-radius: 10px; /* Optionnel : arrondit les coins */
+    padding: 5px; /* Réduit le padding autour de l'image */
+    background-color: rgba(0, 0, 0, 0.4); /* Optionnel : ajustez la transparence */
+    border-radius: 8px; /* Arrondit légèrement les coins */
 }
 
 /* Conteneur des onglets et du contenu */
