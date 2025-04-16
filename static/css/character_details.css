@@ -18,7 +18,8 @@ body {
     width: 100%;
     height: 100vh; /* Prend toute la hauteur de la fenêtre */
     justify-content: center; /* Centre horizontalement */
-    align-items: center; /* Centre verticalement */
+    align-items: flex-start; /* Aligne le contenu en haut */
+    padding-top: 50px; /* Ajoute un espace en haut pour descendre légèrement */
 }
 
 /* Colonne pour l'image */
