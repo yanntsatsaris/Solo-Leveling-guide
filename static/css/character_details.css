@@ -162,7 +162,7 @@ p {
     justify-content: center;
     align-items: center;
     flex-direction: column; /* Aligne le texte et l'image verticalement */
-    width: auto; /* Ajuste automatiquement la largeur */
+    width: auto; /* Permet à l'image principale de définir sa largeur */
     height: auto; /* Ajuste automatiquement la hauteur */
     background: none; /* Supprime le fond */
     color: white;
@@ -172,12 +172,12 @@ p {
     font-size: 20px;
     letter-spacing: 2px;
     margin: 10px 0; /* Espacement vertical */
-    text-align: center;
+    text-align: center; /* Centre le contenu */
 }
 
 /* Image de la statistique principale */
 .stat-main img {
-    width: 250px; /* Augmente la largeur de l'image principale */
+    width: 250px; /* Largeur de l'image principale */
     height: auto; /* Conserve les proportions */
     display: block;
 }
@@ -195,19 +195,19 @@ p {
     justify-content: center;
     align-items: center;
     flex-direction: column; /* Aligne le texte et l'image verticalement */
-    width: auto; /* Ajuste automatiquement la largeur */
+    width: auto; /* Permet à l'image secondaire de définir sa largeur */
     height: auto; /* Ajuste automatiquement la hauteur */
     background: none; /* Supprime le fond */
     color: white;
     font-weight: bold;
     font-size: 16px;
-    text-align: center;
+    text-align: center; /* Centre le contenu */
     margin: 5px 0; /* Espacement vertical */
 }
 
 /* Image des statistiques secondaires */
 .stat-secondary img {
-    width: 80px; /* Réduit davantage la largeur des images secondaires */
+    width: 150px; /* Largeur réduite pour les images secondaires */
     height: auto; /* Conserve les proportions */
     display: block;
 }
