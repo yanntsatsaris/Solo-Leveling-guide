@@ -38,6 +38,20 @@ body {
     display: block;
 }
 
+/* Image du personnage à gauche */
+.character-image {
+    position: fixed; /* Fixe l'image à gauche de l'écran */
+    left: 0; /* Positionne l'image à gauche */
+    top: 50%; /* Centre verticalement */
+    transform: translateY(-50%); /* Ajuste pour centrer parfaitement */
+    z-index: 10; /* Place l'image au-dessus des autres éléments */
+    width: 200px; /* Largeur de l'image (ajustez selon vos besoins) */
+    height: auto; /* Conserve les proportions */
+    padding: 10px; /* Ajoute un peu d'espace autour de l'image */
+    background-color: rgba(0, 0, 0, 0.5); /* Optionnel : ajoute un fond semi-transparent */
+    border-radius: 10px; /* Optionnel : arrondit les coins */
+}
+
 /* Conteneur des onglets et du contenu */
 .tabs-and-content {
     display: flex;

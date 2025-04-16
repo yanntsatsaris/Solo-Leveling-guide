@@ -12,18 +12,20 @@
     style="{% if character.background_image %}background-image: url('{{ url_for('static', filename=character.background_image) }}');{% endif %}"
 >
     {% include 'navbar.html' %}
+
+    <!-- Image du personnage en dehors du conteneur principal -->
+    <div class="character-image">
+        <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}">
+    </div>
+
     <div class="container">
         <h1>{{ character.name }}</h1>
         <p style="text-align: center; color: #ffcc00; font-weight: bold;">
             Type: {{ character.type }}
         </p>
 
-        <!-- Conteneur pour l'image et les onglets -->
+        <!-- Conteneur pour les onglets et le contenu -->
         <div class="character-info">
-            <!-- Image du personnage -->
-            <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}">
-
-            <!-- Conteneur des onglets et du contenu -->
             <div class="tabs-and-content">
                 <!-- Système d'onglets -->
                 <div class="tabs">
