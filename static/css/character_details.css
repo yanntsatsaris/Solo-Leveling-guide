@@ -158,20 +158,44 @@ p {
 
 /* Style pour la statistique principale */
 .stat-main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 180px; /* Largeur augmentée */
-    height: 35px; /* Hauteur réduite */
-    background-color: #4b0082; /* Violet plus foncé */
-    color: white;
-    font-weight: bold;
-    text-align: center;
-    margin: 10px 0; /* Alignement à gauche */
-    box-shadow: 0 0 5px gray;
-    clip-path: polygon(10% 0%, 90% 0%, 97% 50%, 90% 100%, 10% 100%, 3% 50%); /* Coins haut droite et bas gauche légèrement plats */
-    outline: 2px solid gray; /* Bordure qui suit la forme du polygon */
-    outline-offset: -2px; /* Ajuste la position de la bordure pour qu'elle colle à la forme */
+    display: inline-block;
+  background: linear-gradient(to right, #6b1d9f, #8126cc);
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 10px 40px;
+  clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%);
+  font-family: 'Arial Black', sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  position: relative;
+  background-image: repeating-linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.05) 0,
+    rgba(255, 255, 255, 0.05) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+.stat-main::before,
+.stat-main::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 10px;
+  background-color: #ccc;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.stats-main::before {
+  left: -10px;
+  transform: scaleX(-1); /* triangle inversé */
+}
+
+.stats-main::after {
+  right: -10px;
 }
 
 /* Texte à l'intérieur du rectangle principal */
