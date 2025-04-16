@@ -186,16 +186,16 @@ p {
 .stat-secondary-container {
     display: flex;
     flex-direction: column; /* Aligne les stats secondaires verticalement */
-    justify-content: flex-start; /* Aligne les stats secondaires en haut */
+    align-items: flex-start; /* Aligne les stats secondaires à gauche */
     gap: 5px; /* Ajoute un espacement vertical entre les éléments */
 }
 
 /* Conteneur pour chaque statistique secondaire */
 .stat-secondary {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; /* Aligne le texte et l'image verticalement */
+    justify-content: flex-start; /* Aligne le contenu à gauche */
+    align-items: center; /* Centre verticalement le texte et l'image */
+    flex-direction: row; /* Place le texte et l'image côte à côte */
     width: auto; /* Permet à l'image secondaire de définir sa largeur */
     height: auto; /* Ajuste automatiquement la hauteur */
     margin: 0; /* Supprime les marges inutiles */
@@ -253,12 +253,12 @@ p {
     }
 
     .stat-main img {
-        width: 150px; /* Augmente la taille de l'image principale proportionnellement */
+        width: 150px !important; /* Augmente la taille de l'image principale proportionnellement */
         height: auto; /* Conserve les proportions */
     }
 
     .stat-secondary img {
-        width: 120px; /* Augmente la taille des images secondaires proportionnellement */
+        width: 120px !important; /* Augmente la taille des images secondaires proportionnellement */
         height: auto; /* Conserve les proportions */
     }
 
