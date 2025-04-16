@@ -161,8 +161,8 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 120px; /* Largeur du losange */
-    height: 60px; /* Hauteur du losange */
+    width: 140px; /* Augmente la largeur du losange */
+    height: 40px; /* Réduit la hauteur du losange */
     background-color: violet;
     color: white;
     font-weight: bold;
@@ -191,8 +191,8 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100px; /* Largeur du losange */
-    height: 50px; /* Hauteur du losange */
+    width: 120px; /* Augmente la largeur du losange */
+    height: 35px; /* Réduit la hauteur du losange */
     background-color: blue;
     color: white;
     font-weight: bold;
