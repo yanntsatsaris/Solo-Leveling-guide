@@ -6,11 +6,44 @@ body {
     padding: 0;
 }
 
+/* Mise en page principale */
+.layout {
+    display: flex;
+    flex-direction: row; /* Affiche les colonnes côte à côte */
+    width: 100%;
+    height: 100vh; /* Prend toute la hauteur de la fenêtre */
+}
+
+/* Colonne pour l'image */
+.image-column {
+    flex: 1; /* Prend environ 1/3 de la largeur */
+    max-width: 33%; /* Limite la largeur à 33% */
+    display: flex;
+    justify-content: center; /* Centre l'image horizontalement */
+    align-items: center; /* Centre l'image verticalement */
+    background-color: rgba(0, 0, 0, 0.5); /* Optionnel : ajoute un fond semi-transparent */
+}
+
+/* Image du personnage */
+.character-image img {
+    max-width: 80%; /* L'image occupe 80% de la largeur de la colonne */
+    height: auto; /* Conserve les proportions */
+    border-radius: 8px; /* Arrondit légèrement les coins */
+}
+
+/* Colonne pour le contenu principal */
+.content-column {
+    flex: 2; /* Prend environ 2/3 de la largeur */
+    padding: 20px;
+    overflow-y: auto; /* Ajoute un défilement si le contenu dépasse la hauteur */
+    background-color: #1e1e1e; /* Fond du contenu principal */
+}
+
 /* Conteneur principal */
 .container {
-    width: 700px; /* Réduit la largeur du conteneur principal */
-    max-width: 85%; /* S'assure que la largeur ne dépasse pas 85% de l'écran */
-    margin: 20px auto; /* Centre le conteneur horizontalement */
+    width: 100%; /* Prend toute la largeur de la colonne */
+    max-width: 900px; /* Limite la largeur maximale */
+    margin: 0 auto; /* Centre le contenu horizontalement */
     padding: 20px;
     background-color: #1e1e1e;
     border-radius: 8px;
