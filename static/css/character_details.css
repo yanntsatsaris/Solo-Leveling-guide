@@ -229,7 +229,7 @@ p {
     display: flex;
     flex-direction: column; /* Aligne les stats secondaires verticalement */
     align-items: flex-start; /* Aligne les stats secondaires à gauche */
-    gap: 5px; /* Ajuste l'espacement entre les images secondaires */
+    gap: 2px; /* Réduit l'espacement entre les images secondaires */
 }
 
 /* Conteneur pour chaque statistique secondaire */
@@ -240,14 +240,14 @@ p {
     flex-direction: row; /* Place le texte et l'image côte à côte */
     width: auto; /* Permet à l'image secondaire de définir sa largeur */
     height: auto; /* Ajuste automatiquement la hauteur */
-    margin: 0; /* Supprime les marges inutiles */
+    margin: 2px 0; /* Réduit l'espacement vertical entre les stats */
 }
 
-/* Image des statistiques secondaires */
-.stat-secondary img {
-    width: 150px !important; /* Augmente la taille des images secondaires */
-    height: auto; /* Conserve les proportions */
-    display: block;
+/* Conteneur pour chaque artefact */
+.artefact-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px; /* Réduit l'espacement entre les artefacts */
 }
 
 /* Conteneur pour le texte et l'image */
