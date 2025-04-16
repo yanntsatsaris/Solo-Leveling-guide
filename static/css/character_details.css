@@ -161,8 +161,8 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 140px; /* Augmente la largeur du losange */
-    height: 40px; /* Réduit la hauteur du losange */
+    width: 160px; /* Largeur du losange */
+    height: 50px; /* Hauteur du losange */
     background-color: violet;
     color: white;
     font-weight: bold;
@@ -171,7 +171,7 @@ p {
     border: 2px solid gray;
     border-width: 1px 4px; /* Bordure fine en haut/bas, épaisse sur les côtés */
     box-shadow: 0 0 5px gray;
-    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); /* Forme losange */
+    clip-path: polygon(10% 50%, 50% 0%, 90% 50%, 50% 100%); /* Forme losange aplati */
 }
 
 /* Texte à l'intérieur du losange principal */
@@ -191,8 +191,8 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 120px; /* Augmente la largeur du losange */
-    height: 35px; /* Réduit la hauteur du losange */
+    width: 140px; /* Largeur du losange */
+    height: 40px; /* Hauteur du losange */
     background-color: blue;
     color: white;
     font-weight: bold;
@@ -201,7 +201,7 @@ p {
     border: 2px solid gray;
     border-width: 1px 4px; /* Bordure fine en haut/bas, épaisse sur les côtés */
     box-shadow: 0 0 5px gray;
-    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); /* Forme losange */
+    clip-path: polygon(10% 50%, 50% 0%, 90% 50%, 50% 100%); /* Forme losange aplati */
 }
 
 /* Texte à l'intérieur des losanges secondaires */
