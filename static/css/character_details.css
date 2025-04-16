@@ -175,10 +175,11 @@ p {
     text-align: center;
 }
 
+/* Image de la statistique principale */
 .stat-main img {
-    width: 180px; /* Largeur de l'image */
+    width: 200px; /* Augmente la largeur de l'image principale */
     height: auto; /* Conserve les proportions */
-    margin-top: 5px; /* Ajoute un espacement entre le texte et l'image */
+    display: block;
 }
 
 /* Style pour les statistiques secondaires */
@@ -204,10 +205,11 @@ p {
     margin: 5px 0; /* Espacement vertical */
 }
 
+/* Image des statistiques secondaires */
 .stat-secondary img {
-    width: 140px; /* Largeur de l'image */
+    width: 100px; /* Réduit la largeur des images secondaires */
     height: auto; /* Conserve les proportions */
-    margin-top: 5px; /* Ajoute un espacement entre le texte et l'image */
+    display: block;
 }
 
 /* Conteneur pour le texte et l'image */
