@@ -341,9 +341,9 @@ p {
 .core-item .stat-container {
     position: relative;
     text-align: left; /* Aligne le texte à gauche */
-    width: auto; /* Permet aux stats de s'adapter à leur contenu */
+    width: 100%; /* Prend toute la largeur disponible */
     height: auto;
-    padding: 5px; /* Ajoute un padding interne */
+    padding: 10px; /* Ajoute un padding interne */
     background-color: #1e1e1e; /* Ajoute un fond sombre */
     border-radius: 4px; /* Coins légèrement arrondis */
     color: white; /* Couleur du texte */
