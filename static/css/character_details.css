@@ -191,8 +191,8 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 160px; /* Largeur augmentée */
-    height: 30px; /* Hauteur réduite */
+    width: 120px; /* Réduit la largeur */
+    height: 30px; /* Hauteur conservée */
     background-color: blue;
     color: white;
     font-weight: bold;
