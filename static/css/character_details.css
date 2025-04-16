@@ -21,7 +21,8 @@ body {
 /* Conteneur pour l'image et les onglets */
 .character-info {
     display: flex;
-    flex-direction: column; /* Par défaut, empile les éléments */
+    flex-direction: column; /* Empile les éléments */
+    align-items: flex-start;
     width: 100%;
     gap: 20px; /* Espacement entre l'image et les onglets */
 }
@@ -53,10 +54,11 @@ body {
     display: flex;
     flex-direction: column; /* Par défaut, empile les onglets et le contenu */
     flex: 1;
-    min-height: 400px; /* Définit une hauteur minimale basée sur l'onglet le plus grand */
+    min-height: 500px; /* Ajuste la hauteur minimale */
     width: 100%; /* Définit une largeur par défaut */
-    max-width: 800px; /* Fixe une largeur maximale constante */
+    max-width: 900px; /* Fixe une largeur maximale constante */
     margin: 0 auto; /* Centre le conteneur horizontalement */
+    margin-left: 20px; /* Ajoute un espace entre l'image et les onglets */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
 }
 
@@ -187,7 +189,7 @@ p {
 
 /* Image de la statistique principale */
 .stat-main img {
-    width: 125px !important;
+    width: 150px !important; /* Augmente la taille de l'image principale proportionnellement */
     height: auto; /* Conserve les proportions */
     display: block;
 }
@@ -197,7 +199,7 @@ p {
     display: flex;
     flex-direction: column; /* Aligne les stats secondaires verticalement */
     align-items: flex-start; /* Aligne les stats secondaires à gauche */
-    gap: 5px; /* Ajoute un espacement vertical entre les éléments */
+    gap: 5px; /* Ajuste l'espacement entre les images secondaires */
 }
 
 /* Conteneur pour chaque statistique secondaire */
@@ -249,42 +251,8 @@ p {
     margin: 0;
 }
 
-/* Affichage sur PC (écrans larges) */
-@media (min-width: 768px) {
-    .character-info {
-        flex-direction: row; /* Affiche l'image et les onglets côte à côte */
-        align-items: flex-start;
-    }
+/* Affichage sur PC (écrans larges) */ 
 
-    .character-info img {
-        margin: 0; /* Supprime le centrage de l'image */
-    }
-
-    .tabs-and-content {
-        margin-left: 20px; /* Ajoute un espace entre l'image et les onglets */
-        min-height: 500px; /* Ajuste la hauteur minimale pour les écrans larges */
-        max-width: 900px; /* Fixe une largeur maximale constante pour les écrans larges */
-    }
-
-    .container {
-        width: 1100px; /* Augmente la largeur du conteneur principal */
-        max-width: 95%; /* S'assure que la largeur ne dépasse pas 95% de l'écran */
-    }
-
-    .stat-main img {
-        width: 150px !important; /* Augmente la taille de l'image principale proportionnellement */
-        height: auto; /* Conserve les proportions */
-    }
-
-    .stat-secondary img {
-        width: 120px !important; /* Augmente la taille des images secondaires proportionnellement */
-        height: auto; /* Conserve les proportions */
-    }
-
-    .stat-secondary-container {
-        gap: 5px; /* Ajuste l'espacement entre les images secondaires */
-    }
-}
 
 /* Affichage sur téléphone (écrans étroits) */
 @media (max-width: 767px) {
