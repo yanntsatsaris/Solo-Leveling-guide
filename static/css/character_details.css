@@ -19,7 +19,9 @@ body {
     height: 100vh; /* Prend toute la hauteur de la fenêtre */
     justify-content: center; /* Centre horizontalement */
     align-items: flex-start; /* Aligne le contenu en haut */
-    padding-top: 50px; /* Ajoute un espace en haut pour descendre légèrement */
+    margin-top: 10px; /* Réduit l'espace entre la navbar et le layout */
+    padding: 0; /* Supprime tout padding inutile */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
 }
 
 /* Colonne pour l'image */
