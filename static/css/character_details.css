@@ -346,7 +346,7 @@ p {
 }
 
 /* Conteneur des statistiques des noyaux */
-.core-item .stats {
+.core-item {
     display: flex;
     flex-direction: column; /* Aligne les stats-container en colonne */
     gap: 10px; /* Ajoute un espacement entre les stats principales et secondaires */
