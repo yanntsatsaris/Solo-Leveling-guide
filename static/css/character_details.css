@@ -353,13 +353,13 @@ p {
     margin-bottom: 10px; /* Ajoute un espacement en bas */
 }
 
-/* Texte positionné au centre de l'image */
+/* Texte positionné au-dessus de l'image */
 .core-item .stat-container {
     position: relative; /* Définit le conteneur comme un parent positionné */
     display: inline-block;
     text-align: center;
-    width: 100px; /* La largeur doit correspondre à celle de l'image */
-    height: 100px; /* La hauteur doit correspondre à celle de l'image */
+    width: 100%; /* Permet aux images de définir leur propre largeur */
+    height: auto;
 }
 
 .core-item .stat-container span {
@@ -369,10 +369,9 @@ p {
     transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
     color: white; /* Couleur du texte */
     font-weight: bold;
-    font-size: 14px; /* Ajuste la taille du texte */
+    font-size: 12px; /* Taille du texte */
     z-index: 2; /* Assure que le texte est au-dessus de l'image */
     text-shadow: 1px 1px 2px black; /* Ajoute une ombre pour améliorer la lisibilité */
-    pointer-events: none; /* Empêche les interactions avec le texte */
 }
 
 /* Image des statistiques principales des noyaux */
