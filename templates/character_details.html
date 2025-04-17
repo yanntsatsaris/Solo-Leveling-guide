@@ -163,6 +163,7 @@
                                                 <img src="{{ url_for('static', filename=core.image) }}" alt="{{ core.name }}" style="width: 100px; height: 100px; border-radius: 8px; margin-bottom: 10px;">
                                                 
                                                 <!-- Statistique principale -->
+                                                 <div class="stat">
                                                 <div class="stat-main">
                                                     <div class="stat-container">
                                                         <span>{{ core.main_stat.name }}</span>
@@ -177,6 +178,7 @@
                                                         <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
                                                     </div>
                                                 </div>
+                                            </div>
                                             </div>
                                         {% endfor %}
                                     </div>
