@@ -36,7 +36,7 @@ body {
     display: flex;
     justify-content: center; /* Centre l'image horizontalement */
     align-items: center; /* Centre l'image verticalement */
-    padding-left: 10px; /* Ajoute un léger padding à gauche pour équilibrer */
+    padding-left: 100px; /* Ajoute un léger padding à gauche pour équilibrer */
 }
 
 /* Image du personnage */
