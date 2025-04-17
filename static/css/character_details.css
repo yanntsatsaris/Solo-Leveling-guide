@@ -412,7 +412,6 @@ p {
         max-width: 100%; /* S'assure que la largeur ne dépasse pas l'écran */
         padding: 10px; /* Ajoute un padding pour l'espacement interne */
         box-sizing: border-box; /* Inclut le padding dans la largeur totale */
-        overflow-y: auto; /* Permet le défilement vertical si le contenu dépasse */
     }
 
     /* Image du personnage dans le conteneur principal */
