@@ -617,4 +617,20 @@ p {
         width: 80px; /* Réduit la largeur des images secondaires */
         height: auto; /* Conserve les proportions */
     }
+
+    /* Style pour l'arme sur téléphone */
+    .weapon {
+        display: flex;
+        flex-direction: column; /* Place l'image et les stats en colonne */
+        align-items: center; /* Centre le contenu horizontalement */
+        text-align: center; /* Centre le texte */
+    }
+
+    .weapon img {
+        margin-bottom: 10px; /* Ajoute un espacement entre l'image et les stats */
+    }
+
+    .weapon-stats {
+        text-align: center; /* Centre les stats sous l'image */
+    }
 }
