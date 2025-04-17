@@ -409,6 +409,7 @@ p {
 
     /* Conteneur principal (content-column) */
     .content-column {
+        display: unset;
         width: 100vw; /* Prend toute la largeur de la fenêtre */
         padding: 10px; /* Ajoute un padding pour l'espacement interne */
         box-sizing: border-box; /* Inclut le padding dans la largeur totale */
