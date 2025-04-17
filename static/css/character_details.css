@@ -381,11 +381,38 @@ p {
     display: block;
 }
 
-/* Image des statistiques secondaires des noyaux */
+/* Conteneur pour chaque statistique secondaire */
+.core-item .stat-secondary {
+    display: flex;
+    justify-content: center; /* Centre le contenu horizontalement */
+    align-items: center; /* Centre verticalement le texte et l'image */
+    flex-direction: column; /* Place le texte et l'image en colonne */
+    width: 100px; /* Définit une largeur fixe correspondant à celle de l'image */
+    height: 100px; /* Définit une hauteur fixe correspondant à celle de l'image */
+    text-align: center; /* Centre le texte */
+    position: relative; /* Permet de positionner le texte au centre */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
+/* Texte positionné au centre de l'image secondaire */
+.core-item .stat-secondary span {
+    position: absolute; /* Positionne le texte par rapport au conteneur parent */
+    top: 50%; /* Centre verticalement */
+    left: 50%; /* Centre horizontalement */
+    transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
+    color: white; /* Couleur du texte */
+    font-weight: bold;
+    font-size: 12px; /* Ajuste la taille du texte */
+    z-index: 2; /* Assure que le texte est au-dessus de l'image */
+    text-shadow: 1px 1px 2px black; /* Ajoute une ombre pour améliorer la lisibilité */
+}
+
+/* Image des statistiques secondaires */
 .core-item .stat-secondary img {
-    width: 120px; /* Définit la largeur à 120px */
+    width: 100%; /* L'image occupe toute la largeur du conteneur */
     height: auto; /* Conserve les proportions */
     display: block;
+    border-radius: 8px; /* Ajoute un léger arrondi aux coins */
 }
 
 /* Conteneur des statistiques des noyaux */
@@ -441,17 +468,6 @@ p {
     margin: 5px 0; /* Réduit l'espacement vertical autour de la statistique principale */
     text-align: center; /* Centre le contenu */
     margin-bottom: 2px; /* Réduit l'espace entre la statistique principale et les secondaires */
-}
-
-/* Conteneur pour chaque statistique secondaire */
-.core-item .stat-secondary {
-    display: flex;
-    justify-content: flex-start; /* Aligne le contenu à gauche */
-    align-items: center; /* Centre verticalement le texte et l'image */
-    flex-direction: row; /* Place le texte et l'image côte à côte */
-    width: auto; /* Permet à l'image secondaire de définir sa largeur */
-    height: auto; /* Ajuste automatiquement la hauteur */
-    margin: 0; /* Supprime l'espacement vertical entre les stats secondaires */
 }
 
 /* Affichage sur téléphone (écrans étroits) */
