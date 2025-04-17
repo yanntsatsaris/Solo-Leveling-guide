@@ -312,9 +312,10 @@ p {
 
 /* Classe pour l'image de fond */
 .background-image {
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size: cover; /* L'image couvre tout l'écran */
+    background-position: center; /* Centre l'image */
+    background-repeat: no-repeat; /* Empêche la répétition de l'image */
+    background-attachment: scroll; /* L'image suit le défilement */
     height: 100vh; /* Prend toute la hauteur de l'écran */
     margin: 0;
 }
