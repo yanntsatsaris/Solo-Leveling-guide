@@ -63,11 +63,12 @@ body {
 
 /* Conteneur principal */
 .container {
-    width: 1100px; /* Augmente la largeur du conteneur principal */
+    width: 1100px; /* Largeur du conteneur */
     max-width: 95%; /* S'assure que la largeur ne dépasse pas 95% de l'écran */
     margin: 0 auto; /* Centre le contenu horizontalement */
     padding: 20px;
     box-sizing: border-box; /* Inclut le padding dans la largeur */
+    margin-top: 10px; /* Ajoute un petit espace sous la navbar */
 }
 
 /* Conteneur pour l'image et les onglets */
