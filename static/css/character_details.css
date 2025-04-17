@@ -1,9 +1,9 @@
 /* Image de fond */
 html, body {
+    height: 100%; /* S'assure que le body et le html occupent toute la hauteur */
     margin: 0; /* Supprime les marges par défaut */
     padding: 0; /* Supprime les paddings par défaut */
-    overflow-x: hidden; /* Empêche le défilement horizontal */
-    height: 100%; /* S'assure que le body et le html occupent toute la hauteur */
+    overflow: hidden; /* Empêche le défilement global */
 }
 
 body {
@@ -395,8 +395,10 @@ p {
     .layout {
         display: block; /* Passe le layout en bloc pour empiler les éléments */
         width: 100%; /* Prend toute la largeur de l'écran */
+        height: 100vh; /* Prend toute la hauteur de la fenêtre */
         margin: 0; /* Supprime les marges */
         padding: 0; /* Supprime les paddings */
+        overflow: hidden; /* Empêche le défilement global */
     }
 
     /* Cache la colonne de l'image */
@@ -408,10 +410,10 @@ p {
     .content-column {
         display: block; /* Utilise un affichage en bloc */
         width: 100%; /* Prend toute la largeur de l'écran */
-        max-width: 100%; /* S'assure que la largeur ne dépasse pas l'écran */
+        height: 100%; /* Prend toute la hauteur disponible dans .layout */
         padding: 10px; /* Ajoute un padding pour l'espacement interne */
         box-sizing: border-box; /* Inclut le padding dans la largeur totale */
-        overflow-y: auto; /* Permet le défilement vertical si le contenu dépasse */
+        overflow-y: auto; /* Permet le défilement vertical uniquement dans ce conteneur */
     }
 
     /* Image du personnage dans le conteneur principal */
