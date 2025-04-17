@@ -409,8 +409,9 @@ p {
 
     /* Conteneur principal (content-column) */
     .content-column {
-        width: 100%; /* Prend toute la largeur de l'écran */
-        padding: 10px; /* Réduit le padding pour les petits écrans */
+        width: 100vw; /* Prend toute la largeur de la fenêtre */
+        padding: 10px; /* Ajoute un padding pour l'espacement interne */
+        box-sizing: border-box; /* Inclut le padding dans la largeur totale */
     }
 
     /* Image du personnage dans le conteneur principal */
