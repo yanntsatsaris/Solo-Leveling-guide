@@ -453,4 +453,52 @@ p {
         text-align: center; /* Centre le texte */
         margin-bottom: 5px; /* Ajoute un espacement entre les onglets */
     }
+
+    /* Conteneur des cores */
+    .cores-container {
+        display: flex;
+        flex-direction: column; /* Empile les cores verticalement */
+        gap: 20px; /* Ajoute un espacement entre chaque core */
+    }
+
+    /* Chaque core */
+    .core-item {
+        display: flex;
+        flex-direction: column; /* Place l'image et les stats en colonne */
+        align-items: center; /* Centre le contenu horizontalement */
+        gap: 10px; /* Ajoute un espacement entre l'image et les stats */
+        padding: 10px; /* Ajoute un padding interne */
+        border-radius: 8px; /* Arrondit légèrement les coins */
+        background-color: #1e1e1e; /* Ajoute un fond sombre */
+        width: 100%; /* Prend toute la largeur disponible */
+        box-sizing: border-box; /* Inclut le padding dans la largeur */
+    }
+
+    /* Image des cores */
+    .core-image {
+        width: 80px; /* Réduit la taille de l'image */
+        height: 80px; /* Conserve une taille fixe */
+        margin-bottom: 10px; /* Ajoute un espacement en bas */
+    }
+
+    /* Conteneur des statistiques */
+    .core-item .stats {
+        display: flex;
+        flex-direction: column; /* Aligne les stats verticalement */
+        gap: 5px; /* Ajoute un espacement entre les stats */
+        text-align: center; /* Centre le texte */
+        width: 100%; /* Prend toute la largeur disponible */
+    }
+
+    /* Statistiques principales */
+    .core-item .stat-main img {
+        width: 100px; /* Ajuste la taille de l'image principale */
+        height: auto; /* Conserve les proportions */
+    }
+
+    /* Statistiques secondaires */
+    .core-item .stat-secondary img {
+        width: 80px; /* Ajuste la taille des images secondaires */
+        height: auto; /* Conserve les proportions */
+    }
 }
