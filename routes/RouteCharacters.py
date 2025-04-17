@@ -42,11 +42,7 @@ def characters(app: Flask):
         character_info['image'] = image_path
         character_info['description'] = f"{character_info['name']} is a powerful character of type {character_info['type']} in Solo Leveling Arise."
 
-        # Ajouter l'image de fond si la clé 'fond' existe
-        if 'fond' in character_info:
-            character_info['background_image'] = f'images/Personnages/{type_folder}/{character_folder}/{character_info["fond"]}'
-        else:
-            character_info['background_image'] = None  # Pas d'image de fond
+        character_info['background_image'] = f'images/Personnages/{type_folder}/BG_{character_info['type']}.webp'}'
 
         # Construire les chemins des images des passifs
         for passive in character_info.get('passives', []):
