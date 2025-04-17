@@ -379,11 +379,12 @@ p {
 /* Conteneur pour chaque statistique principale et secondaire */
 .core-item .stats-container {
     display: flex;
+    position: relative;
     flex-direction: column; /* Aligne le contenu verticalement */
+    text-align: center;
     align-items: center; /* Centre le contenu horizontalement */
     width: 100%; /* Prend toute la largeur disponible */
     padding: 10px; /* Ajoute un padding interne */
-    background-color: #1e1e1e; /* Ajoute un fond sombre */
     border-radius: 8px; /* Arrondit légèrement les coins */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
 }
