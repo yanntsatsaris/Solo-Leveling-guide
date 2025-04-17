@@ -46,15 +46,15 @@ body {
     display: flex; /* Active Flexbox pour centrer l'image */
     justify-content: center; /* Centre horizontalement */
     align-items: center; /* Centre verticalement */
-    position: absolute; /* Change de fixed à absolute pour qu'elle ne bouge pas au scroll */
-    left: 380px; /* Positionne l'image horizontalement */
-    top: 50%; /* Centre verticalement */
-    transform: translateY(-50%); /* Ajuste pour centrer parfaitement */
-    z-index: 10; /* Place l'image au-dessus des autres éléments */
-    width: 250px; /* Taille de l'image */
+    width: 250px; /* Taille de l'image par défaut */
     height: auto; /* Conserve les proportions */
     padding: 5px; /* Réduit le padding autour de l'image */
     border-radius: 8px; /* Arrondit légèrement les coins */
+    position: relative; /* Change de absolute à relative pour éviter les conflits */
+    left: auto; /* Supprime tout positionnement horizontal */
+    top: auto; /* Supprime tout positionnement vertical */
+    transform: none; /* Supprime la transformation */
+    z-index: auto; /* Réinitialise la profondeur */
 }
 
 /* Colonne pour le contenu principal */
@@ -77,6 +77,18 @@ body {
     padding: 20px;
     box-sizing: border-box; /* Inclut le padding dans la largeur */
     margin-top: 10px; /* Ajoute un petit espace sous la navbar */
+}
+
+/* Image du personnage dans le conteneur principal */
+.container .character-image {
+    display: flex; /* Utilise Flexbox pour centrer l'image */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    margin: 20px auto; /* Centre l'image et ajoute un espacement en haut et en bas */
+    width: 150px; /* Réduit la taille de l'image */
+    height: auto; /* Conserve les proportions */
+    position: relative; /* Supprime tout positionnement absolu ou fixe */
+    text-align: center; /* Centre le contenu textuel si nécessaire */
 }
 
 /* Conteneur pour l'image et les onglets */
@@ -410,10 +422,14 @@ p {
 
     /* Image du personnage dans le conteneur principal */
     .container .character-image {
-        display: block; /* Affiche l'image dans le conteneur principal */
+        display: flex; /* Utilise Flexbox pour centrer l'image */
+        justify-content: center; /* Centre horizontalement */
+        align-items: center; /* Centre verticalement */
         margin: 20px auto; /* Centre l'image et ajoute un espacement en haut et en bas */
         width: 150px; /* Réduit la taille de l'image */
         height: auto; /* Conserve les proportions */
+        position: relative; /* Supprime tout positionnement absolu ou fixe */
+        text-align: center; /* Centre le contenu textuel si nécessaire */
     }
 
     /* Texte et contenu */
