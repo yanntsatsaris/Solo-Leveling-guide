@@ -471,12 +471,21 @@ p {
 }
 
 /* Style pour l'image de l'arme */
-.weapon img {
+.weapon > img {
     width: 150px; /* Augmente la largeur de l'image */
     height: auto; /* Conserve les proportions */
     border-radius: 8px; /* Ajoute un léger arrondi aux coins */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour un effet visuel */
     margin-right: 20px; /* Ajoute un espacement à droite */
+}
+
+/* Images dans les descriptions des skills */
+.weapon img {
+    height: 1em; /* Définit la hauteur des images à la taille de la police */
+    width: auto; /* Maintient les proportions de l'image */
+    vertical-align: -0.2em; /* Ajuste légèrement la position verticale */
+    display: inline; /* S'assure que les images restent dans le flux du texte */
+    margin: 0; /* Supprime tout espacement supplémentaire */
 }
 
 /* Affichage sur téléphone (écrans étroits) */
