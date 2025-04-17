@@ -90,7 +90,7 @@
                                         {% for artefact in character.artefacts[:4] %}
                                             <div class="artefact-item" style="display: flex; flex-direction: column; margin-bottom: 20px;">
                                                 <div style="display: flex; align-items: center;">
-                                                    <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" style="width: 100px; height: 100px; margin-right: 10px;">
+                                                    <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" class="artefact-image">
                                                     <div>
                                                         <!-- Statistique principale -->
                                                         <div class="stat-main">
@@ -122,7 +122,7 @@
                                         {% for artefact in character.artefacts[4:] %}
                                             <div class="artefact-item" style="display: flex; flex-direction: column; margin-bottom: 20px;">
                                                 <div style="display: flex; align-items: center;">
-                                                    <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" style="width: 100px; height: 100px; margin-right: 10px;">
+                                                    <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" class="artefact-image">
                                                     <div>
                                                         <!-- Statistique principale -->
                                                         <div class="stat-main">
@@ -160,7 +160,7 @@
                                     <div class="cores-container" style="display: flex; gap: 5px; justify-content: center;">
                                         {% for core in character.cores %}
                                             <div class="core-item" style="text-align: center;">
-                                                <img src="{{ url_for('static', filename=core.image) }}" alt="{{ core.name }}" style="width: 100px; height: 100px; border-radius: 8px; margin-bottom: 10px;">
+                                                <img src="{{ url_for('static', filename=core.image) }}" alt="{{ core.name }}" class="core-image">
                                                 
                                                 <div class="stats">
                                                     <!-- Statistique principale -->

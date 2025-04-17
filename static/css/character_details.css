@@ -263,6 +263,15 @@ p {
     margin-bottom: 5px; /* Réduit l'espacement entre les artefacts */
 }
 
+/* Style pour les images des artefacts */
+.artefact-image {
+    width: 100px; /* Taille fixe pour la largeur */
+    height: 100px; /* Taille fixe pour la hauteur */
+    border-radius: 8px; /* Arrondit légèrement les coins */
+    object-fit: contain; /* Conserve les proportions de l'image */
+    margin-right: 10px; /* Ajoute un espacement à droite */
+}
+
 /* Conteneur pour le texte et l'image */
 .stat-container {
     position: relative;
@@ -325,10 +334,13 @@ p {
     box-sizing: border-box; /* Inclut le padding dans la largeur */
 }
 
-.core-item img {
-    width: 100px;
-    height: 100px;
+/* Style pour les images des noyaux */
+.core-image {
+    width: 100px; /* Taille fixe pour la largeur */
+    height: 100px; /* Taille fixe pour la hauteur */
     border-radius: 8px; /* Arrondit légèrement les coins */
+    object-fit: contain; /* Conserve les proportions de l'image */
+    margin-bottom: 10px; /* Ajoute un espacement en bas */
 }
 
 /* Image des statistiques principales des noyaux */
