@@ -196,20 +196,20 @@
                 "set": "Malédiction Ardente",
                 "image": "Malediction_Ardente/Malediction_Ardente01.webp",
                 "main_stat": {
-                    "name": "ATK"
+                    "name": "DEF"
                 },
                 "secondary_stats": [
                     {
-                        "name": "CRIT DMG"
+                        "name": "DEF% +3/4"
                     },
                     {
-                        "name": "HP"
+                        "name": "DEF PEN"
                     },
                     {
-                        "name": "DEF"
+                        "name": "DMG INC"
                     },
                     {
-                        "name": "SPD"
+                        "name": "CRIT HIT"
                     }
                 ]
             },
@@ -219,20 +219,20 @@
                 "set": "Malédiction Ardente",
                 "image": "Malediction_Ardente/Malediction_Ardente02.webp",
                 "main_stat": {
-                    "name": "HP"
+                    "name": "DEF"
                 },
                 "secondary_stats": [
                     {
-                        "name": "ATK"
+                        "name": "DEF% +3/4"
                     },
                     {
-                        "name": "CRIT RATE"
+                        "name": "DEF PEN"
                     },
                     {
-                        "name": "DEF"
+                        "name": "DMG INC"
                     },
                     {
-                        "name": "RES"
+                        "name": "CRIT HIT"
                     }
                 ]
             },
@@ -242,20 +242,20 @@
                 "set": "Malédiction Ardente",
                 "image": "Malediction_Ardente/Malediction_Ardente03.webp",
                 "main_stat": {
-                    "name": "CRIT RATE"
+                    "name": "ATK"
                 },
                 "secondary_stats": [
-                    {
-                        "name": "ATK"
-                    },
-                    {
-                        "name": "HP"
-                    },
                     {
                         "name": "DEF"
                     },
                     {
-                        "name": "SPD"
+                        "name": "DEF%"
+                    },
+                    {
+                        "name": "MP CONS"
+                    },
+                    {
+                        "name": "CRIT HIT"
                     }
                 ]
             },
@@ -265,20 +265,20 @@
                 "set": "Malédiction Ardente",
                 "image": "Malediction_Ardente/Malediction_Ardente04.webp",
                 "main_stat": {
-                    "name": "SPD"
+                    "name": "CRIT DMG"
                 },
                 "secondary_stats": [
-                    {
-                        "name": "ATK"
-                    },
-                    {
-                        "name": "HP"
-                    },
                     {
                         "name": "DEF"
                     },
                     {
-                        "name": "CRIT RATE"
+                        "name": "DEF%"
+                    },
+                    {
+                        "name": "MP CONS"
+                    },
+                    {
+                        "name": "CRIT HIT"
                     }
                 ]
             },
@@ -288,20 +288,20 @@
                 "set": "Obsidian",
                 "image": "Obsidian/Obsidian05.webp",
                 "main_stat": {
-                    "name": "CRIT DMG"
+                    "name": "HP"
                 },
                 "secondary_stats": [
-                    {
-                        "name": "ATK"
-                    },
-                    {
-                        "name": "HP"
-                    },
                     {
                         "name": "DEF"
                     },
                     {
-                        "name": "SPD"
+                        "name": "DEF%"
+                    },
+                    {
+                        "name": "CRIT DMG"
+                    },
+                    {
+                        "name": "DEF PEN"
                     }
                 ]
             },
@@ -311,20 +311,20 @@
                 "set": "Obsidian",
                 "image": "Obsidian/Obsidian06.webp",
                 "main_stat": {
-                    "name": "HP"
+                    "name": "ELEM DMG"
                 },
                 "secondary_stats": [
-                    {
-                        "name": "ATK"
-                    },
-                    {
-                        "name": "CRIT RATE"
-                    },
                     {
                         "name": "DEF"
                     },
                     {
-                        "name": "RES"
+                        "name": "DEF%"
+                    },
+                    {
+                        "name": "CRIT DMG"
+                    },
+                    {
+                        "name": "MP CONS"
                     }
                 ]
             },
@@ -334,20 +334,20 @@
                 "set": "Obsidian",
                 "image": "Obsidian/Obsidian07.webp",
                 "main_stat": {
-                    "name": "ATK"
+                    "name": "DEF"
                 },
                 "secondary_stats": [
+                    {
+                        "name": "DEF% +3/4"
+                    },
                     {
                         "name": "CRIT DMG"
                     },
                     {
-                        "name": "HP"
+                        "name": "DEF PEN"
                     },
                     {
-                        "name": "DEF"
-                    },
-                    {
-                        "name": "SPD"
+                        "name": "DMG INC"
                     }
                 ]
             },
@@ -357,20 +357,20 @@
                 "set": "Obsidian",
                 "image": "Obsidian/Obsidian08.webp",
                 "main_stat": {
-                    "name": "RES"
+                    "name": "MP MAX"
                 },
                 "secondary_stats": [
-                    {
-                        "name": "ATK"
-                    },
-                    {
-                        "name": "HP"
-                    },
                     {
                         "name": "DEF"
                     },
                     {
-                        "name": "CRIT RATE"
+                        "name": "DEF%"
+                    },
+                    {
+                        "name": "CRIT DMG"
+                    },
+                    {
+                        "name": "MP CONS"
                     }
                 ]
             }
@@ -392,10 +392,10 @@
                 "number": "02",
                 "image": "Orange02.webp",
                 "main_stat": {
-                    "name": "HP"
+                    "name": "DEF"
                 },
                 "secondary_stat": {
-                    "name": "DEF"
+                    "name": "CRIT HIT"
                 }
             },
             {
@@ -403,10 +403,10 @@
                 "number": "03",
                 "image": "Violet03.webp",
                 "main_stat": {
-                    "name": "SPD"
+                    "name": "HP"
                 },
                 "secondary_stat": {
-                    "name": "RES"
+                    "name": "DEF PEN"
                 }
             }
         ]
