@@ -56,7 +56,7 @@
                                 <div class="weapon" style="display: flex; align-items: center; margin-top: 20px;">
                                     {% for weapon in character.weapon %}
                                         <div style="margin-right: 20px;">
-                                            <img src="{{ url_for('static', filename=weapon.image) }}" alt="{{ weapon.name }}" style="width: 100px; height: auto; border-radius: 8px;">
+                                            <img src="{{ url_for('static', filename=weapon.image) }}" alt="{{ weapon.name }}">
                                         </div>
                                         <div>
                                             <strong>{{ weapon.name }}</strong>

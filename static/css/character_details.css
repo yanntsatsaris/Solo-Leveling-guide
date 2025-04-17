@@ -470,6 +470,15 @@ p {
     margin-bottom: 2px; /* Réduit l'espace entre la statistique principale et les secondaires */
 }
 
+/* Style pour l'image de l'arme */
+.weapon img {
+    width: 150px; /* Augmente la largeur de l'image */
+    height: auto; /* Conserve les proportions */
+    border-radius: 8px; /* Ajoute un léger arrondi aux coins */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour un effet visuel */
+    margin-right: 20px; /* Ajoute un espacement à droite */
+}
+
 /* Affichage sur téléphone (écrans étroits) */
 @media (max-width: 767px) {
     /* Désactiver le layout */
