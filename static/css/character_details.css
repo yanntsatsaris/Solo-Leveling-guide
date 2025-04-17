@@ -388,6 +388,37 @@ p {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
 }
 
+/* Style pour la statistique principale */
+.core-item .stat-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Aligne le texte et l'image verticalement */
+    width: auto; /* Permet à l'image principale de définir sa largeur */
+    height: auto; /* Ajuste automatiquement la hauteur */
+    background: none; /* Supprime le fond */
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin: 5px 0; /* Réduit l'espacement vertical autour de la statistique principale */
+    text-align: center; /* Centre le contenu */
+    margin-bottom: 2px; /* Réduit l'espace entre la statistique principale et les secondaires */
+}
+
+/* Conteneur pour chaque statistique secondaire */
+.core-item .stat-secondary {
+    display: flex;
+    justify-content: flex-start; /* Aligne le contenu à gauche */
+    align-items: center; /* Centre verticalement le texte et l'image */
+    flex-direction: row; /* Place le texte et l'image côte à côte */
+    width: auto; /* Permet à l'image secondaire de définir sa largeur */
+    height: auto; /* Ajuste automatiquement la hauteur */
+    margin: 0; /* Supprime l'espacement vertical entre les stats secondaires */
+}
+
 /* Affichage sur téléphone (écrans étroits) */
 @media (max-width: 767px) {
     /* Désactiver le layout */
