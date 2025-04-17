@@ -157,7 +157,7 @@
                             {% if character.cores and character.cores|length > 0 %}
                                 <div class="cores-section">
                                     <h2>Noyaux</h2>
-                                    <div class="cores-container" style="display: flex; gap: 20px; justify-content: center;">
+                                    <div class="cores-container" style="display: flex; gap: 20px;">
                                         {% for core in character.cores %}
                                             <div class="core-item" style="text-align: center;">
                                                 <img src="{{ url_for('static', filename=core.image) }}" alt="{{ core.name }}" style="width: 100px; height: 100px; border-radius: 8px; margin-bottom: 10px;">
