@@ -40,13 +40,17 @@
                     <div class="tabs-and-content">
                         <!-- Système d'onglets -->
                         <div class="tabs">
-                            <div class="tab active" data-tab="passives">Passifs</div>
+                            <div class="tab active" data-tab="description">Passifs</div>
+                            <div class="tab" data-tab="passives">Passifs</div>
                             <div class="tab" data-tab="skills">Skills</div>
                             <div class="tab" data-tab="artefacts">Artefacts</div>
                         </div>
 
                         <!-- Contenu des onglets -->
-                        <div id="passives" class="tab-content active">
+                        <div id="description" class="tab-content active">
+                            <h2>Description</h2>
+                        </div>
+                        <div id="passives" class="tab-content">
                             <h2>Passifs</h2>
                             {% if character.passives and character.passives|length > 0 %}
                                 {% for passive in character.passives %}
