@@ -213,7 +213,7 @@ p {
 }
 
 /* Style pour la statistique principale */
-.stat-main {
+.artefact-item .stat-main {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -233,14 +233,14 @@ p {
 }
 
 /* Image de la statistique principale */
-.stat-main img {
+.artefact-item .stat-main img {
     width: 150px; /* Taille de l'image principale */
     height: auto; /* Conserve les proportions */
     display: block;
 }
 
 /* Conteneur pour les statistiques secondaires */
-.stat-secondary-container {
+.artefact-item .stat-secondary-container {
     display: flex;
     flex-direction: column; /* Aligne les stats secondaires verticalement */
     align-items: flex-start; /* Aligne les stats secondaires à gauche */
@@ -249,7 +249,7 @@ p {
 }
 
 /* Conteneur pour chaque statistique secondaire */
-.stat-secondary {
+.artefact-item .stat-secondary {
     display: flex;
     justify-content: flex-start; /* Aligne le contenu à gauche */
     align-items: center; /* Centre verticalement le texte et l'image */
@@ -260,7 +260,7 @@ p {
 }
 
 /* Image des statistiques secondaires */
-.stat-secondary img {
+.artefact-item .stat-secondary img {
     width: 120px; /* Taille des images secondaires */
     height: auto; /* Conserve les proportions */
 }
@@ -282,7 +282,7 @@ p {
 }
 
 /* Conteneur pour le texte et l'image */
-.stat-container {
+.artefact-item .stat-container {
     position: relative;
     display: inline-block;
     text-align: center;
@@ -291,7 +291,7 @@ p {
 }
 
 /* Texte positionné au-dessus de l'image */
-.stat-container span {
+.artefact-item .stat-container span {
     position: absolute;
     top: 50%; /* Centre verticalement */
     left: 50%; /* Centre horizontalement */
@@ -304,7 +304,7 @@ p {
 }
 
 /* Image de fond */
-.stat-container img {
+.artefact-item .stat-container img {
     width: 100%; /* S'adapte à la largeur du conteneur */
     height: auto; /* Conserve les proportions */
     display: block;
@@ -485,7 +485,7 @@ p {
     .core-item .stats {
         display: flex;
         flex-direction: column; /* Aligne les stats verticalement */
-        gap: 5px; /* Ajoute un espacement entre les stats */
+        gap: 1px; /* Ajoute un espacement entre les stats */
         text-align: left; /* Aligne le texte à gauche */
         flex: 1; /* Permet aux stats de prendre toute la largeur restante */
     }
