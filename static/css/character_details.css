@@ -23,7 +23,7 @@ body {
     display: flex;
     flex-direction: row; /* Affiche les colonnes côte à côte */
     width: 100%;
-    height: calc(100vh - 50px); /* Ajuste la hauteur pour exclure la navbar (remplacez 50px par la hauteur réelle de la navbar) */
+    height: calc(100vh - 68px); /* Ajuste la hauteur pour exclure la navbar (remplacez 50px par la hauteur réelle de la navbar) */
     justify-content: center; /* Centre horizontalement */
     align-items: flex-start; /* Aligne le contenu en haut */
     margin: 0; /* Supprime les marges */
