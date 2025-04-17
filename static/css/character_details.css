@@ -575,13 +575,13 @@ p {
     /* Réduit la taille de la police pour les statistiques principales des artefacts et cores */
     .core-item .stat-main span,
     .artefact-item .stat-main span {
-        font-size: 10px; /* Réduit la taille de la police */
+        font-size: 8px; /* Réduit la taille de la police */
     }
 
     /* Réduit la taille de la police pour les statistiques secondaires des artefacts et cores */
     .core-item .stat-secondary span,
     .artefact-item .stat-secondary span {
-        font-size: 10px; /* Réduit la taille de la police */
+        font-size: 8px; /* Réduit la taille de la police */
     }
 
     /* Réduit la taille des images des artefacts */
