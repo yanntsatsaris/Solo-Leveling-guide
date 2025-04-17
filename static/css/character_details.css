@@ -571,4 +571,16 @@ p {
         text-align: left; /* Aligne le texte à gauche */
         flex: 1; /* Permet aux stats de prendre toute la largeur restante */
     }
+
+    /* Réduit la taille de la police pour les statistiques principales des artefacts et cores */
+    .core-item .stat-main span,
+    .artefact-item .stat-main span {
+        font-size: 10px; /* Réduit la taille de la police */
+    }
+
+    /* Réduit la taille de la police pour les statistiques secondaires des artefacts et cores */
+    .core-item .stat-secondary span,
+    .artefact-item .stat-secondary span {
+        font-size: 10px; /* Réduit la taille de la police */
+    }
 }
