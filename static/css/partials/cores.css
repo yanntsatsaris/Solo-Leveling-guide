@@ -1,0 +1,67 @@
+/* Section des noyaux */
+.cores-section {
+    margin-top: 20px;
+}
+
+.cores-container {
+    display: flex;
+    flex-wrap: wrap; /* Permet de passer à la ligne après 3 éléments */
+    gap: 20px; /* Ajoute un espacement entre les noyaux */
+    justify-content: space-between; /* Répartit les noyaux sur la ligne */
+}
+
+.core-item {
+    display: flex;
+    flex-direction: row; /* Place l'image et les stats côte à côte */
+    align-items: flex-start; /* Aligne l'image et les stats en haut */
+    gap: 20px; /* Ajoute un espacement entre l'image et les stats */
+    padding: 10px; /* Ajoute un padding interne */
+    border-radius: 8px; /* Arrondit légèrement les coins */
+    background-color: transparent; /* Supprime le fond */
+    width: calc(33.33% - 20px); /* Permet d'afficher 3 éléments par ligne avec un espacement */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
+}
+
+/* Style pour les images des noyaux */
+.core-image {
+    width: 100px; /* Taille fixe pour la largeur */
+    height: 100px; /* Taille fixe pour la hauteur */
+    border-radius: 8px; /* Arrondit légèrement les coins */
+    object-fit: contain; /* Conserve les proportions de l'image */
+    margin-bottom: 10px; /* Ajoute un espacement en bas */
+}
+
+/* Image des statistiques principales des noyaux */
+.core-item .stat-main img {
+    width: 150px; /* Définit la largeur à 150px */
+    height: auto; /* Conserve les proportions */
+    display: block;
+}
+
+/* Image des statistiques secondaires des noyaux */
+.core-item .stat-secondary img {
+    width: 120px; /* Définit la largeur à 120px */
+    height: auto; /* Conserve les proportions */
+    display: block;
+}
+
+/* Conteneur des statistiques des noyaux */
+.core-item .stats {
+    display: flex;
+    flex-direction: column; /* Aligne les stats-container en colonne */
+    gap: 1px; /* Ajoute un espacement entre les stats principales et secondaires */
+    text-align: left; /* Aligne le texte à gauche */
+    flex: 1; /* Permet aux stats de prendre toute la largeur disponible */
+}
+
+/* Conteneur pour chaque statistique principale et secondaire */
+.core-item .stats-container {
+    display: flex;
+    flex-direction: column; /* Aligne le contenu verticalement */
+    align-items: center; /* Centre le contenu horizontalement */
+    width: 100%; /* Prend toute la largeur disponible */
+    padding: 10px; /* Ajoute un padding interne */
+    background-color: #1e1e1e; /* Ajoute un fond sombre */
+    border-radius: 8px; /* Arrondit légèrement les coins */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
+}

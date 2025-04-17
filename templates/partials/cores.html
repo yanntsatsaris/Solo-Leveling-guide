@@ -1,0 +1,28 @@
+<div id="cores" class="tab-content">
+    <h2>Noyaux</h2>
+    {% if character.cores and character.cores|length > 0 %}
+        <div class="cores-container">
+            {% for core in character.cores %}
+                <div class="core-item">
+                    <img src="{{ url_for('static', filename=core.image) }}" alt="{{ core.name }}" class="core-image">
+                    <div class="stats">
+                        <div class="stat-main">
+                            <div class="stat-container">
+                                <span>{{ core.main_stat.name }}</span>
+                                <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
+                            </div>
+                        </div>
+                        <div class="stat-secondary">
+                            <div class="stat-container">
+                                <span>{{ core.secondary_stat.name }}</span>
+                                <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Informations sur les noyaux du personnage.</p>
+    {% endif %}
+</div>

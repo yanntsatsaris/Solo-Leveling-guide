@@ -1,0 +1,97 @@
+/* Conteneur pour chaque artefact */
+.artefact-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1px; /* Réduit l'espacement entre les artefacts */
+}
+
+/* Style pour les images des artefacts */
+.artefact-image {
+    width: 100px; /* Taille fixe pour la largeur */
+    height: 100px; /* Taille fixe pour la hauteur */
+    border-radius: 8px; /* Arrondit légèrement les coins */
+    object-fit: contain; /* Conserve les proportions de l'image */
+    margin-right: 10px; /* Ajoute un espacement à droite */
+}
+
+/* Style pour la statistique principale */
+.artefact-item .stat-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column; /* Aligne le texte et l'image verticalement */
+    width: auto; /* Permet à l'image principale de définir sa largeur */
+    height: auto; /* Ajuste automatiquement la hauteur */
+    background: none; /* Supprime le fond */
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 20px;
+    letter-spacing: 2px;
+    margin: 5px 0; /* Réduit l'espacement vertical autour de la statistique principale */
+    text-align: center; /* Centre le contenu */
+    margin-bottom: 2px; /* Réduit l'espace entre la statistique principale et les secondaires */
+}
+
+/* Image de la statistique principale */
+.artefact-item .stat-main img {
+    width: 150px; /* Taille de l'image principale */
+    height: auto; /* Conserve les proportions */
+    display: block;
+}
+
+/* Conteneur pour les statistiques secondaires */
+.artefact-item .stat-secondary-container {
+    display: flex;
+    flex-direction: column; /* Aligne les stats secondaires verticalement */
+    align-items: flex-start; /* Aligne les stats secondaires à gauche */
+    gap: 0; /* Supprime l'espacement entre les images secondaires */
+    margin-top: 2px; /* Réduit l'espace entre la statistique principale et les secondaires */
+}
+
+/* Conteneur pour chaque statistique secondaire */
+.artefact-item .stat-secondary {
+    display: flex;
+    justify-content: flex-start; /* Aligne le contenu à gauche */
+    align-items: center; /* Centre verticalement le texte et l'image */
+    flex-direction: row; /* Place le texte et l'image côte à côte */
+    width: auto; /* Permet à l'image secondaire de définir sa largeur */
+    height: auto; /* Ajuste automatiquement la hauteur */
+    margin: 0; /* Supprime l'espacement vertical entre les stats secondaires */
+}
+
+/* Image des statistiques secondaires */
+.artefact-item .stat-secondary img {
+    width: 120px; /* Taille des images secondaires */
+    height: auto; /* Conserve les proportions */
+}
+
+/* Conteneur pour le texte et l'image */
+.artefact-item .stat-container {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width: auto; /* Permet aux images de définir leur propre largeur */
+    height: auto;
+}
+
+/* Texte positionné au-dessus de l'image */
+.artefact-item .stat-container span {
+    position: absolute;
+    top: 50%; /* Centre verticalement */
+    left: 50%; /* Centre horizontalement */
+    transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
+    color: white; /* Couleur du texte */
+    font-weight: bold;
+    font-size: 12px; /* Réduit légèrement la taille du texte */
+    z-index: 2; /* Assure que le texte est au-dessus de l'image */
+    text-shadow: 1px 1px 2px black; /* Ajoute une ombre pour améliorer la lisibilité */
+}
+
+/* Image de fond */
+.artefact-item .stat-container img {
+    width: 100%; /* S'adapte à la largeur du conteneur */
+    height: auto; /* Conserve les proportions */
+    display: block;
+}

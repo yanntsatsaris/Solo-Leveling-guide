@@ -1,0 +1,20 @@
+<div id="skills" class="tab-content">
+    <h2>Skills</h2>
+    {% if character.skills and character.skills|length > 0 %}
+        {% for skill in character.skills %}
+            <div class="skill">
+                {% if skill.image %}
+                    <img src="{{ url_for('static', filename=skill.image) }}" alt="{{ skill.name or 'Skill Image' }}" class="skill-image">
+                {% endif %}
+                <div>
+                    {% if skill.name %}
+                        <strong>{{ skill.name }}</strong><br>
+                    {% endif %}
+                    <p>{{ skill.description|safe }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Informations sur les skills du personnage.</p>
+    {% endif %}
+</div>

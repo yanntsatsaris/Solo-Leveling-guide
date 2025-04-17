@@ -1,0 +1,34 @@
+<div id="artefacts" class="tab-content">
+    <h2>Artefacts</h2>
+    {% if character.artefacts and character.artefacts|length > 0 %}
+        <div class="artefacts-container">
+            <div class="artefacts-column">
+                {% for artefact in character.artefacts[:4] %}
+                    <div class="artefact-item">
+                        <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" class="artefact-image">
+                        <div>
+                            <div class="stat-main">
+                                <div class="stat-container">
+                                    <span>{{ artefact.main_stat.name }}</span>
+                                    <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
+                                </div>
+                            </div>
+                            <div class="stat-secondary-container">
+                                {% for stat in artefact.secondary_stats %}
+                                    <div class="stat-secondary">
+                                        <div class="stat-container">
+                                            <span>{{ stat.name }}</span>
+                                            <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <p>Informations sur les artefacts du personnage.</p>
+    {% endif %}
+</div>
