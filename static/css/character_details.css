@@ -471,7 +471,7 @@ p {
 }
 
 /* Style pour l'image de l'arme */
-.weapon > img {
+.weapon-img {
     width: 150px; /* Augmente la largeur de l'image */
     height: auto; /* Conserve les proportions */
     border-radius: 8px; /* Ajoute un léger arrondi aux coins */
