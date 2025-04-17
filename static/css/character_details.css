@@ -387,8 +387,8 @@ p {
     justify-content: center; /* Centre le contenu horizontalement */
     align-items: center; /* Centre verticalement le texte et l'image */
     flex-direction: column; /* Place le texte et l'image en colonne */
-    width: 100px; /* Définit une largeur fixe correspondant à celle de l'image */
-    height: 100px; /* Définit une hauteur fixe correspondant à celle de l'image */
+    width: auto; /* Définit une largeur fixe correspondant à celle de l'image */
+    height: auto; /* Définit une hauteur fixe correspondant à celle de l'image */
     text-align: center; /* Centre le texte */
     position: relative; /* Permet de positionner le texte au centre */
     box-sizing: border-box; /* Inclut le padding dans la largeur totale */
