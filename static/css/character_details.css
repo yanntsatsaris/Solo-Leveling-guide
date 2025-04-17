@@ -437,6 +437,7 @@ p {
         width: 100%; /* Prend toute la largeur disponible */
         max-width: 100%; /* S'assure que la largeur ne dépasse pas l'écran */
         padding: 10px; /* Réduit le padding interne */
+        height: auto;
     }
 
     /* Onglets */
