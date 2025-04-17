@@ -418,14 +418,14 @@ p {
 
     .character-image {
         display: block; /* Affiche l'image dans le conteneur principal */
-        margin: 0 auto 20px; /* Centre l'image et ajoute un espacement en bas */
+        margin: 20px auto; /* Centre l'image et ajoute un espacement en haut et en bas */
         width: 150px; /* Réduit la taille de l'image */
         height: auto; /* Conserve les proportions */
     }
 
     /* Conteneur principal */
     .content-column {
-        width: 100%; /* Prend toute la largeur */
+        width: 100%; /* Prend toute la largeur de l'écran */
         padding: 10px; /* Réduit le padding pour les petits écrans */
     }
 
