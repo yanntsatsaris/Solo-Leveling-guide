@@ -6,10 +6,6 @@
     <title>{{ character.name }} - Solo Leveling Arise</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/characters.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/character_details.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/passives.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/skills.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/artefacts.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/cores.css') }}">
 </head>
 <body 
     class="{% if character.background_image %}background-image{% endif %}"
@@ -42,14 +38,153 @@
                             <div class="tab active" data-tab="passives">Passifs</div>
                             <div class="tab" data-tab="skills">Skills</div>
                             <div class="tab" data-tab="artefacts">Artefacts</div>
-                            <div class="tab" data-tab="cores">Noyaux</div>
                         </div>
 
                         <!-- Contenu des onglets -->
-                        {% include 'partials/passives.html' %}
-                        {% include 'partials/skills.html' %}
-                        {% include 'partials/artefacts.html' %}
-                        {% include 'partials/cores.html' %}
+                        <div id="passives" class="tab-content active">
+                            <h2>Passifs</h2>
+                            {% if character.passives and character.passives|length > 0 %}
+                                {% for passive in character.passives %}
+                                    <div class="passive" style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                                        {% if passive.image %}
+                                            <img src="{{ url_for('static', filename=passive.image) }}" alt="{{ passive.name or 'Passive Image' }}" style="width: 50px; height: 50px; margin-right: 10px;">
+                                        {% endif %}
+                                        <div>
+                                            {% if passive.name %}
+                                                <strong>{{ passive.name }}</strong><br>
+                                            {% endif %}
+                                            <p>{{ passive.description|safe }}</p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <p>Informations sur les passifs du personnage.</p>
+                            {% endif %}
+                        </div>
+                        <div id="skills" class="tab-content">
+                            <h2>Skills</h2>
+                            {% if character.skills and character.skills|length > 0 %}
+                                {% for skill in character.skills %}
+                                    <div class="skill" style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                                        {% if skill.image %}
+                                            <img src="{{ url_for('static', filename=skill.image) }}" alt="{{ skill.name or 'Skill Image' }}" style="width: 50px; height: 50px; margin-right: 10px;">
+                                        {% endif %}
+                                        <div>
+                                            {% if skill.name %}
+                                                <strong>{{ skill.name }}</strong><br>
+                                            {% endif %}
+                                            <p>{{ skill.description|safe }}</p>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                <p>Informations sur les skills du personnage.</p>
+                            {% endif %}
+                        </div>
+                        <div id="artefacts" class="tab-content">
+                            <h2>Artefacts</h2>
+                            {% if character.artefacts and character.artefacts|length > 0 %}
+                                <div class="artefacts-container" style="display: flex; justify-content: space-between;">
+                                    <!-- Colonne gauche -->
+                                    <div class="artefacts-column">
+                                        {% for artefact in character.artefacts[:4] %}
+                                            <div class="artefact-item" style="display: flex; flex-direction: column; margin-bottom: 20px;">
+                                                <div style="display: flex; align-items: center;">
+                                                    <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" class="artefact-image">
+                                                    <div>
+                                                        <!-- Statistique principale -->
+                                                        <div class="stat-main">
+                                                            <div class="stat-container">
+                                                                <span>{{ artefact.main_stat.name }}</span>
+                                                                <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Statistiques secondaires -->
+                                                        <div class="stat-secondary-container">
+                                                            {% for stat in artefact.secondary_stats %}
+                                                                <div class="stat-secondary">
+                                                                    <div class="stat-container">
+                                                                        <span>{{ stat.name }}</span>
+                                                                        <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
+                                                                    </div>
+                                                                </div>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <!-- Colonne droite -->
+                                    <div class="artefacts-column">
+                                        {% for artefact in character.artefacts[4:] %}
+                                            <div class="artefact-item" style="display: flex; flex-direction: column; margin-bottom: 20px;">
+                                                <div style="display: flex; align-items: center;">
+                                                    <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" class="artefact-image">
+                                                    <div>
+                                                        <!-- Statistique principale -->
+                                                        <div class="stat-main">
+                                                            <div class="stat-container">
+                                                                <span>{{ artefact.main_stat.name }}</span>
+                                                                <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Statistiques secondaires -->
+                                                        <div class="stat-secondary-container">
+                                                            {% for stat in artefact.secondary_stats %}
+                                                                <div class="stat-secondary">
+                                                                    <div class="stat-container">
+                                                                        <span>{{ stat.name }}</span>
+                                                                        <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
+                                                                    </div>
+                                                                </div>
+                                                            {% endfor %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% else %}
+                                <p>Informations sur les artefacts du personnage.</p>
+                            {% endif %}
+
+                            <!-- Section des noyaux -->
+                            {% if character.cores and character.cores|length > 0 %}
+                                <div class="cores-section">
+                                    <h2>Noyaux</h2>
+                                    <div class="cores-container" style="display: flex; gap: 5px; justify-content: center;">
+                                        {% for core in character.cores %}
+                                            <div class="core-item" style="text-align: center;">
+                                                <img src="{{ url_for('static', filename=core.image) }}" alt="{{ core.name }}" class="core-image">
+                                                
+                                                <div class="stats">
+                                                    <!-- Statistique principale -->
+                                                    <div class="stat-main">
+                                                        <div class="stat-container">
+                                                        <span>{{ core.main_stat.name }}</span>
+                                                            <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Statistique secondaire -->
+                                                    <div class="stat-secondary">
+                                                        <div class="stat-container">
+                                                            <span>{{ core.secondary_stat.name }}</span>
+                                                            <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
