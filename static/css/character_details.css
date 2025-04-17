@@ -458,7 +458,7 @@ p {
     .cores-container {
         display: flex;
         flex-direction: row; /* Empile les cores verticalement */
-        gap: 20px; /* Ajoute un espacement entre chaque core */
+        gap: 1px; /* Ajoute un espacement entre chaque core */
     }
 
     /* Chaque core */
