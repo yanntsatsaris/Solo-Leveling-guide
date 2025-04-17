@@ -425,6 +425,13 @@ p {
         text-align: center; /* Centre le contenu textuel si nécessaire */
     }
 
+    /* Image du personnage dans le conteneur principal sur téléphone */
+    .container .character-image img {
+        width: 100px; /* Réduit la largeur de l'image */
+        height: auto; /* Conserve les proportions */
+        max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
+    }
+
     /* Texte et contenu */
     .container {
         width: 100%; /* Prend toute la largeur disponible */
