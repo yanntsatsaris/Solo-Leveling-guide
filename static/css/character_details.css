@@ -81,7 +81,7 @@ body {
 
 /* Image du personnage dans le conteneur principal */
 .container .character-image {
-    display: flex; /* Utilise Flexbox pour centrer l'image */
+    display: none; /* Utilise Flexbox pour centrer l'image */
     justify-content: center; /* Centre horizontalement */
     align-items: center; /* Centre verticalement */
     margin: 20px auto; /* Centre l'image et ajoute un espacement en haut et en bas */
