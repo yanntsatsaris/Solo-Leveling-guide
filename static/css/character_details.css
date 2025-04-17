@@ -456,7 +456,7 @@ p {
     justify-content: center;
     align-items: center;
     flex-direction: column; /* Aligne le texte et l'image verticalement */
-    width: auto; /* Permet à l'image principale de définir sa largeur */
+    width: 150px; /* Permet à l'image principale de définir sa largeur */
     height: auto; /* Ajuste automatiquement la hauteur */
     background: none; /* Supprime le fond */
     color: white;
