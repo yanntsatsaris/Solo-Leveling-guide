@@ -409,7 +409,7 @@ p {
 
 /* Image des statistiques secondaires */
 .core-item .stat-secondary img {
-    width: 100%; /* L'image occupe toute la largeur du conteneur */
+    width: 120px; /* Augmente la taille de l'image */
     height: auto; /* Conserve les proportions */
     display: block;
     border-radius: 8px; /* Ajoute un léger arrondi aux coins */
@@ -418,10 +418,10 @@ p {
 /* Conteneur des statistiques des noyaux */
 .core-item .stats {
     display: flex;
-    flex-direction: column; /* Aligne les stats-container en colonne */
-    gap: 1px; /* Ajoute un espacement entre les stats principales et secondaires */
+    flex-direction: column; /* Aligne les stats verticalement */
+    gap: 5px; /* Réduit l'espacement entre les stats principales et secondaires */
     text-align: left; /* Aligne le texte à gauche */
-    flex: 1; /* Permet aux stats de prendre toute la largeur disponible */
+    flex: 1; /* Permet aux stats de prendre toute la largeur restante */
 }
 
 /* Conteneur pour chaque statistique principale et secondaire */
