@@ -457,16 +457,16 @@ p {
     /* Conteneur des cores */
     .cores-container {
         display: flex;
-        flex-direction: row; /* Empile les cores verticalement */
-        gap: 1px; /* Ajoute un espacement entre chaque core */
+        flex-direction: column; /* Empile les core-items verticalement */
+        gap: 20px; /* Ajoute un espacement entre chaque core-item */
     }
 
-    /* Chaque core */
+    /* Chaque core-item */
     .core-item {
         display: flex;
-        flex-direction: column; /* Place l'image et les stats en colonne */
-        align-items: center; /* Centre le contenu horizontalement */
-        gap: 10px; /* Ajoute un espacement entre l'image et les stats */
+        flex-direction: row; /* Place chaque core-item sur une ligne */
+        align-items: center; /* Centre le contenu verticalement */
+        gap: 20px; /* Ajoute un espacement entre l'image et les stats */
         padding: 10px; /* Ajoute un padding interne */
         border-radius: 8px; /* Arrondit légèrement les coins */
         background-color: #1e1e1e; /* Ajoute un fond sombre */
@@ -476,9 +476,9 @@ p {
 
     /* Image des cores */
     .core-image {
-        width: 80px; /* Réduit la taille de l'image */
+        width: 80px; /* Taille de l'image */
         height: 80px; /* Conserve une taille fixe */
-        margin-bottom: 10px; /* Ajoute un espacement en bas */
+        object-fit: contain; /* Conserve les proportions de l'image */
     }
 
     /* Conteneur des statistiques */
@@ -486,19 +486,7 @@ p {
         display: flex;
         flex-direction: column; /* Aligne les stats verticalement */
         gap: 5px; /* Ajoute un espacement entre les stats */
-        text-align: center; /* Centre le texte */
-        width: 100%; /* Prend toute la largeur disponible */
-    }
-
-    /* Statistiques principales */
-    .core-item .stat-main img {
-        width: 100px; /* Ajuste la taille de l'image principale */
-        height: auto; /* Conserve les proportions */
-    }
-
-    /* Statistiques secondaires */
-    .core-item .stat-secondary img {
-        width: 80px; /* Ajuste la taille des images secondaires */
-        height: auto; /* Conserve les proportions */
+        text-align: left; /* Aligne le texte à gauche */
+        flex: 1; /* Permet aux stats de prendre toute la largeur restante */
     }
 }
