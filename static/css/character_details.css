@@ -416,7 +416,7 @@ p {
         display: none; /* Cache la colonne de l'image */
     }
 
-    .character-image {
+    .container .character-image {
         display: block; /* Affiche l'image dans le conteneur principal */
         margin: 20px auto; /* Centre l'image et ajoute un espacement en haut et en bas */
         width: 150px; /* Réduit la taille de l'image */
