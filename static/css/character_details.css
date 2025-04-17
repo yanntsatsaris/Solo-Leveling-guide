@@ -370,7 +370,7 @@ p {
 .core-item .stats {
     display: flex;
     flex-direction: column; /* Aligne les stats-container en colonne */
-    gap: 10px; /* Ajoute un espacement entre les stats principales et secondaires */
+    gap: 1px; /* Ajoute un espacement entre les stats principales et secondaires */
     text-align: left; /* Aligne le texte à gauche */
     flex: 1; /* Permet aux stats de prendre toute la largeur disponible */
 }
