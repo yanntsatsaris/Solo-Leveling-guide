@@ -389,33 +389,26 @@ p {
 
 /* Affichage sur téléphone (écrans étroits) */
 @media (max-width: 767px) {
-    .character-info {
-        flex-direction: column; /* Empile l'image et les onglets */
-        align-items: center;
-    }
-
-    .tabs-and-content {
-        width: 100%; /* Prend toute la largeur */
-        min-height: 400px; /* Ajuste la hauteur minimale pour les téléphones */
-        max-width: 100%; /* Prend toute la largeur disponible */
-    }
-
-    .container {
-        width: 100%; /* Prend toute la largeur disponible */
-        max-width: 100%; /* S'assure que la largeur ne dépasse pas l'écran */
-    }
-
-    /* Supprime la disposition en deux colonnes */
+    /* Désactiver le layout */
     .layout {
-        flex-direction: column; /* Passe les colonnes en disposition verticale */
-        align-items: center; /* Centre les éléments */
+        display: block; /* Passe le layout en bloc pour empiler les éléments */
+        width: 100%; /* Prend toute la largeur de l'écran */
+        margin: 0; /* Supprime les marges */
+        padding: 0; /* Supprime les paddings */
+    }
+
+    /* Cache la colonne de l'image */
+    .image-column {
+        display: none; /* Cache complètement la colonne de l'image */
+    }
+
+    /* Conteneur principal (content-column) */
+    .content-column {
+        width: 100%; /* Prend toute la largeur de l'écran */
+        padding: 10px; /* Réduit le padding pour les petits écrans */
     }
 
     /* Image du personnage dans le conteneur principal */
-    .image-column {
-        display: none; /* Cache la colonne de l'image */
-    }
-
     .container .character-image {
         display: block; /* Affiche l'image dans le conteneur principal */
         margin: 20px auto; /* Centre l'image et ajoute un espacement en haut et en bas */
@@ -423,14 +416,10 @@ p {
         height: auto; /* Conserve les proportions */
     }
 
-    /* Conteneur principal */
-    .content-column {
-        width: 100%; /* Prend toute la largeur de l'écran */
-        padding: 10px; /* Réduit le padding pour les petits écrans */
-    }
-
     /* Texte et contenu */
     .container {
+        width: 100%; /* Prend toute la largeur disponible */
+        max-width: 100%; /* S'assure que la largeur ne dépasse pas l'écran */
         padding: 10px; /* Réduit le padding interne */
     }
 
