@@ -23,12 +23,13 @@ body {
     display: flex;
     flex-direction: row; /* Affiche les colonnes côte à côte */
     width: 100%;
-    height: 100vh; /* Prend toute la hauteur de la fenêtre */
+    height: calc(100vh - 50px); /* Ajuste la hauteur pour exclure la navbar (remplacez 50px par la hauteur réelle de la navbar) */
     justify-content: center; /* Centre horizontalement */
     align-items: flex-start; /* Aligne le contenu en haut */
-    margin-top: 10px; /* Réduit l'espace entre la navbar et le layout */
+    margin: 0; /* Supprime les marges */
     padding: 0; /* Supprime tout padding inutile */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
+    overflow: hidden; /* Empêche le défilement inutile */
 }
 
 /* Colonne pour l'image */
