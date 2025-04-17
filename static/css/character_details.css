@@ -488,6 +488,10 @@ p {
     margin: 0; /* Supprime tout espacement supplémentaire */
 }
 
+.weapon-stats {
+    text-align: left;
+}
+
 /* Affichage sur téléphone (écrans étroits) */
 @media (max-width: 767px) {
     /* Désactiver le layout */
