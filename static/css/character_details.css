@@ -488,8 +488,8 @@ p {
     margin: 0; /* Supprime tout espacement supplémentaire */
 }
 
-.weapon-stats {
-    text-align: left;
+.weapon-stats strong, .weapon-stats p{
+    text-align: justify;
 }
 
 /* Affichage sur téléphone (écrans étroits) */
