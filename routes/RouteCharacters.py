@@ -48,25 +48,21 @@ def characters(app: Flask):
         for passive in character_info.get('passives', []):
             if 'image' in passive:
                 passive['image'] = f'images/Personnages/{type_folder}/{character_folder}/{passive["image"]}'
-            # Remplacer les chemins relatifs dans les descriptions
             if 'description' in passive:
                 passive['description'] = passive['description'].replace(
                     "src='",
                     f"src='/static/images/Personnages/{type_folder}/{character_folder}/"
-                )
-                passive['description'] = passive['description'].replace("\n", "<br>")  # Remplace \n par <br>
+                ).replace("\n", "<br>")
 
         # Construire les chemins des images des skills
         for skill in character_info.get('skills', []):
             if 'image' in skill:
                 skill['image'] = f'images/Personnages/{type_folder}/{character_folder}/{skill["image"]}'
-            # Remplacer les chemins relatifs dans les descriptions
             if 'description' in skill:
                 skill['description'] = skill['description'].replace(
                     "src='",
                     f"src='/static/images/Personnages/{type_folder}/{character_folder}/"
-                )
-                skill['description'] = skill['description'].replace("\n", "<br>")  # Remplace \n par <br>
+                ).replace("\n", "<br>")
 
         # Construire les chemins des images des artefacts
         for artefact in character_info.get('artefacts', []):
@@ -75,5 +71,15 @@ def characters(app: Flask):
         # Construire les chemins des images des noyaux
         for core in character_info.get('cores', []):
             core['image'] = f'images/Noyaux/{core["image"]}'
+
+        # Construire les chemins des images des armes
+        for weapon in character_info.get('weapon', []):
+            if 'image' in weapon:
+                weapon['image'] = f'images/Personnages/{type_folder}/{character_folder}/{weapon["image"]}'
+            if 'stats' in weapon:
+                weapon['stats'] = weapon['stats'].replace(
+                    "src='",
+                    f"src='/static/images/Personnages/{type_folder}/{character_folder}/"
+                ).replace("\n", "<br>")  # Remplace \n par <br> pour l'affichage HTML
 
         return render_template('character_details.html', character=character_info)

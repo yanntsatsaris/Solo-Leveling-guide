@@ -49,6 +49,24 @@
                         <!-- Contenu des onglets -->
                         <div id="description" class="tab-content active">
                             <h2>Description</h2>
+                            <p>{{ character.description }}</p>
+
+                            {% if character.weapon and character.weapon|length > 0 %}
+                                <h3>Arme</h3>
+                                <div class="weapon" style="display: flex; align-items: center; margin-top: 20px;">
+                                    {% for weapon in character.weapon %}
+                                        <div style="margin-right: 20px;">
+                                            <img src="{{ url_for('static', filename=weapon.image) }}" alt="{{ weapon.name }}" style="width: 100px; height: auto; border-radius: 8px;">
+                                        </div>
+                                        <div>
+                                            <strong>{{ weapon.name }}</strong>
+                                            <p style="margin: 0;">{{ weapon.stats|safe }}</p>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <p>Aucune arme disponible pour ce personnage.</p>
+                            {% endif %}
                         </div>
                         <div id="passives" class="tab-content">
                             <h2>Passifs</h2>

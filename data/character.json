@@ -112,6 +112,13 @@
         "alias": "Thomas",
         "folder": "SSR_Light_ThomasAndre",
         "fond": "Light_Thomas_Fond.png",
+        "weapon": [
+            {
+                "name": "[ARME] LE VERITABLE ROI",
+                "image": "Light_Thomas_Weapon.png",
+                "stats": "+16% DEF.\n[GAIN DE SHIELD] +24%."
+            }
+        ],
         "passives": [
             {
                 "description": "+16% DEF.\n[GAIN DE SHIELD] +8%.\nACTIVATION <img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +10% CRIT HIT & CRIT DMG TEAMFIGHT +24% DMG INC."
