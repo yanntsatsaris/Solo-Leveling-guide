@@ -362,7 +362,7 @@ p {
     height: auto;
 }
 
-.core-item .stat-container span {
+.core-item .stat-main span {
     position: absolute; /* Positionne le texte par rapport au conteneur parent */
     top: 50%; /* Centre verticalement */
     left: 50%; /* Centre horizontalement */
