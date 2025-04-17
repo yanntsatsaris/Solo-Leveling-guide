@@ -531,7 +531,7 @@ p {
     }
 
     .tabs .tab {
-        width: 100%; /* Chaque onglet prend toute la largeur */
+        width: auto; /* Chaque onglet prend toute la largeur */
         text-align: center; /* Centre le texte */
         margin-bottom: 5px; /* Ajoute un espacement entre les onglets */
     }
