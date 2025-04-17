@@ -79,6 +79,11 @@ body {
     margin-top: 10px; /* Ajoute un petit espace sous la navbar */
 }
 
+/* Image du personnage dans le conteneur principal */
+.container .character-image {
+    display: none; /* Utilise Flexbox pour centrer l'image */
+}
+
 /* Conteneur pour l'image et les onglets */
 .character-info {
     display: flex;
