@@ -20,7 +20,7 @@
                         <a href="{{ url_for('character_details', alias=image.alias) }}">
                             <img src="{{ url_for('static', filename=image.path) }}" alt="{{ image.name }}" style="width: 150px; height: auto; margin: 10px;">
                         </a>
-                        <p>{{ image.name }}</p>
+                        <p hidden>{{ image.name }}</p>
                     </td>
                     {% if loop.index % 5 == 0 %}
             </tr><tr>
