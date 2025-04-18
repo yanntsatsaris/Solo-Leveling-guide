@@ -279,7 +279,8 @@
             activeSetEffects.forEach(effect => {
                 if (effect.set_name === setName) {
                     const listItem = document.createElement('li');
-                    listItem.textContent = `${effect.pieces_required} pièces : ${effect.effect}`;
+                    // Remplacer les \n par des <br> pour gérer les sauts de ligne
+                    listItem.innerHTML = `${effect.pieces_required} pièces : ${effect.effect.replace(/\n/g, '<br>')}`;
                     effectsList.appendChild(listItem);
                 }
             });
@@ -308,4 +309,3 @@
     </script>
 </body>
 </html>
-``` 
