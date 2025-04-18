@@ -109,19 +109,6 @@
                             {% endif %}
                         </div>
                         <div id="artefacts" class="tab-content">
-                            <!-- Affichage des statistiques à focus -->
-                            {% if character.focus_stats and character.focus_stats|length > 0 %}
-                                <div class="focus-stats">
-                                    <h3 hidden>Stats à Focus</h3>
-                                    <ul class="focus-stats-list">
-                                        {% for stat in character.focus_stats %}
-                                            <li>{{ stat }}</li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            {% endif %}
-
-                            <!-- Titre des artefacts -->
                             <h2>Artefacts</h2>
 
                             <!-- Liste des artefacts -->
@@ -130,7 +117,11 @@
                                     <!-- Colonne gauche -->
                                     <div class="artefacts-column">
                                         {% for artefact in character.artefacts[:4] %}
-                                            <div class="artefact-item" style="display: flex; flex-direction: column; margin-bottom: 20px;">
+                                            <div class="artefact-item"
+                                                 style="display: flex; flex-direction: column; margin-bottom: 20px;"
+                                                 data-set="{{ artefact.set }}"
+                                                 onmouseover="showSetEffects('{{ artefact.set }}')"
+                                                 onmouseout="hideSetEffects()">
                                                 <div style="display: flex; align-items: center;">
                                                     <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" class="artefact-image">
                                                     <div>
@@ -162,7 +153,11 @@
                                     <!-- Colonne droite -->
                                     <div class="artefacts-column">
                                         {% for artefact in character.artefacts[4:] %}
-                                            <div class="artefact-item" style="display: flex; flex-direction: column; margin-bottom: 20px;">
+                                            <div class="artefact-item"
+                                                 style="display: flex; flex-direction: column; margin-bottom: 20px;"
+                                                 data-set="{{ artefact.set }}"
+                                                 onmouseover="showSetEffects('{{ artefact.set }}')"
+                                                 onmouseout="hideSetEffects()">
                                                 <div style="display: flex; align-items: center;">
                                                     <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" class="artefact-image">
                                                     <div>
@@ -194,6 +189,12 @@
                             {% else %}
                                 <p>Informations sur les artefacts du personnage.</p>
                             {% endif %}
+
+                            <!-- Conteneur pour afficher les effets de panoplie -->
+                            <div id="set-effects" style="display: none; background-color: #1e1e1e; color: #ffcc00; padding: 10px; border-radius: 8px; margin-top: 20px;">
+                                <h3>Effets de Panoplie</h3>
+                                <ul id="set-effects-list"></ul>
+                            </div>
 
                             <!-- Section des noyaux -->
                             {% if character.cores and character.cores|length > 0 %}
@@ -249,6 +250,35 @@
                 document.getElementById(tab.dataset.tab).classList.add('active');
             });
         });
+    </script>
+
+    <script>
+        const activeSetEffects = {{ character.active_set_effects|tojson }};
+
+        function showSetEffects(setName) {
+            const effectsContainer = document.getElementById('set-effects');
+            const effectsList = document.getElementById('set-effects-list');
+
+            // Vider la liste des effets
+            effectsList.innerHTML = '';
+
+            // Ajouter les effets activés pour la panoplie survolée
+            activeSetEffects.forEach(effect => {
+                if (effect.set_name === setName) {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${effect.pieces_required} pièces : ${effect.effect}`;
+                    effectsList.appendChild(listItem);
+                }
+            });
+
+            // Afficher le conteneur des effets
+            effectsContainer.style.display = 'block';
+        }
+
+        function hideSetEffects() {
+            const effectsContainer = document.getElementById('set-effects');
+            effectsContainer.style.display = 'none';
+        }
     </script>
 </body>
 </html>

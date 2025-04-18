@@ -1,0 +1,34 @@
+{
+    "panoplies": [
+        {
+            "name": "Malédiction Ardente",
+            "set_bonus": [
+                {
+                    "pieces_required": 2,
+                    "effect": "Applique l’effet [Malédiction].\n– Augmente les dégâts subis de 20%.\n– Augmente les dégâts infligés de 10% et augmente les dégâts infligés de 0.1% toutes les 1 secondes (cumulable jusqu’à 100 fois).\n– Durée : permanent"
+                },
+                {
+                    "pieces_required": 4,
+                    "effect": "L’effet [Malédiction] devient [Malédiction améliorée].\n– Augmente les dégâts subis de 20%.\n– Augmente les dégâts infligés de 20% et augmente les dégâts infligés de 0.1% toutes les 1 secondes (cumulable jusqu’à 100 fois).\n– Rend impossible l’activation de l’effet [Malédiction].\n– Durée : permanent\nApplique l’effet [Sauvetage].\n– Si les PV de l’utilisateur sont à 25% ou en dessous, il récupère 25%.\n– Ne s’active qu’une fois par donjon."
+                },
+                {
+                    "pieces_required": 8,
+                    "effect": "L’effet [Malédiction améliorée] devient [Malédiction ardente].\n– Augmente les dégâts subis par l’utilisateur de 20%.\n– Augmente les dégâts infligés de 30% et augmente les dégâts infligés de 0.2% toutes les 1 secondes (cumulable jusqu’à 100 fois).\n– Rend impossible l’activation de l’effet [Malédiction] et [Malédiction améliorée].\n– Durée : permanent"
+                }
+            ]
+        },
+        {
+            "name": "Obsidian",
+            "set_bonus": [
+                {
+                    "pieces_required": 2,
+                    "effect": "Lorsque les PM de l’utilisateur sont à 70% ou au-dessus, les dégâts infligés augmentent de 30%."
+                },
+                {
+                    "pieces_required": 4,
+                    "effect": "L’effet d’augmentation des dégâts infligés s’élève à 60% et il se déclenche dès que les PM de l’utilisateur sont à 40% ou au-dessus."
+                }
+            ]
+        }
+    ]
+}

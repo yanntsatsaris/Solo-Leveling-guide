@@ -7,6 +7,10 @@ def characters(app: Flask):
     with open('data/character.json', 'r') as f:
         characters_data = json.load(f)
 
+    # Charger les données des panoplies
+    with open('data/panoplies.json', 'r', encoding='utf-8') as f:
+        panoplies_data = json.load(f)
+
     @app.route('/characters')
     def inner_characters():
         images = []
@@ -84,5 +88,29 @@ def characters(app: Flask):
 
         # Ajouter les focus_stats pour les artefacts
         character_info['focus_stats'] = character_info.get('focus_stats', [])
+
+        # Calculer les effets de panoplie activés
+        equipped_sets = {}
+        for artefact in character_info.get('artefacts', []):
+            set_name = artefact.get('set')
+            if set_name:
+                equipped_sets[set_name] = equipped_sets.get(set_name, 0) + 1
+
+        # Ajouter les effets activés pour chaque panoplie
+        active_set_effects = []
+        for panoply in panoplies_data['panoplies']:
+            set_name = panoply['name']
+            if set_name in equipped_sets:
+                pieces_equipped = equipped_sets[set_name]
+                for bonus in panoply['set_bonus']:
+                    if pieces_equipped >= bonus['pieces_required']:
+                        active_set_effects.append({
+                            'set_name': set_name,
+                            'pieces_required': bonus['pieces_required'],
+                            'effect': bonus['effect']
+                        })
+
+        # Ajouter les effets activés au contexte
+        character_info['active_set_effects'] = active_set_effects
 
         return render_template('character_details.html', character=character_info)
