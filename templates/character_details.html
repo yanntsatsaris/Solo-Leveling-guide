@@ -109,6 +109,17 @@
                             {% endif %}
                         </div>
                         <div id="artefacts" class="tab-content">
+                            <!-- Affichage des statistiques à focus -->
+                            {% if character.focus_stats and character.focus_stats|length > 0 %}
+                            <div class="focus-stats">
+                                <h3 hidden>Stats à Focus</h3>
+                                <ul class="focus-stats-list">
+                                    {% for stat in character.focus_stats %}
+                                        <li>{{ stat }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            {% endif %}
                             <h2>Artefacts</h2>
 
                             <!-- Liste des artefacts -->
