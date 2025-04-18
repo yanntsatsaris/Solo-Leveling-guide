@@ -77,9 +77,7 @@
                                                 <!-- Afficher les évolutions groupées (A06-A10) -->
                                                 <li>
                                                     <strong>{{ evolution.id }}</strong> :
-                                                    <span>
-                                                        {{ evolution.stats|map('join', ' / ')|join(', ') }}
-                                                    </span>
+                                                    {{ evolution.description }}
                                                 </li>
                                             {% else %}
                                                 <!-- Afficher les évolutions individuelles (A01 à A05) -->

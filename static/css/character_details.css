@@ -522,7 +522,6 @@ p {
 .evolutions {
     margin-top: 20px; /* Ajoute un espace au-dessus de la section */
     padding: 10px; /* Ajoute un padding interne */
-    background-color: #1e1e1e; /* Fond sombre pour la section */
     border-radius: 8px; /* Coins arrondis */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre */
 }

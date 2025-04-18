@@ -147,11 +147,7 @@
                 "id": "A06-A10",
                 "range": "06-10",
                 "type": "stat",
-                "stats": {
-                    "ATK": "+15%",
-                    "DEF": "+15%",
-                    "HP": "+15%"
-                }
+                "description": "+15% HP / DEF / ATK"
             }
         ],
         "weapon": [

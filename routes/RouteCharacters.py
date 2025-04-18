@@ -129,7 +129,7 @@ def characters(app: Flask):
                     'id': evolution['id'],
                     'range': evolution['range'],
                     'type': evolution['type'],
-                    'stats': evolution.get('stats', {})
+                    'description': evolution.get('description', '')  # Inclure la description
                 })
             else:
                 # Si l'évolution est individuelle
