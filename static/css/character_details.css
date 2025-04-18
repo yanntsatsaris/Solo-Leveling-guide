@@ -556,7 +556,7 @@ p {
 
 /* Image des évolutions */
 .evolutions li img {
-    width: 100px; /* Largeur de l'image */
+    width: auto; /* Largeur de l'image */
     height: auto; /* Hauteur de l'image */
     margin-right: 10px; /* Espace entre l'image et le texte */
     border-radius: 8px; /* Coins arrondis pour les images */
@@ -574,6 +574,21 @@ p {
     color: #ffcc00; /* Couleur dorée pour les identifiants */
     font-weight: bold; /* Texte en gras */
     margin-right: 5px; /* Espace entre l'identifiant et le texte */
+}
+
+/* Style général pour les images des évolutions */
+.evolution-image {
+    width: 100px; /* Taille par défaut des images */
+    height: auto;
+    margin-right: 10px; /* Espace entre l'image et le texte */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour les images */
+}
+
+/* Style spécifique pour les images des évolutions avec une plage (range) */
+.evolution-range {
+    width: 120px; /* Taille plus grande pour les images avec une plage */
+    height: auto; /* Conserve les proportions */
 }
 
 /* Affichage sur téléphone (écrans étroits) */
