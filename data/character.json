@@ -112,6 +112,48 @@
         "alias": "Thomas",
         "folder": "SSR_Light_ThomasAndre",
         "fond": "Light_Thomas_Fond.png",
+        "evolutions": [
+            {
+                "id": "A01",
+                "number": "01",
+                "type": "passive",
+                "description": "+5% DEF."
+            },
+            {
+                "id": "A02",
+                "number": "02",
+                "type": "passive",
+                "description": "+10% DMG INC."
+            },
+            {
+                "id": "A03",
+                "number": "03",
+                "type": "passive",
+                "description": "+5% CRIT HIT."
+            },
+            {
+                "id": "A04",
+                "number": "04",
+                "type": "passive",
+                "description": "+8% HP."
+            },
+            {
+                "id": "A05",
+                "number": "05",
+                "type": "passive",
+                "description": "+10% DEF PEN."
+            },
+            {
+                "id": "A06-A10",
+                "range": "06-10",
+                "type": "stat",
+                "stats": {
+                    "ATK": "+15%",
+                    "DEF": "+15%",
+                    "HP": "+15%"
+                }
+            }
+        ],
         "weapon": [
             {
                 "name": "[ARME] LE VERITABLE ROI",
@@ -140,7 +182,7 @@
             },
             {
                 "name": "[TYRAN D'ACIER]",
-                "description": "<img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] & <img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2] +100% DMG INC.\n<img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIMATE] +125% DMG INC.\n+20% DMG RED.\n+20% DEF.\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +10%.",
+                "description": "<img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] & <img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2] +100% DMG INC.\n<img src='Light_Thomas_Skill_Ultime.png' alt='Ultimate'> [ULTIMATE] +125% DMG INC.\n+20% DMG RED.\n+20% DEF.\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +10%.",
                 "image": "Light_Thomas_Buff_Tyrandacier.png"
             },
             {

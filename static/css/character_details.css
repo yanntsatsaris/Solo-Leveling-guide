@@ -518,6 +518,48 @@ p {
     box-sizing: border-box; /* Inclut le padding dans la largeur totale */
 }
 
+/* Section des évolutions */
+.evolutions {
+    margin-top: 20px; /* Ajoute un espace au-dessus de la section */
+    padding: 10px; /* Ajoute un padding interne */
+    background-color: #1e1e1e; /* Fond sombre pour la section */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre */
+}
+
+.evolutions h3 {
+    color: #ffcc00; /* Couleur dorée pour le titre */
+    font-size: 18px; /* Taille du texte */
+    margin-bottom: 10px; /* Espace sous le titre */
+    text-align: center; /* Centre le titre */
+}
+
+.evolutions ul {
+    list-style-type: none; /* Supprime les puces */
+    padding: 0; /* Supprime le padding interne */
+    margin: 0; /* Supprime les marges */
+}
+
+.evolutions li {
+    margin-bottom: 10px; /* Ajoute un espace entre les éléments */
+    font-size: 14px; /* Taille du texte */
+    color: #ffffff; /* Couleur blanche pour le texte */
+}
+
+.evolutions li strong {
+    color: #ffcc00; /* Couleur dorée pour les identifiants */
+    font-weight: bold; /* Texte en gras */
+}
+
+.evolutions li span {
+    color: #b3b3b3; /* Couleur grise pour les statistiques */
+    font-style: italic; /* Texte en italique */
+}
+
+.evolutions li:last-child {
+    margin-bottom: 0; /* Supprime l'espace sous le dernier élément */
+}
+
 /* Affichage sur téléphone (écrans étroits) */
 @media (max-width: 767px) {
     /* Désactiver le layout */

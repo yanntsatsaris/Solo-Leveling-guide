@@ -67,6 +67,33 @@
                             {% else %}
                                 <p>Aucune arme disponible pour ce personnage.</p>
                             {% endif %}
+
+                            {% if character.evolutions and character.evolutions|length > 0 %}
+                                <h3>Évolutions</h3>
+                                <div class="evolutions">
+                                    <ul>
+                                        {% for evolution in character.evolutions %}
+                                            {% if evolution.range %}
+                                                <!-- Afficher les évolutions groupées (A06-A10) -->
+                                                <li>
+                                                    <strong>{{ evolution.id }}</strong> :
+                                                    <span>
+                                                        {{ evolution.stats|map('join', ' / ')|join(', ') }}
+                                                    </span>
+                                                </li>
+                                            {% else %}
+                                                <!-- Afficher les évolutions individuelles (A01 à A05) -->
+                                                <li>
+                                                    <strong>{{ evolution.id }}</strong> :
+                                                    {{ evolution.description }}
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% else %}
+                                <p>Aucune évolution disponible pour ce personnage.</p>
+                            {% endif %}
                         </div>
                         <div id="passives" class="tab-content">
                             <h2>Passifs</h2>

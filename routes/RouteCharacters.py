@@ -120,4 +120,26 @@ def characters(app: Flask):
         # Ajouter les effets activés au contexte
         character_info['active_set_effects'] = active_set_effects
 
+        # Ajouter les évolutions au contexte
+        evolutions = []
+        for evolution in character_info.get('evolutions', []):
+            if 'range' in evolution:
+                # Si l'évolution a une plage (ex: 06-10)
+                evolutions.append({
+                    'id': evolution['id'],
+                    'range': evolution['range'],
+                    'type': evolution['type'],
+                    'stats': evolution.get('stats', {})
+                })
+            else:
+                # Si l'évolution est individuelle
+                evolutions.append({
+                    'id': evolution['id'],
+                    'number': evolution['number'],
+                    'type': evolution['type'],
+                    'description': evolution.get('description', '')
+                })
+
+        character_info['evolutions'] = evolutions
+
         return render_template('character_details.html', character=character_info)
