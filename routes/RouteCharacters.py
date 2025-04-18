@@ -14,6 +14,7 @@ def characters(app: Flask):
     @app.route('/characters')
     def inner_characters():
         images = []
+        character_types = set()  # Utiliser un ensemble pour éviter les doublons
 
         # Parcourir les données des personnages pour construire les chemins des images
         for character in characters_data:
@@ -24,10 +25,16 @@ def characters(app: Flask):
             images.append({
                 'path': image_path,
                 'name': character['name'],  # Utilisé pour l'affichage
-                'alias': character['alias']  # Utilisé pour les liens
+                'alias': character['alias'],  # Utilisé pour les liens
+                'type': character['type']  # Ajouter le type pour le filtrage
             })
+            # Ajouter le type à l'ensemble
+            character_types.add(character['type'])
 
-        return render_template('characters.html', images=images)
+        # Convertir l'ensemble en liste pour le passer au template
+        character_types = sorted(character_types)  # Trier les types pour un affichage cohérent
+
+        return render_template('characters.html', images=images, character_types=character_types)
 
     @app.route('/characters/<alias>')
     def character_details(alias):
