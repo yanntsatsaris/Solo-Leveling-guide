@@ -134,7 +134,7 @@
                                                     <img src="{{ url_for('static', filename=artefact.image) }}" 
                                                          alt="{{ artefact.name }}" 
                                                          class="artefact-image"
-                                                         onmouseover="showSetEffects('{{ artefact.set }}')"
+                                                         onmouseover="showSetEffects('{{ artefact.set }}', event)"
                                                          onmouseout="hideSetEffects()">
                                                     <div>
                                                         <!-- Statistique principale -->
@@ -171,7 +171,7 @@
                                                     <img src="{{ url_for('static', filename=artefact.image) }}" 
                                                          alt="{{ artefact.name }}" 
                                                          class="artefact-image"
-                                                         onmouseover="showSetEffects('{{ artefact.set }}')"
+                                                         onmouseover="showSetEffects('{{ artefact.set }}', event)"
                                                          onmouseout="hideSetEffects()">
                                                     <div>
                                                         <!-- Statistique principale -->
@@ -204,9 +204,9 @@
                             {% endif %}
 
                             <!-- Conteneur pour afficher les effets de panoplie -->
-                            <div id="set-effects" style="display: none; background-color: #1e1e1e; color: #ffcc00; padding: 10px; border-radius: 8px; margin-top: 20px;">
-                                <h3>Effets de Panoplie</h3>
-                                <ul id="set-effects-list"></ul>
+                            <div id="set-effects" style="display: none; position: absolute; background-color: #1e1e1e; color: #ffcc00; padding: 10px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); z-index: 1000;">
+                                <h3 style="margin: 0; font-size: 14px;">Effets de Panoplie</h3>
+                                <ul id="set-effects-list" style="margin: 5px 0 0 0; padding: 0; list-style: none; font-size: 12px;"></ul>
                             </div>
 
                             <!-- Section des noyaux -->
@@ -268,7 +268,7 @@
     <script>
         const activeSetEffects = {{ character.active_set_effects|tojson }};
 
-        function showSetEffects(setName) {
+        function showSetEffects(setName, event) {
             const effectsContainer = document.getElementById('set-effects');
             const effectsList = document.getElementById('set-effects-list');
 
@@ -284,6 +284,19 @@
                 }
             });
 
+            // Positionner la bulle à côté de l'image
+            const rect = event.target.getBoundingClientRect();
+            const bubbleWidth = 200; // Largeur approximative de la bulle
+            let leftPosition = rect.right + 10;
+
+            // Si la bulle dépasse le bord droit, la positionner à gauche
+            if (leftPosition + bubbleWidth > window.innerWidth) {
+                leftPosition = rect.left - bubbleWidth - 10;
+            }
+
+            effectsContainer.style.top = `${rect.top + window.scrollY}px`;
+            effectsContainer.style.left = `${leftPosition}px`;
+
             // Afficher le conteneur des effets
             effectsContainer.style.display = 'block';
         }
@@ -295,3 +308,4 @@
     </script>
 </body>
 </html>
+``` 
