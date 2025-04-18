@@ -107,7 +107,7 @@ def characters(app: Flask):
                         active_set_effects.append({
                             'set_name': set_name,
                             'pieces_required': bonus['pieces_required'],
-                            'effect': bonus['effect']
+                            'effect': bonus['effect'].replace("\n", "<br>")
                         })
 
         # Ajouter les effets activés au contexte
