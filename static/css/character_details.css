@@ -55,7 +55,6 @@ body {
 /* Colonne pour le contenu principal */
 .content-column {
     flex: 2; /* Prend environ 2/3 de la largeur */
-    padding: 20px;
     border-radius: 8px; /* Arrondit les coins */
     max-width: 66%; /* Limite la largeur à 66% */
     width: 100%; /* Prend toute la largeur disponible */
@@ -71,7 +70,6 @@ body {
     margin: 0 auto; /* Centre le contenu horizontalement */
     padding: 20px;
     box-sizing: border-box; /* Inclut le padding dans la largeur */
-    margin-top: 10px; /* Ajoute un petit espace sous la navbar */
 }
 
 /* Image du personnage dans le conteneur principal */
