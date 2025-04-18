@@ -667,7 +667,7 @@ p {
     .focus-stats-list {
         display: grid; /* Utilise un affichage en grille */
         grid-template-columns: repeat(2, 1fr); /* Définit 2 colonnes de largeur égale */
-        gap: 10px; /* Ajoute un espacement entre les éléments */
+        gap: 2px; /* Ajoute un espacement entre les éléments */
         justify-items: center; /* Centre les éléments horizontalement */
         padding: 0; /* Supprime le padding par défaut */
         margin: 0; /* Supprime les marges par défaut */
