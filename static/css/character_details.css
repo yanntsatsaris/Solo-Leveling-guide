@@ -512,10 +512,9 @@ p {
     background-color: #1e1e1e; /* Fond sombre */
     color: #ffcc00; /* Texte doré */
     font-weight: bold;
-    padding: 10px 15px; /* Ajoute un padding interne */
     border-radius: 8px; /* Arrondit les coins */
     text-align: center;
-    width: calc(33.33% - 20px); /* Chaque élément prend 1/3 de la largeur moins l'espacement */
+    width: calc(33.33% - 60px); /* Chaque élément prend 1/3 de la largeur moins l'espacement */
     box-sizing: border-box; /* Inclut le padding dans la largeur totale */
 }
 
