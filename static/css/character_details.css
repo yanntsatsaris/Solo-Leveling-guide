@@ -501,7 +501,7 @@ p {
     display: flex;
     flex-wrap: wrap; /* Permet de répartir les éléments sur plusieurs lignes */
     justify-content: center; /* Centre les éléments horizontalement */
-    gap: 20px; /* Ajoute un espacement entre les éléments */
+    gap: 10px; /* Ajoute un espacement entre les éléments */
     list-style-type: none; /* Supprime les puces de la liste */
     padding: 0; /* Supprime le padding par défaut */
     margin: 0; /* Supprime les marges par défaut */
