@@ -685,7 +685,7 @@ p {
 }
 
 /* Affichage pour les téléphones en mode paysage */
-@media (max-width: 1024px) and (max-height: 767px) {
+@media (max-width: 1024px) or (max-height: 767px) {
      /* Désactiver le layout */
      .layout {
         display: block; /* Passe le layout en bloc pour empiler les éléments */
@@ -728,7 +728,7 @@ p {
         height: auto; /* Conserve les proportions */
         max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
     }
-    
+
     /* Conteneur principal */
     .container {
         width: 90%; /* Adapte la largeur à l'écran en mode paysage */
