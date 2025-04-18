@@ -677,5 +677,9 @@ p {
         width: auto; /* Laisse la largeur s'adapter au contenu */
         padding: 10px; /* Ajoute un padding interne pour rendre les éléments plus lisibles */
         font-size: 14px; /* Ajuste la taille de la police pour les petits écrans */
+        color: #ffcc00; /* Texte doré */
+        font-weight: bold;
+        border-radius: 8px; /* Arrondit les coins */
+        text-align: center;
     }
 }
