@@ -515,8 +515,7 @@ p {
     padding: 10px 15px; /* Ajoute un padding interne */
     border-radius: 8px; /* Arrondit les coins */
     text-align: center;
-    min-width: 100px; /* Largeur minimale pour uniformiser les éléments */
-    flex: 1 1 calc(50% - 20px); /* Chaque élément prend 50% de la largeur moins l'espacement */
+    width: calc(50% - 20px); /* Chaque élément prend 50% de la largeur moins l'espacement */
     box-sizing: border-box; /* Inclut le padding dans la largeur totale */
 }
 
