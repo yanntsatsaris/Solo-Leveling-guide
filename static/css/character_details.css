@@ -683,3 +683,70 @@ p {
         text-align: center;
     }
 }
+
+/* Affichage pour les téléphones en mode paysage */
+@media (max-width: 1024px) and (max-height: 767px) {
+    /* Conteneur principal */
+    .container {
+        width: 90%; /* Adapte la largeur à l'écran en mode paysage */
+        max-width: 90%; /* S'assure que la largeur ne dépasse pas 90% */
+        padding: 10px; /* Réduit le padding interne */
+        height: auto; /* Ajuste automatiquement la hauteur */
+    }
+
+    /* Liste des statistiques à focus */
+    .focus-stats-list {
+        display: grid; /* Utilise un affichage en grille */
+        grid-template-columns: repeat(2, 1fr); /* Définit 2 colonnes de largeur égale */
+        gap: 10px; /* Ajoute un espacement entre les éléments */
+        justify-items: center; /* Centre les éléments horizontalement */
+        padding: 0; /* Supprime le padding par défaut */
+        margin: 0; /* Supprime les marges par défaut */
+    }
+
+    .focus-stats-list li {
+        width: auto; /* Laisse la largeur s'adapter au contenu */
+        padding: 10px; /* Ajoute un padding interne pour rendre les éléments plus lisibles */
+        font-size: 16px; /* Ajuste légèrement la taille de la police pour les écrans larges */
+        color: #ffcc00; /* Texte doré */
+        font-weight: bold;
+        border-radius: 8px; /* Arrondit les coins */
+        text-align: center;
+    }
+
+    /* Image du personnage */
+    .container .character-image {
+        width: 200px; /* Adapte la taille de l'image pour le mode paysage */
+        height: auto; /* Conserve les proportions */
+        margin: 10px auto; /* Centre l'image avec un espacement réduit */
+    }
+
+    /* Image dans le conteneur principal */
+    .container .character-image img {
+        width: 150px; /* Adapte la largeur de l'image */
+        height: auto; /* Conserve les proportions */
+        max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
+    }
+
+    /* Conteneur des cores */
+    .cores-container {
+        display: flex;
+        flex-wrap: wrap; /* Permet de passer à la ligne après 2 éléments */
+        gap: 15px; /* Ajoute un espacement entre les noyaux */
+        justify-content: center; /* Centre les noyaux horizontalement */
+    }
+
+    .core-item {
+        width: calc(50% - 20px); /* Définit 2 éléments par ligne */
+        padding: 10px; /* Ajoute un padding interne */
+        border-radius: 8px; /* Arrondit légèrement les coins */
+        background-color: #1e1e1e; /* Ajoute un fond sombre */
+        box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+    }
+
+    /* Réduit la taille des images des artefacts */
+    .artefact-image {
+        width: 100px; /* Adapte la largeur de l'image */
+        height: 100px; /* Adapte la hauteur de l'image */
+    }
+}
