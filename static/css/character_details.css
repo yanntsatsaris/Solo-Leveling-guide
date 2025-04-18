@@ -242,7 +242,7 @@ p {
     display: flex;
     flex-direction: column; /* Aligne les stats secondaires verticalement */
     align-items: flex-start; /* Aligne les stats secondaires à gauche */
-    gap: 0; /* Supprime l'espacement entre les images secondaires */
+    gap: 1; /* Supprime l'espacement entre les images secondaires */
     margin-top: 2px; /* Réduit l'espace entre la statistique principale et les secondaires */
 }
 
