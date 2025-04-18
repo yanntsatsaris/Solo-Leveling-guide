@@ -114,6 +114,12 @@
         "fond": "Light_Thomas_Fond.png",
         "evolutions": [
             {
+                "id": "A0",
+                "number": "0",
+                "type": "passive",
+                "description": "+5% DEF."
+            },
+            {
                 "id": "A1",
                 "number": "1",
                 "type": "passive",
