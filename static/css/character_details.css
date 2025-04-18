@@ -59,7 +59,7 @@ body {
     max-width: 66%; /* Limite la largeur à 66% */
     width: 100%; /* Prend toute la largeur disponible */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
-    overflow-y: auto; /* Ajoute un défilement uniquement si nécessaire */
+    /*overflow-y: auto; /* Ajoute un défilement uniquement si nécessaire */
     height: calc(100vh - 50px); /* Ajuste la hauteur pour exclure la navbar */
 }
 
