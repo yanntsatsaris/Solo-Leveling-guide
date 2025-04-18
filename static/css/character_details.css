@@ -520,43 +520,60 @@ p {
 
 /* Section des évolutions */
 .evolutions {
-    margin-top: 20px; /* Ajoute un espace au-dessus de la section */
-    padding: 10px; /* Ajoute un padding interne */
+    margin-top: 20px; /* Espace au-dessus de la section */
+    padding: 15px; /* Ajoute un padding interne */
     border-radius: 8px; /* Coins arrondis */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre */
 }
 
+/* Titre des évolutions */
 .evolutions h3 {
     color: #ffcc00; /* Couleur dorée pour le titre */
     font-size: 18px; /* Taille du texte */
-    margin-bottom: 10px; /* Espace sous le titre */
+    margin-bottom: 15px; /* Espace sous le titre */
     text-align: center; /* Centre le titre */
 }
 
+/* Liste des évolutions */
 .evolutions ul {
     list-style-type: none; /* Supprime les puces */
     padding: 0; /* Supprime le padding interne */
     margin: 0; /* Supprime les marges */
 }
 
+/* Élément individuel de la liste */
 .evolutions li {
-    margin-bottom: 10px; /* Ajoute un espace entre les éléments */
+    display: flex; /* Affiche les éléments en ligne */
+    align-items: center; /* Aligne verticalement les éléments */
+    margin-bottom: 10px; /* Espace entre les éléments */
     font-size: 14px; /* Taille du texte */
     color: #ffffff; /* Couleur blanche pour le texte */
 }
 
-.evolutions li strong {
-    color: #ffcc00; /* Couleur dorée pour les identifiants */
-    font-weight: bold; /* Texte en gras */
+/* Dernier élément sans marge */
+.evolutions li:last-child {
+    margin-bottom: 0; /* Supprime l'espace sous le dernier élément */
 }
 
+/* Image des évolutions */
+.evolutions li img {
+    width: 50px; /* Largeur de l'image */
+    height: 50px; /* Hauteur de l'image */
+    margin-right: 10px; /* Espace entre l'image et le texte */
+    border-radius: 8px; /* Coins arrondis pour les images */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour les images */
+}
+
+/* Texte des évolutions */
 .evolutions li span {
-    color: #b3b3b3; /* Couleur grise pour les statistiques */
+    color: #b3b3b3; /* Couleur grise pour le texte */
     font-style: italic; /* Texte en italique */
 }
 
-.evolutions li:last-child {
-    margin-bottom: 0; /* Supprime l'espace sous le dernier élément */
+/* Identifiant des évolutions */
+.evolutions li strong {
+    color: #ffcc00; /* Couleur dorée pour les identifiants */
+    font-weight: bold; /* Texte en gras */
+    margin-right: 5px; /* Espace entre l'identifiant et le texte */
 }
 
 /* Affichage sur téléphone (écrans étroits) */
