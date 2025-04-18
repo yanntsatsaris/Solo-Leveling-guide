@@ -627,8 +627,7 @@ p {
     }
 
     .weapon img {
-        margin-bottom: 10px; /* Ajoute un espacement entre l'image et les stats */
-        max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
+        max-width: 1em; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
         height: auto; /* Conserve les proportions */
     }
 
