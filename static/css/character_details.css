@@ -686,6 +686,49 @@ p {
 
 /* Affichage pour les téléphones en mode paysage */
 @media (max-width: 1024px) and (max-height: 767px) {
+     /* Désactiver le layout */
+     .layout {
+        display: block; /* Passe le layout en bloc pour empiler les éléments */
+        width: 100%; /* Prend toute la largeur de l'écran */
+        height: 100vh;
+        margin: 0; /* Supprime les marges */
+        padding: 0; /* Supprime les paddings */
+    }
+
+    /* Cache la colonne de l'image */
+    .image-column {
+        display: none; /* Cache complètement la colonne de l'image */
+    }
+
+    /* Conteneur principal (content-column) */
+    .content-column {
+        display: block; /* Utilise un affichage en bloc */
+        width: 100%; /* Prend toute la largeur de l'écran */
+        max-width: 100%; /* S'assure que la largeur ne dépasse pas l'écran */
+        height: auto;
+        padding: 1px; /* Ajoute un padding pour l'espacement interne */
+        box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+    }
+
+    /* Image du personnage dans le conteneur principal */
+    .container .character-image {
+        display: flex; /* Utilise Flexbox pour centrer l'image */
+        justify-content: center; /* Centre horizontalement */
+        align-items: center; /* Centre verticalement */
+        margin: 20px auto; /* Centre l'image et ajoute un espacement en haut et en bas */
+        width: 150px; /* Réduit la taille de l'image */
+        height: auto; /* Conserve les proportions */
+        position: relative; /* Supprime tout positionnement absolu ou fixe */
+        text-align: center; /* Centre le contenu textuel si nécessaire */
+    }
+
+    /* Image du personnage dans le conteneur principal sur téléphone */
+    .container .character-image img {
+        width: 100px; /* Réduit la largeur de l'image */
+        height: auto; /* Conserve les proportions */
+        max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
+    }
+    
     /* Conteneur principal */
     .container {
         width: 90%; /* Adapte la largeur à l'écran en mode paysage */
