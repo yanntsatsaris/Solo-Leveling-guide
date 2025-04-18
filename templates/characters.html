@@ -13,10 +13,20 @@
         <p style="color: #ffcc00; font-weight: bold; text-align: center; margin-top: 20px;">
             Discover the characters from Solo Leveling Arise.
         </p>
-        <table style="width: 100%; text-align: center;">
+        <div class="character-types" style="text-align: center; margin-bottom: 20px;">
+            <button class="type-button" data-type="All" style="margin: 5px; padding: 10px 20px; background-color: #1e1e1e; color: #ffcc00; border: none; border-radius: 5px; cursor: pointer;">
+                All
+            </button>
+            {% for type in character_types %}
+                <button class="type-button" data-type="{{ type }}" style="margin: 5px; padding: 10px 20px; background-color: #1e1e1e; color: #ffcc00; border: none; border-radius: 5px; cursor: pointer;">
+                    {{ type }}
+                </button>
+            {% endfor %}
+        </div>
+        <table id="character-table" style="width: 100%; text-align: center;">
             <tr>
                 {% for image in images %}
-                    <td>
+                    <td data-type="{{ image.type }}">
                         <a href="{{ url_for('character_details', alias=image.alias) }}">
                             <img src="{{ url_for('static', filename=image.path) }}" alt="{{ image.name }}" style="width: 150px; height: auto; margin: 10px;">
                         </a>
@@ -29,5 +39,26 @@
             </tr>
         </table>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.type-button');
+            const characterCells = document.querySelectorAll('#character-table td');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const selectedType = button.getAttribute('data-type');
+
+                    // Afficher ou masquer les personnages en fonction du type sélectionné
+                    characterCells.forEach(cell => {
+                        if (cell.getAttribute('data-type') === selectedType || selectedType === 'All') {
+                            cell.style.display = '';
+                        } else {
+                            cell.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>
