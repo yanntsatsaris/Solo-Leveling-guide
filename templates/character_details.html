@@ -205,7 +205,7 @@
 
                             <!-- Conteneur pour afficher les effets de panoplie -->
                             <div id="set-effects" style="display: none; position: absolute; background-color: #1e1e1e; color: #ffcc00; padding: 10px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); z-index: 1000;">
-                                <h3 style="margin: 0; font-size: 14px;">Effets de Panoplie</h3>
+                                <h3 style="margin: 0; font-size: 14px;">Nom de la Panoplie</h3>
                                 <ul id="set-effects-list" style="margin: 5px 0 0 0; padding: 0; list-style: none; font-size: 12px;"></ul>
                             </div>
 
@@ -271,9 +271,13 @@
         function showSetEffects(setName, event) {
             const effectsContainer = document.getElementById('set-effects');
             const effectsList = document.getElementById('set-effects-list');
+            const effectsTitle = effectsContainer.querySelector('h3');
 
             // Vider la liste des effets
             effectsList.innerHTML = '';
+
+            // Mettre à jour le titre avec le nom de la panoplie
+            effectsTitle.textContent = setName;
 
             // Ajouter les effets activés pour la panoplie survolée
             activeSetEffects.forEach(effect => {
