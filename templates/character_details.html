@@ -117,13 +117,14 @@
                                     <!-- Colonne gauche -->
                                     <div class="artefacts-column">
                                         {% for artefact in character.artefacts[:4] %}
-                                            <div class="artefact-item"
-                                                 style="display: flex; flex-direction: column; margin-bottom: 20px;"
-                                                 data-set="{{ artefact.set }}"
-                                                 onmouseover="showSetEffects('{{ artefact.set }}')"
-                                                 onmouseout="hideSetEffects()">
+                                            <div class="artefact-item" style="display: flex; flex-direction: column; margin-bottom: 20px;" data-set="{{ artefact.set }}">
                                                 <div style="display: flex; align-items: center;">
-                                                    <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" class="artefact-image">
+                                                    <!-- Appliquer les événements sur l'image uniquement -->
+                                                    <img src="{{ url_for('static', filename=artefact.image) }}" 
+                                                         alt="{{ artefact.name }}" 
+                                                         class="artefact-image"
+                                                         onmouseover="showSetEffects('{{ artefact.set }}')"
+                                                         onmouseout="hideSetEffects()">
                                                     <div>
                                                         <!-- Statistique principale -->
                                                         <div class="stat-main">
@@ -153,13 +154,14 @@
                                     <!-- Colonne droite -->
                                     <div class="artefacts-column">
                                         {% for artefact in character.artefacts[4:] %}
-                                            <div class="artefact-item"
-                                                 style="display: flex; flex-direction: column; margin-bottom: 20px;"
-                                                 data-set="{{ artefact.set }}"
-                                                 onmouseover="showSetEffects('{{ artefact.set }}')"
-                                                 onmouseout="hideSetEffects()">
+                                            <div class="artefact-item" style="display: flex; flex-direction: column; margin-bottom: 20px;" data-set="{{ artefact.set }}">
                                                 <div style="display: flex; align-items: center;">
-                                                    <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" class="artefact-image">
+                                                    <!-- Appliquer les événements sur l'image uniquement -->
+                                                    <img src="{{ url_for('static', filename=artefact.image) }}" 
+                                                         alt="{{ artefact.name }}" 
+                                                         class="artefact-image"
+                                                         onmouseover="showSetEffects('{{ artefact.set }}')"
+                                                         onmouseout="hideSetEffects()">
                                                     <div>
                                                         <!-- Statistique principale -->
                                                         <div class="stat-main">
