@@ -82,4 +82,7 @@ def characters(app: Flask):
                     f"src='/static/images/Personnages/{type_folder}/{character_folder}/"
                 ).replace("\n", "<br>")  # Remplace \n par <br> pour l'affichage HTML
 
+        # Ajouter les focus_stats pour les artefacts
+        character_info['focus_stats'] = character_info.get('focus_stats', [])
+
         return render_template('character_details.html', character=character_info)

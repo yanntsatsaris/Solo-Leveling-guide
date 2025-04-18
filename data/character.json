@@ -189,6 +189,14 @@
                 "image": "Light_Thomas_Skill_Soutien.png"
             }
         ],
+        "focus_stats": [
+            "DEF",
+            "CRIT HIT",
+            "CRIT DMG",
+            "DEF PEN",
+            "DMG INC",
+            "MP CONS"
+        ],
         "artefacts": [
             {
                 "name": "Casque",

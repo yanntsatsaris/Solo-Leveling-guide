@@ -109,64 +109,41 @@
                             {% endif %}
                         </div>
                         <div id="artefacts" class="tab-content">
+                            <!-- Affichage des statistiques à focus -->
+                            {% if character.focus_stats and character.focus_stats|length > 0 %}
+                                <div class="focus-stats">
+                                    <h3>Stats à Focus</h3>
+                                    <ul class="focus-stats-list">
+                                        {% for stat in character.focus_stats %}
+                                            <li>{{ stat }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+
+                            <!-- Titre des artefacts -->
                             <h2>Artefacts</h2>
+
+                            <!-- Liste des artefacts -->
                             {% if character.artefacts and character.artefacts|length > 0 %}
-                                <div class="artefacts-container" style="display: flex; justify-content: space-between;">
+                                <div class="artefacts-container">
                                     <!-- Colonne gauche -->
                                     <div class="artefacts-column">
                                         {% for artefact in character.artefacts[:4] %}
-                                            <div class="artefact-item" style="display: flex; flex-direction: column; margin-bottom: 20px;">
-                                                <div style="display: flex; align-items: center;">
+                                            <div class="artefact-item">
+                                                <div>
                                                     <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" class="artefact-image">
                                                     <div>
                                                         <!-- Statistique principale -->
                                                         <div class="stat-main">
-                                                            <div class="stat-container">
-                                                                <span>{{ artefact.main_stat.name }}</span>
-                                                                <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
-                                                            </div>
+                                                            <span>{{ artefact.main_stat.name }}</span>
                                                         </div>
 
                                                         <!-- Statistiques secondaires -->
                                                         <div class="stat-secondary-container">
                                                             {% for stat in artefact.secondary_stats %}
                                                                 <div class="stat-secondary">
-                                                                    <div class="stat-container">
-                                                                        <span>{{ stat.name }}</span>
-                                                                        <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
-                                                                    </div>
-                                                                </div>
-                                                            {% endfor %}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-
-                                    <!-- Colonne droite -->
-                                    <div class="artefacts-column">
-                                        {% for artefact in character.artefacts[4:] %}
-                                            <div class="artefact-item" style="display: flex; flex-direction: column; margin-bottom: 20px;">
-                                                <div style="display: flex; align-items: center;">
-                                                    <img src="{{ url_for('static', filename=artefact.image) }}" alt="{{ artefact.name }}" class="artefact-image">
-                                                    <div>
-                                                        <!-- Statistique principale -->
-                                                        <div class="stat-main">
-                                                            <div class="stat-container">
-                                                                <span>{{ artefact.main_stat.name }}</span>
-                                                                <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
-                                                            </div>
-                                                        </div>
-
-                                                        <!-- Statistiques secondaires -->
-                                                        <div class="stat-secondary-container">
-                                                            {% for stat in artefact.secondary_stats %}
-                                                                <div class="stat-secondary">
-                                                                    <div class="stat-container">
-                                                                        <span>{{ stat.name }}</span>
-                                                                        <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
-                                                                    </div>
+                                                                    <span>{{ stat.name }}</span>
                                                                 </div>
                                                             {% endfor %}
                                                         </div>
@@ -178,38 +155,6 @@
                                 </div>
                             {% else %}
                                 <p>Informations sur les artefacts du personnage.</p>
-                            {% endif %}
-
-                            <!-- Section des noyaux -->
-                            {% if character.cores and character.cores|length > 0 %}
-                                <div class="cores-section">
-                                    <h2>Noyaux</h2>
-                                    <div class="cores-container" style="display: flex; gap: 5px; justify-content: center;">
-                                        {% for core in character.cores %}
-                                            <div class="core-item" style="text-align: center;">
-                                                <img src="{{ url_for('static', filename=core.image) }}" alt="{{ core.name }}" class="core-image">
-                                                
-                                                <div class="stats">
-                                                    <!-- Statistique principale -->
-                                                    <div class="stat-main">
-                                                        <div class="stat-container">
-                                                        <span>{{ core.main_stat.name }}</span>
-                                                            <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- Statistique secondaire -->
-                                                    <div class="stat-secondary">
-                                                        <div class="stat-container">
-                                                            <span>{{ core.secondary_stat.name }}</span>
-                                                            <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
                             {% endif %}
                         </div>
                     </div>

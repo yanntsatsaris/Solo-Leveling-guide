@@ -242,7 +242,7 @@ p {
     display: flex;
     flex-direction: column; /* Aligne les stats secondaires verticalement */
     align-items: flex-start; /* Aligne les stats secondaires à gauche */
-    gap: 1; /* Supprime l'espacement entre les images secondaires */
+    gap: 1px; /* Supprime l'espacement entre les images secondaires */
     margin-top: 2px; /* Réduit l'espace entre la statistique principale et les secondaires */
 }
 
@@ -488,6 +488,36 @@ p {
 
 .weapon-stats strong, .weapon-stats p{
     text-align: justify;
+}
+
+/* Conteneur des statistiques à focus */
+.focus-stats {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Liste des statistiques à focus */
+.focus-stats-list {
+    display: flex;
+    flex-wrap: wrap; /* Permet de répartir les éléments sur plusieurs lignes */
+    justify-content: center; /* Centre les éléments horizontalement */
+    gap: 10px; /* Ajoute un espacement entre les éléments */
+    list-style-type: none; /* Supprime les puces de la liste */
+    padding: 0; /* Supprime le padding par défaut */
+    margin: 0; /* Supprime les marges par défaut */
+}
+
+/* Élément individuel des statistiques */
+.focus-stats-list li {
+    background-color: #1e1e1e; /* Fond sombre */
+    color: #ffcc00; /* Texte doré */
+    font-weight: bold;
+    padding: 10px 15px; /* Ajoute un padding interne */
+    border-radius: 8px; /* Arrondit les coins */
+    text-align: center;
+    min-width: 100px; /* Largeur minimale pour uniformiser les éléments */
+    flex: 1 1 calc(50% - 20px); /* Chaque élément prend 50% de la largeur moins l'espacement */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
 }
 
 /* Affichage sur téléphone (écrans étroits) */
