@@ -662,4 +662,20 @@ p {
         margin-top: 0; /* Supprime tout espacement supplémentaire */
         line-height: 1.5; /* Ajuste l'espacement vertical entre les lignes */
     }
+
+    /* Affichage des statistiques à focus sur téléphone */
+    .focus-stats-list {
+        display: grid; /* Utilise un affichage en grille */
+        grid-template-columns: repeat(2, 1fr); /* Définit 2 colonnes de largeur égale */
+        gap: 10px; /* Ajoute un espacement entre les éléments */
+        justify-items: center; /* Centre les éléments horizontalement */
+        padding: 0; /* Supprime le padding par défaut */
+        margin: 0; /* Supprime les marges par défaut */
+    }
+
+    .focus-stats-list li {
+        width: auto; /* Laisse la largeur s'adapter au contenu */
+        padding: 10px; /* Ajoute un padding interne pour rendre les éléments plus lisibles */
+        font-size: 14px; /* Ajuste la taille de la police pour les petits écrans */
+    }
 }
