@@ -556,8 +556,8 @@ p {
 
 /* Image des évolutions */
 .evolutions li img {
-    width: 50px; /* Largeur de l'image */
-    height: 50px; /* Hauteur de l'image */
+    width: 100px; /* Largeur de l'image */
+    height: auto; /* Hauteur de l'image */
     margin-right: 10px; /* Espace entre l'image et le texte */
     border-radius: 8px; /* Coins arrondis pour les images */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour les images */

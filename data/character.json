@@ -144,7 +144,7 @@
                 "description": "+10% DEF PEN."
             },
             {
-                "id": "A6-A10",
+                "id": "A6-10",
                 "range": "6-10",
                 "type": "stat",
                 "description": "+15% HP / DEF / ATK"
