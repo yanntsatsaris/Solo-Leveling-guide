@@ -38,14 +38,18 @@ function showSetEffects(setName, event) {
         }
     });
 
+    // Rendre la bulle visible temporairement pour calculer sa largeur
+    effectsContainer.style.display = 'block';
+    const bubbleWidth = effectsContainer.offsetWidth; // Largeur réelle de la bulle
+    effectsContainer.style.display = 'none';
+
     // Positionner la bulle à gauche de l'image
     const rect = event.target.getBoundingClientRect();
-    const bubbleWidth = 200; // Largeur approximative de la bulle
-    let leftPosition = rect.left - bubbleWidth - 30;
+    let leftPosition = rect.left - bubbleWidth - 10;
 
     // Si la bulle dépasse le bord gauche, la positionner à droite
     if (leftPosition < 0) {
-        leftPosition = rect.right + 30;
+        leftPosition = rect.right + 10;
     }
 
     effectsContainer.style.top = `${rect.top + window.scrollY}px`;
