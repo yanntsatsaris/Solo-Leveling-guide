@@ -501,7 +501,7 @@ p {
     display: flex;
     flex-wrap: wrap; /* Permet de répartir les éléments sur plusieurs lignes */
     justify-content: center; /* Centre les éléments horizontalement */
-    gap: 10px; /* Ajoute un espacement entre les éléments */
+    gap: 20px; /* Ajoute un espacement entre les éléments */
     list-style-type: none; /* Supprime les puces de la liste */
     padding: 0; /* Supprime le padding par défaut */
     margin: 0; /* Supprime les marges par défaut */
@@ -515,7 +515,7 @@ p {
     padding: 10px 15px; /* Ajoute un padding interne */
     border-radius: 8px; /* Arrondit les coins */
     text-align: center;
-    width: calc(50% - 20px); /* Chaque élément prend 50% de la largeur moins l'espacement */
+    width: calc(33.33% - 20px); /* Chaque élément prend 1/3 de la largeur moins l'espacement */
     box-sizing: border-box; /* Inclut le padding dans la largeur totale */
 }
 
