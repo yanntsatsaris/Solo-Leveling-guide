@@ -563,7 +563,7 @@ p {
 }
 
 .evolutions li span {
-    text-align: center; /* Centre le texte sous l'image */
+    text-align: left; /* Centre le texte sous l'image */
 }
 
 /* Dernier élément sans marge */
