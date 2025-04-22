@@ -859,7 +859,7 @@ p {
     }
 
     .weapon-image img {
-        max-width: 200px; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
+        max-width: 250px; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
         height: auto; /* Conserve les proportions */
         border-radius: 8px; /* Ajoute un léger arrondi aux coins */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour un effet visuel */
