@@ -14,7 +14,7 @@ def update_image_paths(description, base_path, timestamp):
     return description.replace(
         "src='",
         f"src='{url_for('static', filename=base_path)}/"
-    ).replace("'>", f"?v={timestamp}'>").replace("\n", "<br>")
+    ).replace("\n", "<br>")
 
 def characters(app: Flask):
     # Charger les données des personnages depuis le fichier JSON
@@ -64,40 +64,40 @@ def characters(app: Flask):
         # Construire le chemin de l'image principale
         type_folder = f"SLA_Personnages_{character_info['type']}"
         character_folder = character_info['folder']
-        image_path = f'images/Personnages/{type_folder}/{character_folder}/{character_info["type"]}_{character_info["alias"]}_Personnage.png?v={timestamp}'
+        image_path = f'images/Personnages/{type_folder}/{character_folder}/{character_info["type"]}_{character_info["alias"]}_Personnage.png'
 
         # Ajouter les informations supplémentaires pour le rendu
         character_info['image'] = image_path
         character_info['description'] = f"{character_info['name']} is a powerful character of type {character_info['type']} in Solo Leveling Arise."
 
-        character_info['background_image'] = f'images/Personnages/{type_folder}/BG_{character_info["type"]}.webp?v={timestamp}'
+        character_info['background_image'] = f'images/Personnages/{type_folder}/BG_{character_info["type"]}.webp'
 
         # Mettre à jour les descriptions des passifs
         for passive in character_info.get('passives', []):
             if 'image' in passive:
-                passive['image'] = f'images/Personnages/{type_folder}/{character_folder}/{passive["image"]}?v={timestamp}'
+                passive['image'] = f'images/Personnages/{type_folder}/{character_folder}/{passive["image"]}'
             if 'description' in passive:
                 passive['description'] = update_image_paths(passive['description'], f'images/Personnages/{type_folder}/{character_folder}', timestamp)
 
         # Mettre à jour les descriptions des skills
         for skill in character_info.get('skills', []):
             if 'image' in skill:
-                skill['image'] = f'images/Personnages/{type_folder}/{character_folder}/{skill["image"]}?v={timestamp}'
+                skill['image'] = f'images/Personnages/{type_folder}/{character_folder}/{skill["image"]}'
             if 'description' in skill:
                 skill['description'] = update_image_paths(skill['description'], f'images/Personnages/{type_folder}/{character_folder}', timestamp)
 
         # Mettre à jour les descriptions des artefacts
         for artefact in character_info.get('artefacts', []):
-            artefact['image'] = f'images/Artefacts/{artefact["image"]}?v={timestamp}'
+            artefact['image'] = f'images/Artefacts/{artefact["image"]}'
 
         # Mettre à jour les descriptions des noyaux
         for core in character_info.get('cores', []):
-            core['image'] = f'images/Noyaux/{core["image"]}?v={timestamp}'
+            core['image'] = f'images/Noyaux/{core["image"]}'
 
         # Mettre à jour les descriptions des armes
         for weapon in character_info.get('weapon', []):
             if 'image' in weapon:
-                weapon['image'] = f'images/Personnages/{type_folder}/{character_folder}/{weapon["image"]}?v={timestamp}'
+                weapon['image'] = f'images/Personnages/{type_folder}/{character_folder}/{weapon["image"]}'
             if 'stats' in weapon:
                 weapon['stats'] = update_image_paths(weapon['stats'], f'images/Personnages/{type_folder}/{character_folder}', timestamp)
 
