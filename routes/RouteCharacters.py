@@ -72,14 +72,14 @@ def characters(app: Flask):
             if 'image' in passive:
                 passive['image'] = f'images/Personnages/{type_folder}/{character_folder}/{passive["image"]}'
             if 'description' in passive:
-                passive['description'] = update_image_paths(passive['description'], f'images/Personnages/{type_folder}/{character_folder}', timestamp)
+                passive['description'] = update_image_paths(passive['description'], f'images/Personnages/{type_folder}/{character_folder}')
 
         # Mettre à jour les descriptions des skills
         for skill in character_info.get('skills', []):
             if 'image' in skill:
                 skill['image'] = f'images/Personnages/{type_folder}/{character_folder}/{skill["image"]}'
             if 'description' in skill:
-                skill['description'] = update_image_paths(skill['description'], f'images/Personnages/{type_folder}/{character_folder}', timestamp)
+                skill['description'] = update_image_paths(skill['description'], f'images/Personnages/{type_folder}/{character_folder}')
 
         # Mettre à jour les descriptions des artefacts
         for artefact in character_info.get('artefacts', []):
@@ -94,7 +94,7 @@ def characters(app: Flask):
             if 'image' in weapon:
                 weapon['image'] = f'images/Personnages/{type_folder}/{character_folder}/{weapon["image"]}'
             if 'stats' in weapon:
-                weapon['stats'] = update_image_paths(weapon['stats'], f'images/Personnages/{type_folder}/{character_folder}', timestamp)
+                weapon['stats'] = update_image_paths(weapon['stats'], f'images/Personnages/{type_folder}/{character_folder}')
 
         # Ajouter les focus_stats pour les artefacts
         character_info['focus_stats'] = character_info.get('focus_stats', [])
@@ -127,7 +127,7 @@ def characters(app: Flask):
         evolutions = []
         for evolution in character_info.get('evolutions', []):
             description = evolution.get('description', '')
-            description = update_image_paths(description, f'images/Personnages/{type_folder}/{character_folder}', timestamp)
+            description = update_image_paths(description, f'images/Personnages/{type_folder}/{character_folder}')
             evolution['description'] = description
             evolutions.append(evolution)
 
