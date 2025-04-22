@@ -232,12 +232,14 @@ p {
 .artefacts-container {
     display: flex;
     justify-content: space-between;
+    position: relative; /* Définit le conteneur comme parent pour les éléments positionnés */
 }
 
 .artefact-item {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
+    position: relative; /* Définit chaque artefact comme parent pour la bulle */
 }
 
 /* Style pour la statistique principale */
@@ -341,6 +343,37 @@ p {
     width: 100%; /* S'adapte à la largeur du conteneur */
     height: auto; /* Conserve les proportions */
     display: block;
+}
+
+/* Style pour la bulle des effets de panoplie */
+#set-effects {
+    display: none; /* Masque la bulle par défaut */
+    position: absolute; /* Positionne la bulle par rapport à son parent */
+    top: 0; /* Ajuste la position verticale */
+    left: 100%; /* Place la bulle à droite de l'artefact */
+    background-color: #1e1e1e; /* Fond sombre */
+    color: #ffcc00; /* Texte doré */
+    padding: 10px; /* Ajoute un padding interne */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre */
+    z-index: 1000; /* Place la bulle au-dessus des autres éléments */
+    width: 200px; /* Largeur fixe pour la bulle */
+}
+
+/* Style pour le titre de la bulle */
+#set-effects h3 {
+    margin: 0;
+    font-size: 14px;
+    color: #ffcc00;
+}
+
+/* Liste des effets dans la bulle */
+#set-effects ul {
+    margin: 5px 0 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 12px;
+    color: #ffffff;
 }
 
 .set-effects {
