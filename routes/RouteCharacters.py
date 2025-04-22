@@ -1,6 +1,7 @@
 import os
 import json
-from flask import Flask, render_template
+import time
+from flask import Flask, render_template, url_for
 
 def characters(app: Flask):
     # Charger les données des personnages depuis le fichier JSON
@@ -44,21 +45,24 @@ def characters(app: Flask):
         if not character_info:
             return "Character not found", 404
 
+        # Générer un timestamp pour le cache-busting
+        timestamp = int(time.time())
+
         # Construire le chemin de l'image principale
         type_folder = f"SLA_Personnages_{character_info['type']}"
         character_folder = character_info['folder']
-        image_path = f'images/Personnages/{type_folder}/{character_folder}/{character_info["type"]}_{character_info["alias"]}_Personnage.png'
+        image_path = f'images/Personnages/{type_folder}/{character_folder}/{character_info["type"]}_{character_info["alias"]}_Personnage.png?v={timestamp}'
 
         # Ajouter les informations supplémentaires pour le rendu
         character_info['image'] = image_path
         character_info['description'] = f"{character_info['name']} is a powerful character of type {character_info['type']} in Solo Leveling Arise."
 
-        character_info['background_image'] = f'images/Personnages/{type_folder}/BG_{character_info["type"]}.webp'
+        character_info['background_image'] = f'images/Personnages/{type_folder}/BG_{character_info["type"]}.webp?v={timestamp}'
 
         # Construire les chemins des images des passifs
         for passive in character_info.get('passives', []):
             if 'image' in passive:
-                passive['image'] = f'images/Personnages/{type_folder}/{character_folder}/{passive["image"]}'
+                passive['image'] = f'images/Personnages/{type_folder}/{character_folder}/{passive["image"]}?v={timestamp}'
             if 'description' in passive:
                 passive['description'] = passive['description'].replace(
                     "src='",
@@ -68,7 +72,7 @@ def characters(app: Flask):
         # Construire les chemins des images des skills
         for skill in character_info.get('skills', []):
             if 'image' in skill:
-                skill['image'] = f'images/Personnages/{type_folder}/{character_folder}/{skill["image"]}'
+                skill['image'] = f'images/Personnages/{type_folder}/{character_folder}/{skill["image"]}?v={timestamp}'
             if 'description' in skill:
                 skill['description'] = skill['description'].replace(
                     "src='",
@@ -77,16 +81,16 @@ def characters(app: Flask):
 
         # Construire les chemins des images des artefacts
         for artefact in character_info.get('artefacts', []):
-            artefact['image'] = f'images/Artefacts/{artefact["image"]}'
+            artefact['image'] = f'images/Artefacts/{artefact["image"]}?v={timestamp}'
 
         # Construire les chemins des images des noyaux
         for core in character_info.get('cores', []):
-            core['image'] = f'images/Noyaux/{core["image"]}'
+            core['image'] = f'images/Noyaux/{core["image"]}?v={timestamp}'
 
         # Construire les chemins des images des armes
         for weapon in character_info.get('weapon', []):
             if 'image' in weapon:
-                weapon['image'] = f'images/Personnages/{type_folder}/{character_folder}/{weapon["image"]}'
+                weapon['image'] = f'images/Personnages/{type_folder}/{character_folder}/{weapon["image"]}?v={timestamp}'
             if 'stats' in weapon:
                 weapon['stats'] = weapon['stats'].replace(
                     "src='",
