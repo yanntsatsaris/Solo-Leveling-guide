@@ -158,7 +158,7 @@
                                     <div class="artefacts-column">
                                         {% for artefact in character.artefacts[:4] %}
                                             <div class="artefact-item" data-set="{{ artefact.set }}">
-                                                <div style="display: flex; align-items: center;">
+                                                <div>
                                                     <!-- Appliquer les événements sur l'image uniquement -->
                                                     <img src="{{ url_for('static', filename=artefact.image) }}" 
                                                          alt="{{ artefact.name }}" 
@@ -195,7 +195,7 @@
                                     <div class="artefacts-column">
                                         {% for artefact in character.artefacts[4:] %}
                                             <div class="artefact-item" data-set="{{ artefact.set }}">
-                                                <div style="display: flex; align-items: center;">
+                                                <div>
                                                     <!-- Appliquer les événements sur l'image uniquement -->
                                                     <img src="{{ url_for('static', filename=artefact.image) }}" 
                                                          alt="{{ artefact.name }}" 
