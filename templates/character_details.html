@@ -100,30 +100,8 @@
                         <div id="passives" class="tab-content">
                             <h2>Passifs</h2>
                             {% if character.passives and character.passives|length > 0 %}
-                                <!-- Encadré pour les passifs principaux -->
-                                {% set principal_passives = character.passives | selectattr('principal', 'equalto', 'True') | list %}
-                                {% if principal_passives and principal_passives|length > 0 %}
-                                    <div class="principal">
-                                        <h3 hidden>Passifs Principaux</h3>
-                                        {% for passive in principal_passives %}
-                                            <div style="display: flex; align-items: flex-start; margin-bottom: 10px;">
-                                                {% if passive.image %}
-                                                    <img src="{{ url_for('static', filename=passive.image) }}" alt="{{ passive.name or 'Passive Image' }}" style="width: 50px; height: 50px; margin-right: 10px;">
-                                                {% endif %}
-                                                <div>
-                                                    {% if passive.name %}
-                                                        <strong>{{ passive.name }}</strong><br>
-                                                    {% endif %}
-                                                    <p>{{ passive.description|safe }}</p>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-
-                                <!-- Affichage des autres passifs -->
-                                {% for passive in character.passives if passive.principal != 'True' %}
-                                    <div style="display: flex; align-items: flex-start; margin-bottom: 10px;">
+                                {% for passive in character.passives %}
+                                    <div class="passive {% if passive.principal == 'True' %}principal{% endif %}" style="display: flex; align-items: flex-start; margin-bottom: 20px;">
                                         {% if passive.image %}
                                             <img src="{{ url_for('static', filename=passive.image) }}" alt="{{ passive.name or 'Passive Image' }}" style="width: 50px; height: 50px; margin-right: 10px;">
                                         {% endif %}
@@ -142,30 +120,8 @@
                         <div id="skills" class="tab-content">
                             <h2>Skills</h2>
                             {% if character.skills and character.skills|length > 0 %}
-                                <!-- Encadré pour les skills principaux -->
-                                {% set principal_skills = character.skills | selectattr('principal', 'equalto', 'True') | list %}
-                                {% if principal_skills and principal_skills|length > 0 %}
-                                    <div class="principal">
-                                        <h3 hidden>Skills Principaux</h3>
-                                        {% for skill in principal_skills %}
-                                            <div style="display: flex; align-items: flex-start; margin-bottom: 10px;">
-                                                {% if skill.image %}
-                                                    <img src="{{ url_for('static', filename=skill.image) }}" alt="{{ skill.name or 'Skill Image' }}" style="width: 50px; height: 50px; margin-right: 10px;">
-                                                {% endif %}
-                                                <div>
-                                                    {% if skill.name %}
-                                                        <strong>{{ skill.name }}</strong><br>
-                                                    {% endif %}
-                                                    <p>{{ skill.description|safe }}</p>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-
-                                <!-- Affichage des autres skills -->
-                                {% for skill in character.skills if skill.principal != 'True' %}
-                                    <div style="display: flex; align-items: flex-start; margin-bottom: 10px;">
+                                {% for skill in character.skills %}
+                                    <div class="skill {% if skill.principal == 'True' %}principal{% endif %}" style="display: flex; align-items: flex-start; margin-bottom: 20px;">
                                         {% if skill.image %}
                                             <img src="{{ url_for('static', filename=skill.image) }}" alt="{{ skill.name or 'Skill Image' }}" style="width: 50px; height: 50px; margin-right: 10px;">
                                         {% endif %}
