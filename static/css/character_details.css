@@ -229,6 +229,11 @@ p {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour mettre en valeur */
 }
 
+.artefact-container {
+    display: flex;
+    justify-content: space-between;
+}
+
 /* Style pour la statistique principale */
 .artefact-item .stat-main {
     display: flex;

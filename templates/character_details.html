@@ -153,11 +153,11 @@
 
                             <!-- Liste des artefacts -->
                             {% if character.artefacts and character.artefacts|length > 0 %}
-                                <div class="artefacts-container" style="display: flex; justify-content: space-between;">
+                                <div class="artefacts-container">
                                     <!-- Colonne gauche -->
                                     <div class="artefacts-column">
                                         {% for artefact in character.artefacts[:4] %}
-                                            <div class="artefact-item" style="display: flex; flex-direction: column; margin-bottom: 20px;" data-set="{{ artefact.set }}">
+                                            <div class="artefact-item" data-set="{{ artefact.set }}">
                                                 <div style="display: flex; align-items: center;">
                                                     <!-- Appliquer les événements sur l'image uniquement -->
                                                     <img src="{{ url_for('static', filename=artefact.image) }}" 
@@ -194,7 +194,7 @@
                                     <!-- Colonne droite -->
                                     <div class="artefacts-column">
                                         {% for artefact in character.artefacts[4:] %}
-                                            <div class="artefact-item" style="display: flex; flex-direction: column; margin-bottom: 20px;" data-set="{{ artefact.set }}">
+                                            <div class="artefact-item" data-set="{{ artefact.set }}">
                                                 <div style="display: flex; align-items: center;">
                                                     <!-- Appliquer les événements sur l'image uniquement -->
                                                     <img src="{{ url_for('static', filename=artefact.image) }}" 
