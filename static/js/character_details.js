@@ -66,14 +66,12 @@ function hideSetEffects() {
 
 // Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
 document.addEventListener('DOMContentLoaded', () => {
-    const artefactsTab = document.getElementById('artefacts-tab');
-    const setOptions = document.getElementById('set-options');
     const setSelect = document.getElementById('set-select');
     const focusStatsList = document.querySelector('.focus-stats-list');
     const artefactsContainer = document.querySelector('.artefacts-container');
     const coresContainer = document.querySelector('.cores-container');
 
-    // Liste des sets d'équipement (générée côté serveur)
+    // Récupérer les données des sets d'équipement depuis le script JSON
     const equipmentSets = JSON.parse(document.getElementById('equipmentSetsData').textContent);
 
     // Fonction pour afficher un set spécifique
@@ -167,16 +165,12 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    // Gérer le clic sur un set dans la liste
-    setOptions.addEventListener('click', (event) => {
-        if (event.target.tagName === 'LI') {
-            const setIndex = event.target.dataset.setIndex;
-            displaySet(setIndex);
-        }
+    // Gérer le changement de sélection dans le menu déroulant
+    setSelect.addEventListener('change', (event) => {
+        const setIndex = event.target.value;
+        displaySet(setIndex);
     });
 
-    // Gérer le clic sur l'onglet Artefacts
-    artefactsTab.addEventListener('click', () => {
-        displaySet(0); // Afficher le premier set par défaut
-    });
+    // Afficher le premier set par défaut au chargement
+    displaySet(0);
 });
