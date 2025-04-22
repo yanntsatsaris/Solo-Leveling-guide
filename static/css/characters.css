@@ -74,6 +74,43 @@ p {
     margin-top: 20px;
 }
 
+/* Style pour la liste des sets dans l'onglet Artefacts */
+#set-options {
+    display: none; /* Masquer par défaut */
+    position: absolute;
+    background-color: #1e1e1e; /* Fond sombre pour correspondre au thème */
+    border: 1px solid #333; /* Bordure discrète */
+    border-radius: 8px; /* Coins arrondis */
+    padding: 10px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre légère */
+    color: #ffffff; /* Texte blanc */
+    font-size: 0.9rem; /* Taille de texte légèrement réduite */
+    min-width: 150px; /* Largeur minimale */
+}
+
+#set-options ul {
+    list-style: none; /* Supprime les puces */
+    margin: 0;
+    padding: 0;
+}
+
+#set-options li {
+    padding: 8px 12px; /* Espacement interne */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transition fluide au survol */
+}
+
+#set-options li:hover {
+    background-color: #333; /* Fond plus clair au survol */
+    color: #ffcc00; /* Texte doré au survol */
+}
+
+/* Afficher la liste des sets au survol de l'onglet Artefacts */
+#artefacts-tab:hover #set-options {
+    display: block; /* Affiche la liste */
+}
+
 /* Responsive Design */
 
 /* Pour les écrans de taille moyenne (tablettes) */
@@ -88,6 +125,15 @@ p {
 
     td {
         padding: 8px; /* Réduit l'espacement des cellules */
+    }
+
+    #set-options {
+        font-size: 0.8rem; /* Réduit la taille du texte */
+        min-width: 120px; /* Réduit la largeur minimale */
+    }
+
+    #set-options li {
+        padding: 6px 10px; /* Réduit l'espacement interne */
     }
 }
 

@@ -66,6 +66,8 @@ function hideSetEffects() {
 
 // Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
 document.addEventListener('DOMContentLoaded', () => {
+    const artefactsTab = document.getElementById('artefacts-tab');
+    const setOptions = document.getElementById('set-options');
     const setSelect = document.getElementById('set-select');
     const focusStatsList = document.querySelector('.focus-stats-list');
     const artefactsContainer = document.querySelector('.artefacts-container');
@@ -74,10 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Liste des sets d'équipement (générée côté serveur)
     const equipmentSets = JSON.parse(document.getElementById('equipmentSetsData').textContent);
 
-    // Gérer la sélection d'un set
-    setSelect.addEventListener('change', (event) => {
-        const selectedSetIndex = event.target.value;
-        const selectedSet = equipmentSets[selectedSetIndex];
+    // Fonction pour afficher un set spécifique
+    function displaySet(setIndex) {
+        const selectedSet = equipmentSets[setIndex];
 
         // Mettre à jour les focus stats
         focusStatsList.innerHTML = selectedSet.focus_stats.map(stat => `<li>${stat}</li>`).join('');
@@ -164,5 +165,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             </div>
         `).join('');
+    }
+
+    // Gérer le clic sur un set dans la liste
+    setOptions.addEventListener('click', (event) => {
+        if (event.target.tagName === 'LI') {
+            const setIndex = event.target.dataset.setIndex;
+            displaySet(setIndex);
+        }
+    });
+
+    // Gérer le clic sur l'onglet Artefacts
+    artefactsTab.addEventListener('click', () => {
+        displaySet(0); // Afficher le premier set par défaut
     });
 });

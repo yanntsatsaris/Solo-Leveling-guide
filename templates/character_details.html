@@ -43,17 +43,16 @@
                             <div class="tab active" data-tab="description">Description</div>
                             <div class="tab" data-tab="passives">Passifs</div>
                             <div class="tab" data-tab="skills">Skills</div>
-                            <div class="tab" data-tab="artefacts">
+                            <div class="tab" data-tab="artefacts" id="artefacts-tab">
                                 Artefacts
-                                <!-- Menu déroulant pour sélectionner un set -->
+                                <!-- Liste des sets affichée au survol -->
                                 {% if character.equipment_sets and character.equipment_sets|length > 0 %}
-                                    <div class="artefact-dropdown">
-                                        <label for="set-select">Set :</label>
-                                        <select id="set-select">
+                                    <div class="set-options" id="set-options">
+                                        <ul>
                                             {% for set in character.equipment_sets %}
-                                                <option value="{{ loop.index0 }}">{{ set.set_name }}</option>
+                                                <li data-set-index="{{ loop.index0 }}">{{ set.set_name }}</li>
                                             {% endfor %}
-                                        </select>
+                                        </ul>
                                     </div>
                                 {% endif %}
                             </div>
