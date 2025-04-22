@@ -144,7 +144,7 @@ def characters(app: Flask):
                 description = description.replace(
                     "src='",
                     f"src='/static/images/Personnages/{type_folder}/{character_folder}/"
-                )
+                ).replace("\n", "<br>")
                 evolutions.append({
                     'id': evolution['id'],
                     'number': evolution['number'],
