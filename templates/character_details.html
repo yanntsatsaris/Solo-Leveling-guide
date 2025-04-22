@@ -53,14 +53,14 @@
 
                             {% if character.weapon and character.weapon|length > 0 %}
                                 <h3>Arme</h3>
-                                <div class="weapon" style="display: flex; align-items: center; margin-top: 20px;">
+                                <div class="weapon">
                                     {% for weapon in character.weapon %}
-                                        <div style="margin-right: 20px;">
+                                        <div">
                                             <img src="{{ url_for('static', filename=weapon.image) }}" alt="{{ weapon.name }}">
                                         </div>
                                         <div class="weapon-stats">
                                             <strong>{{ weapon.name }}</strong>
-                                            <p style="margin: 0;">{{ weapon.stats|safe }}</p>
+                                            <p>{{ weapon.stats|safe }}</p>
                                         </div>
                                     {% endfor %}
                                 </div>
@@ -101,9 +101,9 @@
                             <h2>Passifs</h2>
                             {% if character.passives and character.passives|length > 0 %}
                                 {% for passive in character.passives %}
-                                    <div class="passive {% if passive.principal == 'True' %}principal{% endif %}" style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                                    <div class="passive {% if passive.principal == 'True' %}principal{% endif %}">
                                         {% if passive.image %}
-                                            <img src="{{ url_for('static', filename=passive.image) }}" alt="{{ passive.name or 'Passive Image' }}" style="width: 50px; height: 50px; margin-right: 10px;">
+                                            <img src="{{ url_for('static', filename=passive.image) }}" alt="{{ passive.name or 'Passive Image' }}">
                                         {% endif %}
                                         <div>
                                             {% if passive.name %}
@@ -121,9 +121,9 @@
                             <h2>Skills</h2>
                             {% if character.skills and character.skills|length > 0 %}
                                 {% for skill in character.skills %}
-                                    <div class="skill {% if skill.principal == 'True' %}principal{% endif %}" style="display: flex; align-items: flex-start; margin-bottom: 20px;">
+                                    <div class="skill {% if skill.principal == 'True' %}principal{% endif %}">
                                         {% if skill.image %}
-                                            <img src="{{ url_for('static', filename=skill.image) }}" alt="{{ skill.name or 'Skill Image' }}" style="width: 50px; height: 50px; margin-right: 10px;">
+                                            <img src="{{ url_for('static', filename=skill.image) }}" alt="{{ skill.name or 'Skill Image' }}">
                                         {% endif %}
                                         <div>
                                             {% if skill.name %}
@@ -153,12 +153,12 @@
 
                             <!-- Liste des artefacts -->
                             {% if character.artefacts and character.artefacts|length > 0 %}
-                                <div class="artefacts-container" style="display: flex; justify-content: space-between;">
+                                <div class="artefacts-container">
                                     <!-- Colonne gauche -->
                                     <div class="artefacts-column">
                                         {% for artefact in character.artefacts[:4] %}
-                                            <div class="artefact-item" style="display: flex; flex-direction: column; margin-bottom: 20px;" data-set="{{ artefact.set }}">
-                                                <div style="display: flex; align-items: center;">
+                                            <div class="artefact-item" data-set="{{ artefact.set }}">
+                                                <div>
                                                     <!-- Appliquer les événements sur l'image uniquement -->
                                                     <img src="{{ url_for('static', filename=artefact.image) }}" 
                                                          alt="{{ artefact.name }}" 
@@ -194,8 +194,8 @@
                                     <!-- Colonne droite -->
                                     <div class="artefacts-column">
                                         {% for artefact in character.artefacts[4:] %}
-                                            <div class="artefact-item" style="display: flex; flex-direction: column; margin-bottom: 20px;" data-set="{{ artefact.set }}">
-                                                <div style="display: flex; align-items: center;">
+                                            <div class="artefact-item" data-set="{{ artefact.set }}">
+                                                <div>
                                                     <!-- Appliquer les événements sur l'image uniquement -->
                                                     <img src="{{ url_for('static', filename=artefact.image) }}" 
                                                          alt="{{ artefact.name }}" 
@@ -233,18 +233,18 @@
                             {% endif %}
 
                             <!-- Conteneur pour afficher les effets de panoplie -->
-                            <div id="set-effects" style="display: none; position: absolute; background-color: #1e1e1e; color: #ffcc00; padding: 10px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); z-index: 1000;">
-                                <h3 style="margin: 0; font-size: 14px;">Nom de la Panoplie</h3>
-                                <ul id="set-effects-list" style="margin: 5px 0 0 0; padding: 0; list-style: none; font-size: 12px;"></ul>
+                            <div id="set-effects">
+                                <h3>Nom de la Panoplie</h3>
+                                <ul id="set-effects-list"></ul>
                             </div>
 
                             <!-- Section des noyaux -->
                             {% if character.cores and character.cores|length > 0 %}
                                 <div class="cores-section">
                                     <h2>Noyaux</h2>
-                                    <div class="cores-container" style="display: flex; gap: 5px; justify-content: center;">
+                                    <div class="cores-container">
                                         {% for core in character.cores %}
-                                            <div class="core-item" style="text-align: center;">
+                                            <div class="core-item"">
                                                 <img src="{{ url_for('static', filename=core.image) }}" alt="{{ core.name }}" class="core-image">
                                                 
                                                 <div class="stats">

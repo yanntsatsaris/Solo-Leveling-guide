@@ -244,6 +244,7 @@ p {
     width: 150px; /* Taille de l'image principale */
     height: auto; /* Conserve les proportions */
     display: block;
+    border-radius: 8px;
 }
 
 /* Conteneur pour les statistiques secondaires */
@@ -270,13 +271,14 @@ p {
 .artefact-item .stat-secondary img {
     width: 120px; /* Taille des images secondaires */
     height: auto; /* Conserve les proportions */
+    border-radius: 8px;
 }
 
 /* Conteneur pour chaque artefact */
 .artefact-item {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1px; /* Réduit l'espacement entre les artefacts */
+    margin-bottom: 20px; /* Réduit l'espacement entre les artefacts */
 }
 
 /* Style pour les images des artefacts */
@@ -295,6 +297,8 @@ p {
     text-align: center;
     width: auto; /* Permet aux images de définir leur propre largeur */
     height: auto;
+    display: flex;
+    align-items: center;
 }
 
 /* Texte positionné au-dessus de l'image */
@@ -335,10 +339,11 @@ p {
 .cores-container {
     display: flex;
     flex-wrap: wrap; /* Permet de passer à la ligne après 3 éléments */
-    gap: 20px; /* Ajoute un espacement entre les noyaux */
-    justify-content: space-between; /* Répartit les noyaux sur la ligne */
+    gap: 5px; /* Ajoute un espacement entre les noyaux */
+    justify-content: center; /* Répartit les noyaux sur la ligne */
 }
 
+/* Conteneur pour chaque noyau */
 .core-item {
     display: flex;
     flex-direction: row; /* Place l'image et les stats côte à côte */
@@ -349,6 +354,7 @@ p {
     background-color: transparent; /* Supprime le fond */
     width: calc(33.33% - 20px); /* Permet d'afficher 3 éléments par ligne avec un espacement */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
+    text-align: center;
 }
 
 /* Style pour les images des noyaux */
@@ -367,38 +373,8 @@ p {
     text-align: center;
     width: 100%; /* Permet aux images de définir leur propre largeur */
     height: auto;
-}
-
-.core-item .stat-main span {
-    position: absolute; /* Positionne le texte par rapport au conteneur parent */
-    top: 50%; /* Centre verticalement */
-    left: 50%; /* Centre horizontalement */
-    transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
-    color: white; /* Couleur du texte */
-    font-weight: bold;
-    font-size: 12px; /* Taille du texte */
-    z-index: 2; /* Assure que le texte est au-dessus de l'image */
-    text-shadow: 1px 1px 2px black; /* Ajoute une ombre pour améliorer la lisibilité */
-}
-
-/* Image des statistiques principales des noyaux */
-.core-item .stat-main img {
-    width: 150px; /* Définit la largeur à 150px */
-    height: auto; /* Conserve les proportions */
-    display: block;
-}
-
-/* Conteneur pour chaque statistique secondaire */
-.core-item .stat-secondary {
     display: flex;
-    justify-content: center; /* Centre le contenu horizontalement */
-    align-items: center; /* Centre verticalement le texte et l'image */
-    flex-direction: column; /* Place le texte et l'image en colonne */
-    width: 120px; /* Définit une largeur fixe correspondant à celle de l'image */
-    height: auto; /* Définit une hauteur fixe correspondant à celle de l'image */
-    text-align: center; /* Centre le texte */
-    position: relative; /* Permet de positionner le texte au centre */
-    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+    align-items: center;
 }
 
 /* Texte positionné au centre de l'image secondaire */
@@ -414,7 +390,27 @@ p {
     text-shadow: 1px 1px 2px black; /* Ajoute une ombre pour améliorer la lisibilité */
 }
 
-/* Image des statistiques secondaires */
+/* Image des statistiques principales des noyaux */
+.core-item .stat-main img {
+    width: 150px; /* Définit la largeur à 150px */
+    height: auto; /* Conserve les proportions */
+    display: block;
+    border-radius: 8px;
+}
+
+/* Conteneur pour chaque statistique secondaire */
+.core-item .stat-secondary {
+    display: flex;
+    justify-content: center; /* Centre le contenu horizontalement */
+    align-items: center; /* Centre verticalement le texte et l'image */
+    flex-direction: column; /* Place le texte et l'image en colonne */
+    width: 120px; /* Définit une largeur fixe correspondant à celle de l'image */
+    height: auto; /* Définit une hauteur fixe correspondant à celle de l'image */
+    text-align: center; /* Centre le texte */
+    position: relative; /* Permet de positionner le texte au centre */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+}
+
 .core-item .stat-secondary img {
     width: 120px; /* Augmente la taille de l'image */
     height: auto; /* Conserve les proportions */
@@ -486,17 +482,27 @@ p {
     margin-right: 20px; /* Ajoute un espacement à droite */
 }
 
-/* Images dans les descriptions des skills */
-.weapon-stats img {
-    height: 1em; /* Définit la hauteur des images à la taille de la police */
-    width: auto; /* Maintient les proportions de l'image */
-    vertical-align: -0.2em; /* Ajuste légèrement la position verticale */
-    display: inline; /* S'assure que les images restent dans le flux du texte */
-    margin: 0; /* Supprime tout espacement supplémentaire */
+/* Style pour la section des armes */
+.weapon {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
 }
 
-.weapon-stats strong, .weapon-stats p{
+.weapon > div {
+    margin-right: 20px;
+}
+
+.weapon-stats {
     text-align: justify;
+}
+
+.weapon-stats strong {
+    font-weight: bold;
+}
+
+.weapon-stats p {
+    margin: 0;
 }
 
 /* Encadré pour les statistiques à focus */
@@ -541,6 +547,12 @@ p {
     border-radius: 8px; /* Coins arrondis */
 }
 
+.evolutions ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
 /* Titre des évolutions */
 .evolutions h3 {
     color: #ffcc00; /* Couleur dorée pour le titre */
@@ -550,18 +562,11 @@ p {
 }
 
 /* Liste des évolutions */
-.evolutions ul {
-    list-style-type: none; /* Supprime les puces */
-    padding: 0; /* Supprime le padding interne */
-    margin: 0; /* Supprime les marges */
-}
-
-/* Élément individuel de la liste */
 .evolutions li {
     display: flex;
     flex-direction: column; /* Place l'image au-dessus du texte */
-    align-items: left; /* Centre le contenu horizontalement */
-    text-align: left; /* Centre le texte */
+    align-items: center; /* Centre le contenu horizontalement */
+    text-align: center; /* Centre le texte */
 }
 
 .evolutions li img {
@@ -570,7 +575,7 @@ p {
 }
 
 .evolutions li span {
-    text-align: left; /* Centre le texte sous l'image */
+    text-align: center; /* Centre le texte sous l'image */
 }
 
 /* Dernier élément sans marge */
@@ -579,9 +584,9 @@ p {
 }
 
 /* Image des évolutions */
-.evolutions li img {
-    margin-right: 10px; /* Espace entre l'image et le texte */
-    border-radius: 8px; /* Coins arrondis pour les images */
+.evolution-image {
+    margin-bottom: 10px;
+    border-radius: 8px;
 }
 
 /* Texte des évolutions */
@@ -616,8 +621,32 @@ p {
 
 /* Style spécifique pour les images des évolutions avec une plage (range) */
 .evolution-range {
-    width: 150px; /* Taille plus grande pour les images avec une plage */
-    height: auto; /* Conserve les proportions */
+    width: 150px;
+    height: auto;
+}
+
+/* Conteneur pour afficher les effets de panoplie */
+#set-effects {
+    display: none;
+    position: absolute;
+    background-color: #1e1e1e;
+    color: #ffcc00;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+#set-effects h3 {
+    margin: 0;
+    font-size: 14px;
+}
+
+#set-effects ul {
+    margin: 5px 0 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 12px;
 }
 
 /* Affichage sur téléphone (écrans étroits) */
