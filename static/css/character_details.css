@@ -929,7 +929,7 @@ p {
 }
 
 /* Affichage pour les téléphones en mode paysage */
-@media (max-width: 1024px) or (max-height: 767px) {
+@media (max-height: 767px) {
      /* Désactiver le layout */
      .layout {
         display: block; /* Passe le layout en bloc pour empiler les éléments */
