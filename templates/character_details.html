@@ -9,7 +9,7 @@
 </head>
 <body 
     class="{% if character.background_image %}background-image{% endif %}"
-    style="{% if character.background_image %}background-image: url('{{ url_for('static', filename=character.background_image) }}?v={{ time.time() }}');{% endif %}"
+    style="{% if character.background_image %}background-image: url('{{ url_for('static', filename=character.background_image) }}');{% endif %}"
 >
     {% include 'navbar.html' %}
 
@@ -18,7 +18,7 @@
         <!-- Colonne pour l'image -->
         <div class="image-column">
             <div class="character-image">
-                <img src="{{ url_for('static', filename=character.image) }}?v={{ time.time() }}" alt="{{ character.name }}">
+                <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}">
             </div>
         </div>
 
@@ -32,7 +32,7 @@
 
                 <!-- Image du personnage (affichée sous le type sur téléphone) -->
                 <div class="character-image">
-                    <img src="{{ url_for('static', filename=character.image) }}?v={{ time.time() }}" alt="{{ character.name }}">
+                    <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}">
                 </div>
 
                 <!-- Conteneur pour les onglets et le contenu -->
@@ -56,7 +56,7 @@
                                 <div class="weapon">
                                     {% for weapon in character.weapon %}
                                         <div class="weapon-image">
-                                            <img src="{{ url_for('static', filename=weapon.image) }}?v={{ time.time() }}" alt="{{ weapon.name }}">
+                                            <img src="{{ url_for('static', filename=weapon.image) }}" alt="{{ weapon.name }}">
                                         </div>
                                         <div class="weapon-stats">
                                             <strong>{{ weapon.name }}</strong>
@@ -76,7 +76,7 @@
                                             {% if evolution.range %}
                                                 <!-- Afficher les évolutions groupées (A06-A10) -->
                                                 <li>
-                                                    <img src="{{ url_for('static', filename='images/Advancement/' + evolution.id + '.webp') }}?v={{ time.time() }}" 
+                                                    <img src="{{ url_for('static', filename='images/Advancement/' + evolution.id + '.webp') }}" 
                                                          alt="{{ evolution.id }}" 
                                                          class="evolution-image evolution-range">
                                                     <span>{{ evolution.description|safe }}</span>
@@ -84,7 +84,7 @@
                                             {% else %}
                                                 <!-- Afficher les évolutions individuelles (A01 à A05) -->
                                                 <li>
-                                                    <img src="{{ url_for('static', filename='images/Advancement/' + evolution.id + '.webp') }}?v={{ time.time() }}" 
+                                                    <img src="{{ url_for('static', filename='images/Advancement/' + evolution.id + '.webp') }}" 
                                                          alt="{{ evolution.id }}" 
                                                          class="evolution-image">
                                                     <span>{{ evolution.description|safe }}</span>
@@ -103,7 +103,7 @@
                                 {% for passive in character.passives %}
                                     <div class="passive {% if passive.principal == 'True' %}principal{% endif %}">
                                         {% if passive.image %}
-                                            <img src="{{ url_for('static', filename=passive.image) }}?v={{ time.time() }}" alt="{{ passive.name or 'Passive Image' }}">
+                                            <img src="{{ url_for('static', filename=passive.image) }}" alt="{{ passive.name or 'Passive Image' }}">
                                         {% endif %}
                                         <div>
                                             {% if passive.name %}
@@ -123,7 +123,7 @@
                                 {% for skill in character.skills %}
                                     <div class="skill {% if skill.principal == 'True' %}principal{% endif %}">
                                         {% if skill.image %}
-                                            <img src="{{ url_for('static', filename=skill.image) }}?v={{ time.time() }}" alt="{{ skill.name or 'Skill Image' }}">
+                                            <img src="{{ url_for('static', filename=skill.image) }}" alt="{{ skill.name or 'Skill Image' }}">
                                         {% endif %}
                                         <div>
                                             {% if skill.name %}
@@ -160,7 +160,7 @@
                                             <div class="artefact-item" data-set="{{ artefact.set }}">
                                                 <div class="artefact-item-content">
                                                     <!-- Appliquer les événements sur l'image uniquement -->
-                                                    <img src="{{ url_for('static', filename=artefact.image) }}?v={{ time.time() }}" 
+                                                    <img src="{{ url_for('static', filename=artefact.image) }}" 
                                                          alt="{{ artefact.name }}" 
                                                          class="artefact-image"
                                                          onmouseover="showSetEffects('{{ artefact.set }}', event)"
@@ -170,7 +170,7 @@
                                                         <div class="stat-main">
                                                             <div class="stat-container">
                                                                 <span>{{ artefact.main_stat.name }}</span>
-                                                                <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}?v={{ time.time() }}" alt="Statistique Principale">
+                                                                <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
                                                             </div>
                                                         </div>
 
@@ -180,7 +180,7 @@
                                                                 <div class="stat-secondary">
                                                                     <div class="stat-container">
                                                                         <span>{{ stat.name }}</span>
-                                                                        <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}?v={{ time.time() }}" alt="Statistique Secondaire">
+                                                                        <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
                                                                     </div>
                                                                 </div>
                                                             {% endfor %}
@@ -197,7 +197,7 @@
                                             <div class="artefact-item" data-set="{{ artefact.set }}">
                                                 <div class="artefact-item-content">
                                                     <!-- Appliquer les événements sur l'image uniquement -->
-                                                    <img src="{{ url_for('static', filename=artefact.image) }}?v={{ time.time() }}" 
+                                                    <img src="{{ url_for('static', filename=artefact.image) }}" 
                                                          alt="{{ artefact.name }}" 
                                                          class="artefact-image"
                                                          onmouseover="showSetEffects('{{ artefact.set }}', event)"
@@ -207,7 +207,7 @@
                                                         <div class="stat-main">
                                                             <div class="stat-container">
                                                                 <span>{{ artefact.main_stat.name }}</span>
-                                                                <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}?v={{ time.time() }}" alt="Statistique Principale">
+                                                                <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
                                                             </div>
                                                         </div>
 
@@ -217,7 +217,7 @@
                                                                 <div class="stat-secondary">
                                                                     <div class="stat-container">
                                                                         <span>{{ stat.name }}</span>
-                                                                        <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}?v={{ time.time() }}" alt="Statistique Secondaire">
+                                                                        <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
                                                                     </div>
                                                                 </div>
                                                             {% endfor %}
@@ -245,14 +245,14 @@
                                     <div class="cores-container">
                                         {% for core in character.cores %}
                                             <div class="core-item">
-                                                <img src="{{ url_for('static', filename=core.image) }}?v={{ time.time() }}" alt="{{ core.name }}" class="core-image">
+                                                <img src="{{ url_for('static', filename=core.image) }}" alt="{{ core.name }}" class="core-image">
                                                 
                                                 <div class="stats">
                                                     <!-- Statistique principale -->
                                                     <div class="stat-main">
                                                         <div class="stat-container">
                                                         <span>{{ core.main_stat.name }}</span>
-                                                            <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}?v={{ time.time() }}" alt="Statistique Principale">
+                                                            <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
                                                         </div>
                                                     </div>
 
@@ -260,7 +260,7 @@
                                                     <div class="stat-secondary">
                                                         <div class="stat-container">
                                                             <span>{{ core.secondary_stat.name }}</span>
-                                                            <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}?v={{ time.time() }}" alt="Statistique Secondaire">
+                                                            <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
                                                         </div>
                                                     </div>
                                                 </div>
