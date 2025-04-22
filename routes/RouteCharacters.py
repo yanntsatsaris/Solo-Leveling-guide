@@ -129,7 +129,7 @@ def characters(app: Flask):
                 # Remplacer les chemins des images dans la description
                 description = description.replace(
                     "src='",
-                    "src='/static/images/Advancement/"
+                    f"src='/static/images/Personnages/{type_folder}/{character_folder}/"
                 )
                 evolutions.append({
                     'id': evolution['id'],
@@ -143,7 +143,7 @@ def characters(app: Flask):
                 # Remplacer les chemins des images dans la description
                 description = description.replace(
                     "src='",
-                    "src='/static/images/Advancement/"
+                    f"src='/static/images/Personnages/{type_folder}/{character_folder}/"
                 )
                 evolutions.append({
                     'id': evolution['id'],
