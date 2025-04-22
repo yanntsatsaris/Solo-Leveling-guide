@@ -66,7 +66,7 @@ function hideSetEffects() {
 
 // Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
 document.addEventListener('DOMContentLoaded', () => {
-    const setSelect = document.getElementById('set-select');
+    const setOptions = document.getElementById('set-options');
     const focusStatsList = document.querySelector('.focus-stats-list');
     const artefactsContainer = document.querySelector('.artefacts-container');
     const coresContainer = document.querySelector('.cores-container');
@@ -165,10 +165,12 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    // Gérer le changement de sélection dans le menu déroulant
-    setSelect.addEventListener('change', (event) => {
-        const setIndex = event.target.value;
-        displaySet(setIndex);
+    // Gérer le clic sur un set dans la liste
+    setOptions.addEventListener('click', (event) => {
+        if (event.target.tagName === 'LI') {
+            const setIndex = event.target.dataset.setIndex;
+            displaySet(setIndex);
+        }
     });
 
     // Afficher le premier set par défaut au chargement
