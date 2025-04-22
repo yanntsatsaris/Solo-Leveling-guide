@@ -343,6 +343,29 @@ p {
     display: block;
 }
 
+.set-effects {
+    display: none;
+    position: absolute;
+    background-color: #1e1e1e;
+    color: #ffcc00;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.set-effects h3 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.set-effects-list {
+    margin: 5px 0 0 0;
+    padding: 0;
+    list-style: none;
+    font-size: 12px;
+}
+
 /* Classe pour l'image de fond */
 .background-image {
     background-size: cover; /* L'image couvre tout l'écran */
