@@ -854,7 +854,7 @@ p {
     }
 
     .weapon img {
-        max-width: 1em; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
+        max-width: 100px; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
         height: auto; /* Conserve les proportions */
     }
 
