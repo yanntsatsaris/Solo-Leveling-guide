@@ -565,7 +565,7 @@ p {
 }
 
 /* Style pour l'image de l'arme */
-.weapon-image {
+.weapon-image img {
     width: 300px; /* Augmente la largeur de l'image */
     height: auto; /* Conserve les proportions */
     border-radius: 8px; /* Ajoute un léger arrondi aux coins */
@@ -858,7 +858,7 @@ p {
         margin: 0; /* Supprime tout espacement supplémentaire */
     }
 
-    .weapon-image {
+    .weapon-image img {
         max-width: 100px; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
         height: auto; /* Conserve les proportions */
         border-radius: 8px; /* Ajoute un léger arrondi aux coins */
