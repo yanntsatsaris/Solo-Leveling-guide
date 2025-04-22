@@ -86,11 +86,6 @@ body {
     gap: 20px; /* Espacement entre l'image et les onglets */
 }
 
-/* Image dans .character-info */
-.character-info img {
-    margin: 0; /* Supprime le centrage de l'image */
-}
-
 /* Conteneur des onglets et du contenu */
 .tabs-and-content {
     display: flex;
