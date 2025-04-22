@@ -817,13 +817,13 @@ p {
 
     /* Réduit la taille de la police pour les statistiques principales des artefacts et cores */
     .core-item .stat-main span,
-    .artefact-item .stat-main span {
+    .artefact-item-content .stat-main span {
         font-size: 8px; /* Réduit la taille de la police */
     }
 
     /* Réduit la taille de la police pour les statistiques secondaires des artefacts et cores */
     .core-item .stat-secondary span,
-    .artefact-item .stat-secondary span {
+    .artefact-item-content .stat-secondary span {
         font-size: 8px; /* Réduit la taille de la police */
     }
 
@@ -834,7 +834,7 @@ p {
     }
 
     /* Réduit également les images secondaires des artefacts */
-    .artefact-item .stat-secondary img {
+    .artefact-item-content .stat-secondary img {
         width: 80px; /* Réduit la largeur des images secondaires */
         height: auto; /* Conserve les proportions */
     }
