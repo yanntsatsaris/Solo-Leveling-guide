@@ -165,6 +165,12 @@ p {
 }
 
 /* Images dans les descriptions des passifs */
+.passive {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
 .passive img {
     height: 1em; /* Définit la hauteur des images à la taille de la police */
     width: auto; /* Maintient les proportions de l'image */
@@ -175,9 +181,8 @@ p {
 
 /* Images à côté du nom des passifs */
 .passive > img {
-    height: 1em; /* Définit la hauteur des images à la taille de la police */
-    width: auto; /* Maintient les proportions de l'image */
-    vertical-align: middle; /* Aligne les images avec le texte */
+    height: 50px; /* Définit la hauteur des images à la taille de la police */
+    width: 50px; /* Maintient les proportions de l'image */
     margin-right: 10px; /* Ajoute un espacement entre l'image et le texte */
 }
 
