@@ -125,19 +125,31 @@ def characters(app: Flask):
         for evolution in character_info.get('evolutions', []):
             if 'range' in evolution:
                 # Si l'évolution a une plage (ex: 06-10)
+                description = evolution.get('description', '')
+                # Remplacer les chemins des images dans la description
+                description = description.replace(
+                    "src='",
+                    "src='/static/images/Advancement/"
+                )
                 evolutions.append({
                     'id': evolution['id'],
                     'range': evolution['range'],
                     'type': evolution['type'],
-                    'description': evolution.get('description', '')  # Inclure la description
+                    'description': description  # Inclure la description modifiée
                 })
             else:
                 # Si l'évolution est individuelle
+                description = evolution.get('description', '')
+                # Remplacer les chemins des images dans la description
+                description = description.replace(
+                    "src='",
+                    "src='/static/images/Advancement/"
+                )
                 evolutions.append({
                     'id': evolution['id'],
                     'number': evolution['number'],
                     'type': evolution['type'],
-                    'description': evolution.get('description', '')
+                    'description': description  # Inclure la description modifiée
                 })
 
         character_info['evolutions'] = evolutions
