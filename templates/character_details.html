@@ -266,6 +266,9 @@
     <script id="activeSetEffectsData" type="application/json">
         {{ character.active_set_effects|tojson }}
     </script>
+    <script id="equipmentSetsData" type="application/json">
+        {{ character.equipment_sets|tojson }}
+    </script>
     <script src="{{ url_for('static', filename='js/character_details.js') }}"></script>
 </body>
 </html>

@@ -64,6 +64,7 @@ function hideSetEffects() {
     effectsContainer.style.display = 'none';
 }
 
+// Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
 document.addEventListener('DOMContentLoaded', () => {
     const setSelect = document.getElementById('set-select');
     const focusStatsList = document.querySelector('.focus-stats-list');
@@ -71,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const coresContainer = document.querySelector('.cores-container');
 
     // Liste des sets d'équipement (générée côté serveur)
-    const equipmentSets = {{ character.equipment_sets|tojson }};
+    const equipmentSets = JSON.parse(document.getElementById('equipmentSetsData').textContent);
 
     // Gérer la sélection d'un set
     setSelect.addEventListener('change', (event) => {
