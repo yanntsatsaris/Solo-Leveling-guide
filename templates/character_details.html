@@ -242,9 +242,9 @@
                             {% if character.cores and character.cores|length > 0 %}
                                 <div class="cores-section">
                                     <h2>Noyaux</h2>
-                                    <div class="cores-container" style="display: flex; gap: 5px; justify-content: center;">
+                                    <div class="cores-container">
                                         {% for core in character.cores %}
-                                            <div class="core-item" style="text-align: center;">
+                                            <div class="core-item">
                                                 <img src="{{ url_for('static', filename=core.image) }}" alt="{{ core.name }}" class="core-image">
                                                 
                                                 <div class="stats">
