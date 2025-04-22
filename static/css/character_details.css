@@ -266,14 +266,14 @@ p {
 }
 
 /* Image de la statistique principale */
-.artefact-item .stat-main img {
+.artefact-item-content .stat-main img {
     width: 150px; /* Taille de l'image principale */
     height: auto; /* Conserve les proportions */
     display: block;
 }
 
 /* Conteneur pour les statistiques secondaires */
-.artefact-item .stat-secondary-container {
+.artefact-item-content .stat-secondary-container {
     display: flex;
     flex-direction: column; /* Aligne les stats secondaires verticalement */
     align-items: flex-start; /* Aligne les stats secondaires à gauche */
@@ -282,7 +282,7 @@ p {
 }
 
 /* Conteneur pour chaque statistique secondaire */
-.artefact-item .stat-secondary {
+.artefact-item-content .stat-secondary {
     display: flex;
     justify-content: flex-start; /* Aligne le contenu à gauche */
     align-items: center; /* Centre verticalement le texte et l'image */
@@ -293,7 +293,7 @@ p {
 }
 
 /* Image des statistiques secondaires */
-.artefact-item .stat-secondary img {
+.artefact-item-content .stat-secondary img {
     width: 120px; /* Taille des images secondaires */
     height: auto; /* Conserve les proportions */
 }
