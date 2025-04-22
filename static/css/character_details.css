@@ -553,7 +553,7 @@ p {
 .evolutions li {
     display: flex;
     flex-direction: column; /* Place l'image au-dessus du texte */
-    align-items: center; /* Centre le contenu horizontalement */
+    align-items: left; /* Centre le contenu horizontalement */
     text-align: left; /* Centre le texte */
 }
 
