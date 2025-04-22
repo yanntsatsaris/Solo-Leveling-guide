@@ -477,6 +477,16 @@ p {
     margin-bottom: 2px; /* Réduit l'espace entre la statistique principale et les secondaires */
 }
 
+.weapon {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.weapon > div {
+    margin-right: 20px; /* Ajoute un espacement à droite */
+}
+
 /* Style pour l'image de l'arme */
 .weapon img {
     width: 300px; /* Augmente la largeur de l'image */
@@ -497,6 +507,7 @@ p {
 
 .weapon-stats strong, .weapon-stats p{
     text-align: justify;
+    margin: 0;
 }
 
 /* Encadré pour les statistiques à focus */

@@ -53,9 +53,9 @@
 
                             {% if character.weapon and character.weapon|length > 0 %}
                                 <h3>Arme</h3>
-                                <div class="weapon" style="display: flex; align-items: center; margin-top: 20px;">
+                                <div class="weapon">
                                     {% for weapon in character.weapon %}
-                                        <div style="margin-right: 20px;">
+                                        <div>
                                             <img src="{{ url_for('static', filename=weapon.image) }}" alt="{{ weapon.name }}">
                                         </div>
                                         <div class="weapon-stats">
