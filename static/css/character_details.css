@@ -866,6 +866,9 @@ p {
     .weapon-image {
         max-width: 100px; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
         height: auto; /* Conserve les proportions */
+        border-radius: 8px; /* Ajoute un léger arrondi aux coins */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour un effet visuel */
+        margin-right: 20px; /* Ajoute un espacement à droite */
     }
 
     .weapon-stats {
