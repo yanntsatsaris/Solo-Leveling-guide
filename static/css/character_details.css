@@ -192,6 +192,12 @@ p {
     margin: 0; /* Supprime les marges inutiles */
 }
 
+.skill {
+    display: flex;
+    align-items: flex-start; /* Aligne le texte et l'image en haut */
+    margin-bottom: 20px; /* Ajoute un espacement entre les skills */
+}
+
 /* Images dans les descriptions des skills */
 .skill img {
     height: 1em; /* Définit la hauteur des images à la taille de la police */
@@ -203,9 +209,8 @@ p {
 
 /* Images à côté du nom des skills */
 .skill > img {
-    height: 1em; /* Définit la hauteur des images à la taille de la police */
-    width: auto; /* Maintient les proportions de l'image */
-    vertical-align: middle; /* Aligne les images avec le texte */
+    height: 50px; /* Définit la hauteur des images à la taille de la police */
+    width: 50px; /* Maintient les proportions de l'image */
     margin-right: 10px; /* Ajoute un espacement entre l'image et le texte */
 }
 
