@@ -3,9 +3,22 @@ import json
 import time
 from flask import Flask, render_template, url_for
 
+def update_image_paths(description, base_path, timestamp):
+    """
+    Met à jour les chemins des images dans une description en ajoutant un cache-busting.
+    """
+    if not description:
+        return description
+
+    # Remplace les chemins relatifs par des chemins absolus avec cache-busting
+    return description.replace(
+        "src='",
+        f"src='{url_for('static', filename=base_path)}/"
+    ).replace("'>", f"?v={timestamp}'>").replace("\n", "<br>")
+
 def characters(app: Flask):
     # Charger les données des personnages depuis le fichier JSON
-    with open('data/character.json', 'r') as f:
+    with open('data/character.json', 'r', encoding='utf-8') as f:
         characters_data = json.load(f)
 
     # Charger les données des panoplies
@@ -59,43 +72,34 @@ def characters(app: Flask):
 
         character_info['background_image'] = f'images/Personnages/{type_folder}/BG_{character_info["type"]}.webp?v={timestamp}'
 
-        # Construire les chemins des images des passifs
+        # Mettre à jour les descriptions des passifs
         for passive in character_info.get('passives', []):
             if 'image' in passive:
                 passive['image'] = f'images/Personnages/{type_folder}/{character_folder}/{passive["image"]}?v={timestamp}'
             if 'description' in passive:
-                passive['description'] = passive['description'].replace(
-                    "src='",
-                    f"src='/static/images/Personnages/{type_folder}/{character_folder}/"
-                ).replace("\n", "<br>")
+                passive['description'] = update_image_paths(passive['description'], f'images/Personnages/{type_folder}/{character_folder}', timestamp)
 
-        # Construire les chemins des images des skills
+        # Mettre à jour les descriptions des skills
         for skill in character_info.get('skills', []):
             if 'image' in skill:
                 skill['image'] = f'images/Personnages/{type_folder}/{character_folder}/{skill["image"]}?v={timestamp}'
             if 'description' in skill:
-                skill['description'] = skill['description'].replace(
-                    "src='",
-                    f"src='/static/images/Personnages/{type_folder}/{character_folder}/"
-                ).replace("\n", "<br>")
+                skill['description'] = update_image_paths(skill['description'], f'images/Personnages/{type_folder}/{character_folder}', timestamp)
 
-        # Construire les chemins des images des artefacts
+        # Mettre à jour les descriptions des artefacts
         for artefact in character_info.get('artefacts', []):
             artefact['image'] = f'images/Artefacts/{artefact["image"]}?v={timestamp}'
 
-        # Construire les chemins des images des noyaux
+        # Mettre à jour les descriptions des noyaux
         for core in character_info.get('cores', []):
             core['image'] = f'images/Noyaux/{core["image"]}?v={timestamp}'
 
-        # Construire les chemins des images des armes
+        # Mettre à jour les descriptions des armes
         for weapon in character_info.get('weapon', []):
             if 'image' in weapon:
                 weapon['image'] = f'images/Personnages/{type_folder}/{character_folder}/{weapon["image"]}?v={timestamp}'
             if 'stats' in weapon:
-                weapon['stats'] = weapon['stats'].replace(
-                    "src='",
-                    f"src='/static/images/Personnages/{type_folder}/{character_folder}/"
-                ).replace("\n", "<br>")  # Remplace \n par <br> pour l'affichage HTML
+                weapon['stats'] = update_image_paths(weapon['stats'], f'images/Personnages/{type_folder}/{character_folder}', timestamp)
 
         # Ajouter les focus_stats pour les artefacts
         character_info['focus_stats'] = character_info.get('focus_stats', [])
@@ -127,34 +131,10 @@ def characters(app: Flask):
         # Ajouter les évolutions au contexte
         evolutions = []
         for evolution in character_info.get('evolutions', []):
-            if 'range' in evolution:
-                # Si l'évolution a une plage (ex: 06-10)
-                description = evolution.get('description', '')
-                # Remplacer les chemins des images dans la description
-                description = description.replace(
-                    "src='",
-                    f"src='/static/images/Personnages/{type_folder}/{character_folder}/"
-                )
-                evolutions.append({
-                    'id': evolution['id'],
-                    'range': evolution['range'],
-                    'type': evolution['type'],
-                    'description': description  # Inclure la description modifiée
-                })
-            else:
-                # Si l'évolution est individuelle
-                description = evolution.get('description', '')
-                # Remplacer les chemins des images dans la description
-                description = description.replace(
-                    "src='",
-                    f"src='/static/images/Personnages/{type_folder}/{character_folder}/"
-                ).replace("\n", "<br>")
-                evolutions.append({
-                    'id': evolution['id'],
-                    'number': evolution['number'],
-                    'type': evolution['type'],
-                    'description': description  # Inclure la description modifiée
-                })
+            description = evolution.get('description', '')
+            description = update_image_paths(description, f'images/Personnages/{type_folder}/{character_folder}', timestamp)
+            evolution['description'] = description
+            evolutions.append(evolution)
 
         character_info['evolutions'] = evolutions
 
