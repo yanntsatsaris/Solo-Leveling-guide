@@ -236,15 +236,18 @@
                 "image": "Light_Thomas_Skill_Soutien.png"
             }
         ],
-        "focus_stats": [
+        "equipment_sets": [ 
+            {
+                "set_name": "GLOBAL",
+                "focus_stats": [
             "DEF",
             "CRIT HIT",
             "CRIT DMG",
             "DEF PEN",
             "DMG INC",
             "MP CONS"
-        ],
-        "artefacts": [
+                ],
+                "artefacts": [
             {
                 "name": "Casque",
                 "number": "01",
@@ -429,8 +432,8 @@
                     }
                 ]
             }
-        ],
-        "cores": [
+                ],
+                "cores": [
             {
                 "name": "Noyau Orange 01",
                 "number": "01",
@@ -463,6 +466,240 @@
                 "secondary_stat": {
                     "name": "DEF PEN"
                 }
+            }
+                ]
+            },
+            {
+                "set_name": "SPEEDRUN",
+                "focus_stats": [
+            "DEF",
+            "CRIT HIT",
+            "CRIT DMG",
+            "DEF PEN",
+            "DMG INC",
+            "MP CONS"
+                ],
+                "artefacts": [
+            {
+                "name": "Casque",
+                "number": "01",
+                "set": "Malédiction Ardente",
+                "image": "Malediction_Ardente/Malediction_Ardente01.webp",
+                "main_stat": {
+                    "name": "DEF"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "DEF% +3/4"
+                    },
+                    {
+                        "name": "DEF PEN"
+                    },
+                    {
+                        "name": "DMG INC"
+                    },
+                    {
+                        "name": "CRIT HIT"
+                    }
+                ]
+            },
+            {
+                "name": "Plastron",
+                "number": "02",
+                "set": "Malédiction Ardente",
+                "image": "Malediction_Ardente/Malediction_Ardente02.webp",
+                "main_stat": {
+                    "name": "DEF"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "DEF% +3/4"
+                    },
+                    {
+                        "name": "DEF PEN"
+                    },
+                    {
+                        "name": "DMG INC"
+                    },
+                    {
+                        "name": "CRIT HIT"
+                    }
+                ]
+            },
+            {
+                "name": "Gants",
+                "number": "03",
+                "set": "Malédiction Ardente",
+                "image": "Malediction_Ardente/Malediction_Ardente03.webp",
+                "main_stat": {
+                    "name": "ATK"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "DEF%"
+                    },
+                    {
+                        "name": "MP CONS"
+                    },
+                    {
+                        "name": "CRIT HIT"
+                    }
+                ]
+            },
+            {
+                "name": "Bottes",
+                "number": "04",
+                "set": "Malédiction Ardente",
+                "image": "Malediction_Ardente/Malediction_Ardente04.webp",
+                "main_stat": {
+                    "name": "CRIT DMG"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "DEF%"
+                    },
+                    {
+                        "name": "MP CONS"
+                    },
+                    {
+                        "name": "CRIT HIT"
+                    }
+                ]
+            },
+            {
+                "name": "Collier",
+                "number": "05",
+                "set": "Obsidian",
+                "image": "Obsidian/Obsidian05.webp",
+                "main_stat": {
+                    "name": "HP"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "DEF%"
+                    },
+                    {
+                        "name": "CRIT DMG"
+                    },
+                    {
+                        "name": "DEF PEN"
+                    }
+                ]
+            },
+            {
+                "name": "Bracelet",
+                "number": "06",
+                "set": "Obsidian",
+                "image": "Obsidian/Obsidian06.webp",
+                "main_stat": {
+                    "name": "ELEM DMG"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "DEF%"
+                    },
+                    {
+                        "name": "CRIT DMG"
+                    },
+                    {
+                        "name": "MP CONS"
+                    }
+                ]
+            },
+            {
+                "name": "Bague",
+                "number": "07",
+                "set": "Obsidian",
+                "image": "Obsidian/Obsidian07.webp",
+                "main_stat": {
+                    "name": "DEF"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "DEF% +3/4"
+                    },
+                    {
+                        "name": "CRIT DMG"
+                    },
+                    {
+                        "name": "DEF PEN"
+                    },
+                    {
+                        "name": "DMG INC"
+                    }
+                ]
+            },
+            {
+                "name": "Boucle d'oreille",
+                "number": "08",
+                "set": "Obsidian",
+                "image": "Obsidian/Obsidian08.webp",
+                "main_stat": {
+                    "name": "MP MAX"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "DEF%"
+                    },
+                    {
+                        "name": "CRIT DMG"
+                    },
+                    {
+                        "name": "MP CONS"
+                    }
+                ]
+            }
+                ],
+                "cores": [
+            {
+                "name": "Noyau Orange 01",
+                "number": "01",
+                "image": "Orange01.webp",
+                "main_stat": {
+                    "name": "ATK"
+                },
+                "secondary_stat": {
+                    "name": "CRIT DMG"
+                }
+            },
+            {
+                "name": "Noyau Orange 02",
+                "number": "02",
+                "image": "Orange02.webp",
+                "main_stat": {
+                    "name": "DEF"
+                },
+                "secondary_stat": {
+                    "name": "CRIT HIT"
+                }
+            },
+            {
+                "name": "Noyau Violet 03",
+                "number": "03",
+                "image": "Violet03.webp",
+                "main_stat": {
+                    "name": "HP"
+                },
+                "secondary_stat": {
+                    "name": "DEF PEN"
+                }
+            }
+                ]
             }
         ]
     },

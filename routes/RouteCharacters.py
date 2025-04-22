@@ -81,23 +81,12 @@ def characters(app: Flask):
             if 'description' in skill:
                 skill['description'] = update_image_paths(skill['description'], f'images/Personnages/{type_folder}/{character_folder}')
 
-        # Mettre à jour les descriptions des artefacts
-        for artefact in character_info.get('artefacts', []):
-            artefact['image'] = f'images/Artefacts/{artefact["image"]}'
-
-        # Mettre à jour les descriptions des noyaux
-        for core in character_info.get('cores', []):
-            core['image'] = f'images/Noyaux/{core["image"]}'
-
         # Mettre à jour les descriptions des armes
         for weapon in character_info.get('weapon', []):
             if 'image' in weapon:
                 weapon['image'] = f'images/Personnages/{type_folder}/{character_folder}/{weapon["image"]}'
             if 'stats' in weapon:
                 weapon['stats'] = update_image_paths(weapon['stats'], f'images/Personnages/{type_folder}/{character_folder}')
-
-        # Ajouter les focus_stats pour les artefacts
-        character_info['focus_stats'] = character_info.get('focus_stats', [])
 
         # Calculer les effets de panoplie activés
         equipped_sets = {}
@@ -133,4 +122,18 @@ def characters(app: Flask):
 
         character_info['evolutions'] = evolutions
 
+        # Mettre à jour les données des sets d'équipement
+        for equipment_set in character_info.get('equipment_sets', []):
+            # Mettre à jour les focus_stats
+            equipment_set['focus_stats'] = equipment_set.get('focus_stats', [])
+
+            # Mettre à jour les images des artefacts
+            for artefact in equipment_set.get('artefacts', []):
+                artefact['image'] = f'images/Artefacts/{artefact["image"]}'
+
+            # Mettre à jour les images des noyaux
+            for core in equipment_set.get('cores', []):
+                core['image'] = f'images/Noyaux/{core["image"]}'
+
+        # Renvoyer le template avec les données du personnage
         return render_template('character_details.html', character=character_info)

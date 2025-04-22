@@ -63,3 +63,105 @@ function hideSetEffects() {
     const effectsContainer = document.getElementById('set-effects');
     effectsContainer.style.display = 'none';
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const setSelect = document.getElementById('set-select');
+    const focusStatsList = document.querySelector('.focus-stats-list');
+    const artefactsContainer = document.querySelector('.artefacts-container');
+    const coresContainer = document.querySelector('.cores-container');
+
+    // Liste des sets d'équipement (générée côté serveur)
+    const equipmentSets = {{ character.equipment_sets|tojson }};
+
+    // Gérer la sélection d'un set
+    setSelect.addEventListener('change', (event) => {
+        const selectedSetIndex = event.target.value;
+        const selectedSet = equipmentSets[selectedSetIndex];
+
+        // Mettre à jour les focus stats
+        focusStatsList.innerHTML = selectedSet.focus_stats.map(stat => `<li>${stat}</li>`).join('');
+
+        // Mettre à jour les artefacts
+        const leftColumnArtefacts = selectedSet.artefacts.slice(0, 4).map(artefact => `
+            <div class="artefact-item" data-set="${artefact.set}">
+                <div class="artefact-item-content">
+                    <img src="/static/${artefact.image}" alt="${artefact.name}" class="artefact-image"
+                         onmouseover="showSetEffects('${artefact.set}', event)"
+                         onmouseout="hideSetEffects()">
+                    <div>
+                        <div class="stat-main">
+                            <div class="stat-container">
+                                <span>${artefact.main_stat.name}</span>
+                                <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
+                            </div>
+                        </div>
+                        <div class="stat-secondary-container">
+                            ${artefact.secondary_stats.map(stat => `
+                                <div class="stat-secondary">
+                                    <div class="stat-container">
+                                        <span>${stat.name}</span>
+                                        <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        const rightColumnArtefacts = selectedSet.artefacts.slice(4).map(artefact => `
+            <div class="artefact-item" data-set="${artefact.set}">
+                <div class="artefact-item-content">
+                    <img src="/static/${artefact.image}" alt="${artefact.name}" class="artefact-image"
+                         onmouseover="showSetEffects('${artefact.set}', event)"
+                         onmouseout="hideSetEffects()">
+                    <div>
+                        <div class="stat-main">
+                            <div class="stat-container">
+                                <span>${artefact.main_stat.name}</span>
+                                <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
+                            </div>
+                        </div>
+                        <div class="stat-secondary-container">
+                            ${artefact.secondary_stats.map(stat => `
+                                <div class="stat-secondary">
+                                    <div class="stat-container">
+                                        <span>${stat.name}</span>
+                                        <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        artefactsContainer.innerHTML = `
+            <div class="artefacts-column">${leftColumnArtefacts}</div>
+            <div class="artefacts-column">${rightColumnArtefacts}</div>
+        `;
+
+        // Mettre à jour les cores
+        coresContainer.innerHTML = selectedSet.cores.map(core => `
+            <div class="core-item">
+                <img src="/static/${core.image}" alt="${core.name}" class="core-image">
+                <div class="stats">
+                    <div class="stat-main">
+                        <div class="stat-container">
+                            <span>${core.main_stat.name}</span>
+                            <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
+                        </div>
+                    </div>
+                    <div class="stat-secondary">
+                        <div class="stat-container">
+                            <span>${core.secondary_stat.name}</span>
+                            <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    });
+});

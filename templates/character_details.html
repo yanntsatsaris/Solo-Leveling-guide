@@ -138,137 +138,124 @@
                             {% endif %}
                         </div>
                         <div id="artefacts" class="tab-content">
+                            <!-- Menu déroulant pour sélectionner un set -->
+                            {% if character.equipment_sets and character.equipment_sets|length > 0 %}
+                                <div class="artefact-dropdown">
+                                    <label for="set-select">Choisissez un set :</label>
+                                    <select id="set-select">
+                                        {% for set in character.equipment_sets %}
+                                            <option value="{{ loop.index0 }}">{{ set.set_name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            {% endif %}
+
                             <!-- Affichage des statistiques à focus -->
-                            {% if character.focus_stats and character.focus_stats|length > 0 %}
                             <div class="focus-stats">
                                 <h3 hidden>Stats à Focus</h3>
                                 <ul class="focus-stats-list">
-                                    {% for stat in character.focus_stats %}
+                                    {% for stat in character.equipment_sets[0].focus_stats %}
                                         <li>{{ stat }}</li>
                                     {% endfor %}
                                 </ul>
                             </div>
-                            {% endif %}
+
                             <h2>Artefacts</h2>
 
                             <!-- Liste des artefacts -->
-                            {% if character.artefacts and character.artefacts|length > 0 %}
-                                <div class="artefacts-container">
-                                    <!-- Colonne gauche -->
-                                    <div class="artefacts-column">
-                                        {% for artefact in character.artefacts[:4] %}
-                                            <div class="artefact-item" data-set="{{ artefact.set }}">
-                                                <div class="artefact-item-content">
-                                                    <!-- Appliquer les événements sur l'image uniquement -->
-                                                    <img src="{{ url_for('static', filename=artefact.image) }}" 
-                                                         alt="{{ artefact.name }}" 
-                                                         class="artefact-image"
-                                                         onmouseover="showSetEffects('{{ artefact.set }}', event)"
-                                                         onmouseout="hideSetEffects()">
-                                                    <div>
-                                                        <!-- Statistique principale -->
-                                                        <div class="stat-main">
-                                                            <div class="stat-container">
-                                                                <span>{{ artefact.main_stat.name }}</span>
-                                                                <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
-                                                            </div>
-                                                        </div>
-
-                                                        <!-- Statistiques secondaires -->
-                                                        <div class="stat-secondary-container">
-                                                            {% for stat in artefact.secondary_stats %}
-                                                                <div class="stat-secondary">
-                                                                    <div class="stat-container">
-                                                                        <span>{{ stat.name }}</span>
-                                                                        <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
-                                                                    </div>
-                                                                </div>
-                                                            {% endfor %}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-
-                                    <!-- Colonne droite -->
-                                    <div class="artefacts-column">
-                                        {% for artefact in character.artefacts[4:] %}
-                                            <div class="artefact-item" data-set="{{ artefact.set }}">
-                                                <div class="artefact-item-content">
-                                                    <!-- Appliquer les événements sur l'image uniquement -->
-                                                    <img src="{{ url_for('static', filename=artefact.image) }}" 
-                                                         alt="{{ artefact.name }}" 
-                                                         class="artefact-image"
-                                                         onmouseover="showSetEffects('{{ artefact.set }}', event)"
-                                                         onmouseout="hideSetEffects()">
-                                                    <div>
-                                                        <!-- Statistique principale -->
-                                                        <div class="stat-main">
-                                                            <div class="stat-container">
-                                                                <span>{{ artefact.main_stat.name }}</span>
-                                                                <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
-                                                            </div>
-                                                        </div>
-
-                                                        <!-- Statistiques secondaires -->
-                                                        <div class="stat-secondary-container">
-                                                            {% for stat in artefact.secondary_stats %}
-                                                                <div class="stat-secondary">
-                                                                    <div class="stat-container">
-                                                                        <span>{{ stat.name }}</span>
-                                                                        <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
-                                                                    </div>
-                                                                </div>
-                                                            {% endfor %}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                            {% else %}
-                                <p>Informations sur les artefacts du personnage.</p>
-                            {% endif %}
-
-                            <!-- Conteneur pour afficher les effets de panoplie -->
-                            <div id="set-effects">
-                                <h3>Nom de la Panoplie</h3>
-                                <ul id="set-effects-list"></ul>
-                            </div>
-
-                            <!-- Section des noyaux -->
-                            {% if character.cores and character.cores|length > 0 %}
-                                <div class="cores-section">
-                                    <h2>Noyaux</h2>
-                                    <div class="cores-container">
-                                        {% for core in character.cores %}
-                                            <div class="core-item">
-                                                <img src="{{ url_for('static', filename=core.image) }}" alt="{{ core.name }}" class="core-image">
-                                                
-                                                <div class="stats">
-                                                    <!-- Statistique principale -->
+                            <div class="artefacts-container">
+                                <!-- Colonne gauche -->
+                                <div class="artefacts-column">
+                                    {% for artefact in character.equipment_sets[0].artefacts[:4] %}
+                                        <div class="artefact-item" data-set="{{ artefact.set }}">
+                                            <div class="artefact-item-content">
+                                                <img src="{{ url_for('static', filename=artefact.image) }}" 
+                                                     alt="{{ artefact.name }}" 
+                                                     class="artefact-image"
+                                                     onmouseover="showSetEffects('{{ artefact.set }}', event)"
+                                                     onmouseout="hideSetEffects()">
+                                                <div>
                                                     <div class="stat-main">
                                                         <div class="stat-container">
-                                                        <span>{{ core.main_stat.name }}</span>
+                                                            <span>{{ artefact.main_stat.name }}</span>
                                                             <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
                                                         </div>
                                                     </div>
-
-                                                    <!-- Statistique secondaire -->
-                                                    <div class="stat-secondary">
-                                                        <div class="stat-container">
-                                                            <span>{{ core.secondary_stat.name }}</span>
-                                                            <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
-                                                        </div>
+                                                    <div class="stat-secondary-container">
+                                                        {% for stat in artefact.secondary_stats %}
+                                                            <div class="stat-secondary">
+                                                                <div class="stat-container">
+                                                                    <span>{{ stat.name }}</span>
+                                                                    <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
                                                     </div>
                                                 </div>
                                             </div>
-                                        {% endfor %}
-                                    </div>
+                                        </div>
+                                    {% endfor %}
                                 </div>
-                            {% endif %}
+
+                                <!-- Colonne droite -->
+                                <div class="artefacts-column">
+                                    {% for artefact in character.equipment_sets[0].artefacts[4:] %}
+                                        <div class="artefact-item" data-set="{{ artefact.set }}">
+                                            <div class="artefact-item-content">
+                                                <img src="{{ url_for('static', filename=artefact.image) }}" 
+                                                     alt="{{ artefact.name }}" 
+                                                     class="artefact-image"
+                                                     onmouseover="showSetEffects('{{ artefact.set }}', event)"
+                                                     onmouseout="hideSetEffects()">
+                                                <div>
+                                                    <div class="stat-main">
+                                                        <div class="stat-container">
+                                                            <span>{{ artefact.main_stat.name }}</span>
+                                                            <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
+                                                        </div>
+                                                    </div>
+                                                    <div class="stat-secondary-container">
+                                                        {% for stat in artefact.secondary_stats %}
+                                                            <div class="stat-secondary">
+                                                                <div class="stat-container">
+                                                                    <span>{{ stat.name }}</span>
+                                                                    <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
+                                                                </div>
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <!-- Section des noyaux -->
+                            <div class="cores-section">
+                                <h2>Noyaux</h2>
+                                <div class="cores-container">
+                                    {% for core in character.equipment_sets[0].cores %}
+                                        <div class="core-item">
+                                            <img src="{{ url_for('static', filename=core.image) }}" alt="{{ core.name }}" class="core-image">
+                                            <div class="stats">
+                                                <div class="stat-main">
+                                                    <div class="stat-container">
+                                                        <span>{{ core.main_stat.name }}</span>
+                                                        <img src="{{ url_for('static', filename='images/Stats_Principale.png') }}" alt="Statistique Principale">
+                                                    </div>
+                                                </div>
+                                                <div class="stat-secondary">
+                                                    <div class="stat-container">
+                                                        <span>{{ core.secondary_stat.name }}</span>
+                                                        <img src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}" alt="Statistique Secondaire">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
