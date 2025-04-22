@@ -562,13 +562,17 @@ p {
 
 /* Texte des évolutions */
 .evolutions li span {
+    color: #b3b3b3; /* Couleur grise pour le texte */
+    font-style: italic; /* Texte en italique */
+}
+
+/* Images dans les descriptions (dans les balises <span>) */
+.evolutions li span img {
     height: 1em; /* Définit la hauteur des images à la taille de la police */
     width: auto; /* Maintient les proportions de l'image */
     vertical-align: -0.2em; /* Ajuste légèrement la position verticale pour aligner avec le texte */
     display: inline; /* S'assure que les images restent dans le flux du texte */
     margin: 0; /* Supprime tout espacement supplémentaire */
-    color: #b3b3b3; /* Couleur grise pour le texte */
-    font-style: italic; /* Texte en italique */
 }
 
 /* Identifiant des évolutions */
