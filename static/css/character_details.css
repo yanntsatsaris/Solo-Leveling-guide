@@ -317,7 +317,7 @@ p {
 }
 
 /* Conteneur pour le texte et l'image */
-.artefact-item .stat-container {
+.artefact-item-content .stat-container {
     position: relative;
     display: inline-block;
     text-align: center;
@@ -326,7 +326,7 @@ p {
 }
 
 /* Texte positionné au-dessus de l'image */
-.artefact-item .stat-container span {
+.artefact-item-content .stat-container span {
     position: absolute;
     top: 50%; /* Centre verticalement */
     left: 50%; /* Centre horizontalement */
@@ -339,7 +339,7 @@ p {
 }
 
 /* Image de fond */
-.artefact-item .stat-container img {
+.artefact-item-content .stat-container img {
     width: 100%; /* S'adapte à la largeur du conteneur */
     height: auto; /* Conserve les proportions */
     display: block;
