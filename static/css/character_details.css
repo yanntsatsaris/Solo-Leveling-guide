@@ -815,6 +815,12 @@ p {
         flex: 1; /* Permet aux stats de prendre toute la largeur restante */
     }
 
+    .artefact-item-content {
+        display: flex;
+        align-items: center; /* Centre le contenu verticalement */
+    }
+    
+
     /* Réduit la taille de la police pour les statistiques principales des artefacts et cores */
     .core-item .stat-main span,
     .artefact-item-content .stat-main span {
