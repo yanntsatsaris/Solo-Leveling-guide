@@ -134,7 +134,7 @@ p {
 }
 
 /* Pour les écrans en mode paysage */
-@media (max-width: 1024px) or (max-height: 480px) {
+@media (max-height: 480px) {
     .container {
         width: 90%; /* Adapte la largeur à l'écran en mode paysage */
         margin: 0 auto; /* Centre le conteneur */
