@@ -76,23 +76,8 @@ p {
 
 /* Responsive Design */
 
-/* Pour les écrans de taille moyenne (tablettes) */
-@media (max-width: 768px) {
-    .container {
-        width: 90%; /* Réduit la largeur pour s'adapter aux écrans plus petits */
-    }
-
-    table img {
-        width: 120px; /* Réduit la taille des images */
-    }
-
-    td {
-        padding: 8px; /* Réduit l'espacement des cellules */
-    }
-}
-
 /* Pour les écrans de petite taille (téléphones) */
-@media (max-width: 480px) {
+@media (max-width: 768px) {
     .container {
         width: 95%; /* Réduit légèrement la largeur du conteneur */
         margin: 0 auto; /* Centre le conteneur */
