@@ -1,9 +1,7 @@
-import os
 import json
-import time
 from flask import Flask, render_template, url_for
 
-def update_image_paths(description, base_path, timestamp):
+def update_image_paths(description, base_path):
     """
     Met à jour les chemins des images dans une description en ajoutant un cache-busting.
     """
@@ -57,9 +55,6 @@ def characters(app: Flask):
 
         if not character_info:
             return "Character not found", 404
-
-        # Générer un timestamp pour le cache-busting
-        timestamp = int(time.time())
 
         # Construire le chemin de l'image principale
         type_folder = f"SLA_Personnages_{character_info['type']}"
