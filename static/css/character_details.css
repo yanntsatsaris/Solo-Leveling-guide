@@ -801,8 +801,8 @@ p {
 
     /* Image des cores */
     .core-image {
-        width: 80px; /* Taille de l'image */
-        height: 80px; /* Conserve une taille fixe */
+        width: 65px; /* Taille de l'image */
+        height: 65px; /* Conserve une taille fixe */
         object-fit: contain; /* Conserve les proportions de l'image */
     }
 
@@ -835,11 +835,10 @@ p {
 
     /* Réduit la taille des images des artefacts */
     .artefact-image {
-        width: 80px; /* Réduit la largeur de l'image */
-        height: 80px; /* Réduit la hauteur de l'image */
-        border-radius: 8px;
+        width: 65px; /* Réduit la largeur de l'image */
+        height: 64px; /* Réduit la hauteur de l'image */
+        border-radius: 4px;
         object-fit: contain;
-        margin-right: 10px; /* Ajoute un espacement à droite */
     }
 
     /* Réduit également les images secondaires des artefacts */
