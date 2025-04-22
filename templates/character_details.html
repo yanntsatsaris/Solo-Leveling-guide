@@ -43,7 +43,20 @@
                             <div class="tab active" data-tab="description">Description</div>
                             <div class="tab" data-tab="passives">Passifs</div>
                             <div class="tab" data-tab="skills">Skills</div>
-                            <div class="tab" data-tab="artefacts">Artefacts</div>
+                            <div class="tab" data-tab="artefacts">
+                                Artefacts
+                                <!-- Menu déroulant pour sélectionner un set -->
+                                {% if character.equipment_sets and character.equipment_sets|length > 0 %}
+                                    <div class="artefact-dropdown">
+                                        <label for="set-select">Set :</label>
+                                        <select id="set-select">
+                                            {% for set in character.equipment_sets %}
+                                                <option value="{{ loop.index0 }}">{{ set.set_name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                {% endif %}
+                            </div>
                         </div>
 
                         <!-- Contenu des onglets -->
@@ -138,18 +151,6 @@
                             {% endif %}
                         </div>
                         <div id="artefacts" class="tab-content">
-                            <!-- Menu déroulant pour sélectionner un set -->
-                            {% if character.equipment_sets and character.equipment_sets|length > 0 %}
-                                <div class="artefact-dropdown">
-                                    <label for="set-select">Choisissez un set :</label>
-                                    <select id="set-select">
-                                        {% for set in character.equipment_sets %}
-                                            <option value="{{ loop.index0 }}">{{ set.set_name }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            {% endif %}
-
                             <!-- Affichage des statistiques à focus -->
                             <div class="focus-stats">
                                 <h3 hidden>Stats à Focus</h3>
