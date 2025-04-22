@@ -165,6 +165,7 @@
         ],
         "passives": [
             {
+                "principal": "True",
                 "description": "+16% DEF.\n<img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD] +8%.\nACTIVATION <img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +10% CRIT HIT & CRIT DMG TEAMFIGHT +24% DMG INC."
             },
             {
@@ -195,9 +196,11 @@
         ],
         "skills": [
             {
+                "principal": "True",
                 "description": "<img src='Light_Thomas_Skill_QTE.png' alt='QTE'> [QTE] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME] <img src='Light_Thomas_Buff_Tyrandacier.png' alt='Tyrandacier'>"
             },
             {
+                "principal": "True",
                 "name": "[TYRAN D'ACIER]",
                 "description": "<img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2] > <img src='Light_Thomas_Buff_Tyrandacier.png' alt='Tyrandacier'> CLINIOTE > <img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME] > <img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME] <img src='Light_Thomas_Buff_Tyrandacier.png' alt='Tyrandacier'>.",
                 "image": "Light_Thomas_Buff_Tyrandacier.png"

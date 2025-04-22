@@ -210,6 +210,15 @@ p {
     margin: 0; /* Supprime les marges inutiles */
 }
 
+/* Style pour les passifs et skills principaux */
+.principal {
+    border: 2px solid #ffcc00; /* Bordure dorée pour les éléments principaux */
+    padding: 10px; /* Ajoute un padding interne */
+    border-radius: 8px; /* Coins arrondis */
+    background-color: rgba(255, 204, 0, 0.1); /* Fond légèrement doré */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour mettre en valeur */
+}
+
 /* Style pour la statistique principale */
 .artefact-item .stat-main {
     display: flex;
