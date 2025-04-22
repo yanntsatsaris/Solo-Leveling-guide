@@ -4,7 +4,7 @@ from routes.RouteGame_contents import game_contents
 from routes.RouteCharacters import characters
 from routes.RouteGuides import guides
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__)
 
 # Enregistrer les routes
 home(app)
