@@ -431,7 +431,7 @@ p {
     align-items: center; /* Centre le contenu horizontalement */
     width: 100%; /* Prend toute la largeur disponible */
     padding: 10px; /* Ajoute un padding interne */
-    border-radius: 8px; /* Arrondit légèrement les coins */
+    border-radius: 8px; /* Coins arrondis */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
 }
 
@@ -562,6 +562,11 @@ p {
 
 /* Texte des évolutions */
 .evolutions li span {
+    height: 1em; /* Définit la hauteur des images à la taille de la police */
+    width: auto; /* Maintient les proportions de l'image */
+    vertical-align: -0.2em; /* Ajuste légèrement la position verticale pour aligner avec le texte */
+    display: inline; /* S'assure que les images restent dans le flux du texte */
+    margin: 0; /* Supprime tout espacement supplémentaire */
     color: #b3b3b3; /* Couleur grise pour le texte */
     font-style: italic; /* Texte en italique */
 }
