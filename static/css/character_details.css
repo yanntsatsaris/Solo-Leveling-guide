@@ -260,7 +260,7 @@ p {
     margin-bottom: 2px; /* Réduit l'espace entre la statistique principale et les secondaires */
 }
 
-.artefact-item-content div {
+.artefact-item-content {
     display: flex;
     align-items: center; /* Centre le contenu verticalement */
 }
