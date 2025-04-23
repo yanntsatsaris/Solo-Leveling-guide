@@ -46,9 +46,10 @@ function showSetEffects(setName, event) {
         }
     });
 
-    // Rendre la bulle visible temporairement pour calculer sa largeur
+    // Rendre la bulle visible temporairement pour calculer ses dimensions
     effectsContainer.style.display = 'block';
     const bubbleWidth = effectsContainer.offsetWidth; // Largeur réelle de la bulle
+    const bubbleHeight = effectsContainer.offsetHeight; // Hauteur réelle de la bulle
     effectsContainer.style.display = 'none';
 
     // Positionner la bulle à gauche de l'image
@@ -60,7 +61,16 @@ function showSetEffects(setName, event) {
         leftPosition = rect.right + 10;
     }
 
-    effectsContainer.style.top = `${rect.top + window.scrollY}px`;
+    // Calculer la position verticale
+    let topPosition = rect.top + window.scrollY;
+
+    // Si la bulle dépasse le bas de la fenêtre, ajuster sa position
+    const viewportHeight = window.innerHeight;
+    if (topPosition + bubbleHeight > viewportHeight + window.scrollY) {
+        topPosition = viewportHeight + window.scrollY - bubbleHeight - 10; // Ajuster pour qu'elle reste visible
+    }
+
+    effectsContainer.style.top = `${topPosition}px`;
     effectsContainer.style.left = `${leftPosition}px`;
 
     // Afficher le conteneur des effets
