@@ -3,9 +3,13 @@
     <div class="focus-stats">
         <h3 hidden>Stats à Focus</h3>
         <ul class="focus-stats-list">
-            {% for stat in character.equipment_sets[0].focus_stats %}
-                <li>{{ stat }}</li>
-            {% endfor %}
+            {% if character.equipment_sets and character.equipment_sets|length > 0 %}
+                {% for stat in character.equipment_sets[0].focus_stats %}
+                    <li>{{ stat }}</li>
+                s{% endfor %}
+            {% else %}
+                <li>Aucune statistique à focus disponible.</li>
+            {% endif %}
         </ul>
     </div>
 
@@ -85,10 +89,6 @@
         <h3></h3>
         <ul id="set-effects-list"></ul>
     </div>
-
-    <script id="activeSetEffectsData" type="application/json">
-        {{ character.active_set_effects|tojson }}
-    </script>
 
     <!-- Section des noyaux -->
     <div class="cores-section">
