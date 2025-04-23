@@ -25,7 +25,7 @@ tabs.forEach(tab => {
 // Gestion des effets de panoplie
 const activeSetEffects = JSON.parse(document.getElementById('activeSetEffectsData').textContent);
 
-function showSetEffects(setName, event) {
+window.showSetEffects = function (setName, event) {
     const effectsContainer = document.getElementById('set-effects');
     const effectsList = document.getElementById('set-effects-list');
     const effectsTitle = effectsContainer.querySelector('h3');
@@ -40,37 +40,22 @@ function showSetEffects(setName, event) {
     activeSetEffects.forEach(effect => {
         if (effect.set_name === setName) {
             const listItem = document.createElement('li');
-            // Remplacer les \n par des <br> pour gérer les sauts de ligne
             listItem.innerHTML = `${effect.pieces_required} pièces : ${effect.effect.replace(/\n/g, '<br>')}`;
             effectsList.appendChild(listItem);
         }
     });
 
-    // Rendre la bulle visible temporairement pour calculer sa largeur
-    effectsContainer.style.display = 'block';
-    const bubbleWidth = effectsContainer.offsetWidth; // Largeur réelle de la bulle
-    effectsContainer.style.display = 'none';
-
-    // Positionner la bulle à gauche de l'image
+    // Positionner et afficher la bulle
     const rect = event.target.getBoundingClientRect();
-    let leftPosition = rect.left - bubbleWidth - 10;
-
-    // Si la bulle dépasse le bord gauche, la positionner à droite
-    if (leftPosition < 0) {
-        leftPosition = rect.right + 10;
-    }
-
     effectsContainer.style.top = `${rect.top + window.scrollY}px`;
-    effectsContainer.style.left = `${leftPosition}px`;
-
-    // Afficher le conteneur des effets
+    effectsContainer.style.left = `${rect.left + window.scrollX + rect.width + 10}px`;
     effectsContainer.style.display = 'block';
-}
+};
 
-function hideSetEffects() {
+window.hideSetEffects = function () {
     const effectsContainer = document.getElementById('set-effects');
     effectsContainer.style.display = 'none';
-}
+};
 
 // Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
 document.addEventListener('DOMContentLoaded', () => {
