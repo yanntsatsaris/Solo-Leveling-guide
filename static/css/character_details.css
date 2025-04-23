@@ -842,8 +842,29 @@ p {
     /* Onglets */
     .tabs {
         display: flex;
-        flex-direction: column; /* Affiche les onglets en colonne */
-        align-items: center; /* Centre les onglets */
+        flex-wrap: wrap; /* Permet de passer à la ligne si nécessaire */
+        justify-content: center; /* Centre les onglets horizontalement */
+        gap: 5px; /* Ajoute un espacement entre les onglets */
+    }
+
+    /* Onglet Artefacts et flèche côte à côte */
+    #artefacts-tab,
+    #dropdown-tab {
+        flex: 1; /* Chaque onglet prend une largeur égale */
+        max-width: 45%; /* Limite la largeur de chaque onglet */
+        text-align: center; /* Centre le texte */
+    }
+
+    /* Ajuste la flèche pour qu'elle reste alignée */
+    #dropdown-tab {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Ajuste la taille de la flèche */
+    #dropdown-tab .dropdown-arrow {
+        font-size: 1.2rem; /* Augmente légèrement la taille de la flèche */
     }
 
     .tabs .tab {
