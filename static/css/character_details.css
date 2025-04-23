@@ -422,7 +422,7 @@ p {
     text-align: center;
     gap: 20px; /* Ajoute un espacement entre l'image et les stats */
     padding: 10px; /* Ajoute un padding interne */
-    border-radius: 8px; /* Arrondit légèrement les coins */
+    border-radius: 8px; /* Coins arrondis */
     background-color: transparent; /* Supprime le fond */
     width: calc(33.33% - 20px); /* Permet d'afficher 3 éléments par ligne avec un espacement */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
@@ -842,16 +842,16 @@ p {
     /* Onglets */
     .tabs {
         display: flex;
-        flex-wrap: wrap; /* Permet de passer à la ligne si nécessaire */
-        justify-content: center; /* Centre les onglets horizontalement */
+        flex-direction: column; /* Les onglets restent empilés par défaut */
         gap: 5px; /* Ajoute un espacement entre les onglets */
     }
 
     /* Onglet Artefacts et flèche côte à côte */
     #artefacts-tab,
     #dropdown-tab {
+        display: inline-flex; /* Affiche ces deux onglets côte à côte */
         flex: 1; /* Chaque onglet prend une largeur égale */
-        max-width: 45%; /* Limite la largeur de chaque onglet */
+        max-width: 50%; /* Limite la largeur de chaque onglet */
         text-align: center; /* Centre le texte */
     }
 
@@ -867,10 +867,10 @@ p {
         font-size: 1.2rem; /* Augmente légèrement la taille de la flèche */
     }
 
-    .tabs .tab {
-        width: auto; /* Chaque onglet prend toute la largeur */
+    /* Les autres onglets restent en colonne */
+    .tabs .tab:not(#artefacts-tab):not(#dropdown-tab) {
+        width: 100%; /* Chaque onglet prend toute la largeur */
         text-align: center; /* Centre le texte */
-        margin-bottom: 5px; /* Ajoute un espacement entre les onglets */
     }
 
     /* Conteneur des cores */
