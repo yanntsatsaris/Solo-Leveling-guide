@@ -90,10 +90,11 @@ def characters(app: Flask):
 
         # Calculer les effets de panoplie activés
         equipped_sets = {}
-        for artefact in character_info.get('artefacts', []):
-            set_name = artefact.get('set')
-            if set_name:
-                equipped_sets[set_name] = equipped_sets.get(set_name, 0) + 1
+        for equipment_set in character_info.get('equipment_sets', []):
+            for artefact in equipment_set.get('artefacts', []):
+                set_name = artefact.get('set')  # Utiliser le champ 'set' des artefacts
+                if set_name:
+                    equipped_sets[set_name] = equipped_sets.get(set_name, 0) + 1
 
         # Ajouter les effets activés pour chaque panoplie
         active_set_effects = []
@@ -108,8 +109,6 @@ def characters(app: Flask):
                             'pieces_required': bonus['pieces_required'],
                             'effect': bonus['effect']
                         })
-
-        print("Effets activés :", active_set_effects)
 
         # Ajouter les effets activés au contexte
         character_info['active_set_effects'] = active_set_effects
