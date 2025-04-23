@@ -81,7 +81,11 @@
     </div>
     
     <script id="equipmentSetsData" type="application/json">
-        {{ character.equipment_sets|tojson }}
+        {% if character.equipment_sets and character.equipment_sets|length > 0 %}
+            {{ character.equipment_sets|tojson }}
+        {% else %}
+            []
+        {% endif %}
     </script>
     <script src="{{ url_for('static', filename='js/character_details.js') }}"></script>
 </body>
