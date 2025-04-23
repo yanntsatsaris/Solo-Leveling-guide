@@ -842,14 +842,14 @@ p {
     /* Onglets */
     .tabs {
         display: flex;
-        flex-direction: column; /* Les onglets restent empilés par défaut */
+        flex-wrap: wrap; /* Permet de passer à la ligne si nécessaire */
         gap: 5px; /* Ajoute un espacement entre les onglets */
     }
 
     /* Onglet Artefacts et flèche côte à côte */
     #artefacts-tab,
     #dropdown-tab {
-        display: inline-flex; /* Affiche ces deux onglets côte à côte */
+        display: flex; /* Affiche ces deux onglets côte à côte */
         flex: 1; /* Chaque onglet prend une largeur égale */
         max-width: 50%; /* Limite la largeur de chaque onglet */
         text-align: center; /* Centre le texte */
@@ -860,11 +860,6 @@ p {
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    /* Ajuste la taille de la flèche */
-    #dropdown-tab .dropdown-arrow {
-        font-size: 1.2rem; /* Augmente légèrement la taille de la flèche */
     }
 
     /* Les autres onglets restent en colonne */
