@@ -4,13 +4,21 @@ const tabContents = document.querySelectorAll('.tab-content');
 
 tabs.forEach(tab => {
     tab.addEventListener('click', () => {
+        // Ignorer le clic sur l'onglet avec la flèche (dropdown-tab)
+        if (tab.id === 'dropdown-tab') {
+            return;
+        }
+
         // Retirer la classe active de tous les onglets
         tabs.forEach(t => t.classList.remove('active'));
         tabContents.forEach(tc => tc.classList.remove('active'));
 
         // Ajouter la classe active à l'onglet cliqué et son contenu
         tab.classList.add('active');
-        document.getElementById(tab.dataset.tab).classList.add('active');
+        const targetTabContent = document.getElementById(tab.dataset.tab);
+        if (targetTabContent) {
+            targetTabContent.classList.add('active');
+        }
     });
 });
 
