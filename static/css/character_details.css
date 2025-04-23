@@ -256,6 +256,13 @@ p {
     color: #ffcc00; /* Garde la couleur du texte par défaut */
 }
 
+/* Désactiver les options */
+.dropdown-options .disabled {
+    color: #888; /* Couleur grisée */
+    pointer-events: none; /* Désactive les interactions */
+    cursor: not-allowed; /* Change le curseur pour indiquer que c'est désactivé */
+}
+
 /* Affichage sur téléphone (écrans étroits) */
 @media (max-width: 767px) {
     /* Désactiver le layout */

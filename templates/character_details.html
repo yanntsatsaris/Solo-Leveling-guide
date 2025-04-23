@@ -54,9 +54,13 @@
                                 <span class="dropdown-arrow" id="dropdown-arrow">▼</span>
                                 <div class="dropdown-options" id="dropdown-options">
                                     <ul>
-                                        {% for set in character.equipment_sets %}
-                                            <li data-set-index="{{ loop.index0 }}">{{ set.set_name }}</li>
-                                        {% endfor %}
+                                        {% if character.equipment_sets and character.equipment_sets|length > 0 %}
+                                            {% for set in character.equipment_sets %}
+                                                <li data-set-index="{{ loop.index0 }}">{{ set.set_name }}</li>
+                                            {% endfor %}
+                                        {% else %}
+                                            <li class="disabled">Aucun set équipé</li>
+                                        {% endif %}
                                     </ul>
                                 </div>
                             </div>
