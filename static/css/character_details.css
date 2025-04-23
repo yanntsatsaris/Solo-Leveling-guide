@@ -718,9 +718,10 @@ p {
 
 /* Style pour la flèche */
 .dropdown-arrow {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #ffcc00;
     margin-left: 5px;
+    cursor: pointer; /* Ajoute un curseur pour indiquer que c'est cliquable */
     transition: transform 0.3s ease;
 }
 
@@ -731,7 +732,7 @@ p {
 
 /* Conteneur des options */
 .dropdown-options {
-    display: none;
+    display: none; /* Masqué par défaut */
     position: absolute;
     background-color: #1e1e1e;
     border: 1px solid #333;

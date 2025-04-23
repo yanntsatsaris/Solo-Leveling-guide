@@ -174,6 +174,17 @@ document.addEventListener('DOMContentLoaded', () => {
         dropdownOptions.classList.toggle('active');
     });
 
+    // Fermer le menu si on clique en dehors
+    document.addEventListener('click', () => {
+        dropdownArrow.classList.remove('active');
+        dropdownOptions.classList.remove('active');
+    });
+
+    // Empêcher la fermeture si on clique à l'intérieur du menu
+    dropdownOptions.addEventListener('click', (event) => {
+        event.stopPropagation();
+    });
+
     // Gérer le clic sur une option
     dropdownOptions.addEventListener('click', (event) => {
         if (event.target.tagName === 'LI') {
