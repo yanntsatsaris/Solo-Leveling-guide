@@ -498,39 +498,6 @@ p {
     margin-bottom: 2px; /* Réduit l'espace entre la statistique principale et les secondaires */
 }
 
-.weapon {
-    display: flex;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.weapon > div {
-    margin-right: 20px; /* Ajoute un espacement à droite */
-}
-
-/* Style pour l'image de l'arme */
-.weapon-image img {
-    width: 300px; /* Augmente la largeur de l'image */
-    height: auto; /* Conserve les proportions */
-    border-radius: 8px; /* Ajoute un léger arrondi aux coins */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour un effet visuel */
-    margin-right: 20px; /* Ajoute un espacement à droite */
-}
-
-/* Images dans les descriptions des skills */
-.weapon-stats img {
-    height: 1em; /* Définit la hauteur des images à la taille de la police */
-    width: auto; /* Maintient les proportions de l'image */
-    vertical-align: -0.2em; /* Ajuste légèrement la position verticale */
-    display: inline; /* S'assure que les images restent dans le flux du texte */
-    margin: 0; /* Supprime tout espacement supplémentaire */
-}
-
-.weapon-stats strong, .weapon-stats p{
-    text-align: justify;
-    margin: 0;
-}
-
 /* Encadré pour les statistiques à focus */
 .focus-stats {
     text-align: center;
@@ -564,92 +531,6 @@ p {
     width: calc(33.33% - 20px); /* Chaque élément prend 1/3 de la largeur moins l'espacement */
     box-sizing: border-box; /* Inclut le padding dans la largeur totale */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
-}
-
-/* Section des évolutions */
-.evolutions {
-    margin-top: 20px; /* Espace au-dessus de la section */
-    padding: 15px; /* Ajoute un padding interne */
-    border-radius: 8px; /* Coins arrondis */
-}
-
-/* Titre des évolutions */
-.evolutions h3 {
-    color: #ffcc00; /* Couleur dorée pour le titre */
-    font-size: 18px; /* Taille du texte */
-    margin-bottom: 15px; /* Espace sous le titre */
-    text-align: center; /* Centre le titre */
-}
-
-/* Liste des évolutions */
-.evolutions ul {
-    list-style-type: none; /* Supprime les puces */
-    padding: 0; /* Supprime le padding interne */
-    margin: 0; /* Supprime les marges */
-}
-
-/* Élément individuel de la liste */
-.evolutions li {
-    display: flex;
-    flex-direction: column; /* Place l'image au-dessus du texte */
-    align-items: left; /* Centre le contenu horizontalement */
-    text-align: left; /* Centre le texte */
-}
-
-.evolutions li img {
-    margin-bottom: 10px; /* Ajoute un espacement entre l'image et le texte */
-    margin-right: 0; /* Supprime l'espacement à droite */
-}
-
-.evolutions li span {
-    text-align: left; /* Centre le texte sous l'image */
-}
-
-/* Dernier élément sans marge */
-.evolutions li:last-child {
-    margin-bottom: 0; /* Supprime l'espace sous le dernier élément */
-}
-
-/* Image des évolutions */
-.evolutions li img {
-    margin-right: 10px; /* Espace entre l'image et le texte */
-    border-radius: 8px; /* Coins arrondis pour les images */
-}
-
-/* Texte des évolutions */
-.evolutions li span {
-    color: #b3b3b3; /* Couleur grise pour le texte */
-    font-style: italic; /* Texte en italique */
-}
-
-/* Images dans les descriptions (dans les balises <span>) */
-.evolutions li span img {
-    height: 1em; /* Définit la hauteur des images à la taille de la police */
-    width: auto; /* Maintient les proportions de l'image */
-    vertical-align: -0.2em; /* Ajuste légèrement la position verticale pour aligner avec le texte */
-    display: inline; /* S'assure que les images restent dans le flux du texte */
-    margin: 0; /* Supprime tout espacement supplémentaire */
-}
-
-/* Identifiant des évolutions */
-.evolutions li strong {
-    color: #ffcc00; /* Couleur dorée pour les identifiants */
-    font-weight: bold; /* Texte en gras */
-    margin-right: 5px; /* Espace entre l'identifiant et le texte */
-}
-
-/* Style général pour les images des évolutions */
-.evolution-image {
-    width: 120px; /* Taille par défaut des images */
-    height: auto;
-    margin-right: 10px; /* Espace entre l'image et le texte */
-    border-radius: 8px; /* Coins arrondis */
-}
-
-/* Style spécifique pour les images des évolutions avec une plage (range) */
-.evolution-range {
-    width: 150px; /* Taille plus grande pour les images avec une plage */
-    height: auto; /* Conserve les proportions */
 }
 
 /* Style pour la flèche */

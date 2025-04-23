@@ -6,8 +6,10 @@
     <title>{{ character.name }} - Solo Leveling Arise</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/characters.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/character_details.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/review.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/passives.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/skills.css') }}">
+
 </head>
 <body 
     class="{% if character.background_image %}background-image{% endif %}"
