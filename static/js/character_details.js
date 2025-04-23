@@ -181,13 +181,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Gérer le clic sur la flèche pour afficher/masquer les options
     dropdownArrow.addEventListener('click', (event) => {
         event.stopPropagation(); // Empêche la propagation du clic
-        dropdownArrow.classList.toggle('active'); // Ajoute ou retire la classe active
-        dropdownTab.classList.toggle('active'); // Ouvre ou ferme le menu déroulant
+        dropdownTab.classList.toggle('active'); // Ajoute ou retire la classe active
     });
 
     // Fermer le menu si on clique en dehors
     document.addEventListener('click', () => {
-        dropdownArrow.classList.remove('active');
         dropdownTab.classList.remove('active');
     });
 

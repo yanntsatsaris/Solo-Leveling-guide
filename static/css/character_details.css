@@ -184,6 +184,25 @@ p {
     cursor: pointer;
 }
 
+#dropdown-arrow {
+    display: inline-block;
+    cursor: pointer;
+}
+
+#dropdown-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 1000;
+}
+
+#dropdown-tab.active #dropdown-options {
+    display: block;
+}
+
 /* Style pour la flèche */
 #dropdown-tab .dropdown-arrow {
     font-size: 1rem;
