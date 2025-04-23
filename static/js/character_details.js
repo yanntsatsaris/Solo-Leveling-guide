@@ -67,6 +67,7 @@ function hideSetEffects() {
 // Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
 document.addEventListener('DOMContentLoaded', () => {
     const artefactsTab = document.getElementById('artefacts-tab');
+    const dropdownTab = document.getElementById('dropdown-tab');
     const dropdownArrow = document.getElementById('dropdown-arrow');
     const dropdownOptions = document.getElementById('dropdown-options');
     const focusStatsList = document.querySelector('.focus-stats-list');
@@ -170,19 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Gérer le clic sur la flèche pour afficher/masquer les options
     dropdownArrow.addEventListener('click', (event) => {
         event.stopPropagation(); // Empêche la propagation du clic
-        dropdownArrow.classList.toggle('active');
-        dropdownOptions.classList.toggle('active');
-    });
-
-    // Fermer le menu si on clique en dehors
-    document.addEventListener('click', () => {
-        dropdownArrow.classList.remove('active');
-        dropdownOptions.classList.remove('active');
-    });
-
-    // Empêcher la fermeture si on clique à l'intérieur du menu
-    dropdownOptions.addEventListener('click', (event) => {
-        event.stopPropagation();
+        dropdownTab.classList.toggle('active');
     });
 
     // Gérer le clic sur une option
@@ -190,8 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.tagName === 'LI') {
             const setIndex = event.target.dataset.setIndex;
             displaySet(setIndex);
-            dropdownArrow.classList.remove('active');
-            dropdownOptions.classList.remove('active');
+            dropdownTab.classList.remove('active');
         }
     });
 
