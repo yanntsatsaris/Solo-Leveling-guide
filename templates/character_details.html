@@ -59,8 +59,8 @@
                         </div>
 
                         <!-- Contenu des onglets -->
-                        {included 'partials/review.html' %}
-                        
+                        {% include 'partials/review.html' %}
+
                         <div id="passives" class="tab-content">
                             <h2>Passifs</h2>
                             {% if character.passives and character.passives|length > 0 %}
