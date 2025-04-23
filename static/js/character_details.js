@@ -180,8 +180,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Gérer le clic sur la flèche pour afficher/masquer les options
     dropdownArrow.addEventListener('click', (event) => {
-        event.stopPropagation(); // Empêche la propagation du clic
-        dropdownTab.classList.toggle('active'); // Ajoute ou retire la classe active
+        event.stopPropagation();
+        console.log('Flèche cliquée');
+        dropdownTab.classList.toggle('active');
     });
 
     // Fermer le menu si on clique en dehors
