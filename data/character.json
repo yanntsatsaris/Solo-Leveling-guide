@@ -134,7 +134,7 @@
             {
                 "name": "[VOLONTE DU FRAGEMENT]",
                 "description": "[TEAM] +30% CRIT DMG & [QTE] +150% DMG INC. (20 SECONDES)",
-                "image": "Light_GGH_Buff_VolonteBrillante.png"
+                "image": "Light_GGH_Buff_VolonteFragement.png"
             },
             {
                 "name": "[LIGHT DMG UP]",
@@ -159,32 +159,32 @@
             },
             {
                 "name": "[CORE] ECRASEMENT ABDOMINAL",
-                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].\nCHARGE <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE]\nCHARGE <img src='Light_GGH_Buff_Aura.png' alt='Aura'> [AURA DE DIRIGEANT]\n<img src='Light_GGH_Weapon_Codex.png' alt='Arme'> [ARME].",
+                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].",
                 "image": "Light_GGH_Skill_Core.png"
             },
             {
-                "name": "[SKILL1] ",
-                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].",
+                "name": "[SKILL1] ESPRIT COMBATIF",
+                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].\nCHARGE <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE]\n<img src='Light_GGH_Buff_Aura.png' alt='Aura'> [AURA DE DIRIGEANT]\n<img src='Light_GGH_Weapon_Codex.png' alt='Arme'> [ARME]\n<img src='Light_GGH_DBuffLightDMGUp.png' alt='LightDmgInc'> [LIGHT DMG UP]",
                 "image": "Light_GGH_Skill1.png"
             },
             {
-                "name": "[SKILL2] ECRASEMENT COLOSSAL",
-                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].",
+                "name": "[SKILL2] POUVOIR LUMIERE BRILLANTE",
+                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].\nCHARGE <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE] & <img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1]\n<img src='Light_GGH_Buff_Fragement.png' alt='Fragement'> [FRAGEMENT LUMIERE BRILLANTE]\n<img src='Light_GGH_Buff_VolonteBrillante.png' alt='VolonteBrillante'> [VOLONTE LUMIERE BRILLANTE]",
                 "image": "Light_GGH_Skill2.png"
             },
             {
-                "name": "[ULTIME] JUGEMENT DU CHEF",
-                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].",
+                "name": "[ULTIME] SUPERNOVA",
+                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [TOUT-PUISSANTS].\n[MOB BREAK] +60% DMG INC\n<img src='Light_GGH_Buff_VolonteFragement.png' alt='VolonteFragement'> [VOLONTE DU FRAGEMENT].",
                 "image": "Light_GGH_Skill_Ultime.png"
             },
             {
-                "name": "[QTE] COUP A LA VOLEE",
-                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].",
+                "name": "[QTE] BALAYAGE",
+                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [MOYENS]\n<img src='Light_GGH_Buff_Aura.png' alt='Aura'> [AURA DE DIRIGEANT].",
                 "image": "Light_GGH_Skill_QTE.png"
             },
             {
-                "name": "[SOUTIEN] RETOUR DU ROI",
-                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].",
+                "name": "[SOUTIEN] DESTRUCTION INSTANTANEE",
+                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS]\n[SJW BUFF] <img src='Light_GGH_Buff_Aura.png' alt='Core'> [AURA LUMIERE BRILLANTE].",
                 "image": "Light_GGH_Skill_Soutien.png"
             }
         ],
