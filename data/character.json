@@ -94,6 +94,59 @@
         "name": "Go Gun Hee",
         "alias": "GGH",
         "folder": "SSR_Light_GoGunHee",
+        "weapon": [
+            {
+                "name": "[ARME] UNE CONVICTION ET UNE VOCATION",
+                "image": "Light_GGH_Weapon.png",
+                "stats": "+12% DEF.\nTOUCHE MOB<img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] <img src='Light_GGH_DBuffLightDMGUp.png' alt='LightDmgInc'> [LIGHT DMG UP]."
+            }
+        ],
+        "passives": [
+            {
+                "principal": "True",
+                "description": "+12% DEF.\n<img src='Light_GGH_Buff_Vaisseaubrise.png' alt='VaisseauBrise'> [VAISSEAU BRISE]."
+            },
+            {
+                "name": "[SHIELD]",
+                "description": "EMPECHE LE KNOCKBACK ET PROTEGE DES DEGATS.",
+                "image": "Light_GGH_BuffShield.png"
+            },
+            {
+                "name": "[VAISSEAU BRISE]",
+                "description": "-50% RECUPERATION HEAL.",
+                "image": "Light_GGH_Buff_Vaisseaubrise.png"
+            },
+            {
+                "name": "[AURA DE DIRIGEANT]",
+                "description": "+50% DEF\n+20%DMG RED.\n <img src='Light_GGH_BuffShield.png' alt='Shield'> [SHIELD] +20% (15 SECONDES).",
+                "image": "Light_GGH_Buff_Aura.png"
+            },
+            {
+                "name": "[FRAGEMENT LUMIERE BRILLANTE]",
+                "description": "CHARGE <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE]\n<img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] +60% DMG INC. (15 SECONDES)",
+                "image": "Light_GGH_Buff_Fragement.png"
+            },
+            {
+                "name": "[VOLONTE LUMIERE BRILLANTE]",
+                "description": "[PAR LIGHT] TEAM +8% LIGHT DMG INC. & +8% CRIT DMG.",
+                "image": "Light_GGH_Buff_VolonteBrillante.png"
+            },
+            {
+                "name": "[VOLONTE DU FRAGEMENT]",
+                "description": "[TEAM] +30% CRIT DMG & [QTE] +150% DMG INC. (20 SECONDES)",
+                "image": "Light_GGH_Buff_VolonteBrillante.png"
+            },
+            {
+                "name": "[LIGHT DMG UP]",
+                "description": "[DBUFF MOB] +12% LIGHT DMG INC. (15 SECONDES)",
+                "image": "Light_GGH_DBuffLightDMGUp.png"
+            },
+            {
+                "name": "[AURA LUMIERE BRILLANTE]",
+                "description": "[SJW BUFF] +10% DEF & <img src='Light_GGH_BuffShield.png' alt='Shield'> [SHIELD] +10% & +10% LIGHT DMG INC. (20 SECONDES)",
+                "image": "Light_GGH_Buff_Aura.png"
+            }
+        ],
         "skills": [
             {
                 "description": "<img src='Light_GGH_Skill_QTE.png' alt='QTE'> [QTE] > <img src='Light_GGH_Skill_Ultime.png' alt='Ultime'> [ULTIME] > <img src='Light_GGH_Skill2.png' alt='Skill2'> [SKILL2] > <img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_GGH_Skill_Base.png' alt='Base'> [BASE ATK] > <img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_GGH_Skill_Base.png' alt='Base'> [BASE ATK] > <img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_GGH_Skill2.png' alt='Skill2'> [SKILL2] > <img src='Light_GGH_Skill_Base.png' alt='Base'> [BASE ATK] > <img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE]"
