@@ -766,6 +766,25 @@ p {
     display: block;
 }
 
+/* Empêcher le changement de couleur pour le tab avec la flèche */
+#dropdown-tab {
+    background-color: #1e1e1e; /* Couleur de fond par défaut */
+    color: #ffcc00; /* Couleur du texte par défaut */
+    cursor: pointer; /* Curseur pour indiquer qu'il est cliquable */
+}
+
+/* Empêcher le changement de couleur lorsqu'il est actif */
+#dropdown-tab.active {
+    background-color: #1e1e1e; /* Garde la couleur de fond par défaut */
+    color: #ffcc00; /* Garde la couleur du texte par défaut */
+}
+
+/* Empêcher le changement de couleur lorsqu'il est survolé */
+#dropdown-tab:hover {
+    background-color: #1e1e1e; /* Garde la couleur de fond par défaut */
+    color: #ffcc00; /* Garde la couleur du texte par défaut */
+}
+
 /* Affichage sur téléphone (écrans étroits) */
 @media (max-width: 767px) {
     /* Désactiver le layout */
