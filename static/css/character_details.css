@@ -785,6 +785,7 @@ p {
 /* Rotation de la flèche lorsqu'elle est active */
 #dropdown-tab .dropdown-arrow.active {
     transform: rotate(180deg);
+    color: #1e1e1e;
 }
 
 /* Conteneur des options */
