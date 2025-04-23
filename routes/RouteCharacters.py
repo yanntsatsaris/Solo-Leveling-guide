@@ -109,6 +109,8 @@ def characters(app: Flask):
                             'effect': bonus['effect']
                         })
 
+        print("Effets activés :", active_set_effects)
+
         # Ajouter les effets activés au contexte
         character_info['active_set_effects'] = active_set_effects
 
