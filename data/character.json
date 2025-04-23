@@ -149,7 +149,277 @@
         ],
         "skills": [
             {
-                "description": "<img src='Light_GGH_Skill_QTE.png' alt='QTE'> [QTE] > <img src='Light_GGH_Skill_Ultime.png' alt='Ultime'> [ULTIME] > <img src='Light_GGH_Skill2.png' alt='Skill2'> [SKILL2] > <img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_GGH_Skill_Base.png' alt='Base'> [BASE ATK] > <img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_GGH_Skill_Base.png' alt='Base'> [BASE ATK] > <img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_GGH_Skill2.png' alt='Skill2'> [SKILL2] > <img src='Light_GGH_Skill_Base.png' alt='Base'> [BASE ATK] > <img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE]"
+                "principal": "True",
+                "description": "<img src='Light_GGH_Skill_QTE.png' alt='QTE'> [QTE] > <img src='Light_GGH_Skill1.png' alt='Ultime'> [SKILL1] > <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_GGH_Skill2.png' alt='Skill2'> [SKILL2] > <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_GGH_Skill_Ultime.png' alt='Ultime'> [ULTIME] > <img src='Light_GGH_Skill_Core.png' alt='Core'> [Core] > [QTE]"
+            },
+            {
+                "name": "[BASE ATK] VOLONTE DU PRESIDENT",
+                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].",
+                "image": "Light_GGH_Skill_Base.png"
+            },
+            {
+                "name": "[CORE] ECRASEMENT ABDOMINAL",
+                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].\nCHARGE <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE]\nCHARGE <img src='Light_GGH_Buff_Aura.png' alt='Aura'> [AURA DE DIRIGEANT]\n<img src='Light_GGH_Weapon_Codex.png' alt='Arme'> [ARME].",
+                "image": "Light_GGH_Skill_Core.png"
+            },
+            {
+                "name": "[SKILL1] ",
+                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].",
+                "image": "Light_GGH_Skill1.png"
+            },
+            {
+                "name": "[SKILL2] ECRASEMENT COLOSSAL",
+                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].",
+                "image": "Light_GGH_Skill2.png"
+            },
+            {
+                "name": "[ULTIME] JUGEMENT DU CHEF",
+                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].",
+                "image": "Light_GGH_Skill_Ultime.png"
+            },
+            {
+                "name": "[QTE] COUP A LA VOLEE",
+                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].",
+                "image": "Light_GGH_Skill_QTE.png"
+            },
+            {
+                "name": "[SOUTIEN] RETOUR DU ROI",
+                "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].",
+                "image": "Light_GGH_Skill_Soutien.png"
+            }
+        ],
+        "equipment_sets": [ 
+            {
+                "set_name": "GLOBAL",
+                "focus_stats": [
+            "DEF",
+            "CRIT HIT",
+            "CRIT DMG",
+            "DMG INC",
+            "DEF PEN",
+            "MP CONS"
+                ],
+                "artefacts": [
+            {
+                "name": "Casque",
+                "number": "01",
+                "set": "Avarice Ardente",
+                "image": "Avarice_Ardente/Avarice_Ardente01.webp",
+                "main_stat": {
+                    "name": "DEF"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "DEF% +3/4"
+                    },
+                    {
+                        "name": "DEF PEN"
+                    },
+                    {
+                        "name": "DMG INC"
+                    },
+                    {
+                        "name": "CRIT HIT"
+                    }
+                ]
+            },
+            {
+                "name": "Plastron",
+                "number": "02",
+                "set": "Avarice Ardente",
+                "image": "Avarice_Ardente/Avarice_Ardente02.webp",
+                "main_stat": {
+                    "name": "DEF"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "DEF% +3/4"
+                    },
+                    {
+                        "name": "DEF PEN"
+                    },
+                    {
+                        "name": "DMG INC"
+                    },
+                    {
+                        "name": "CRIT HIT"
+                    }
+                ]
+            },
+            {
+                "name": "Gants",
+                "number": "03",
+                "set": "Avarice Ardente",
+                "image": "Avarice_Ardente/Avarice_Ardente03.webp",
+                "main_stat": {
+                    "name": "ATK"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "DEF%"
+                    },
+                    {
+                        "name": "MP CONS"
+                    },
+                    {
+                        "name": "CRIT HIT"
+                    }
+                ]
+            },
+            {
+                "name": "Bottes",
+                "number": "04",
+                "set": "Avarice Ardente",
+                "image": "Avarice_Ardente/Avarice_Ardente04.webp",
+                "main_stat": {
+                    "name": "CRIT DMG"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "DEF%"
+                    },
+                    {
+                        "name": "MP CONS"
+                    },
+                    {
+                        "name": "CRIT HIT"
+                    }
+                ]
+            },
+            {
+                "name": "Collier",
+                "number": "05",
+                "set": "Avarice Ardente",
+                "image": "Avarice_Ardente/Avarice_Ardente05.webp",
+                "main_stat": {
+                    "name": "HP"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "DEF%"
+                    },
+                    {
+                        "name": "CRIT DMG"
+                    },
+                    {
+                        "name": "DEF PEN"
+                    }
+                ]
+            },
+            {
+                "name": "Bracelet",
+                "number": "06",
+                "set": "Avarice Ardente",
+                "image": "Avarice_Ardente/Avarice_Ardente06.webp",
+                "main_stat": {
+                    "name": "ELEM DMG"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "DEF%"
+                    },
+                    {
+                        "name": "CRIT DMG"
+                    },
+                    {
+                        "name": "MP CONS"
+                    }
+                ]
+            },
+            {
+                "name": "Bague",
+                "number": "07",
+                "set": "Avarice Ardente",
+                "image": "Avarice_Ardente/Avarice_Ardente07.webp",
+                "main_stat": {
+                    "name": "DEF"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "DEF% +3/4"
+                    },
+                    {
+                        "name": "CRIT DMG"
+                    },
+                    {
+                        "name": "DEF PEN"
+                    },
+                    {
+                        "name": "DMG INC"
+                    }
+                ]
+            },
+            {
+                "name": "Boucle d'oreille",
+                "number": "08",
+                "set": "Avarice Ardente",
+                "image": "Avarice_Ardente/Avarice_Ardente08.webp",
+                "main_stat": {
+                    "name": "MP MAX"
+                },
+                "secondary_stats": [
+                    {
+                        "name": "DEF"
+                    },
+                    {
+                        "name": "DEF%"
+                    },
+                    {
+                        "name": "CRIT DMG"
+                    },
+                    {
+                        "name": "MP CONS"
+                    }
+                ]
+            }
+                ],
+                "cores": [
+            {
+                "name": "Noyau Violet 01",
+                "number": "01",
+                "image": "Violet01.webp",
+                "main_stat": {
+                    "name": "ATK"
+                },
+                "secondary_stat": {
+                    "name": "CRIT DMG"
+                }
+            },
+            {
+                "name": "Noyau Rouge 02",
+                "number": "02",
+                "image": "Rouge02.webp",
+                "main_stat": {
+                    "name": "DEF"
+                },
+                "secondary_stat": {
+                    "name": "DMG INC"
+                }
+            },
+            {
+                "name": "Noyau Violet 03",
+                "number": "03",
+                "image": "Violet03.webp",
+                "main_stat": {
+                    "name": "HP"
+                },
+                "secondary_stat": {
+                    "name": "DEF PEN"
+                }
+            }
+                ]
             }
         ]
     },
