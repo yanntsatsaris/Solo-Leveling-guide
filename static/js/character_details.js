@@ -81,6 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const focusStatsList = document.querySelector('.focus-stats-list');
     const artefactsContainer = document.querySelector('.artefacts-container');
     const coresContainer = document.querySelector('.cores-container');
+    const tabs = document.querySelectorAll('.tab');
+    const tabContents = document.querySelectorAll('.tab-content');
 
     // Récupérer les données des sets d'équipement depuis le script JSON
     const equipmentSets = JSON.parse(document.getElementById('equipmentSetsData').textContent);
@@ -186,7 +188,17 @@ document.addEventListener('DOMContentLoaded', () => {
     dropdownOptions.addEventListener('click', (event) => {
         if (event.target.tagName === 'LI') {
             const setIndex = event.target.dataset.setIndex;
+
+            // Afficher le set sélectionné
             displaySet(setIndex);
+
+            // Activer l'onglet Artefacts
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(tc => tc.classList.remove('active'));
+            artefactsTab.classList.add('active');
+            document.getElementById('artefacts').classList.add('active');
+
+            // Fermer le menu déroulant
             dropdownTab.classList.remove('active');
         }
     });
