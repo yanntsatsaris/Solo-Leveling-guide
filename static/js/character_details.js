@@ -66,7 +66,9 @@ function hideSetEffects() {
 
 // Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
 document.addEventListener('DOMContentLoaded', () => {
-    const setOptions = document.getElementById('set-options');
+    const artefactsTab = document.getElementById('artefacts-tab');
+    const dropdownArrow = document.getElementById('dropdown-arrow');
+    const dropdownOptions = document.getElementById('dropdown-options');
     const focusStatsList = document.querySelector('.focus-stats-list');
     const artefactsContainer = document.querySelector('.artefacts-container');
     const coresContainer = document.querySelector('.cores-container');
@@ -165,12 +167,26 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    // Gérer le clic sur un set dans la liste
-    setOptions.addEventListener('click', (event) => {
+    // Gérer le clic sur la flèche pour afficher/masquer les options
+    dropdownArrow.addEventListener('click', (event) => {
+        event.stopPropagation(); // Empêche la propagation du clic
+        dropdownArrow.classList.toggle('active');
+        dropdownOptions.classList.toggle('active');
+    });
+
+    // Gérer le clic sur une option
+    dropdownOptions.addEventListener('click', (event) => {
         if (event.target.tagName === 'LI') {
             const setIndex = event.target.dataset.setIndex;
             displaySet(setIndex);
+            dropdownArrow.classList.remove('active');
+            dropdownOptions.classList.remove('active');
         }
+    });
+
+    // Gérer le clic sur l'onglet Artefacts (affiche le premier set par défaut)
+    artefactsTab.addEventListener('click', () => {
+        displaySet(0);
     });
 
     // Afficher le premier set par défaut au chargement

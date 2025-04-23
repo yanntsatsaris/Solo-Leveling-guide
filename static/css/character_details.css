@@ -708,6 +708,65 @@ p {
     height: auto; /* Conserve les proportions */
 }
 
+/* Style pour le conteneur dropdown */
+.dropdown {
+    display: inline-block;
+    position: relative;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+/* Style pour la flèche */
+.dropdown-arrow {
+    font-size: 0.9rem;
+    color: #ffcc00;
+    margin-left: 5px;
+    transition: transform 0.3s ease;
+}
+
+/* Rotation de la flèche lorsqu'elle est active */
+.dropdown-arrow.active {
+    transform: rotate(180deg);
+}
+
+/* Conteneur des options */
+.dropdown-options {
+    display: none;
+    position: absolute;
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 10px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    font-size: 0.9rem;
+    min-width: 150px;
+}
+
+/* Liste des options */
+.dropdown-options ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.dropdown-options li {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-options li:hover {
+    background-color: #333;
+    color: #ffcc00;
+}
+
+/* Afficher les options lorsque le dropdown est actif */
+.dropdown.active .dropdown-options {
+    display: block;
+}
+
 /* Affichage sur téléphone (écrans étroits) */
 @media (max-width: 767px) {
     /* Désactiver le layout */

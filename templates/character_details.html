@@ -45,14 +45,17 @@
                             <div class="tab" data-tab="skills">Skills</div>
                             <div class="tab" data-tab="artefacts" id="artefacts-tab">
                                 Artefacts
-                                <!-- Liste des sets affichée au survol -->
+                                <!-- Menu déroulant personnalisé -->
                                 {% if character.equipment_sets and character.equipment_sets|length > 0 %}
-                                    <div class="set-options" id="set-options">
-                                        <ul>
-                                            {% for set in character.equipment_sets %}
-                                                <li data-set-index="{{ loop.index0 }}">{{ set.set_name }}</li>
-                                            {% endfor %}
-                                        </ul>
+                                    <div class="dropdown">
+                                        <span class="dropdown-arrow" id="dropdown-arrow">▼</span>
+                                        <div class="dropdown-options" id="dropdown-options">
+                                            <ul>
+                                                {% for set in character.equipment_sets %}
+                                                    <li data-set-index="{{ loop.index0 }}">{{ set.set_name }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
                                     </div>
                                 {% endif %}
                             </div>
