@@ -211,7 +211,7 @@ p {
     color: #ffcc00; /* Texte doré */
     border: 1px solid #ffcc00; /* Bordure dorée */
     border-radius: 8px; /* Coins arrondis */
-    padding: 10px 15px; /* Espacement interne */
+    padding: 1px 5px; /* Espacement interne */
     font-size: 16px; /* Taille du texte */
     font-family: Arial, sans-serif; /* Police */
     cursor: pointer; /* Curseur cliquable */
