@@ -24,27 +24,40 @@
   <h3>Évolutions</h3>
   <div class="evolutions">
     <ul>
-      {% for evolution in character.evolutions %}
+      {% for evolution in character.evolutions %} {% if evolution.range %}
+      <!-- Afficher les évolutions groupées (A06-A10) -->
       <li>
-        <!-- Afficher l'image de l'évolution -->
+        <img
+          src="{{ url_for('static', filename='images/Advancement/' + evolution.id + '.webp') }}"
+          alt="{{ evolution.id }}"
+          class="evolution-image evolution-range"
+        />
+        <span>{{ evolution.description|safe }}</span>
+        <!-- Afficher la description de l'évolution de l'arme correspondante -->
+        {% if character.weapon and character.weapon|length > 0 %} {% for weapon
+        in character.weapon %} {% for weapon_evolution in weapon.evolutions %}
+        {% if(weapon_evolution.range and weapon_evolution.range ==
+        evolution.range)%}
+        <span>{{ weapon_evolution.description|safe }}</span>
+        {% endif %} {% endfor %} {% endfor %} {% endif %}
+      </li>
+      {% else %}
+      <!-- Afficher les évolutions individuelles (A01 à A05) -->
+      <li>
         <img
           src="{{ url_for('static', filename='images/Advancement/' + evolution.id + '.webp') }}"
           alt="{{ evolution.id }}"
           class="evolution-image"
         />
-        <!-- Afficher la description de l'évolution du personnage -->
         <span>{{ evolution.description|safe }}</span>
-
         <!-- Afficher la description de l'évolution de l'arme correspondante -->
         {% if character.weapon and character.weapon|length > 0 %} {% for weapon
         in character.weapon %} {% for weapon_evolution in weapon.evolutions %}
-        {% if weapon_evolution.number == evolution.number or
-        (weapon_evolution.range and weapon_evolution.range == evolution.range)
-        %}
+        {% if weapon_evolution.number == evolution.number or%}
         <span>{{ weapon_evolution.description|safe }}</span>
         {% endif %} {% endfor %} {% endfor %} {% endif %}
       </li>
-      {% endfor %}
+      {% endif %} {% endfor %}
     </ul>
   </div>
   {% else %}
