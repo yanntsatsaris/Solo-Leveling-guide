@@ -178,14 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (equipmentSelect.options.length === 0 || equipmentSelect.options[0].disabled) {
         // Masquer le <select> s'il n'y a pas d'options valides
         equipmentSelect.style.display = 'none';
-
-        // Optionnel : Afficher un message alternatif
-        const noSetsMessage = document.createElement('p');
-        noSetsMessage.textContent = 'Aucun set disponible pour ce personnage.';
-        noSetsMessage.style.color = '#ffcc00'; // Texte doré
-        noSetsMessage.style.textAlign = 'center'; // Centrer le texte
-        noSetsMessage.style.marginTop = '10px'; // Espacement supérieur
-        equipmentSelect.parentNode.insertBefore(noSetsMessage, equipmentSelect);
     }
 
     // Gestion du clic sur le <select>
