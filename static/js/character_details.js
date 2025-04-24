@@ -40,7 +40,6 @@ function showSetEffects(setName, event) {
     activeSetEffects.forEach(effect => {
         if (effect.set_name === setName) {
             const listItem = document.createElement('li');
-            // Remplacer les \n par des <br> pour gérer les sauts de ligne
             listItem.innerHTML = `${effect.pieces_required} pièces : ${effect.effect.replace(/\n/g, '<br>')}`;
             effectsList.appendChild(listItem);
         }
@@ -48,32 +47,24 @@ function showSetEffects(setName, event) {
 
     // Rendre la bulle visible temporairement pour calculer ses dimensions
     effectsContainer.style.display = 'block';
-    const bubbleWidth = effectsContainer.offsetWidth; // Largeur réelle de la bulle
-    const bubbleHeight = effectsContainer.offsetHeight; // Hauteur réelle de la bulle
+    const bubbleWidth = effectsContainer.offsetWidth;
+    const bubbleHeight = effectsContainer.offsetHeight;
     effectsContainer.style.display = 'none';
 
-    // Positionner la bulle à gauche de l'image
+    // Positionner la bulle
     const rect = event.target.getBoundingClientRect();
     let leftPosition = rect.left - bubbleWidth - 10;
-
-    // Si la bulle dépasse le bord gauche, la positionner à droite
     if (leftPosition < 0) {
         leftPosition = rect.right + 10;
     }
-
-    // Calculer la position verticale
     let topPosition = rect.top + window.scrollY;
-
-    // Si la bulle dépasse le bas de la fenêtre, ajuster sa position
     const viewportHeight = window.innerHeight;
     if (topPosition + bubbleHeight > viewportHeight + window.scrollY) {
-        topPosition = viewportHeight + window.scrollY - bubbleHeight - 10; // Ajuster pour qu'elle reste visible
+        topPosition = viewportHeight + window.scrollY - bubbleHeight - 10;
     }
 
     effectsContainer.style.top = `${topPosition}px`;
     effectsContainer.style.left = `${leftPosition}px`;
-
-    // Afficher le conteneur des effets
     effectsContainer.style.display = 'block';
 }
 
@@ -84,20 +75,11 @@ function hideSetEffects() {
 
 // Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
 document.addEventListener('DOMContentLoaded', () => {
-    const artefactsTab = document.getElementById('artefacts-tab');
-    const dropdownTab = document.getElementById('dropdown-tab');
-    const dropdownArrow = document.getElementById('dropdown-arrow');
-    const dropdownOptions = document.getElementById('dropdown-options');
     const focusStatsList = document.querySelector('.focus-stats-list');
     const artefactsContainer = document.querySelector('.artefacts-container');
     const coresContainer = document.querySelector('.cores-container');
-    const tabs = document.querySelectorAll('.tab');
-    const tabContents = document.querySelectorAll('.tab-content');
-
-    // Récupérer les données des sets d'équipement depuis le script JSON
     const equipmentSets = JSON.parse(document.getElementById('equipmentSetsData').textContent);
 
-    // Fonction pour afficher un set spécifique
     function displaySet(setIndex) {
         const selectedSet = equipmentSets[setIndex];
 
@@ -188,40 +170,21 @@ document.addEventListener('DOMContentLoaded', () => {
         `).join('');
     }
 
-    // Gérer le clic sur la flèche pour afficher/masquer les options
-    dropdownArrow.addEventListener('click', (event) => {
-        event.stopPropagation();
-        console.log('Flèche cliquée');
-        dropdownTab.classList.toggle('active');
-    });
+    // Gestion du changement de sélection dans le <select>
+    const equipmentSelect = document.getElementById('equipment-select');
 
-    // Fermer le menu si on clique en dehors
-    document.addEventListener('click', () => {
-        dropdownTab.classList.remove('active');
-    });
+    equipmentSelect.addEventListener('change', (event) => {
+        const setIndex = event.target.value;
 
-    // Gérer le clic sur une option
-    dropdownOptions.addEventListener('click', (event) => {
-        if (event.target.tagName === 'LI') {
-            const setIndex = event.target.dataset.setIndex;
+        // Afficher le set sélectionné
+        displaySet(setIndex);
 
-            // Afficher le set sélectionné
-            displaySet(setIndex);
-
-            // Activer l'onglet Artefacts
-            tabs.forEach(t => t.classList.remove('active'));
-            tabContents.forEach(tc => tc.classList.remove('active'));
-            artefactsTab.classList.add('active');
-            document.getElementById('artefacts').classList.add('active');
-
-            // Fermer le menu déroulant
-            dropdownTab.classList.remove('active');
-        }
-    });
-
-    // Gérer le clic sur l'onglet Artefacts (affiche le premier set par défaut)
-    artefactsTab.addEventListener('click', () => {
-        displaySet(0);
+        // Activer l'onglet Artefacts
+        tabs.forEach(t => t.classList.remove('active'));
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        const artefactsTab = document.getElementById('artefacts-tab');
+        artefactsTab.classList.add('active');
+        document.getElementById('artefacts').classList.add('active');
     });
 
     // Afficher le premier set par défaut au chargement
@@ -229,25 +192,3 @@ document.addEventListener('DOMContentLoaded', () => {
         displaySet(equipmentSelect.options[0].value);
     }
 });
-
-// Gestion du changement de sélection dans le <select>
-const equipmentSelect = document.getElementById('equipment-select');
-
-equipmentSelect.addEventListener('change', (event) => {
-    const setIndex = event.target.value;
-
-    // Afficher le set sélectionné
-    displaySet(setIndex);
-
-    // Activer l'onglet Artefacts
-    tabs.forEach(t => t.classList.remove('active'));
-    tabContents.forEach(tc => tc.classList.remove('active'));
-    const artefactsTab = document.getElementById('artefacts-tab');
-    artefactsTab.classList.add('active');
-    document.getElementById('artefacts').classList.add('active');
-});
-
-// Afficher le premier set par défaut au chargement
-if (equipmentSelect.options.length > 0) {
-    displaySet(equipmentSelect.options[0].value);
-}
