@@ -229,3 +229,25 @@ document.addEventListener('DOMContentLoaded', () => {
         displaySet(equipmentSelect.options[0].value);
     }
 });
+
+// Gestion du changement de sélection dans le <select>
+const equipmentSelect = document.getElementById('equipment-select');
+
+equipmentSelect.addEventListener('change', (event) => {
+    const setIndex = event.target.value;
+
+    // Afficher le set sélectionné
+    displaySet(setIndex);
+
+    // Activer l'onglet Artefacts
+    tabs.forEach(t => t.classList.remove('active'));
+    tabContents.forEach(tc => tc.classList.remove('active'));
+    const artefactsTab = document.getElementById('artefacts-tab');
+    artefactsTab.classList.add('active');
+    document.getElementById('artefacts').classList.add('active');
+});
+
+// Afficher le premier set par défaut au chargement
+if (equipmentSelect.options.length > 0) {
+    displaySet(equipmentSelect.options[0].value);
+}
