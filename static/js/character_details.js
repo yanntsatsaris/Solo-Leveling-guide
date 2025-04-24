@@ -176,8 +176,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Vérifier si le <select> contient des options valides
     if (equipmentSelect.options.length === 0 || equipmentSelect.options[0].disabled) {
-        // Masquer le <select> s'il n'y a pas d'options valides
-        equipmentSelect.style.display = 'none';
+        // Ajouter la classe 'hidden' pour masquer complètement le <select>
+        equipmentSelect.classList.add('hidden');
     }
 
     // Gestion du clic sur le <select>

@@ -18,6 +18,12 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.hidden {
+    display: none; /* Masque complètement l'élément */
+    pointer-events: none; /* Désactive les interactions avec la souris */
+    visibility: hidden; /* Rend l'élément invisible */
+}
+
 /* Mise en page principale */
 .layout {
     display: flex;
