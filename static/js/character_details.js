@@ -225,5 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Afficher le premier set par défaut au chargement
-    displaySet(0);
+    if (equipmentSelect.options.length > 0) {
+        displaySet(equipmentSelect.options[0].value);
+    }
 });

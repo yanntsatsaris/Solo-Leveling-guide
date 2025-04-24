@@ -51,18 +51,16 @@
                                 Artefacts
                             </div>
                             <div class="tab" id="dropdown-tab">
-                                <span class="dropdown-arrow" id="dropdown-arrow">▼</span>
-                                <div class="dropdown-options" id="dropdown-options">
-                                    <ul>
-                                        {% if character.equipment_sets and character.equipment_sets|length > 0 %}
-                                            {% for set in character.equipment_sets %}
-                                                <li data-set-index="{{ loop.index0 }}">{{ set.set_name }}</li>
-                                            {% endfor %}
-                                        {% else %}
-                                            <li class="disabled">Aucun set équipé</li>
-                                        {% endif %}
-                                    </ul>
-                                </div>
+                                <label for="equipment-select">Choisir un set :</label>
+                                <select id="equipment-select">
+                                    {% if character.equipment_sets and character.equipment_sets|length > 0 %}
+                                        {% for set in character.equipment_sets %}
+                                            <option value="{{ loop.index0 }}">{{ set.set_name }}</option>
+                                        {% endfor %}
+                                    {% else %}
+                                        <option disabled>Aucun set équipé</option>
+                                    {% endif %}
+                                </select>
                             </div>
                         </div>
 

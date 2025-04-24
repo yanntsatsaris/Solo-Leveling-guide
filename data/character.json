@@ -262,10 +262,10 @@
                         "name": "DEF%"
                     },
                     {
-                        "name": "MP CONS"
+                        "name": "CRIT HIT"
                     },
                     {
-                        "name": "CRIT HIT"
+                        "name": "MP CONS"
                     }
                 ]
             },
@@ -285,10 +285,10 @@
                         "name": "DEF%"
                     },
                     {
-                        "name": "MP CONS"
+                        "name": "CRIT HIT"
                     },
                     {
-                        "name": "CRIT HIT"
+                        "name": "MP CONS"
                     }
                 ]
             },
