@@ -172,12 +172,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Gestion du changement de sélection dans le <select>
     const equipmentSelect = document.getElementById('equipment-select');
+    const dropdownTab = document.getElementById('dropdown-tab'); // Conteneur parent du <select>
     let currentSetIndex = null; // Variable pour suivre le set actuellement affiché
 
     // Vérifier si le <select> contient des options valides
     if (equipmentSelect.options.length === 0 || equipmentSelect.options[0].disabled) {
-        // Ajouter la classe 'hidden' pour masquer complètement le <select>
-        equipmentSelect.classList.add('hidden');
+        // Ajouter la classe 'hidden' pour masquer complètement le conteneur du <select>
+        dropdownTab.classList.add('hidden');
     }
 
     // Gestion du clic sur le <select>
