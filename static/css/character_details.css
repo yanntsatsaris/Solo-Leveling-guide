@@ -178,79 +178,6 @@ p {
     margin: 0;
 }
 
-/* Style pour la flèche */
-#dropdown-tab {
-    position: relative;
-    cursor: pointer;
-}
-
-#dropdown-arrow {
-    display: inline-block;
-    cursor: pointer;
-}
-
-#dropdown-options {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    z-index: 1000;
-}
-
-#dropdown-tab.active #dropdown-options {
-    display: block;
-}
-
-/* Style pour la flèche */
-#dropdown-tab .dropdown-arrow {
-    font-size: 1rem;
-    color: #ffcc00;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-/* Rotation de la flèche lorsqu'elle est active */
-#dropdown-tab .dropdown-arrow.active {
-    transform: rotate(180deg); /* Pivote la flèche de 180 degrés */
-    color: #ffcc00; /* Optionnel : change la couleur pour indiquer l'état actif */
-    transition: transform 0.3s ease; /* Ajoute une transition fluide */
-}
-
-/* Conteneur des options */
-#dropdown-tab .dropdown-options {
-    display: none; /* Masqué par défaut */
-    position: absolute;
-    background-color: #1e1e1e;
-    border: 1px solid #333;
-    border-radius: 8px;
-    padding: 10px;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    color: #ffffff;
-    font-size: 0.9rem;
-    min-width: 150px;
-}
-
-/* Liste des options */
-#dropdown-tab .dropdown-options ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-#dropdown-tab .dropdown-options li {
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-#dropdown-tab .dropdown-options li:hover {
-    background-color: #333;
-    color: #ffcc00;
-}
-
 /* Afficher les options lorsque le dropdown est actif */
 #dropdown-tab.active .dropdown-options {
     display: block;
@@ -275,11 +202,50 @@ p {
     color: #ffcc00; /* Garde la couleur du texte par défaut */
 }
 
-/* Désactiver les options */
-.dropdown-options .disabled {
-    color: #888; /* Couleur grisée */
-    pointer-events: none; /* Désactive les interactions */
-    cursor: not-allowed; /* Change le curseur pour indiquer que c'est désactivé */
+/* Style pour le conteneur du <select> */
+#equipment-select {
+    appearance: none; /* Supprime le style par défaut du navigateur */
+    -webkit-appearance: none; /* Compatibilité avec Safari */
+    -moz-appearance: none; /* Compatibilité avec Firefox */
+    background-color: #1e1e1e; /* Fond sombre */
+    color: #ffcc00; /* Texte doré */
+    border: 1px solid #ffcc00; /* Bordure dorée */
+    border-radius: 8px; /* Coins arrondis */
+    padding: 10px 15px; /* Espacement interne */
+    font-size: 16px; /* Taille du texte */
+    font-family: Arial, sans-serif; /* Police */
+    cursor: pointer; /* Curseur cliquable */
+    width: 100%; /* Prend toute la largeur disponible */
+    max-width: 300px; /* Largeur maximale */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transition pour les interactions */
+}
+
+/* Style pour le <select> lorsqu'il est survolé */
+#equipment-select:hover {
+    background-color: #ffcc00; /* Fond doré */
+    color: #121212; /* Texte sombre */
+}
+
+/* Style pour le <select> lorsqu'il est actif (cliqué) */
+#equipment-select:focus {
+    outline: none; /* Supprime le contour par défaut */
+    border-color: #8000ff; /* Bordure violette */
+    box-shadow: 0 0 10px #8000ff; /* Glow violet */
+}
+
+/* Style pour les options */
+#equipment-select option {
+    background-color: #1e1e1e; /* Fond sombre */
+    color: #ffffff; /* Texte blanc */
+    padding: 10px; /* Espacement interne */
+}
+
+/* Style pour les options désactivées */
+#equipment-select option:disabled {
+    color: #888; /* Texte grisé */
+    background-color: #1e1e1e; /* Fond sombre */
+    cursor: not-allowed; /* Curseur désactivé */
 }
 
 /* Affichage sur téléphone (écrans étroits) */
