@@ -172,9 +172,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Gestion du changement de sélection dans le <select>
     const equipmentSelect = document.getElementById('equipment-select');
+    let currentSetIndex = null; // Variable pour suivre le set actuellement affiché
 
     equipmentSelect.addEventListener('change', (event) => {
         const setIndex = event.target.value;
+
+        // Si le set sélectionné est déjà affiché, activer l'onglet Artefacts
+        if (setIndex === currentSetIndex) {
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(tc => tc.classList.remove('active'));
+            const artefactsTab = document.getElementById('artefacts-tab');
+            artefactsTab.classList.add('active');
+            document.getElementById('artefacts').classList.add('active');
+            return;
+        }
+
+        // Mettre à jour le set sélectionné
+        currentSetIndex = setIndex;
 
         // Afficher le set sélectionné
         displaySet(setIndex);
@@ -189,6 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Afficher le premier set par défaut au chargement
     if (equipmentSelect.options.length > 0) {
-        displaySet(equipmentSelect.options[0].value);
+        currentSetIndex = equipmentSelect.options[0].value; // Initialiser avec le premier set
+        displaySet(currentSetIndex);
     }
 });
