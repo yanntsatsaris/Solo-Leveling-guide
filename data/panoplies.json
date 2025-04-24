@@ -1,51 +1,51 @@
 {
-    "panoplies": [
+  "panoplies": [
+    {
+      "name": "Malédiction Ardente",
+      "set_bonus": [
         {
-            "name": "Malédiction Ardente",
-            "set_bonus": [
-                {
-                    "pieces_required": 2,
-                    "effect": "Applique l’effet [Malédiction].\n– Augmente les dégâts subis de 20%.\n– Augmente les dégâts infligés de 10% et augmente les dégâts infligés de 0.1% toutes les 1 secondes (cumulable jusqu’à 100 fois).\n– Durée : permanent"
-                },
-                {
-                    "pieces_required": 4,
-                    "effect": "L’effet [Malédiction] devient [Malédiction améliorée].\n– Augmente les dégâts subis de 20%.\n– Augmente les dégâts infligés de 20% et augmente les dégâts infligés de 0.1% toutes les 1 secondes (cumulable jusqu’à 100 fois).\n– Rend impossible l’activation de l’effet [Malédiction].\n– Durée : permanent\nApplique l’effet [Sauvetage].\n– Si les PV de l’utilisateur sont à 25% ou en dessous, il récupère 25%.\n– Ne s’active qu’une fois par donjon."
-                },
-                {
-                    "pieces_required": 8,
-                    "effect": "L’effet [Malédiction améliorée] devient [Malédiction ardente].\n– Augmente les dégâts subis par l’utilisateur de 20%.\n– Augmente les dégâts infligés de 30% et augmente les dégâts infligés de 0.2% toutes les 1 secondes (cumulable jusqu’à 100 fois).\n– Rend impossible l’activation de l’effet [Malédiction] et [Malédiction améliorée].\n– Durée : permanent"
-                }
-            ]
+          "pieces_required": 2,
+          "effect": "Applique l’effet [Malédiction].\n– Augmente les dégâts subis de 20%.\n– Augmente les dégâts infligés de 10% et augmente les dégâts infligés de 0.1% toutes les 1 secondes (cumulable jusqu’à 100 fois).\n– Durée : permanent"
         },
         {
-            "name": "Avarice Ardente",
-            "set_bonus": [
-                {
-                    "pieces_required": 2,
-                    "effect": "Lorsque l’utilisateur touche une cible avec une attaque infligeant des dégâts de [Bris], l’effet [Avarice] s’applique.\n– Augmente le taux de coup critique de l’utilisateur de 1% (cumulable jusqu’à 10 fois).\n– Temps de rechargement : 1.5 secondes\n– Durée : permanent"
-                },
-                {
-                    "pieces_required": 4,
-                    "effect": "Lorsque l’effet [Avarice] se cumule 10 fois, il devient [Avarice améliorée].\nDétails :\n[Avarice améliorée] – Augmente le taux de coup critique de l’utilisateur de 10% et de ses alliés, et leurs dégâts de coup critique de 15%.\n– L’effet [Avarice] ne peut pas être activé si l’effet [Avarice améliorée] est actif.\nDurée : permanent"
-                },
-                {
-                    "pieces_required": 8,
-                    "effect": "Augmente l’effet de [Bris] de 30% en attaquant des ennemis dotés d’une faiblesse élémentaires. L’effet [Avarice améliorée] devient [Avarice ardente].\nDétails :\n[Avarice ardente] – Augmente le taux de coup critique de l’utilisateur et de ses alliés de 15%, et leurs dégâts de coup critique de 30%.\n– L’effet [Avarice] est indisponible une fois que l’effet [Avarice ardente] a été activé.\n– L’effet [Avarice améliorée] devient indisponible.\nDurée : permanent"
-                }
-            ]
+          "pieces_required": 4,
+          "effect": "L’effet [Malédiction] devient [Malédiction améliorée].\n– Augmente les dégâts subis de 20%.\n– Augmente les dégâts infligés de 20% et augmente les dégâts infligés de 0.1% toutes les 1 secondes (cumulable jusqu’à 100 fois).\n– Rend impossible l’activation de l’effet [Malédiction].\n– Durée : permanent\nApplique l’effet [Sauvetage].\n– Si les PV de l’utilisateur sont à 25% ou en dessous, il récupère 25%.\n– Ne s’active qu’une fois par donjon."
         },
         {
-            "name": "Obsidian",
-            "set_bonus": [
-                {
-                    "pieces_required": 2,
-                    "effect": "Lorsque les PM de l’utilisateur sont à 70% ou au-dessus, les dégâts infligés augmentent de 30%."
-                },
-                {
-                    "pieces_required": 4,
-                    "effect": "L’effet d’augmentation des dégâts infligés s’élève à 60% et il se déclenche dès que les PM de l’utilisateur sont à 40% ou au-dessus."
-                }
-            ]
+          "pieces_required": 8,
+          "effect": "L’effet [Malédiction améliorée] devient [Malédiction ardente].\n– Augmente les dégâts subis par l’utilisateur de 20%.\n– Augmente les dégâts infligés de 30% et augmente les dégâts infligés de 0.2% toutes les 1 secondes (cumulable jusqu’à 100 fois).\n– Rend impossible l’activation de l’effet [Malédiction] et [Malédiction améliorée].\n– Durée : permanent"
         }
-    ]
+      ]
+    },
+    {
+      "name": "Avarice Ardente",
+      "set_bonus": [
+        {
+          "pieces_required": 2,
+          "effect": "Lorsque l’utilisateur touche une cible avec une attaque infligeant des dégâts de [Bris], l’effet [Avarice] s’applique.\n– Augmente le taux de coup critique de l’utilisateur de 1% (cumulable jusqu’à 10 fois).\n– Temps de rechargement : 1.5 secondes\n– Durée : permanent"
+        },
+        {
+          "pieces_required": 4,
+          "effect": "Lorsque l’effet [Avarice] se cumule 10 fois, il devient [Avarice améliorée].\nDétails :\n[Avarice améliorée] – Augmente le taux de coup critique de l’utilisateur de 10% et de ses alliés, et leurs dégâts de coup critique de 15%.\n– L’effet [Avarice] ne peut pas être activé si l’effet [Avarice améliorée] est actif.\nDurée : permanent"
+        },
+        {
+          "pieces_required": 8,
+          "effect": "Augmente l’effet de [Bris] de 30% en attaquant des ennemis dotés d’une faiblesse élémentaires. L’effet [Avarice améliorée] devient [Avarice ardente].\nDétails :\n[Avarice ardente] – Augmente le taux de coup critique de l’utilisateur et de ses alliés de 15%, et leurs dégâts de coup critique de 30%.\n– L’effet [Avarice] est indisponible une fois que l’effet [Avarice ardente] a été activé.\n– L’effet [Avarice améliorée] devient indisponible.\nDurée : permanent"
+        }
+      ]
+    },
+    {
+      "name": "Obsidian",
+      "set_bonus": [
+        {
+          "pieces_required": 2,
+          "effect": "Lorsque les PM de l’utilisateur sont à 70% ou au-dessus, les dégâts infligés augmentent de 30%."
+        },
+        {
+          "pieces_required": 4,
+          "effect": "L’effet d’augmentation des dégâts infligés s’élève à 60% et il se déclenche dès que les PM de l’utilisateur sont à 40% ou au-dessus."
+        }
+      ]
+    }
+  ]
 }

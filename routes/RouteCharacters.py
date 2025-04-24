@@ -87,6 +87,10 @@ def characters(app: Flask):
                 weapon['image'] = f'images/Personnages/{type_folder}/{character_folder}/{weapon["image"]}'
             if 'stats' in weapon:
                 weapon['stats'] = update_image_paths(weapon['stats'], f'images/Personnages/{type_folder}/{character_folder}')
+            # Mettre à jour les évolutions des armes
+            for evolution in weapon.get('evolutions', []):
+                if 'description' in evolution:
+                    evolution['description'] = update_image_paths(evolution['description'], f'images/Personnages/{type_folder}/{character_folder}')
 
         # Calculer les effets de panoplie activés
         equipped_sets = {}
