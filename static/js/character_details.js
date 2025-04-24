@@ -174,8 +174,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const equipmentSelect = document.getElementById('equipment-select');
     let currentSetIndex = null; // Variable pour suivre le set actuellement affiché
 
-    equipmentSelect.addEventListener('change', (event) => {
-        const setIndex = event.target.value;
+    // Gestion du clic sur le <select>
+    equipmentSelect.addEventListener('click', () => {
+        const setIndex = equipmentSelect.value;
 
         // Si le set sélectionné est déjà affiché, activer l'onglet Artefacts
         if (setIndex === currentSetIndex) {
@@ -184,8 +185,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const artefactsTab = document.getElementById('artefacts-tab');
             artefactsTab.classList.add('active');
             document.getElementById('artefacts').classList.add('active');
-            return;
         }
+    });
+
+    // Gestion du changement de sélection
+    equipmentSelect.addEventListener('change', (event) => {
+        const setIndex = event.target.value;
 
         // Mettre à jour le set sélectionné
         currentSetIndex = setIndex;
