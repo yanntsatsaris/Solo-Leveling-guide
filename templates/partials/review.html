@@ -37,7 +37,7 @@
         {% if character.weapon and character.weapon|length > 0 %} {% for weapon
         in character.weapon %} {% for weapon_evolution in weapon.evolutions %}
         {% if(weapon_evolution.range and weapon_evolution.range ==
-        evolution.range)%}
+        evolution.range) %}
         <span>{{ weapon_evolution.description|safe }}</span>
         {% endif %} {% endfor %} {% endfor %} {% endif %}
       </li>
@@ -53,7 +53,7 @@
         <!-- Afficher la description de l'évolution de l'arme correspondante -->
         {% if character.weapon and character.weapon|length > 0 %} {% for weapon
         in character.weapon %} {% for weapon_evolution in weapon.evolutions %}
-        {% if weapon_evolution.number == evolution.number or%}
+        {% if weapon_evolution.number == evolution.number %}
         <span>{{ weapon_evolution.description|safe }}</span>
         {% endif %} {% endfor %} {% endfor %} {% endif %}
       </li>
