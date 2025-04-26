@@ -46,6 +46,19 @@
           "effect": "L’effet d’augmentation des dégâts infligés s’élève à 60% et il se déclenche dès que les PM de l’utilisateur sont à 40% ou au-dessus."
         }
       ]
+    },
+    {
+      "name": "Iron Will",
+      "set_bonus": [
+        {
+          "pieces_required": 2,
+          "effect": "Increases the user's Defense by 8%."
+        },
+        {
+          "pieces_required": 4,
+          "effect": "When the user's users their Ultimate Skill, it increase their Defense by 5% (stacking up to 5 times).\n・Duration: Permanent\nIncreases Ultimate Skill damage by 50% 1 time only (Cooldown: 20 second(s))"
+        }
+      ]
     }
   ]
 }
