@@ -42,9 +42,10 @@ function showSetEffects(setName, event) {
   activeSetEffects.forEach((effect) => {
     if (effect.set_name === setName) {
       const listItem = document.createElement("li");
-      listItem.innerHTML = `${
-        effect.pieces_required
-      } pièces : ${effect.effect.replace(/\n/g, "<br>")}`;
+      listItem.innerHTML = `
+        <span style="color: #ffcc00; font-weight: bold;">${effect.pieces_required} pièces :</span>
+        <span style="display: block; margin-top: 5px;">${effect.effect.replace(/\n/g, "<br>")}</span>
+      `;
       effectsList.appendChild(listItem);
     }
   });
