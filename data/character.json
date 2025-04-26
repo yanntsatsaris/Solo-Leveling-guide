@@ -605,7 +605,7 @@
     ],
     "equipment_sets": [
       {
-        "set_name": "GLOBAL",
+        "set_name": "Mid Game",
         "focus_stats": [
           "DEF",
           "CRIT HIT",
@@ -837,9 +837,9 @@
         ]
       },
       {
-        "set_name": "SPEEDRUN",
+        "set_name": "End Game",
         "focus_stats": [
-          "ATK",
+          "DEF",
           "CRIT HIT",
           "CRIT DMG",
           "DEF PEN",
@@ -850,8 +850,8 @@
           {
             "name": "Casque",
             "number": "01",
-            "set": "Malédiction Ardente",
-            "image": "Malediction_Ardente/Malediction_Ardente01.webp",
+            "set": "Iron Will",
+            "image": "Iron_Will/Iron_Will01.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -873,8 +873,8 @@
           {
             "name": "Plastron",
             "number": "02",
-            "set": "Malédiction Ardente",
-            "image": "Malediction_Ardente/Malediction_Ardente02.webp",
+            "set": "Iron Will",
+            "image": "Iron_Will/Iron_Will02.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -896,8 +896,8 @@
           {
             "name": "Gants",
             "number": "03",
-            "set": "Malédiction Ardente",
-            "image": "Malediction_Ardente/Malediction_Ardente03.webp",
+            "set": "Iron Will",
+            "image": "Iron_Will/Iron_Will03.webp",
             "main_stat": {
               "name": "ATK"
             },
@@ -919,8 +919,8 @@
           {
             "name": "Bottes",
             "number": "04",
-            "set": "Malédiction Ardente",
-            "image": "Malediction_Ardente/Malediction_Ardente04.webp",
+            "set": "Iron Will",
+            "image": "Iron_Will/Iron_Will04.webp",
             "main_stat": {
               "name": "CRIT DMG"
             },
