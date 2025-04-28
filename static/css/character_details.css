@@ -242,19 +242,6 @@ p {
   box-shadow: none; /* Supprime l'effet de glow */
 }
 
-/* Style spécifique pour le <select> sur mobile */
-@media (max-width: 767px) {
-  #equipment-select {
-    width: 100%; /* Prend toute la largeur disponible */
-    background-color: #1e1e1e; /* Fond sombre */
-    color: #ffcc00; /* Texte doré */
-    border: 1px solid #ffcc00; /* Bordure dorée */
-    border-radius: 8px; /* Coins arrondis */
-    padding: 1px 5px; /* Espacement interne */
-    font-size: 16px; /* Taille du texte */
-  }
-}
-
 /* Affichage sur téléphone (écrans étroits) */
 @media (max-width: 767px) {
   /* Désactiver le layout */
@@ -361,6 +348,16 @@ p {
   .tabs .tab:not(#artefacts-tab):not(#dropdown-tab) {
     width: 100%; /* Chaque onglet prend toute la largeur */
     text-align: center; /* Centre le texte */
+  }
+
+  #equipment-select {
+    width: 100%; /* Prend toute la largeur disponible */
+    background-color: #1e1e1e; /* Fond sombre */
+    color: #ffcc00; /* Texte doré */
+    border: 1px solid #ffcc00; /* Bordure dorée */
+    border-radius: 8px; /* Coins arrondis */
+    padding: 1px 5px; /* Espacement interne */
+    font-size: 16px; /* Taille du texte */
   }
 }
 

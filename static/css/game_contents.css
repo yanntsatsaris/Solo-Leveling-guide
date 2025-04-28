@@ -1,0 +1,15 @@
+p {
+  color: #ffcc00;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.menu-image {
+  display: block; /* Affiche l'image comme un bloc */
+  margin: 20px auto; /* Centre l'image horizontalement et ajoute un espacement vertical */
+  max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
+  height: auto; /* Conserve les proportions de l'image */
+  border-radius: 8px; /* Ajoute des coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
+}

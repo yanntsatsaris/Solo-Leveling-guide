@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Solo Leveling Arise : Game Contents</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
     {% include 'navbar.html' %}
     <div class="container">
-        <h1>Game Contents</h1>
-        <p style="color: #ffcc00; font-weight: bold; text-align: center; margin-top: 20px;">
-            Explore the various game contents available in Solo Leveling Arise.
-        </p>
+      <h1>Game Contents</h1>
+      <p>Explore the various game contents available in Solo Leveling Arise.</p>
+      <img
+        src="{{ url_for('static', filename='images/Menus/MenuDuJeux2.webp') }}"
+        alt="Menu du Jeu"
+        class="menu-image"
+      />
     </div>
-</body>
+  </body>
 </html>
