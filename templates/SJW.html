@@ -26,6 +26,14 @@
     />
     <link
       rel="stylesheet"
+      href="{{ url_for('static', filename='css/partials/shadows.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/partials/monarchs.css') }}"
+    />
+    <link
+      rel="stylesheet"
       href="{{ url_for('static', filename='css/partials/artefacts.css') }}"
     />
 </head>
@@ -72,6 +80,8 @@
                 <div class="tab active" data-tab="description">Description</div>
                 <div class="tab" data-tab="passives">Passifs</div>
                 <div class="tab" data-tab="skills">Skills</div>
+                <div class="tab" data-tab="shadows">Shadows</div>
+                <div class="tab" data-tab="monarchs">Monarchs</div>
                 <div class="tab" data-tab="artefacts" id="artefacts-tab">
                   Artefacts
                 </div>
@@ -93,6 +103,7 @@
               <!-- Contenu des onglets -->
               {% include 'partials/review.html' %} {% include
               'partials/passives.html' %} {% include 'partials/skills.html' %}
+              {% include 'partials/shadows.html' %} {% include 'partials/monarchs.html' %}
               {% include 'partials/artefacts.html' %}
             </div>
           </div>

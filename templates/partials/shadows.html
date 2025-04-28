@@ -1,0 +1,20 @@
+<div id="shadows" class="tab-content">
+    <h2>Shadows</h2>
+    {% if character.shadows and character.shadows|length > 0 %}
+        {% for shadow in character.shadows %}
+            <div class="shadow {% if passive.principal == 'True' %}principal{% endif %}">
+                {% if shadow.image %}
+                    <img src="{{ url_for('static', filename=shadow.image) }}" alt="{{ shadow.name or 'Passive Image' }}">
+                {% endif %}
+                <div>
+                    {% if shadow.name %}
+                        <strong>{{ passive.name }}</strong><br>
+                    {% endif %}
+                    <p>{{ shadow.description|safe }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Informations sur les monarch du personnage.</p>
+    {% endif %}
+</div>

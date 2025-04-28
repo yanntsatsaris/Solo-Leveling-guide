@@ -1,0 +1,27 @@
+/* Images dans les descriptions des passifs */
+.shadow {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.shadow img {
+    height: 1em; /* Définit la hauteur des images à la taille de la police */
+    width: auto; /* Maintient les proportions de l'image */
+    vertical-align: -0.2em; /* Ajuste légèrement la position verticale */
+    display: inline; /* S'assure que les images restent dans le flux du texte */
+    margin: 0; /* Supprime tout espacement supplémentaire */
+}
+
+/* Images à côté du nom des passifs */
+.shadow > img {
+    height: 50px; /* Définit la hauteur des images à la taille de la police */
+    width: 50px; /* Maintient les proportions de l'image */
+    margin-right: 10px; /* Ajoute un espacement entre l'image et le texte */
+}
+
+/* Texte des descriptions des passifs */
+.shadow p {
+    text-align: justify; /* Justifie le texte */
+    margin: 0; /* Supprime les marges inutiles */
+}
