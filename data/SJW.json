@@ -7,39 +7,39 @@
         "shadows": [
             {
                 "name": "Beru",
-                "image": "Shadows_Beru.png"
+                "image": "Shadow_Beru.png"
             },
             {
                 "name": "Bigrock",
-                "image": "Shadows_Bigrock.png"
+                "image": "Shadow_Bigrock.png"
             },
             {
                 "name": "Cerbie",
-                "image": "Shadows_Cerbie.png"
+                "image": "Shadow_Cerbie.png"
             },
             {
                 "name": "Croc",
-                "image": "Shadows_Croc.png"
+                "image": "Shadow_Croc.png"
             },
             {
                 "name": "Igrit",
-                "image": "Shadows_Igrit.png"
+                "image": "Shadow_Igrit.png"
             },
             {
                 "name": "Iron",
-                "image": "Shadows_Iron.png"
+                "image": "Shadow_Iron.png"
             },
             {
                 "name": "Kaisel",
-                "image": "Shadows_Kaisel.png"
+                "image": "Shadow_Kaisel.png"
             },
             {
                 "name": "Lames",
-                "image": "Shadows_Lames.png"
+                "image": "Shadow_Lames.png"
             },
             {
                 "name": "Tank",
-                "image": "Shadows_Tank.png"
+                "image": "Shadow_Tank.png"
             }
         ]
     }
