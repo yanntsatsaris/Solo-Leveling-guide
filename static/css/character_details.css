@@ -246,12 +246,11 @@ p {
 @media (max-width: 767px) {
   #equipment-select {
     width: 100%; /* Prend toute la largeur disponible */
-    margin: 10px 0; /* Ajoute un espacement vertical */
     background-color: #1e1e1e; /* Fond sombre */
     color: #ffcc00; /* Texte doré */
     border: 1px solid #ffcc00; /* Bordure dorée */
     border-radius: 8px; /* Coins arrondis */
-    padding: 10px; /* Espacement interne */
+    padding: 1px 5px; /* Espacement interne */
     font-size: 16px; /* Taille du texte */
   }
 }
