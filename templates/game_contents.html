@@ -14,11 +14,22 @@
     <div class="container">
       <h1>Game Contents</h1>
       <p>Explore the various game contents available in Solo Leveling Arise.</p>
-      <img
-        src="{{ url_for('static', filename='images/Menus/MenuDuJeu2.webp') }}"
-        alt="Menu du Jeu"
-        class="menu-image"
-      />
+      <div class="image-container">
+        <img
+          src="{{ url_for('static', filename='images/Menus/MenuDuJeu2.webp') }}"
+          alt="Menu du Jeu"
+          class="menu-image"
+        />
+        <!-- Zone 1 -->
+        <div class="hotspot hotspot-1">
+          <span class="tooltip">Description for Element 1</span>
+        </div>
+        <!-- Zone 2 -->
+        <div class="hotspot hotspot-2">
+          <span class="tooltip">Description for Element 2</span>
+        </div>
+        <!-- Add more hotspots as needed -->
+      </div>
     </div>
   </body>
 </html>

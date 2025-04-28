@@ -45,3 +45,53 @@ p {
   width: fit-content; /* Adapte la largeur du conteneur à son contenu (l'image) */
   max-width: 770px; /* Empêche le conteneur de dépasser la largeur de l'écran */
 }
+
+.image-container {
+  position: relative; /* Permet de positionner les hotspots par rapport à l'image */
+  display: inline-block; /* Adapte la taille du conteneur à l'image */
+}
+
+.hotspot {
+  position: absolute; /* Positionne les zones par rapport au conteneur */
+  background-color: rgba(255, 204, 0, 0.3); /* Couleur semi-transparente pour visualiser la zone */
+  border: 1px solid #ffcc00; /* Bordure pour mieux visualiser */
+  cursor: pointer; /* Change le curseur pour indiquer une interaction */
+}
+
+.hotspot:hover {
+  background-color: rgba(255, 204, 0, 0.5); /* Change la couleur au survol */
+}
+
+.tooltip {
+  display: none; /* Cache la description par défaut */
+  position: absolute;
+  top: 100%; /* Positionne la description sous la zone */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1e1e1e;
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  white-space: nowrap; /* Empêche le texte de passer à la ligne */
+  z-index: 10;
+}
+
+.hotspot:hover .tooltip {
+  display: block; /* Affiche la description au survol */
+}
+
+/* Positionnement des hotspots */
+.hotspot-1 {
+  top: 10%; /* Position verticale */
+  left: 20%; /* Position horizontale */
+  width: 15%; /* Largeur de la zone */
+  height: 10%; /* Hauteur de la zone */
+}
+
+.hotspot-2 {
+  top: 40%; /* Position verticale */
+  left: 50%; /* Position horizontale */
+  width: 20%; /* Largeur de la zone */
+  height: 15%; /* Hauteur de la zone */
+}
