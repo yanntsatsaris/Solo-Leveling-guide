@@ -13,3 +13,13 @@ p {
   border-radius: 8px; /* Ajoute des coins arrondis */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
 }
+
+.container {
+  display: inline-block; /* Adapte la taille du conteneur à son contenu */
+  text-align: center; /* Centre le contenu textuellement */
+  margin: 0 auto; /* Centre le conteneur horizontalement */
+  padding: 0; /* Supprime les marges internes */
+  border: 1px solid #ffcc00; /* Optionnel : Ajoute une bordure pour mieux visualiser */
+  border-radius: 8px; /* Coins arrondis pour correspondre à l'image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
+}
