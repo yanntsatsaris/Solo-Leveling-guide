@@ -19,7 +19,9 @@ p {
   text-align: center; /* Centre le contenu textuellement */
   margin: 0 auto; /* Centre le conteneur horizontalement */
   padding: 0; /* Supprime les marges internes */
+  max-width: 100%; /* Limite la largeur maximale du conteneur */
   border: 1px solid #ffcc00; /* Optionnel : Ajoute une bordure pour mieux visualiser */
   border-radius: 8px; /* Coins arrondis pour correspondre à l'image */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
+  overflow: hidden; /* Empêche le contenu de dépasser du conteneur */
 }
