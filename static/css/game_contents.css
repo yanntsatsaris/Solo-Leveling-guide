@@ -7,7 +7,7 @@ p {
 
 .menu-image {
   display: block; /* Affiche l'image comme un bloc */
-  margin: 20px auto; /* Centre l'image horizontalement et ajoute un espacement vertical */
+  margin: 0 auto; /* Centre l'image horizontalement */
   max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
   height: auto; /* Conserve les proportions de l'image */
   border-radius: 8px; /* Ajoute des coins arrondis */
@@ -15,13 +15,15 @@ p {
 }
 
 .container {
-  display: inline-block; /* Adapte la taille du conteneur à son contenu */
-  text-align: center; /* Centre le contenu textuellement */
+  display: flex; /* Utilise Flexbox pour s'adapter au contenu */
+  flex-direction: column; /* Aligne les éléments verticalement */
+  align-items: center; /* Centre les éléments horizontalement */
+  justify-content: center; /* Centre les éléments verticalement */
   margin: 0 auto; /* Centre le conteneur horizontalement */
   padding: 0; /* Supprime les marges internes */
-  max-width: 100%; /* Limite la largeur maximale du conteneur */
-  border: 1px solid #ffcc00; /* Optionnel : Ajoute une bordure pour mieux visualiser */
-  border-radius: 8px; /* Coins arrondis pour correspondre à l'image */
+  max-width: fit-content; /* Adapte la largeur du conteneur à son contenu */
+  border: 1px solid #ffcc00; /* Ajoute une bordure dorée */
+  border-radius: 8px; /* Coins arrondis */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
   overflow: hidden; /* Empêche le contenu de dépasser du conteneur */
 }
