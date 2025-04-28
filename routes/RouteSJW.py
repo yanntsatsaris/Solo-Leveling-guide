@@ -26,7 +26,7 @@ def SJW(app: Flask):
     @app.route('/SJW')
     def inner_SJW():
         # Trouver les informations du personnage correspondant
-        character_info = characters_data['alias']
+        character_info = next((char for char in characters_data if char['alias'] == alias), None)
 
         if not character_info:
             return "Character not found", 404
