@@ -1,20 +1,27 @@
 <div id="shadows" class="tab-content">
     <h2>Shadows</h2>
     {% if character.shadows and character.shadows|length > 0 %}
-        {% for shadow in character.shadows %}
-            <div class="shadow {% if shadow.principal == 'True' %}principal{% endif %}">
-                {% if shadow.image %}
-                    <img src="{{ url_for('static', filename=shadow.image) }}" alt="{{ shadow.name or 'Passive Image' }}">
-                {% endif %}
-                <div>
-                    {% if shadow.name %}
-                        <strong>{{ shadow.name }}</strong><br>
+        <table id="shadows-table" style="width: 100%; text-align: center; margin-top: 20px;">
+            <tr>
+                {% for shadow in character.shadows %}
+                    <td>
+                        <div class="shadow-card" style="margin: 10px; text-align: center;">
+                            {% if shadow.image %}
+                                <img src="{{ url_for('static', filename=shadow.image) }}" alt="{{ shadow.name or 'Shadow Image' }}" style="width: 150px; height: auto; border-radius: 8px;">
+                            {% endif %}
+                            <p style="margin-top: 10px; font-weight: bold; color: #ffffff;">{{ shadow.name }}</p>
+                            <p style="color: #cccccc;">{{ shadow.description|safe }}</p>
+                        </div>
+                    </td>
+                    {% if loop.index % 5 == 0 %} <!-- Change 5 to the number of columns you want per row -->
+            </tr><tr>
                     {% endif %}
-                    <p>{{ shadow.description|safe }}</p>
-                </div>
-            </div>
-        {% endfor %}
+                {% endfor %}
+            </tr>
+        </table>
     {% else %}
-        <p>Informations sur les monarch du personnage.</p>
+        <p style="text-align: center; color: #ffcc00; font-weight: bold;">
+            No shadows available for this character.
+        </p>
     {% endif %}
 </div>
