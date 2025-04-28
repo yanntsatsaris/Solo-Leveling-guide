@@ -15,8 +15,8 @@
 
 /* Images à côté du nom des passifs */
 .shadow > img {
-    height: 50px; /* Définit la hauteur des images à la taille de la police */
-    width: 50px; /* Maintient les proportions de l'image */
+    height: 150px; /* Définit la hauteur des images à la taille de la police */
+    width: auto; /* Maintient les proportions de l'image */
     margin-right: 10px; /* Ajoute un espacement entre l'image et le texte */
 }
 
