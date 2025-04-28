@@ -12,32 +12,30 @@ body {
   background-color: #121212;
   color: #ffffff;
   font-family: Arial, sans-serif;
-  display: flex; /* Active Flexbox pour centrer le contenu */
-  justify-content: center; /* Centre horizontalement */
-  align-items: center; /* Centre verticalement */
 }
 
 p {
-    color: #ffcc00;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .menu-image {
-    display: block; /* Affiche l'image comme un bloc */
-    margin: 0 auto; /* Centre l'image horizontalement */
-    max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
-    height: auto; /* Conserve les proportions de l'image */
-    border-radius: 8px; /* Ajoute des coins arrondis */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
-  }
+  color: #ffcc00;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.menu-image {
+  display: block; /* Affiche l'image comme un bloc */
+  margin: 0 auto; /* Centre l'image horizontalement */
+  max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
+  height: auto; /* Conserve les proportions de l'image */
+  border-radius: 8px; /* Ajoute des coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
+}
 
 .container {
   display: flex; /* Active Flexbox pour le conteneur */
   flex-direction: column; /* Aligne les éléments verticalement */
   justify-content: center; /* Centre verticalement */
   align-items: center; /* Centre horizontalement */
+  margin: 0 auto; /* Centre le conteneur horizontalement */
   padding: 10px; /* Ajoute un espacement interne */
   border: 1px solid #ffcc00; /* Ajoute une bordure dorée */
   border-radius: 8px; /* Coins arrondis */
@@ -46,4 +44,8 @@ p {
   box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur totale */
   width: fit-content; /* Adapte la largeur du conteneur à son contenu (l'image) */
   max-width: 770px; /* Empêche le conteneur de dépasser la largeur de l'écran */
+  position: absolute; /* Permet de positionner le conteneur indépendamment */
+  top: 50%; /* Place le conteneur au milieu verticalement */
+  left: 50%; /* Place le conteneur au milieu horizontalement */
+  transform: translate(-50%, -50%); /* Centre parfaitement le conteneur */
 }
