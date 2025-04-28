@@ -4,9 +4,6 @@ body {
   padding: 0; /* Supprime les paddings par défaut */
   overflow-x: hidden; /* Empêche le défilement horizontal */
   height: 100%; /* S'assure que le body et le html occupent toute la hauteur */
-  display: flex; /* Active Flexbox */
-  justify-content: center; /* Centre horizontalement */
-  align-items: center; /* Centre verticalement */
 }
 
 body {
@@ -35,8 +32,10 @@ p {
 }
 
 .container {
-  display: inline-block; /* Adapte la largeur du conteneur à son contenu */
-  text-align: center; /* Centre le contenu textuellement */
+  display: flex; /* Active Flexbox pour le conteneur */
+  flex-direction: column; /* Aligne les éléments verticalement */
+  justify-content: center; /* Centre verticalement */
+  align-items: center; /* Centre horizontalement */
   margin: 0 auto; /* Centre le conteneur horizontalement */
   padding: 10px; /* Ajoute un espacement interne */
   border: 1px solid #ffcc00; /* Ajoute une bordure dorée */
@@ -46,4 +45,8 @@ p {
   box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur totale */
   width: fit-content; /* Adapte la largeur du conteneur à son contenu (l'image) */
   max-width: 770px; /* Empêche le conteneur de dépasser la largeur de l'écran */
+  position: absolute; /* Permet de positionner le conteneur indépendamment */
+  top: 50%; /* Place le conteneur au milieu verticalement */
+  left: 50%; /* Place le conteneur au milieu horizontalement */
+  transform: translate(-50%, -50%); /* Centre parfaitement le conteneur */
 }
