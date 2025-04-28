@@ -1,16 +1,16 @@
 <div id="shadows" class="tab-content">
     <h2>Shadows</h2>
     {% if character.shadows and character.shadows|length > 0 %}
-        <table id="shadows-table" style="width: 100%; text-align: center; margin-top: 20px;">
+        <table id="shadows-table">
             <tr>
                 {% for shadow in character.shadows %}
                     <td>
-                        <div class="shadow-card" style="margin: 10px; text-align: center;">
+                        <div class="shadow-card">
                             {% if shadow.image %}
-                                <img src="{{ url_for('static', filename=shadow.image) }}" alt="{{ shadow.name or 'Shadow Image' }}" style="width: 150px; height: auto; border-radius: 8px;">
+                                <img src="{{ url_for('static', filename=shadow.image) }}" alt="{{ shadow.name or 'Shadow Image' }}">
                             {% endif %}
-                            <p style="margin-top: 10px; font-weight: bold; color: #ffffff;">{{ shadow.name }}</p>
-                            <p style="color: #cccccc;">{{ shadow.description|safe }}</p>
+                            <p class="shadow-name" hidden>{{ shadow.name }}</p>
+                            <p class="shadow-description">{{ shadow.description|safe }}</p>
                         </div>
                     </td>
                     {% if loop.index % 5 == 0 %} <!-- Change 5 to the number of columns you want per row -->
@@ -20,7 +20,7 @@
             </tr>
         </table>
     {% else %}
-        <p style="text-align: center; color: #ffcc00; font-weight: bold;">
+        <p class="no-shadows">
             No shadows available for this character.
         </p>
     {% endif %}
