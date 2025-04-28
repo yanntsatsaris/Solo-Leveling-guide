@@ -47,5 +47,4 @@ p {
   position: absolute; /* Permet de positionner le conteneur indépendamment */
   top: 50%; /* Place le conteneur au milieu verticalement */
   left: 50%; /* Place le conteneur au milieu horizontalement */
-  transform: translate(-50%, -50%); /* Centre parfaitement le conteneur */
 }
