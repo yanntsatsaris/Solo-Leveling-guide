@@ -38,6 +38,7 @@ p {
   margin: 0 auto; /* Centre le conteneur horizontalement */
   padding: 10px; /* Ajoute un espacement interne */
   border: 1px solid #ffcc00; /* Ajoute une bordure dorée */
+  background-color: #1e1e1e;
   border-radius: 8px; /* Coins arrondis */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
   overflow: hidden; /* Empêche le contenu de dépasser du conteneur */
