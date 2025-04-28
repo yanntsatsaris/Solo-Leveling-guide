@@ -25,10 +25,7 @@
       href="{{ url_for('static', filename='css/partials/artefacts.css') }}"
     />
   </head>
-  <body
-    class="{% if character.background_image %}background-image{% endif %}"
-    style="{% if character.background_image %}background-image: url('{{ url_for('static', filename=character.background_image) }}');{% endif %}"
-  >
+  <body>
     {% include 'navbar.html' %}
 
     <h1>{{ name }}</h1>
