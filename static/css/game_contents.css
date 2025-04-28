@@ -85,8 +85,8 @@ p {
 .hotspot-1 {
   top: 10%; /* Position verticale */
   left: 20%; /* Position horizontale */
-  width: 15%; /* Largeur de la zone */
-  height: 10%; /* Hauteur de la zone */
+  width: 20%; /* Augmente la largeur de la zone */
+  height: 5%; /* Réduit la hauteur de la zone */
 }
 
 .hotspot-2 {
