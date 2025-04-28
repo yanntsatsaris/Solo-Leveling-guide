@@ -95,3 +95,200 @@ p {
   width: 23%; /* Largeur de la zone */
   height: 12.4%; /* Hauteur de la zone */
 }
+
+/* Positionnement des hotspots */
+.hotspot-3 {
+  top: 30%; /* Position verticale */
+  left: 10%; /* Position horizontale */
+  width: 15%; /* Largeur de la zone */
+  height: 10%; /* Hauteur de la zone */
+}
+
+.hotspot-4 {
+  top: 35%;
+  left: 25%;
+  width: 20%;
+  height: 8%;
+}
+
+.hotspot-5 {
+  top: 40%;
+  left: 15%;
+  width: 18%;
+  height: 12%;
+}
+
+.hotspot-6 {
+  top: 45%;
+  left: 30%;
+  width: 12%;
+  height: 10%;
+}
+
+.hotspot-7 {
+  top: 50%;
+  left: 20%;
+  width: 15%;
+  height: 8%;
+}
+
+.hotspot-8 {
+  top: 55%;
+  left: 35%;
+  width: 18%;
+  height: 10%;
+}
+
+.hotspot-9 {
+  top: 60%;
+  left: 10%;
+  width: 20%;
+  height: 12%;
+}
+
+.hotspot-10 {
+  top: 65%;
+  left: 25%;
+  width: 15%;
+  height: 8%;
+}
+
+.hotspot-11 {
+  top: 70%;
+  left: 30%;
+  width: 12%;
+  height: 10%;
+}
+
+.hotspot-12 {
+  top: 75%;
+  left: 15%;
+  width: 18%;
+  height: 8%;
+}
+
+.hotspot-13 {
+  top: 80%;
+  left: 20%;
+  width: 15%;
+  height: 10%;
+}
+
+.hotspot-14 {
+  top: 85%;
+  left: 35%;
+  width: 20%;
+  height: 12%;
+}
+
+.hotspot-15 {
+  top: 90%;
+  left: 10%;
+  width: 18%;
+  height: 8%;
+}
+
+.hotspot-16 {
+  top: 95%;
+  left: 25%;
+  width: 15%;
+  height: 10%;
+}
+
+.hotspot-17 {
+  top: 20%;
+  left: 40%;
+  width: 12%;
+  height: 8%;
+}
+
+.hotspot-18 {
+  top: 25%;
+  left: 50%;
+  width: 18%;
+  height: 10%;
+}
+
+.hotspot-19 {
+  top: 30%;
+  left: 60%;
+  width: 15%;
+  height: 12%;
+}
+
+.hotspot-20 {
+  top: 35%;
+  left: 70%;
+  width: 20%;
+  height: 8%;
+}
+
+.hotspot-21 {
+  top: 40%;
+  left: 50%;
+  width: 18%;
+  height: 10%;
+}
+
+.hotspot-22 {
+  top: 45%;
+  left: 60%;
+  width: 15%;
+  height: 12%;
+}
+
+.hotspot-23 {
+  top: 50%;
+  left: 70%;
+  width: 20%;
+  height: 8%;
+}
+
+.hotspot-24 {
+  top: 55%;
+  left: 40%;
+  width: 18%;
+  height: 10%;
+}
+
+.hotspot-25 {
+  top: 60%;
+  left: 50%;
+  width: 15%;
+  height: 12%;
+}
+
+.hotspot-26 {
+  top: 65%;
+  left: 60%;
+  width: 20%;
+  height: 8%;
+}
+
+.hotspot-27 {
+  top: 70%;
+  left: 70%;
+  width: 18%;
+  height: 10%;
+}
+
+.hotspot-28 {
+  top: 75%;
+  left: 40%;
+  width: 15%;
+  height: 12%;
+}
+
+.hotspot-29 {
+  top: 80%;
+  left: 50%;
+  width: 20%;
+  height: 8%;
+}
+
+.hotspot-30 {
+  top: 85%;
+  left: 60%;
+  width: 18%;
+  height: 10%;
+}
