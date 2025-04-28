@@ -16,7 +16,7 @@ def update_image_paths(description, base_path):
 
 def SJW(app: Flask):
     # Charger les données des personnages depuis le fichier JSON
-    with open('data/JSW.json', 'r', encoding='utf-8') as f:
+    with open('data/SJW.json', 'r', encoding='utf-8') as f:
         characters_data = json.load(f)
 
     # Charger les données des panoplies
