@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ shadow.name }} - Solo Leveling Arise</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/shadow.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/partials/review.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/partials/passives.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/partials/skills.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/partials/artefacts.css') }}"
+    />
+  </head>
+  <body
+    class="{% if character.background_image %}background-image{% endif %}"
+    style="{% if character.background_image %}background-image: url('{{ url_for('static', filename=character.background_image) }}');{% endif %}"
+  >
+    {% include 'navbar.html' %}
+
+    <h1>{{ shadow.name }}</h1>
+</body>
+</html>

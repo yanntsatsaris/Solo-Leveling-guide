@@ -124,3 +124,8 @@ def SJW(app: Flask):
 
         # Renvoyer le template avec les données du personnage
         return render_template('SJW.html', character=character_info)
+
+    @app.route('/SJW/<name>')
+    def shadow_details(name):
+        # Logique pour récupérer les détails du shadow
+        return render_template('shadow_details.html', name=name)
