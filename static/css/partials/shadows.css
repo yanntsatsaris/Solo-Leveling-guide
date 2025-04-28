@@ -17,11 +17,19 @@
     text-align: center;
 }
 
-/* Image des shadows */
+/* Style pour les images */
 .shadow-card img {
+    display: block;
+    margin: 10px auto; /* Centre les images dans leurs cellules */
     width: 150px;
     height: auto;
-    border-radius: 8px;
+    border-radius: 8px; /* Ajoute des coins arrondis aux images */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre aux images */
+    transition: transform 0.3s ease; /* Ajoute un effet au survol */
+}
+
+.shadow-card img:hover {
+    transform: scale(1.1); /* Agrandit légèrement l'image au survol */
 }
 
 /* Nom des shadows */
