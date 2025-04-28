@@ -292,3 +292,13 @@ p {
   width: 17%;
   height: 8%;
 }
+
+.hotspot a {
+  display: block; /* Permet au lien de remplir toute la zone du hotspot */
+  text-decoration: none; /* Supprime le soulignement du lien */
+  color: inherit; /* Utilise la couleur du texte par défaut */
+}
+
+.hotspot a:hover {
+  color: #ffcc00; /* Change la couleur du texte au survol */
+}
