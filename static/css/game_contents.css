@@ -4,6 +4,9 @@ body {
   padding: 0; /* Supprime les paddings par défaut */
   overflow-x: hidden; /* Empêche le défilement horizontal */
   height: 100%; /* S'assure que le body et le html occupent toute la hauteur */
+  display: flex; /* Active Flexbox */
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
 }
 
 body {
