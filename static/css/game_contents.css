@@ -83,15 +83,15 @@ p {
 
 /* Positionnement des hotspots */
 .hotspot-1 {
-  top: 10%; /* Position verticale */
-  left: 20%; /* Position horizontale */
-  width: 20%; /* Augmente la largeur de la zone */
-  height: 5%; /* Réduit la hauteur de la zone */
+  top: 12.1%; /* Position verticale */
+  left: 3.1%; /* Position horizontale */
+  width: 75%; /* Augmente la largeur de la zone */
+  height: 8.2%; /* Réduit la hauteur de la zone */
 }
 
 .hotspot-2 {
-  top: 40%; /* Position verticale */
-  left: 50%; /* Position horizontale */
-  width: 20%; /* Largeur de la zone */
-  height: 15%; /* Hauteur de la zone */
+  top: 21.3%; /* Position verticale */
+  left: 3.4%; /* Position horizontale */
+  width: 23%; /* Largeur de la zone */
+  height: 12.4%; /* Hauteur de la zone */
 }
