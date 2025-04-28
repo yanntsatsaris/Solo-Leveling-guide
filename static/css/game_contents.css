@@ -7,9 +7,6 @@ body {
 }
 
 body {
-  background-size: cover; /* L'image de fond couvre tout l'écran */
-  background-position: center; /* Centre l'image de fond */
-  background-repeat: no-repeat; /* Empêche la répétition de l'image */
   height: 100vh; /* Prend toute la hauteur de la fenêtre */
   margin: 0;
   padding: 0;
