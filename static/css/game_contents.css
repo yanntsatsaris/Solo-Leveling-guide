@@ -53,7 +53,12 @@ p {
 
 .hotspot {
   position: absolute; /* Positionne les zones par rapport au conteneur */
-  background-color: rgba(255, 204, 0, 0.3); /* Couleur semi-transparente pour visualiser la zone */
+  background-color: rgba(
+    255,
+    204,
+    0,
+    0.3
+  ); /* Couleur semi-transparente pour visualiser la zone */
   border: 1px solid #ffcc00; /* Bordure pour mieux visualiser */
   cursor: pointer; /* Change le curseur pour indiquer une interaction */
 }
@@ -79,6 +84,16 @@ p {
 
 .hotspot:hover .tooltip {
   display: block; /* Affiche la description au survol */
+}
+
+.hotspot a {
+  display: block; /* Permet au lien de remplir toute la zone du hotspot */
+  text-decoration: none; /* Supprime le soulignement du lien */
+  color: inherit; /* Utilise la couleur du texte par défaut */
+}
+
+.hotspot a:hover {
+  color: #ffcc00; /* Change la couleur du texte au survol */
 }
 
 /* Positionnement des hotspots */
@@ -293,12 +308,51 @@ p {
   height: 8%;
 }
 
-.hotspot a {
-  display: block; /* Permet au lien de remplir toute la zone du hotspot */
-  text-decoration: none; /* Supprime le soulignement du lien */
-  color: inherit; /* Utilise la couleur du texte par défaut */
+.hotspot-31 {
+  top: 95%;
+  left: 3.5%;
+  width: 17%;
+  height: 8%;
 }
 
-.hotspot a:hover {
-  color: #ffcc00; /* Change la couleur du texte au survol */
+.hotspot-32 {
+  top: 95%;
+  left: 22.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-33 {
+  top: 95%;
+  left: 41.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-34 {
+  top: 95%;
+  left: 60.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-35 {
+  top: 104%;
+  left: 3.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-36 {
+  top: 104%;
+  left: 22.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-37 {
+  top: 104%;
+  left: 41.5%;
+  width: 17%;
+  height: 8%;
 }
