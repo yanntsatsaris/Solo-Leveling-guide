@@ -15,14 +15,15 @@ p {
 }
 
 .container {
-  display: block; /* Permet au conteneur de prendre toute la largeur nécessaire */
+  display: inline-block; /* Adapte la largeur du conteneur à son contenu */
   text-align: center; /* Centre le contenu textuellement */
   margin: 0 auto; /* Centre le conteneur horizontalement */
   padding: 10px; /* Ajoute un espacement interne */
-  max-width: 90%; /* Limite la largeur maximale du conteneur à 90% de l'écran */
   border: 1px solid #ffcc00; /* Ajoute une bordure dorée */
   border-radius: 8px; /* Coins arrondis */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
   overflow: hidden; /* Empêche le contenu de dépasser du conteneur */
   box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur totale */
+  width: fit-content; /* Adapte la largeur du conteneur à son contenu (l'image) */
+  max-width: 100%; /* Empêche le conteneur de dépasser la largeur de l'écran */
 }
