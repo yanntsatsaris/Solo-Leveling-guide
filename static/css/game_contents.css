@@ -362,3 +362,9 @@ p {
   width: 17%;
   height: 4%;
 }
+
+@media (max-width: 768px) {
+  .hotspot {
+    border: 2px solid #800080; /* Bordure violette */
+  }
+}
