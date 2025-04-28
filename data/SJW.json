@@ -3,6 +3,44 @@
         "name": "Sung Jinwoo",
         "alias": "SJW",
         "description": "",
-        "folder" : "Sung_Jinwoo"
+        "folder" : "Sung_Jinwoo",
+        "shadows": [
+            {
+                "name": "Beru",
+                "image": "Shadows_Beru.png"
+            },
+            {
+                "name": "Bigrock",
+                "image": "Shadows_Bigrock.png"
+            },
+            {
+                "name": "Cerbie",
+                "image": "Shadows_Cerbie.png"
+            },
+            {
+                "name": "Croc",
+                "image": "Shadows_Croc.png"
+            },
+            {
+                "name": "Igrit",
+                "image": "Shadows_Igrit.png"
+            },
+            {
+                "name": "Iron",
+                "image": "Shadows_Iron.png"
+            },
+            {
+                "name": "Kaisel",
+                "image": "Shadows_Kaisel.png"
+            },
+            {
+                "name": "Lames",
+                "image": "Shadows_Lames.png"
+            },
+            {
+                "name": "Tank",
+                "image": "Shadows_Tank.png"
+            }
+        ]
     }
 ]
