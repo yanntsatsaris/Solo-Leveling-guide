@@ -59,7 +59,7 @@ def SJW(app: Flask):
         shadows = character_info.get('shadows', [])
         for shadow in shadows:
             if 'image' in shadow:
-                shadow['image'] = f'images/{character_folder}/{shadow["image"]}'
+                shadow['image'] = f'images/{character_folder}/Shadows/{shadow["image"]}'
 
         character_info['shadows'] = shadows
         
