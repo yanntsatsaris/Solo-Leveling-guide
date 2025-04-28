@@ -2,7 +2,7 @@
     <h2>Monarchs</h2>
     {% if character.monarchs and character.monarchs|length > 0 %}
         {% for monarch in character.monarchs %}
-            <div class="monarch {% if passive.principal == 'True' %}principal{% endif %}">
+            <div class="monarch {% if monarch.principal == 'True' %}principal{% endif %}">
                 {% if monarch.image %}
                     <img src="{{ url_for('static', filename=monarch.image) }}" alt="{{ monarch.name or 'Passive Image' }}">
                 {% endif %}

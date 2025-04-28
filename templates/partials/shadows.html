@@ -2,7 +2,7 @@
     <h2>Shadows</h2>
     {% if character.shadows and character.shadows|length > 0 %}
         {% for shadow in character.shadows %}
-            <div class="shadow {% if passive.principal == 'True' %}principal{% endif %}">
+            <div class="shadow {% if shadow.principal == 'True' %}principal{% endif %}">
                 {% if shadow.image %}
                     <img src="{{ url_for('static', filename=shadow.image) }}" alt="{{ shadow.name or 'Passive Image' }}">
                 {% endif %}
