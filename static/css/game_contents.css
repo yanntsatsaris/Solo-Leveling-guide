@@ -44,8 +44,4 @@ p {
   box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur totale */
   width: fit-content; /* Adapte la largeur du conteneur à son contenu (l'image) */
   max-width: 770px; /* Empêche le conteneur de dépasser la largeur de l'écran */
-  position: absolute; /* Permet de positionner le conteneur indépendamment */
-  top: 50%; /* Place le conteneur au milieu verticalement */
-  left: 50%; /* Place le conteneur au milieu horizontalement */
-  transform: translate(-50%, -50%); /* Centre parfaitement le conteneur */
 }
