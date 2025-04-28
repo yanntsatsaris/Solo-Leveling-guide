@@ -1,5 +1,5 @@
 import json
-from flask import Flask, render_template
+from flask import Flask, render_template , url_for
 
 def update_image_paths(description, base_path):
     """
