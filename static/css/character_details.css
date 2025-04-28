@@ -234,25 +234,26 @@ p {
   color: #121212; /* Texte sombre */
 }
 
-/* Style pour le <select> lorsqu'il est actif (cliqué) */
+/* Empêcher le surlignage jaune du <select> lorsqu'il est actif */
 #equipment-select:focus {
   outline: none; /* Supprime le contour par défaut */
-  border-color: #8000ff; /* Bordure violette */
-  box-shadow: 0 0 10px #8000ff; /* Glow violet */
+  background-color: #1e1e1e; /* Garde le fond sombre */
+  color: #ffcc00; /* Garde le texte doré */
+  box-shadow: none; /* Supprime l'effet de glow */
 }
 
-/* Style pour les options */
-#equipment-select option {
-  background-color: #1e1e1e; /* Fond sombre */
-  color: #ffffff; /* Texte blanc */
-  padding: 10px; /* Espacement interne */
-}
-
-/* Style pour les options désactivées */
-#equipment-select option:disabled {
-  color: #888; /* Texte grisé */
-  background-color: #1e1e1e; /* Fond sombre */
-  cursor: not-allowed; /* Curseur désactivé */
+/* Style spécifique pour le <select> sur mobile */
+@media (max-width: 767px) {
+  #equipment-select {
+    width: 100%; /* Prend toute la largeur disponible */
+    margin: 10px 0; /* Ajoute un espacement vertical */
+    background-color: #1e1e1e; /* Fond sombre */
+    color: #ffcc00; /* Texte doré */
+    border: 1px solid #ffcc00; /* Bordure dorée */
+    border-radius: 8px; /* Coins arrondis */
+    padding: 10px; /* Espacement interne */
+    font-size: 16px; /* Taille du texte */
+  }
 }
 
 /* Affichage sur téléphone (écrans étroits) */
@@ -338,6 +339,7 @@ p {
     background-color: #1e1e1e; /* Garde la couleur de fond par défaut */
     color: #ffcc00; /* Garde la couleur du texte par défaut */
   }
+
   /* Onglet Artefacts */
   #artefacts-tab {
     display: flex;

@@ -80,7 +80,7 @@ function hideSetEffects() {
 
 // Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
 document.addEventListener("DOMContentLoaded", () => {
-  const focusStatsList = document.querySelector(".focus-stats-list");
+const focusStatsList = document.querySelector(".focus-stats-list");
   const artefactsContainer = document.querySelector(".artefacts-container");
   const coresContainer = document.querySelector(".cores-container");
   const equipmentSets = JSON.parse(
@@ -207,20 +207,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Gestion du changement de sélection dans le <select>
   const equipmentSelect = document.getElementById("equipment-select");
-  const dropdownTab = document.getElementById("dropdown-tab"); // Conteneur parent du <select>
-  let currentSetIndex = null; // Variable pour suivre le set actuellement affiché
-
-  // Vérifier si le <select> contient des options valides
-  if (
-    equipmentSelect.options.length === 0 ||
-    equipmentSelect.options[0].disabled
-  ) {
-    // Ajouter la classe 'hidden' pour masquer complètement le conteneur du <select>
-    dropdownTab.classList.add("hidden");
-  }
+  const artefactsTab = document.getElementById("artefacts-tab");
 
   // Gestion du clic sur le <select>
-  equipmentSelect.addEventListener("click", () => {
+  equipmentSelect.addEventListener("click", (event) => {
+    event.stopPropagation(); // Empêche le clic de se propager comme un onglet
     const setIndex = equipmentSelect.value;
 
     // Si le set sélectionné est déjà affiché, activer l'onglet Artefacts
