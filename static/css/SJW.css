@@ -1,0 +1,224 @@
+/* Image de fond */
+html,
+body {
+  margin: 0; /* Supprime les marges par défaut */
+  padding: 0; /* Supprime les paddings par défaut */
+  overflow-x: hidden; /* Empêche le défilement horizontal */
+  height: 100%; /* S'assure que le body et le html occupent toute la hauteur */
+}
+
+body {
+  background-size: cover; /* L'image de fond couvre tout l'écran */
+  background-position: center; /* Centre l'image de fond */
+  background-repeat: no-repeat; /* Empêche la répétition de l'image */
+  height: 100vh; /* Prend toute la hauteur de la fenêtre */
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+.hidden {
+  display: none; /* Masque complètement l'élément */
+  pointer-events: none; /* Désactive les interactions avec la souris */
+  visibility: hidden; /* Rend l'élément invisible */
+}
+
+/* Mise en page principale */
+.layout {
+  display: flex;
+  flex-direction: row; /* Par défaut, disposition en colonnes */
+  width: 100%; /* Prend toute la largeur */
+  height: auto; /* Permet à la hauteur de s'adapter au contenu */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Colonne pour l'image */
+.image-column {
+  flex: 1; /* Prend environ 1/3 de la largeur */
+  max-width: 33%; /* Limite la largeur à 33% */
+  display: flex;
+  justify-content: center; /* Centre l'image horizontalement */
+  align-items: center; /* Centre l'image verticalement */
+  padding-left: 100px; /* Ajoute un léger padding à gauche pour équilibrer */
+}
+
+/* Image du personnage */
+.character-image {
+  display: flex; /* Active Flexbox pour centrer l'image */
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+  width: 250px; /* Taille de l'image par défaut */
+  height: auto; /* Conserve les proportions */
+  padding: 5px; /* Réduit le padding autour de l'image */
+  margin: 0 auto; /* Centre l'image dans son conteneur */
+  border-radius: 8px; /* Arrondit légèrement les coins */
+  position: relative; /* Change de absolute à relative pour éviter les conflits */
+}
+
+/* Colonne pour le contenu principal */
+.content-column {
+  flex: 2; /* Prend environ 2/3 de la largeur */
+  border-radius: 8px; /* Arrondit les coins */
+  max-width: 66%; /* Limite la largeur à 66% */
+  width: 100%; /* Prend toute la largeur disponible */
+  box-sizing: border-box; /* Inclut le padding dans la largeur */
+  /*overflow-y: auto; /* Ajoute un défilement uniquement si nécessaire */
+  height: calc(100vh - 50px); /* Ajuste la hauteur pour exclure la navbar */
+}
+
+/* Conteneur principal */
+.container {
+  width: 1100px; /* Largeur du conteneur */
+  max-width: 95%; /* S'assure que la largeur ne dépasse pas 95% de l'écran */
+  margin: 100px auto; /* Centre le contenu horizontalement */
+  padding: 20px;
+  box-sizing: border-box; /* Inclut le padding dans la largeur */
+}
+
+/* Image du personnage dans le conteneur principal */
+.container .character-image {
+  display: none; /* Utilise Flexbox pour centrer l'image */
+}
+
+/* Conteneur pour l'image et les onglets */
+.character-info {
+  display: flex;
+  flex-direction: row; /* Affiche l'image et les onglets côte à côte */
+  align-items: flex-start; /* Aligne les éléments en haut */
+  width: 100%;
+  gap: 20px; /* Espacement entre l'image et les onglets */
+}
+
+/* Conteneur des onglets et du contenu */
+.tabs-and-content {
+  display: flex;
+  flex-direction: column; /* Par défaut, empile les onglets et le contenu */
+  flex: 1;
+  min-height: 500px; /* Ajuste la hauteur minimale */
+  width: 100%; /* Définit une largeur par défaut */
+  max-width: 900px; /* Fixe une largeur maximale constante */
+  margin: 0 auto; /* Centre le conteneur horizontalement */
+  margin-left: 20px; /* Ajoute un espace entre l'image et les onglets */
+  box-sizing: border-box; /* Inclut le padding dans la largeur */
+}
+
+/* Style pour le titre */
+h1 {
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff; /* Glow violet */
+  margin-bottom: 20px;
+}
+
+/* Style pour le paragraphe */
+p {
+  color: #ffcc00;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Onglets */
+.tabs {
+  display: flex;
+  justify-content: center; /* Centre les onglets horizontalement */
+  background-color: #1e1e1e;
+  padding: 10px 0; /* Ajoute un peu de padding pour l'espacement vertical */
+}
+
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: none; /* Supprime les bordures */
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.tab.active {
+  background-color: #ffcc00;
+  color: #121212;
+  font-weight: bold;
+}
+
+.tab:hover {
+  background-color: #ffcc00;
+  color: #121212;
+}
+
+/* Contenu des onglets */
+.tab-content {
+  display: none;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  padding: 20px;
+  border: none; /* Supprime les bordures */
+  border-radius: 0; /* Supprime les coins arrondis */
+  height: 100%; /* S'assure que le contenu occupe toute la hauteur disponible */
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Afficher les options lorsque le dropdown est actif */
+#dropdown-tab.active .dropdown-options {
+    display: block;
+  }
+  
+  /* Empêcher le changement de couleur pour le tab avec la flèche */
+  #dropdown-tab {
+    background-color: #1e1e1e; /* Couleur de fond par défaut */
+    color: #ffcc00; /* Couleur du texte par défaut */
+    cursor: pointer; /* Curseur pour indiquer qu'il est cliquable */
+  }
+  
+  /* Empêcher le changement de couleur lorsqu'il est actif */
+  #dropdown-tab.active {
+    background-color: #1e1e1e; /* Garde la couleur de fond par défaut */
+    color: #ffcc00; /* Garde la couleur du texte par défaut */
+  }
+  
+  /* Empêcher le changement de couleur lorsqu'il est survolé */
+  #dropdown-tab:hover {
+    background-color: #1e1e1e; /* Garde la couleur de fond par défaut */
+    color: #ffcc00; /* Garde la couleur du texte par défaut */
+  }
+  
+  /* Style pour le conteneur du <select> */
+  #equipment-select {
+    appearance: none; /* Supprime le style par défaut du navigateur */
+    -webkit-appearance: none; /* Compatibilité avec Safari */
+    -moz-appearance: none; /* Compatibilité avec Firefox */
+    background-color: #1e1e1e; /* Fond sombre */
+    color: #ffcc00; /* Texte doré */
+    border: 1px solid #ffcc00; /* Bordure dorée */
+    border-radius: 8px; /* Coins arrondis */
+    padding: 1px 5px; /* Espacement interne */
+    font-size: 16px; /* Taille du texte */
+    font-family: Arial, sans-serif; /* Police */
+    cursor: pointer; /* Curseur cliquable */
+    width: 100%; /* Prend toute la largeur disponible */
+    max-width: 300px; /* Largeur maximale */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transition pour les interactions */
+  }
+  
+  /* Style pour le <select> lorsqu'il est survolé */
+  #equipment-select:hover {
+    background-color: #ffcc00; /* Fond doré */
+    color: #121212; /* Texte sombre */
+  }
+  
+  /* Empêcher le surlignage jaune du <select> lorsqu'il est actif */
+  #equipment-select:focus {
+    outline: none; /* Supprime le contour par défaut */
+    background-color: #1e1e1e; /* Garde le fond sombre */
+    color: #ffcc00; /* Garde le texte doré */
+    box-shadow: none; /* Supprime l'effet de glow */
+  }

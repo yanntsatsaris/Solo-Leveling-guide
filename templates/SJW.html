@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solo Leveling Arise : Sung Jinwoo</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/SJW.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/character_details.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/partials/review.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/partials/passives.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/partials/skills.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/partials/artefacts.css') }}"
+    />
+</head>
+<body>
+    class="{% if character.background_image %}background-image{% endif %}"
+    style="{% if character.background_image %}background-image: url('{{ url_for('static', filename=character.background_image) }}');{% endif %}"
+
+    {% include 'navbar.html' %}
+    <div class="layout">
+      <!-- Colonne pour l'image -->
+      <div class="image-column">
+        <div class="character-image">
+          <img
+            src="{{ url_for('static', filename=character.image) }}"
+            alt="{{ character.name }}"
+          />
+        </div>
+      </div>
+
+      <!-- Colonne pour le contenu principal -->
+      <div class="content-column">
+        <div class="container">
+          <h1>{{ character.name }}</h1>
+          <p
+            style="text-align: center; color: #ffcc00; font-weight: bold"
+            hidden
+          >
+            Type: {{ character.type }}
+          </p>
+
+          <!-- Image du personnage (affichée sous le type sur téléphone) -->
+          <div class="character-image">
+            <img
+              src="{{ url_for('static', filename=character.image) }}"
+              alt="{{ character.name }}"
+            />
+          </div>
+
+          <!-- Conteneur pour les onglets et le contenu -->
+          <div class="character-info">
+            <div class="tabs-and-content">
+              <!-- Système d'onglets -->
+              <div class="tabs">
+                <div class="tab active" data-tab="description">Description</div>
+                <div class="tab" data-tab="passives">Passifs</div>
+                <div class="tab" data-tab="skills">Skills</div>
+                <div class="tab" data-tab="artefacts" id="artefacts-tab">
+                  Artefacts
+                </div>
+                <div class="tab" id="dropdown-tab">
+                  <select id="equipment-select">
+                    {% if character.equipment_sets and
+                    character.equipment_sets|length > 0 %} {% for set in
+                    character.equipment_sets %}
+                    <option value="{{ loop.index0 }}">
+                      {{ set.set_name }}
+                    </option>
+                    {% endfor %} {% else %}
+                    <option disabled>Aucun set équipé</option>
+                    {% endif %}
+                  </select>
+                </div>
+              </div>
+
+              <!-- Contenu des onglets -->
+              {% include 'partials/review.html' %} {% include
+              'partials/passives.html' %} {% include 'partials/skills.html' %}
+              {% include 'partials/artefacts.html' %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script id="equipmentSetsData" type="application/json">
+      {% if character.equipment_sets and character.equipment_sets|length > 0 %}
+          {{ character.equipment_sets|tojson }}
+      {% else %}
+          []
+      {% endif %}
+</body>
+</html>
