@@ -37,9 +37,10 @@
       href="{{ url_for('static', filename='css/partials/artefacts.css') }}"
     />
 </head>
-<body>
+<body
     class="{% if character.background_image %}background-image{% endif %}"
     style="{% if character.background_image %}background-image: url('{{ url_for('static', filename=character.background_image) }}');{% endif %}"
+  >
 
     {% include 'navbar.html' %}
     <div class="layout">
@@ -57,12 +58,6 @@
       <div class="content-column">
         <div class="container">
           <h1>{{ character.name }}</h1>
-          <p
-            style="text-align: center; color: #ffcc00; font-weight: bold"
-            hidden
-          >
-            Type: {{ character.type }}
-          </p>
 
           <!-- Image du personnage (affichée sous le type sur téléphone) -->
           <div class="character-image">
