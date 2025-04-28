@@ -6,6 +6,11 @@
     display: flex;
     justify-content: space-between; /* Sépare les éléments à gauche et à droite */
     align-items: center;
+    position: fixed; /* Rend la navbar fixe */
+    top: 0; /* Positionne la navbar en haut de la page */
+    left: 0; /* Positionne la navbar à gauche */
+    width: 100%; /* S'assure que la navbar prend toute la largeur */
+    z-index: 1000; /* Place la navbar au-dessus des autres éléments */
 }
 
 /* Liste des liens */
