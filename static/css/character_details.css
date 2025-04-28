@@ -75,6 +75,9 @@ body {
   width: 1100px; /* Largeur du conteneur */
   max-width: 95%; /* S'assure que la largeur ne dépasse pas 95% de l'écran */
   margin: 100px auto; /* Centre le contenu horizontalement */
+  background-color: #1e1e1e;
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
   padding: 20px;
   box-sizing: border-box; /* Inclut le padding dans la largeur */
 }
