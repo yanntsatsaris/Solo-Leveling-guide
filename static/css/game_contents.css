@@ -53,18 +53,17 @@ p {
 
 .hotspot {
   position: absolute; /* Positionne les zones par rapport au conteneur */
-  background-color: rgba(
-    255,
-    204,
-    0,
-    0.3
-  ); /* Couleur semi-transparente pour visualiser la zone */
-  border: 1px solid #ffcc00; /* Bordure pour mieux visualiser */
   cursor: pointer; /* Change le curseur pour indiquer une interaction */
 }
 
 .hotspot:hover {
-  background-color: rgba(255, 204, 0, 0.5); /* Change la couleur au survol */
+  background-color: rgba(
+    128,
+    0,
+    128,
+    0.5
+  ); /* Couleur violette semi-transparente */
+  border-color: #800080; /* Bordure violette */
 }
 
 .tooltip {
