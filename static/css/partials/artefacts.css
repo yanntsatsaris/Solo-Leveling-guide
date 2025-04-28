@@ -473,20 +473,6 @@
     text-align: center;
   }
 
-  /* Image du personnage */
-  .container .character-image {
-    width: 200px; /* Adapte la taille de l'image pour le mode paysage */
-    height: auto; /* Conserve les proportions */
-    margin: 10px auto; /* Centre l'image avec un espacement réduit */
-  }
-
-  /* Image dans le conteneur principal */
-  .container .character-image img {
-    width: 150px; /* Adapte la largeur de l'image */
-    height: auto; /* Conserve les proportions */
-    max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
-  }
-
   /* Conteneur des cores */
   .cores-container {
     display: flex;
