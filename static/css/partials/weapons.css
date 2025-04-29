@@ -1,12 +1,46 @@
+.weapon {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.weapon > div {
+  margin-right: 20px; /* Ajoute un espacement à droite */
+}
+
+/* Style pour l'image de l'arme */
+.weapon-image img {
+  width: 300px; /* Augmente la largeur de l'image */
+  height: auto; /* Conserve les proportions */
+  border-radius: 8px; /* Ajoute un léger arrondi aux coins */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour un effet visuel */
+  margin-right: 20px; /* Ajoute un espacement à droite */
+}
+
+/* Images dans les descriptions des skills */
+.weapon-stats img {
+  height: 1em; /* Définit la hauteur des images à la taille de la police */
+  width: auto; /* Maintient les proportions de l'image */
+  vertical-align: -0.2em; /* Ajuste légèrement la position verticale */
+  display: inline; /* S'assure que les images restent dans le flux du texte */
+  margin: 0; /* Supprime tout espacement supplémentaire */
+}
+
+.weapon-stats strong,
+.weapon-stats p {
+  text-align: justify;
+  margin: 0;
+}
+
 /* Section des évolutions */
-.evolutions {
+.weapon-evolutions {
   margin-top: 20px; /* Espace au-dessus de la section */
   padding: 15px; /* Ajoute un padding interne */
   border-radius: 8px; /* Coins arrondis */
 }
 
 /* Titre des évolutions */
-.evolutions h3 {
+.weapon-evolutions h3 {
   color: #ffcc00; /* Couleur dorée pour le titre */
   font-size: 18px; /* Taille du texte */
   margin-bottom: 15px; /* Espace sous le titre */
@@ -14,48 +48,48 @@
 }
 
 /* Liste des évolutions */
-.evolutions ul {
+.weapon-evolutions ul {
   list-style-type: none; /* Supprime les puces */
   padding: 0; /* Supprime le padding interne */
   margin: 0; /* Supprime les marges */
 }
 
 /* Élément individuel de la liste */
-.evolutions li {
+.weapon-evolutions li {
   display: flex;
   flex-direction: column; /* Place l'image au-dessus du texte */
   align-items: left; /* Centre le contenu horizontalement */
   text-align: left; /* Centre le texte */
 }
 
-.evolutions li img {
+.weapon-evolutions li img {
   margin-bottom: 10px; /* Ajoute un espacement entre l'image et le texte */
   margin-right: 0; /* Supprime l'espacement à droite */
 }
 
-.evolutions li span {
+.weapon-evolutions li span {
   text-align: left; /* Centre le texte sous l'image */
 }
 
 /* Dernier élément sans marge */
-.evolutions li:last-child {
+.weapon-evolutions li:last-child {
   margin-bottom: 0; /* Supprime l'espace sous le dernier élément */
 }
 
 /* Image des évolutions */
-.evolutions li img {
+.weapon-evolutions li img {
   margin-right: 10px; /* Espace entre l'image et le texte */
   border-radius: 8px; /* Coins arrondis pour les images */
 }
 
 /* Texte des évolutions */
-.evolutions li span {
+.weapon-evolutions li span {
   color: #b3b3b3; /* Couleur grise pour le texte */
   font-style: italic; /* Texte en italique */
 }
 
 /* Images dans les descriptions (dans les balises <span>) */
-.evolutions li span img {
+.weapon-evolutions li span img {
   height: 1em; /* Définit la hauteur des images à la taille de la police */
   width: auto; /* Maintient les proportions de l'image */
   vertical-align: -0.2em; /* Ajuste légèrement la position verticale pour aligner avec le texte */
@@ -64,7 +98,7 @@
 }
 
 /* Identifiant des évolutions */
-.evolutions li strong {
+.weapon-evolutions li strong {
   color: #ffcc00; /* Couleur dorée pour les identifiants */
   font-weight: bold; /* Texte en gras */
   margin-right: 5px; /* Espace entre l'identifiant et le texte */
@@ -116,24 +150,24 @@
   }
 
   /* Affichage des évolutions */
-  .evolutions li {
+  .weapon-evolutions li {
     display: flex;
     flex-direction: column; /* Place l'image au-dessus du texte */
     align-items: center; /* Centre le contenu horizontalement */
     text-align: center; /* Centre le texte */
   }
 
-  .evolutions li img {
+  .weapon-evolutions li img {
     margin-bottom: 10px; /* Ajoute un espacement entre l'image et le texte */
     margin-right: 0; /* Supprime l'espacement à droite */
   }
 
-  .evolutions li span {
+  .weapon-evolutions li span {
     text-align: center; /* Centre le texte sous l'image */
   }
 
   /* Images dans les descriptions (dans les balises <span>) */
-  .evolutions li span img {
+  .weapon-evolutions li span img {
     height: 1em; /* Définit la hauteur des images à la taille de la police */
     width: auto; /* Maintient les proportions de l'image */
     vertical-align: -0.2em; /* Ajuste légèrement la position verticale pour aligner avec le texte */
@@ -141,7 +175,7 @@
     margin: 0; /* Supprime tout espacement supplémentaire */
   }
   /* Supprimer les puces des listes des évolutions */
-  .evolutions ul {
+  .weapon-evolutions ul {
     list-style-type: none; /* Supprime les puces */
     padding: 0; /* Supprime le padding interne */
     margin: 0; /* Supprime les marges */

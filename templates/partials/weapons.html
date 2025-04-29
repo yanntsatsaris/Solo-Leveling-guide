@@ -1,0 +1,53 @@
+<div id="weapons" class="tab-content">
+  <h2>Armes</h2>
+  {% if character.weapon and character.weapon|length > 0 %}
+  <div class="weapons-container">
+    {% for weapon in character.weapon %}
+    <div class="weapon-card">
+      <div class="weapon-image">
+        <img
+          src="{{ url_for('static', filename=weapon.image) }}"
+          alt="{{ weapon.name }}"
+        />
+      </div>
+      <div class="weapon-stats">
+        <strong>{{ weapon.name }}</strong>
+        <p>{{ weapon.stats|safe }}</p>
+      </div>
+
+      <!-- Système d'évolution pour l'arme -->
+      {% if weapon.evolutions and weapon.evolutions|length > 0 %}
+      <div class="weapon-evolutions">
+        <h3>Évolutions</h3>
+        <ul>
+          {% for evolution in weapon.evolutions %}
+          <li>
+            {% if evolution.range %}
+            <!-- Évolutions groupées (par exemple, A06-A10) -->
+            <img
+              src="{{ url_for('static', filename='images/Advancement/' + evolution.id + '.webp') }}"
+              alt="{{ evolution.id }}"
+              class="evolution-image evolution-range"
+            />
+            <span>{{ evolution.description|safe }}</span>
+            {% else %}
+            <!-- Évolutions individuelles (par exemple, A01 à A05) -->
+            <img
+              src="{{ url_for('static', filename='images/Advancement/' + evolution.id + '.webp') }}"
+              alt="{{ evolution.id }}"
+              class="evolution-image"
+            />
+            <span>{{ evolution.description|safe }}</span>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p>Aucune arme disponible pour ce personnage.</p>
+  {% endif %}
+</div>

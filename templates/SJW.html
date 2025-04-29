@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Solo Leveling Arise : Sung Jinwoo</title>
     <link
       rel="stylesheet"
@@ -32,12 +32,11 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/partials/artefacts.css') }}"
     />
-</head>
-<body
+  </head>
+  <body
     class="{% if character.background_image %}background-image{% endif %}"
     style="{% if character.background_image %}background-image: url('{{ url_for('static', filename=character.background_image) }}');{% endif %}"
   >
-
     {% include 'navbar.html' %}
     <div class="layout">
       <!-- Colonne pour l'image -->
@@ -69,6 +68,7 @@
               <!-- Système d'onglets -->
               <div class="tabs">
                 <div class="tab active" data-tab="description">Description</div>
+                <div class="tab" data-tab="weapons">Armes</div>
                 <div class="tab" data-tab="passives">Passifs</div>
                 <div class="tab" data-tab="skills">Skills</div>
                 <div class="tab" data-tab="shadows">Shadows</div>
@@ -93,8 +93,9 @@
 
               <!-- Contenu des onglets -->
               {% include 'partials/review.html' %} {% include
-              'partials/passives.html' %} {% include 'partials/skills.html' %}
-              {% include 'partials/shadows.html' %} {% include 'partials/monarchs.html' %}
+              'partials/weapons.html' %} {% include 'partials/passives.html' %}
+              {% include 'partials/skills.html' %} {% include
+              'partials/shadows.html' %} {% include 'partials/monarchs.html' %}
               {% include 'partials/artefacts.html' %}
             </div>
           </div>
@@ -110,5 +111,5 @@
       {% endif %}
     </script>
     <script src="{{ url_for('static', filename='js/character_details.js') }}"></script>
-</body>
+  </body>
 </html>

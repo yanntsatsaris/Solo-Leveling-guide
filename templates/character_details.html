@@ -14,6 +14,10 @@
     />
     <link
       rel="stylesheet"
+      href="{{ url_for('static', filename='css/partials/weapons.css') }}"
+    />
+    <link
+      rel="stylesheet"
       href="{{ url_for('static', filename='css/partials/passives.css') }}"
     />
     <link
@@ -68,6 +72,7 @@
               <!-- Système d'onglets -->
               <div class="tabs">
                 <div class="tab active" data-tab="description">Description</div>
+                <div class="tab" data-tab="weapons">Armes</div>
                 <div class="tab" data-tab="passives">Passifs</div>
                 <div class="tab" data-tab="skills">Skills</div>
                 <div class="tab" data-tab="artefacts" id="artefacts-tab">
@@ -90,8 +95,9 @@
 
               <!-- Contenu des onglets -->
               {% include 'partials/review.html' %} {% include
-              'partials/passives.html' %} {% include 'partials/skills.html' %}
-              {% include 'partials/artefacts.html' %}
+              'partials/weapons.html' %} {% include 'partials/passives.html' %}
+              {% include 'partials/skills.html' %} {% include
+              'partials/artefacts.html' %}
             </div>
           </div>
         </div>

@@ -1,52 +1,52 @@
 /* Conteneur principal des shadows */
 #shadows {
-    text-align: center;
-    margin-top: 20px;
+  text-align: center;
+  margin-top: 20px;
 }
 
 /* Tableau des shadows */
 #shadows-table {
-    width: 100%;
-    text-align: center;
-    margin-top: 20px;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
 }
 
 /* Carte individuelle pour chaque shadow */
 .shadow-card {
-    margin: 10px;
-    text-align: center;
+  margin: 10px;
+  text-align: center;
 }
 
 /* Style pour les images */
 .shadow-card img {
-    display: block;
-    margin: 10px auto; /* Centre les images dans leurs cellules */
-    width: 150px;
-    height: auto;
-    border-radius: 8px; /* Ajoute des coins arrondis aux images */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre aux images */
-    transition: transform 0.3s ease; /* Ajoute un effet au survol */
+  display: block;
+  margin: 10px auto; /* Centre les images dans leurs cellules */
+  width: 150px;
+  height: auto;
+  border-radius: 8px; /* Ajoute des coins arrondis aux images */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre aux images */
+  transition: transform 0.3s ease; /* Ajoute un effet au survol */
 }
 
 .shadow-card img:hover {
-    transform: scale(1.1); /* Agrandit légèrement l'image au survol */
+  transform: scale(1.1); /* Agrandit légèrement l'image au survol */
 }
 
 /* Nom des shadows */
 .shadow-name {
-    margin-top: 10px;
-    font-weight: bold;
-    color: #ffffff;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #ffffff;
 }
 
 /* Description des shadows */
 .shadow-description {
-    color: #cccccc;
+  color: #cccccc;
 }
 
 /* Message lorsqu'il n'y a pas de shadows */
 .no-shadows {
-    text-align: center;
-    color: #ffcc00;
-    font-weight: bold;
+  text-align: center;
+  color: #ffcc00;
+  font-weight: bold;
 }

@@ -1,46 +1,46 @@
 [
-    {
-        "name": "Sung Jinwoo",
-        "alias": "SJW",
-        "description": "",
-        "folder" : "Sung_Jinwoo",
-        "shadows": [
-            {
-                "name": "Beru",
-                "image": "Shadow_Beru.png"
-            },
-            {
-                "name": "Bigrock",
-                "image": "Shadow_Bigrock.png"
-            },
-            {
-                "name": "Cerbie",
-                "image": "Shadow_Cerbie.png"
-            },
-            {
-                "name": "Croc",
-                "image": "Shadow_Croc.png"
-            },
-            {
-                "name": "Igrit",
-                "image": "Shadow_Igrit.png"
-            },
-            {
-                "name": "Iron",
-                "image": "Shadow_Iron.png"
-            },
-            {
-                "name": "Kaisel",
-                "image": "Shadow_Kaisel.png"
-            },
-            {
-                "name": "Lames",
-                "image": "Shadow_Lames.png"
-            },
-            {
-                "name": "Tank",
-                "image": "Shadow_Tank.png"
-            }
-        ]
-    }
+  {
+    "name": "Sung Jinwoo",
+    "alias": "SJW",
+    "description": "",
+    "folder": "Sung_Jinwoo",
+    "shadows": [
+      {
+        "name": "Beru",
+        "image": "Shadow_Beru.png"
+      },
+      {
+        "name": "Bigrock",
+        "image": "Shadow_Bigrock.png"
+      },
+      {
+        "name": "Cerbie",
+        "image": "Shadow_Cerbie.png"
+      },
+      {
+        "name": "Croc",
+        "image": "Shadow_Croc.png"
+      },
+      {
+        "name": "Igrit",
+        "image": "Shadow_Igrit.png"
+      },
+      {
+        "name": "Iron",
+        "image": "Shadow_Iron.png"
+      },
+      {
+        "name": "Kaisel",
+        "image": "Shadow_Kaisel.png"
+      },
+      {
+        "name": "Lames",
+        "image": "Shadow_Lames.png"
+      },
+      {
+        "name": "Tank",
+        "image": "Shadow_Tank.png"
+      }
+    ]
+  }
 ]
