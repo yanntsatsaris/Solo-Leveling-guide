@@ -19,6 +19,14 @@ document.addEventListener("DOMContentLoaded", () => {
       targetTab.classList.add("active");
       targetContent.classList.add("active");
     }
+  } else {
+    // Activer l'onglet par défaut (Description)
+    const defaultTab = document.querySelector('.tab[data-tab="description"]');
+    const defaultContent = document.getElementById("description");
+    if (defaultTab && defaultContent) {
+      defaultTab.classList.add("active");
+      defaultContent.classList.add("active");
+    }
   }
 
   // Gestion du clic sur les onglets
@@ -64,8 +72,13 @@ function showSetEffects(setName, event) {
     if (effect.set_name === setName) {
       const listItem = document.createElement("li");
       listItem.innerHTML = `
-        <span style="color: #ffcc00; font-weight: bold;">${effect.pieces_required} pièces :</span>
-        <span style="display: block; margin-top: 5px;">${effect.effect.replace(/\n/g, "<br>")}</span>
+        <span style="color: #ffcc00; font-weight: bold;">${
+          effect.pieces_required
+        } pièces :</span>
+        <span style="display: block; margin-top: 5px;">${effect.effect.replace(
+          /\n/g,
+          "<br>"
+        )}</span>
       `;
       effectsList.appendChild(listItem);
     }
@@ -101,7 +114,7 @@ function hideSetEffects() {
 
 // Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
 document.addEventListener("DOMContentLoaded", () => {
-const focusStatsList = document.querySelector(".focus-stats-list");
+  const focusStatsList = document.querySelector(".focus-stats-list");
   const artefactsContainer = document.querySelector(".artefacts-container");
   const coresContainer = document.querySelector(".cores-container");
   const equipmentSets = JSON.parse(
