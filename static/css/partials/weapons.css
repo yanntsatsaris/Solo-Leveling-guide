@@ -60,8 +60,6 @@
   margin-top: 20px; /* Espace au-dessus de la section */
   padding: 15px; /* Ajoute un padding interne */
   border-radius: 8px; /* Coins arrondis */
-  border: 1px solid #ccc; /* Ajoute une bordure légère */
-  background-color: #f9f9f9; /* Couleur de fond pour différencier */
 }
 
 /* Titre des évolutions */
