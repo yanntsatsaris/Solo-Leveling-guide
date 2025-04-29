@@ -105,7 +105,7 @@
 }
 
 /* Style général pour les images des évolutions */
-.evolution-image {
+.weapon-evolution-image {
   width: 120px; /* Taille par défaut des images */
   height: auto;
   margin-right: 10px; /* Espace entre l'image et le texte */
@@ -113,14 +113,14 @@
 }
 
 /* Style spécifique pour les images des évolutions avec une plage (range) */
-.evolution-range {
+.weapon-evolution-range {
   width: 150px; /* Taille plus grande pour les images avec une plage */
   height: auto; /* Conserve les proportions */
 }
 
 @media (max-width: 767px) {
   /* Style pour l'arme sur téléphone */
-  .weapon {
+  #weapons {
     display: flex;
     flex-direction: column; /* Place l'image et les stats en colonne */
     align-items: center; /* Centre le contenu horizontalement */
