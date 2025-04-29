@@ -3,6 +3,25 @@ document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll(".tab");
   const tabContents = document.querySelectorAll(".tab-content");
 
+  // Vérifier si un paramètre "tab" est présent dans l'URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const activeTab = urlParams.get("tab");
+
+  if (activeTab) {
+    // Désactiver tous les onglets et contenus
+    tabs.forEach((tab) => tab.classList.remove("active"));
+    tabContents.forEach((content) => content.classList.remove("active"));
+
+    // Activer l'onglet et le contenu correspondant
+    const targetTab = document.querySelector(`.tab[data-tab="${activeTab}"]`);
+    const targetContent = document.getElementById(activeTab);
+    if (targetTab && targetContent) {
+      targetTab.classList.add("active");
+      targetContent.classList.add("active");
+    }
+  }
+
+  // Gestion du clic sur les onglets
   tabs.forEach((tab) => {
     tab.addEventListener("click", () => {
       // Ignorer le clic sur l'onglet avec la flèche (dropdown-tab)
