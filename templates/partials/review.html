@@ -6,7 +6,8 @@
   <h3>Évolutions</h3>
   <div class="evolutions">
     <ul>
-      {% for evolution in character.evolutions %} {% if evolution.range %}
+      {% if not character.weapon.evolutions %} {% for evolution in
+      character.evolutions %} {% if evolution.range %}
       <!-- Afficher les évolutions groupées (A06-A10) -->
       <li>
         <img
@@ -26,7 +27,7 @@
         />
         <span>{{ evolution.description|safe }}</span>
       </li>
-      {% endif %} {% endfor %}
+      {% endif %} {% endfor %} {% endif %}
     </ul>
   </div>
   {% else %}
