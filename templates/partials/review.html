@@ -6,9 +6,7 @@
   <h3>Évolutions</h3>
   <div class="evolutions">
     <ul>
-      {% for evolution in character.evolutions %} {% if evolution.type ==
-      "evolution" %}
-      <!-- Filtrer uniquement les évolutions -->
+      {% for evolution in character.evolutions %}
       {% if evolution.range %}
       <!-- Afficher les évolutions groupées (A06-A10) -->
       <li>
