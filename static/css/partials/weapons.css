@@ -8,20 +8,27 @@
   margin-right: 20px; /* Ajoute un espacement à droite */
 }
 
-/* Style pour l'image de l'arme */
-.weapon-image img {
-  width: 300px; /* Augmente la largeur de l'image */
-  height: auto; /* Conserve les proportions */
-  border-radius: 8px; /* Ajoute un léger arrondi aux coins */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour un effet visuel */
-  margin-right: 20px; /* Ajoute un espacement à droite */
-}
-
 /* Conteneur de la carte de l'arme */
 .weapon-card {
-  display: flex; /* Aligne les éléments horizontalement */
+  display: flex;
+  flex-direction: column; /* Organise les éléments en colonne */
+  gap: 20px; /* Ajoute un espacement entre les sections */
+  margin-bottom: 20px; /* Ajoute un espacement entre les cartes */
+}
+
+/* Conteneur pour l'image et les stats */
+.weapon-header {
+  display: flex; /* Aligne l'image et les stats horizontalement */
   align-items: flex-start; /* Aligne les éléments en haut */
   gap: 20px; /* Ajoute un espacement entre l'image et les stats */
+}
+
+/* Style pour l'image de l'arme */
+.weapon-image img {
+  width: 300px; /* Largeur de l'image */
+  height: auto; /* Conserve les proportions */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour un effet visuel */
 }
 
 /* Conteneur des stats de l'arme */
@@ -53,6 +60,8 @@
   margin-top: 20px; /* Espace au-dessus de la section */
   padding: 15px; /* Ajoute un padding interne */
   border-radius: 8px; /* Coins arrondis */
+  border: 1px solid #ccc; /* Ajoute une bordure légère */
+  background-color: #f9f9f9; /* Couleur de fond pour différencier */
 }
 
 /* Titre des évolutions */
@@ -136,7 +145,7 @@
 
 @media (max-width: 767px) {
   /* Style pour l'arme sur téléphone */
-  #weapons {
+  .weapons-container {
     display: flex;
     flex-direction: column; /* Place l'image et les stats en colonne */
     align-items: center; /* Centre le contenu horizontalement */
@@ -149,6 +158,11 @@
     vertical-align: -0.2em; /* Ajuste légèrement la position verticale */
     display: inline; /* S'assure que les images restent dans le flux du texte */
     margin: 0; /* Supprime tout espacement supplémentaire */
+  }
+  .weapon-header {
+    flex-direction: column; /* Passe en colonne sur les petits écrans */
+    align-items: center; /* Centre les éléments horizontalement */
+    text-align: center; /* Centre le texte */
   }
 
   .weapon-image img {
