@@ -94,32 +94,10 @@
               </div>
 
               <!-- Contenu des onglets -->
-              <div class="tab-content-container">
-                <!-- Onglet Description -->
-                <div id="description" class="tab-content active">
-                  {% include 'partials/review.html' %}
-                </div>
-
-                <!-- Onglet Armes -->
-                <div id="weapons" class="tab-content">
-                  {% include 'partials/weapons.html' %}
-                </div>
-
-                <!-- Onglet Passifs -->
-                <div id="passives" class="tab-content">
-                  {% include 'partials/passives.html' %}
-                </div>
-
-                <!-- Onglet Skills -->
-                <div id="skills" class="tab-content">
-                  {% include 'partials/skills.html' %}
-                </div>
-
-                <!-- Onglet Artefacts -->
-                <div id="artefacts" class="tab-content">
-                  {% include 'partials/artefacts.html' %}
-                </div>
-              </div>
+              {% include 'partials/review.html' %} {% include
+              'partials/weapons.html' %} {% include 'partials/passives.html' %}
+              {% include 'partials/skills.html' %} {% include
+              'partials/artefacts.html' %}
             </div>
           </div>
         </div>
