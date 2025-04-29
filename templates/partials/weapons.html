@@ -27,7 +27,7 @@
             <img
               src="{{ url_for('static', filename='images/Advancement/' + evolution.id + '.webp') }}"
               alt="{{ evolution.id }}"
-              class="evolution-image evolution-range"
+              class="weapon-evolution-image weapon-evolution-range"
             />
             <span>{{ evolution.description|safe }}</span>
             {% else %}
@@ -35,7 +35,7 @@
             <img
               src="{{ url_for('static', filename='images/Advancement/' + evolution.id + '.webp') }}"
               alt="{{ evolution.id }}"
-              class="evolution-image"
+              class="weapon-evolution-image"
             />
             <span>{{ evolution.description|safe }}</span>
             {% endif %}
