@@ -1,10 +1,10 @@
-#weapon {
+#weapons {
   display: flex;
   align-items: center;
   margin-top: 20px;
 }
 
-#weapon > div {
+#weapons > div {
   margin-right: 20px; /* Ajoute un espacement à droite */
 }
 
