@@ -17,6 +17,22 @@
   margin-right: 20px; /* Ajoute un espacement à droite */
 }
 
+/* Conteneur de la carte de l'arme */
+.weapon-card {
+  display: flex; /* Aligne les éléments horizontalement */
+  align-items: flex-start; /* Aligne les éléments en haut */
+  gap: 20px; /* Ajoute un espacement entre l'image et les stats */
+}
+
+/* Conteneur des stats de l'arme */
+.weapon-stats {
+  flex: 1; /* Permet aux stats de prendre tout l'espace restant */
+  text-align: left; /* Aligne le texte à gauche */
+  display: flex;
+  flex-direction: column; /* Organise les stats verticalement */
+  justify-content: center; /* Centre verticalement les stats */
+}
+
 /* Images dans les descriptions des skills */
 .weapon-stats img {
   height: 1em; /* Définit la hauteur des images à la taille de la police */
