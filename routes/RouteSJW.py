@@ -46,6 +46,7 @@ def SJW(app: Flask):
         
     @app.route('/SJW')
     def inner_SJW():
+        write_log("Route '/SJW' called")
         # Trouver les informations du personnage correspondant
         character_info = next((char for char in characters_data if char['alias'] == "SJW"), None)
 
