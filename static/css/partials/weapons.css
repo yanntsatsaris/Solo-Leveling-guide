@@ -253,3 +253,36 @@
     margin: 0; /* Supprime les marges */
   }
 }
+
+@media (max-width: 480px) {
+  #weapons-table {
+    width: 100%; /* S'assure que le tableau occupe toute la largeur */
+  }
+
+  #weapons-table td {
+    flex: 1 1 50%; /* Chaque image occupe environ 50% de la largeur */
+    max-width: 50%; /* Limite la largeur maximale à 50% */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
+    padding: 5px; /* Réduit l'espacement dans les cellules */
+  }
+
+  #weapons-table td img {
+    margin: 0 auto; /* Centre l'image horizontalement */
+    display: block; /* S'assure que l'image est un bloc centré */
+    width: 100px; /* Réduit la taille des images */
+    height: auto; /* Conserve les proportions */
+  }
+
+  #weapons-table td p {
+    margin: 5px auto 0 auto; /* Centre le texte sous l'image */
+    font-size: 0.9rem; /* Réduit légèrement la taille du texte */
+    text-align: center; /* Centre le texte */
+    width: 100%; /* S'assure que le texte occupe toute la largeur de la cellule */
+  }
+
+  #weapons-table tr {
+    display: flex;
+    flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
+    justify-content: center; /* Centre les images sur la ligne */
+  }
+}
