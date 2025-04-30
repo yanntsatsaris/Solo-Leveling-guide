@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ name }} - Solo Leveling Arise</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/weapon_details.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/partials/review.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/partials/passives.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/partials/skills.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/partials/artefacts.css') }}"
+    />
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+
+    <div class="container">
+      <h1>{{ name }}</h1>
+    </div>
+  </body>
+</html>

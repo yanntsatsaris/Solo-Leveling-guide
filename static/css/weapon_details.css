@@ -1,0 +1,45 @@
+html,
+body {
+  margin: 0; /* Supprime les marges par défaut */
+  padding: 0; /* Supprime les paddings par défaut */
+  overflow-x: hidden; /* Empêche le défilement horizontal */
+  height: 100%; /* S'assure que le body et le html occupent toute la hauteur */
+}
+
+body {
+  background-size: cover; /* L'image de fond couvre tout l'écran */
+  background-position: center; /* Centre l'image de fond */
+  background-repeat: no-repeat; /* Empêche la répétition de l'image */
+  height: 100vh; /* Prend toute la hauteur de la fenêtre */
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+.hidden {
+  display: none; /* Masque complètement l'élément */
+  pointer-events: none; /* Désactive les interactions avec la souris */
+  visibility: hidden; /* Rend l'élément invisible */
+}
+
+/* Conteneur principal */
+.container {
+  width: 1100px; /* Largeur du conteneur */
+  max-width: 95%; /* S'assure que la largeur ne dépasse pas 95% de l'écran */
+  margin: 100px auto; /* Centre le contenu horizontalement */
+  padding: 20px;
+  background-color: #1e1e1e;
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
+  box-sizing: border-box; /* Inclut le padding dans la largeur */
+}
+
+/* Style pour le titre */
+h1 {
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff; /* Glow violet */
+  margin-bottom: 20px;
+}
