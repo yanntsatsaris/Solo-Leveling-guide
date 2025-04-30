@@ -333,12 +333,4 @@
     margin: 0; /* Supprime les marges */
     padding: 0; /* Supprime le padding */
   }
-
-  .container {
-    width: 100%; /* S'assure que le conteneur occupe toute la largeur */
-    margin: 0 auto; /* Centre le conteneur */
-    overflow: hidden; /* Empêche les éléments de dépasser le conteneur */
-    padding: 10px; /* Ajoute un padding interne */
-    box-sizing: border-box; /* Inclut le padding dans la largeur */
-  }
 }
