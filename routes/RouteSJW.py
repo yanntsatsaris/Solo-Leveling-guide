@@ -9,11 +9,15 @@ def update_image_paths(description, base_path):
     if not description:
         return description
 
-    # Remplace les chemins relatifs par des chemins absolus avec cache-busting
-    return description.replace(
-        "src='",
-        f"src='{base_path}/"
-    ).replace("\n", "<br>")
+    # Vérifiez si le chemin commence déjà par le chemin de base
+    updated_description = description
+    if f"src='{url_for('static', filename=base_path)}/" not in description:
+        updated_description = description.replace(
+            "src='",
+            f"src='{url_for('static', filename=base_path)}/"
+        )
+
+    return updated_description.replace("\n", "<br>")
 
 def SJW(app: Flask):
     # Charger les données des personnages depuis le fichier JSON
