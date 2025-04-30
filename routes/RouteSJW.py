@@ -1,5 +1,6 @@
 import json
 import logging
+from static.Controleurs.ControleurLog import write_log
 from flask import Flask, render_template , url_for
 
 # Configurer le logger
@@ -166,10 +167,10 @@ def SJW(app: Flask):
                     break
 
         if not weapon:
-            logger.error(f"Weapon '{weaponName}' not found")
+            write_log(f"Weapon '{weaponName}' not found", "ERROR")
             return "Weapon not found", 404
 
-        logger.info(f"Weapon data: {weapon}")
+        write_log(f"Weapon data: {weapon}", "DEBUG")
 
         # Renvoyer le template avec les données de l'arme
         return render_template('weapon_details.html', weapon=weapon)
