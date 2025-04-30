@@ -134,6 +134,10 @@ def SJW(app: Flask):
     
     @app.route('/SJW/<weaponName>')
     def weapon_details(weaponName):
+        # Charger les données des personnages depuis le fichier JSON
+        with open('data/SJW.json', 'r', encoding='utf-8') as f:
+            characters_data = json.load(f)
+            
         # Trouver l'arme correspondant au nom donné
         weapon = None
         character_folder = None
