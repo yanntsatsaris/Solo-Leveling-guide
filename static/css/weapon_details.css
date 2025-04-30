@@ -46,7 +46,9 @@ h1 {
 
 .weapon-container {
   display: flex;
-  align-items: center;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+  flex-direction: column; /* Place les éléments en colonne */
   margin-top: 20px;
 }
 
@@ -64,9 +66,11 @@ h1 {
 
 /* Conteneur pour l'image et les stats */
 .weapon-header {
-  display: flex; /* Aligne l'image et les stats horizontalement */
-  align-items: flex-start; /* Aligne les éléments en haut */
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
   gap: 20px; /* Ajoute un espacement entre l'image et les stats */
+  text-align: center; /* Centre le texte */
 }
 
 /* Style pour l'image de l'arme */
@@ -103,7 +107,11 @@ h1 {
 
 /* Section des évolutions */
 .weapon-evolutions {
-  margin-top: 20px; /* Espace au-dessus de la section */
+  display: flex;
+  flex-direction: column; /* Place les éléments en colonne */
+  align-items: center; /* Centre horizontalement */
+  text-align: center; /* Centre le texte */
+  margin-top: 20px;
   padding: 15px; /* Ajoute un padding interne */
   border-radius: 8px; /* Coins arrondis */
 }
