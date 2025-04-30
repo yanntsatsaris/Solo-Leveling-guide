@@ -143,7 +143,7 @@ def characters(app: Flask):
                 if 'image' in artefact:
                     if not artefact['image'].startswith('images/'):
                         # Vérifiez si le chemin est déjà absolu pour éviter les doublons
-                        artefact['image'] = f'images/Personnages/{type_folder}/{character_folder}/{artefact["image"]}'
+                        artefact['image'] = f'images/Artefacts/{artefact["image"]}'
 
             # Mettre à jour les images des noyaux
             for core in equipment_set.get('cores', []):
