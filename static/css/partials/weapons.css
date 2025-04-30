@@ -294,43 +294,51 @@
 }
 
 @media (max-width: 480px) {
-  .container {
-    width: 90%; /* Adapte la largeur à l'écran en mode paysage */
-    margin: 0 auto; /* Centre le conteneur */
-    padding: 15px; /* Ajuste le padding pour maximiser l'espace */
+  #weapons-table {
+    display: flex;
+    flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
+    justify-content: center; /* Centre les lignes horizontalement */
+    gap: 10px; /* Ajoute un espacement entre les cellules */
+    padding: 0;
+    margin: 0 auto; /* Centre le tableau */
   }
 
-  table {
-    width: 100%; /* S'assure que le tableau occupe toute la largeur */
+  #weapons-table td {
+    flex: 0 0 calc(50% - 10px); /* Chaque cellule occupe exactement 50% de la largeur moins l'espacement */
+    max-width: calc(50% - 10px); /* Limite la largeur maximale à 50% moins l'espacement */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
+    padding: 5px; /* Ajoute un espacement interne */
+    text-align: center; /* Centre le contenu dans la cellule */
   }
 
-  table img {
-    width: 120px; /* Adapte la taille des images pour le mode paysage */
+  #weapons-table td img {
+    margin: 0 auto; /* Centre l'image horizontalement */
+    display: block; /* S'assure que l'image est un bloc centré */
+    width: 100%; /* L'image occupe toute la largeur de la cellule */
+    max-width: 120px; /* Limite la taille maximale de l'image */
     height: auto; /* Conserve les proportions */
   }
 
-  td {
-    padding: 8px; /* Ajuste l'espacement dans les cellules */
-    flex: 1 1 20%; /* Chaque image occupe environ 33% de la largeur */
-    max-width: 20%; /* Limite la largeur maximale à 33% */
-    box-sizing: border-box; /* Inclut le padding dans la largeur */
-  }
-
-  td img {
-    margin: 0 auto; /* Centre l'image horizontalement */
-    display: block; /* S'assure que l'image est un bloc centré */
-  }
-
-  td p {
+  #weapons-table td p {
     margin: 5px auto 0 auto; /* Centre le texte sous l'image */
     font-size: 0.8rem; /* Réduit légèrement la taille du texte */
     text-align: center; /* Centre le texte */
     width: 100%; /* S'assure que le texte occupe toute la largeur de la cellule */
   }
 
-  tr {
+  #weapons-table tr {
     display: flex;
     flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
     justify-content: center; /* Centre les images sur la ligne */
+    margin: 0; /* Supprime les marges */
+    padding: 0; /* Supprime le padding */
+  }
+
+  .container {
+    width: 100%; /* S'assure que le conteneur occupe toute la largeur */
+    margin: 0 auto; /* Centre le conteneur */
+    overflow: hidden; /* Empêche les éléments de dépasser le conteneur */
+    padding: 10px; /* Ajoute un padding interne */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
   }
 }
