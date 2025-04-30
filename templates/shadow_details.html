@@ -41,6 +41,13 @@
         <div class="container">
           <h1>{{ shadow.name }}</h1>
 
+          <!-- Image du personnage (affichée sous le type sur téléphone) -->
+          <div class="shadow-image">
+            <img
+              src="{{ url_for('static', filename=shadow.image) }}"
+              alt="{{ shadow.name }}"
+            />
+          </div>
           <!-- Conteneur pour les onglets et le contenu -->
           <div class="shadow-info">
             <div class="tabs-and-content">
