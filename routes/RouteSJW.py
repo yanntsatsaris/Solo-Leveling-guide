@@ -1,11 +1,6 @@
 import json
-import logging
 from static.Controleurs.ControleurLog import write_log
 from flask import Flask, render_template , url_for
-
-# Configurer le logger
-logging.basicConfig(level=logging.INFO)  # Vous pouvez utiliser DEBUG pour plus de détails
-logger = logging.getLogger(__name__)
 
 def update_image_paths(description, base_path):
     """
