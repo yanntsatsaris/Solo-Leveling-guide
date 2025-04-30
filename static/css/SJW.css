@@ -225,3 +225,176 @@ p {
   color: #ffcc00; /* Garde le texte doré */
   box-shadow: none; /* Supprime l'effet de glow */
 }
+
+/* Affichage sur téléphone (écrans étroits) */
+@media (max-width: 767px) {
+  /* Désactiver le layout */
+  .layout {
+    display: block; /* Passe le layout en bloc pour empiler les éléments */
+    width: 100%; /* Prend toute la largeur de l'écran */
+    height: 100vh;
+    margin: 0; /* Supprime les marges */
+    padding: 0; /* Supprime les paddings */
+  }
+
+  /* Cache la colonne de l'image */
+  .image-column {
+    display: none; /* Cache complètement la colonne de l'image */
+  }
+
+  /* Conteneur principal (content-column) */
+  .content-column {
+    display: block; /* Utilise un affichage en bloc */
+    width: 100%; /* Prend toute la largeur de l'écran */
+    max-width: 100%; /* S'assure que la largeur ne dépasse pas l'écran */
+    height: auto;
+    padding: 1px; /* Ajoute un padding pour l'espacement interne */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+  }
+
+  /* Image du personnage dans le conteneur principal */
+  .container .character-image {
+    display: flex; /* Utilise Flexbox pour centrer l'image */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    margin: 20px auto; /* Centre l'image et ajoute un espacement en haut et en bas */
+    width: 150px; /* Réduit la taille de l'image */
+    height: auto; /* Conserve les proportions */
+    position: relative; /* Supprime tout positionnement absolu ou fixe */
+    text-align: center; /* Centre le contenu textuel si nécessaire */
+  }
+
+  /* Image du personnage dans le conteneur principal sur téléphone */
+  .container .character-image img {
+    width: 100px; /* Réduit la largeur de l'image */
+    height: auto; /* Conserve les proportions */
+    max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
+  }
+
+  /* Texte et contenu */
+  .container {
+    width: 100%; /* Prend toute la largeur disponible */
+    max-width: 100%; /* S'assure que la largeur ne dépasse pas l'écran */
+    padding: 10px; /* Réduit le padding interne */
+    height: auto;
+  }
+
+  /* Onglets */
+  .tabs {
+    display: flex;
+    flex-wrap: wrap; /* Permet de passer à la ligne si nécessaire */
+    gap: 5px; /* Ajoute un espacement entre les onglets */
+  }
+
+  /* Afficher les options lorsque le dropdown est actif */
+  #dropdown-tab.active .dropdown-options {
+    display: block;
+  }
+
+  /* Empêcher le changement de couleur pour le tab avec la flèche */
+  #dropdown-tab {
+    background-color: #1e1e1e; /* Couleur de fond par défaut */
+    color: #ffcc00; /* Couleur du texte par défaut */
+    cursor: pointer; /* Curseur pour indiquer qu'il est cliquable */
+  }
+
+  /* Empêcher le changement de couleur lorsqu'il est actif */
+  #dropdown-tab.active {
+    background-color: #1e1e1e; /* Garde la couleur de fond par défaut */
+    color: #ffcc00; /* Garde la couleur du texte par défaut */
+  }
+
+  /* Empêcher le changement de couleur lorsqu'il est survolé */
+  #dropdown-tab:hover {
+    background-color: #1e1e1e; /* Garde la couleur de fond par défaut */
+    color: #ffcc00; /* Garde la couleur du texte par défaut */
+  }
+
+  /* Onglet Artefacts */
+  #artefacts-tab {
+    display: flex;
+    flex: 2; /* Prend plus de place que la flèche */
+    max-width: 70%; /* Limite la largeur à 70% */
+    text-align: center; /* Centre le texte */
+  }
+
+  /* Onglet de la flèche */
+  #dropdown-tab {
+    display: flex;
+    flex: 1; /* Prend moins de place que l'onglet Artefacts */
+    max-width: 30%; /* Limite la largeur à 30% */
+    align-items: center;
+    justify-content: center;
+    text-align: center; /* Centre le contenu */
+  }
+
+  /* Les autres onglets restent en colonne */
+  .tabs .tab:not(#artefacts-tab):not(#dropdown-tab) {
+    width: 100%; /* Chaque onglet prend toute la largeur */
+    text-align: center; /* Centre le texte */
+  }
+
+  #equipment-select {
+    width: 100%; /* Prend toute la largeur disponible */
+    background-color: #1e1e1e; /* Fond sombre */
+    color: #ffcc00; /* Texte doré */
+    border: 1px solid #ffcc00; /* Bordure dorée */
+    border-radius: 8px; /* Coins arrondis */
+    padding: 1px 5px; /* Espacement interne */
+    font-size: 16px; /* Taille du texte */
+  }
+}
+
+/* Affichage pour les téléphones en mode paysage */
+@media (max-height: 767px) {
+  /* Désactiver le layout */
+  .layout {
+    display: block; /* Passe le layout en bloc pour empiler les éléments */
+    width: 100%; /* Prend toute la largeur de l'écran */
+    height: 100vh;
+    margin: 0; /* Supprime les marges */
+    padding: 0; /* Supprime les paddings */
+  }
+
+  /* Cache la colonne de l'image */
+  .image-column {
+    display: none; /* Cache complètement la colonne de l'image */
+  }
+
+  /* Conteneur principal (content-column) */
+  .content-column {
+    display: block; /* Utilise un affichage en bloc */
+    width: 100%; /* Prend toute la largeur de l'écran */
+    max-width: 100%; /* S'assure que la largeur ne dépasse pas l'écran */
+    height: auto;
+    padding: 1px; /* Ajoute un padding pour l'espacement interne */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+  }
+
+  /* Image du personnage dans le conteneur principal */
+  .container .character-image {
+    display: flex; /* Utilise Flexbox pour centrer l'image */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    margin: 20px auto; /* Centre l'image et ajoute un espacement en haut et en bas */
+    width: 150px; /* Réduit la taille de l'image */
+    height: auto; /* Conserve les proportions */
+    position: relative; /* Supprime tout positionnement absolu ou fixe */
+    text-align: center; /* Centre le contenu textuel si nécessaire */
+  }
+
+  /* Image du personnage dans le conteneur principal sur téléphone */
+  .container .character-image img {
+    width: 100px; /* Réduit la largeur de l'image */
+    height: auto; /* Conserve les proportions */
+    max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
+  }
+
+  /* Conteneur principal */
+  .container {
+    width: 90%; /* Adapte la largeur à l'écran en mode paysage */
+    max-width: 90%; /* S'assure que la largeur ne dépasse pas 90% */
+    padding: 10px; /* Réduit le padding interne */
+    height: auto; /* Ajuste automatiquement la hauteur */
+  }
+}
