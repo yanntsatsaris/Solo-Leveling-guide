@@ -59,6 +59,7 @@
 
               <div class="tab-content" id="skills">
                 <h2>Skills</h2>
+                {% if shadow.skills %}
                 <ul>
                   {% for skill in shadow.skills %}
                   <li>
@@ -71,10 +72,14 @@
                   </li>
                   {% endfor %}
                 </ul>
+                {% else %}
+                <p>No skills available for this shadow.</p>
+                {% endif %}
               </div>
 
               <div class="tab-content" id="weapon">
                 <h2>Weapon</h2>
+                {% if shadow.weapon %}
                 <h3>{{ shadow.weapon.name }}</h3>
                 <img
                   src="{{ url_for('static', filename=shadow.weapon.image) }}"
@@ -83,6 +88,7 @@
                 <p>{{ shadow.weapon.stats|safe }}</p>
 
                 <h3>Weapon Evolutions</h3>
+                {% if shadow.weapon.evolutions %}
                 <ul>
                   {% for evolution in shadow.weapon.evolutions %}
                   <li>
@@ -91,6 +97,11 @@
                   </li>
                   {% endfor %}
                 </ul>
+                {% else %}
+                <p>No evolutions available for this weapon.</p>
+                {% endif %} {% else %}
+                <p>No weapon available for this shadow.</p>
+                {% endif %}
               </div>
             </div>
           </div>
