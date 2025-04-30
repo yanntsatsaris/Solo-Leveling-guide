@@ -66,9 +66,9 @@ def SJW(app: Flask):
         # Mettre à jour les descriptions des armes
         for weapon in character_info.get('weapon', []):
             if 'image' in weapon:
-                weapon['image'] = f'images/{character_folder}/Armes/{weapon["image"]}'
+                weapon['image'] = f'images/{character_folder}/Armes/{weapon["folder"]}/{weapon["image"]}'
             if 'codex' in weapon:
-                weapon['codex'] = f'images/{character_folder}/Armes/{weapon["codex"]}'
+                weapon['codex'] = f'images/{character_folder}/Armes/{weapon["folder"]}/{weapon["codex"]}'
             if 'stats' in weapon:
                 weapon['stats'] = update_image_paths(weapon['stats'], f'images/{character_folder}')
             # Mettre à jour les évolutions des armes
