@@ -53,7 +53,7 @@
       {
         "name": "Fragment de Zeke",
         "type": "Dark",
-        "folder": "Dark_Faragment_de_Zeke",
+        "folder": "Dark_Fargment_de_Zeke",
         "image": "Zeke_img.png",
         "codex": "Zeke_Codex.png"
       },
@@ -74,7 +74,7 @@
       {
         "name": "Ame de Phénix",
         "type": "Fire",
-        "folder": "Fire_Ame_de_Phéni",
+        "folder": "Fire_Ame_de_Phénix",
         "image": "PhénixBow_img.png",
         "codex": "PhénixBow_Codex.png"
       },
@@ -86,9 +86,9 @@
         "codex": "Brochette_Codex.png"
       },
       {
-        "name": "Evetail du Démon",
+        "name": "Eventail du Démon",
         "type": "Fire",
-        "folder": "Fire_Evetail_du_Démon",
+        "folder": "Fire_Eventail_du_Démon",
         "image": "EventailDemon_img.png",
         "codex": "EventailDemon_Codex.png"
       },
@@ -128,14 +128,14 @@
         "codex": "LanceRenard_Codex.png"
       },
       {
-        "name": "Crochet_Kasaka",
+        "name": "Crochet Kasaka",
         "type": "Water",
-        "folder": "Water_Crochet_Kasaka[F2P]",
+        "folder": "Water_Crochet_Kasaka_[F2P]", 
         "image": "Kasaka_img.png",
         "codex": "Kasaka_Codex.png"
       },
       {
-        "name": "Grimoire_Thétis",
+        "name": "Grimoire Thétis",
         "type": "Water",
         "folder": "Water_Grimoire_Thétis",
         "image": "Thétis_img.png",
