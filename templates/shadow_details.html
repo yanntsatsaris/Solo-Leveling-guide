@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ name }} - Solo Leveling Arise</title>
+    <title>{{ shadow.name }} - Solo Leveling Arise</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/shadow_details.css') }}"
@@ -14,22 +14,106 @@
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/passives.css') }}"
-    />
-    <link
-      rel="stylesheet"
       href="{{ url_for('static', filename='css/partials/skills.css') }}"
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/artefacts.css') }}"
+      href="{{ url_for('static', filename='css/partials/weapons.css') }}"
     />
   </head>
   <body>
     {% include 'navbar.html' %}
 
-    <div class="container">
-      <h1>{{ name }}</h1>
+    <!-- Conteneur principal divisé en deux colonnes -->
+    <div class="layout">
+      <!-- Colonne pour l'image -->
+      <div class="image-column">
+        <div class="shadow-image">
+          <img
+            src="{{ url_for('static', filename=shadow.image) }}"
+            alt="{{ shadow.name }}"
+          />
+        </div>
+      </div>
+
+      <!-- Colonne pour le contenu principal -->
+      <div class="content-column">
+        <div class="container">
+          <h1>{{ shadow.name }}</h1>
+
+          <!-- Conteneur pour les onglets et le contenu -->
+          <div class="shadow-info">
+            <div class="tabs-and-content">
+              <!-- Système d'onglets -->
+              <div class="tabs">
+                <div class="tab active" data-tab="review">Review</div>
+                <div class="tab" data-tab="skills">Skills</div>
+                <div class="tab" data-tab="weapon">Weapon</div>
+              </div>
+
+              <!-- Contenu des onglets -->
+              <div class="tab-content active" id="review">
+                <h2>Review</h2>
+                <p>{{ shadow.description|safe }}</p>
+              </div>
+
+              <div class="tab-content" id="skills">
+                <h2>Skills</h2>
+                <ul>
+                  {% for skill in shadow.skills %}
+                  <li>
+                    <h3>{{ skill.name }}</h3>
+                    <img
+                      src="{{ url_for('static', filename=skill.image) }}"
+                      alt="{{ skill.name }}"
+                    />
+                    <p>{{ skill.description|safe }}</p>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+
+              <div class="tab-content" id="weapon">
+                <h2>Weapon</h2>
+                <h3>{{ shadow.weapon.name }}</h3>
+                <img
+                  src="{{ url_for('static', filename=shadow.weapon.image) }}"
+                  alt="{{ shadow.weapon.name }}"
+                />
+                <p>{{ shadow.weapon.stats|safe }}</p>
+
+                <h3>Weapon Evolutions</h3>
+                <ul>
+                  {% for evolution in shadow.weapon.evolutions %}
+                  <li>
+                    <h4>{{ evolution.name }}</h4>
+                    <p>{{ evolution.description|safe }}</p>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <script>
+      // Gestion des onglets
+      document.querySelectorAll(".tab").forEach((tab) => {
+        tab.addEventListener("click", function () {
+          // Supprime la classe active de tous les onglets et contenus
+          document
+            .querySelectorAll(".tab, .tab-content")
+            .forEach((el) => el.classList.remove("active"));
+
+          // Ajoute la classe active à l'onglet et au contenu sélectionnés
+          this.classList.add("active");
+          document
+            .getElementById(this.getAttribute("data-tab"))
+            .classList.add("active");
+        });
+      });
+    </script>
   </body>
 </html>

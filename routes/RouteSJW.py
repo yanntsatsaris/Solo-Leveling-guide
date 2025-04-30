@@ -146,8 +146,56 @@ def SJW(app: Flask):
 
     @app.route('/SJW/shadow/<shadowName>')
     def shadow_details(shadowName):
-        # Logique pour récupérer les détails du shadow
-        return render_template('shadow_details.html', name=shadowName)
+        # Charger les données des personnages depuis le fichier JSON
+        with open('data/SJW.json', 'r', encoding='utf-8') as f:
+            characters_data = json.load(f)
+
+        # Trouver l'ombre correspondant au nom donné
+        shadow = None
+        character_folder = None
+        for character in characters_data:
+            for s in character.get('shadows', []):
+                if s['name'] == shadowName:
+                    shadow = s
+                    character_folder = character['folder']
+                    # Mettre à jour les chemins des images
+                    if 'image' in shadow:
+                        shadow['image'] = f'images/{character_folder}/Shadows/{shadow["image"]}'
+                    if 'description' in shadow:
+                        shadow['description'] = update_image_paths(shadow['description'], f'images/{character_folder}')
+                    
+                    # Mettre à jour les compétences (skills) de l'ombre
+                    for skill in shadow.get('skills', []):
+                        if 'image' in skill:
+                            skill['image'] = f'images/{character_folder}/Shadows/Skills/{skill["image"]}'
+                        if 'description' in skill:
+                            skill['description'] = update_image_paths(skill['description'], f'images/{character_folder}/Shadows/Skills')
+
+                    # Mettre à jour les évolutions de l'ombre
+                    for evolution in shadow.get('evolutions', []):
+                        if 'description' in evolution:
+                            evolution['description'] = update_image_paths(evolution['description'], f'images/{character_folder}/Shadows/Evolutions')
+
+                    # Mettre à jour l'arme associée à l'ombre
+                    if 'weapon' in shadow:
+                        weapon = shadow['weapon']
+                        if 'image' in weapon:
+                            weapon['image'] = f'images/{character_folder}/Shadows/Weapons/{weapon["image"]}'
+                        if 'codex' in weapon:
+                            weapon['codex'] = f'images/{character_folder}/Shadows/Weapons/{weapon["codex"]}'
+                        if 'stats' in weapon:
+                            weapon['stats'] = update_image_paths(weapon['stats'], f'images/{character_folder}/Shadows/Weapons')
+                        for evolution in weapon.get('evolutions', []):
+                            if 'description' in evolution:
+                                evolution['description'] = update_image_paths(evolution['description'], f'images/{character_folder}/Shadows/Weapons/Evolutions')
+
+                    break
+
+        if not shadow:
+            return "Shadow not found", 404
+
+        # Renvoyer le template avec les données de l'ombre
+        return render_template('shadow_details.html', shadow=shadow)
 
     @app.route('/SJW/weapon/<weaponName>')
     def weapon_details(weaponName):
