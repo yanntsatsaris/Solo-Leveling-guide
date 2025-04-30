@@ -74,7 +74,7 @@ def characters(app: Flask):
                     # Vérifiez si le chemin est déjà absolu pour éviter les doublons
                     passive['image'] = f'images/Personnages/{type_folder}/{character_folder}/{passive["image"]}'
             if 'description' in passive:
-                passive['description'] = update_image_paths(passive['description'], f'images/Personnages/{type_folder}/{character_folder}')
+                passive['description'] = update_image_paths(passive['description'], f'static/images/Personnages/{type_folder}/{character_folder}')
 
         # Mettre à jour les descriptions des skills
         for skill in character_info.get('skills', []):
@@ -83,7 +83,7 @@ def characters(app: Flask):
                     # Vérifiez si le chemin est déjà absolu pour éviter les doublons
                     skill['image'] = f'images/Personnages/{type_folder}/{character_folder}/{skill["image"]}'
             if 'description' in skill:
-                skill['description'] = update_image_paths(skill['description'], f'images/Personnages/{type_folder}/{character_folder}')
+                skill['description'] = update_image_paths(skill['description'], f'static/images/Personnages/{type_folder}/{character_folder}')
 
         # Mettre à jour les descriptions des armes
         for weapon in character_info.get('weapon', []):
@@ -92,11 +92,11 @@ def characters(app: Flask):
                     # Vérifiez si le chemin est déjà absolu pour éviter les doublons
                     weapon['image'] = f'images/Personnages/{type_folder}/{character_folder}/{weapon["image"]}'
             if 'stats' in weapon:
-                weapon['stats'] = update_image_paths(weapon['stats'], f'images/Personnages/{type_folder}/{character_folder}')
+                weapon['stats'] = update_image_paths(weapon['stats'], f'static/images/Personnages/{type_folder}/{character_folder}')
             # Mettre à jour les évolutions des armes
             for evolution in weapon.get('evolutions', []):
                 if 'description' in evolution:
-                    evolution['description'] = update_image_paths(evolution['description'], f'images/Personnages/{type_folder}/{character_folder}')
+                    evolution['description'] = update_image_paths(evolution['description'], f'static/images/Personnages/{type_folder}/{character_folder}')
 
         # Calculer les effets de panoplie activés
         equipped_sets = {}
@@ -127,7 +127,7 @@ def characters(app: Flask):
         evolutions = []
         for evolution in character_info.get('evolutions', []):
             description = evolution.get('description', '')
-            description = update_image_paths(description, f'images/Personnages/{type_folder}/{character_folder}')
+            description = update_image_paths(description, f'static/images/Personnages/{type_folder}/{character_folder}')
             evolution['description'] = description
             evolutions.append(evolution)
 
