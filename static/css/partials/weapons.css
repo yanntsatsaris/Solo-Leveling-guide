@@ -181,6 +181,10 @@
   margin-top: 5px;
 }
 
+.weapon-card-codex img:hover {
+  transform: scale(1.1); /* Agrandit légèrement l'image au survol */
+}
+
 @media (max-width: 767px) {
   /* Style pour l'arme sur téléphone */
   .weapons-container {
