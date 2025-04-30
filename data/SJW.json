@@ -53,7 +53,7 @@
       {
         "name": "Fragment de Zeke",
         "type": "Dark",
-        "folder": "Dark_Fargment_de_Zeke",
+        "folder": "Dark_Fragment_de_Zeke",
         "image": "Zeke_img.png",
         "codex": "Zeke_Codex.png"
       },
@@ -110,15 +110,15 @@
         "name": "Lance démoniaque",
         "type": "Light",
         "folder": "Light_Lance_démoniaque_[F2P]",
-        "image": "LanceGuide_img.png",
-        "codex": "LanceGuide_Codex.png"
+        "image": "LanceGuilde_img.png",
+        "codex": "LanceGuilde_Codex.png"
       },
       {
         "name": "Le traqueur",
         "type": "Light",
         "folder": "Light_Le_traqueur",
         "image": "HuntGun_img.png",
-        "codex": "HunTGun_Codex.png"
+        "codex": "HuntGun_Codex.png"
       },
       {
         "name": "Renard a queue dorée",
@@ -138,8 +138,8 @@
         "name": "Grimoire Thétis",
         "type": "Water",
         "folder": "Water_Grimoire_Thétis",
-        "image": "Thétis_img.png",
-        "codex": "Thétis_Codex.png"
+        "image": "Thetis_img.png",
+        "codex": "Thetis_Codex.png"
       },
       {
         "name": "Planche de surf",
