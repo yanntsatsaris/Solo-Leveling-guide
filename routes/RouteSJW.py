@@ -1,22 +1,6 @@
 import json
-import logging
 from static.Controleurs.ControleurLog import write_log
 from flask import Flask, render_template , url_for
-
-# Configurez le logger
-logger = logging.getLogger("RouteSJW")
-logger.setLevel(logging.DEBUG)
-
-# Créez un FileHandler pour écrire les logs dans un fichier
-file_handler = logging.FileHandler("/var/log/Solo-Leveling-guide/RouteSJW.log")
-file_handler.setLevel(logging.DEBUG)
-
-# Définir le format des logs
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-file_handler.setFormatter(formatter)
-
-# Ajoutez le FileHandler au logger
-logger.addHandler(file_handler)
 
 def update_image_paths(description, base_path):
     """

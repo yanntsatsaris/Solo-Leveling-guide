@@ -489,43 +489,43 @@
             "id": "A0",
             "number": "0",
             "type": "passive",
-            "description": "<img src='Light_Thomas_Weapon_Codex.png' alt='Weapon'> [ARME] +4% DEF & +6% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "+4% DEF & +6% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A1",
             "number": "1",
             "type": "passive",
-            "description": "<img src='Light_Thomas_Weapon_Codex.png' alt='Weapon'> [ARME] +6% DEF & +10% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "<+6% DEF & +10% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A2",
             "number": "2",
             "type": "passive",
-            "description": "<img src='Light_Thomas_Weapon_Codex.png' alt='Weapon'> [ARME] +8% DEF & +12% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "<+8% DEF & +12% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A3",
             "number": "3",
             "type": "passive",
-            "description": "<img src='Light_Thomas_Weapon_Codex.png' alt='Weapon'> [ARME] +10% DEF & +15% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "<+10% DEF & +15% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A4",
             "number": "4",
             "type": "passive",
-            "description": "<img src='Light_Thomas_Weapon_Codex.png' alt='Weapon'> [ARME] +12% DEF & +18% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "<+12% DEF & +18% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A5",
             "number": "5",
             "type": "passive",
-            "description": "<img src='Light_Thomas_Weapon_Codex.png' alt='Weapon'> [ARME] +16% DEF & +24% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "<+16% DEF & +24% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A6-10",
             "range": "6-10",
             "type": "stat",
-            "description": "<img src='Light_Thomas_Weapon_Codex.png' alt='Weapon'> [ARME] +4% DEF & +6% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "<+4% DEF & +6% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
           }
         ]
       }
