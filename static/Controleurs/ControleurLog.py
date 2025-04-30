@@ -1,10 +1,16 @@
 import logging
 import inspect
+import os
 from flask import session
+
+log_file_path = "/var/log/Solo-Leveling-guide/Solo-Leveling-guide.log"
+log_dir = os.path.dirname(log_file_path)
+
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
 
 def write_log(message, log_level=None, username=None):
     # Get the configuration
-    log_file_path = "/var/log/Solo-Leveling-guide/Solo-Leveling-guide.log"
     
     # Use the provided log_level or fall back to the default from the configuration
     if log_level is None:
