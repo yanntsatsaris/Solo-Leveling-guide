@@ -137,7 +137,7 @@ def SJW(app: Flask):
         # Charger les données des personnages depuis le fichier JSON
         with open('data/SJW.json', 'r', encoding='utf-8') as f:
             characters_data = json.load(f)
-            
+
         # Trouver l'arme correspondant au nom donné
         weapon = None
         character_folder = None
@@ -159,7 +159,10 @@ def SJW(app: Flask):
                     break
 
         if not weapon:
+            print(f"Weapon '{weaponName}' not found")
             return "Weapon not found", 404
+
+        print(f"Weapon data: {weapon}")
 
         # Renvoyer le template avec les données de l'arme
         return render_template('weapon_details.html', weapon=weapon)
