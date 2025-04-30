@@ -256,20 +256,26 @@
 
 @media (max-width: 480px) {
   #weapons-table {
-    width: 100%; /* S'assure que le tableau occupe toute la largeur */
+    display: flex;
+    flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
+    justify-content: center; /* Centre les lignes horizontalement */
+    gap: 10px; /* Ajoute un espacement entre les cellules */
+    padding: 0;
+    margin: 0 auto; /* Centre le tableau */
   }
 
   #weapons-table td {
-    flex: 1 1 50%; /* Chaque image occupe environ 50% de la largeur */
-    max-width: 50%; /* Limite la largeur maximale à 50% */
+    flex: 1 1 calc(50% - 10px); /* Chaque cellule occupe 50% de la largeur moins l'espacement */
+    max-width: calc(50% - 10px); /* Limite la largeur maximale à 50% moins l'espacement */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
-    padding: 5px; /* Réduit l'espacement dans les cellules */
+    padding: 5px; /* Ajoute un espacement interne */
+    text-align: center; /* Centre le contenu dans la cellule */
   }
 
   #weapons-table td img {
     margin: 0 auto; /* Centre l'image horizontalement */
     display: block; /* S'assure que l'image est un bloc centré */
-    width: 50px; /* Réduit la taille des images */
+    width: 80%; /* Réduit la taille des images à 80% de la largeur de la cellule */
     height: auto; /* Conserve les proportions */
   }
 
@@ -284,5 +290,7 @@
     display: flex;
     flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
     justify-content: center; /* Centre les images sur la ligne */
+    margin: 0; /* Supprime les marges */
+    padding: 0; /* Supprime le padding */
   }
 }
