@@ -10,6 +10,7 @@ if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 
 def write_log(message, log_level=None, username=None):
+    print(f"write_log called with message: {message}, level: {log_level}")
     # Get the configuration
     
     # Use the provided log_level or fall back to the default from the configuration
