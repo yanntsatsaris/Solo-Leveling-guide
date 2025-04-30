@@ -10,10 +10,10 @@ def update_image_paths(description, base_path):
 
     # Vérifiez si le chemin commence déjà par le chemin de base
     updated_description = description
-    if f"src='{base_path}/" not in description:
+    if f"src='{url_for('static', filename=base_path)}/" not in description:
         updated_description = description.replace(
             "src='",
-            f"src='{base_path}/"
+            f"src='{url_for('static', filename=base_path)}/"
         )
 
     return updated_description.replace("\n", "<br>")
