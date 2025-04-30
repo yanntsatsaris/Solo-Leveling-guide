@@ -4,7 +4,7 @@ from routes.RouteHome import home
 from routes.RouteGame_contents import game_contents
 from routes.RouteCharacters import characters
 from routes.RouteGuides import guides
-from routes.RouteSJW import SJW, SJW_weapon
+from routes.RouteSJW import SJW
 
 app = Flask(__name__, static_folder='static')
 
@@ -14,7 +14,6 @@ game_contents(app)
 characters(app)
 guides(app)
 SJW(app)
-SJW_weapon(app)
 
 if __name__ == '__main__':
     app.run(debug=True)

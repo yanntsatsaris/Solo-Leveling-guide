@@ -30,7 +30,6 @@ def SJW(app: Flask):
         
     @app.route('/SJW')
     def inner_SJW():
-        write_log("Route '/SJW' called")
         # Trouver les informations du personnage correspondant
         character_info = next((char for char in characters_data if char['alias'] == "SJW"), None)
 
@@ -147,14 +146,11 @@ def SJW(app: Flask):
 
     @app.route('/SJW/shadow/<shadowName>')
     def shadow_details(shadowName):
-        write_log(f"Route '/SJW/{shadowName}' called")
         # Logique pour récupérer les détails du shadow
         return render_template('shadow_details.html', name=shadowName)
 
-def SJW_weapon(app: Flask):
     @app.route('/SJW/weapon/<weaponName>')
     def weapon_details(weaponName):
-        write_log(f"Route '/SJW/{weaponName}' called")
         
         with open('data/SJW.json', 'r', encoding='utf-8') as f:
             characters_data = json.load(f)
@@ -167,7 +163,6 @@ def SJW_weapon(app: Flask):
                 if w['name'] == weaponName:
                     weapon = w
                     character_folder = character['folder']
-                    write_log(f"Weapon found: {weapon}")
                     # Mettre à jour les chemins des images
                     if 'image' in weapon:
                         weapon['image'] = f'images/{character_folder}/Armes/{weapon["folder"]}/{weapon["image"]}'
@@ -181,10 +176,7 @@ def SJW_weapon(app: Flask):
                     break
 
         if not weapon:
-            write_log(f"Weapon '{weaponName}' not found", "ERROR")
             return "Weapon not found", 404
-
-        write_log(f"Weapon data prepared for: {weaponName}")
 
         # Renvoyer le template avec les données de l'arme
         return render_template('weapon_details.html', weapon=weapon)

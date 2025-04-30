@@ -44,13 +44,13 @@ h1 {
   margin-bottom: 20px;
 }
 
-.weapons-container {
+.weapon-container {
   display: flex;
   align-items: center;
   margin-top: 20px;
 }
 
-.weapons-container > div {
+.weapon-container > div {
   margin-right: 20px; /* Ajoute un espacement à droite */
 }
 
