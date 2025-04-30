@@ -155,6 +155,7 @@ def SJW(app: Flask):
         with open('data/SJW.json', 'r', encoding='utf-8') as f:
             characters_data = json.load(f)
 
+        print(f"Weapon name: {weaponName}")
         # Trouver l'arme correspondant au nom donné
         weapon = None
         character_folder = None
