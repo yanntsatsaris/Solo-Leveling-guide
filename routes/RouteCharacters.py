@@ -11,7 +11,7 @@ def update_image_paths(description, base_path):
     # Remplace les chemins relatifs par des chemins absolus avec cache-busting
     return description.replace(
         "src='",
-        f"src='{url_for('static', filename=base_path)}/"
+        f"src='{base_path}/"
     ).replace("\n", "<br>")
 
 def characters(app: Flask):
@@ -70,21 +70,27 @@ def characters(app: Flask):
         # Mettre à jour les descriptions des passifs
         for passive in character_info.get('passives', []):
             if 'image' in passive:
-                passive['image'] = f'images/Personnages/{type_folder}/{character_folder}/{passive["image"]}'
+                if not passive['image'].startswith('images/'):
+                    # Vérifiez si le chemin est déjà absolu pour éviter les doublons
+                    passive['image'] = f'images/Personnages/{type_folder}/{character_folder}/{passive["image"]}'
             if 'description' in passive:
                 passive['description'] = update_image_paths(passive['description'], f'images/Personnages/{type_folder}/{character_folder}')
 
         # Mettre à jour les descriptions des skills
         for skill in character_info.get('skills', []):
             if 'image' in skill:
-                skill['image'] = f'images/Personnages/{type_folder}/{character_folder}/{skill["image"]}'
+                if not skill['image'].startswith('images/'):
+                    # Vérifiez si le chemin est déjà absolu pour éviter les doublons
+                    skill['image'] = f'images/Personnages/{type_folder}/{character_folder}/{skill["image"]}'
             if 'description' in skill:
                 skill['description'] = update_image_paths(skill['description'], f'images/Personnages/{type_folder}/{character_folder}')
 
         # Mettre à jour les descriptions des armes
         for weapon in character_info.get('weapon', []):
             if 'image' in weapon:
-                weapon['image'] = f'images/Personnages/{type_folder}/{character_folder}/{weapon["image"]}'
+                if not weapon['image'].startswith('images/'):
+                    # Vérifiez si le chemin est déjà absolu pour éviter les doublons
+                    weapon['image'] = f'images/Personnages/{type_folder}/{character_folder}/{weapon["image"]}'
             if 'stats' in weapon:
                 weapon['stats'] = update_image_paths(weapon['stats'], f'images/Personnages/{type_folder}/{character_folder}')
             # Mettre à jour les évolutions des armes
@@ -134,11 +140,17 @@ def characters(app: Flask):
 
             # Mettre à jour les images des artefacts
             for artefact in equipment_set.get('artefacts', []):
-                artefact['image'] = f'images/Artefacts/{artefact["image"]}'
+                if 'image' in artefact:
+                    if not artefact['image'].startswith('images/'):
+                        # Vérifiez si le chemin est déjà absolu pour éviter les doublons
+                        artefact['image'] = f'images/Personnages/{type_folder}/{character_folder}/{artefact["image"]}'
 
             # Mettre à jour les images des noyaux
             for core in equipment_set.get('cores', []):
-                core['image'] = f'images/Noyaux/{core["image"]}'
+                if 'image' in core:
+                    if not core['image'].startswith('images/'):
+                        # Vérifiez si le chemin est déjà absolu pour éviter les doublons
+                        core['image'] = f'images/Noyaux/{core["image"]}'
 
         # Renvoyer le template avec les données du personnage
         return render_template('character_details.html', character=character_info)

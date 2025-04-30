@@ -45,14 +45,18 @@ def SJW(app: Flask):
         # Mettre à jour les descriptions des passifs
         for passive in character_info.get('passives', []):
             if 'image' in passive:
-                passive['image'] = f'images/{character_folder}/{passive["image"]}'
+                if not passive['image'].startswith('images/'):
+                    # Vérifiez si le chemin est déjà absolu pour éviter les doublons
+                    passive['image'] = f'images/{character_folder}/{passive["image"]}'
             if 'description' in passive:
                 passive['description'] = update_image_paths(passive['description'], f'images/{character_folder}')
 
         # Mettre à jour les descriptions des skills
         for skill in character_info.get('skills', []):
             if 'image' in skill:
-                skill['image'] = f'images//{character_folder}/{skill["image"]}'
+                if not skill['image'].startswith('images/'):
+                    # Vérifiez si le chemin est déjà absolu pour éviter les doublons
+                    skill['image'] = f'images/{character_folder}/{skill["image"]}'
             if 'description' in skill:
                 skill['description'] = update_image_paths(skill['description'], f'images/{character_folder}')
 
@@ -61,7 +65,9 @@ def SJW(app: Flask):
         shadows = character_info.get('shadows', [])
         for shadow in shadows:
             if 'image' in shadow:
-                shadow['image'] = f'images/{character_folder}/Shadows/{shadow["image"]}'
+                if not shadow['image'].startswith('images/'):
+                    # Vérifiez si le chemin est déjà absolu pour éviter les doublons
+                    shadow['image'] = f'images/{character_folder}/Shadows/{shadow["image"]}'
 
         character_info['shadows'] = shadows
         
