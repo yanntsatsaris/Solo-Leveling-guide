@@ -46,19 +46,22 @@ def write_log(message, log_level=None, username=None):
 
         # Check if the logger already has handlers
         if not logger.handlers:
-            # Create file handler
+            # Créez un FileHandler
             fh = logging.FileHandler(log_file_path)
             fh.setLevel(log_levels[log_level])
 
-            # Create formatter and add it to the handler
+            # Définir le format des logs
             formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
             fh.setFormatter(formatter)
 
-            # Add the handler to the logger
+            # Ajoutez le handler au logger
             logger.addHandler(fh)
 
         # Log the message with the caller function
-        logger.log(log_levels[log_level], f"{message}")
+        logger.log(log_levels[log_level], message)
 
     except Exception as e:
         print(f"Failed to write log: {e}")
+        # Optionnel : écrire l'erreur dans un fichier séparé
+        with open("/var/log/Solo-Leveling-guide/error.log", "a") as error_log:
+            error_log.write(f"Failed to write log: {e}\n")
