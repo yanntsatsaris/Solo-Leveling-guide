@@ -182,7 +182,7 @@ h1 {
   }
 
   /* Image du personnage dans le conteneur principal */
-  .container .shadows-image {
+  .container .shadow-image {
     display: flex; /* Utilise Flexbox pour centrer l'image */
     justify-content: center; /* Centre horizontalement */
     align-items: center; /* Centre verticalement */
@@ -194,7 +194,7 @@ h1 {
   }
 
   /* Image du personnage dans le conteneur principal sur téléphone */
-  .container .shadows-image img {
+  .container .shadow-image img {
     width: 100px; /* Réduit la largeur de l'image */
     height: auto; /* Conserve les proportions */
     max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
@@ -243,7 +243,7 @@ h1 {
   }
 
   /* Image du personnage dans le conteneur principal */
-  .container .shadows-image {
+  .container .shadow-image {
     display: flex; /* Utilise Flexbox pour centrer l'image */
     justify-content: center; /* Centre horizontalement */
     align-items: center; /* Centre verticalement */
@@ -255,7 +255,7 @@ h1 {
   }
 
   /* Image du personnage dans le conteneur principal sur téléphone */
-  .container .shadows-image img {
+  .container .shadow-image img {
     width: 100px; /* Réduit la largeur de l'image */
     height: auto; /* Conserve les proportions */
     max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
