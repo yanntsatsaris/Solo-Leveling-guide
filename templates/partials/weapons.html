@@ -72,7 +72,7 @@
               </a>
               {% endif %}
               <p class="weapon-name" hidden>{{ weapon.name }}</p>
-              <p class="weapon-description">{{ weapon.stats|safe }}</p>
+              <p class="weapon-description" hidden>{{ weapon.stats|safe }}</p>
             </div>
           </td>
           {% if loop.index % 4 == 0 %}
