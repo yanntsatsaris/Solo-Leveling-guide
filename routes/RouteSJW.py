@@ -1,5 +1,10 @@
 import json
+import logging
 from flask import Flask, render_template , url_for
+
+# Configurer le logger
+logging.basicConfig(level=logging.INFO)  # Vous pouvez utiliser DEBUG pour plus de détails
+logger = logging.getLogger(__name__)
 
 def update_image_paths(description, base_path):
     """
@@ -161,10 +166,10 @@ def SJW(app: Flask):
                     break
 
         if not weapon:
-            print(f"Weapon '{weaponName}' not found")
+            logger.error(f"Weapon '{weaponName}' not found")
             return "Weapon not found", 404
 
-        print(f"Weapon data: {weapon}")
+        logger.info(f"Weapon data: {weapon}")
 
         # Renvoyer le template avec les données de l'arme
         return render_template('weapon_details.html', weapon=weapon)
