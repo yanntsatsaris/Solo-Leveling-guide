@@ -12,7 +12,7 @@ def update_image_paths(description, base_path):
     # Remplace les chemins relatifs par des chemins absolus avec cache-busting
     return description.replace(
         "src='",
-        f"src='{url_for('static', filename=base_path)}/"
+        f"src='{base_path}/"
     ).replace("\n", "<br>")
 
 def SJW(app: Flask):
@@ -69,9 +69,12 @@ def SJW(app: Flask):
         weapon = []
         for weapon in character_info.get('weapon', []):
             if 'image' in weapon:
-                weapon['image'] = f'images/{character_folder}/Armes/{weapon["folder"]}/{weapon["image"]}'
+                # Vérifiez si le chemin est déjà absolu pour éviter les doublons
+                if not weapon['image'].startswith('images/'):
+                    weapon['image'] = f'images/{character_folder}/Armes/{weapon["folder"]}/{weapon["image"]}'
             if 'codex' in weapon:
-                weapon['codex'] = f'images/{character_folder}/Armes/{weapon["folder"]}/{weapon["codex"]}'
+                if not weapon['codex'].startswith('images/'):
+                    weapon['codex'] = f'images/{character_folder}/Armes/{weapon["folder"]}/{weapon["codex"]}'
             if 'stats' in weapon:
                 weapon['stats'] = update_image_paths(weapon['stats'], f'images/{character_folder}')
             # Mettre à jour les évolutions des armes
@@ -121,7 +124,10 @@ def SJW(app: Flask):
 
             # Mettre à jour les images des artefacts
             for artefact in equipment_set.get('artefacts', []):
-                artefact['image'] = f'images/Artefacts/{artefact["image"]}'
+                if 'image' in artefact:
+                    # Vérifiez si le chemin est déjà absolu pour éviter les doublons
+                    if not artefact['image'].startswith('images/'):
+                        artefact['image'] = f'images/Artefacts/{artefact["image"]}'
 
             # Mettre à jour les images des noyaux
             for core in equipment_set.get('cores', []):
