@@ -1,59 +1,89 @@
 <div id="weapons" class="tab-content">
   <h2>Armes</h2>
   {% if character.weapon and character.weapon|length > 0 %}
-  <div class="weapons-container">
-    {% for weapon in character.weapon %}
-    <div class="weapon-card">
-      <!-- Conteneur pour l'image et les stats -->
-      <div class="weapon-header">
-        <div class="weapon-image">
-          <img
-            src="{{ url_for('static', filename=weapon.image) }}"
-            alt="{{ weapon.name }}"
-          />
-        </div>
-        <div class="weapon-stats">
-          <strong>{{ weapon.name }}</strong>
-          <p>{{ weapon.stats|safe }}</p>
-        </div>
-      </div>
+    {% if character.weapon|length == 1 %}
+      <!-- Affichage pour une seule arme -->
+      <div class="weapons-container">
+        {% for weapon in character.weapon %}
+        <div class="weapon-card">
+          <!-- Conteneur pour l'image et les stats -->
+          <div class="weapon-header">
+            <div class="weapon-image">
+              <img
+                src="{{ url_for('static', filename=weapon.image) }}"
+                alt="{{ weapon.name }}"
+              />
+            </div>
+            <div class="weapon-stats">
+              <strong>{{ weapon.name }}</strong>
+              <p>{{ weapon.stats|safe }}</p>
+            </div>
+          </div>
 
-      <!-- Section des évolutions -->
-      {% if weapon.evolutions and weapon.evolutions|length > 0 %}
-      <div class="weapon-evolutions">
-        <h3>Évolutions</h3>
-        <ul>
-          {% for evolution in weapon.evolutions %}
-          {% if evolution.range %}
-          <!-- Afficher les évolutions groupées (A06-A10) -->
-          <li>
-            <img
-              src="{{ url_for('static', filename='images/Advancement/' + evolution.id + '.webp') }}"
-              alt="{{ evolution.id }}"
-              class="weapon-evolution-image weapon-evolution-range"
-            />
-            <span>{{ evolution.description|safe }}</span>
-          </li>
+          <!-- Section des évolutions -->
+          {% if weapon.evolutions and weapon.evolutions|length > 0 %}
+          <div class="weapon-evolutions">
+            <h3>Évolutions</h3>
+            <ul>
+              {% for evolution in weapon.evolutions %}
+              {% if evolution.range %}
+              <!-- Afficher les évolutions groupées (A06-A10) -->
+              <li>
+                <img
+                  src="{{ url_for('static', filename='images/Advancement/' + evolution.id + '.webp') }}"
+                  alt="{{ evolution.id }}"
+                  class="weapon-evolution-image weapon-evolution-range"
+                />
+                <span>{{ evolution.description|safe }}</span>
+              </li>
+              {% else %}
+              <!-- Afficher les évolutions individuelles (A01 à A05) -->
+              <li>
+                <img
+                  src="{{ url_for('static', filename='images/Advancement/' + evolution.id + '.webp') }}"
+                  alt="{{ evolution.id }}"
+                  class="weapon-evolution-image"
+                />
+                <span>{{ evolution.description|safe }}</span>
+              </li>
+              {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
           {% else %}
-          <!-- Afficher les évolutions individuelles (A01 à A05) -->
-          <li>
-            <img
-              src="{{ url_for('static', filename='images/Advancement/' + evolution.id + '.webp') }}"
-              alt="{{ evolution.id }}"
-              class="weapon-evolution-image"
-            />
-            <span>{{ evolution.description|safe }}</span>
-          </li>
+          <p>Aucune évolution disponible pour cette arme.</p>
+          {% endif %}
+        </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <!-- Affichage pour plusieurs armes -->
+      <table id="weapons-table">
+        <tr>
+          {% for weapon in character.weapon %}
+          <td>
+            <div class="weapon-card-codex">
+              {% if weapon.codex %}
+              <a href="{{ url_for('weapon_details', name=weapon.name) }}">
+                <img
+                  src="{{ url_for('static', filename=weapon.codex) }}"
+                  alt="{{ weapon.name or 'Weapon Codex Image' }}"
+                />
+              </a>
+              {% endif %}
+              <p class="weapon-name" hidden>{{ weapon.name }}</p>
+              <p class="weapon-description">{{ weapon.stats|safe }}</p>
+            </div>
+          </td>
+          {% if loop.index % 5 == 0 %}
+          <!-- Change 5 to the number of columns you want per row -->
+        </tr>
+        <tr>
           {% endif %}
           {% endfor %}
-        </ul>
-      </div>
-      {% else %}
-      <p>Aucune évolution disponible pour ce personnage.</p>
-      {% endif %}
-    </div>
-    {% endfor %}
-  </div>
+        </tr>
+      </table>
+    {% endif %}
   {% else %}
   <p>Aucune arme disponible pour ce personnage.</p>
   {% endif %}

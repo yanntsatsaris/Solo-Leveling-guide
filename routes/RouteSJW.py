@@ -66,13 +66,15 @@ def SJW(app: Flask):
         # Mettre à jour les descriptions des armes
         for weapon in character_info.get('weapon', []):
             if 'image' in weapon:
-                weapon['image'] = f'images/{character_folder}/{weapon["image"]}'
+                weapon['image'] = f'images/{character_folder}/Armes/{weapon["image"]}'
+            if 'codex' in weapon:
+                weapon['codex'] = f'images/{character_folder}/Armes/{weapon["codex"]}'
             if 'stats' in weapon:
-                weapon['stats'] = update_image_paths(weapon['stats'], f'images//{character_folder}')
+                weapon['stats'] = update_image_paths(weapon['stats'], f'images/{character_folder}')
             # Mettre à jour les évolutions des armes
             for evolution in weapon.get('evolutions', []):
                 if 'description' in evolution:
-                    evolution['description'] = update_image_paths(evolution['description'], f'images//{character_folder}')
+                    evolution['description'] = update_image_paths(evolution['description'], f'images/{character_folder}')
 
         # Calculer les effets de panoplie activés
         equipped_sets = {}

@@ -41,6 +41,141 @@
         "name": "Tank",
         "image": "Shadow_Tank.png"
       }
+    ],
+    "weapon": [
+      {
+        "name": "Faux de l'ombre",
+        "type": "Dark",
+        "folder": "Dark_Faux_de_l'ombre",
+        "image": "Faux_img.png",
+        "codex": "Faux_Codex.png"
+      },
+      {
+        "name": "Fragment de Zeke",
+        "type": "Dark",
+        "folder": "Dark_Faragment_de_Zeke",
+        "image": "Zeke_img.png",
+        "codex": "Zeke_Codex.png"
+      },
+      {
+        "name": "Katana Fleu de prunier",
+        "type": "Dark",
+        "folder": "Dark_Katana_Fleu_de_prunier",
+        "image": "KatanaPlum_img.png",
+        "codex": "KatanaPlum_Codex.png"
+      },
+      {
+        "name": "Ombre Sélene",
+        "type": "Dark",
+        "folder": "Dark_Ombre_Sélene",
+        "image": "Moonshadow_img.png",
+        "codex": "Moonshadow_Codex.png"
+      },
+      {
+        "name": "Ame de Phénix",
+        "type": "Fire",
+        "folder": "Fire_Ame_de_Phéni",
+        "image": "PhénixBow_img.png",
+        "codex": "PhénixBow_Codex.png"
+      },
+      {
+        "name": "Brochette grilée juteuse",
+        "type": "Fire",
+        "folder": "Fire_Brochette_grilée_juteuse_[F2P]",
+        "image": "Brochette_img.png",
+        "codex": "Brochette_Codex.png"
+      },
+      {
+        "name": "Evetail du Démon",
+        "type": "Fire",
+        "folder": "Fire_Evetail_du_Démon",
+        "image": "EventailDemon_img.png",
+        "codex": "EventailDemon_Codex.png"
+      },
+      {
+        "name": "Rage de Vulkan",
+        "type": "Fire",
+        "folder": "Fire_Rage_de_Vulkan",
+        "image": "MasseVulkan_img.png",
+        "codex": "MasseVulkan_Codex.png"
+      },
+      {
+        "name": "Bâton Divin",
+        "type": "Light",
+        "folder": "Light_Bâton_Divin",
+        "image": "BatonDivin_img.png",
+        "codex": "BatonDivin_Codex.png"
+      },
+      {
+        "name": "Lance démoniaque",
+        "type": "Light",
+        "folder": "Light_Lance_démoniaque_[F2P]",
+        "image": "LanceGuide_img.png",
+        "codex": "LanceGuide_Codex.png"
+      },
+      {
+        "name": "Le traqueur",
+        "type": "Light",
+        "folder": "Light_Le_traqueur",
+        "image": "HuntGun_img.png",
+        "codex": "HunTGun_Codex.png"
+      },
+      {
+        "name": "Renard a queue dorée",
+        "type": "Light",
+        "folder": "Light_Renard_a_queue_dorée_[F2P]",
+        "image": "LanceRenard_img.png",
+        "codex": "LanceRenard_Codex.png"
+      },
+      {
+        "name": "Crochet_Kasaka",
+        "type": "Water",
+        "folder": "Water_Crochet_Kasaka[F2P]",
+        "image": "Kasaka_img.png",
+        "codex": "Kasaka_Codex.png"
+      },
+      {
+        "name": "Grimoire_Thétis",
+        "type": "Water",
+        "folder": "Water_Grimoire_Thétis",
+        "image": "Thétis_img.png",
+        "codex": "Thétis_Codex.png"
+      },
+      {
+        "name": "Planche de surf",
+        "type": "Water",
+        "folder": "Water_Planche_de_surf_[F2P]",
+        "image": "Surf_img.png",
+        "codex": "Surf_Codex.png"
+      },
+      {
+        "name": "Skadi",
+        "type": "Water",
+        "folder": "Water_Skadi",
+        "image": "Skadi_img.png",
+        "codex": "Skadi_Codex.png"
+      },
+      {
+        "name": "Citrouille effrayante",
+        "type": "Wind",
+        "folder": "Wind_Citrouille_effrayante_[F2P]",
+        "image": "Citrouille_img.png",
+        "codex": "Citrouille_Codex.png"
+      },
+      {
+        "name": "Dagues du roi démon",
+        "type": "Wind",
+        "folder": "Wind_Dagues_du_roi_démon",
+        "image": "DagueBaran_img.png",
+        "codex": "DagueBaran_Codex.png"
+      },
+      {
+        "name": "Glaive du roi démon",
+        "type": "Wind",
+        "folder": "Wind_Glaive_du_roi_démon",
+        "image": "EpeeBaran_img.png",
+        "codex": "EpeeBaran_Codex.png"
+      }
     ]
   }
 ]
