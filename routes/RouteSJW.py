@@ -168,15 +168,15 @@ def SJW(app: Flask):
     
     @app.route('/SJW/<weaponName>')
     def weapon_details(weaponName):
-        logger.debug(f"Route '/SJW/{weaponName}' called")
+        write_log(f"Route '/SJW/{weaponName}' called")
 
         # Charger les données des personnages depuis le fichier JSON
         try:
             with open('data/SJW.json', 'r', encoding='utf-8') as f:
                 characters_data = json.load(f)
-            logger.debug("Successfully loaded SJW.json")
+            write_log("Successfully loaded SJW.json")
         except Exception as e:
-            logger.error(f"Failed to load SJW.json: {e}")
+            write_log(f"Failed to load SJW.json: {e}", "ERROR")
             return "Internal Server Error", 500
 
         # Trouver l'arme correspondant au nom donné
@@ -201,10 +201,10 @@ def SJW(app: Flask):
                     break
 
         if not weapon:
-            logger.warning(f"Weapon '{weaponName}' not found")
+            write_log(f"Weapon '{weaponName}' not found", "ERROR")
             return "Weapon not found", 404
 
-        logger.info(f"Weapon data prepared for: {weaponName}")
+        write_log(f"Weapon data prepared for: {weaponName}")
 
         # Renvoyer le template avec les données de l'arme
         return render_template('weapon_details.html', weapon=weapon)
