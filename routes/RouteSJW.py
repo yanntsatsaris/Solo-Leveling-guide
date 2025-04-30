@@ -65,7 +65,6 @@ def SJW(app: Flask):
                 skill['description'] = update_image_paths(skill['description'], f'images/{character_folder}')
 
         # Récupérer et mettre à jour les données des shadows
-        shadows = []
         shadows = character_info.get('shadows', [])
         for shadow in shadows:
             if 'image' in shadow:
@@ -76,7 +75,6 @@ def SJW(app: Flask):
         character_info['shadows'] = shadows
         
         # Mettre à jour les descriptions des armes
-        weapon = []
         for weapon in character_info.get('weapon', []):
             if 'image' in weapon:
                 # Vérifiez si le chemin est déjà absolu pour éviter les doublons
