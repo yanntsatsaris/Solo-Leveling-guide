@@ -82,7 +82,7 @@ body {
 }
 
 /* Image du personnage dans le conteneur principal */
-.container .character-image {
+.container .shadow-image {
   display: none; /* Utilise Flexbox pour centrer l'image */
 }
 
