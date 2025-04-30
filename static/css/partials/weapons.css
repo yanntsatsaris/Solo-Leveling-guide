@@ -265,7 +265,7 @@
   }
 
   #weapons-table td {
-    flex: 1 1 calc(50% - 10px); /* Chaque cellule occupe 50% de la largeur moins l'espacement */
+    flex: 0 0 calc(50% - 10px); /* Chaque cellule occupe exactement 50% de la largeur moins l'espacement */
     max-width: calc(50% - 10px); /* Limite la largeur maximale à 50% moins l'espacement */
     box-sizing: border-box; /* Inclut le padding dans la largeur */
     padding: 5px; /* Ajoute un espacement interne */
@@ -275,7 +275,8 @@
   #weapons-table td img {
     margin: 0 auto; /* Centre l'image horizontalement */
     display: block; /* S'assure que l'image est un bloc centré */
-    width: 80%; /* Réduit la taille des images à 80% de la largeur de la cellule */
+    width: 100%; /* L'image occupe toute la largeur de la cellule */
+    max-width: 120px; /* Limite la taille maximale de l'image */
     height: auto; /* Conserve les proportions */
   }
 
