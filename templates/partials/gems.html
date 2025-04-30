@@ -1,0 +1,20 @@
+<div id="gems" class="tab-content">
+    <h2>Gems</h2>
+    {% if character.gems and character.gems|length > 0 %}
+        {% for gems in character.gems %}
+            <div class="gems {% if monarch.principal == 'True' %}principal{% endif %}">
+                {% if gems.image %}
+                    <img src="{{ url_for('static', filename=gems.image) }}" alt="{{ gems.name or 'Passive Image' }}">
+                {% endif %}
+                <div>
+                    {% if gems.name %}
+                        <strong>{{ gems.name }}</strong><br>
+                    {% endif %}
+                    <p>{{ gems.description|safe }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Informations sur les gems du personnage.</p>
+    {% endif %}
+</div>
