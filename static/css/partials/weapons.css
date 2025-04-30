@@ -269,7 +269,7 @@
   #weapons-table td img {
     margin: 0 auto; /* Centre l'image horizontalement */
     display: block; /* S'assure que l'image est un bloc centré */
-    width: 80px; /* Réduit la taille des images */
+    width: 50px; /* Réduit la taille des images */
     height: auto; /* Conserve les proportions */
   }
 
