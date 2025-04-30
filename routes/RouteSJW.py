@@ -145,14 +145,14 @@ def SJW(app: Flask):
         # Renvoyer le template avec les données du personnage
         return render_template('SJW.html', character=character_info)
 
-    @app.route('/SJW/<shadowName>')
+    @app.route('/SJW/shadow/<shadowName>')
     def shadow_details(shadowName):
         write_log(f"Route '/SJW/{shadowName}' called")
         # Logique pour récupérer les détails du shadow
         return render_template('shadow_details.html', name=shadowName)
 
 def SJW_weapon(app: Flask):
-    @app.route('/SJW/<weaponName>')
+    @app.route('/SJW/weapon/<weaponName>')
     def weapon_details(weaponName):
         write_log(f"Route '/SJW/{weaponName}' called")
 
