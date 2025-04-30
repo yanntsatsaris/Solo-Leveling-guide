@@ -11,7 +11,7 @@ def update_image_paths(description, base_path):
     # Remplace les chemins relatifs par des chemins absolus avec cache-busting
     return description.replace(
         "src='",
-        f"src='{url_for('static', filename=base_path)}/"
+        f"src='{base_path}/"
     ).replace("\n", "<br>")
 
 def characters(app: Flask):
