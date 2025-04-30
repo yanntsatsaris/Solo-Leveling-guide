@@ -269,13 +269,13 @@
   #weapons-table td img {
     margin: 0 auto; /* Centre l'image horizontalement */
     display: block; /* S'assure que l'image est un bloc centré */
-    width: 100px; /* Réduit la taille des images */
+    width: 80px; /* Réduit la taille des images */
     height: auto; /* Conserve les proportions */
   }
 
   #weapons-table td p {
     margin: 5px auto 0 auto; /* Centre le texte sous l'image */
-    font-size: 0.9rem; /* Réduit légèrement la taille du texte */
+    font-size: 0.8rem; /* Réduit légèrement la taille du texte */
     text-align: center; /* Centre le texte */
     width: 100%; /* S'assure que le texte occupe toute la largeur de la cellule */
   }
