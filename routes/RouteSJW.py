@@ -1,6 +1,22 @@
 import json
+import logging
 from static.Controleurs.ControleurLog import write_log
 from flask import Flask, render_template , url_for
+
+# Configurez le logger
+logger = logging.getLogger("RouteSJW")
+logger.setLevel(logging.DEBUG)
+
+# Créez un FileHandler pour écrire les logs dans un fichier
+file_handler = logging.FileHandler("/var/log/Solo-Leveling-guide/RouteSJW.log")
+file_handler.setLevel(logging.DEBUG)
+
+# Définir le format des logs
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+file_handler.setFormatter(formatter)
+
+# Ajoutez le FileHandler au logger
+logger.addHandler(file_handler)
 
 def update_image_paths(description, base_path):
     """
@@ -151,9 +167,16 @@ def SJW(app: Flask):
     
     @app.route('/SJW/<weaponName>')
     def weapon_details(weaponName):
+        logger.debug(f"Route '/SJW/{weaponName}' called")
+
         # Charger les données des personnages depuis le fichier JSON
-        with open('data/SJW.json', 'r', encoding='utf-8') as f:
-            characters_data = json.load(f)
+        try:
+            with open('data/SJW.json', 'r', encoding='utf-8') as f:
+                characters_data = json.load(f)
+            logger.debug("Successfully loaded SJW.json")
+        except Exception as e:
+            logger.error(f"Failed to load SJW.json: {e}")
+            return "Internal Server Error", 500
 
         # Trouver l'arme correspondant au nom donné
         weapon = None
@@ -163,6 +186,7 @@ def SJW(app: Flask):
                 if w['name'] == weaponName:
                     weapon = w
                     character_folder = character['folder']
+                    logger.debug(f"Weapon found: {weapon}")
                     # Mettre à jour les chemins des images
                     if 'image' in weapon:
                         weapon['image'] = f'images/{character_folder}/Armes/{weapon["folder"]}/{weapon["image"]}'
@@ -176,10 +200,10 @@ def SJW(app: Flask):
                     break
 
         if not weapon:
-            write_log(f"Weapon '{weaponName}' not found", "ERROR")
+            logger.warning(f"Weapon '{weaponName}' not found")
             return "Weapon not found", 404
 
-        write_log(f"Weapon data: {weapon}", "DEBUG")
+        logger.info(f"Weapon data prepared for: {weaponName}")
 
         # Renvoyer le template avec les données de l'arme
         return render_template('weapon_details.html', weapon=weapon)
