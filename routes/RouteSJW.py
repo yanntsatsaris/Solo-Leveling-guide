@@ -155,15 +155,9 @@ def SJW_weapon(app: Flask):
     @app.route('/SJW/weapon/<weaponName>')
     def weapon_details(weaponName):
         write_log(f"Route '/SJW/{weaponName}' called")
-
-        # Charger les données des personnages depuis le fichier JSON
-        try:
-            with open('data/SJW.json', 'r', encoding='utf-8') as f:
-                characters_data = json.load(f)
-            write_log("Successfully loaded SJW.json")
-        except Exception as e:
-            write_log(f"Failed to load SJW.json: {e}", "ERROR")
-            return "Internal Server Error", 500
+        
+        with open('data/SJW.json', 'r', encoding='utf-8') as f:
+            characters_data = json.load(f)
 
         # Trouver l'arme correspondant au nom donné
         weapon = None
@@ -173,7 +167,7 @@ def SJW_weapon(app: Flask):
                 if w['name'] == weaponName:
                     weapon = w
                     character_folder = character['folder']
-                    logger.debug(f"Weapon found: {weapon}")
+                    write_log(f"Weapon found: {weapon}")
                     # Mettre à jour les chemins des images
                     if 'image' in weapon:
                         weapon['image'] = f'images/{character_folder}/Armes/{weapon["folder"]}/{weapon["image"]}'
