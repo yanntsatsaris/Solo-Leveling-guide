@@ -134,5 +134,28 @@ def SJW(app: Flask):
     
     @app.route('/SJW/<weaponName>')
     def weapon_details(weaponName):
-        # Logique pour récupérer les détails du shadow
-        return render_template('weapon_details.html', name=weaponName)
+        # Trouver l'arme correspondant au nom donné
+        weapon = None
+        character_folder = None
+        for character in characters_data:
+            for w in character.get('weapon', []):
+                if w['name'] == weaponName:
+                    weapon = w
+                    character_folder = character['folder']
+                    # Mettre à jour les chemins des images
+                    if 'image' in weapon:
+                        weapon['image'] = f'images/{character_folder}/Armes/{weapon["folder"]}/{weapon["image"]}'
+                    if 'codex' in weapon:
+                        weapon['codex'] = f'images/{character_folder}/Armes/{weapon["folder"]}/{weapon["codex"]}'
+                    if 'stats' in weapon:
+                        weapon['stats'] = update_image_paths(weapon['stats'], f'images/{character_folder}')
+                    for evolution in weapon.get('evolutions', []):
+                        if 'description' in evolution:
+                            evolution['description'] = update_image_paths(evolution['description'], f'images/{character_folder}')
+                    break
+
+        if not weapon:
+            return "Weapon not found", 404
+
+        # Renvoyer le template avec les données de l'arme
+        return render_template('weapon_details.html', weapon=weapon)

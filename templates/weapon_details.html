@@ -3,33 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ name }} - Solo Leveling Arise</title>
+    <title>{{ weapon.name }} - Solo Leveling Arise</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/weapon_details.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/review.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/passives.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/skills.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/artefacts.css') }}"
     />
   </head>
   <body>
     {% include 'navbar.html' %}
 
     <div class="container">
-      <h1>{{ name }}</h1>
+      <h1>{{ weapon.name }}</h1>
+      <div class="weapon-card">
+        <!-- Conteneur pour l'image et les stats -->
+        <div class="weapon-header">
+          <div class="weapon-image">
+            <img
+              src="{{ url_for('static', filename=weapon.image) }}"
+              alt="{{ weapon.name }}"
+            />
+          </div>
+          <div class="weapon-stats">
+            <strong>{{ weapon.name }}</strong>
+            <p>{{ weapon.stats|safe }}</p>
+          </div>
+        </div>
+
+        <!-- Section des évolutions -->
+        {% if weapon.evolutions and weapon.evolutions|length > 0 %}
+        <div class="weapon-evolutions">
+          <h3>Évolutions</h3>
+          <ul>
+            {% for evolution in weapon.evolutions %} {% if evolution.range %}
+            <!-- Afficher les évolutions groupées (A06-A10) -->
+            <li>
+              <img
+                src="{{ url_for('static', filename='images/Advancement/' + evolution.id + '.webp') }}"
+                alt="{{ evolution.id }}"
+                class="weapon-evolution-image weapon-evolution-range"
+              />
+              <span>{{ evolution.description|safe }}</span>
+            </li>
+            {% else %}
+            <!-- Afficher les évolutions individuelles (A01 à A05) -->
+            <li>
+              <img
+                src="{{ url_for('static', filename='images/Advancement/' + evolution.id + '.webp') }}"
+                alt="{{ evolution.id }}"
+                class="weapon-evolution-image"
+              />
+              <span>{{ evolution.description|safe }}</span>
+            </li>
+            {% endif %} {% endfor %}
+          </ul>
+        </div>
+        {% else %}
+        <p>Aucune évolution disponible pour cette arme.</p>
+        {% endif %}
+      </div>
     </div>
   </body>
 </html>
