@@ -147,6 +147,7 @@ def SJW(app: Flask):
 
     @app.route('/SJW/<shadowName>')
     def shadow_details(shadowName):
+        write_log(f"Route '/SJW/{shadowName}' called")
         # Logique pour récupérer les détails du shadow
         return render_template('shadow_details.html', name=shadowName)
 
