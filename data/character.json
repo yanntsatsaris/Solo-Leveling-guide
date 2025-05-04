@@ -1174,7 +1174,7 @@
           {
             "name": "Collier",
             "number": "05",
-            "set": "Outstanding_Ability",
+            "set": "Outstanding Ability",
             "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
             "main_stat": {
               "name": "HP"
@@ -1197,7 +1197,7 @@
           {
             "name": "Bracelet",
             "number": "06",
-            "set": "Outstanding_Ability",
+            "set": "Outstanding Ability",
             "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
             "main_stat": {
               "name": "ELEM DMG"
@@ -1220,7 +1220,7 @@
           {
             "name": "Bague",
             "number": "07",
-            "set": "Outstanding_Ability",
+            "set": "Outstanding Ability",
             "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
             "main_stat": {
               "name": "DEF"
@@ -1243,8 +1243,240 @@
           {
             "name": "Boucle d'oreille",
             "number": "08",
-            "set": "Outstanding_Ability",
+            "set": "Outstanding Ability",
             "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
+            "main_stat": {
+              "name": "MP MAX"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "CRIT DMG"
+              },
+              {
+                "name": "MP CONS"
+              }
+            ]
+          }
+        ],
+        "cores": [
+          {
+            "name": "Noyau Orange 01",
+            "number": "01",
+            "image": "Orange01.webp",
+            "main_stat": {
+              "name": "ATK"
+            },
+            "secondary_stat": {
+              "name": "CRIT DMG"
+            }
+          },
+          {
+            "name": "Noyau Orange 02",
+            "number": "02",
+            "image": "Orange02.webp",
+            "main_stat": {
+              "name": "DEF"
+            },
+            "secondary_stat": {
+              "name": "CRIT HIT"
+            }
+          },
+          {
+            "name": "Noyau Violet 03",
+            "number": "03",
+            "image": "Violet03.webp",
+            "main_stat": {
+              "name": "HP"
+            },
+            "secondary_stat": {
+              "name": "DEF PEN"
+            }
+          }
+        ]
+      },
+      {
+        "set_name": "Guild & POD",
+        "focus_stats": [
+          "DEF",
+          "CRIT HIT",
+          "CRIT DMG",
+          "DEF PEN",
+          "DMG INC",
+          "MP CONS"
+        ],
+        "artefacts": [
+          {
+            "name": "Casque",
+            "number": "01",
+            "set": "Chaotic Infamy",
+            "image": "Chaotic_Infamy/Artefact01_Infamy.webp",
+            "main_stat": {
+              "name": "DEF"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF% +3/4"
+              },
+              {
+                "name": "DEF PEN"
+              },
+              {
+                "name": "DMG INC"
+              },
+              {
+                "name": "CRIT HIT"
+              }
+            ]
+          },
+          {
+            "name": "Plastron",
+            "number": "02",
+            "set": "Chaotic Infamy",
+            "image": "Chaotic_Infamy/Artefact02_Infamy.webp",
+            "main_stat": {
+              "name": "DEF"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF% +3/4"
+              },
+              {
+                "name": "DEF PEN"
+              },
+              {
+                "name": "DMG INC"
+              },
+              {
+                "name": "CRIT HIT"
+              }
+            ]
+          },
+          {
+            "name": "Gants",
+            "number": "03",
+            "set": "Chaotic Infamy",
+            "image": "Chaotic_Infamy/Artefact02_Infamy.webp",
+            "main_stat": {
+              "name": "ATK"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "MP CONS"
+              },
+              {
+                "name": "CRIT HIT"
+              }
+            ]
+          },
+          {
+            "name": "Bottes",
+            "number": "04",
+            "set": "Chaotic Infamy",
+            "image": "Chaotic_Infamy/Artefact04_Infamy.webp",
+            "main_stat": {
+              "name": "CRIT DMG"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "MP CONS"
+              },
+              {
+                "name": "CRIT HIT"
+              }
+            ]
+          },
+          {
+            "name": "Collier",
+            "number": "05",
+            "set": "Chaotic Infamy",
+            "image": "Chaotic Infamy/Artefact05_Infamy.webp",
+            "main_stat": {
+              "name": "HP"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "CRIT DMG"
+              },
+              {
+                "name": "DEF PEN"
+              }
+            ]
+          },
+          {
+            "name": "Bracelet",
+            "number": "06",
+            "set": "Chaotic Infamy",
+            "image": "Chaotic Infamy/Artefact06_Infamy.webp",
+            "main_stat": {
+              "name": "ELEM DMG"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "CRIT DMG"
+              },
+              {
+                "name": "MP CONS"
+              }
+            ]
+          },
+          {
+            "name": "Bague",
+            "number": "07",
+            "set": "Chaotic Infamy",
+            "image": "Chaotic Infamy/Artefact07_Infamy.webp",
+            "main_stat": {
+              "name": "DEF"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF% +3/4"
+              },
+              {
+                "name": "CRIT DMG"
+              },
+              {
+                "name": "DEF PEN"
+              },
+              {
+                "name": "DMG INC"
+              }
+            ]
+          },
+          {
+            "name": "Boucle d'oreille",
+            "number": "08",
+            "set": "Chaotic Infamy",
+            "image": "Chaotic Infamy/Artefact08_Infamy.webp",
             "main_stat": {
               "name": "MP MAX"
             },

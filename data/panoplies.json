@@ -1,6 +1,19 @@
 {
   "panoplies": [
     {
+      "name": "Armed",
+      "set_bonus": [
+        {
+          "pieces_required": 2,
+          "effect": "Increases the user's Attack by 5%."
+        },
+        {
+          "pieces_required": 4,
+          "effect": "When attacking, the user ignores 18% of the target's Defense."
+        }
+      ]
+    },
+    {
       "name": "Burning Curse",
       "set_bonus": [
         {
@@ -30,20 +43,24 @@
         },
         {
           "pieces_required": 8,
-          "effect": "Augmente l’effet de [Bris] de 30% en attaquant des ennemis dotés d’une faiblesse élémentaires. L’effet [Avarice améliorée] devient [Avarice ardente].\nDétails :\n[Avarice ardente] – Augmente le taux de coup critique de l’utilisateur et de ses alliés de 15%, et leurs dégâts de coup critique de 30%.\n– L’effet [Avarice] est indisponible une fois que l’effet [Avarice ardente] a été activé.\n– L’effet [Avarice améliorée] devient indisponible.\nDurée : permanent"
+          "effect": "When attacking enemies that have elemental weakness, the [Break] effect increases by 30%.\n[Enhanced Greed] enhances to [Burning Greed].\n[Burning Greed]\n・Increases the user and their team members' Critical Hit Rate by 15% and Critical Hit Damage by 30%.\n・[Greed] becomes unavailable after [Burning Greed] has been activated.\n・[Enhanced Greed] becomes unavailable.\n・Duration: Permanent"
         }
       ]
     },
     {
-      "name": "Outstanding Ability",
+      "name": "Chaotic Infamy",
       "set_bonus": [
         {
           "pieces_required": 2,
-          "effect": "Lorsque les PM de l’utilisateur sont à 70% ou au-dessus, les dégâts infligés augmentent de 30%."
+          "effect": "Using this skill grants the Infamy effect.\n・Excludes Support Skills\n[Infamy]\n・Increases Basic Skill damage by 1.5% (stacking up to 20 times).\n・Increases the user's damage taken by 1% (stacking up to 20 times)\n・Duration: Permanent"
         },
         {
           "pieces_required": 4,
-          "effect": "L’effet d’augmentation des dégâts infligés s’élève à 60% et il se déclenche dès que les PM de l’utilisateur sont à 40% ou au-dessus."
+          "effect": "Enhances the [Infamy] effect to Ehnahced Infamy.\n[Enhanced Infamy]\n・Increases the user's Basic Skill damage by 2.5% (stacking up to 20%)\n・Increases the user's damage taken by 1% (stacking up to 20 times)\n・Duration: Permanent\n・When the user uses their Basic Skill, they recover 5% of their MP (Cooldown: 30 second(s)).\n・Unable to activate the Infamy effect."
+        },
+        {
+          "pieces_required": 8,
+          "effect": "In [Team Fight] mode, the user's damage dealt increases by 40%.\nWhen the [Enhanced Infamy] effect has stacked 10 times, it becomes the [Chaotic Infamy] effect.\n[Chaotic Infamy]\n・Increases the user's Basic Skill and Ultimate Skill damage by 100%.\n・Duration: Permanent\n・Removes the Damage Taken Increase effect on the user.\n・The user regians 5% of their MP when using their Basic Skill (Cooldown: 30 second(s))\n・The user becomes unable to activate the [Infamy] and [Enhanced Infamy] effects."
         }
       ]
     },
@@ -61,15 +78,15 @@
       ]
     },
     {
-      "name": "Armed",
+      "name": "Outstanding Ability",
       "set_bonus": [
         {
           "pieces_required": 2,
-          "effect": "Increases the user's Attack by 5%."
+          "effect": "When the user has 70% or more of their MP, their damage dealt increases by 30%."
         },
         {
           "pieces_required": 4,
-          "effect": "When attacking, the user ignores 18% of the target's Defense."
+          "effect": "The Damage Dealt Increase effect potency increases to 60% and this effect now triggers when the user is at 40% or more of their maximum MP."
         }
       ]
     }
