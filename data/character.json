@@ -851,7 +851,7 @@
             "name": "Casque",
             "number": "01",
             "set": "Burning Curse",
-            "image": "Burning_Curse/Artefact01_Cure.webp",
+            "image": "Burning_Curse/Artefact01_Curse.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -874,7 +874,7 @@
             "name": "Plastron",
             "number": "02",
             "set": "Burning Curse",
-            "image": "Burning_Curse/Artefact02_Cure.webp",
+            "image": "Burning_Curse/Artefact02_Curse.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -897,7 +897,7 @@
             "name": "Gants",
             "number": "03",
             "set": "Burning Curse",
-            "image": "Burning_Curse/Artefact03_Cure.webp",
+            "image": "Burning_Curse/Artefact03_Curse.webp",
             "main_stat": {
               "name": "ATK"
             },
@@ -920,7 +920,7 @@
             "name": "Bottes",
             "number": "04",
             "set": "Burning Curse",
-            "image": "Burning_Curse/Artefact04_Cure.webp",
+            "image": "Burning_Curse/Artefact04_Curse.webp",
             "main_stat": {
               "name": "CRIT DMG"
             },
