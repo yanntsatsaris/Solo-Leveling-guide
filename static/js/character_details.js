@@ -67,8 +67,11 @@ function showSetEffects(setName, event) {
   // Mettre à jour le titre avec le nom de la panoplie
   effectsTitle.textContent = setName;
 
+  // Récupérer les effets activés pour le set actuellement sélectionné
+  const selectedSetEffects = equipmentSetsEffects[currentSetIndex];
+
   // Ajouter les effets activés pour la panoplie survolée
-  activeSetEffects.forEach((effect) => {
+  selectedSetEffects.forEach((effect) => {
     if (effect.set_name === setName) {
       const listItem = document.createElement("li");
       listItem.innerHTML = `
