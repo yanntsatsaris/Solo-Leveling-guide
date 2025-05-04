@@ -65,6 +65,36 @@
       ]
     },
     {
+      "name": "Chaotic Desire",
+      "set_bonus": [
+        {
+          "pieces_required": 2,
+          "effect": "When an attack that deals [Break] damage hits, it triggers the [Desire] effect.\n[Desire]\n・Increases the user's elemental damage by 0.5% (stacking up to 20 times). (Cooldown: 1.5 second(s)).\n・Duration: Permanent"
+        },
+        {
+          "pieces_required": 4,
+          "effect": "When the [Desire] effect has stacked 20 times, it becomes the [Enhanced Desire] effect.\n[Enhanced Desire]\n・Increases the damage of the user's skill with the [Break] effect by 30%.\n・Increases the user's and team members' elemental damage by 20%\n・Duration: Permanent\n・The user becomes unable to activate the [Desire] effect."
+        },
+        {
+          "pieces_required": 8,
+          "effect": "Attacking enemies that are at an elemental weakness increases the user's [Break] effectiveness by 30%\nThe [Enhanced Desire] effect becomes the [Chaotic Desire] effect\n[Chaotic Desire]\n・Increases the damage of the user's skill with the [Break] effect by 50%.\n・The user and team members' elemental damage increases by 40%\n・Duration: Permanent\n・The user becomes unable to activate the [Desire] and [Enhanced Desire] effects."
+        }
+      ]
+    },
+    {
+      "name": "Destructive Instinct",
+      "set_bonus": [
+        {
+          "pieces_required": 2,
+          "effect": "The damage of user skills with the [Break] effect increases by 30%."
+        },
+        {
+          "pieces_required": 4,
+          "effect": "The Skill Damage Increase effect increases to 60%."
+        }
+      ]
+    },
+    {
       "name": "Guardian",
       "set_bonus": [
         {
