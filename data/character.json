@@ -97,95 +97,95 @@
     "weapon": [
       {
         "name": "[ARME] UNE CONVICTION ET UNE VOCATION",
-        "image": "Light_GGH_Weapon.png",
-        "stats": "+12% DEF.\nTOUCHE MOB<img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] <img src='Light_GGH_DBuff_LightDMGUp.png' alt='LightDmgInc'> [LIGHT DMG UP]."
+        "image": "Light_GGH_Weapon.webp",
+        "stats": "+12% DEF.\nTOUCHE MOB<img src='Light_GGH_Skill1.webp' alt='Skill1'> [SKILL1] <img src='Light_GGH_DBuff_LightDMGUp.webp' alt='LightDmgInc'> [LIGHT DMG UP]."
       }
     ],
     "passives": [
       {
         "principal": "True",
-        "description": "+12% DEF.\n<img src='Light_GGH_Buff_Vaisseaubrise.png' alt='VaisseauBrise'> [VAISSEAU BRISE]."
+        "description": "+12% DEF.\n<img src='Light_GGH_Buff_Vaisseaubrise.webp' alt='VaisseauBrise'> [VAISSEAU BRISE]."
       },
       {
         "name": "[SHIELD]",
         "description": "EMPECHE LE KNOCKBACK ET PROTEGE DES DEGATS.",
-        "image": "Light_GGH_Buff_Shield.png"
+        "image": "Light_GGH_Buff_Shield.webp"
       },
       {
         "name": "[VAISSEAU BRISE]",
         "description": "-50% RECUPERATION HEAL.",
-        "image": "Light_GGH_Buff_Vaisseaubrise.png"
+        "image": "Light_GGH_Buff_Vaisseaubrise.webp"
       },
       {
         "name": "[AURA DE DIRIGEANT]",
-        "description": "+50% DEF\n+20%DMG RED.\n <img src='Light_GGH_Buff_Shield.png' alt='Shield'> [SHIELD] +20% (15 SECONDES).",
-        "image": "Light_GGH_Buff_Aura.png"
+        "description": "+50% DEF\n+20%DMG RED.\n <img src='Light_GGH_Buff_Shield.webp' alt='Shield'> [SHIELD] +20% (15 SECONDES).",
+        "image": "Light_GGH_Buff_Aura.webp"
       },
       {
         "name": "[Fragment LUMIERE BRILLANTE]",
-        "description": "CHARGE <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE]\n<img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] +60% DMG INC. (15 SECONDES)",
-        "image": "Light_GGH_Buff_Fragment.png"
+        "description": "CHARGE <img src='Light_GGH_Skill_Core.webp' alt='Core'> [CORE]\n<img src='Light_GGH_Skill1.webp' alt='Skill1'> [SKILL1] +60% DMG INC. (15 SECONDES)",
+        "image": "Light_GGH_Buff_Fragment.webp"
       },
       {
         "name": "[VOLONTE LUMIERE BRILLANTE]",
         "description": "[PAR LIGHT] TEAM +8% LIGHT DMG INC. & +8% CRIT DMG.",
-        "image": "Light_GGH_Buff_VolonteBrillante.png"
+        "image": "Light_GGH_Buff_VolonteBrillante.webp"
       },
       {
         "name": "[VOLONTE DU Fragment]",
         "description": "[TEAM] +30% CRIT DMG & [QTE] +150% DMG INC. (20 SECONDES)",
-        "image": "Light_GGH_Buff_VolonteFragment.png"
+        "image": "Light_GGH_Buff_VolonteFragment.webp"
       },
       {
         "name": "[LIGHT DMG UP]",
         "description": "[DBUFF MOB] +12% LIGHT DMG INC. (15 SECONDES)",
-        "image": "Light_GGH_DBuff_LightDMGUp.png"
+        "image": "Light_GGH_DBuff_LightDMGUp.webp"
       },
       {
         "name": "[AURA LUMIERE BRILLANTE]",
-        "description": "[SJW BUFF] +10% DEF & <img src='Light_GGH_Buff_Shield.png' alt='Shield'> [SHIELD] +10% & +10% LIGHT DMG INC. (20 SECONDES)",
-        "image": "Light_GGH_Buff_Aura.png"
+        "description": "[SJW BUFF] +10% DEF & <img src='Light_GGH_Buff_Shield.webp' alt='Shield'> [SHIELD] +10% & +10% LIGHT DMG INC. (20 SECONDES)",
+        "image": "Light_GGH_Buff_Aura.webp"
       }
     ],
     "skills": [
       {
         "principal": "True",
-        "description": "<img src='Light_GGH_Skill_QTE.png' alt='QTE'> [QTE] > <img src='Light_GGH_Skill1.png' alt='Ultime'> [SKILL1] > <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_GGH_Skill2.png' alt='Skill2'> [SKILL2] > <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_GGH_Skill_Ultime.png' alt='Ultime'> [ULTIME] > <img src='Light_GGH_Skill_Core.png' alt='Core'> [Core] > [QTE]"
+        "description": "<img src='Light_GGH_Skill_QTE.webp' alt='QTE'> [QTE] > <img src='Light_GGH_Skill1.webp' alt='Ultime'> [SKILL1] > <img src='Light_GGH_Skill_Core.webp' alt='Core'> [CORE] > <img src='Light_GGH_Skill2.webp' alt='Skill2'> [SKILL2] > <img src='Light_GGH_Skill_Core.webp' alt='Core'> [CORE] > <img src='Light_GGH_Skill1.webp' alt='Skill1'> [SKILL1] > <img src='Light_GGH_Skill_Ultime.webp' alt='Ultime'> [ULTIME] > <img src='Light_GGH_Skill_Core.webp' alt='Core'> [Core] > [QTE]"
       },
       {
         "name": "[BASE ATK] VOLONTE DU PRESIDENT",
-        "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].",
-        "image": "Light_GGH_Skill_Base.png"
+        "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [LEGERS].",
+        "image": "Light_GGH_Skill_Base.webp"
       },
       {
         "name": "[CORE] ECRASEMENT ABDOMINAL",
-        "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].",
-        "image": "Light_GGH_Skill_Core.png"
+        "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [LEGERS].",
+        "image": "Light_GGH_Skill_Core.webp"
       },
       {
         "name": "[SKILL1] ESPRIT COMBATIF",
-        "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].\nCHARGE <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE]\n<img src='Light_GGH_Buff_Aura.png' alt='Aura'> [AURA DE DIRIGEANT]\n<img src='Light_GGH_Weapon_Codex.png' alt='Arme'> [ARME]\n<img src='Light_GGH_DBuff_LightDMGUp.png' alt='LightDmgInc'> [LIGHT DMG UP]",
-        "image": "Light_GGH_Skill1.png"
+        "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [LEGERS].\nCHARGE <img src='Light_GGH_Skill_Core.webp' alt='Core'> [CORE]\n<img src='Light_GGH_Buff_Aura.webp' alt='Aura'> [AURA DE DIRIGEANT]\n<img src='Light_GGH_Weapon_Codex.webp' alt='Arme'> [ARME]\n<img src='Light_GGH_DBuff_LightDMGUp.webp' alt='LightDmgInc'> [LIGHT DMG UP]",
+        "image": "Light_GGH_Skill1.webp"
       },
       {
         "name": "[SKILL2] POUVOIR LUMIERE BRILLANTE",
-        "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].\nCHARGE <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE] & <img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1]\n<img src='Light_GGH_Buff_Fragment.png' alt='Fragment'> [Fragment LUMIERE BRILLANTE]\n<img src='Light_GGH_Buff_VolonteBrillante.png' alt='VolonteBrillante'> [VOLONTE LUMIERE BRILLANTE]",
-        "image": "Light_GGH_Skill2.png"
+        "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [LEGERS].\nCHARGE <img src='Light_GGH_Skill_Core.webp' alt='Core'> [CORE] & <img src='Light_GGH_Skill1.webp' alt='Skill1'> [SKILL1]\n<img src='Light_GGH_Buff_Fragment.webp' alt='Fragment'> [Fragment LUMIERE BRILLANTE]\n<img src='Light_GGH_Buff_VolonteBrillante.webp' alt='VolonteBrillante'> [VOLONTE LUMIERE BRILLANTE]",
+        "image": "Light_GGH_Skill2.webp"
       },
       {
         "name": "[ULTIME] SUPERNOVA",
-        "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [TOUT-PUISSANTS].\n[MOB BREAK] +60% DMG INC\n<img src='Light_GGH_Buff_VolonteFragment.png' alt='VolonteFragment'> [VOLONTE DU Fragment].",
-        "image": "Light_GGH_Skill_Ultime.png"
+        "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [TOUT-PUISSANTS].\n[MOB BREAK] +60% DMG INC\n<img src='Light_GGH_Buff_VolonteFragment.webp' alt='VolonteFragment'> [VOLONTE DU Fragment].",
+        "image": "Light_GGH_Skill_Ultime.webp"
       },
       {
         "name": "[QTE] BALAYAGE",
-        "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [MOYENS]\n<img src='Light_GGH_Buff_Aura.png' alt='Aura'> [AURA DE DIRIGEANT].",
-        "image": "Light_GGH_Skill_QTE.png"
+        "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [MOYENS]\n<img src='Light_GGH_Buff_Aura.webp' alt='Aura'> [AURA DE DIRIGEANT].",
+        "image": "Light_GGH_Skill_QTE.webp"
       },
       {
         "name": "[SOUTIEN] DESTRUCTION INSTANTANEE",
-        "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS]\n[SJW BUFF] <img src='Light_GGH_Buff_Aura.png' alt='Core'> [AURA LUMIERE BRILLANTE].",
-        "image": "Light_GGH_Skill_Soutien.png"
+        "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [LEGERS]\n[SJW BUFF] <img src='Light_GGH_Buff_Aura.webp' alt='Core'> [AURA LUMIERE BRILLANTE].",
+        "image": "Light_GGH_Skill_Soutien.webp"
       }
     ],
     "equipment_sets": [
