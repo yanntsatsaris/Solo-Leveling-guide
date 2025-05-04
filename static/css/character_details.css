@@ -51,7 +51,7 @@ body {
   display: flex; /* Active Flexbox pour centrer l'image */
   justify-content: center; /* Centre horizontalement */
   align-items: center; /* Centre verticalement */
-  width: 250px; /* Taille de l'image par défaut */
+  width: 225px; /* Taille de l'image par défaut */
   height: auto; /* Conserve les proportions */
   padding: 5px; /* Réduit le padding autour de l'image */
   margin: 0 auto; /* Centre l'image dans son conteneur */
