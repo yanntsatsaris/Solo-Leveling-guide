@@ -1129,7 +1129,7 @@
             "name": "Gants",
             "number": "03",
             "set": "Iron Will",
-            "image": "Iron_Will/Artefact02_IronWill.webp",
+            "image": "Iron_Will/Artefact03_IronWill.webp",
             "main_stat": {
               "name": "ATK"
             },
@@ -1361,7 +1361,7 @@
             "name": "Gants",
             "number": "03",
             "set": "Chaotic Infamy",
-            "image": "Chaotic_Infamy/Artefact02_Infamy.webp",
+            "image": "Chaotic_Infamy/Artefact03_Infamy.webp",
             "main_stat": {
               "name": "ATK"
             },
@@ -1407,7 +1407,7 @@
             "name": "Collier",
             "number": "05",
             "set": "Chaotic Infamy",
-            "image": "Chaotic Infamy/Artefact05_Infamy.webp",
+            "image": "Chaotic_Infamy/Artefact05_Infamy.webp",
             "main_stat": {
               "name": "HP"
             },
@@ -1430,7 +1430,7 @@
             "name": "Bracelet",
             "number": "06",
             "set": "Chaotic Infamy",
-            "image": "Chaotic Infamy/Artefact06_Infamy.webp",
+            "image": "Chaotic_Infamy/Artefact06_Infamy.webp",
             "main_stat": {
               "name": "ELEM DMG"
             },
@@ -1453,7 +1453,7 @@
             "name": "Bague",
             "number": "07",
             "set": "Chaotic Infamy",
-            "image": "Chaotic Infamy/Artefact07_Infamy.webp",
+            "image": "Chaotic_Infamy/Artefact07_Infamy.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -1476,7 +1476,7 @@
             "name": "Boucle d'oreille",
             "number": "08",
             "set": "Chaotic Infamy",
-            "image": "Chaotic Infamy/Artefact08_Infamy.webp",
+            "image": "Chaotic_Infamy/Artefact08_Infamy.webp",
             "main_stat": {
               "name": "MP MAX"
             },
