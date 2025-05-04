@@ -89,6 +89,19 @@
           "effect": "The Damage Dealt Increase effect potency increases to 60% and this effect now triggers when the user is at 40% or more of their maximum MP."
         }
       ]
+    },
+    {
+      "name": "Sylph's Blessing",
+      "set_bonus": [
+        {
+          "pieces_required": 2,
+          "effect": "When the user uses their QTE Skills, Support Skills, or Ultimate Skill, it increases the user and their team's elemental weakness damage dealt by 5%. - Duration: 30 second(s)"
+        },
+        {
+          "pieces_required": 4,
+          "effect": "Increases the skill's duration to 60 second(s) and increases the Elemental Weakness Damage. Increases the effect stack maximum to 3 instances."
+        }
+      ]
     }
   ]
 }
