@@ -115,10 +115,10 @@
   </div>
 
   <script id="equipmentSetsEffectsData" type="application/json">
-    {% if character.active_set_effects and character.active_set_effects|length > 0 %}
-        {{ character.active_set_effects|tojson }}
+    {% if character.equipment_sets_effects and character.equipment_sets_effects|length > 0 %}
+      {{ character.equipment_sets_effects|tojson }}
     {% else %}
-        []
+      []
     {% endif %}
   </script>
 
