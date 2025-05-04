@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Gestion des effets de panoplie
 const activeSetEffects = JSON.parse(
-  document.getElementById("activeSetEffectsData").textContent
+  document.getElementById("equipmentSetsEffectsData").textContent
 );
 
 function showSetEffects(setName, event) {
