@@ -203,8 +203,8 @@
           {
             "name": "Casque",
             "number": "01",
-            "set": "Avarice Ardente",
-            "image": "Avarice_Ardente/Avarice_Ardente01.webp",
+            "set": "Burning Greed",
+            "image": "Burning_Greed/Avarice_Ardente01.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -226,8 +226,8 @@
           {
             "name": "Plastron",
             "number": "02",
-            "set": "Avarice Ardente",
-            "image": "Avarice_Ardente/Avarice_Ardente02.webp",
+            "set": "Burning Greed",
+            "image": "Burning_Greed/Avarice_Ardente02.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -249,8 +249,8 @@
           {
             "name": "Gants",
             "number": "03",
-            "set": "Avarice Ardente",
-            "image": "Avarice_Ardente/Avarice_Ardente03.webp",
+            "set": "Burning Greed",
+            "image": "Burning_Greed/Avarice_Ardente03.webp",
             "main_stat": {
               "name": "ATK"
             },
@@ -272,8 +272,8 @@
           {
             "name": "Bottes",
             "number": "04",
-            "set": "Avarice Ardente",
-            "image": "Avarice_Ardente/Avarice_Ardente04.webp",
+            "set": "Burning Greed",
+            "image": "Burning_Greed/Avarice_Ardente04.webp",
             "main_stat": {
               "name": "CRIT DMG"
             },
@@ -295,8 +295,8 @@
           {
             "name": "Collier",
             "number": "05",
-            "set": "Avarice Ardente",
-            "image": "Avarice_Ardente/Avarice_Ardente05.webp",
+            "set": "Burning Greed",
+            "image": "Burning_Greed/Avarice_Ardente05.webp",
             "main_stat": {
               "name": "HP"
             },
@@ -318,8 +318,8 @@
           {
             "name": "Bracelet",
             "number": "06",
-            "set": "Avarice Ardente",
-            "image": "Avarice_Ardente/Avarice_Ardente06.webp",
+            "set": "Burning Greed",
+            "image": "Burning_Greed/Avarice_Ardente06.webp",
             "main_stat": {
               "name": "ELEM DMG"
             },
@@ -341,8 +341,8 @@
           {
             "name": "Bague",
             "number": "07",
-            "set": "Avarice Ardente",
-            "image": "Avarice_Ardente/Avarice_Ardente07.webp",
+            "set": "Burning Greed",
+            "image": "Burning_Greed/Avarice_Ardente07.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -364,8 +364,8 @@
           {
             "name": "Boucle d'oreille",
             "number": "08",
-            "set": "Avarice Ardente",
-            "image": "Avarice_Ardente/Avarice_Ardente08.webp",
+            "set": "Burning Greed",
+            "image": "Burning_Greed/Avarice_Ardente08.webp",
             "main_stat": {
               "name": "MP MAX"
             },
@@ -434,31 +434,31 @@
     "name": "Thomas Andre",
     "alias": "Thomas",
     "folder": "SSR_Light_ThomasAndre",
-    "fond": "Light_Thomas_Fond.png",
+    "fond": "Light_Thomas_Fond.webp",
     "evolutions": [
       {
         "id": "A0",
         "number": "0",
         "type": "passive",
-        "description": "Utiliser <img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE], <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1], <img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2] ou <img src='Light_Thomas_Skill_QTE.png' alt='QTE'> [QTE] Active <img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='PuissanceEcrasante'> [PUISSANCE ECRASANTE] 1x.\n<img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME] s'active uniquement quand Thomas Andre atteint 5 cumuls de <img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='PuissanceEcrasante'> [PUISSANCE ECRASANTE].\nBoss de guilde & Puissance de destruction +24% hausse de dégats (DMG inc)."
+        "description": "Utiliser <img src='Light_Thomas_Skill_Core.webp' alt='Core'> [CORE], <img src='Light_Thomas_Skill1.webp' alt='Skill1'> [SKILL1], <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [SKILL2] ou <img src='Light_Thomas_Skill_QTE.webp' alt='QTE'> [QTE] Active <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='PuissanceEcrasante'> [PUISSANCE ECRASANTE] 1x.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [ULTIME] s'active uniquement quand Thomas Andre atteint 5 cumuls de <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='PuissanceEcrasante'> [PUISSANCE ECRASANTE].\nBoss de guilde & Puissance de destruction +24% hausse de dégats (DMG inc)."
       },
       {
         "id": "A1",
         "number": "1",
         "type": "passive",
-        "description": "Chaque bouclier qui s'active sur Thomas Andre active <img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='PuissanceEcrasante'> [PUISSANCE ECRASANTE] 1x"
+        "description": "Chaque bouclier qui s'active sur Thomas Andre active <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='PuissanceEcrasante'> [PUISSANCE ECRASANTE] 1x"
       },
       {
         "id": "A2",
         "number": "2",
         "type": "passive",
-        "description": "<img src='Light_Thomas_BuffShield.png' alt='Shield'>[SHIELD] actif +10% taux & dégâts coup critique (Crit Rate & DMG).\n<img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD] +8%."
+        "description": "<img src='Light_Thomas_BuffShield.webp' alt='Shield'>[SHIELD] actif +10% taux & dégâts coup critique (Crit Rate & DMG).\n<img src='Light_Thomas_BuffGainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD] +8%."
       },
       {
         "id": "A3",
         "number": "3",
         "type": "passive",
-        "description": "Transformer en <img src='Light_Thomas_Buff_Tyrandacier.png' alt='Tyrandacier'> [TYRAN D'ACIER] <img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2] active [Overgrowth].\n[Overgrowth] 200% dégats de la defense total de Thomas Andre.\n10 000 <img src='Light_Thomas_BuffShield.png' alt='Shield'>[SHIELD] = [Overgrowth] +1000% hausse de dégâts (DMG inc)."
+        "description": "Transformer en <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Tyrandacier'> [TYRAN D'ACIER] <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [SKILL2] active [Overgrowth].\n[Overgrowth] 200% dégats de la defense total de Thomas Andre.\n10 000 <img src='Light_Thomas_BuffShield.webp' alt='Shield'>[SHIELD] = [Overgrowth] +1000% hausse de dégâts (DMG inc)."
       },
       {
         "id": "A4",
@@ -470,7 +470,7 @@
         "id": "A5",
         "number": "5",
         "type": "passive",
-        "description": "Transformer en <img src='Light_Thomas_Buff_Tyrandacier.png' alt='Tyrandacier'> [TYRAN D'ACIER] <img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME] +125% hausse de dégâts (DMG inc)."
+        "description": "Transformer en <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Tyrandacier'> [TYRAN D'ACIER] <img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [ULTIME] +125% hausse de dégâts (DMG inc)."
       },
       {
         "id": "A6-10",
@@ -482,50 +482,50 @@
     "weapon": [
       {
         "name": "[ARME] LE VERITABLE ROI",
-        "image": "Light_Thomas_Weapon.png",
-        "stats": "+16% DEF.\n<img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD] +24%.",
+        "image": "Light_Thomas_Weapon.webp",
+        "stats": "+16% DEF.\n<img src='Light_Thomas_BuffGainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD] +24%.",
         "evolutions": [
           {
             "id": "A0",
             "number": "0",
             "type": "passive",
-            "description": "+4% DEF & +6% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "+4% DEF & +6% <img src='Light_Thomas_BuffGainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A1",
             "number": "1",
             "type": "passive",
-            "description": "+6% DEF & +10% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "+6% DEF & +10% <img src='Light_Thomas_BuffGainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A2",
             "number": "2",
             "type": "passive",
-            "description": "+8% DEF & +12% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "+8% DEF & +12% <img src='Light_Thomas_BuffGainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A3",
             "number": "3",
             "type": "passive",
-            "description": "+10% DEF & +15% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "+10% DEF & +15% <img src='Light_Thomas_BuffGainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A4",
             "number": "4",
             "type": "passive",
-            "description": "+12% DEF & +18% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "+12% DEF & +18% <img src='Light_Thomas_BuffGainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A5",
             "number": "5",
             "type": "passive",
-            "description": "+16% DEF & +24% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "+16% DEF & +24% <img src='Light_Thomas_BuffGainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A6-10",
             "range": "6-10",
             "type": "stat",
-            "description": "+4% DEF & +6% <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "+4% DEF & +6% <img src='Light_Thomas_BuffGainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
           }
         ]
       }
@@ -533,79 +533,79 @@
     "passives": [
       {
         "principal": "True",
-        "description": "+16% DEF.\n<img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD] +8%.\nACTIVATION <img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +10% CRIT HIT & CRIT DMG TEAMFIGHT +24% DMG INC."
+        "description": "+16% DEF.\n<img src='Light_Thomas_BuffGainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD] +8%.\nACTIVATION <img src='Light_Thomas_BuffShield.webp' alt='Shield'> [SHIELD] +10% CRIT HIT & CRIT DMG TEAMFIGHT +24% DMG INC."
       },
       {
         "name": "[GAIN DE SHIELD]",
-        "description": "AUGMENTE L'ACQUISITION DE LA  QUANTITE DU <img src='Light_Thomas_BuffShield.png' alt='Shield'>[SHIELD].",
-        "image": "Light_Thomas_BuffGainShield.png"
+        "description": "AUGMENTE L'ACQUISITION DE LA  QUANTITE DU <img src='Light_Thomas_BuffShield.webp' alt='Shield'>[SHIELD].",
+        "image": "Light_Thomas_BuffGainShield.webp"
       },
       {
         "name": "[SHIELD]",
-        "description": "EMPECHE LE KNOCKBACK ET PROTEGE DES DEGATS\nACTIVATION <img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='PuissanceEcrasante'> [PUISSANCE ECRASANTE].",
-        "image": "Light_Thomas_BuffShield.png"
+        "description": "EMPECHE LE KNOCKBACK ET PROTEGE DES DEGATS\nACTIVATION <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='PuissanceEcrasante'> [PUISSANCE ECRASANTE].",
+        "image": "Light_Thomas_BuffShield.webp"
       },
       {
         "name": "[PUISSANCE ECRASANTE] (5x)",
-        "description": "+50% DEF\n <img src='Light_Thomas_BuffGainShield.png' alt='GainDeShield'> [GAIN DE SHIELD] +10% (25 SECONDES).",
-        "image": "Light_Thomas_Buff_Puissanceecrasante.png"
+        "description": "+50% DEF\n <img src='Light_Thomas_BuffGainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD] +10% (25 SECONDES).",
+        "image": "Light_Thomas_Buff_Puissanceecrasante.webp"
       },
       {
         "name": "[TYRAN D'ACIER]",
-        "description": "<img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] & <img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2] +100% DMG INC.\n<img src='Light_Thomas_Skill_Ultime.png' alt='Ultimate'> [ULTIMATE] +125% DMG INC.\n+20% DMG RED.\n+20% DEF.\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +10%.",
-        "image": "Light_Thomas_Buff_Tyrandacier.png"
+        "description": "<img src='Light_Thomas_Skill1.webp' alt='Skill1'> [SKILL1] & <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [SKILL2] +100% DMG INC.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultimate'> [ULTIMATE] +125% DMG INC.\n+20% DMG RED.\n+20% DEF.\n<img src='Light_Thomas_BuffShield.webp' alt='Shield'> [SHIELD] +10%.",
+        "image": "Light_Thomas_Buff_Tyrandacier.webp"
       },
       {
         "name": "[ARMURE D'ACIER]",
-        "description": "<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +10%\n+10 CRIT HIT & CRIT DMG (25 SECONDES).",
-        "image": "Light_Thomas_Buff_Armuredacier.png"
+        "description": "<img src='Light_Thomas_BuffShield.webp' alt='Shield'> [SHIELD] +10%\n+10 CRIT HIT & CRIT DMG (25 SECONDES).",
+        "image": "Light_Thomas_Buff_Armuredacier.webp"
       }
     ],
     "skills": [
       {
         "principal": "True",
-        "description": "<img src='Light_Thomas_Skill_QTE.png' alt='QTE'> [QTE] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME] <img src='Light_Thomas_Buff_Tyrandacier.png' alt='Tyrandacier'>"
+        "description": "<img src='Light_Thomas_Skill_QTE.webp' alt='QTE'> [QTE] > <img src='Light_Thomas_Skill1.webp' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Core.webp' alt='Core'> [CORE] > <img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [ULTIME] <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Tyrandacier'>"
       },
       {
         "principal": "True",
         "name": "[TYRAN D'ACIER]",
-        "description": "<img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_Thomas_Skill2.png' alt='Skill2'> [SKILL2] > <img src='Light_Thomas_Buff_Tyrandacier.png' alt='Tyrandacier'> CLINIOTE > <img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME] > <img src='Light_Thomas_Skill_Core.png' alt='Core'> [CORE] > <img src='Light_Thomas_Skill1.png' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME] <img src='Light_Thomas_Buff_Tyrandacier.png' alt='Tyrandacier'>.",
-        "image": "Light_Thomas_Buff_Tyrandacier.png"
+        "description": "<img src='Light_Thomas_Skill_Core.webp' alt='Core'> [CORE] > <img src='Light_Thomas_Skill1.webp' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Core.webp' alt='Core'> [CORE] > <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [SKILL2] > <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Tyrandacier'> CLINIOTE > <img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [ULTIME] > <img src='Light_Thomas_Skill_Core.webp' alt='Core'> [CORE] > <img src='Light_Thomas_Skill1.webp' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [ULTIME] <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Tyrandacier'>.",
+        "image": "Light_Thomas_Buff_Tyrandacier.webp"
       },
       {
         "name": "[CORE] COUP DE MARTEAU GEANT",
-        "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='Puissanceecrasante'> [PUISSANCE ECRASANTE] (1x)\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +2%",
-        "image": "Light_Thomas_Skill_Core.png"
+        "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='Puissanceecrasante'> [PUISSANCE ECRASANTE] (1x)\n<img src='Light_Thomas_BuffShield.webp' alt='Shield'> [SHIELD] +2%",
+        "image": "Light_Thomas_Skill_Core.webp"
       },
       {
         "name": "[SKILL1] DEMOLITION ABSOLUE",
-        "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='Puissanceecrasante'> [PUISSANCE ECRASANTE] (1x)\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +2%",
-        "image": "Light_Thomas_Skill1.png"
+        "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='Puissanceecrasante'> [PUISSANCE ECRASANTE] (1x)\n<img src='Light_Thomas_BuffShield.webp' alt='Shield'> [SHIELD] +2%",
+        "image": "Light_Thomas_Skill1.webp"
       },
       {
         "name": "[SKILL2] ECRASEMENT COLOSSAL",
-        "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='Puissanceecrasante'> [PUISSANCE ECRASANTE] (1x)\n<img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] +2%",
-        "image": "Light_Thomas_Skill2.png"
+        "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='Puissanceecrasante'> [PUISSANCE ECRASANTE] (1x)\n<img src='Light_Thomas_BuffShield.webp' alt='Shield'> [SHIELD] +2%",
+        "image": "Light_Thomas_Skill2.webp"
       },
       {
         "name": "[ULTIME] JUGEMENT DU CHEF",
-        "description": "TRANSFORMATION <img src='Light_Thomas_Buff_Tyrandacier.png' alt='Tyrandacier'> [TYRAN D'ACIER] 10000 POINTS <img src='Light_Thomas_BuffShield.png' alt='Shield'> [SHIELD] = <img src='Light_Thomas_Skill_Ultime.png' alt='Ultime'> [ULTIME] +1020% DMG INC.",
-        "image": "Light_Thomas_Skill_Ultime.png"
+        "description": "TRANSFORMATION <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Tyrandacier'> [TYRAN D'ACIER] 10000 POINTS <img src='Light_Thomas_BuffShield.webp' alt='Shield'> [SHIELD] = <img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [ULTIME] +1020% DMG INC.",
+        "image": "Light_Thomas_Skill_Ultime.webp"
       },
       {
         "name": "[QTE] COUP A LA VOLEE",
-        "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.png' alt='Puissanceecrasante'> [PUISSANCE ECRASANTE] (1x).",
-        "image": "Light_Thomas_Skill_QTE.png"
+        "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='Puissanceecrasante'> [PUISSANCE ECRASANTE] (1x).",
+        "image": "Light_Thomas_Skill_QTE.webp"
       },
       {
         "name": "[SOUTIEN] RETOUR DU ROI",
-        "description": "<img src='Light_Thomas_Buff_Armuredacier.png' alt='Armuredacier'> [ARMURE D'ACIER].",
-        "image": "Light_Thomas_Skill_Soutien.png"
+        "description": "<img src='Light_Thomas_Buff_Armuredacier.webp' alt='Armuredacier'> [ARMURE D'ACIER].",
+        "image": "Light_Thomas_Skill_Soutien.webp"
       }
     ],
     "equipment_sets": [
       {
-        "set_name": "Mid Game",
+        "set_name": "Early Game",
         "focus_stats": [
           "DEF",
           "CRIT HIT",
@@ -618,8 +618,8 @@
           {
             "name": "Casque",
             "number": "01",
-            "set": "Malédiction Ardente",
-            "image": "Malediction_Ardente/Malediction_Ardente01.webp",
+            "set": "Armed",
+            "image": "Armed/Artefact01_Armed.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -641,8 +641,8 @@
           {
             "name": "Plastron",
             "number": "02",
-            "set": "Malédiction Ardente",
-            "image": "Malediction_Ardente/Malediction_Ardente02.webp",
+            "set": "Armed",
+            "image": "Armed/Artefact02_Armed.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -664,8 +664,8 @@
           {
             "name": "Gants",
             "number": "03",
-            "set": "Malédiction Ardente",
-            "image": "Malediction_Ardente/Malediction_Ardente03.webp",
+            "set": "Armed",
+            "image": "Armed/Artefact03_Armed.webp",
             "main_stat": {
               "name": "ATK"
             },
@@ -687,8 +687,8 @@
           {
             "name": "Bottes",
             "number": "04",
-            "set": "Malédiction Ardente",
-            "image": "Malediction_Ardente/Malediction_Ardente04.webp",
+            "set": "Armed",
+            "image": "Armed/Artefact04_Armed.webp",
             "main_stat": {
               "name": "CRIT DMG"
             },
@@ -710,8 +710,8 @@
           {
             "name": "Collier",
             "number": "05",
-            "set": "Obsidian",
-            "image": "Obsidian/Obsidian05.webp",
+            "set": "Outstanding Ability",
+            "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
             "main_stat": {
               "name": "HP"
             },
@@ -733,8 +733,8 @@
           {
             "name": "Bracelet",
             "number": "06",
-            "set": "Obsidian",
-            "image": "Obsidian/Obsidian06.webp",
+            "set": "Outstanding Ability",
+            "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
             "main_stat": {
               "name": "ELEM DMG"
             },
@@ -756,8 +756,8 @@
           {
             "name": "Bague",
             "number": "07",
-            "set": "Obsidian",
-            "image": "Obsidian/Obsidian07.webp",
+            "set": "Outstanding Ability",
+            "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -779,8 +779,240 @@
           {
             "name": "Boucle d'oreille",
             "number": "08",
-            "set": "Obsidian",
-            "image": "Obsidian/Obsidian08.webp",
+            "set": "Outstanding Ability",
+            "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
+            "main_stat": {
+              "name": "MP MAX"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "CRIT DMG"
+              },
+              {
+                "name": "MP CONS"
+              }
+            ]
+          }
+        ],
+        "cores": [
+          {
+            "name": "Noyau Orange 01",
+            "number": "01",
+            "image": "Orange01.webp",
+            "main_stat": {
+              "name": "ATK"
+            },
+            "secondary_stat": {
+              "name": "CRIT DMG"
+            }
+          },
+          {
+            "name": "Noyau Orange 02",
+            "number": "02",
+            "image": "Orange02.webp",
+            "main_stat": {
+              "name": "DEF"
+            },
+            "secondary_stat": {
+              "name": "CRIT HIT"
+            }
+          },
+          {
+            "name": "Noyau Violet 03",
+            "number": "03",
+            "image": "Violet03.webp",
+            "main_stat": {
+              "name": "HP"
+            },
+            "secondary_stat": {
+              "name": "DEF PEN"
+            }
+          }
+        ]
+      },
+      {
+        "set_name": "Mid Game",
+        "focus_stats": [
+          "DEF",
+          "CRIT HIT",
+          "CRIT DMG",
+          "DEF PEN",
+          "DMG INC",
+          "MP CONS"
+        ],
+        "artefacts": [
+          {
+            "name": "Casque",
+            "number": "01",
+            "set": "Burning Curse",
+            "image": "Burning_Curse/Artefact01_Cure.webp",
+            "main_stat": {
+              "name": "DEF"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF% +3/4"
+              },
+              {
+                "name": "DEF PEN"
+              },
+              {
+                "name": "DMG INC"
+              },
+              {
+                "name": "CRIT HIT"
+              }
+            ]
+          },
+          {
+            "name": "Plastron",
+            "number": "02",
+            "set": "Burning Curse",
+            "image": "Burning_Curse/Artefact02_Cure.webp",
+            "main_stat": {
+              "name": "DEF"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF% +3/4"
+              },
+              {
+                "name": "DEF PEN"
+              },
+              {
+                "name": "DMG INC"
+              },
+              {
+                "name": "CRIT HIT"
+              }
+            ]
+          },
+          {
+            "name": "Gants",
+            "number": "03",
+            "set": "Burning Curse",
+            "image": "Burning_Curse/Artefact03_Cure.webp",
+            "main_stat": {
+              "name": "ATK"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "MP CONS"
+              },
+              {
+                "name": "CRIT HIT"
+              }
+            ]
+          },
+          {
+            "name": "Bottes",
+            "number": "04",
+            "set": "Burning Curse",
+            "image": "Burning_Curse/Artefact04_Cure.webp",
+            "main_stat": {
+              "name": "CRIT DMG"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "MP CONS"
+              },
+              {
+                "name": "CRIT HIT"
+              }
+            ]
+          },
+          {
+            "name": "Collier",
+            "number": "05",
+            "set": "Outstanding Ability",
+            "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
+            "main_stat": {
+              "name": "HP"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "CRIT DMG"
+              },
+              {
+                "name": "DEF PEN"
+              }
+            ]
+          },
+          {
+            "name": "Bracelet",
+            "number": "06",
+            "set": "Outstanding Ability",
+            "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
+            "main_stat": {
+              "name": "ELEM DMG"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "CRIT DMG"
+              },
+              {
+                "name": "MP CONS"
+              }
+            ]
+          },
+          {
+            "name": "Bague",
+            "number": "07",
+            "set": "Outstanding Ability",
+            "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
+            "main_stat": {
+              "name": "DEF"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF% +3/4"
+              },
+              {
+                "name": "CRIT DMG"
+              },
+              {
+                "name": "DEF PEN"
+              },
+              {
+                "name": "DMG INC"
+              }
+            ]
+          },
+          {
+            "name": "Boucle d'oreille",
+            "number": "08",
+            "set": "Outstanding Ability",
+            "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
             "main_stat": {
               "name": "MP MAX"
             },
@@ -851,7 +1083,7 @@
             "name": "Casque",
             "number": "01",
             "set": "Iron Will",
-            "image": "Iron_Will/Iron_Will01.webp",
+            "image": "Iron_Will/Artefact01_IronWill.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -874,7 +1106,7 @@
             "name": "Plastron",
             "number": "02",
             "set": "Iron Will",
-            "image": "Iron_Will/Iron_Will02.webp",
+            "image": "Iron_Will/Artefact02_IronWill.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -897,7 +1129,7 @@
             "name": "Gants",
             "number": "03",
             "set": "Iron Will",
-            "image": "Iron_Will/Iron_Will03.webp",
+            "image": "Iron_Will/Artefact02_IronWill.webp",
             "main_stat": {
               "name": "ATK"
             },
@@ -920,7 +1152,7 @@
             "name": "Bottes",
             "number": "04",
             "set": "Iron Will",
-            "image": "Iron_Will/Iron_Will04.webp",
+            "image": "Iron_Will/Artefact04_IronWill.webp",
             "main_stat": {
               "name": "CRIT DMG"
             },
@@ -942,8 +1174,8 @@
           {
             "name": "Collier",
             "number": "05",
-            "set": "Obsidian",
-            "image": "Obsidian/Obsidian05.webp",
+            "set": "Outstanding_Ability",
+            "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
             "main_stat": {
               "name": "HP"
             },
@@ -965,8 +1197,8 @@
           {
             "name": "Bracelet",
             "number": "06",
-            "set": "Obsidian",
-            "image": "Obsidian/Obsidian06.webp",
+            "set": "Outstanding_Ability",
+            "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
             "main_stat": {
               "name": "ELEM DMG"
             },
@@ -988,8 +1220,8 @@
           {
             "name": "Bague",
             "number": "07",
-            "set": "Obsidian",
-            "image": "Obsidian/Obsidian07.webp",
+            "set": "Outstanding_Ability",
+            "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -1011,8 +1243,8 @@
           {
             "name": "Boucle d'oreille",
             "number": "08",
-            "set": "Obsidian",
-            "image": "Obsidian/Obsidian08.webp",
+            "set": "Outstanding_Ability",
+            "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
             "main_stat": {
               "name": "MP MAX"
             },

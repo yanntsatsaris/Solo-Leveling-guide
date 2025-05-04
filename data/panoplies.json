@@ -1,32 +1,32 @@
 {
   "panoplies": [
     {
-      "name": "Malédiction Ardente",
+      "name": "Burning Curse",
       "set_bonus": [
         {
           "pieces_required": 2,
-          "effect": "Applique l’effet [Malédiction].\n– Augmente les dégâts subis de 20%.\n– Augmente les dégâts infligés de 10% et augmente les dégâts infligés de 0.1% toutes les 1 secondes (cumulable jusqu’à 100 fois).\n– Durée : permanent"
+          "effect": "Applies the [Curse] effect.\n・Increases damage taken by 20%.\n・Increases damage dealth by 10% and additionally increases damage dealt by 0.1% every 1 second(s) (stacking up to 100 times).\n・Duration: Permanent"
         },
         {
           "pieces_required": 4,
-          "effect": "L’effet [Malédiction] devient [Malédiction améliorée].\n– Augmente les dégâts subis de 20%.\n– Augmente les dégâts infligés de 20% et augmente les dégâts infligés de 0.1% toutes les 1 secondes (cumulable jusqu’à 100 fois).\n– Rend impossible l’activation de l’effet [Malédiction].\n– Durée : permanent\nApplique l’effet [Sauvetage].\n– Si les PV de l’utilisateur sont à 25% ou en dessous, il récupère 25%.\n– Ne s’active qu’une fois par donjon."
+          "effect": "The [Curse] effect becomes the [Enhanced Curse] effect\n[Enhanced Curse]\n・Increases the user's Damage Taken by 20%.\n・Increases the user's damage dealt by 20% and additionally increases damage dealt by 0.1% every 1 second(s) (stacking up to 100 times).\n・Unable to activate the [Curse] effect.\nApplies the [Rescue] effect.\n・If the user has 25% HP or less, they recover 25% of their HP.\n・Activates only once per dungeon."
         },
         {
           "pieces_required": 8,
-          "effect": "L’effet [Malédiction améliorée] devient [Malédiction ardente].\n– Augmente les dégâts subis par l’utilisateur de 20%.\n– Augmente les dégâts infligés de 30% et augmente les dégâts infligés de 0.2% toutes les 1 secondes (cumulable jusqu’à 100 fois).\n– Rend impossible l’activation de l’effet [Malédiction] et [Malédiction améliorée].\n– Durée : permanent"
+          "effect": "The [Enhanced Curse] effect becomes the [Burning Curse] effect\n[Burning Curse]\n・Increases the user's Damage Taken by 20%.\n・Increases the user's damage dealt by 30% and additionally increases damage dealt by 0.2% every 1 second(s) (stacking up to 100 times).\n・Unable to activate the [Curse] and [Enhanced Curse] effects.\n・Duration: Permanent"
         }
       ]
     },
     {
-      "name": "Avarice Ardente",
+      "name": "Burning Greed",
       "set_bonus": [
         {
           "pieces_required": 2,
-          "effect": "Lorsque l’utilisateur touche une cible avec une attaque infligeant des dégâts de [Bris], l’effet [Avarice] s’applique.\n– Augmente le taux de coup critique de l’utilisateur de 1% (cumulable jusqu’à 10 fois).\n– Temps de rechargement : 1.5 secondes\n– Durée : permanent"
+          "effect": "When the user hits a target with an attack that deals [Break] damage, it applies the [Greed] effect.\n・Increases the user's Critical Hit Rate by 1% (stacking up to 10 times).\n・Cooldown: 1.5 second(s).\n・Duration: Permanent"
         },
         {
           "pieces_required": 4,
-          "effect": "Lorsque l’effet [Avarice] se cumule 10 fois, il devient [Avarice améliorée].\nDétails :\n[Avarice améliorée] – Augmente le taux de coup critique de l’utilisateur de 10% et de ses alliés, et leurs dégâts de coup critique de 15%.\n– L’effet [Avarice] ne peut pas être activé si l’effet [Avarice améliorée] est actif.\nDurée : permanent"
+          "effect": "When [Greed] effect stacks 10 times, it changes to [Enhanced Greed].\n[Enhanced Greed]\n・Increases the user and their team members' Critical Hit Rate by 10% and Critical Hit Damage by 15%.\n・[Greed] becomes unavailable after [Enhanced Greed] has been activated.\n・Duration: Permanent"
         },
         {
           "pieces_required": 8,
@@ -35,7 +35,7 @@
       ]
     },
     {
-      "name": "Obsidian",
+      "name": "Outstanding Ability",
       "set_bonus": [
         {
           "pieces_required": 2,
@@ -57,6 +57,19 @@
         {
           "pieces_required": 4,
           "effect": "When the user's users their Ultimate Skill, it increase their Defense by 5% (stacking up to 5 times).\n・Duration: Permanent\nIncreases Ultimate Skill damage by 50% 1 time only (Cooldown: 20 second(s))"
+        }
+      ]
+    },
+    {
+      "name": "Armed",
+      "set_bonus": [
+        {
+          "pieces_required": 2,
+          "effect": "Increases the user's Attack by 5%."
+        },
+        {
+          "pieces_required": 4,
+          "effect": "When attacking, the user ignores 18% of the target's Defense."
         }
       ]
     }
