@@ -98,7 +98,7 @@
       {
         "name": "[ARME] UNE CONVICTION ET UNE VOCATION",
         "image": "Light_GGH_Weapon.png",
-        "stats": "+12% DEF.\nTOUCHE MOB<img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] <img src='Light_GGH_DBuffLightDMGUp.png' alt='LightDmgInc'> [LIGHT DMG UP]."
+        "stats": "+12% DEF.\nTOUCHE MOB<img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] <img src='Light_GGH_DBuff_LightDMGUp.png' alt='LightDmgInc'> [LIGHT DMG UP]."
       }
     ],
     "passives": [
@@ -109,7 +109,7 @@
       {
         "name": "[SHIELD]",
         "description": "EMPECHE LE KNOCKBACK ET PROTEGE DES DEGATS.",
-        "image": "Light_GGH_BuffShield.png"
+        "image": "Light_GGH_Buff_Shield.png"
       },
       {
         "name": "[VAISSEAU BRISE]",
@@ -118,13 +118,13 @@
       },
       {
         "name": "[AURA DE DIRIGEANT]",
-        "description": "+50% DEF\n+20%DMG RED.\n <img src='Light_GGH_BuffShield.png' alt='Shield'> [SHIELD] +20% (15 SECONDES).",
+        "description": "+50% DEF\n+20%DMG RED.\n <img src='Light_GGH_Buff_Shield.png' alt='Shield'> [SHIELD] +20% (15 SECONDES).",
         "image": "Light_GGH_Buff_Aura.png"
       },
       {
-        "name": "[FRAGEMENT LUMIERE BRILLANTE]",
+        "name": "[Fragment LUMIERE BRILLANTE]",
         "description": "CHARGE <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE]\n<img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1] +60% DMG INC. (15 SECONDES)",
-        "image": "Light_GGH_Buff_Fragement.png"
+        "image": "Light_GGH_Buff_Fragment.png"
       },
       {
         "name": "[VOLONTE LUMIERE BRILLANTE]",
@@ -132,18 +132,18 @@
         "image": "Light_GGH_Buff_VolonteBrillante.png"
       },
       {
-        "name": "[VOLONTE DU FRAGEMENT]",
+        "name": "[VOLONTE DU Fragment]",
         "description": "[TEAM] +30% CRIT DMG & [QTE] +150% DMG INC. (20 SECONDES)",
-        "image": "Light_GGH_Buff_VolonteFragement.png"
+        "image": "Light_GGH_Buff_VolonteFragment.png"
       },
       {
         "name": "[LIGHT DMG UP]",
         "description": "[DBUFF MOB] +12% LIGHT DMG INC. (15 SECONDES)",
-        "image": "Light_GGH_DBuffLightDMGUp.png"
+        "image": "Light_GGH_DBuff_LightDMGUp.png"
       },
       {
         "name": "[AURA LUMIERE BRILLANTE]",
-        "description": "[SJW BUFF] +10% DEF & <img src='Light_GGH_BuffShield.png' alt='Shield'> [SHIELD] +10% & +10% LIGHT DMG INC. (20 SECONDES)",
+        "description": "[SJW BUFF] +10% DEF & <img src='Light_GGH_Buff_Shield.png' alt='Shield'> [SHIELD] +10% & +10% LIGHT DMG INC. (20 SECONDES)",
         "image": "Light_GGH_Buff_Aura.png"
       }
     ],
@@ -164,17 +164,17 @@
       },
       {
         "name": "[SKILL1] ESPRIT COMBATIF",
-        "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].\nCHARGE <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE]\n<img src='Light_GGH_Buff_Aura.png' alt='Aura'> [AURA DE DIRIGEANT]\n<img src='Light_GGH_Weapon_Codex.png' alt='Arme'> [ARME]\n<img src='Light_GGH_DBuffLightDMGUp.png' alt='LightDmgInc'> [LIGHT DMG UP]",
+        "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].\nCHARGE <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE]\n<img src='Light_GGH_Buff_Aura.png' alt='Aura'> [AURA DE DIRIGEANT]\n<img src='Light_GGH_Weapon_Codex.png' alt='Arme'> [ARME]\n<img src='Light_GGH_DBuff_LightDMGUp.png' alt='LightDmgInc'> [LIGHT DMG UP]",
         "image": "Light_GGH_Skill1.png"
       },
       {
         "name": "[SKILL2] POUVOIR LUMIERE BRILLANTE",
-        "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].\nCHARGE <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE] & <img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1]\n<img src='Light_GGH_Buff_Fragement.png' alt='Fragement'> [FRAGEMENT LUMIERE BRILLANTE]\n<img src='Light_GGH_Buff_VolonteBrillante.png' alt='VolonteBrillante'> [VOLONTE LUMIERE BRILLANTE]",
+        "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [LEGERS].\nCHARGE <img src='Light_GGH_Skill_Core.png' alt='Core'> [CORE] & <img src='Light_GGH_Skill1.png' alt='Skill1'> [SKILL1]\n<img src='Light_GGH_Buff_Fragment.png' alt='Fragment'> [Fragment LUMIERE BRILLANTE]\n<img src='Light_GGH_Buff_VolonteBrillante.png' alt='VolonteBrillante'> [VOLONTE LUMIERE BRILLANTE]",
         "image": "Light_GGH_Skill2.png"
       },
       {
         "name": "[ULTIME] SUPERNOVA",
-        "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [TOUT-PUISSANTS].\n[MOB BREAK] +60% DMG INC\n<img src='Light_GGH_Buff_VolonteFragement.png' alt='VolonteFragement'> [VOLONTE DU FRAGEMENT].",
+        "description": "<img src='Light_GGH_BreakDMG.png' alt='Break'> [TOUT-PUISSANTS].\n[MOB BREAK] +60% DMG INC\n<img src='Light_GGH_Buff_VolonteFragment.png' alt='VolonteFragment'> [VOLONTE DU Fragment].",
         "image": "Light_GGH_Skill_Ultime.png"
       },
       {
@@ -525,7 +525,7 @@
             "id": "A6-10",
             "range": "6-10",
             "type": "stat",
-            "description": "+4% DEF & +6% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "+16% DEF & +24% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD].\n+3% ATK/DEF/HP par évolution (max 15%).\nLes statistique ne s'applique qu'en jeu, ce n'est pas visible directement sur le personnage."
           }
         ]
       }
