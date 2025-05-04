@@ -190,6 +190,238 @@
     ],
     "equipment_sets": [
       {
+        "set_name": "Early Game",
+        "focus_stats": [
+          "DEF",
+          "CRIT HIT",
+          "CRIT DMG",
+          "DMG INC",
+          "DEF PEN",
+          "MP CONS"
+        ],
+        "artefacts": [
+          {
+            "name": "Casque",
+            "number": "01",
+            "set": "Guardian",
+            "image": "Guardian/Artefact01_Guardian.webp",
+            "main_stat": {
+              "name": "DEF"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF% +3/4"
+              },
+              {
+                "name": "DEF PEN"
+              },
+              {
+                "name": "DMG INC"
+              },
+              {
+                "name": "CRIT HIT"
+              }
+            ]
+          },
+          {
+            "name": "Plastron",
+            "number": "02",
+            "set": "Guardian",
+            "image": "Guardian/Artefact02_Guardian.webp",
+            "main_stat": {
+              "name": "DEF"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF% +3/4"
+              },
+              {
+                "name": "DEF PEN"
+              },
+              {
+                "name": "DMG INC"
+              },
+              {
+                "name": "CRIT HIT"
+              }
+            ]
+          },
+          {
+            "name": "Gants",
+            "number": "03",
+            "set": "Guardian",
+            "image": "Guardian/Artefact03_Guardian.webp",
+            "main_stat": {
+              "name": "ATK"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "CRIT HIT"
+              },
+              {
+                "name": "MP CONS"
+              }
+            ]
+          },
+          {
+            "name": "Bottes",
+            "number": "04",
+            "set": "Guardian",
+            "image": "Guardian/Artefact04_Guardian.webp",
+            "main_stat": {
+              "name": "CRIT DMG"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "CRIT HIT"
+              },
+              {
+                "name": "MP CONS"
+              }
+            ]
+          },
+          {
+            "name": "Collier",
+            "number": "05",
+            "set": "Sylph Blessing",
+            "image": "Sylph_Blessing/Artefact05_SylphsBlessing.webp",
+            "main_stat": {
+              "name": "HP"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "CRIT DMG"
+              },
+              {
+                "name": "DEF PEN"
+              }
+            ]
+          },
+          {
+            "name": "Bracelet",
+            "number": "06",
+            "set": "Sylph Blessing",
+            "image": "Sylph_Blessing/Artefact06_SylphsBlessing.webp",
+            "main_stat": {
+              "name": "ELEM DMG"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "CRIT DMG"
+              },
+              {
+                "name": "MP CONS"
+              }
+            ]
+          },
+          {
+            "name": "Bague",
+            "number": "07",
+            "set": "Sylph Blessing",
+            "image": "Sylph_Blessing/Artefact07_SylphsBlessing.webp",
+            "main_stat": {
+              "name": "DEF"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF% +3/4"
+              },
+              {
+                "name": "CRIT DMG"
+              },
+              {
+                "name": "DEF PEN"
+              },
+              {
+                "name": "DMG INC"
+              }
+            ]
+          },
+          {
+            "name": "Boucle d'oreille",
+            "number": "08",
+            "set": "Sylph Blessing",
+            "image": "Sylph_Blessing/Artefact08_SylphsBlessing.webp",
+            "main_stat": {
+              "name": "MP MAX"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "CRIT DMG"
+              },
+              {
+                "name": "MP CONS"
+              }
+            ]
+          }
+        ],
+        "cores": [
+          {
+            "name": "Noyau Violet 01",
+            "number": "01",
+            "image": "Violet01.webp",
+            "main_stat": {
+              "name": "ATK"
+            },
+            "secondary_stat": {
+              "name": "CRIT DMG"
+            }
+          },
+          {
+            "name": "Noyau Rouge 02",
+            "number": "02",
+            "image": "Rouge02.webp",
+            "main_stat": {
+              "name": "DEF"
+            },
+            "secondary_stat": {
+              "name": "DMG INC"
+            }
+          },
+          {
+            "name": "Noyau Violet 03",
+            "number": "03",
+            "image": "Violet03.webp",
+            "main_stat": {
+              "name": "HP"
+            },
+            "secondary_stat": {
+              "name": "DEF PEN"
+            }
+          }
+        ]
+      },
+      {
         "set_name": "Mid Game",
         "focus_stats": [
           "DEF",
@@ -423,6 +655,238 @@
       },
       {
         "set_name": "End Game",
+        "focus_stats": [
+          "DEF",
+          "CRIT HIT",
+          "CRIT DMG",
+          "DMG INC",
+          "DEF PEN",
+          "MP CONS"
+        ],
+        "artefacts": [
+          {
+            "name": "Casque",
+            "number": "01",
+            "set": "Burning Greed",
+            "image": "Burning_Greed/Artefact01_Greed.webp",
+            "main_stat": {
+              "name": "DEF"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF% +3/4"
+              },
+              {
+                "name": "DEF PEN"
+              },
+              {
+                "name": "DMG INC"
+              },
+              {
+                "name": "CRIT HIT"
+              }
+            ]
+          },
+          {
+            "name": "Plastron",
+            "number": "02",
+            "set": "Burning Greed",
+            "image": "Burning_Greed/Artefact02_Greed.webp",
+            "main_stat": {
+              "name": "DEF"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF% +3/4"
+              },
+              {
+                "name": "DEF PEN"
+              },
+              {
+                "name": "DMG INC"
+              },
+              {
+                "name": "CRIT HIT"
+              }
+            ]
+          },
+          {
+            "name": "Gants",
+            "number": "03",
+            "set": "Burning Greed",
+            "image": "Burning_Greed/Artefact03_Greed.webp",
+            "main_stat": {
+              "name": "ATK"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "CRIT HIT"
+              },
+              {
+                "name": "MP CONS"
+              }
+            ]
+          },
+          {
+            "name": "Bottes",
+            "number": "04",
+            "set": "Burning Greed",
+            "image": "Burning_Greed/Artefact04_Greed.webp",
+            "main_stat": {
+              "name": "CRIT DMG"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "CRIT HIT"
+              },
+              {
+                "name": "MP CONS"
+              }
+            ]
+          },
+          {
+            "name": "Collier",
+            "number": "05",
+            "set": "Burning Greed",
+            "image": "Burning_Greed/Artefact05_Greed.webp",
+            "main_stat": {
+              "name": "HP"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "CRIT DMG"
+              },
+              {
+                "name": "DEF PEN"
+              }
+            ]
+          },
+          {
+            "name": "Bracelet",
+            "number": "06",
+            "set": "Burning Greed",
+            "image": "Burning_Greed/Artefact06_Greed.webp",
+            "main_stat": {
+              "name": "ELEM DMG"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "CRIT DMG"
+              },
+              {
+                "name": "MP CONS"
+              }
+            ]
+          },
+          {
+            "name": "Bague",
+            "number": "07",
+            "set": "Burning Greed",
+            "image": "Burning_Greed/Artefact07_Greed.webp",
+            "main_stat": {
+              "name": "DEF"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF% +3/4"
+              },
+              {
+                "name": "CRIT DMG"
+              },
+              {
+                "name": "DEF PEN"
+              },
+              {
+                "name": "DMG INC"
+              }
+            ]
+          },
+          {
+            "name": "Boucle d'oreille",
+            "number": "08",
+            "set": "Burning Greed",
+            "image": "Burning_Greed/Artefact08_Greed.webp",
+            "main_stat": {
+              "name": "MP MAX"
+            },
+            "secondary_stats": [
+              {
+                "name": "DEF"
+              },
+              {
+                "name": "DEF%"
+              },
+              {
+                "name": "CRIT DMG"
+              },
+              {
+                "name": "MP CONS"
+              }
+            ]
+          }
+        ],
+        "cores": [
+          {
+            "name": "Noyau Violet 01",
+            "number": "01",
+            "image": "Violet01.webp",
+            "main_stat": {
+              "name": "ATK"
+            },
+            "secondary_stat": {
+              "name": "CRIT DMG"
+            }
+          },
+          {
+            "name": "Noyau Rouge 02",
+            "number": "02",
+            "image": "Rouge02.webp",
+            "main_stat": {
+              "name": "DEF"
+            },
+            "secondary_stat": {
+              "name": "DMG INC"
+            }
+          },
+          {
+            "name": "Noyau Violet 03",
+            "number": "03",
+            "image": "Violet03.webp",
+            "main_stat": {
+              "name": "HP"
+            },
+            "secondary_stat": {
+              "name": "DEF PEN"
+            }
+          }
+        ]
+      },
+      {
+        "set_name": "Guild",
         "focus_stats": [
           "DEF",
           "CRIT HIT",
