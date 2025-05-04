@@ -1,4 +1,5 @@
 import json
+import os  # Importer le module os pour vérifier l'existence des fichiers
 from flask import Flask, render_template, url_for
 
 def update_image_paths(description, base_path):
@@ -36,8 +37,18 @@ def characters(app: Flask):
         for character in characters_data:
             type_folder = f"SLA_Personnages_{character['type']}"
             character_folder = character['folder']
-            # Utiliser l'alias pour construire le chemin de l'image Codex
-            image_path = f'images/Personnages/{type_folder}/{character_folder}/{character["type"]}_{character["alias"]}_Codex.png'
+
+            # Construire les chemins possibles pour les images Codex
+            base_path = f'static/images/Personnages/{type_folder}/{character_folder}'
+            codex_png = f'{base_path}/{character["type"]}_{character["alias"]}_Codex.png'
+            codex_webp = f'{base_path}/{character["type"]}_{character["alias"]}_Codex.webp'
+
+            # Vérifier si le fichier .webp existe, sinon utiliser .png
+            if os.path.exists(codex_webp):
+                image_path = codex_webp.replace('static/', '')  # Retirer "static/" pour Flask
+            else:
+                image_path = codex_png.replace('static/', '')
+
             images.append({
                 'path': image_path,
                 'name': character['name'],  # Utilisé pour l'affichage
@@ -60,10 +71,17 @@ def characters(app: Flask):
         if not character_info:
             return "Character not found", 404
 
-        # Construire le chemin de l'image principale
+        # Construire les chemins possibles pour l'image principale (_Personnage)
         type_folder = f"SLA_Personnages_{character_info['type']}"
         character_folder = character_info['folder']
-        image_path = f'images/Personnages/{type_folder}/{character_folder}/{character_info["type"]}_{character_info["alias"]}_Personnage.png'
+        personnage_png = f'static/images/Personnages/{type_folder}/{character_folder}/{character_info["type"]}_{character_info["alias"]}_Personnage.png'
+        personnage_webp = f'static/images/Personnages/{type_folder}/{character_folder}/{character_info["type"]}_{character_info["alias"]}_Personnage.webp'
+
+        # Vérifier si le fichier .webp existe, sinon utiliser .png
+        if os.path.exists(personnage_webp):
+            image_path = personnage_webp.replace('static/', '')  # Retirer "static/" pour Flask
+        else:
+            image_path = personnage_png.replace('static/', '')
 
         # Ajouter les informations supplémentaires pour le rendu
         character_info['image'] = image_path
