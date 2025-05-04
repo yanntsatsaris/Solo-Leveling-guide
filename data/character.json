@@ -452,7 +452,7 @@
         "id": "A2",
         "number": "2",
         "type": "passive",
-        "description": "<img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[SHIELD] actif +10% taux & dégâts coup critique (Crit Rate & DMG).\n<img src='Light_Thomas_Buff_GainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD] +8%."
+        "description": "<img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[SHIELD] actif +10% taux & dégâts coup critique (Crit Rate & DMG).\n<img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD] +8%."
       },
       {
         "id": "A3",
@@ -483,49 +483,49 @@
       {
         "name": "[ARME] LE VERITABLE ROI",
         "image": "Light_Thomas_Weapon.webp",
-        "stats": "+16% DEF.\n<img src='Light_Thomas_Buff_GainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD] +24%.",
+        "stats": "+16% DEF.\n<img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD] +24%.",
         "evolutions": [
           {
             "id": "A0",
             "number": "0",
             "type": "passive",
-            "description": "+4% DEF & +6% <img src='Light_Thomas_Buff_GainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "+4% DEF & +6% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A1",
             "number": "1",
             "type": "passive",
-            "description": "+6% DEF & +10% <img src='Light_Thomas_Buff_GainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "+6% DEF & +10% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A2",
             "number": "2",
             "type": "passive",
-            "description": "+8% DEF & +12% <img src='Light_Thomas_Buff_GainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "+8% DEF & +12% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A3",
             "number": "3",
             "type": "passive",
-            "description": "+10% DEF & +15% <img src='Light_Thomas_Buff_GainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "+10% DEF & +15% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A4",
             "number": "4",
             "type": "passive",
-            "description": "+12% DEF & +18% <img src='Light_Thomas_Buff_GainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "+12% DEF & +18% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A5",
             "number": "5",
             "type": "passive",
-            "description": "+16% DEF & +24% <img src='Light_Thomas_Buff_GainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "+16% DEF & +24% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
           },
           {
             "id": "A6-10",
             "range": "6-10",
             "type": "stat",
-            "description": "+4% DEF & +6% <img src='Light_Thomas_Buff_GainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
+            "description": "+4% DEF & +6% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
           }
         ]
       }
@@ -533,12 +533,12 @@
     "passives": [
       {
         "principal": "True",
-        "description": "+16% DEF.\n<img src='Light_Thomas_Buff_GainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD] +8%.\nACTIVATION <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD] +10% CRIT HIT & CRIT DMG TEAMFIGHT +24% DMG INC."
+        "description": "+16% DEF.\n<img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD] +8%.\nACTIVATION <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD] +10% CRIT HIT & CRIT DMG TEAMFIGHT +24% DMG INC."
       },
       {
         "name": "[GAIN DE SHIELD]",
         "description": "AUGMENTE L'ACQUISITION DE LA  QUANTITE DU <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[SHIELD].",
-        "image": "Light_Thomas_Buff_GainShield.webp"
+        "image": "Light_Thomas_Buff_GaindShield.webp"
       },
       {
         "name": "[SHIELD]",
@@ -547,7 +547,7 @@
       },
       {
         "name": "[PUISSANCE ECRASANTE] (5x)",
-        "description": "+50% DEF\n <img src='Light_Thomas_Buff_GainShield.webp' alt='GainDeShield'> [GAIN DE SHIELD] +10% (25 SECONDES).",
+        "description": "+50% DEF\n <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD] +10% (25 SECONDES).",
         "image": "Light_Thomas_Buff_Puissanceecrasante.webp"
       },
       {
