@@ -65,6 +65,19 @@
       ]
     },
     {
+      "name": "Guardian",
+      "set_bonus": [
+        {
+          "pieces_required": 2,
+          "effect": "The user's [Shield] effects increase by 30%."
+        },
+        {
+          "pieces_required": 4,
+          "effect": "When a team member (including the user) activates a [Shield], it increases their individual damage dealt by 10% for 10 second(s)."
+        }
+      ]
+    },
+    {
       "name": "Iron Will",
       "set_bonus": [
         {
