@@ -204,7 +204,7 @@
             "name": "Casque",
             "number": "01",
             "set": "Burning Greed",
-            "image": "Burning_Greed/Avarice_Ardente01.webp",
+            "image": "Burning_Greed/Artefact01_Greed.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -227,7 +227,7 @@
             "name": "Plastron",
             "number": "02",
             "set": "Burning Greed",
-            "image": "Burning_Greed/Avarice_Ardente02.webp",
+            "image": "Burning_Greed/Artefact02_Greed.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -250,7 +250,7 @@
             "name": "Gants",
             "number": "03",
             "set": "Burning Greed",
-            "image": "Burning_Greed/Avarice_Ardente03.webp",
+            "image": "Burning_Greed/Artefact03_Greed.webp",
             "main_stat": {
               "name": "ATK"
             },
@@ -273,7 +273,7 @@
             "name": "Bottes",
             "number": "04",
             "set": "Burning Greed",
-            "image": "Burning_Greed/Avarice_Ardente04.webp",
+            "image": "Burning_Greed/Artefact04_Greed.webp",
             "main_stat": {
               "name": "CRIT DMG"
             },
@@ -296,7 +296,7 @@
             "name": "Collier",
             "number": "05",
             "set": "Burning Greed",
-            "image": "Burning_Greed/Avarice_Ardente05.webp",
+            "image": "Burning_Greed/Artefact05_Greed.webp",
             "main_stat": {
               "name": "HP"
             },
@@ -319,7 +319,7 @@
             "name": "Bracelet",
             "number": "06",
             "set": "Burning Greed",
-            "image": "Burning_Greed/Avarice_Ardente06.webp",
+            "image": "Burning_Greed/Artefact06_Greed.webp",
             "main_stat": {
               "name": "ELEM DMG"
             },
@@ -342,7 +342,7 @@
             "name": "Bague",
             "number": "07",
             "set": "Burning Greed",
-            "image": "Burning_Greed/Avarice_Ardente07.webp",
+            "image": "Burning_Greed/Artefact07_Greed.webp",
             "main_stat": {
               "name": "DEF"
             },
@@ -365,7 +365,7 @@
             "name": "Boucle d'oreille",
             "number": "08",
             "set": "Burning Greed",
-            "image": "Burning_Greed/Avarice_Ardente08.webp",
+            "image": "Burning_Greed/Artefact08_Greed.webp",
             "main_stat": {
               "name": "MP MAX"
             },
