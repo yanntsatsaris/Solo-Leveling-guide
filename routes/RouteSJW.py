@@ -116,7 +116,7 @@ def SJW(app: Flask):
 
         # Ajouter les effets activés pour chaque panoplie
         active_set_effects = []
-        for panoply in panoplies_data['panoplies']:
+        for panoply in panoplies_data:
             set_name = panoply['name']
             if set_name in equipped_sets:
                 pieces_equipped = equipped_sets[set_name]
