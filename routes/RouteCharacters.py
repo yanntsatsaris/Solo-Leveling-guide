@@ -23,19 +23,27 @@ def characters(app: Flask):
     @app.route('/characters')
     def inner_characters():
         # Récupérer la langue sélectionnée
-        language = session.get('language', 'EN-en')
+        language = session.get('language')
+        if not language:
+            return "Language not set", 400
 
         # Charger les données des personnages depuis le fichier JSON
         with open('data/character.json', 'r', encoding='utf-8') as f:
             characters_data = json.load(f)
 
+        # Trouver les données correspondant à la langue sélectionnée
+        characters_data = next((item.get(language) for item in characters_data if language in item), [])
+        if not characters_data:
+            return f"No data found for language: {language}", 404
+
         # Charger les données des panoplies depuis le fichier JSON
         with open('data/panoplies.json', 'r', encoding='utf-8') as f:
             panoplies_data = json.load(f)
 
-        # Filtrer les données en fonction de la langue
-        characters_data = characters_data.get(language, [])
-        panoplies_data = panoplies_data.get(language, [])
+        # Trouver les données correspondant à la langue sélectionnée
+        panoplies_data = next((item.get(language) for item in panoplies_data if language in item), [])
+        if not panoplies_data:
+            return f"No data found for language: {language}", 404
 
         images = []
         character_types = set()
@@ -75,20 +83,28 @@ def characters(app: Flask):
     @app.route('/characters/<alias>')
     def character_details(alias):
         # Récupérer la langue sélectionnée
-        language = session.get('language', 'EN-en')
+        language = session.get('language')
+        if not language:
+            return "Language not set", 400
 
         # Charger les données des personnages depuis le fichier JSON
         with open('data/character.json', 'r', encoding='utf-8') as f:
             characters_data = json.load(f)
 
+        # Trouver les données correspondant à la langue sélectionnée
+        characters_data = next((item.get(language) for item in characters_data if language in item), [])
+        if not characters_data:
+            return f"No data found for language: {language}", 404
+
         # Charger les données des panoplies depuis le fichier JSON
         with open('data/panoplies.json', 'r', encoding='utf-8') as f:
             panoplies_data = json.load(f)
 
-        # Filtrer les données en fonction de la langue
-        characters_data = characters_data.get(language, [])
-        panoplies_data = panoplies_data.get(language, [])
-
+        # Trouver les données correspondant à la langue sélectionnée
+        panoplies_data = next((item.get(language) for item in panoplies_data if language in item), [])
+        if not panoplies_data:
+            return f"No data found for language: {language}", 404
+        
         # Trouver les informations du personnage correspondant
         character_info = next((char for char in characters_data if char['alias'] == alias), None)
 
