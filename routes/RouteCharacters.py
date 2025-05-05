@@ -41,9 +41,9 @@ def characters(app: Flask):
             panoplies_data = json.load(f)
 
         # Trouver les données correspondant à la langue sélectionnée
-        panoplies_data = next((item.get(language) for item in panoplies_data if language in item), [])
+        panoplies_data = panoplies_data.get(language, {}).get('panoplies', [])
         if not panoplies_data:
-            return f"No data found for language: {language}", 404
+            return f"No panoplies data found for language: {language}", 404
 
         images = []
         character_types = set()
@@ -101,9 +101,9 @@ def characters(app: Flask):
             panoplies_data = json.load(f)
 
         # Trouver les données correspondant à la langue sélectionnée
-        panoplies_data = next((item.get(language) for item in panoplies_data if language in item), [])
+        panoplies_data = panoplies_data.get(language, {}).get('panoplies', [])
         if not panoplies_data:
-            return f"No data found for language: {language}", 404
+            return f"No panoplies data found for language: {language}", 404
         
         # Trouver les informations du personnage correspondant
         character_info = next((char for char in characters_data if char['alias'] == alias), None)
