@@ -23,7 +23,7 @@ def characters(app: Flask):
     @app.route('/characters')
     def inner_characters():
         # Récupérer la langue sélectionnée
-        language = session.get('language', "EN-en")  # Valeur par défaut si aucune langue n'est sélectionnée
+        language = session.get('language')  # Valeur par défaut si aucune langue n'est sélectionnée
         if not language:
             return "Language not set", 400
 
@@ -83,7 +83,7 @@ def characters(app: Flask):
     @app.route('/characters/<alias>')
     def character_details(alias):
         # Récupérer la langue sélectionnée
-        language = session.get('language', "EN-en")
+        language = session.get('language')
         if not language:
             return "Language not set", 400
 

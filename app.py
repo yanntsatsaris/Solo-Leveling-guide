@@ -8,6 +8,8 @@ from routes.RouteSJW import SJW
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Nécessaire pour utiliser les sessions
 
+session['language'] = 'EN-en'  # Valeur par défaut de la langue
+
 @app.route('/set-language', methods=['POST'])
 def set_language():
     # Récupérer la langue sélectionnée dans le formulaire
