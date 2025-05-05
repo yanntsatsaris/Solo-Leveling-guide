@@ -1,6 +1,6 @@
 import json
 import os  # Importer le module os pour vérifier l'existence des fichiers
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, session
 
 def update_image_paths(description, base_path):
     """
@@ -20,20 +20,26 @@ def update_image_paths(description, base_path):
     return updated_description.replace("\n", "<br>")
 
 def characters(app: Flask):
-    # Charger les données des personnages depuis le fichier JSON
-    with open('data/character.json', 'r', encoding='utf-8') as f:
-        characters_data = json.load(f)
-
-    # Charger les données des panoplies
-    with open('data/panoplies.json', 'r', encoding='utf-8') as f:
-        panoplies_data = json.load(f)
-
     @app.route('/characters')
     def inner_characters():
-        images = []
-        character_types = set()  # Utiliser un ensemble pour éviter les doublons
+        # Récupérer la langue sélectionnée
+        language = session.get('language', 'EN-en')
 
-        # Parcourir les données des personnages pour construire les chemins des images
+        # Charger les données des personnages depuis le fichier JSON
+        with open('data/character.json', 'r', encoding='utf-8') as f:
+            characters_data = json.load(f)
+
+        # Charger les données des panoplies depuis le fichier JSON
+        with open('data/panoplies.json', 'r', encoding='utf-8') as f:
+            panoplies_data = json.load(f)
+
+        # Filtrer les données en fonction de la langue
+        characters_data = characters_data.get(language, [])
+        panoplies_data = panoplies_data.get(language, [])
+
+        images = []
+        character_types = set()
+
         for character in characters_data:
             type_folder = f"SLA_Personnages_{character['type']}"
             character_folder = character['folder']
@@ -45,26 +51,44 @@ def characters(app: Flask):
 
             # Vérifier si le fichier .webp existe, sinon utiliser .png
             if os.path.exists(codex_webp):
-                image_path = codex_webp.replace('static/', '')  # Retirer "static/" pour Flask
+                image_path = codex_webp.replace('static/', '')
             else:
                 image_path = codex_png.replace('static/', '')
 
             images.append({
                 'path': image_path,
-                'name': character['name'],  # Utilisé pour l'affichage
-                'alias': character['alias'],  # Utilisé pour les liens
-                'type': character['type']  # Ajouter le type pour le filtrage
+                'name': character['name'],
+                'alias': character['alias'],
+                'type': character['type']
             })
-            # Ajouter le type à l'ensemble
             character_types.add(character['type'])
 
-        # Convertir l'ensemble en liste pour le passer au template
-        character_types = sorted(character_types)  # Trier les types pour un affichage cohérent
+        character_types = sorted(character_types)
 
-        return render_template('characters.html', images=images, character_types=character_types)
+        return render_template(
+            'characters.html',
+            images=images,
+            character_types=character_types,
+            panoplies=panoplies_data
+        )
 
     @app.route('/characters/<alias>')
     def character_details(alias):
+        # Récupérer la langue sélectionnée
+        language = session.get('language', 'EN-en')
+
+        # Charger les données des personnages depuis le fichier JSON
+        with open('data/character.json', 'r', encoding='utf-8') as f:
+            characters_data = json.load(f)
+
+        # Charger les données des panoplies depuis le fichier JSON
+        with open('data/panoplies.json', 'r', encoding='utf-8') as f:
+            panoplies_data = json.load(f)
+
+        # Filtrer les données en fonction de la langue
+        characters_data = characters_data.get(language, [])
+        panoplies_data = panoplies_data.get(language, [])
+
         # Trouver les informations du personnage correspondant
         character_info = next((char for char in characters_data if char['alias'] == alias), None)
 
@@ -131,7 +155,7 @@ def characters(app: Flask):
 
             # Ajouter les effets activés pour chaque panoplie
             active_set_effects = []
-            for panoply in panoplies_data['panoplies']:
+            for panoply in panoplies_data:
                 set_name = panoply['name']
                 if set_name in equipped_sets:
                     pieces_equipped = equipped_sets[set_name]

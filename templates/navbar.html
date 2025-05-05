@@ -12,6 +12,14 @@
         </li>
         <li><a href="/guides" class="{% if request.path == '/guides' %}active{% endif %}">Guides</a></li>
     </ul>
+    <div class="language-switch">
+        <form method="POST" action="/set-language">
+            <select name="language" onchange="this.form.submit()">
+                <option value="FR-fr" {% if session.get('language', 'EN-en') == 'FR-fr' %}selected{% endif %}>Français</option>
+                <option value="EN-en" {% if session.get('language', 'EN-en') == 'EN-en' %}selected{% endif %}>English</option>
+            </select>
+        </form>
+    </div>
     <div class="user-logo">
         <img src="{{ url_for('static', filename='images/utilisateur-noir.jpg') }}" alt="User" />
     </div>

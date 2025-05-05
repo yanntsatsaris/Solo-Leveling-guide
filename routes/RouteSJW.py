@@ -1,6 +1,6 @@
 import json
 from static.Controleurs.ControleurLog import write_log
-from flask import Flask, render_template , url_for
+from flask import Flask, render_template, session , url_for
 
 def update_image_paths(description, base_path):
     """
@@ -20,16 +20,24 @@ def update_image_paths(description, base_path):
     return updated_description.replace("\n", "<br>")
 
 def SJW(app: Flask):
-    # Charger les données des personnages depuis le fichier JSON
-    with open('data/SJW.json', 'r', encoding='utf-8') as f:
-        characters_data = json.load(f)
-
-    # Charger les données des panoplies
-    with open('data/panoplies.json', 'r', encoding='utf-8') as f:
-        panoplies_data = json.load(f)
         
     @app.route('/SJW')
     def inner_SJW():
+        # Récupérer la langue sélectionnée ou définir 'EN-en' par défaut
+        language = session.get('language', 'EN-en')
+
+        # Charger les données des personnages depuis le fichier JSON
+        with open('data/SJW.json', 'r', encoding='utf-8') as f:
+            characters_data = json.load(f)
+
+        # Charger les données des panoplies depuis le fichier JSON
+        with open('data/panoplies.json', 'r', encoding='utf-8') as f:
+            panoplies_data = json.load(f)
+
+        # Filtrer les données en fonction de la langue
+        characters_data = characters_data.get(language, [])
+        panoplies_data = panoplies_data.get(language, [])
+        
         # Trouver les informations du personnage correspondant
         character_info = next((char for char in characters_data if char['alias'] == "SJW"), None)
 
@@ -146,6 +154,15 @@ def SJW(app: Flask):
 
     @app.route('/SJW/shadow/<shadowName>')
     def shadow_details(shadowName):
+        # Récupérer la langue sélectionnée ou définir 'EN-en' par défaut
+        language = session.get('language', 'EN-en')
+
+        # Charger les données des personnages depuis le fichier JSON
+        with open('data/SJW.json', 'r', encoding='utf-8') as f:
+            characters_data = json.load(f)
+
+        characters_data = characters_data.get(language, [])
+        
         # Charger les données des personnages depuis le fichier JSON
         with open('data/SJW.json', 'r', encoding='utf-8') as f:
             characters_data = json.load(f)
@@ -199,6 +216,14 @@ def SJW(app: Flask):
 
     @app.route('/SJW/weapon/<weaponName>')
     def weapon_details(weaponName):
+        # Récupérer la langue sélectionnée ou définir 'EN-en' par défaut
+        language = session.get('language', 'EN-en')
+
+        # Charger les données des personnages depuis le fichier JSON
+        with open('data/SJW.json', 'r', encoding='utf-8') as f:
+            characters_data = json.load(f)
+
+        characters_data = characters_data.get(language, [])
         
         with open('data/SJW.json', 'r', encoding='utf-8') as f:
             characters_data = json.load(f)
