@@ -3462,51 +3462,51 @@
         ],
         "weapon": [
           {
-            "name": "[ARME] LE VERITABLE ROI",
+            "name": "[ARME] True King",
             "image": "Light_Thomas_Weapon.webp",
-            "stats": "+16% DEF.\n<img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD] +24%.",
+            "stats": "+16% DEF.\n<img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain] +24%.",
             "evolutions": [
               {
                 "id": "A0",
                 "number": "0",
                 "type": "passive",
-                "description": "+4% DEF & +6% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
+                "description": "+4% DEF & +6% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain]."
               },
               {
                 "id": "A1",
                 "number": "1",
                 "type": "passive",
-                "description": "+6% DEF & +10% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
+                "description": "+6% DEF & +10% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain]."
               },
               {
                 "id": "A2",
                 "number": "2",
                 "type": "passive",
-                "description": "+8% DEF & +12% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
+                "description": "+8% DEF & +12% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain]."
               },
               {
                 "id": "A3",
                 "number": "3",
                 "type": "passive",
-                "description": "+10% DEF & +15% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
+                "description": "+10% DEF & +15% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain]."
               },
               {
                 "id": "A4",
                 "number": "4",
                 "type": "passive",
-                "description": "+12% DEF & +18% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
+                "description": "+12% DEF & +18% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain]."
               },
               {
                 "id": "A5",
                 "number": "5",
                 "type": "passive",
-                "description": "+16% DEF & +24% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD]."
+                "description": "+16% DEF & +24% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain]."
               },
               {
                 "id": "A6-10",
                 "range": "6-10",
                 "type": "stat",
-                "description": "+16% DEF & +24% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD].\n+3% ATK/DEF/HP par évolution (max 15%).\nLes statistique ne s'applique qu'en jeu, ce n'est pas visible directement sur le personnage."
+                "description": "+16% DEF & +24% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain].\n+3% ATK/DEF/HP for each Advancement (maximum 15%).\nThese stats only apply ingame, you can't see them on the character."
               }
             ]
           }
@@ -3514,31 +3514,31 @@
         "passives": [
           {
             "principal": "True",
-            "description": "+16% DEF.\n<img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD] +8%.\nACTIVATION <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD] +10% CRIT HIT & CRIT DMG TEAMFIGHT +24% DMG INC."
+            "description": "+16% DEF.\n<img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain] +8%.\nACTIVATION <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD] +10% CRIT HIT & CRIT DMG TEAMFIGHT +24% DMG INC."
           },
           {
-            "name": "[GAIN DE SHIELD]",
-            "description": "AUGMENTE L'ACQUISITION DE LA  QUANTITE DU <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[SHIELD].",
+            "name": "[Shield gain]",
+            "description": "Increase the amount of <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[SHIELD] acquisitions.",
             "image": "Light_Thomas_Buff_GaindShield.webp"
           },
           {
             "name": "[SHIELD]",
-            "description": "EMPECHE LE KNOCKBACK ET PROTEGE DES DEGATS\nACTIVATION <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='PuissanceEcrasante'> [PUISSANCE ECRASANTE].",
+            "description": "Knockback and damage resistance.\nActivate <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='OverwhelmingPower'> [Overwhelming Power] 1 time.\n+10% Critical Hit & DMG when [Shield] is active.",
             "image": "Light_Thomas_Buff_Shield.webp"
           },
           {
-            "name": "[PUISSANCE ECRASANTE] (5x)",
-            "description": "+50% DEF\n <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD] +10% (25 SECONDES).",
+            "name": "[Overwhelming Power] (5 stacks)",
+            "description": "+10% DEF (maximum 50%).\n+2% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain] (maximum 10%).\n(25 SECONDES).",
             "image": "Light_Thomas_Buff_Puissanceecrasante.webp"
           },
           {
-            "name": "[TYRAN D'ACIER]",
-            "description": "<img src='Light_Thomas_Skill1.webp' alt='Skill1'> [SKILL1] & <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [SKILL2] +100% DMG INC.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultimate'> [ULTIMATE] +125% DMG INC.\n+20% DMG RED.\n+20% DEF.\n<img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD] +10%.",
+            "name": "[Steel Tyrant]",
+            "description": "+20% DEF.\n+20% DMG RED.\n+10% <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD].\n<img src='Light_Thomas_Skill1.webp' alt='Skill1'> [SKILL1] & <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [SKILL2] +100% DMG inc.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultimate'> [ULTIMATE] +125% DMG inc.\n(25 seconds)",
             "image": "Light_Thomas_Buff_Tyrandacier.webp"
           },
           {
-            "name": "[ARMURE D'ACIER]",
-            "description": "<img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD] +10%\n+10 CRIT HIT & CRIT DMG (25 SECONDES).",
+            "name": "[Overgrowth]",
+            "description": "Transformed into <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Steel Tyran'>[Steel Tyran] <img src='Light_Thomas_Skill2.webp' alt='Skill2'>[Skill 2] activate [Overgrowth].\n200% Light DMG of defense.\n10 000 points <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[Shield] = [Overgrowth] +1000% DMG inc.\n<img src='Light_Thomas_Buff_Armuredacier.webp' alt='SteelArmor'>[Steel Armor]\n+10%<img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD].\n+10% Critical Hit & DMG\n(25 SECONDES).",
             "image": "Light_Thomas_Buff_Armuredacier.webp"
           }
         ],
