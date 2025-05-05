@@ -3421,25 +3421,25 @@
             "id": "A0",
             "number": "0",
             "type": "passive",
-            "description": "Utiliser <img src='Light_Thomas_Skill_Core.webp' alt='Core'> [CORE], <img src='Light_Thomas_Skill1.webp' alt='Skill1'> [SKILL1], <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [SKILL2] ou <img src='Light_Thomas_Skill_QTE.webp' alt='QTE'> [QTE] Active <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='PuissanceEcrasante'> [PUISSANCE ECRASANTE] 1x.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [ULTIME] s'active uniquement quand Thomas Andre atteint 5 cumuls de <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='PuissanceEcrasante'> [PUISSANCE ECRASANTE].\nBoss de guilde & Puissance de destruction +24% hausse de dégats (DMG inc)."
+            "description": "Use <img src='Light_Thomas_Skill_Core.webp' alt='Core'> [CORE], <img src='Light_Thomas_Skill1.webp' alt='Skill1'> [SKILL1], <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [SKILL2] or <img src='Light_Thomas_Skill_QTE.webp' alt='QTE'> [QTE] activate <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='OverwhelmingPower'> [Overwhelming Power] 1 time.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultimate'> [Ultimate]  unlock only when Thomas Andre get 5 stacks of <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='OverwhelmingPower'> [Overwhelming Power].\nGuild boss and Power of destruction +24% DMG inc."
           },
           {
             "id": "A1",
             "number": "1",
             "type": "passive",
-            "description": "Chaque bouclier qui s'active sur Thomas Andre active <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='PuissanceEcrasante'> [PUISSANCE ECRASANTE] 1x"
+            "description": "Get <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[SHIELD] activate <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='OverwhelmingPower'> [Overwhelming Power] 1 time."
           },
           {
             "id": "A2",
             "number": "2",
             "type": "passive",
-            "description": "<img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[SHIELD] actif +10% taux & dégâts coup critique (Crit Rate & DMG).\n<img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [GAIN DE SHIELD] +8%."
+            "description": "Active <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[SHIELD] +10% Critical Hit & DMG.\n+8% <img src='Light_Thomas_Buff_GaindShield.webp' alt='GainDeShield'> [Shield gain]."
           },
           {
             "id": "A3",
             "number": "3",
             "type": "passive",
-            "description": "Transformer en <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Tyrandacier'> [TYRAN D'ACIER] <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [SKILL2] active [Overgrowth].\n[Overgrowth] 200% dégats de la defense total de Thomas Andre.\n10 000 <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[SHIELD] = [Overgrowth] +1000% hausse de dégâts (DMG inc)."
+            "description": "Transformed into <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='SteelTyran'> [Steel Tyran] <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [SKILL2] activate [Overgrowth]."
           },
           {
             "id": "A4",
@@ -3451,13 +3451,13 @@
             "id": "A5",
             "number": "5",
             "type": "passive",
-            "description": "Transformer en <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Tyrandacier'> [TYRAN D'ACIER] <img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [ULTIME] +125% hausse de dégâts (DMG inc)."
+            "description": "Transformed into <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='SteelTyran'> [Steel Tyran] <img src='Light_Thomas_Skill_Ultime.webp' alt='Ultimate'> [Ultimate] +125% DMG inc."
           },
           {
             "id": "A6-10",
             "range": "6-10",
             "type": "stat",
-            "description": "+3% ATK/DEF/HP par évolution (max 15%).\nLes statistique ne s'applique qu'en jeu, ce n'est pas visible directement sur le personnage."
+            "description": "+3% ATK/DEF/HP for each Advancement (maximum 15%).\nThese stats only apply ingame, you can't see them on the character."
           }
         ],
         "weapon": [
