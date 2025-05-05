@@ -1239,7 +1239,7 @@
             "image": "Light_Thomas_Buff_GaindShield.webp"
           },
           {
-            "name": "[SHIELD]",
+            "name": "[Bouclier]",
             "description": "Résistance aux dégâts et aux reculs.\nActive <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='PuissanceEcrasante'> [Puissance écrasante] 1 fois.\nActive +10% taux & dégâts coup critique.",
             "image": "Light_Thomas_Buff_Shield.webp"
           },
@@ -1249,7 +1249,7 @@
             "image": "Light_Thomas_Buff_Puissanceecrasante.webp"
           },
           {
-            "name": "[TYRAN D'ACIER]",
+            "name": "[Tyran d’acier]",
             "description": "+20% DEF.\n+20% DMG RED.\n+10%<img src='Light_Thomas_Buff_Shield.webp' alt='Bouclier'> [Bouclier].\n<img src='Light_Thomas_Skill1.webp' alt='Skill1'> [Skill 1] & <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [Skill 2] +100% DMG INC.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [Ultime] +125% DMG INC.\n(25 secondes)",
             "image": "Light_Thomas_Buff_Tyrandacier.webp"
           },
@@ -1259,7 +1259,7 @@
             "image": "Light_Thomas_Buff_Overgrowth.webp"
           },
           {
-            "name": "[ARMURE D'ACIER]",
+            "name": "[Armure d'acier]",
             "description": "+10% <img src='Light_Thomas_Buff_Shield.webp' alt='Bouclier'> [Bouclier]\n+10 CRIT HIT & CRIT DMG (25 SECONDES).",
             "image": "Light_Thomas_Buff_Armuredacier.webp"
           }
@@ -3426,25 +3426,25 @@
             "id": "A0",
             "number": "0",
             "type": "passive",
-            "description": "Use <img src='Light_Thomas_Skill_Core.webp' alt='Core'> [CORE], <img src='Light_Thomas_Skill1.webp' alt='Skill1'> [SKILL1], <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [SKILL2] or <img src='Light_Thomas_Skill_QTE.webp' alt='QTE'> [QTE] activate <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='OverwhelmingPower'> [Overwhelming Power] 1 time.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultimate'> [Ultimate]  unlock only when Thomas Andre get 5 stacks of <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='OverwhelmingPower'> [Overwhelming Power].\nGuild boss and Power of destruction +24% DMG inc."
+            "description": "Use <img src='Light_Thomas_Skill_Core.webp' alt='Core'> [Core], <img src='Light_Thomas_Skill1.webp' alt='Skill1'> [Skill 1], <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [Skill 2] or <img src='Light_Thomas_Skill_QTE.webp' alt='QTE'> [QTE] activate <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='OverwhelmingPower'> [Overwhelming Power] 1 time.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultimate'> [Ultimate]  unlock only when Thomas Andre get 5 stacks of <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='OverwhelmingPower'> [Overwhelming Power].\nGuild boss and Power of destruction +24% DMG inc."
           },
           {
             "id": "A1",
             "number": "1",
             "type": "passive",
-            "description": "Get <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[SHIELD] activate <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='OverwhelmingPower'> [Overwhelming Power] 1 time."
+            "description": "Get <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[Shield] activate <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='OverwhelmingPower'> [Overwhelming Power] 1 time."
           },
           {
             "id": "A2",
             "number": "2",
             "type": "passive",
-            "description": "Active <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[SHIELD] +10% Critical Hit & DMG.\n+8% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Gain de bouclier'> [Shield gain]."
+            "description": "Active <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[Shield] +10% Critical Hit & DMG.\n+8% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Gain de bouclier'> [Shield gain]."
           },
           {
             "id": "A3",
             "number": "3",
             "type": "passive",
-            "description": "Transformed into <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='SteelTyran'> [Steel Tyran] <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [SKILL2] activate <img src='Light_Thomas_Buff_Overgrowth.webp' alt='Overgrowth'>[Overgrowth]."
+            "description": "Transformed into <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='SteelTyran'> [Steel Tyran] <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [Skill 2] activate <img src='Light_Thomas_Buff_Overgrowth.webp' alt='Overgrowth'>[Overgrowth]."
           },
           {
             "id": "A4",
@@ -3523,11 +3523,11 @@
           },
           {
             "name": "[Shield gain]",
-            "description": "Increase the amount of <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[SHIELD] acquisitions.",
+            "description": "Increase the amount of <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[Shield] acquisitions.",
             "image": "Light_Thomas_Buff_GaindShield.webp"
           },
           {
-            "name": "[SHIELD]",
+            "name": "[Shield]",
             "description": "Knockback and damage resistance.\nActivate <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='OverwhelmingPower'> [Overwhelming Power] 1 time.\n+10% Critical Hit & DMG when [Shield] is active.",
             "image": "Light_Thomas_Buff_Shield.webp"
           },
@@ -3538,7 +3538,7 @@
           },
           {
             "name": "[Steel Tyrant]",
-            "description": "+20% DEF.\n+20% DMG RED.\n+10% <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD].\n<img src='Light_Thomas_Skill1.webp' alt='Skill1'> [SKILL1] & <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [SKILL2] +100% DMG inc.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultimate'> [ULTIMATE] +125% DMG inc.\n(25 seconds)",
+            "description": "+20% DEF.\n+20% DMG RED.\n+10% <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD].\n<img src='Light_Thomas_Skill1.webp' alt='Skill1'> [Skill 1] & <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [Skill 2] +100% DMG inc.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultimate'> [Ultimate] +125% DMG inc.\n(25 seconds)",
             "image": "Light_Thomas_Buff_Tyrandacier.webp"
           },
           {
