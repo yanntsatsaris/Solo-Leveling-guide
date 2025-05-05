@@ -3514,7 +3514,7 @@
         "passives": [
           {
             "principal": "True",
-            "description": "+16% DEF.\n<img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain] +8%.\nACTIVATION <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD] +10% CRIT HIT & CRIT DMG TEAMFIGHT +24% DMG INC."
+            "description": "+16% DEF.\n<img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain] +8%."
           },
           {
             "name": "[Shield gain]",
