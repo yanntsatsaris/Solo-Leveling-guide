@@ -1179,7 +1179,7 @@
         ],
         "weapon": [
           {
-            "name": "[ARME] LE VERITABLE ROI",
+            "name": "[Arme] LE VERITABLE ROI",
             "image": "Light_Thomas_Weapon.webp",
             "stats": "+16% DEF.\n<img src='Light_Thomas_Buff_GaindShield.webp' alt='Gain de bouclier'> [Gain de bouclier] +24%.",
             "evolutions": [
@@ -3467,7 +3467,7 @@
         ],
         "weapon": [
           {
-            "name": "[ARME] True King",
+            "name": "[Weapon] True King",
             "image": "Light_Thomas_Weapon.webp",
             "stats": "+16% DEF.\n<img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain] +24%.",
             "evolutions": [
@@ -3538,7 +3538,7 @@
           },
           {
             "name": "[Steel Tyrant]",
-            "description": "+20% DEF.\n+20% DMG RED.\n+10% <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD].\n<img src='Light_Thomas_Skill1.webp' alt='Skill1'> [Skill 1] & <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [Skill 2] +100% DMG inc.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultimate'> [Ultimate] +125% DMG inc.\n(25 seconds)",
+            "description": "+20% DEF.\n+20% DMG RED.\n+10% <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [Shield].\n<img src='Light_Thomas_Skill1.webp' alt='Skill1'> [Skill 1] & <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [Skill 2] +100% DMG inc.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultimate'> [Ultimate] +125% DMG inc.\n(25 seconds)",
             "image": "Light_Thomas_Buff_Tyrandacier.webp"
           },
           {
@@ -3548,7 +3548,7 @@
           },
           {
             "name": "[Steel Armor]",
-            "description": "+10%<img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD].\n+10% Critical Hit & DMG\n(25 SECONDES).",
+            "description": "+10%<img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [Shield].\n+10% Critical Hit & DMG\n(25 SECONDES).",
             "image": "Light_Thomas_Buff_Armuredacier.webp"
           }
         ],
