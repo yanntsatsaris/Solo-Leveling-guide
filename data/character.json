@@ -1138,7 +1138,7 @@
             "id": "A0",
             "number": "0",
             "type": "passive",
-            "description": "Utiliser <img src='Light_Thomas_Skill_Core.webp' alt='Core'> [Core], <img src='Light_Thomas_Skill1.webp' alt='Skill1'> [Skill 1], <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [Skill 2] ou <img src='Light_Thomas_Skill_QTE.webp' alt='QTE'> [QTE] active <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='PuissanceEcrasante'> [Puissance écrasante] 1 fois.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [ULTIME] s'active uniquement quand Thomas Andre atteint 5 cumuls de <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='PuissanceEcrasante'> [PUISSANCE ECRASANTE].\nBoss de guilde et Puissance de destruction +24% hausse de dégâts."
+            "description": "Utiliser <img src='Light_Thomas_Skill_Core.webp' alt='Core'> [Core], <img src='Light_Thomas_Skill1.webp' alt='Skill1'> [Skill 1], <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [Skill 2] ou <img src='Light_Thomas_Skill_QTE.webp' alt='QTE'> [QTE] active <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='PuissanceEcrasante'> [Puissance écrasante] 1 fois.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [Ultime] s'active uniquement quand Thomas Andre atteint 5 cumuls de <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='PuissanceEcrasante'> [Puissance écrasante].\nBoss de guilde et Puissance de destruction +24% hausse de dégâts."
           },
           {
             "id": "A1",
