@@ -3538,7 +3538,12 @@
           },
           {
             "name": "[Overgrowth]",
-            "description": "Transformed into <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Steel Tyran'>[Steel Tyran] <img src='Light_Thomas_Skill2.webp' alt='Skill2'>[Skill 2] activate [Overgrowth].\n200% Light DMG of defense.\n10 000 points <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[Shield] = [Overgrowth] +1000% DMG inc.\n<img src='Light_Thomas_Buff_Armuredacier.webp' alt='SteelArmor'>[Steel Armor]\n+10%<img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD].\n+10% Critical Hit & DMG\n(25 SECONDES).",
+            "description": "Transformed into <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Steel Tyran'>[Steel Tyran] <img src='Light_Thomas_Skill2.webp' alt='Skill2'>[Skill 2] activate [Overgrowth].\n200% Light DMG of defense.\n10 000 points <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[Shield] = [Overgrowth] +1000% DMG inc.",
+            "image": "Light_Thomas_Buff_Overgrowth.webp"
+          },
+          {
+            "name": "[Steel Armor]",
+            "description": "+10%<img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD].\n+10% Critical Hit & DMG\n(25 SECONDES).",
             "image": "Light_Thomas_Buff_Armuredacier.webp"
           }
         ],
