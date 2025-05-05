@@ -24,7 +24,7 @@ def SJW(app: Flask):
     @app.route('/SJW')
     def inner_SJW():
         # Récupérer la langue sélectionnée
-        language = session.get('language')
+        language = session.get('language', "EN-en")
         if not language:
             return "Language not set", 400
 
@@ -163,7 +163,7 @@ def SJW(app: Flask):
     @app.route('/SJW/shadow/<shadowName>')
     def shadow_details(shadowName):
         # Récupérer la langue sélectionnée
-        language = session.get('language')
+        language = session.get('language', "EN-en")
         if not language:
             return "Language not set", 400
 
@@ -226,7 +226,7 @@ def SJW(app: Flask):
     @app.route('/SJW/weapon/<weaponName>')
     def weapon_details(weaponName):
         # Récupérer la langue sélectionnée
-        language = session.get('language')
+        language = session.get('language', "EN-en")
         if not language:
             return "Language not set", 400
 
