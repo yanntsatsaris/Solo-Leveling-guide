@@ -91,7 +91,7 @@ p {
   position: absolute;
   top: 80%; /* Descend le tooltip plus bas (ajustez cette valeur si nécessaire) */
   left: 50%; /* Centre horizontalement */
-  transform: translate(-50%, -1%); /* Centre le tooltip par rapport à son point d'origine */
+  transform: translate(-50%, 50%); /* Centre le tooltip par rapport à son point d'origine */
   background-color: #1e1e1e; /* Fond sombre */
   color: #ffffff; /* Texte blanc */
   padding: 5px 10px; /* Espacement interne */
