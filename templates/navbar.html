@@ -3,7 +3,7 @@
 <nav class="navbar">
     <ul>
         <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
-        <li><a href="/game-contents" class="{% if request.path.startswith()'/game-contents') %}active{% endif %}">Game Contents</a></li>
+        <li><a href="/game-contents" class="{% if request.path.startswith('/game-contents') %}active{% endif %}">Game Contents</a></li>
         <li><a href="/SJW" class="{% if request.path.startswith('/SJW') %}active{% endif %}">Sung Jinwoo</a></li>
         <li>
             <a href="/characters" class="{% if request.path.startswith('/characters') %}active{% endif %}">
