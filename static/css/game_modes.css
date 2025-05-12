@@ -1,0 +1,370 @@
+html,
+body {
+  margin: 0; /* Supprime les marges par défaut */
+  padding: 0; /* Supprime les paddings par défaut */
+  height: 100%; /* S'assure que le body et le html occupent toute la hauteur */
+}
+
+body {
+  height: 100vh; /* Prend toute la hauteur de la fenêtre */
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+p {
+  color: #ffcc00;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.menu-image {
+  display: block; /* Affiche l'image comme un bloc */
+  margin: 0 auto; /* Centre l'image horizontalement */
+  max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
+  height: auto; /* Conserve les proportions de l'image */
+  border-radius: 8px; /* Ajoute des coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
+}
+
+.container {
+  display: flex; /* Active Flexbox pour le conteneur */
+  flex-direction: column; /* Aligne les éléments verticalement */
+  justify-content: center; /* Centre verticalement */
+  align-items: center; /* Centre horizontalement */
+  margin: 70px auto; /* Centre le conteneur horizontalement */
+  padding: 10px; /* Ajoute un espacement interne */
+  background-color: #1e1e1e;
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
+  overflow: hidden; /* Empêche le contenu de dépasser du conteneur */
+  box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur totale */
+  width: fit-content; /* Adapte la largeur du conteneur à son contenu (l'image) */
+  max-width: 770px; /* Empêche le conteneur de dépasser la largeur de l'écran */
+}
+
+.image-container {
+  position: relative; /* Permet de positionner les hotspots par rapport à l'image */
+  display: inline-block; /* Adapte la taille du conteneur à l'image */
+}
+
+.hotspot {
+  position: absolute; /* Positionne les zones par rapport au conteneur */
+  cursor: pointer; /* Change le curseur pour indiquer une interaction */
+}
+
+.hotspot:hover {
+  background-color: rgba(
+    128,
+    0,
+    128,
+    0.5
+  ); /* Couleur violette semi-transparente */
+  border-color: #800080; /* Bordure violette */
+}
+
+.tooltip {
+  display: none; /* Cache la description par défaut */
+  position: absolute;
+  top: 100%; /* Positionne la description sous la zone */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1e1e1e;
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  white-space: nowrap; /* Empêche le texte de passer à la ligne */
+  z-index: 10;
+}
+
+.hotspot:hover .tooltip {
+  display: block; /* Affiche la description au survol */
+}
+
+.hotspot a {
+  display: block; /* Permet au lien de remplir toute la zone du hotspot */
+  text-decoration: none; /* Supprime le soulignement du lien */
+  color: inherit; /* Utilise la couleur du texte par défaut */
+}
+
+.hotspot a:hover {
+  color: #ffcc00; /* Change la couleur du texte au survol */
+}
+
+/* Positionnement des hotspots */
+.hotspot-1 {
+  top: 12.1%; /* Position verticale */
+  left: 3.5%; /* Position horizontale */
+  width: 75%; /* Augmente la largeur de la zone */
+  height: 8.2%; /* Réduit la hauteur de la zone */
+}
+
+.hotspot-2 {
+  top: 21.3%; /* Position verticale */
+  left: 3.5%; /* Position horizontale */
+  width: 23%; /* Largeur de la zone */
+  height: 12.4%; /* Hauteur de la zone */
+}
+
+/* Positionnement des hotspots */
+.hotspot-3 {
+  top: 21.3%; /* Position verticale */
+  left: 29%; /* Position horizontale */
+  width: 23%; /* Largeur de la zone */
+  height: 12.4%; /* Hauteur de la zone */
+}
+
+.hotspot-4 {
+  top: 21.3%;
+  left: 55%;
+  width: 22.2%;
+  height: 6%;
+}
+
+.hotspot-5 {
+  top: 27.8%;
+  left: 55%;
+  width: 22.2%;
+  height: 6%;
+}
+
+.hotspot-6 {
+  top: 35%;
+  left: 3.5%;
+  width: 23%;
+  height: 8%;
+}
+
+.hotspot-7 {
+  top: 35%;
+  left: 29%;
+  width: 23%;
+  height: 8%;
+}
+
+.hotspot-8 {
+  top: 35%;
+  left: 55%;
+  width: 22.2%;
+  height: 8%;
+}
+
+.hotspot-9 {
+  top: 44%;
+  left: 3.5%;
+  width: 36%;
+  height: 8%;
+}
+
+.hotspot-10 {
+  top: 44%;
+  left: 41.5%;
+  width: 36%;
+  height: 8%;
+}
+
+.hotspot-11 {
+  top: 53%;
+  left: 3.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-12 {
+  top: 53%;
+  left: 22.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-13 {
+  top: 53%;
+  left: 41.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-14 {
+  top: 53%;
+  left: 60.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-15 {
+  top: 61.9%;
+  left: 3.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-16 {
+  top: 61.9%;
+  left: 22.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-17 {
+  top: 61.9%;
+  left: 41.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-18 {
+  top: 61.9%;
+  left: 60.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-19 {
+  top: 71%;
+  left: 3.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-20 {
+  top: 71%;
+  left: 22.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-21 {
+  top: 71%;
+  left: 41.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-22 {
+  top: 71%;
+  left: 60.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-23 {
+  top: 80.2%;
+  left: 3.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-24 {
+  top: 80.2%;
+  left: 22.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-25 {
+  top: 80.2%;
+  left: 41.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-26 {
+  top: 80.2%;
+  left: 60.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-27 {
+  top: 89.4%;
+  left: 3.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-28 {
+  top: 89.4%;
+  left: 22.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-29 {
+  top: 89.4%;
+  left: 41.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-30 {
+  top: 89.4%;
+  left: 60.5%;
+  width: 17%;
+  height: 8%;
+}
+
+.hotspot-31 {
+  top: 9%;
+  left: 85%;
+  width: 12.5%;
+  height: 4%;
+}
+
+.hotspot-32 {
+  top: 14%;
+  left: 85%;
+  width: 12.5%;
+  height: 4%;
+}
+
+.hotspot-33 {
+  top: 19%;
+  left: 85%;
+  width: 12.5%;
+  height: 4%;
+}
+
+.hotspot-34 {
+  top: 23.8%;
+  left: 85%;
+  width: 12.5%;
+  height: 4%;
+}
+
+.hotspot-35 {
+  top: 28.5%;
+  left: 85%;
+  width: 12.5%;
+  height: 4%;
+}
+
+.hotspot-36 {
+  top: 33.3%;
+  left: 85%;
+  width: 12.5%;
+  height: 4%;
+}
+
+.hotspot-37 {
+  top: 54%;
+  left: 82.7%;
+  width: 17%;
+  height: 15%;
+}
+
+.hotspot-38 {
+  top: 89%;
+  left: 82.7%;
+  width: 17%;
+  height: 4%;
+}
+
+@media (max-width: 768px) {
+  .hotspot {
+    border: 2px solid #800080; /* Bordure violette */
+  }
+}
