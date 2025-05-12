@@ -54,7 +54,6 @@ p {
 .hotspot {
   position: absolute; /* Positionne les zones par rapport au conteneur */
   cursor: pointer; /* Change le curseur pour indiquer une interaction */
-  clip-path: inherit; /* Applique la forme définie */
 }
 
 .hotspot:hover::before {
@@ -216,6 +215,9 @@ p {
 }
 
 @media (max-width: 768px) {
+  .hotspot {
+    clip-path: inherit; /* Applique la forme définie */
+  }
   .hotspot::before {
     content: "";
     position: absolute;
