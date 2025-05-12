@@ -154,19 +154,11 @@ p {
   clip-path: polygon(0% 0%, 100% 0%, 100% 93%, 0% 100%);
 }
 
-.hotspot-5 {
-  top: 59.8%;
-  left: 20%;
-  width: 10.2%;
-  height: 16%;
-  clip-path: polygon(0% 0%, 100% 1%, 100% 84%, 0% 100%);
-}
-
 .hotspot-6 {
   top: 44%;
   left: 20%;
   width: 10%;
-  height: 15.5%;
+  height: 32%;
   clip-path: polygon(0% 0%, 100% 3%, 100% 95%, 0% 100%);
 }
 
