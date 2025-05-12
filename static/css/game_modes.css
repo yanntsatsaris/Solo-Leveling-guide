@@ -56,7 +56,7 @@ p {
   cursor: pointer; /* Change le curseur pour indiquer une interaction */
 }
 
-.hotspot:hover::before {
+.hotspot:hover {
   background-color: rgba(
     128,
     0,
