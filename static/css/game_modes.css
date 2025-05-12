@@ -89,20 +89,20 @@ p {
 .tooltip {
   display: none; /* Cache la description par défaut */
   position: absolute;
-  top: 100%; /* Positionne la description sous la zone */
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #1e1e1e;
-  color: #ffffff;
-  padding: 5px 10px;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  top: 50%; /* Positionne le tooltip au milieu verticalement */
+  left: 50%; /* Positionne le tooltip au milieu horizontalement */
+  transform: translate(-50%, -50%); /* Centre le tooltip par rapport à son point d'origine */
+  background-color: #1e1e1e; /* Fond sombre */
+  color: #ffffff; /* Texte blanc */
+  padding: 5px 10px; /* Espacement interne */
+  border-radius: 4px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre subtile */
   white-space: nowrap; /* Empêche le texte de passer à la ligne */
-  z-index: 10;
+  z-index: 10; /* Assure que le tooltip est visible au-dessus des autres éléments */
 }
 
 .hotspot:hover .tooltip {
-  display: block; /* Affiche la description au survol */
+  display: block; /* Affiche le tooltip au survol */
 }
 
 .hotspot a {
