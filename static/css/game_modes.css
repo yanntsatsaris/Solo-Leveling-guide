@@ -81,6 +81,11 @@ p {
   border-color: #ffcc00; /* Change la couleur de la bordure au survol */
 }
 
+.tooltip-container {
+  position: relative; /* Permet au tooltip de se positionner correctement */
+  z-index: 10; /* Assure que le tooltip est visible */
+}
+
 .tooltip {
   display: none; /* Cache la description par défaut */
   position: absolute;
