@@ -54,9 +54,20 @@ p {
 .hotspot {
   position: absolute; /* Positionne les zones par rapport au conteneur */
   cursor: pointer; /* Change le curseur pour indiquer une interaction */
-  outline: 2px solid #800080; /* Bordure violette qui suit le clip-path */
-  outline-offset: -2px; /* Ajuste l'espacement de l'outline pour qu'il colle à la forme */
-  clip-path: inherit; /* Assure que l'outline suit la forme définie */
+}
+
+.hotspot::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: inherit; /* Suit la forme du parent */
+  background-color: transparent; /* Pas de fond */
+  border: 2px solid #800080; /* Bordure violette */
+  box-sizing: border-box;
+  pointer-events: none; /* Empêche l'interaction avec le pseudo-élément */
 }
 
 .hotspot:hover {
