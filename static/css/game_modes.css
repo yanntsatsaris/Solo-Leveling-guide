@@ -54,7 +54,9 @@ p {
 .hotspot {
   position: absolute; /* Positionne les zones par rapport au conteneur */
   cursor: pointer; /* Change le curseur pour indiquer une interaction */
-  border: 2px solid #800080; /* Bordure violette */
+  outline: 2px solid #800080; /* Bordure violette qui suit le clip-path */
+  outline-offset: -2px; /* Ajuste l'espacement de l'outline pour qu'il colle à la forme */
+  clip-path: inherit; /* Assure que l'outline suit la forme définie */
 }
 
 .hotspot:hover {
@@ -64,7 +66,7 @@ p {
     128,
     0.5
   ); /* Couleur violette semi-transparente */
-  border-color: #800080; /* Bordure violette */
+  outline-color: #ffcc00; /* Change la couleur de l'outline au survol */
 }
 
 .tooltip {
@@ -98,26 +100,33 @@ p {
 
 /* Positionnement des hotspots */
 .hotspot-1 {
-  top: 12.1%; /* Position verticale */
+  top: 12%; /* Position verticale */
   left: 6.5%; /* Position horizontale */
   width: 32%; /* Largeur de la zone */
-  height: 15.2%; /* Hauteur de la zone */
-  clip-path: polygon(0% 0%, 100% 10%, 100% 90%, 0% 100%); /* Forme en perspective */
+  height: 20.2%; /* Hauteur de la zone */
+  clip-path: polygon(
+    0% 0%,
+    100% 40%,
+    100% 100%,
+    0% 68%
+  ); /* Forme en perspective */
 }
 
 .hotspot-2 {
-  top: 28.3%; /* Position verticale */
+  top: 28%; /* Position verticale */
   left: 6.9%; /* Position horizontale */
-  width: 18%; /* Largeur de la zone */
-  height: 14.4%; /* Hauteur de la zone */
+  width: 17.3%; /* Largeur de la zone */
+  height: 20%; /* Hauteur de la zone */
+  clip-path: polygon(0% 0%, 100% 12%, 100% 73%, 0% 68%);
 }
 
 /* Positionnement des hotspots */
 .hotspot-3 {
   top: 30.3%; /* Position verticale */
   left: 25%; /* Position horizontale */
-  width: 14%; /* Largeur de la zone */
-  height: 12.7%; /* Hauteur de la zone */
+  width: 13.5%; /* Largeur de la zone */
+  height: 17.8%; /* Hauteur de la zone */
+  clip-path: polygon(0% 0%, 100% 12%, 100% 73%, 0% 68%);
 }
 
 .hotspot-4 {
@@ -125,6 +134,7 @@ p {
   left: 7%;
   width: 12.2%;
   height: 34%;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 93%, 0% 100%);
 }
 
 .hotspot-5 {
@@ -132,6 +142,7 @@ p {
   left: 20%;
   width: 10.2%;
   height: 16%;
+  clip-path: polygon(0% 0%, 100% 1%, 100% 84%, 0% 100%);
 }
 
 .hotspot-6 {
@@ -139,6 +150,7 @@ p {
   left: 20%;
   width: 10%;
   height: 15.5%;
+  clip-path: polygon(0% 0%, 100% 3%, 100% 95%, 0% 100%);
 }
 
 .hotspot-7 {
@@ -146,55 +158,63 @@ p {
   left: 30.5%;
   width: 9%;
   height: 29%;
+  clip-path: polygon(0% 0%, 90% 0%, 100% 92%, 10% 100%);
 }
 
 .hotspot-8 {
-  top: 80%;
+  top: 72.5%;
   left: 8%;
   width: 32%;
-  height: 15%;
+  height: 21.6%;
+  clip-path: polygon(0% 30%, 98% 0%, 99% 52%, 0% 100%);
 }
 
 .hotspot-9 {
-  top: 18%;
-  left: 67%;
+  top: 9%;
+  left: 67.8%;
   width: 31%;
-  height: 9%;
+  height: 19%;
+  clip-path: polygon(0% 48%, 100% 0%, 99% 67%, 0% 100%);
 }
 
 .hotspot-10 {
-  top: 29%;
+  top: 23.3%;
   left: 67.5%;
   width: 31%;
-  height: 9%;
+  height: 15.1%;
+  clip-path: polygon(0% 35%, 100% 0%, 99% 82%, 0% 100%);
 }
 
 .hotspot-11 {
-  top: 41%;
-  left: 66.6%;
+  top: 37.6%;
+  left: 66.9%;
   width: 31%;
-  height: 8%;
+  height: 12.2%;
+  clip-path: polygon(0% 20%, 100% 0%, 100% 100%, 0% 100%);
 }
 
 .hotspot-12 {
-  top: 53%;
-  left: 65.9%;
+  top: 51.5%;
+  left: 66%;
   width: 32%;
-  height: 8%;
+  height: 13%;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 78%);
 }
 
 .hotspot-13 {
-  top: 64%;
+  top: 63%;
   left: 65.5%;
   width: 32%;
-  height: 8%;
+  height: 17%;
+  clip-path: polygon(0% 0%, 100% 20%, 100% 100%, 0% 60%);
 }
 
 .hotspot-14 {
-  top: 76%;
+  top: 74.5%;
   left: 65.5%;
   width: 32%;
-  height: 8%;
+  height: 20.6%;
+  clip-path: polygon(0% 0%, 100% 34%, 100% 100%, 0% 51%);
 }
 
 @media (max-width: 768px) {
