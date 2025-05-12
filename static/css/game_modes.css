@@ -231,4 +231,13 @@ p {
     box-sizing: border-box;
     pointer-events: none; /* Empêche l'interaction avec le pseudo-élément */
   }
+  .hotspot:hover::before {
+    background-color: rgba(
+      128,
+      0,
+      128,
+      0.5
+    ); /* Couleur violette semi-transparente */
+    border-color: #ffcc00; /* Change la couleur de la bordure au survol */
+  }
 }
