@@ -54,6 +54,7 @@ p {
 .hotspot {
   position: absolute; /* Positionne les zones par rapport au conteneur */
   cursor: pointer; /* Change le curseur pour indiquer une interaction */
+  border: 2px solid #800080; /* Bordure violette */
 }
 
 .hotspot:hover {
