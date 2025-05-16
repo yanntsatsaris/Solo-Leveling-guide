@@ -1,223 +1,221 @@
 body {
-    background-color: #121212;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  background-color: #121212;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 /* Style pour le conteneur */
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centre le contenu horizontalement */
-    justify-content: center; /* Centre le contenu verticalement si nécessaire */
-    padding: 20px;
-    background-color: #1e1e1e;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin: 70px auto;
-    width: fit-content; /* Adapte la largeur à la taille du tableau */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centre le contenu horizontalement */
+  justify-content: center; /* Centre le contenu verticalement si nécessaire */
+  padding: 20px;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 70px auto;
+  width: fit-content; /* Adapte la largeur à la taille du tableau */
 }
 
 /* Style pour le tableau */
 table {
-    border-collapse: collapse;
-    margin: 0 auto; /* Centre le tableau horizontalement */
-    width: 100%; /* S'assure que le tableau occupe toute la largeur disponible */
-    text-align: center;
+  border-collapse: collapse;
+  margin: 0 auto; /* Centre le tableau horizontalement */
+  width: 100%; /* S'assure que le tableau occupe toute la largeur disponible */
+  text-align: center;
 }
 
 /* Style pour les cellules du tableau */
 td {
-    padding: 10px;
-    text-align: center; /* Centre le contenu dans les cellules */
-    vertical-align: top; /* Aligne le texte en haut de la cellule */
+  padding: 10px;
+  text-align: center; /* Centre le contenu dans les cellules */
+  vertical-align: top; /* Aligne le texte en haut de la cellule */
 }
 
 /* Centrer le texte sous l'image */
 td p {
-    margin: 5px 0 0 0; /* Réduit l'espacement au-dessus du texte */
-    font-size: 0.9rem; /* Réduit légèrement la taille du texte */
-    text-align: center; /* Centre le texte sous l'image */
-    width: 100%; /* S'assure que le texte occupe toute la largeur de la cellule */
+  margin: 5px 0 0 0; /* Réduit l'espacement au-dessus du texte */
+  font-size: 0.9rem; /* Réduit légèrement la taille du texte */
+  text-align: center; /* Centre le texte sous l'image */
+  width: 100%; /* S'assure que le texte occupe toute la largeur de la cellule */
 }
 
 /* Style pour les images */
 table img {
-    display: block;
-    margin: 10px auto; /* Centre les images dans leurs cellules */
-    width: 150px;
-    height: auto;
-    border-radius: 8px; /* Ajoute des coins arrondis aux images */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre aux images */
-    transition: transform 0.3s ease; /* Ajoute un effet au survol */
+  display: block;
+  margin: 10px auto; /* Centre les images dans leurs cellules */
+  width: 150px;
+  height: auto;
+  border-radius: 8px; /* Ajoute des coins arrondis aux images */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre aux images */
+  transition: transform 0.3s ease; /* Ajoute un effet au survol */
 }
 
 table img:hover {
-    transform: scale(1.1); /* Agrandit légèrement l'image au survol */
+  transform: scale(1.1); /* Agrandit légèrement l'image au survol */
 }
 
 /* Style pour le titre */
 h1 {
-    color: #ffffff;
-    text-align: center;
-    text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff; /* Glow violet */
-    margin-bottom: 20px;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff; /* Glow violet */
+  margin-bottom: 20px;
 }
 
 /* Style pour le paragraphe */
 p {
-    color: #ffcc00;
-    font-weight: bold;
+  color: #ffcc00;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.character-type {
     text-align: center;
-    margin-top: 20px;
+    margin-bottom: 20px
 }
 
-/* Style pour la liste des sets dans l'onglet Artefacts */
-#set-options {
-    display: none; /* Masquer par défaut */
-    position: absolute;
-    background-color: #1e1e1e; /* Fond sombre pour correspondre au thème */
-    border: 1px solid #333; /* Bordure discrète */
-    border-radius: 8px; /* Coins arrondis */
-    padding: 10px;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre légère */
-    color: #ffffff; /* Texte blanc */
-    font-size: 0.9rem; /* Taille de texte légèrement réduite */
-    min-width: 150px; /* Largeur minimale */
+.type-button {
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: #1e1e1e;
+  color: #ffcc00;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-#set-options ul {
-    list-style: none; /* Supprime les puces */
-    margin: 0;
-    padding: 0;
+.rarity-filter {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-#set-options li {
-    padding: 8px 12px; /* Espacement interne */
-    cursor: pointer;
-    transition: background-color 0.3s ease; /* Transition fluide au survol */
+.rarity-button {
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: #1e1e1e;
+  color: #ffcc00;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-#set-options li:hover {
-    background-color: #333; /* Fond plus clair au survol */
-    color: #ffcc00; /* Texte doré au survol */
-}
-
-/* Afficher la liste des sets au survol de l'onglet Artefacts */
-#artefacts-tab:hover #set-options {
-    display: block; /* Affiche la liste */
+.character-table {
+  width: 100%;
+  text-align: center
 }
 
 /* Responsive Design */
 
 /* Pour les écrans de taille moyenne (tablettes) */
 @media (max-width: 768px) {
-    .container {
-        width: 90%; /* Réduit la largeur pour s'adapter aux écrans plus petits */
-    }
+  .container {
+    width: 90%; /* Réduit la largeur pour s'adapter aux écrans plus petits */
+  }
 
-    table img {
-        width: 120px; /* Réduit la taille des images */
-    }
+  table img {
+    width: 120px; /* Réduit la taille des images */
+  }
 
-    td {
-        padding: 8px; /* Réduit l'espacement des cellules */
-    }
+  td {
+    padding: 8px; /* Réduit l'espacement des cellules */
+  }
 
-    #set-options {
-        font-size: 0.8rem; /* Réduit la taille du texte */
-        min-width: 120px; /* Réduit la largeur minimale */
-    }
+  #set-options {
+    font-size: 0.8rem; /* Réduit la taille du texte */
+    min-width: 120px; /* Réduit la largeur minimale */
+  }
 
-    #set-options li {
-        padding: 6px 10px; /* Réduit l'espacement interne */
-    }
+  #set-options li {
+    padding: 6px 10px; /* Réduit l'espacement interne */
+  }
 }
 
 /* Pour les écrans de petite taille (téléphones) */
 @media (max-width: 480px) {
-    .container {
-        width: 95%; /* Réduit légèrement la largeur du conteneur */
-        margin: 0 auto; /* Centre le conteneur */
-        padding: 10px; /* Réduit le padding */
-    }
+  .container {
+    width: 95%; /* Réduit légèrement la largeur du conteneur */
+    margin: 0 auto; /* Centre le conteneur */
+    padding: 10px; /* Réduit le padding */
+  }
 
-    table {
-        width: 100%; /* S'assure que le tableau occupe toute la largeur */
-    }
+  table {
+    width: 100%; /* S'assure que le tableau occupe toute la largeur */
+  }
 
-    table img {
-        width: 100px; /* Réduit encore la taille des images */
-    }
+  table img {
+    width: 100px; /* Réduit encore la taille des images */
+  }
 
-    td {
-        padding: 5px; /* Réduit l'espacement dans les cellules */
-        flex: 1 1 50%; /* Chaque image occupe environ 50% de la largeur */
-        max-width: 50%; /* Limite la largeur maximale */
-        box-sizing: border-box; /* Inclut le padding dans la largeur */
-    }
+  td {
+    padding: 5px; /* Réduit l'espacement dans les cellules */
+    flex: 1 1 50%; /* Chaque image occupe environ 50% de la largeur */
+    max-width: 50%; /* Limite la largeur maximale */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
+  }
 
-    td img {
-        margin: 0 auto; /* Centre l'image horizontalement */
-        display: block; /* S'assure que l'image est un bloc centré */
-    }
+  td img {
+    margin: 0 auto; /* Centre l'image horizontalement */
+    display: block; /* S'assure que l'image est un bloc centré */
+  }
 
-    td p {
-        margin: 5px auto 0 auto; /* Centre le texte sous l'image */
-        font-size: 0.9rem; /* Réduit légèrement la taille du texte */
-        text-align: center; /* Centre le texte */
-        width: 100%; /* S'assure que le texte occupe toute la largeur de la cellule */
-    }
+  td p {
+    margin: 5px auto 0 auto; /* Centre le texte sous l'image */
+    font-size: 0.9rem; /* Réduit légèrement la taille du texte */
+    text-align: center; /* Centre le texte */
+    width: 100%; /* S'assure que le texte occupe toute la largeur de la cellule */
+  }
 
-    tr {
-        display: flex;
-        flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
-        justify-content: center; /* Centre les images sur la ligne */
-    }
+  tr {
+    display: flex;
+    flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
+    justify-content: center; /* Centre les images sur la ligne */
+  }
 }
 
 /* Pour les écrans en mode paysage */
 @media (max-height: 480px) {
-    .container {
-        width: 90%; /* Adapte la largeur à l'écran en mode paysage */
-        margin: 0 auto; /* Centre le conteneur */
-        padding: 15px; /* Ajuste le padding pour maximiser l'espace */
-    }
+  .container {
+    width: 90%; /* Adapte la largeur à l'écran en mode paysage */
+    margin: 0 auto; /* Centre le conteneur */
+    padding: 15px; /* Ajuste le padding pour maximiser l'espace */
+  }
 
-    table {
-        width: 100%; /* S'assure que le tableau occupe toute la largeur */
-    }
+  table {
+    width: 100%; /* S'assure que le tableau occupe toute la largeur */
+  }
 
-    table img {
-        width: 120px; /* Adapte la taille des images pour le mode paysage */
-        height: auto; /* Conserve les proportions */
-    }
+  table img {
+    width: 120px; /* Adapte la taille des images pour le mode paysage */
+    height: auto; /* Conserve les proportions */
+  }
 
-    td {
-        padding: 8px; /* Ajuste l'espacement dans les cellules */
-        flex: 1 1 20%; /* Chaque image occupe environ 33% de la largeur */
-        max-width: 20%; /* Limite la largeur maximale à 33% */
-        box-sizing: border-box; /* Inclut le padding dans la largeur */
-    }
+  td {
+    padding: 8px; /* Ajuste l'espacement dans les cellules */
+    flex: 1 1 20%; /* Chaque image occupe environ 33% de la largeur */
+    max-width: 20%; /* Limite la largeur maximale à 33% */
+    box-sizing: border-box; /* Inclut le padding dans la largeur */
+  }
 
-    td img {
-        margin: 0 auto; /* Centre l'image horizontalement */
-        display: block; /* S'assure que l'image est un bloc centré */
-    }
+  td img {
+    margin: 0 auto; /* Centre l'image horizontalement */
+    display: block; /* S'assure que l'image est un bloc centré */
+  }
 
-    td p {
-        margin: 5px auto 0 auto; /* Centre le texte sous l'image */
-        font-size: 0.8rem; /* Réduit légèrement la taille du texte */
-        text-align: center; /* Centre le texte */
-        width: 100%; /* S'assure que le texte occupe toute la largeur de la cellule */
-    }
+  td p {
+    margin: 5px auto 0 auto; /* Centre le texte sous l'image */
+    font-size: 0.8rem; /* Réduit légèrement la taille du texte */
+    text-align: center; /* Centre le texte */
+    width: 100%; /* S'assure que le texte occupe toute la largeur de la cellule */
+  }
 
-    tr {
-        display: flex;
-        flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
-        justify-content: center; /* Centre les images sur la ligne */
-    }
+  tr {
+    display: flex;
+    flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
+    justify-content: center; /* Centre les images sur la ligne */
+  }
 }

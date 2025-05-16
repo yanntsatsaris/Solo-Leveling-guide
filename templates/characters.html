@@ -18,32 +18,15 @@
     {% include 'navbar.html' %}
     <div class="container">
       <h1>Characters</h1>
-      <p
-        style="
-          color: #ffcc00;
-          font-weight: bold;
-          text-align: center;
-          margin-top: 20px;
-        "
-      >
+      <p>
         Discover the characters from Solo Leveling Arise.
       </p>
       <div
         class="character-types"
-        style="text-align: center; margin-bottom: 20px"
       >
         <button
           class="type-button"
           data-type="All"
-          style="
-            margin: 5px;
-            padding: 10px 20px;
-            background-color: #1e1e1e;
-            color: #ffcc00;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-          "
         >
           All
         </button>
@@ -51,15 +34,6 @@
         <button
           class="type-button"
           data-type="{{ type }}"
-          style="
-            margin: 5px;
-            padding: 10px 20px;
-            background-color: #1e1e1e;
-            color: #ffcc00;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-          "
         >
           {{ type }}
         </button>
@@ -67,20 +41,10 @@
       </div>
       <div
         class="rarity-filters"
-        style="text-align: center; margin-bottom: 20px"
       >
         <button
           class="rarity-button"
           data-rarity="All"
-          style="
-            margin: 5px;
-            padding: 10px 20px;
-            background-color: #1e1e1e;
-            color: #ffcc00;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-          "
         >
           All
         </button>
@@ -88,21 +52,12 @@
         <button
           class="rarity-button"
           data-rarity="{{ rarity }}"
-          style="
-            margin: 5px;
-            padding: 10px 20px;
-            background-color: #1e1e1e;
-            color: #ffcc00;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-          "
         >
           {{ rarity }}
         </button>
         {% endfor %}
       </div>
-      <table id="character-table" style="width: 100%; text-align: center">
+      <table id="character-table">
         <tr>
           {% for image in images %}
           <td data-type="{{ image.type }}" data-rarity="{{ image.rarity }}">
@@ -110,7 +65,6 @@
               <img
                 src="{{ url_for('static', filename=image.path) }}"
                 alt="{{ image.name }}"
-                style="width: 150px; height: auto; margin: 10px"
               />
             </a>
             <p hidden>{{ image.name }}</p>
