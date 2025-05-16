@@ -4631,6 +4631,27 @@
         "name": "Anna Ruiz",
         "alias": "AnnaRuiz",
         "folder": "SR_Water_AnnaRuiz"
+      },
+      {
+        "type": "Water",
+        "rarity": "SR",
+        "name": "Han Songyi",
+        "alias": "HanSongyi",
+        "folder": "SR_Water_HanSongyi"
+      },
+      {
+        "type": "Water",
+        "rarity": "SR",
+        "name": "Lee Juhee",
+        "alias": "LeeJuhee",
+        "folder": "SR_Water_LeeJuhee"
+      },
+      {
+        "type": "Water",
+        "rarity": "SR",
+        "name": "Nam Chae-Young",
+        "alias": "Nam",
+        "folder": "SR_Water_Nam"
       }
     ]
   }
