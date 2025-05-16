@@ -31,7 +31,7 @@ body {
   flex-direction: row; /* Par défaut, disposition en colonnes */
   width: 100%; /* Prend toute la largeur */
   height: auto; /* Permet à la hauteur de s'adapter au contenu */
-  margin: 0;
+  margin-top: 50px;
   padding: 0;
   box-sizing: border-box;
 }
