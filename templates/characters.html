@@ -36,7 +36,7 @@
         <table id="character-table" style="width: 100%; text-align: center;">
             <tr>
                 {% for image in images %}
-                    <td data-type="{{ image.type }}">
+                    <td data-type="{{ image.type }}" data-rarity="{{ image.rarity }}">
                         <a href="{{ url_for('character_details', alias=image.alias) }}">
                             <img src="{{ url_for('static', filename=image.path) }}" alt="{{ image.name }}" style="width: 150px; height: auto; margin: 10px;">
                         </a>
