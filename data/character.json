@@ -3,96 +3,112 @@
     "FR-fr": [
       {
         "type": "Dark",
+        "rarity": "SSR",
         "name": "Beak Beast",
         "alias": "BeakBeast",
         "folder": "SSR_Dark_BeakBeast"
       },
       {
         "type": "Dark",
+        "rarity": "SSR",
         "name": "Charlotte",
         "alias": "Charlotte",
         "folder": "SSR_Dark_Charlotte"
       },
       {
         "type": "Dark",
+        "rarity": "SSR",
         "name": "Harper",
         "alias": "Harper",
         "folder": "SSR_Dark_Harper"
       },
       {
         "type": "Dark",
+        "rarity": "SSR",
         "name": "Isla Wright",
         "alias": "Isla",
         "folder": "SSR_Dark_IslaWright"
       },
       {
         "type": "Dark",
+        "rarity": "SSR",
         "name": "Lee Bora",
         "alias": "LeeBora",
         "folder": "SSR_Dark_LeeBora"
       },
       {
         "type": "Dark",
+        "rarity": "SSR",
         "name": "Lim Taegyu",
         "alias": "Lim",
         "folder": "SSR_Dark_LimTaegyu"
       },
       {
         "type": "Fire",
+        "rarity": "SSR",
         "name": "Choi",
         "alias": "Choi",
         "folder": "SSR_Fire_Choi"
       },
       {
         "type": "Fire",
+        "rarity": "SSR",
         "name": "Emma Laurent",
         "alias": "Emma",
         "folder": "SSR_Fire_EmmaLaurent"
       },
       {
         "type": "Fire",
+        "rarity": "SSR",
         "name": "Esil Radir",
         "alias": "Esil",
         "folder": "SSR_Fire_EsilRadir"
       },
       {
         "type": "Fire",
+        "rarity": "SSR",
         "name": "Gina",
         "alias": "Gina",
         "folder": "SSR_Fire_Gina"
       },
       {
         "type": "Fire",
+        "rarity": "SSR",
         "name": "Tawata Kanae",
         "alias": "Kanae",
         "folder": "SSR_Fire_TawataKanae"
       },
       {
         "type": "Fire",
+        "rarity": "SSR",
         "name": "Yoo Soohyun",
         "alias": "Soohyun",
         "folder": "SSR_Fire_YooSoohyun"
       },
       {
         "type": "Light",
+        "rarity": "SSR",
         "name": "Akari",
         "alias": "Akari",
         "folder": "SSR_Light_Akari"
       },
       {
         "type": "Light",
+        "rarity": "SSR",
         "name": "Beak",
         "alias": "Beak",
         "folder": "SSR_Light_Beak"
       },
       {
         "type": "Light",
+        "rarity": "SSR",
         "name": "Cha Hae-In",
         "alias": "Chae",
         "folder": "SSR_Light_ChaHaeIn"
       },
       {
         "type": "Light",
+        "rarity": "SSR",
         "name": "Go Gun Hee",
         "alias": "GGH",
         "folder": "SSR_Light_GoGunHee",
@@ -1123,12 +1139,14 @@
       },
       {
         "type": "Light",
+        "rarity": "SSR",
         "name": "Min",
         "alias": "Min",
         "folder": "SSR_Light_Min"
       },
       {
         "type": "Light",
+        "rarity": "SSR",
         "name": "Thomas Andre",
         "alias": "Thomas",
         "folder": "SSR_Light_ThomasAndre",
@@ -2239,48 +2257,56 @@
       },
       {
         "type": "Water",
+        "rarity": "SSR",
         "name": "Alicia Blanche",
         "alias": "Alicia",
         "folder": "SSR_Water_AliciaBlanche"
       },
       {
         "type": "Water",
+        "rarity": "SSR",
         "name": "Meilin Fisher",
         "alias": "Meilin",
         "folder": "SSR_Water_MeilinFisher"
       },
       {
         "type": "Water",
+        "rarity": "SSR",
         "name": "Seo Jiwoo",
         "alias": "Seo",
         "folder": "SSR_Water_SeoJiwoo"
       },
       {
         "type": "Wind",
+        "rarity": "SSR",
         "name": "Goto Eyuji",
         "alias": "Goto",
         "folder": "SSR_Wind_GotoEyuji"
       },
       {
         "type": "Wind",
+        "rarity": "SSR",
         "name": "Hansemi",
         "alias": "Hansemi",
         "folder": "SSR_Wind_Hansemi"
       },
       {
         "type": "Wind",
+        "rarity": "SSR",
         "name": "Hwang Dongsoo",
         "alias": "Dongsoo",
         "folder": "SSR_Wind_HwangDongsoo"
       },
       {
         "type": "Wind",
+        "rarity": "SSR",
         "name": "Mirei",
         "alias": "Mirei",
         "folder": "SSR_Wind_Mirei"
       },
       {
         "type": "Wind",
+        "rarity": "SSR",
         "name": "Woo Jincheol",
         "alias": "Woo",
         "folder": "SSR_Wind_WooJincheol"
@@ -2291,96 +2317,112 @@
     "EN-en": [
       {
         "type": "Dark",
+        "rarity": "SSR",
         "name": "Beak Beast",
         "alias": "BeakBeast",
         "folder": "SSR_Dark_BeakBeast"
       },
       {
         "type": "Dark",
+        "rarity": "SSR",
         "name": "Charlotte",
         "alias": "Charlotte",
         "folder": "SSR_Dark_Charlotte"
       },
       {
         "type": "Dark",
+        "rarity": "SSR",
         "name": "Harper",
         "alias": "Harper",
         "folder": "SSR_Dark_Harper"
       },
       {
         "type": "Dark",
+        "rarity": "SSR",
         "name": "Isla Wright",
         "alias": "Isla",
         "folder": "SSR_Dark_IslaWright"
       },
       {
         "type": "Dark",
+        "rarity": "SSR",
         "name": "Lee Bora",
         "alias": "LeeBora",
         "folder": "SSR_Dark_LeeBora"
       },
       {
         "type": "Dark",
+        "rarity": "SSR",
         "name": "Lim Taegyu",
         "alias": "Lim",
         "folder": "SSR_Dark_LimTaegyu"
       },
       {
         "type": "Fire",
+        "rarity": "SSR",
         "name": "Choi",
         "alias": "Choi",
         "folder": "SSR_Fire_Choi"
       },
       {
         "type": "Fire",
+        "rarity": "SSR",
         "name": "Emma Laurent",
         "alias": "Emma",
         "folder": "SSR_Fire_EmmaLaurent"
       },
       {
         "type": "Fire",
+        "rarity": "SSR",
         "name": "Esil Radir",
         "alias": "Esil",
         "folder": "SSR_Fire_EsilRadir"
       },
       {
         "type": "Fire",
+        "rarity": "SSR",
         "name": "Gina",
         "alias": "Gina",
         "folder": "SSR_Fire_Gina"
       },
       {
         "type": "Fire",
+        "rarity": "SSR",
         "name": "Tawata Kanae",
         "alias": "Kanae",
         "folder": "SSR_Fire_TawataKanae"
       },
       {
         "type": "Fire",
+        "rarity": "SSR",
         "name": "Yoo Soohyun",
         "alias": "Soohyun",
         "folder": "SSR_Fire_YooSoohyun"
       },
       {
         "type": "Light",
+        "rarity": "SSR",
         "name": "Akari",
         "alias": "Akari",
         "folder": "SSR_Light_Akari"
       },
       {
         "type": "Light",
+        "rarity": "SSR",
         "name": "Beak",
         "alias": "Beak",
         "folder": "SSR_Light_Beak"
       },
       {
         "type": "Light",
+        "rarity": "SSR",
         "name": "Cha Hae-In",
         "alias": "Chae",
         "folder": "SSR_Light_ChaHaeIn"
       },
       {
         "type": "Light",
+        "rarity": "SSR",
         "name": "Go Gun Hee",
         "alias": "GGH",
         "folder": "SSR_Light_GoGunHee",
@@ -3411,12 +3453,14 @@
       },
       {
         "type": "Light",
+        "rarity": "SSR",
         "name": "Min",
         "alias": "Min",
         "folder": "SSR_Light_Min"
       },
       {
         "type": "Light",
+        "rarity": "SSR",
         "name": "Thomas Andre",
         "alias": "Thomas",
         "folder": "SSR_Light_ThomasAndre",
@@ -4527,51 +4571,66 @@
       },
       {
         "type": "Water",
+        "rarity": "SSR",
         "name": "Alicia Blanche",
         "alias": "Alicia",
         "folder": "SSR_Water_AliciaBlanche"
       },
       {
         "type": "Water",
+        "rarity": "SSR",
         "name": "Meilin Fisher",
         "alias": "Meilin",
         "folder": "SSR_Water_MeilinFisher"
       },
       {
         "type": "Water",
+        "rarity": "SSR",
         "name": "Seo Jiwoo",
         "alias": "Seo",
         "folder": "SSR_Water_SeoJiwoo"
       },
       {
         "type": "Wind",
+        "rarity": "SSR",
         "name": "Goto Eyuji",
         "alias": "Goto",
         "folder": "SSR_Wind_GotoEyuji"
       },
       {
         "type": "Wind",
+        "rarity": "SSR",
         "name": "Hansemi",
         "alias": "Hansemi",
         "folder": "SSR_Wind_Hansemi"
       },
       {
         "type": "Wind",
+        "rarity": "SSR",
         "name": "Hwang Dongsoo",
         "alias": "Dongsoo",
         "folder": "SSR_Wind_HwangDongsoo"
       },
       {
         "type": "Wind",
+        "rarity": "SSR",
         "name": "Mirei",
         "alias": "Mirei",
         "folder": "SSR_Wind_Mirei"
       },
       {
         "type": "Wind",
+        "rarity": "SSR",
         "name": "Woo Jincheol",
         "alias": "Woo",
         "folder": "SSR_Wind_WooJincheol"
+      },
+      {
+        "type": "Water",
+        "rarity": "SR",
+        "name": "Anna Ruiz",
+        "alias": "AnnaRuiz",
+        "folder": "SR_Water_AnnaRuiz"
       }
     ]
   }

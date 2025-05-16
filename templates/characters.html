@@ -23,6 +23,16 @@
                 </button>
             {% endfor %}
         </div>
+        <div class="rarity-filters" style="text-align: center; margin-bottom: 20px;">
+            <button class="rarity-button" data-rarity="All" style="margin: 5px; padding: 10px 20px; background-color: #1e1e1e; color: #ffcc00; border: none; border-radius: 5px; cursor: pointer;">
+                All
+            </button>
+            {% for rarity in rarities %}
+                <button class="rarity-button" data-rarity="{{ rarity }}" style="margin: 5px; padding: 10px 20px; background-color: #1e1e1e; color: #ffcc00; border: none; border-radius: 5px; cursor: pointer;">
+                    {{ rarity }}
+                </button>
+            {% endfor %}
+        </div>
         <table id="character-table" style="width: 100%; text-align: center;">
             <tr>
                 {% for image in images %}
@@ -41,21 +51,32 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const buttons = document.querySelectorAll('.type-button');
+            const typeButtons = document.querySelectorAll('.type-button');
+            const rarityButtons = document.querySelectorAll('.rarity-button');
             const characterCells = document.querySelectorAll('#character-table td');
 
-            buttons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const selectedType = button.getAttribute('data-type');
+            let selectedType = 'All';
+            let selectedRarity = 'All';
 
-                    // Afficher ou masquer les personnages en fonction du type sélectionné
-                    characterCells.forEach(cell => {
-                        if (cell.getAttribute('data-type') === selectedType || selectedType === 'All') {
-                            cell.style.display = '';
-                        } else {
-                            cell.style.display = 'none';
-                        }
-                    });
+            function filterCharacters() {
+                characterCells.forEach(cell => {
+                    const matchesType = (selectedType === 'All' || cell.getAttribute('data-type') === selectedType);
+                    const matchesRarity = (selectedRarity === 'All' || cell.getAttribute('data-rarity') === selectedRarity);
+                    cell.style.display = (matchesType && matchesRarity) ? '' : 'none';
+                });
+            }
+
+            typeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    selectedType = button.getAttribute('data-type');
+                    filterCharacters();
+                });
+            });
+
+            rarityButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    selectedRarity = button.getAttribute('data-rarity');
+                    filterCharacters();
                 });
             });
         });

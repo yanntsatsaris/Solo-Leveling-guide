@@ -67,7 +67,8 @@ def characters(app: Flask):
                 'path': image_path,
                 'name': character['name'],
                 'alias': character['alias'],
-                'type': character['type']
+                'type': character['type'],
+                'rarity': character.get('rarity', '')  # Ajoute la rareté ici
             })
             character_types.add(character['type'])
 
