@@ -73,11 +73,13 @@ def characters(app: Flask):
             character_types.add(character['type'])
 
         character_types = sorted(character_types)
+        rarities = sorted(set(img['rarity'] for img in images if img['rarity']))
 
         return render_template(
             'characters.html',
             images=images,
             character_types=character_types,
+            rarities=rarities,
             panoplies=panoplies_data
         )
 
