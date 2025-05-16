@@ -41,6 +41,7 @@ body {
   flex: 1; /* Prend environ 1/3 de la largeur */
   max-width: 33%; /* Limite la largeur à 33% */
   display: flex;
+  height: auto;
   justify-content: center; /* Centre l'image horizontalement */
   align-items: center; /* Centre l'image verticalement */
   padding-left: 100px; /* Ajoute un léger padding à gauche pour équilibrer */
