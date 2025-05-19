@@ -18,7 +18,6 @@
     cursor: pointer;
     border-radius: 50%;
     z-index: 2;
-    background: rgba(255,0,0,0.15); /* léger fond pour repérage, à retirer après */
     box-sizing: border-box;
     /* Pour placer chaque hotspot, ajuste top/left dans chaque classe gem-couleur-x */
 }
