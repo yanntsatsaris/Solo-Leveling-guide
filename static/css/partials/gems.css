@@ -53,44 +53,44 @@
 .gem-rouge-7 { top: 3.4%; left: 33.9%; }
 
 /* Répète pour chaque couleur, adapte les valeurs ! */
-.gem-bleu-0 { top: 12%; left: 38%; }
-.gem-bleu-1 { top: 18%; left: 42%; }
-.gem-bleu-2 { top: 24%; left: 39%; }
-.gem-bleu-3 { top: 30%; left: 41%; }
-.gem-bleu-4 { top: 36%; left: 38%; }
-.gem-bleu-5 { top: 42%; left: 42%; }
-.gem-bleu-6 { top: 48%; left: 39%; }
-.gem-bleu-7 { top: 54%; left: 41%; }
+.gem-bleu-0 { top: 32.1%; left: 54.7%; }
+.gem-bleu-1 { top: 30%; left: 63.8%; }
+.gem-bleu-2 { top: 20.2%; left: 54.6%; }
+.gem-bleu-3 { top: 12.3%; left: 58.5%; }
+.gem-bleu-4 { top: 8.4%; left: 68%; }
+.gem-bleu-5 { top: 21.3%; left: 68%; }
+.gem-bleu-6 { top: 16.4%; left: 84.4%; }
+.gem-bleu-7 { top: 29%; left: 80.6%; }
 
 /* Exemples pour les gems vertes */
-.gem-vert-0 { top: 12%; left: 58%; }
-.gem-vert-1 { top: 18%; left: 62%; }
-.gem-vert-2 { top: 24%; left: 59%; }
-.gem-vert-3 { top: 30%; left: 61%; }
-.gem-vert-4 { top: 36%; left: 58%; }
-.gem-vert-5 { top: 42%; left: 62%; }
-.gem-vert-6 { top: 48%; left: 59%; }
-.gem-vert-7 { top: 54%; left: 61%; }
+.gem-vert-0 { top: 46%; left: 37%; }
+.gem-vert-1 { top: 49%; left: 29.2%; }
+.gem-vert-2 { top: 46.2%; left: 20%; }
+.gem-vert-3 { top: 55%; left: 14.3%; }
+.gem-vert-4 { top: 63%; left: 8.7%; }
+.gem-vert-5 { top: 60.5%; left: 26%; }
+.gem-vert-6 { top: 75%; left: 16.5%; }
+.gem-vert-7 { top: 75.4%; left: 1%; }
 
 /* Exemples pour les gems jaunes */
-.gem-jaune-0 { top: 12%; left: 78%; }
-.gem-jaune-1 { top: 18%; left: 82%; }
-.gem-jaune-2 { top: 24%; left: 79%; }
-.gem-jaune-3 { top: 30%; left: 81%; }
-.gem-jaune-4 { top: 36%; left: 78%; }
-.gem-jaune-5 { top: 42%; left: 82%; }
-.gem-jaune-6 { top: 48%; left: 79%; }
-.gem-jaune-7 { top: 54%; left: 81%; }
+.gem-jaune-0 { top: 46.1%; left: 56.7%; }
+.gem-jaune-1 { top: 40.3%; left: 66.6%; }
+.gem-jaune-2 { top: 54.6%; left: 62.1%; }
+.gem-jaune-3 { top: 55.3%; left: 70.9%; }
+.gem-jaune-4 { top: 50%; left: 80.9%; }
+.gem-jaune-5 { top: 62.5%; left: 85.3%; }
+.gem-jaune-6 { top: 73%; left: 79.2%; }
+.gem-jaune-7 { top: 72%; left: 92.8%; }
 
 /* Exemples pour les gems violettes */
-.gem-violet-0 { top: 62%; left: 18%; }
-.gem-violet-1 { top: 68%; left: 22%; }
-.gem-violet-2 { top: 74%; left: 19%; }
-.gem-violet-3 { top: 80%; left: 21%; }
-.gem-violet-4 { top: 62%; left: 38%; }
-.gem-violet-5 { top: 68%; left: 42%; }
-.gem-violet-6 { top: 74%; left: 39%; }
-.gem-violet-7 { top: 80%; left: 41%; }
+.gem-violet-0 { top: 53.5%; left: 46.9%; }
+.gem-violet-1 { top: 62.4%; left: 43.4%; }
+.gem-violet-2 { top: 71.3%; left: 51.2%; }
+.gem-violet-3 { top: 68.8%; left: 35.3%; }
+.gem-violet-4 { top: 79.2%; left: 37.4%; }
+.gem-violet-5 { top: 76.9%; left: 62.5%; }
+.gem-violet-6 { top: 89.6%; left: 50%; }
+.gem-violet-7 { top: 92.6%; left: 60.9%; }
 
 /* Pour masquer le fond rouge temporaire après placement :
 .gem-hotspot {
