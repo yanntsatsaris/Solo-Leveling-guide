@@ -176,7 +176,7 @@ def SJW(app: Flask):
             return "Language not set", 400
 
         # Charger les données des personnages depuis le fichier JSON
-        with open('data/character.json', 'r', encoding='utf-8') as f:
+        with open('data/SJW.json', 'r', encoding='utf-8') as f:
             characters_data = json.load(f)
 
         # Trouver les données correspondant à la langue sélectionnée
@@ -239,7 +239,7 @@ def SJW(app: Flask):
             return "Language not set", 400
 
         # Charger les données des personnages depuis le fichier JSON
-        with open('data/character.json', 'r', encoding='utf-8') as f:
+        with open('data/SJW.json', 'r', encoding='utf-8') as f:
             characters_data = json.load(f)
 
         # Trouver les données correspondant à la langue sélectionnée
