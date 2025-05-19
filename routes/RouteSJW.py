@@ -106,30 +106,33 @@ def SJW(app: Flask):
                 if 'description' in evolution:
                     evolution['description'] = update_image_paths(evolution['description'], f'images/{character_folder}')
 
-        # Calculer les effets de panoplie activés
-        equipped_sets = {}
+       # Calculer les effets de panoplie activés pour chaque set
+        equipment_sets_effects = []
         for equipment_set in character_info.get('equipment_sets', []):
+            equipped_sets = {}
             for artefact in equipment_set.get('artefacts', []):
                 set_name = artefact.get('set')  # Utiliser le champ 'set' des artefacts
                 if set_name:
                     equipped_sets[set_name] = equipped_sets.get(set_name, 0) + 1
 
-        # Ajouter les effets activés pour chaque panoplie
-        active_set_effects = []
-        for panoply in panoplies_data:
-            set_name = panoply['name']
-            if set_name in equipped_sets:
-                pieces_equipped = equipped_sets[set_name]
-                for bonus in panoply['set_bonus']:
-                    if pieces_equipped >= bonus['pieces_required']:
-                        active_set_effects.append({
-                            'set_name': set_name,
-                            'pieces_required': bonus['pieces_required'],
-                            'effect': bonus['effect']
-                        })
+            # Ajouter les effets activés pour chaque panoplie
+            active_set_effects = []
+            for panoply in panoplies_data:
+                set_name = panoply['name']
+                if set_name in equipped_sets:
+                    pieces_equipped = equipped_sets[set_name]
+                    for bonus in panoply['set_bonus']:
+                        if pieces_equipped >= bonus['pieces_required']:
+                            active_set_effects.append({
+                                'set_name': set_name,
+                                'pieces_required': bonus['pieces_required'],
+                                'effect': bonus['effect']
+                            })
 
-        # Ajouter les effets activés au contexte
-        character_info['active_set_effects'] = active_set_effects
+            equipment_sets_effects.append(active_set_effects)
+
+        # Ajouter les effets activés pour chaque set au contexte
+        character_info['equipment_sets_effects'] = equipment_sets_effects
 
         # Ajouter les évolutions au contexte
         evolutions = []
