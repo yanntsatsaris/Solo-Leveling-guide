@@ -178,6 +178,472 @@
             "image": "EpeeBaran_img.png",
             "codex": "EpeeBaran_Codex.png"
           }
+        ],
+        "equipment_sets": [
+          {
+            "set_name": "Combat long",
+            "focus_stats": [
+              "ATK",
+              "CRIT HIT",
+              "CRIT DMG",
+              "DEF PEN",
+              "DMG INC",
+              "MP CONS"
+            ],
+            "artefacts": [
+              {
+                "name": "Casque",
+                "number": "01",
+                "set": "Burning Curse",
+                "image": "Burning_Curse/Artefact01_Curse.webp",
+                "main_stat": {
+                  "name": "ATK"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK% +3/4"
+                  },
+                  {
+                    "name": "CRIT HIT"
+                  },
+                  {
+                    "name": "DMG INC"
+                  },
+                  {
+                    "name": "DEF PEN"
+                  }
+                ]
+              },
+              {
+                "name": "Plastron",
+                "number": "02",
+                "set": "Burning Curse",
+                "image": "Burning_Curse/Artefact02_Curse.webp",
+                "main_stat": {
+                  "name": "DEF"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK% +3/4"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT HIT"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Gants",
+                "number": "03",
+                "set": "Burning Curse",
+                "image": "Burning_Curse/Artefact03_Curse.webp",
+                "main_stat": {
+                  "name": "ATK"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK% +3/4"
+                  },
+                  {
+                    "name": "CRIT HIT"
+                  },
+                  {
+                    "name": "DMG INC"
+                  },
+                  {
+                    "name": "DEF Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Bottes",
+                "number": "04",
+                "set": "Burning Curse",
+                "image": "Burning_Curse/Artefact04_Curse.webp",
+                "main_stat": {
+                  "name": "CRIT DMG"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK%"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT HIT"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Collier",
+                "number": "05",
+                "set": "Outstanding Ability",
+                "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
+                "main_stat": {
+                  "name": "HP"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK%"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT DMG"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Bracelet",
+                "number": "06",
+                "set": "Outstanding Ability",
+                "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
+                "main_stat": {
+                  "name": "ELEM DMG"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK%"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT DMG"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Bague",
+                "number": "07",
+                "set": "Outstanding Ability",
+                "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
+                "main_stat": {
+                  "name": "ATK"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK% +3/4"
+                  },
+                  {
+                    "name": "CRIT DMG"
+                  },
+                  {
+                    "name": "DMG INC"
+                  },
+                  {
+                    "name": "DEF Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Boucle d'oreille",
+                "number": "08",
+                "set": "Outstanding Ability",
+                "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
+                "main_stat": {
+                  "name": "MP MAX"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK%"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT DMG"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              }
+            ],
+            "cores": [
+              {
+                "name": "Noyau Bleu 01",
+                "number": "01",
+                "image": "Bleu01.webp",
+                "main_stat": {
+                  "name": "ATK%"
+                },
+                "secondary_stat": {
+                  "name": "CRIT DMG"
+                }
+              },
+              {
+                "name": "Noyau Orange 02",
+                "number": "02",
+                "image": "Orange02.webp",
+                "main_stat": {
+                  "name": "DEF"
+                },
+                "secondary_stat": {
+                  "name": "CRIT DMG"
+                }
+              },
+              {
+                "name": "Noyau Bleu 03",
+                "number": "03",
+                "image": "Bleu03.webp",
+                "main_stat": {
+                  "name": "HP"
+                },
+                "secondary_stat": {
+                  "name": "DMG/Pen"
+                }
+              }
+            ]
+          },
+          {
+            "set_name": "Combat court",
+            "focus_stats": [
+              "ATK",
+              "CRIT HIT",
+              "CRIT DMG",
+              "DEF PEN",
+              "DMG INC",
+              "MP CONS"
+            ],
+            "artefacts": [
+              {
+                "name": "Casque",
+                "number": "01",
+                "set": "Burning Curse",
+                "image": "Burning_Curse/Artefact01_Curse.webp",
+                "main_stat": {
+                  "name": "ATK"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK% +3/4"
+                  },
+                  {
+                    "name": "CRIT HIT"
+                  },
+                  {
+                    "name": "DMG INC"
+                  },
+                  {
+                    "name": "DEF PEN"
+                  }
+                ]
+              },
+              {
+                "name": "Plastron",
+                "number": "02",
+                "set": "Burning Curse",
+                "image": "Burning_Curse/Artefact02_Curse.webp",
+                "main_stat": {
+                  "name": "DEF"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK% +3/4"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT HIT"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Gants",
+                "number": "03",
+                "set": "Burning Curse",
+                "image": "Burning_Curse/Artefact03_Curse.webp",
+                "main_stat": {
+                  "name": "ATK"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK% +3/4"
+                  },
+                  {
+                    "name": "CRIT HIT"
+                  },
+                  {
+                    "name": "DMG INC"
+                  },
+                  {
+                    "name": "DEF Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Bottes",
+                "number": "04",
+                "set": "Burning Curse",
+                "image": "Burning_Curse/Artefact04_Curse.webp",
+                "main_stat": {
+                  "name": "CRIT DMG"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK%"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT HIT"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Collier",
+                "number": "05",
+                "set": "Outstanding Ability",
+                "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
+                "main_stat": {
+                  "name": "HP"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK%"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT DMG"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Bracelet",
+                "number": "06",
+                "set": "Outstanding Ability",
+                "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
+                "main_stat": {
+                  "name": "ELEM DMG"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK%"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT DMG"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Bague",
+                "number": "07",
+                "set": "Outstanding Ability",
+                "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
+                "main_stat": {
+                  "name": "ATK"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK% +3/4"
+                  },
+                  {
+                    "name": "CRIT DMG"
+                  },
+                  {
+                    "name": "DMG INC"
+                  },
+                  {
+                    "name": "DEF Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Boucle d'oreille",
+                "number": "08",
+                "set": "Outstanding Ability",
+                "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
+                "main_stat": {
+                  "name": "MP MAX"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK%"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT DMG"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              }
+            ],
+            "cores": [
+              {
+                "name": "Noyau Bleu 01",
+                "number": "01",
+                "image": "Bleu01.webp",
+                "main_stat": {
+                  "name": "ATK%"
+                },
+                "secondary_stat": {
+                  "name": "CRIT DMG"
+                }
+              },
+              {
+                "name": "Noyau Orange 02",
+                "number": "02",
+                "image": "Orange02.webp",
+                "main_stat": {
+                  "name": "DEF"
+                },
+                "secondary_stat": {
+                  "name": "CRIT DMG"
+                }
+              },
+              {
+                "name": "Noyau Bleu 03",
+                "number": "03",
+                "image": "Bleu03.webp",
+                "main_stat": {
+                  "name": "HP"
+                },
+                "secondary_stat": {
+                  "name": "DMG/Pen"
+                }
+              }
+            ]
+          }
         ]
       }
     ],
@@ -358,6 +824,472 @@
             "folder": "Wind_Glaive_du_roi_démon",
             "image": "EpeeBaran_img.png",
             "codex": "EpeeBaran_Codex.png"
+          }
+        ],
+        "equipment_sets": [
+          {
+            "set_name": "Long Fight",
+            "focus_stats": [
+              "ATK",
+              "CRIT HIT",
+              "CRIT DMG",
+              "DEF PEN",
+              "DMG INC",
+              "MP CONS"
+            ],
+            "artefacts": [
+              {
+                "name": "Casque",
+                "number": "01",
+                "set": "Burning Curse",
+                "image": "Burning_Curse/Artefact01_Curse.webp",
+                "main_stat": {
+                  "name": "ATK"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK% +3/4"
+                  },
+                  {
+                    "name": "CRIT HIT"
+                  },
+                  {
+                    "name": "DMG INC"
+                  },
+                  {
+                    "name": "DEF PEN"
+                  }
+                ]
+              },
+              {
+                "name": "Plastron",
+                "number": "02",
+                "set": "Burning Curse",
+                "image": "Burning_Curse/Artefact02_Curse.webp",
+                "main_stat": {
+                  "name": "DEF"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK% +3/4"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT HIT"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Gants",
+                "number": "03",
+                "set": "Burning Curse",
+                "image": "Burning_Curse/Artefact03_Curse.webp",
+                "main_stat": {
+                  "name": "ATK"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK% +3/4"
+                  },
+                  {
+                    "name": "CRIT HIT"
+                  },
+                  {
+                    "name": "DMG INC"
+                  },
+                  {
+                    "name": "DEF Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Bottes",
+                "number": "04",
+                "set": "Burning Curse",
+                "image": "Burning_Curse/Artefact04_Curse.webp",
+                "main_stat": {
+                  "name": "CRIT DMG"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK%"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT HIT"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Collier",
+                "number": "05",
+                "set": "Outstanding Ability",
+                "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
+                "main_stat": {
+                  "name": "HP"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK%"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT DMG"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Bracelet",
+                "number": "06",
+                "set": "Outstanding Ability",
+                "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
+                "main_stat": {
+                  "name": "ELEM DMG"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK%"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT DMG"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Bague",
+                "number": "07",
+                "set": "Outstanding Ability",
+                "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
+                "main_stat": {
+                  "name": "ATK"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK% +3/4"
+                  },
+                  {
+                    "name": "CRIT DMG"
+                  },
+                  {
+                    "name": "DMG INC"
+                  },
+                  {
+                    "name": "DEF Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Boucle d'oreille",
+                "number": "08",
+                "set": "Outstanding Ability",
+                "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
+                "main_stat": {
+                  "name": "MP MAX"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK%"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT DMG"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              }
+            ],
+            "cores": [
+              {
+                "name": "Noyau Bleu 01",
+                "number": "01",
+                "image": "Bleu01.webp",
+                "main_stat": {
+                  "name": "ATK%"
+                },
+                "secondary_stat": {
+                  "name": "CRIT DMG"
+                }
+              },
+              {
+                "name": "Noyau Orange 02",
+                "number": "02",
+                "image": "Orange02.webp",
+                "main_stat": {
+                  "name": "DEF"
+                },
+                "secondary_stat": {
+                  "name": "CRIT DMG"
+                }
+              },
+              {
+                "name": "Noyau Bleu 03",
+                "number": "03",
+                "image": "Bleu03.webp",
+                "main_stat": {
+                  "name": "HP"
+                },
+                "secondary_stat": {
+                  "name": "DMG/Pen"
+                }
+              }
+            ]
+          },
+          {
+            "set_name": "Short Fight",
+            "focus_stats": [
+              "ATK",
+              "CRIT HIT",
+              "CRIT DMG",
+              "DEF PEN",
+              "DMG INC",
+              "MP CONS"
+            ],
+            "artefacts": [
+              {
+                "name": "Casque",
+                "number": "01",
+                "set": "Burning Curse",
+                "image": "Burning_Curse/Artefact01_Curse.webp",
+                "main_stat": {
+                  "name": "ATK"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK% +3/4"
+                  },
+                  {
+                    "name": "CRIT HIT"
+                  },
+                  {
+                    "name": "DMG INC"
+                  },
+                  {
+                    "name": "DEF PEN"
+                  }
+                ]
+              },
+              {
+                "name": "Plastron",
+                "number": "02",
+                "set": "Burning Curse",
+                "image": "Burning_Curse/Artefact02_Curse.webp",
+                "main_stat": {
+                  "name": "DEF"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK% +3/4"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT HIT"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Gants",
+                "number": "03",
+                "set": "Burning Curse",
+                "image": "Burning_Curse/Artefact03_Curse.webp",
+                "main_stat": {
+                  "name": "ATK"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK% +3/4"
+                  },
+                  {
+                    "name": "CRIT HIT"
+                  },
+                  {
+                    "name": "DMG INC"
+                  },
+                  {
+                    "name": "DEF Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Bottes",
+                "number": "04",
+                "set": "Burning Curse",
+                "image": "Burning_Curse/Artefact04_Curse.webp",
+                "main_stat": {
+                  "name": "CRIT DMG"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK%"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT HIT"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Collier",
+                "number": "05",
+                "set": "Outstanding Ability",
+                "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
+                "main_stat": {
+                  "name": "HP"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK%"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT DMG"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Bracelet",
+                "number": "06",
+                "set": "Outstanding Ability",
+                "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
+                "main_stat": {
+                  "name": "ELEM DMG"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK%"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT DMG"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Bague",
+                "number": "07",
+                "set": "Outstanding Ability",
+                "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
+                "main_stat": {
+                  "name": "ATK"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK% +3/4"
+                  },
+                  {
+                    "name": "CRIT DMG"
+                  },
+                  {
+                    "name": "DMG INC"
+                  },
+                  {
+                    "name": "DEF Pen"
+                  }
+                ]
+              },
+              {
+                "name": "Boucle d'oreille",
+                "number": "08",
+                "set": "Outstanding Ability",
+                "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
+                "main_stat": {
+                  "name": "MP MAX"
+                },
+                "secondary_stats": [
+                  {
+                    "name": "ATK%"
+                  },
+                  {
+                    "name": "ATK"
+                  },
+                  {
+                    "name": "CRIT DMG"
+                  },
+                  {
+                    "name": "DMG/Pen"
+                  }
+                ]
+              }
+            ],
+            "cores": [
+              {
+                "name": "Noyau Bleu 01",
+                "number": "01",
+                "image": "Bleu01.webp",
+                "main_stat": {
+                  "name": "ATK%"
+                },
+                "secondary_stat": {
+                  "name": "CRIT DMG"
+                }
+              },
+              {
+                "name": "Noyau Orange 02",
+                "number": "02",
+                "image": "Orange02.webp",
+                "main_stat": {
+                  "name": "DEF"
+                },
+                "secondary_stat": {
+                  "name": "CRIT DMG"
+                }
+              },
+              {
+                "name": "Noyau Bleu 03",
+                "number": "03",
+                "image": "Bleu03.webp",
+                "main_stat": {
+                  "name": "HP"
+                },
+                "secondary_stat": {
+                  "name": "DMG/Pen"
+                }
+              }
+            ]
           }
         ]
       }
