@@ -221,4 +221,4 @@ def characters(app: Flask):
                         core['image'] = f'images/Noyaux/{core["image"]}'
 
         # Renvoyer le template avec les données du personnage
-        return render_template('character_details.html', character=character_info)
+        return render_template('character_details.html', character=character_info, language=language, panoplies=panoplies_data)

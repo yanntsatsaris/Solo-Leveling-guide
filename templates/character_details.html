@@ -76,23 +76,33 @@
             <div class="tabs-and-content">
               <!-- Système d'onglets -->
               <div class="tabs">
-                <div class="tab active" data-tab="description">Description</div>
-                <div class="tab" data-tab="weapons">Armes</div>
-                <div class="tab" data-tab="passives">Passifs</div>
-                <div class="tab" data-tab="skills">Skills</div>
+                <div class="tab active" data-tab="description">
+                  {% if language == "FR-fr" %}Description{% else %}Description{% endif %}
+                </div>
+                <div class="tab" data-tab="weapons">
+                  {% if language == "FR-fr" %}Armes{% else %}Weapons{% endif %}
+                </div>
+                <div class="tab" data-tab="passives">
+                  {% if language == "FR-fr" %}Passifs{% else %}Passives{% endif %}
+                </div>
+                <div class="tab" data-tab="skills">
+                  {% if language == "FR-fr" %}Compétences{% else %}Skills{% endif %}
+                </div>
                 <div class="tab" data-tab="artefacts" id="artefacts-tab">
-                  Artefacts
+                  {% if language == "FR-fr" %}Artefacts{% else %}Artefacts{% endif %}
                 </div>
                 <div class="tab" id="dropdown-tab">
                   <select id="equipment-select">
-                    {% if character.equipment_sets and
-                    character.equipment_sets|length > 0 %} {% for set in
-                    character.equipment_sets %}
-                    <option value="{{ loop.index0 }}">
-                      {{ set.set_name }}
-                    </option>
-                    {% endfor %} {% else %}
-                    <option disabled>Aucun set équipé</option>
+                    {% if character.equipment_sets and character.equipment_sets|length > 0 %}
+                      {% for set in character.equipment_sets %}
+                        <option value="{{ loop.index0 }}">
+                          {{ set.set_name }}
+                        </option>
+                      {% endfor %}
+                    {% else %}
+                      <option disabled>
+                        {% if language == "FR-fr" %}Aucun set équipé{% else %}No set equipped{% endif %}
+                      </option>
                     {% endif %}
                   </select>
                 </div>
