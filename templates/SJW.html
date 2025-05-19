@@ -76,15 +76,34 @@
             <div class="tabs-and-content">
               <!-- Système d'onglets -->
               <div class="tabs">
-                <div class="tab" data-tab="description">Description</div>
-                <div class="tab" data-tab="weapons">Armes</div>
-                <div class="tab" data-tab="passives">Passifs</div>
-                <div class="tab" data-tab="skills">Skills</div>
-                <div class="tab" data-tab="gems">Gems</div>
-                <div class="tab" data-tab="shadows">Shadows</div>
-                <div class="tab" data-tab="monarchs">Monarchs</div>
+                <div class="tab" data-tab="description">
+                  {% if language == "FR-fr" %}Description{% else %}Description{%
+                  endif %}
+                </div>
+                <div class="tab" data-tab="weapons">
+                  {% if language == "FR-fr" %}Armes{% else %}Weapons{% endif %}
+                </div>
+                <div class="tab" data-tab="passives">
+                  {% if language == "FR-fr" %}Bénédictions{% else %}Blessings{%
+                  endif %}
+                </div>
+                <div class="tab" data-tab="skills">
+                  {% if language == "FR-fr" %}Compétences{% else %}Skills{%
+                  endif %}
+                </div>
+                <div class="tab" data-tab="gems">
+                  {% if language == "FR-fr" %}Gemmes{% else %}Gems{% endif %}
+                </div>
+                <div class="tab" data-tab="shadows">
+                  {% if language == "FR-fr" %}Ombres{% else %}Shadows{% endif %}
+                </div>
+                <div class="tab" data-tab="monarchs">
+                  {% if language == "FR-fr" %}Monarques{% else %}Monarchs{%
+                  endif %}
+                </div>
                 <div class="tab" data-tab="artefacts" id="artefacts-tab">
-                  Artefacts
+                  {% if language == "FR-fr" %}Artefacts{% else %}Artefacts{%
+                  endif %}
                 </div>
                 <div class="tab" id="dropdown-tab">
                   <select id="equipment-select">

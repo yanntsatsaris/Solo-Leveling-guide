@@ -158,7 +158,7 @@ def SJW(app: Flask):
                 core['image'] = f'images/Noyaux/{core["image"]}'
 
         # Renvoyer le template avec les données du personnage
-        return render_template('SJW.html', character=character_info)
+        return render_template('SJW.html', character=character_info, language=language, panoplies=panoplies_data)
 
     @app.route('/SJW/shadow/<shadowName>')
     def shadow_details(shadowName):
