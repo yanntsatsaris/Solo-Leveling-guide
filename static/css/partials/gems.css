@@ -14,9 +14,8 @@
 .gem-hotspot {
     position: absolute;
     width: 6%;   /* à ajuster selon la taille de la gemme sur l'image */
-    height: 6%;  /* à ajuster selon la taille de la gemme sur l'image */
+    height: 7%;  /* à ajuster selon la taille de la gemme sur l'image */
     cursor: pointer;
-    border: 2px solid #ff0000; /* contour rouge visible pour placement */
     border-radius: 50%;
     z-index: 2;
     background: rgba(255,0,0,0.15); /* léger fond pour repérage, à retirer après */
