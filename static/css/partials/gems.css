@@ -43,14 +43,14 @@
 }
 
 /* Exemples de positionnement pour les gems rouges (à ajuster selon ton image) */
-.gem-rouge-0 { top: 12%; left: 18%; }
-.gem-rouge-1 { top: 18%; left: 22%; }
-.gem-rouge-2 { top: 24%; left: 19%; }
-.gem-rouge-3 { top: 30%; left: 21%; }
-.gem-rouge-4 { top: 36%; left: 18%; }
-.gem-rouge-5 { top: 42%; left: 22%; }
-.gem-rouge-6 { top: 48%; left: 19%; }
-.gem-rouge-7 { top: 54%; left: 21%; }
+.gem-rouge-0 { top: 32.3%; left: 39%; }
+.gem-rouge-1 { top: 25.5%; left: 32.5%; }
+.gem-rouge-2 { top: 31%; left: 21%; }
+.gem-rouge-3 { top: 24.3%; left: 14.7%; }
+.gem-rouge-4 { top: 11.3%; left: 12.3%; }
+.gem-rouge-5 { top: 2.3%; left: 20.2%; }
+.gem-rouge-6 { top: 12%; left: 22.5%; }
+.gem-rouge-7 { top: 3.4%; left: 33.9%; }
 
 /* Répète pour chaque couleur, adapte les valeurs ! */
 .gem-bleu-0 { top: 12%; left: 38%; }
