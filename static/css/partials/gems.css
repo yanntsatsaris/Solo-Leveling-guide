@@ -1,0 +1,97 @@
+/* Conteneur principal de l'image des gemmes */
+.gems-image-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Image responsive */
+.gems-image-container img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Style général pour les hotspots */
+.gem-hotspot {
+    position: absolute;
+    width: 6%;   /* à ajuster selon la taille de la gemme sur l'image */
+    height: 6%;  /* à ajuster selon la taille de la gemme sur l'image */
+    cursor: pointer;
+    background: rgba(255,0,0,0.15); /* temporaire pour placement, à retirer après */
+    border-radius: 50%;
+    z-index: 2;
+    /* Pour le placement, tu peux augmenter l'opacité ou changer la couleur */
+}
+
+/* Style général pour les tooltips */
+.gem-tooltip {
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #222;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 5px;
+    white-space: nowrap;
+    z-index: 10;
+    font-size: 0.95em;
+    pointer-events: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* Exemples de positionnement pour les gems rouges (à ajuster selon ton image) */
+.gem-rouge-0 { top: 12%; left: 18%; }
+.gem-rouge-1 { top: 18%; left: 22%; }
+.gem-rouge-2 { top: 24%; left: 19%; }
+.gem-rouge-3 { top: 30%; left: 21%; }
+.gem-rouge-4 { top: 36%; left: 18%; }
+.gem-rouge-5 { top: 42%; left: 22%; }
+.gem-rouge-6 { top: 48%; left: 19%; }
+.gem-rouge-7 { top: 54%; left: 21%; }
+
+/* Exemples pour les gems bleues */
+.gem-bleu-0 { top: 12%; left: 38%; }
+.gem-bleu-1 { top: 18%; left: 42%; }
+.gem-bleu-2 { top: 24%; left: 39%; }
+.gem-bleu-3 { top: 30%; left: 41%; }
+.gem-bleu-4 { top: 36%; left: 38%; }
+.gem-bleu-5 { top: 42%; left: 42%; }
+.gem-bleu-6 { top: 48%; left: 39%; }
+.gem-bleu-7 { top: 54%; left: 41%; }
+
+/* Exemples pour les gems vertes */
+.gem-vert-0 { top: 12%; left: 58%; }
+.gem-vert-1 { top: 18%; left: 62%; }
+.gem-vert-2 { top: 24%; left: 59%; }
+.gem-vert-3 { top: 30%; left: 61%; }
+.gem-vert-4 { top: 36%; left: 58%; }
+.gem-vert-5 { top: 42%; left: 62%; }
+.gem-vert-6 { top: 48%; left: 59%; }
+.gem-vert-7 { top: 54%; left: 61%; }
+
+/* Exemples pour les gems jaunes */
+.gem-jaune-0 { top: 12%; left: 78%; }
+.gem-jaune-1 { top: 18%; left: 82%; }
+.gem-jaune-2 { top: 24%; left: 79%; }
+.gem-jaune-3 { top: 30%; left: 81%; }
+.gem-jaune-4 { top: 36%; left: 78%; }
+.gem-jaune-5 { top: 42%; left: 82%; }
+.gem-jaune-6 { top: 48%; left: 79%; }
+.gem-jaune-7 { top: 54%; left: 81%; }
+
+/* Exemples pour les gems violettes */
+.gem-violet-0 { top: 62%; left: 18%; }
+.gem-violet-1 { top: 68%; left: 22%; }
+.gem-violet-2 { top: 74%; left: 19%; }
+.gem-violet-3 { top: 80%; left: 21%; }
+.gem-violet-4 { top: 62%; left: 38%; }
+.gem-violet-5 { top: 68%; left: 42%; }
+.gem-violet-6 { top: 74%; left: 39%; }
+.gem-violet-7 { top: 80%; left: 41%; }
+
+/* Pour masquer le fond rouge temporaire après placement :
+.gem-hotspot {
+    background: transparent;
+}
+*/
