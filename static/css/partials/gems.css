@@ -16,10 +16,12 @@
     width: 6%;   /* à ajuster selon la taille de la gemme sur l'image */
     height: 6%;  /* à ajuster selon la taille de la gemme sur l'image */
     cursor: pointer;
-    background: rgba(255,0,0,0.15); /* temporaire pour placement, à retirer après */
+    border: 2px solid #ff0000; /* contour rouge visible pour placement */
     border-radius: 50%;
     z-index: 2;
-    /* Pour le placement, tu peux augmenter l'opacité ou changer la couleur */
+    background: rgba(255,0,0,0.15); /* léger fond pour repérage, à retirer après */
+    box-sizing: border-box;
+    /* Pour placer chaque hotspot, ajuste top/left dans chaque classe gem-couleur-x */
 }
 
 /* Style général pour les tooltips */
@@ -50,7 +52,7 @@
 .gem-rouge-6 { top: 48%; left: 19%; }
 .gem-rouge-7 { top: 54%; left: 21%; }
 
-/* Exemples pour les gems bleues */
+/* Répète pour chaque couleur, adapte les valeurs ! */
 .gem-bleu-0 { top: 12%; left: 38%; }
 .gem-bleu-1 { top: 18%; left: 42%; }
 .gem-bleu-2 { top: 24%; left: 39%; }
