@@ -5,8 +5,12 @@ from routes.RouteCharacters import characters
 from routes.RouteGuides import guides
 from routes.RouteSJW import SJW
 
+# Importer le contrôleur de configuration
+from static.Controleurs.ControleurConf import ControleurConf
+
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Nécessaire pour utiliser les sessions
+conf = ControleurConf()
+app.secret_key = conf.get_config('APP', 'secret_key')
 
 @app.route('/set-language', methods=['POST'])
 def set_language():
@@ -24,4 +28,4 @@ guides(app)
 SJW(app)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=int(conf.get_config('APP', 'port')))
