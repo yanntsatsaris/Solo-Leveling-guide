@@ -207,24 +207,18 @@
     outline: none;
 }
 
-/* Boutons principaux */
-.user-menu-popup button {
-    width: 100%;
-    margin-bottom: 8px;
-    padding: 10px;
-    font-size: 1em;
-    border-radius: 8px;
-    border: none;
-    background: linear-gradient(90deg, #8000ff 0%, #ffcc00 100%);
-    color: #fff;
-    cursor: pointer;
+/* Boutons principaux : "Créer" et "Se connecter" en jaune sans gradient */
+.user-menu-popup button[type="submit"] {
+    background: #ffcc00;
+    color: #222;
     font-weight: bold;
-    box-shadow: 0 2px 8px rgba(128,0,255,0.15);
+    border: none;
+    box-shadow: 0 2px 8px rgba(255,204,0,0.15);
     transition: background 0.2s, color 0.2s;
 }
-.user-menu-popup button:hover {
-    background: linear-gradient(90deg, #ffcc00 0%, #8000ff 100%);
-    color: #222;
+.user-menu-popup button[type="submit"]:hover {
+    background: #ffe066;
+    color: #1e1e1e;
 }
 
 /* Boutons switch */
@@ -252,7 +246,7 @@
     cursor: pointer;
     width: auto;
     padding: 0;
-    text-shadow: 0 0 10px #8000ff;
+    text-shadow: 0 0 10px #ffcc00;
 }
 
 /* Responsive pour le popup */
