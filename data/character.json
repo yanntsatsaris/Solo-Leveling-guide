@@ -1147,6 +1147,13 @@
       {
         "type": "Light",
         "rarity": "SSR",
+        "name": "Miyeon",
+        "alias": "Miyeon",
+        "folder": "SSR_Light_Miyeon"
+      },
+      {
+        "type": "Light",
+        "rarity": "SSR",
         "name": "Thomas Andre",
         "alias": "Thomas",
         "folder": "SSR_Light_ThomasAndre",
@@ -3492,6 +3499,13 @@
         "name": "Min",
         "alias": "Min",
         "folder": "SSR_Light_Min"
+      },
+      {
+        "type": "Light",
+        "rarity": "SSR",
+        "name": "Miyeon",
+        "alias": "Miyeon",
+        "folder": "SSR_Light_Miyeon"
       },
       {
         "type": "Light",
