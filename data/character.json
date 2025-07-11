@@ -2300,6 +2300,13 @@
       {
         "type": "Wind",
         "rarity": "SSR",
+        "name": "Lennart Niermann",
+        "alias": "Niermann",
+        "folder": "SSR_Wind_LennartNiermann"
+      },
+      {
+        "type": "Wind",
+        "rarity": "SSR",
         "name": "Mirei",
         "alias": "Mirei",
         "folder": "SSR_Wind_Mirei"
@@ -4638,6 +4645,13 @@
         "name": "Hwang Dongsoo",
         "alias": "Dongsoo",
         "folder": "SSR_Wind_HwangDongsoo"
+      },
+      {
+        "type": "Wind",
+        "rarity": "SSR",
+        "name": "Lennart Niermann",
+        "alias": "Niermann",
+        "folder": "SSR_Wind_LennartNiermann"
       },
       {
         "type": "Wind",
