@@ -8,10 +8,13 @@ from routes.RouteUsers import users
 
 # Importer le contrôleur de configuration
 from static.Controleurs.ControleurConf import ControleurConf
+from static.Controleurs.ControleurLog import write_log
 
 app = Flask(__name__)
 conf = ControleurConf()
 app.secret_key = conf.get_config('APP', 'secret_key')
+
+write_log("Application démarrée", log_level="INFO")
 
 @app.route('/set-language', methods=['POST'])
 def set_language():
