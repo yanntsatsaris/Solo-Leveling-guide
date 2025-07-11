@@ -162,17 +162,18 @@
     z-index: 9999;
 }
 
-/* Popup centrée */
+/* Popup centrée : style Solo Leveling */
 .user-menu-popup {
-    background: #fff;
+    background: #1e1e1e; /* Fond sombre comme la navbar */
     padding: 32px 24px 24px 24px;
-    border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(128,0,255,0.25); /* Glow violet */
     min-width: 320px;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    border: 2px solid #8000ff; /* Bordure violette */
 }
 
 /* Titres */
@@ -180,6 +181,10 @@
     margin-top: 0;
     margin-bottom: 16px;
     text-align: center;
+    color: #ffcc00; /* Titre doré */
+    text-shadow: 0 0 10px #8000ff;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 /* Inputs et boutons */
@@ -189,40 +194,65 @@
     margin-bottom: 12px;
     padding: 8px;
     font-size: 1em;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+    border-radius: 8px;
+    border: 1px solid #8000ff; /* Bordure violette */
+    background: #121212; /* Fond sombre */
+    color: #ffcc00; /* Texte doré */
+    box-shadow: 0 2px 8px rgba(128,0,255,0.10);
+    transition: border 0.2s, background 0.2s;
+}
+.user-menu-popup input:focus {
+    border-color: #ffcc00; /* Bordure dorée au focus */
+    background: #222;
+    outline: none;
 }
 
+/* Boutons principaux */
 .user-menu-popup button {
     width: 100%;
     margin-bottom: 8px;
     padding: 10px;
     font-size: 1em;
-    border-radius: 6px;
+    border-radius: 8px;
     border: none;
-    background: #222;
+    background: linear-gradient(90deg, #8000ff 0%, #ffcc00 100%);
     color: #fff;
     cursor: pointer;
-    transition: background 0.2s;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(128,0,255,0.15);
+    transition: background 0.2s, color 0.2s;
 }
-
-.user-menu-popup .switch-btn {
-    background: #eee;
+.user-menu-popup button:hover {
+    background: linear-gradient(90deg, #ffcc00 0%, #8000ff 100%);
     color: #222;
-    border: 1px solid #ccc;
 }
 
+/* Boutons switch */
+.user-menu-popup .switch-btn {
+    background: #222;
+    color: #ffcc00;
+    border: 1px solid #8000ff;
+    box-shadow: none;
+    font-weight: normal;
+}
+.user-menu-popup .switch-btn:hover {
+    background: #8000ff;
+    color: #fff;
+}
+
+/* Bouton de fermeture */
 .close-btn {
     position: absolute;
     top: 8px;
     right: 12px;
     background: transparent;
-    color: #222;
+    color: #ffcc00;
     font-size: 2em;
     border: none;
     cursor: pointer;
     width: auto;
     padding: 0;
+    text-shadow: 0 0 10px #8000ff;
 }
 
 /* Responsive pour le popup */
