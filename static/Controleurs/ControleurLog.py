@@ -2,6 +2,7 @@ import logging
 import inspect
 import os
 from flask import session
+from .ControleurConf import ControleurConf
 
 # Récupérer le chemin du fichier de log via ControleurConf
 conf = ControleurConf()
