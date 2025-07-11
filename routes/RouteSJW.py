@@ -23,6 +23,7 @@ def SJW(app: Flask):
         
     @app.route('/SJW')
     def inner_SJW():
+        write_log("Accès à la page SJW", log_level="INFO")
         # Récupérer la langue sélectionnée
         language = session.get('language', "EN-en")
         if not language:
