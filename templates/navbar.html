@@ -68,7 +68,7 @@ document.getElementById('show-login').onclick = function() {
     document.getElementById('login-form').style.display = 'block';
 };
 
-// Formulaire d'inscription (déjà présent)
+// Formulaire d'inscription
 document.getElementById('register-form').onsubmit = function(e) {
     e.preventDefault();
     const pwd = this.new_password.value;
@@ -86,6 +86,8 @@ document.getElementById('register-form').onsubmit = function(e) {
             location.reload();
         } else {
             alert(data.error);
+            // Le formulaire reste affiché
+            document.getElementById('register-form').style.display = 'block';
         }
     });
 };
@@ -102,6 +104,8 @@ document.getElementById('login-form').onsubmit = function(e) {
             location.reload();
         } else {
             alert(data.error);
+            // Le formulaire reste affiché
+            document.getElementById('login-form').style.display = 'block';
         }
     });
 };
