@@ -168,6 +168,26 @@ class ControleurLdap:
             write_log(f"Erreur lors de la récupération des utilisateurs LDAP: {e}", 'ERROR')
             return []
 
+    def get_user_info(self, username):
+        """
+        Récupère tous les attributs LDAP de l'utilisateur sous forme de dictionnaire.
+        """
+        try:
+            self.bind_as_root()
+            base_dn = self.config.get_config('LDAP', 'base_dn')
+            search_filter = f"(uid={username})"
+            result = self.conn.search_s(base_dn, ldap.SCOPE_SUBTREE, search_filter)
+            if result:
+                entry = result[0][1]
+                # On retourne un dict avec les attributs et leurs valeurs
+                return {attr: entry[attr] for attr in entry}
+            else:
+                write_log(f"Utilisateur {username} non trouvé dans get_user_info", 'WARNING')
+                return {}
+        except ldap.LDAPError as e:
+            write_log(f"Erreur get_user_info pour {username}: {e}", 'ERROR')
+            return {}
+
     def disconnect(self):
         try:
             self.conn.unbind()
