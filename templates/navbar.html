@@ -91,8 +91,60 @@ document.addEventListener("DOMContentLoaded", function() {
     };
 
     // Formulaire d'inscription
+    let emailTouched = false;
+    let confirmTouched = false;
+
+    if (emailInput) {
+        emailInput.addEventListener('input', function() {
+            emailTouched = true;
+            updateRegisterError();
+        });
+    }
+    const confirmInput = document.getElementById('register-form').querySelector('input[name="confirm_password"]');
+    if (confirmInput) {
+        confirmInput.addEventListener('input', function() {
+            confirmTouched = true;
+            updateRegisterError();
+        });
+    }
+
+    function updateRegisterError() {
+        let errorMsg = "";
+        // Vérification email
+        const strictEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        if (emailTouched && !strictEmail.test(emailInput.value)) {
+            errorMsg += "Adresse mail invalide.<br>";
+            createBtn.disabled = true;
+            emailInput.classList.add('input-error');
+        } else {
+            emailInput.classList.remove('input-error');
+        }
+        // Vérification mot de passe
+        const pwd = document.getElementById('register-form').new_password.value;
+        const confirm = confirmInput.value;
+        if (confirmTouched && pwd !== confirm) {
+            errorMsg += "Les mots de passe ne correspondent pas.";
+            createBtn.disabled = true;
+            confirmInput.classList.add('input-error');
+        } else {
+            confirmInput.classList.remove('input-error');
+        }
+        // Si tout est bon, on active le bouton
+        if (
+            strictEmail.test(emailInput.value) &&
+            pwd === confirm &&
+            pwd.length > 0 &&
+            confirm.length > 0
+        ) {
+            createBtn.disabled = false;
+        }
+        registerError.innerHTML = errorMsg;
+    }
+
     if (registerForm) registerForm.onsubmit = function(e) {
         e.preventDefault();
+        updateRegisterError();
+        if (createBtn.disabled) return;
         registerError.textContent = ""; // Reset
         const pwd = this.new_password.value;
         const confirm = this.confirm_password.value;
@@ -142,21 +194,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     }
                 });
         };
-    }
-
-    // Vérification live de l'email
-    if (emailInput && createBtn) {
-        emailInput.addEventListener('input', function() {
-            // Regex stricte : au moins un caractère, @, au moins un caractère, ., au moins 2 caractères
-            const strictEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-            if (strictEmail.test(emailInput.value)) {
-                createBtn.disabled = false;
-                emailInput.classList.remove('input-error');
-            } else {
-                createBtn.disabled = true;
-                emailInput.classList.add('input-error');
-            }
-        });
     }
 });
 </script>
