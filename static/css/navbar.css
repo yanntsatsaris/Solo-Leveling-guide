@@ -280,3 +280,9 @@
         padding: 16px 8px 16px 8px;
     }
 }
+
+/* Classe pour les champs avec erreur */
+.input-error {
+    border: 2px solid #ff3333 !important;
+    box-shadow: 0 0 4px #ff3333;
+}

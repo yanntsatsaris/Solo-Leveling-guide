@@ -141,11 +141,12 @@ document.addEventListener("DOMContentLoaded", function() {
     // Vérification live de l'email
     if (emailInput && createBtn) {
         emailInput.addEventListener('input', function() {
-            // Utilise la validation native HTML5
             if (emailInput.checkValidity()) {
                 createBtn.disabled = false;
+                emailInput.classList.remove('input-error');
             } else {
                 createBtn.disabled = true;
+                emailInput.classList.add('input-error');
             }
         });
     }
