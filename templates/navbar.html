@@ -119,16 +119,18 @@ document.getElementById('login-form').onsubmit = function(e) {
     });
 };
 
-// Ajoute ce JS dans ton <script> pour gérer la déconnexion
-if (document.getElementById('logout-btn')) {
-    document.getElementById('logout-btn').onclick = function() {
-        fetch('/logout')
-            .then(r => r.json())
-            .then(data => {
-                if(data.success) {
-                    location.reload();
-                }
-            });
-    };
-}
+document.addEventListener("DOMContentLoaded", function() {
+    const logoutBtn = document.getElementById('logout-btn');
+    if (logoutBtn) {
+        logoutBtn.onclick = function() {
+            fetch('/logout')
+                .then(r => r.json())
+                .then(data => {
+                    if(data.success) {
+                        location.reload();
+                    }
+                });
+        };
+    }
+});
 </script>
