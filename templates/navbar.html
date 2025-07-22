@@ -57,69 +57,74 @@
 </div>
 
 <script>
-document.getElementById('user-btn').onclick = function() {
-    document.getElementById('user-menu-overlay').style.display = 'flex';
-    document.getElementById('login-form').style.display = 'block';
-    document.getElementById('register-form').style.display = 'none';
-};
-
-document.getElementById('close-user-menu').onclick = function() {
-    document.getElementById('user-menu-overlay').style.display = 'none';
-};
-
-document.getElementById('show-register').onclick = function() {
-    document.getElementById('login-form').style.display = 'none';
-    document.getElementById('register-form').style.display = 'block';
-};
-
-document.getElementById('show-login').onclick = function() {
-    document.getElementById('register-form').style.display = 'none';
-    document.getElementById('login-form').style.display = 'block';
-};
-
-// Formulaire d'inscription
-document.getElementById('register-form').onsubmit = function(e) {
-    e.preventDefault();
-    const pwd = this.new_password.value;
-    const confirm = this.confirm_password.value;
-    if (pwd !== confirm) {
-        alert("Les mots de passe ne correspondent pas.");
-        return;
-    }
-    fetch('/register', {
-        method: 'POST',
-        body: new FormData(this)
-    }).then(r => r.json()).then(data => {
-        if(data.success) {
-            alert('Compte créé !');
-            location.reload();
-        } else {
-            alert(data.error);
-            // Le formulaire reste affiché
-            document.getElementById('register-form').style.display = 'block';
-        }
-    });
-};
-
-// Formulaire de connexion
-document.getElementById('login-form').onsubmit = function(e) {
-    e.preventDefault();
-    fetch('/login', {
-        method: 'POST',
-        body: new FormData(this)
-    }).then(r => r.json()).then(data => {
-        if(data.success) {
-            alert('Connexion réussie !');
-            location.reload();
-        } else {
-            alert(data.error);
-            // Le formulaire reste affiché
-            document.getElementById('login-form').style.display = 'block';
-        }
-    });
-};
-
 document.addEventListener("DOMContentLoaded", function() {
+    // Affichage/masquage des formulaires
+    const userBtn = document.getElementById('user-btn');
+    const closeBtn = document.getElementById('close-user-menu');
+    const showRegister = document.getElementById('show-register');
+    const showLogin = document.getElementById('show-login');
+    const loginForm = document.getElementById('login-form');
+    const registerForm = document.getElementById('register-form');
+    const overlay = document.getElementById('user-menu-overlay');
+
+    if (userBtn) userBtn.onclick = function() {
+        overlay.style.display = 'flex';
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'none';
+    };
+    if (closeBtn) closeBtn.onclick = function() {
+        overlay.style.display = 'none';
+    };
+    if (showRegister) showRegister.onclick = function() {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+    };
+    if (showLogin) showLogin.onclick = function() {
+        registerForm.style.display = 'none';
+        loginForm.style.display = 'block';
+    };
+
+    // Formulaire d'inscription
+    if (registerForm) registerForm.onsubmit = function(e) {
+        e.preventDefault();
+        const pwd = this.new_password.value;
+        const confirm = this.confirm_password.value;
+        if (pwd !== confirm) {
+            alert("Les mots de passe ne correspondent pas.");
+            return;
+        }
+        fetch('/register', {
+            method: 'POST',
+            body: new FormData(this)
+        }).then(r => r.json()).then(data => {
+            if(data.success) {
+                alert('Compte créé !');
+                location.reload();
+            } else {
+                alert(data.error);
+                registerForm.style.display = 'block';
+            }
+        });
+    };
+
+    // Formulaire de connexion
+    if (loginForm) loginForm.onsubmit = function(e) {
+        e.preventDefault();
+        fetch('/login', {
+            method: 'POST',
+            body: new FormData(this)
+        }).then(r => r.json()).then(data => {
+            if(data.success) {
+                alert('Connexion réussie !');
+                location.reload();
+            } else {
+                alert(data.error);
+                loginForm.style.display = 'block';
+            }
+        });
+    };
+
+    // Déconnexion
     const logoutBtn = document.getElementById('logout-btn');
     if (logoutBtn) {
         logoutBtn.onclick = function() {
