@@ -1,6 +1,7 @@
 import json
 import os  # Importer le module os pour vérifier l'existence des fichiers
 from flask import Flask, render_template, url_for, session
+from static.Controleurs.ControleurLog import write_log
 
 def update_image_paths(description, base_path):
     """
@@ -85,6 +86,8 @@ def characters(app: Flask):
 
     @app.route('/characters/<alias>')
     def character_details(alias):
+        
+        write_log(f"Accès aux détails du personnage: {alias}", log_level="INFO")
         # Récupérer la langue sélectionnée
         language = session.get('language', "EN-en")
         if not language:
