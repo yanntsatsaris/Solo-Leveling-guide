@@ -42,6 +42,7 @@
             <input type="password" name="password" placeholder="Mot de passe" required>
             <button type="submit">Se connecter</button>
             <button type="button" id="show-register" class="switch-btn">Créer un compte</button>
+            <div id="login-error" class="form-error"></div>
         </form>
         <form id="register-form" style="display:none;">
             <h3>Créer un compte</h3>
@@ -51,6 +52,7 @@
             <input type="password" name="confirm_password" placeholder="Confirmer le mot de passe" required>
             <button type="submit" id="create-btn" disabled>Créer</button>
             <button type="button" id="show-login" class="switch-btn">Déjà un compte ?</button>
+            <div id="register-error" class="form-error"></div>
         </form>
         <button type="button" id="close-user-menu" class="close-btn">&times;</button>
     </div>
@@ -68,6 +70,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const overlay = document.getElementById('user-menu-overlay');
     const emailInput = document.getElementById('new_email');
     const createBtn = document.getElementById('create-btn');
+    const registerError = document.getElementById('register-error');
+    const loginError = document.getElementById('login-error');
 
     if (userBtn) userBtn.onclick = function() {
         overlay.style.display = 'flex';
@@ -89,10 +93,11 @@ document.addEventListener("DOMContentLoaded", function() {
     // Formulaire d'inscription
     if (registerForm) registerForm.onsubmit = function(e) {
         e.preventDefault();
+        registerError.textContent = ""; // Reset
         const pwd = this.new_password.value;
         const confirm = this.confirm_password.value;
         if (pwd !== confirm) {
-            alert("Les mots de passe ne correspondent pas.");
+            registerError.textContent = "Les mots de passe ne correspondent pas.";
             return;
         }
         fetch('/register', {
@@ -102,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if(data.success) {
                 location.reload();
             } else {
-                alert(data.error);
+                registerError.textContent = data.error;
                 registerForm.style.display = 'block';
             }
         });
@@ -111,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Formulaire de connexion
     if (loginForm) loginForm.onsubmit = function(e) {
         e.preventDefault();
+        loginError.textContent = ""; // Reset
         fetch('/login', {
             method: 'POST',
             body: new FormData(this)
@@ -118,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if(data.success) {
                 location.reload();
             } else {
-                alert(data.error);
+                loginError.textContent = data.error;
                 loginForm.style.display = 'block';
             }
         });

@@ -286,3 +286,11 @@
     border: 2px solid #ff3333 !important;
     box-shadow: 0 0 4px #ff3333;
 }
+
+/* Classe pour les messages d'erreur */
+.form-error {
+    color: #ff3333;
+    font-size: 0.95em;
+    margin-top: 6px;
+    min-height: 18px;
+}
