@@ -26,7 +26,7 @@ def users(app):
             if not any(r.decode() if isinstance(r, bytes) else r for r in rights if "SoloLevelinGuide::" in (r.decode() if isinstance(r, bytes) else r)):
                 write_log(f"Connexion refusée : pas de compte SoloLevelinGuide", log_level="WARNING", username=username)
                 return jsonify({'success': False, 'error': "Aucun compte SoloLevelinGuide n'est associé à cet utilisateur."})
-            session['user'] = username
+            session['username'] = username
             write_log(f"Connexion réussie", log_level="INFO", username=username)
             return jsonify({'success': True})
         write_log(f"Échec de connexion", log_level="WARNING", username=username)
@@ -62,9 +62,9 @@ def users(app):
             ('rightsAgreement', [b'SoloLevelinGuide::New']),  # Accord de droits par défaut
         ]
         if ldap.add_entry(dn, attrs):
-            write_log(f"Création de compte réussie ({email})", log_level="INFO", username=username)
+            write_log(f"Création de compte réussie ({username})", log_level="INFO", username=username)
             return jsonify({'success': True})
-        write_log(f"Échec de création de compte ({email})", log_level="ERROR", username=username)
+        write_log(f"Échec de création de compte ({username})", log_level="ERROR", username=username)
         return jsonify({'success': False, 'error': 'Erreur lors de la création'})
 
     @app.route('/logout')

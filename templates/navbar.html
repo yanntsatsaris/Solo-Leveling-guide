@@ -22,9 +22,9 @@
             </div>
         </li>
     </ul>
-    {% if session.get('user') %}
+    {% if session.get('username') %}
     <div class="user-info">
-        <span class="username">{{ session.get('user') }}</span>
+        <span class="username">{{ session.get('username') }}</span>
         <button id="logout-btn" class="logout-btn">Déconnexion</button>
     </div>
     {% else %}
