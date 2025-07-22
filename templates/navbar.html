@@ -20,9 +20,16 @@
             </select>
         </form>
     </div>
+    {% if session.get('user') %}
+    <div class="user-info">
+        <span class="username">{{ session.get('user') }}</span>
+        <button id="logout-btn" class="logout-btn">Déconnexion</button>
+    </div>
+    {% else %}
     <div class="user-logo">
         <img src="{{ url_for('static', filename='images/utilisateur-noir.jpg') }}" alt="User" id="user-btn" style="cursor:pointer;" />
     </div>
+    {% endif %}
 </nav>
 
 <div id="user-menu-overlay" class="user-menu-overlay" style="display:none;">
@@ -109,4 +116,17 @@ document.getElementById('login-form').onsubmit = function(e) {
         }
     });
 };
+
+// Ajoute ce JS dans ton <script> pour gérer la déconnexion
+if (document.getElementById('logout-btn')) {
+    document.getElementById('logout-btn').onclick = function() {
+        fetch('/logout')
+            .then(r => r.json())
+            .then(data => {
+                if(data.success) {
+                    location.reload();
+                }
+            });
+    };
+}
 </script>

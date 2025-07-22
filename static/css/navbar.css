@@ -114,6 +114,30 @@
   transform: scale(1.1); /* Agrandit légèrement le logo au survol */
 }
 
+/* Ajoute dans navbar.css pour le style */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.username {
+    color: #ffcc00;
+    font-weight: bold;
+}
+.logout-btn {
+    background: #ffcc00;
+    color: #222;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 14px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+.logout-btn:hover {
+    background: #ffe066;
+}
+
 /* Responsive Design */
 
 /* Pour les écrans de taille moyenne (tablettes) */
