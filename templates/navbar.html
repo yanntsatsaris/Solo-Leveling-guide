@@ -11,15 +11,17 @@
             </a>
         </li>
         <li><a href="/guides" class="{% if request.path == '/guides' %}active{% endif %}">Guides</a></li>
+        <li>
+            <div class="language-switch">
+                <form method="POST" action="/set-language">
+                    <select name="language" onchange="this.form.submit()">
+                        <option value="FR-fr" {% if session.get('language', 'EN-en') == 'FR-fr' %}selected{% endif %}>Français</option>
+                        <option value="EN-en" {% if session.get('language', 'EN-en') == 'EN-en' %}selected{% endif %}>English</option>
+                    </select>
+                </form>
+            </div>
+        </li>
     </ul>
-    <div class="language-switch">
-        <form method="POST" action="/set-language">
-            <select name="language" onchange="this.form.submit()">
-                <option value="FR-fr" {% if session.get('language', 'EN-en') == 'FR-fr' %}selected{% endif %}>Français</option>
-                <option value="EN-en" {% if session.get('language', 'EN-en') == 'EN-en' %}selected{% endif %}>English</option>
-            </select>
-        </form>
-    </div>
     {% if session.get('user') %}
     <div class="user-info">
         <span class="username">{{ session.get('user') }}</span>
