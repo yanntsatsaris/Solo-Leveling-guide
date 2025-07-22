@@ -141,7 +141,9 @@ document.addEventListener("DOMContentLoaded", function() {
     // Vérification live de l'email
     if (emailInput && createBtn) {
         emailInput.addEventListener('input', function() {
-            if (emailInput.checkValidity()) {
+            // Regex stricte : au moins un caractère, @, au moins un caractère, ., au moins 2 caractères
+            const strictEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+            if (strictEmail.test(emailInput.value)) {
                 createBtn.disabled = false;
                 emailInput.classList.remove('input-error');
             } else {
