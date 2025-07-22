@@ -46,10 +46,10 @@
         <form id="register-form" style="display:none;">
             <h3>Créer un compte</h3>
             <input type="text" name="new_username" placeholder="Nom d'utilisateur" required>
-            <input type="email" name="new_email" placeholder="Adresse mail" required>
+            <input type="email" name="new_email" id="new_email" placeholder="Adresse mail" required>
             <input type="password" name="new_password" placeholder="Mot de passe" required>
             <input type="password" name="confirm_password" placeholder="Confirmer le mot de passe" required>
-            <button type="submit">Créer</button>
+            <button type="submit" id="create-btn" disabled>Créer</button>
             <button type="button" id="show-login" class="switch-btn">Déjà un compte ?</button>
         </form>
         <button type="button" id="close-user-menu" class="close-btn">&times;</button>
@@ -66,6 +66,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const loginForm = document.getElementById('login-form');
     const registerForm = document.getElementById('register-form');
     const overlay = document.getElementById('user-menu-overlay');
+    const emailInput = document.getElementById('new_email');
+    const createBtn = document.getElementById('create-btn');
 
     if (userBtn) userBtn.onclick = function() {
         overlay.style.display = 'flex';
@@ -98,7 +100,6 @@ document.addEventListener("DOMContentLoaded", function() {
             body: new FormData(this)
         }).then(r => r.json()).then(data => {
             if(data.success) {
-                alert('Compte créé !');
                 location.reload();
             } else {
                 alert(data.error);
@@ -115,7 +116,6 @@ document.addEventListener("DOMContentLoaded", function() {
             body: new FormData(this)
         }).then(r => r.json()).then(data => {
             if(data.success) {
-                alert('Connexion réussie !');
                 location.reload();
             } else {
                 alert(data.error);
@@ -129,13 +129,25 @@ document.addEventListener("DOMContentLoaded", function() {
     if (logoutBtn) {
         logoutBtn.onclick = function() {
             fetch('/logout')
-                .then(r => r.json())
+                .then (r => r.json())
                 .then(data => {
                     if(data.success) {
                         location.reload();
                     }
                 });
         };
+    }
+
+    // Vérification live de l'email
+    if (emailInput && createBtn) {
+        emailInput.addEventListener('input', function() {
+            // Utilise la validation native HTML5
+            if (emailInput.checkValidity()) {
+                createBtn.disabled = false;
+            } else {
+                createBtn.disabled = true;
+            }
+        });
     }
 });
 </script>
