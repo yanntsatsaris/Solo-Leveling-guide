@@ -56,6 +56,7 @@
           </div>
         </div>
       </div>
+      <pre>{{ artefact | tojson }}</pre>
       {% endfor %}
     </div>
 
@@ -97,6 +98,7 @@
           </div>
         </div>
       </div>
+      <pre>{{ artefact | tojson }}</pre>
       {% endfor %}
     </div>
     {% else %}
@@ -156,6 +158,7 @@
           </div>
         </div>
       </div>
+      <pre>{{ core | tojson }}</pre>
       {% endfor %} {% else %}
       <p>Aucun noyau équipé pour ce personnage.</p>
       {% endif %}
