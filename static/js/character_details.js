@@ -64,12 +64,13 @@ function showSetEffects(setName, event) {
   effectsList.innerHTML = "";
   effectsTitle.textContent = setName;
 
-  // Récupère le nombre de pièces équipées pour ce set/panoplie
-  const currentSet = equipmentSets.find((set) => set.set_name === setName);
-  const numPieces =
-    currentSet && currentSet.set_piece_count
-      ? currentSet.set_piece_count[setName] || 0
-      : 0;
+  // Récupère l'index du set sélectionné
+  const equipmentSelect = document.getElementById("equipment-select");
+  const selectedSetIndex = equipmentSelect ? parseInt(equipmentSelect.value) : 0;
+  const selectedSet = equipmentSets[selectedSetIndex];
+
+  // Récupère le nombre de pièces pour le set survolé
+  const numPieces = selectedSet.set_piece_count[setName] || 0;
 
   // Filtre les effets pour le set affiché et le nombre de pièces
   const effects = equipmentSetsEffects.filter(
@@ -78,9 +79,7 @@ function showSetEffects(setName, event) {
   effects.forEach((effect) => {
     const listItem = document.createElement("li");
     listItem.innerHTML = `
-      <span style="color: #ffcc00; font-weight: bold;">${
-        effect.pieces_required
-      } pièces :</span>
+      <span style="color: #ffcc00; font-weight: bold;">${effect.pieces_required} pièces :</span>
       <span style="display: block; margin-top: 5px;">${effect.effect.replace(
         /\n/g,
         "<br>"
@@ -89,13 +88,12 @@ function showSetEffects(setName, event) {
     effectsList.appendChild(listItem);
   });
 
-  // Rendre la bulle visible temporairement pour calculer ses dimensions
+  // Positionner la bulle
   effectsContainer.style.display = "block";
   const bubbleWidth = effectsContainer.offsetWidth;
   const bubbleHeight = effectsContainer.offsetHeight;
   effectsContainer.style.display = "none";
 
-  // Positionner la bulle
   const rect = event.target.getBoundingClientRect();
   let leftPosition = rect.left - bubbleWidth - 10;
   if (leftPosition < 0) {
