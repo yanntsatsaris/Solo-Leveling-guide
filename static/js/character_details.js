@@ -112,12 +112,63 @@ function hideSetEffects() {
 
 // Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
 document.addEventListener("DOMContentLoaded", () => {
+  // Toutes les variables ici sont accessibles partout dans ce bloc !
+  const tabs = document.querySelectorAll(".tab");
+  const tabContents = document.querySelectorAll(".tab-content");
+  let currentSetIndex = 0;
+
+  // Gestion des onglets
+  // Vérifier si un paramètre "tab" est présent dans l'URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const activeTab = urlParams.get("tab");
+
+  if (activeTab) {
+    // Désactiver tous les onglets et contenus
+    tabs.forEach((tab) => tab.classList.remove("active"));
+    tabContents.forEach((content) => content.classList.remove("active"));
+
+    // Activer l'onglet et le contenu correspondant
+    const targetTab = document.querySelector(`.tab[data-tab="${activeTab}"]`);
+    const targetContent = document.getElementById(activeTab);
+    if (targetTab && targetContent) {
+      targetTab.classList.add("active");
+      targetContent.classList.add("active");
+    }
+  } else {
+    // Activer l'onglet par défaut (Description)
+    const defaultTab = document.querySelector('.tab[data-tab="description"]');
+    const defaultContent = document.getElementById("description");
+    if (defaultTab && defaultContent) {
+      defaultTab.classList.add("active");
+      defaultContent.classList.add("active");
+    }
+  }
+
+  // Gestion du clic sur les onglets
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      // Ignorer le clic sur l'onglet avec la flèche (dropdown-tab)
+      if (tab.id === "dropdown-tab") {
+        return;
+      }
+
+      // Retirer la classe active de tous les onglets et contenus
+      tabs.forEach((t) => t.classList.remove("active"));
+      tabContents.forEach((tc) => tc.classList.remove("active"));
+
+      // Ajouter la classe active à l'onglet cliqué et son contenu
+      tab.classList.add("active");
+      const targetTabContent = document.getElementById(tab.dataset.tab);
+      if (targetTabContent) {
+        targetTabContent.classList.add("active");
+      }
+    });
+  });
+
+  // Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
   const focusStatsList = document.querySelector(".focus-stats-list");
   const artefactsContainer = document.querySelector(".artefacts-container");
   const coresContainer = document.querySelector(".cores-container");
-  const equipmentSets = JSON.parse(
-    document.getElementById("equipmentSetsData").textContent
-  );
 
   function displaySet(setIndex) {
     const selectedSet = equipmentSets[setIndex];
@@ -246,7 +297,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (setIndex === currentSetIndex) {
       tabs.forEach((t) => t.classList.remove("active"));
       tabContents.forEach((tc) => tc.classList.remove("active"));
-      const artefactsTab = document.getElementById("artefacts-tab");
       artefactsTab.classList.add("active");
       document.getElementById("artefacts").classList.add("active");
     }
@@ -255,17 +305,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Gestion du changement de sélection
   equipmentSelect.addEventListener("change", (event) => {
     const setIndex = event.target.value;
-
-    // Mettre à jour le set sélectionné
     currentSetIndex = setIndex;
-
-    // Afficher le set sélectionné
     displaySet(setIndex);
-
-    // Activer l'onglet Artefacts
     tabs.forEach((t) => t.classList.remove("active"));
     tabContents.forEach((tc) => tc.classList.remove("active"));
-    const artefactsTab = document.getElementById("artefacts-tab");
     artefactsTab.classList.add("active");
     document.getElementById("artefacts").classList.add("active");
   });
