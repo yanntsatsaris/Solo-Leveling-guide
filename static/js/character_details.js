@@ -99,10 +99,26 @@ function showSetEffects(setName, event) {
     });
   }
 
-  // Positionner la bulle
+  // Positionner la bulle à gauche de l'image
   const rect = event.target.getBoundingClientRect();
-  effectsContainer.style.top = `${rect.bottom + window.scrollY + 10}px`;
-  effectsContainer.style.left = `${rect.left + window.scrollX}px`;
+  const bubbleWidth = effectsContainer.offsetWidth || 300; // largeur estimée si non encore affichée
+  const bubbleHeight = effectsContainer.offsetHeight || 100; // hauteur estimée si non encore affichée
+
+  let leftPosition = rect.left + window.scrollX - bubbleWidth - 10;
+  if (leftPosition < 0) {
+    // Si trop à gauche, la mettre à droite de l'image
+    leftPosition = rect.right + window.scrollX + 10;
+  }
+  let topPosition = rect.top + window.scrollY;
+
+  // Si la bulle dépasse en haut, ajuste
+  if (topPosition + bubbleHeight > window.innerHeight + window.scrollY) {
+    topPosition = window.innerHeight + window.scrollY - bubbleHeight - 10;
+  }
+
+  effectsContainer.style.top = `${topPosition}px`;
+  effectsContainer.style.left = `${leftPosition}px`;
+  effectsContainer.style.display = "block";
 }
 
 function hideSetEffects() {
