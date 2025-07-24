@@ -75,14 +75,15 @@ function showSetEffects(setName, event) {
     ? selectedSet.set_piece_count[setName]
     : 0;
 
+  // Debug : affiche le nom et le nombre de pièces
+  console.log("setName:", setName, "numPieces:", numPieces, "selectedSet:", selectedSet);
+
   // Filtre les effets pour le set affiché et le nombre de pièces
   const effects = equipmentSetsEffects.filter(
     (e) => e.set_name === setName && e.pieces_required <= numPieces
   );
 
-  // Affiche la bulle même si aucun effet (pour debug)
   effectsContainer.style.display = "block";
-
   effectsList.innerHTML = "";
   if (effects.length === 0) {
     effectsList.innerHTML = "<li>Aucun effet disponible pour ce nombre de pièces.</li>";
