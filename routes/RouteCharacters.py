@@ -323,6 +323,7 @@ def characters(app: Flask):
                 'cores': cores,
                 'set_piece_count': dict(set_piece_count)  # {'Armed': 4, ...}
             })
+        write_log(f"Found {equipment_sets} equipment sets for character {char_alias}", log_level="DEBUG")
         character_info['equipment_sets'] = equipment_sets
 
         # Effets des panoplies
@@ -340,7 +341,6 @@ def characters(app: Flask):
                 'pieces_required': row[1],
                 'effect': row[2]
             })
-        write_log(f"Found {panoplies_effects} panoplies effects for character {char_alias}", log_level="DEBUG")
         conn.close()
 
         return render_template(
