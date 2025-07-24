@@ -13,8 +13,6 @@ def get_psql_conn():
     user = conf.get_config('PSQL', 'user')
     password = conf.get_config('PSQL', 'password')
     return psycopg2.connect(
-        host=host,
-        port=port,
         dbname=database,
         user=user,
         password=""
@@ -195,7 +193,7 @@ def characters(app: Flask):
         """, (char_id, language))
         character_info['evolutions'] = [
             {
-                'evolution_id': row[0],
+                'id': row[0],
                 'number': row[1],
                 'type': row[2],
                 'range': row[3],
@@ -240,7 +238,7 @@ def characters(app: Flask):
             """, (weapon_id, language))
             evolutions = [
                 {
-                    'evolution_id': evo[0],
+                    'id': evo[0],
                     'number': evo[1],
                     'type': evo[2],
                     'range': evo[3],
