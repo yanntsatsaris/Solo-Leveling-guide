@@ -122,8 +122,7 @@ def characters(app: Flask):
         language = session.get('language', "EN-en")
         if not language:
             return "Language not set", 400
-
-        write_log(f"Langue sélectionnée: {language}", log_level="DEBUG")
+        
         # --- JSON désactivé ---
         # with open('data/character.json', 'r', encoding='utf-8') as f:
         #     characters_data = json.load(f)
@@ -136,9 +135,7 @@ def characters(app: Flask):
         # if not panoplies_data:
         #     return f"No panoplies data found for language: {language}", 404
 
-        write_log(f"Recherche des détails du personnage: {alias}", log_level="DEBUG")
         conn = get_psql_conn()
-        write_log(f"Connexion à la base de données établie", log_level="DEBUG")
         cursor = conn.cursor()
         cursor.execute("""
             SELECT c.characters_id, c.characters_type, c.characters_rarity, c.characters_alias, c.characters_folder, ct.character_translations_name, ct.character_translations_description
@@ -264,9 +261,7 @@ def characters(app: Flask):
             WHERE es.equipment_sets_characters_id = %s
         """, (char_id,))
         equipment_sets = []
-        write_log(f"Found {cursor.rowcount} equipment sets for character {char_alias}", log_level="DEBUG")
         for es_row in cursor.fetchall():
-            write_log(f"Processing equipment set: {es_row[1]}", log_level="DEBUG")
             eq_set_id, eq_set_name = es_row
             # Focus stats
             cursor.execute("""
@@ -296,7 +291,6 @@ def characters(app: Flask):
                     'main_stat': artefact_main_stat,
                     'secondary_stats': secondary_stats
                 }
-                write_log(f"Artefact: {artefact_obj}", log_level="DEBUG")
                 artefacts.append(artefact_obj)
             # Noyaux
             cursor.execute("""
@@ -313,7 +307,6 @@ def characters(app: Flask):
                     'main_stat': core_row[3],
                     'secondary_stat': core_row[4]
                 }
-                write_log(f"Core: {core_obj}", log_level="DEBUG")
                 cores.append(core_obj)
             equipment_sets.append({
                 'set_name': eq_set_name,
