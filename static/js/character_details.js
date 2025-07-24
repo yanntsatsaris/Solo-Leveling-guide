@@ -64,50 +64,43 @@ function showSetEffects(setName, event) {
   effectsList.innerHTML = "";
   effectsTitle.textContent = setName;
 
-  // Récupère l'index du set sélectionné
+  // Récupère le set actuellement sélectionné
   const equipmentSelect = document.getElementById("equipment-select");
   const selectedSetIndex = equipmentSelect ? parseInt(equipmentSelect.value) : 0;
   const selectedSet = equipmentSets[selectedSetIndex];
 
   // Récupère le nombre de pièces pour le set survolé
-  const numPieces = selectedSet.set_piece_count[setName] || 0;
+  // Attention : set_piece_count est un dict {nom_panoplie: nombre}
+  const numPieces = selectedSet.set_piece_count && selectedSet.set_piece_count[setName]
+    ? selectedSet.set_piece_count[setName]
+    : 0;
 
   // Filtre les effets pour le set affiché et le nombre de pièces
   const effects = equipmentSetsEffects.filter(
     (e) => e.set_name === setName && e.pieces_required <= numPieces
   );
-  effects.forEach((effect) => {
-    const listItem = document.createElement("li");
-    listItem.innerHTML = `
-      <span style="color: #ffcc00; font-weight: bold;">${effect.pieces_required} pièces :</span>
-      <span style="display: block; margin-top: 5px;">${effect.effect.replace(
-        /\n/g,
-        "<br>"
-      )}</span>
-    `;
-    effectsList.appendChild(listItem);
-  });
+
+  // Affiche la bulle même si aucun effet (pour debug)
+  effectsContainer.style.display = "block";
+
+  effectsList.innerHTML = "";
+  if (effects.length === 0) {
+    effectsList.innerHTML = "<li>Aucun effet disponible pour ce nombre de pièces.</li>";
+  } else {
+    effects.forEach((effect) => {
+      const listItem = document.createElement("li");
+      listItem.innerHTML = `
+        <span style="color: #ffcc00; font-weight: bold;">${effect.pieces_required} pièces :</span>
+        <span style="display: block; margin-top: 5px;">${effect.effect.replace(/\n/g, "<br>")}</span>
+      `;
+      effectsList.appendChild(listItem);
+    });
+  }
 
   // Positionner la bulle
-  effectsContainer.style.display = "block";
-  const bubbleWidth = effectsContainer.offsetWidth;
-  const bubbleHeight = effectsContainer.offsetHeight;
-  effectsContainer.style.display = "none";
-
   const rect = event.target.getBoundingClientRect();
-  let leftPosition = rect.left - bubbleWidth - 10;
-  if (leftPosition < 0) {
-    leftPosition = rect.right + 10;
-  }
-  let topPosition = rect.top + window.scrollY;
-  const viewportHeight = window.innerHeight;
-  if (topPosition + bubbleHeight > viewportHeight + window.scrollY) {
-    topPosition = viewportHeight + window.scrollY - bubbleHeight - 10;
-  }
-
-  effectsContainer.style.top = `${topPosition}px`;
-  effectsContainer.style.left = `${leftPosition}px`;
-  effectsContainer.style.display = "block";
+  effectsContainer.style.top = `${rect.bottom + window.scrollY + 10}px`;
+  effectsContainer.style.left = `${rect.left + window.scrollX}px`;
 }
 
 function hideSetEffects() {
