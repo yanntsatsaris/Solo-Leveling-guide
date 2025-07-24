@@ -238,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const artefactsTab = document.getElementById("artefacts-tab");
 
   // Gestion du clic sur le <select>
-  equipmentSelect.addEventListener("click", (event) => {
+  equipmentSelect.addEventListener("click", function(event) {
     event.stopPropagation(); // Empêche le clic de se propager comme un onglet
     const setIndex = equipmentSelect.value;
 
