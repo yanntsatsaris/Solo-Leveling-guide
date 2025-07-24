@@ -291,7 +291,7 @@ def characters(app: Flask):
                     'main_stat': artefact_main_stat,
                     'secondary_stats': secondary_stats
                 }
-                write_log(f"Artefact: {json.dumps(artefact_obj, ensure_ascii=False)}", log_level="DEBUG")
+                write_log(f"Artefact: {artefact_obj}", log_level="DEBUG")
                 artefacts.append(artefact_obj)
             # Noyaux
             cursor.execute("""
@@ -308,7 +308,7 @@ def characters(app: Flask):
                     'main_stat': core_row[3],
                     'secondary_stat': core_row[4]
                 }
-                write_log(f"Core: {json.dumps(core_obj, ensure_ascii=False)}", log_level="DEBUG")
+                write_log(f"Core: {core_obj}", log_level="DEBUG")
                 cores.append(core_obj)
             equipment_sets.append({
                 'set_name': eq_set_name,
