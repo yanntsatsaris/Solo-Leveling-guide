@@ -116,14 +116,6 @@
     <ul id="set-effects-list"></ul>
   </div>
 
-  <script id="equipmentSetsEffectsData" type="application/json">
-    {% if character.equipment_sets_effects and character.equipment_sets_effects|length > 0 %}
-      {{ character.equipment_sets_effects|tojson }}
-    {% else %}
-      []
-    {% endif %}
-  </script>
-
   <!-- Section des noyaux -->
   <div class="cores-section">
     <h2>Noyaux</h2>
