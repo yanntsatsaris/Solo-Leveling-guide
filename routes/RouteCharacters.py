@@ -279,35 +279,37 @@ def characters(app: Flask):
             artefacts = []
             for a_row in cursor.fetchall():
                 artefact_id, artefact_name, artefact_set, artefact_image, artefact_main_stat = a_row
-                # Stats secondaires
                 cursor.execute("""
                     SELECT artefact_secondary_stats_name FROM artefact_secondary_stats
                     WHERE artefact_secondary_stats_artefacts_id = %s
                 """, (artefact_id,))
                 secondary_stats = [sec_row[0] for sec_row in cursor.fetchall()]
-                artefacts.append({
+                artefact_obj = {
                     'name': artefact_name,
                     'set': artefact_set,
                     'image': f'images/Artefacts/{artefact_image}' if artefact_image else '',
                     'main_stat': artefact_main_stat,
                     'secondary_stats': secondary_stats
-                })
+                }
+                write_log(f"Artefact: {json.dumps(artefact_obj, ensure_ascii=False)}", log_level="DEBUG")
+                artefacts.append(artefact_obj)
             # Noyaux
             cursor.execute("""
                 SELECT cores_name, cores_number, cores_image, cores_main_stat, cores_secondary_stat
                 FROM cores
                 WHERE cores_equipment_sets_id = %s
             """, (eq_set_id,))
-            cores = [
-                {
+            cores = []
+            for core_row in cursor.fetchall():
+                core_obj = {
                     'name': core_row[0],
                     'number': core_row[1],
                     'image': f'images/Noyaux/{core_row[2]}' if core_row[2] else '',
                     'main_stat': core_row[3],
                     'secondary_stat': core_row[4]
                 }
-                for core_row in cursor.fetchall()
-            ]
+                write_log(f"Core: {json.dumps(core_obj, ensure_ascii=False)}", log_level="DEBUG")
+                cores.append(core_obj)
             equipment_sets.append({
                 'set_name': eq_set_name,
                 'focus_stats': focus_stats,
