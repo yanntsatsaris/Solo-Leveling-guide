@@ -1,3 +1,11 @@
+// Ces deux lignes doivent être tout en haut du fichier, AVANT toute fonction
+const equipmentSets = JSON.parse(
+  document.getElementById("equipmentSetsData").textContent
+);
+const equipmentSetsEffects = JSON.parse(
+  document.getElementById("equipmentSetsEffectsData").textContent
+);
+
 // Gestion des onglets
 document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll(".tab");
@@ -52,10 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Gestion des effets de panoplie
-const equipmentSetsEffects = JSON.parse(
-  document.getElementById("equipmentSetsEffectsData").textContent
-);
-
 function showSetEffects(setName, event) {
   const effectsContainer = document.getElementById("set-effects");
   const effectsList = document.getElementById("set-effects-list");
