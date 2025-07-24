@@ -261,7 +261,9 @@ def characters(app: Flask):
             WHERE es.equipment_sets_characters_id = %s
         """, (char_id,))
         equipment_sets = []
+        write_log(f"Found {cursor.rowcount} equipment sets for character {char_alias}", log_level="DEBUG")
         for es_row in cursor.fetchall():
+            write_log(f"Processing equipment set: {es_row[1]}", log_level="DEBUG")
             eq_set_id, eq_set_name = es_row
             # Focus stats
             cursor.execute("""
