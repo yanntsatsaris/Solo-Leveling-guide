@@ -61,30 +61,23 @@ function showSetEffects(setName, event) {
   const effectsList = document.getElementById("set-effects-list");
   const effectsTitle = effectsContainer.querySelector("h3");
 
-  // Vider la liste des effets
   effectsList.innerHTML = "";
-
-  // Mettre à jour le titre avec le nom de la panoplie
   effectsTitle.textContent = setName;
 
-  // Récupérer les effets activés pour le set actuellement sélectionné
-  const selectedSetEffects = equipmentSetsEffects[currentSetIndex];
-
-  // Ajouter les effets activés pour la panoplie survolée
-  selectedSetEffects.forEach((effect) => {
-    if (effect.set_name === setName) {
-      const listItem = document.createElement("li");
-      listItem.innerHTML = `
-        <span style="color: #ffcc00; font-weight: bold;">${
-          effect.pieces_required
-        } pièces :</span>
-        <span style="display: block; margin-top: 5px;">${effect.effect.replace(
-          /\n/g,
-          "<br>"
-        )}</span>
-      `;
-      effectsList.appendChild(listItem);
-    }
+  // Filtre les effets pour le set affiché
+  const effects = equipmentSetsEffects.filter((e) => e.set_name === setName);
+  effects.forEach((effect) => {
+    const listItem = document.createElement("li");
+    listItem.innerHTML = `
+      <span style="color: #ffcc00; font-weight: bold;">${
+        effect.pieces_required
+      } pièces :</span>
+      <span style="display: block; margin-top: 5px;">${effect.effect.replace(
+        /\n/g,
+        "<br>"
+      )}</span>
+    `;
+    effectsList.appendChild(listItem);
   });
 
   // Rendre la bulle visible temporairement pour calculer ses dimensions

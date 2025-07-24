@@ -317,6 +317,27 @@ def characters(app: Flask):
         character_info['equipment_sets'] = equipment_sets
         write_log(f"Found {len(equipment_sets)} equipment sets for character {char_alias}", log_level="DEBUG")
 
+        # Effets des panoplies
+        cursor.execute("""
+            SELECT p.panoplies_name, psb.panoplie_set_bonus_pieces_required, psbt.panoplie_set_bonus_translations_effect
+            FROM panoplies p
+            JOIN panoplie_set_bonus psb ON psb.panoplie_set_bonus_panoplies_id = p.panoplies_id
+            JOIN panoplie_set_bonus_translations psbt ON psbt.panoplie_set_bonus_translations_panoplie_set_bonus_id = psb.panoplie_set_bonus_id
+            WHERE psbt.panoplie_set_bonus_translations_language = %s
+        """, (language,))
+        panoplies_effects = []
+        for row in cursor.fetchall():
+            panoplies_effects.append({
+                'set_name': row[0],
+                'pieces_required': row[1],
+                'effect': row[2]
+            })
+
         conn.close()
 
-        return render_template('character_details.html', character=character_info, language=language)
+        return render_template(
+            'character_details.html',
+            character=character_info,
+            language=language,
+            panoplies_effects=panoplies_effects
+        )
