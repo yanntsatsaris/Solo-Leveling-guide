@@ -6,10 +6,10 @@ const equipmentSetsEffects = JSON.parse(
   document.getElementById("equipmentSetsEffectsData").textContent
 );
 
-// Gestion des onglets
 document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll(".tab");
   const tabContents = document.querySelectorAll(".tab-content");
+  let currentSetIndex = 0;
 
   // Vérifier si un paramètre "tab" est présent dans l'URL
   const urlParams = new URLSearchParams(window.location.search);
@@ -57,70 +57,62 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-});
 
-// Gestion des effets de panoplie
-function showSetEffects(setName, event) {
-  const effectsContainer = document.getElementById("set-effects");
-  const effectsList = document.getElementById("set-effects-list");
-  const effectsTitle = effectsContainer.querySelector("h3");
+  // Gestion des effets de panoplie
+  function showSetEffects(setName, event) {
+    const effectsContainer = document.getElementById("set-effects");
+    const effectsList = document.getElementById("set-effects-list");
+    const effectsTitle = effectsContainer.querySelector("h3");
 
-  effectsList.innerHTML = "";
-  effectsTitle.textContent = setName;
+    effectsList.innerHTML = "";
+    effectsTitle.textContent = setName;
 
-  // Récupère le set actuellement sélectionné
-  const equipmentSelect = document.getElementById("equipment-select");
-  const selectedSetIndex = equipmentSelect ? parseInt(equipmentSelect.value) : 0;
-  const selectedSet = equipmentSets[selectedSetIndex];
+    // Récupère le set actuellement sélectionné
+    const equipmentSelect = document.getElementById("equipment-select");
+    const selectedSetIndex = equipmentSelect ? parseInt(equipmentSelect.value) : 0;
+    const selectedSet = equipmentSets[selectedSetIndex];
 
-  // Récupère le nombre de pièces pour le set survolé
-  // Attention : set_piece_count est un dict {nom_panoplie: nombre}
-  const numPieces = selectedSet.set_piece_count && selectedSet.set_piece_count[setName]
-    ? selectedSet.set_piece_count[setName]
-    : 0;
+    // Récupère le nombre de pièces pour le set survolé
+    // Attention : set_piece_count est un dict {nom_panoplie: nombre}
+    const numPieces = selectedSet.set_piece_count && selectedSet.set_piece_count[setName]
+      ? selectedSet.set_piece_count[setName]
+      : 0;
 
-  // Debug : affiche le nom et le nombre de pièces
-  console.log("setName:", setName, "numPieces:", numPieces, "selectedSet:", selectedSet);
+    // Filtre les effets pour le set affiché et le nombre de pièces
+    const effects = equipmentSetsEffects.filter(
+      (e) => e.set_name === setName && e.pieces_required <= numPieces
+    );
 
-  // Filtre les effets pour le set affiché et le nombre de pièces
-  const effects = equipmentSetsEffects.filter(
-    (e) => e.set_name === setName && e.pieces_required <= numPieces
-  );
+    effectsContainer.style.display = "block";
+    effectsList.innerHTML = "";
+    if (effects.length === 0) {
+      effectsList.innerHTML = "<li>Aucun effet disponible pour ce nombre de pièces.</li>";
+    } else {
+      effects.forEach((effect) => {
+        const listItem = document.createElement("li");
+        listItem.innerHTML = `
+          <span style="color: #ffcc00; font-weight: bold;">${effect.pieces_required} pièces :</span>
+          <span style="display: block; margin-top: 5px;">${effect.effect.replace(/\n/g, "<br>")}</span>
+        `;
+        effectsList.appendChild(listItem);
+      });
+    }
 
-  effectsContainer.style.display = "block";
-  effectsList.innerHTML = "";
-  if (effects.length === 0) {
-    effectsList.innerHTML = "<li>Aucun effet disponible pour ce nombre de pièces.</li>";
-  } else {
-    effects.forEach((effect) => {
-      const listItem = document.createElement("li");
-      listItem.innerHTML = `
-        <span style="color: #ffcc00; font-weight: bold;">${effect.pieces_required} pièces :</span>
-        <span style="display: block; margin-top: 5px;">${effect.effect.replace(/\n/g, "<br>")}</span>
-      `;
-      effectsList.appendChild(listItem);
-    });
+    // Positionner la bulle
+    const rect = event.target.getBoundingClientRect();
+    effectsContainer.style.top = `${rect.bottom + window.scrollY + 10}px`;
+    effectsContainer.style.left = `${rect.left + window.scrollX}px`;
   }
 
-  // Positionner la bulle
-  const rect = event.target.getBoundingClientRect();
-  effectsContainer.style.top = `${rect.bottom + window.scrollY + 10}px`;
-  effectsContainer.style.left = `${rect.left + window.scrollX}px`;
-}
+  function hideSetEffects() {
+    const effectsContainer = document.getElementById("set-effects");
+    effectsContainer.style.display = "none";
+  }
 
-function hideSetEffects() {
-  const effectsContainer = document.getElementById("set-effects");
-  effectsContainer.style.display = "none";
-}
-
-// Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
-document.addEventListener("DOMContentLoaded", () => {
+  // Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
   const focusStatsList = document.querySelector(".focus-stats-list");
   const artefactsContainer = document.querySelector(".artefacts-container");
   const coresContainer = document.querySelector(".cores-container");
-  const equipmentSets = JSON.parse(
-    document.getElementById("equipmentSetsData").textContent
-  );
 
   function displaySet(setIndex) {
     const selectedSet = equipmentSets[setIndex];
@@ -135,36 +127,36 @@ document.addEventListener("DOMContentLoaded", () => {
       .slice(0, 4)
       .map(
         (artefact) => `
-            <div class="artefact-item" data-set="${artefact.set}">
-                <div class="artefact-item-content">
-                    <img src="/static/${artefact.image}" alt="${artefact.name}" class="artefact-image"
-                         onmouseover="showSetEffects('${artefact.set}', event)"
-                         onmouseout="hideSetEffects()">
-                    <div>
-                        <div class="stat-main">
-                            <div class="stat-container">
-                                <span>${artefact.main_stat}</span>
-                                <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
-                            </div>
-                        </div>
-                        <div class="stat-secondary-container">
-                            ${artefact.secondary_stats
-                              .map(
-                                (stat) => `
-                                <div class="stat-secondary">
-                                    <div class="stat-container">
-                                        <span>${stat}</span>
-                                        <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
-                                    </div>
-                                </div>
-                            `
-                              )
-                              .join("")}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `
+          <div class="artefact-item" data-set="${artefact.set}">
+              <div class="artefact-item-content">
+                  <img src="/static/${artefact.image}" alt="${artefact.name}" class="artefact-image"
+                       onmouseover="showSetEffects('${artefact.set}', event)"
+                       onmouseout="hideSetEffects()">
+                  <div>
+                      <div class="stat-main">
+                          <div class="stat-container">
+                              <span>${artefact.main_stat}</span>
+                              <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
+                          </div>
+                      </div>
+                      <div class="stat-secondary-container">
+                          ${artefact.secondary_stats
+                            .map(
+                              (stat) => `
+                              <div class="stat-secondary">
+                                  <div class="stat-container">
+                                      <span>${stat}</span>
+                                      <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
+                                  </div>
+                              </div>
+                          `
+                            )
+                            .join("")}
+                      </div>
+                  </div>
+              </div>
+          </div>
+      `
       )
       .join("");
 
@@ -172,66 +164,66 @@ document.addEventListener("DOMContentLoaded", () => {
       .slice(4)
       .map(
         (artefact) => `
-            <div class="artefact-item" data-set="${artefact.set}">
-                <div class="artefact-item-content">
-                    <img src="/static/${artefact.image}" alt="${artefact.name}" class="artefact-image"
-                         onmouseover="showSetEffects('${artefact.set}', event)"
-                         onmouseout="hideSetEffects()">
-                    <div>
-                        <div class="stat-main">
-                            <div class="stat-container">
-                                <span>${artefact.main_stat}</span>
-                                <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
-                            </div>
-                        </div>
-                        <div class="stat-secondary-container">
-                            ${artefact.secondary_stats
-                              .map(
-                                (stat) => `
-                                <div class="stat-secondary">
-                                    <div class="stat-container">
-                                        <span>${stat}</span>
-                                        <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
-                                    </div>
-                                </div>
-                            `
-                              )
-                              .join("")}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `
+          <div class="artefact-item" data-set="${artefact.set}">
+              <div class="artefact-item-content">
+                  <img src="/static/${artefact.image}" alt="${artefact.name}" class="artefact-image"
+                       onmouseover="showSetEffects('${artefact.set}', event)"
+                       onmouseout="hideSetEffects()">
+                  <div>
+                      <div class="stat-main">
+                          <div class="stat-container">
+                              <span>${artefact.main_stat}</span>
+                              <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
+                          </div>
+                      </div>
+                      <div class="stat-secondary-container">
+                          ${artefact.secondary_stats
+                            .map(
+                              (stat) => `
+                              <div class="stat-secondary">
+                                  <div class="stat-container">
+                                      <span>${stat}</span>
+                                      <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
+                                  </div>
+                              </div>
+                          `
+                            )
+                            .join("")}
+                      </div>
+                  </div>
+              </div>
+          </div>
+      `
       )
       .join("");
 
     artefactsContainer.innerHTML = `
-            <div class="artefacts-column">${leftColumnArtefacts}</div>
-            <div class="artefacts-column">${rightColumnArtefacts}</div>
-        `;
+          <div class="artefacts-column">${leftColumnArtefacts}</div>
+          <div class="artefacts-column">${rightColumnArtefacts}</div>
+      `;
 
     // Mettre à jour les cores
     coresContainer.innerHTML = selectedSet.cores
       .map(
         (core) => `
-            <div class="core-item">
-                <img src="/static/${core.image}" alt="${core.name}" class="core-image">
-                <div class="stats">
-                    <div class="stat-main">
-                        <div class="stat-container">
-                            <span>${core.main_stat}</span>
-                            <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
-                        </div>
-                    </div>
-                    <div class="stat-secondary">
-                        <div class="stat-container">
-                            <span>${core.secondary_stat}</span>
-                            <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `
+          <div class="core-item">
+              <img src="/static/${core.image}" alt="${core.name}" class="core-image">
+              <div class="stats">
+                  <div class="stat-main">
+                      <div class="stat-container">
+                          <span>${core.main_stat}</span>
+                          <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
+                      </div>
+                  </div>
+                  <div class="stat-secondary">
+                      <div class="stat-container">
+                          <span>${core.secondary_stat}</span>
+                          <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
+                      </div>
+                  </div>
+              </div>
+          </div>
+      `
       )
       .join("");
   }
@@ -249,7 +241,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (setIndex === currentSetIndex) {
       tabs.forEach((t) => t.classList.remove("active"));
       tabContents.forEach((tc) => tc.classList.remove("active"));
-      const artefactsTab = document.getElementById("artefacts-tab");
       artefactsTab.classList.add("active");
       document.getElementById("artefacts").classList.add("active");
     }
@@ -258,17 +249,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Gestion du changement de sélection
   equipmentSelect.addEventListener("change", (event) => {
     const setIndex = event.target.value;
-
-    // Mettre à jour le set sélectionné
     currentSetIndex = setIndex;
-
-    // Afficher le set sélectionné
     displaySet(setIndex);
-
-    // Activer l'onglet Artefacts
     tabs.forEach((t) => t.classList.remove("active"));
     tabContents.forEach((tc) => tc.classList.remove("active"));
-    const artefactsTab = document.getElementById("artefacts-tab");
     artefactsTab.classList.add("active");
     document.getElementById("artefacts").classList.add("active");
   });
