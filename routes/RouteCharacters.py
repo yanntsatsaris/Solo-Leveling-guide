@@ -123,6 +123,7 @@ def characters(app: Flask):
         if not language:
             return "Language not set", 400
 
+        write_log(f"Langue sélectionnée: {language}", log_level="DEBUG")
         # --- JSON désactivé ---
         # with open('data/character.json', 'r', encoding='utf-8') as f:
         #     characters_data = json.load(f)
@@ -135,7 +136,9 @@ def characters(app: Flask):
         # if not panoplies_data:
         #     return f"No panoplies data found for language: {language}", 404
 
+        write_log(f"Recherche des détails du personnage: {alias}", log_level="DEBUG")
         conn = get_psql_conn()
+        write_log(f"Connexion à la base de données établie", log_level="DEBUG")
         cursor = conn.cursor()
         cursor.execute("""
             SELECT c.characters_id, c.characters_type, c.characters_rarity, c.characters_alias, c.characters_folder, ct.character_translations_name, ct.character_translations_description
