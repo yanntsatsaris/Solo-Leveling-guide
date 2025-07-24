@@ -139,15 +139,13 @@ document.addEventListener("DOMContentLoaded", () => {
         (artefact) => `
             <div class="artefact-item" data-set="${artefact.set}">
                 <div class="artefact-item-content">
-                    <img src="/static/${artefact.image}" alt="${
-          artefact.name
-        }" class="artefact-image"
+                    <img src="/static/${artefact.image}" alt="${artefact.name}" class="artefact-image"
                          onmouseover="showSetEffects('${artefact.set}', event)"
                          onmouseout="hideSetEffects()">
                     <div>
                         <div class="stat-main">
                             <div class="stat-container">
-                                <span>${artefact.main_stat.name}</span>
+                                <span>${artefact.main_stat}</span>
                                 <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
                             </div>
                         </div>
@@ -157,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 (stat) => `
                                 <div class="stat-secondary">
                                     <div class="stat-container">
-                                        <span>${stat.name}</span>
+                                        <span>${stat}</span>
                                         <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
                                     </div>
                                 </div>
@@ -178,15 +176,13 @@ document.addEventListener("DOMContentLoaded", () => {
         (artefact) => `
             <div class="artefact-item" data-set="${artefact.set}">
                 <div class="artefact-item-content">
-                    <img src="/static/${artefact.image}" alt="${
-          artefact.name
-        }" class="artefact-image"
+                    <img src="/static/${artefact.image}" alt="${artefact.name}" class="artefact-image"
                          onmouseover="showSetEffects('${artefact.set}', event)"
                          onmouseout="hideSetEffects()">
                     <div>
                         <div class="stat-main">
                             <div class="stat-container">
-                                <span>${artefact.main_stat.name}</span>
+                                <span>${artefact.main_stat}</span>
                                 <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
                             </div>
                         </div>
@@ -196,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 (stat) => `
                                 <div class="stat-secondary">
                                     <div class="stat-container">
-                                        <span>${stat.name}</span>
+                                        <span>${stat}</span>
                                         <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
                                     </div>
                                 </div>
@@ -225,13 +221,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="stats">
                     <div class="stat-main">
                         <div class="stat-container">
-                            <span>${core.main_stat.name}</span>
+                            <span>${core.main_stat}</span>
                             <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
                         </div>
                     </div>
                     <div class="stat-secondary">
                         <div class="stat-container">
-                            <span>${core.secondary_stat.name}</span>
+                            <span>${core.secondary_stat}</span>
                             <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
                         </div>
                     </div>
