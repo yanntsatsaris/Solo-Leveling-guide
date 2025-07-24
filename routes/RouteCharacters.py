@@ -117,7 +117,7 @@ def characters(app: Flask):
     @app.route('/characters/<alias>')
     def character_details(alias):
         
-        #write_log(f"Accès aux détails du personnage: {alias}", log_level="INFO")
+        write_log(f"Accès aux détails du personnage: {alias}", log_level="INFO")
         # Récupérer la langue sélectionnée
         language = session.get('language', "EN-en")
         if not language:
