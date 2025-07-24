@@ -2575,7 +2575,7 @@
             ],
             "artefacts": [
               {
-                "name": "Casque",
+                "name": "Helmet",
                 "number": "01",
                 "set": "Guardian",
                 "image": "Guardian/Artefact01_Guardian.webp",
@@ -2598,7 +2598,7 @@
                 ]
               },
               {
-                "name": "Plastron",
+                "name": "Chestplate",
                 "number": "02",
                 "set": "Guardian",
                 "image": "Guardian/Artefact02_Guardian.webp",
@@ -2621,7 +2621,7 @@
                 ]
               },
               {
-                "name": "Gants",
+                "name": "Gloves",
                 "number": "03",
                 "set": "Guardian",
                 "image": "Guardian/Artefact03_Guardian.webp",
@@ -2644,7 +2644,7 @@
                 ]
               },
               {
-                "name": "Bottes",
+                "name": "Boots",
                 "number": "04",
                 "set": "Guardian",
                 "image": "Guardian/Artefact04_Guardian.webp",
@@ -2667,7 +2667,7 @@
                 ]
               },
               {
-                "name": "Collier",
+                "name": "Necklace",
                 "number": "05",
                 "set": "Sylph Blessing",
                 "image": "Sylph_Blessing/Artefact05_SylphsBlessing.webp",
@@ -2713,7 +2713,7 @@
                 ]
               },
               {
-                "name": "Bague",
+                "name": "Ring",
                 "number": "07",
                 "set": "Sylph Blessing",
                 "image": "Sylph_Blessing/Artefact07_SylphsBlessing.webp",
@@ -2736,7 +2736,7 @@
                 ]
               },
               {
-                "name": "Boucle d'oreille",
+                "name": "Earring",
                 "number": "08",
                 "set": "Sylph Blessing",
                 "image": "Sylph_Blessing/Artefact08_SylphsBlessing.webp",
@@ -2807,7 +2807,7 @@
             ],
             "artefacts": [
               {
-                "name": "Casque",
+                "name": "Helmet",
                 "number": "01",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact01_Greed.webp",
@@ -2830,7 +2830,7 @@
                 ]
               },
               {
-                "name": "Plastron",
+                "name": "Chestplate",
                 "number": "02",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact02_Greed.webp",
@@ -2853,7 +2853,7 @@
                 ]
               },
               {
-                "name": "Gants",
+                "name": "Gloves",
                 "number": "03",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact03_Greed.webp",
@@ -2876,7 +2876,7 @@
                 ]
               },
               {
-                "name": "Bottes",
+                "name": "Boots",
                 "number": "04",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact04_Greed.webp",
@@ -2899,7 +2899,7 @@
                 ]
               },
               {
-                "name": "Collier",
+                "name": "Necklace",
                 "number": "05",
                 "set": "Sylph Blessing",
                 "image": "Sylph_Blessing/Artefact05_SylphsBlessing.webp",
@@ -2945,7 +2945,7 @@
                 ]
               },
               {
-                "name": "Bague",
+                "name": "Ring",
                 "number": "07",
                 "set": "Sylph Blessing",
                 "image": "Sylph_Blessing/Artefact07_SylphsBlessing.webp",
@@ -2968,7 +2968,7 @@
                 ]
               },
               {
-                "name": "Boucle d'oreille",
+                "name": "Earring",
                 "number": "08",
                 "set": "Sylph Blessing",
                 "image": "Sylph_Blessing/Artefact08_SylphsBlessing.webp",
@@ -3039,7 +3039,7 @@
             ],
             "artefacts": [
               {
-                "name": "Casque",
+                "name": "Helmet",
                 "number": "01",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact01_Greed.webp",
@@ -3062,7 +3062,7 @@
                 ]
               },
               {
-                "name": "Plastron",
+                "name": "Chestplate",
                 "number": "02",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact02_Greed.webp",
@@ -3085,7 +3085,7 @@
                 ]
               },
               {
-                "name": "Gants",
+                "name": "Gloves",
                 "number": "03",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact03_Greed.webp",
@@ -3108,7 +3108,7 @@
                 ]
               },
               {
-                "name": "Bottes",
+                "name": "Boots",
                 "number": "04",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact04_Greed.webp",
@@ -3131,7 +3131,7 @@
                 ]
               },
               {
-                "name": "Collier",
+                "name": "Necklace",
                 "number": "05",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact05_Greed.webp",
@@ -3177,7 +3177,7 @@
                 ]
               },
               {
-                "name": "Bague",
+                "name": "Ring",
                 "number": "07",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact07_Greed.webp",
@@ -3200,7 +3200,7 @@
                 ]
               },
               {
-                "name": "Boucle d'oreille",
+                "name": "Earring",
                 "number": "08",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact08_Greed.webp",
@@ -3271,7 +3271,7 @@
             ],
             "artefacts": [
               {
-                "name": "Casque",
+                "name": "Helmet",
                 "number": "01",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact01_Greed.webp",
@@ -3294,7 +3294,7 @@
                 ]
               },
               {
-                "name": "Plastron",
+                "name": "Chestplate",
                 "number": "02",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact02_Greed.webp",
@@ -3317,7 +3317,7 @@
                 ]
               },
               {
-                "name": "Gants",
+                "name": "Gloves",
                 "number": "03",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact03_Greed.webp",
@@ -3340,7 +3340,7 @@
                 ]
               },
               {
-                "name": "Bottes",
+                "name": "Boots",
                 "number": "04",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact04_Greed.webp",
@@ -3363,7 +3363,7 @@
                 ]
               },
               {
-                "name": "Collier",
+                "name": "Necklace",
                 "number": "05",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact05_Greed.webp",
@@ -3409,7 +3409,7 @@
                 ]
               },
               {
-                "name": "Bague",
+                "name": "Ring",
                 "number": "07",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact07_Greed.webp",
@@ -3432,7 +3432,7 @@
                 ]
               },
               {
-                "name": "Boucle d'oreille",
+                "name": "Earring",
                 "number": "08",
                 "set": "Burning Greed",
                 "image": "Burning_Greed/Artefact08_Greed.webp",
@@ -3700,7 +3700,7 @@
             ],
             "artefacts": [
               {
-                "name": "Casque",
+                "name": "Helmet",
                 "number": "01",
                 "set": "Armed",
                 "image": "Armed/Artefact01_Armed.webp",
@@ -3723,7 +3723,7 @@
                 ]
               },
               {
-                "name": "Plastron",
+                "name": "Chestplate",
                 "number": "02",
                 "set": "Armed",
                 "image": "Armed/Artefact02_Armed.webp",
@@ -3746,7 +3746,7 @@
                 ]
               },
               {
-                "name": "Gants",
+                "name": "Gloves",
                 "number": "03",
                 "set": "Armed",
                 "image": "Armed/Artefact03_Armed.webp",
@@ -3769,7 +3769,7 @@
                 ]
               },
               {
-                "name": "Bottes",
+                "name": "Boots",
                 "number": "04",
                 "set": "Armed",
                 "image": "Armed/Artefact04_Armed.webp",
@@ -3792,7 +3792,7 @@
                 ]
               },
               {
-                "name": "Collier",
+                "name": "Necklace",
                 "number": "05",
                 "set": "Outstanding Ability",
                 "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
@@ -3838,7 +3838,7 @@
                 ]
               },
               {
-                "name": "Bague",
+                "name": "Ring",
                 "number": "07",
                 "set": "Outstanding Ability",
                 "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
@@ -3861,7 +3861,7 @@
                 ]
               },
               {
-                "name": "Boucle d'oreille",
+                "name": "Earring",
                 "number": "08",
                 "set": "Outstanding Ability",
                 "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
@@ -3932,7 +3932,7 @@
             ],
             "artefacts": [
               {
-                "name": "Casque",
+                "name": "Helmet",
                 "number": "01",
                 "set": "Burning Curse",
                 "image": "Burning_Curse/Artefact01_Curse.webp",
@@ -3955,7 +3955,7 @@
                 ]
               },
               {
-                "name": "Plastron",
+                "name": "Chestplate",
                 "number": "02",
                 "set": "Burning Curse",
                 "image": "Burning_Curse/Artefact02_Curse.webp",
@@ -3978,7 +3978,7 @@
                 ]
               },
               {
-                "name": "Gants",
+                "name": "Gloves",
                 "number": "03",
                 "set": "Burning Curse",
                 "image": "Burning_Curse/Artefact03_Curse.webp",
@@ -4001,7 +4001,7 @@
                 ]
               },
               {
-                "name": "Bottes",
+                "name": "Boots",
                 "number": "04",
                 "set": "Burning Curse",
                 "image": "Burning_Curse/Artefact04_Curse.webp",
@@ -4024,7 +4024,7 @@
                 ]
               },
               {
-                "name": "Collier",
+                "name": "Necklace",
                 "number": "05",
                 "set": "Outstanding Ability",
                 "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
@@ -4070,7 +4070,7 @@
                 ]
               },
               {
-                "name": "Bague",
+                "name": "Ring",
                 "number": "07",
                 "set": "Outstanding Ability",
                 "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
@@ -4093,7 +4093,7 @@
                 ]
               },
               {
-                "name": "Boucle d'oreille",
+                "name": "Earring",
                 "number": "08",
                 "set": "Outstanding Ability",
                 "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
@@ -4164,7 +4164,7 @@
             ],
             "artefacts": [
               {
-                "name": "Casque",
+                "name": "Helmet",
                 "number": "01",
                 "set": "Iron Will",
                 "image": "Iron_Will/Artefact01_IronWill.webp",
@@ -4187,7 +4187,7 @@
                 ]
               },
               {
-                "name": "Plastron",
+                "name": "Chestplate",
                 "number": "02",
                 "set": "Iron Will",
                 "image": "Iron_Will/Artefact02_IronWill.webp",
@@ -4210,7 +4210,7 @@
                 ]
               },
               {
-                "name": "Gants",
+                "name": "Gloves",
                 "number": "03",
                 "set": "Iron Will",
                 "image": "Iron_Will/Artefact03_IronWill.webp",
@@ -4233,7 +4233,7 @@
                 ]
               },
               {
-                "name": "Bottes",
+                "name": "Boots",
                 "number": "04",
                 "set": "Iron Will",
                 "image": "Iron_Will/Artefact04_IronWill.webp",
@@ -4256,7 +4256,7 @@
                 ]
               },
               {
-                "name": "Collier",
+                "name": "Necklace",
                 "number": "05",
                 "set": "Outstanding Ability",
                 "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
@@ -4302,7 +4302,7 @@
                 ]
               },
               {
-                "name": "Bague",
+                "name": "Ring",
                 "number": "07",
                 "set": "Outstanding Ability",
                 "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
@@ -4325,7 +4325,7 @@
                 ]
               },
               {
-                "name": "Boucle d'oreille",
+                "name": "Earring",
                 "number": "08",
                 "set": "Outstanding Ability",
                 "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
@@ -4396,7 +4396,7 @@
             ],
             "artefacts": [
               {
-                "name": "Casque",
+                "name": "Helmet",
                 "number": "01",
                 "set": "Chaotic Infamy",
                 "image": "Chaotic_Infamy/Artefact01_Infamy.webp",
@@ -4419,7 +4419,7 @@
                 ]
               },
               {
-                "name": "Plastron",
+                "name": "Chestplate",
                 "number": "02",
                 "set": "Chaotic Infamy",
                 "image": "Chaotic_Infamy/Artefact02_Infamy.webp",
@@ -4442,7 +4442,7 @@
                 ]
               },
               {
-                "name": "Gants",
+                "name": "Gloves",
                 "number": "03",
                 "set": "Chaotic Infamy",
                 "image": "Chaotic_Infamy/Artefact03_Infamy.webp",
@@ -4465,7 +4465,7 @@
                 ]
               },
               {
-                "name": "Bottes",
+                "name": "Boots",
                 "number": "04",
                 "set": "Chaotic Infamy",
                 "image": "Chaotic_Infamy/Artefact04_Infamy.webp",
@@ -4488,7 +4488,7 @@
                 ]
               },
               {
-                "name": "Collier",
+                "name": "Necklace",
                 "number": "05",
                 "set": "Chaotic Infamy",
                 "image": "Chaotic_Infamy/Artefact05_Infamy.webp",
@@ -4534,7 +4534,7 @@
                 ]
               },
               {
-                "name": "Bague",
+                "name": "Ring",
                 "number": "07",
                 "set": "Chaotic Infamy",
                 "image": "Chaotic_Infamy/Artefact07_Infamy.webp",
@@ -4557,7 +4557,7 @@
                 ]
               },
               {
-                "name": "Boucle d'oreille",
+                "name": "Earring",
                 "number": "08",
                 "set": "Chaotic Infamy",
                 "image": "Chaotic_Infamy/Artefact08_Infamy.webp",

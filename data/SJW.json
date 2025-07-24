@@ -9,7 +9,136 @@
         "shadows": [
           {
             "name": "Beru",
-            "image": "Shadow_Beru.png"
+            "image": "Shadow_Beru.png",
+            "authority_passive": "",
+            "evolutions": [
+              {
+                "id": "A0",
+                "number": "0",
+                "type": "passive",
+                "description": ""
+              },
+              {
+                "id": "A1",
+                "number": "1",
+                "type": "passive",
+                "description": ""
+              },
+              {
+                "id": "A2",
+                "number": "2",
+                "type": "passive",
+                "description": ""
+              },
+              {
+                "id": "A3",
+                "number": "3",
+                "type": "passive",
+                "description": ""
+              },
+              {
+                "id": "A4",
+                "number": "4",
+                "type": "passive",
+                "description": ""
+              },
+              {
+                "id": "A5",
+                "number": "5",
+                "type": "passive",
+                "description": ""
+              }
+            ],
+            "weapon": [
+              {
+                "name": "",
+                "image": "",
+                "stats": "",
+                "evolutions": [
+                  {
+                    "id": "A0",
+                    "number": "0",
+                    "type": "passive",
+                    "description": ""
+                  },
+                  {
+                    "id": "A1",
+                    "number": "1",
+                    "type": "passive",
+                    "description": ""
+                  },
+                  {
+                    "id": "A2",
+                    "number": "2",
+                    "type": "passive",
+                    "description": ""
+                  },
+                  {
+                    "id": "A3",
+                    "number": "3",
+                    "type": "passive",
+                    "description": ""
+                  },
+                  {
+                    "id": "A4",
+                    "number": "4",
+                    "type": "passive",
+                    "description": ""
+                  },
+                  {
+                    "id": "A5",
+                    "number": "5",
+                    "type": "passive",
+                    "description": ""
+                  }
+                ]
+              }
+            ],
+            "passives": [
+              {
+                "name": "",
+                "description": "",
+                "image": ""
+              }
+            ],
+            "skills": [
+              {
+                "principal": "True",
+                "name": "",
+                "description": "",
+                "image": ""
+              },
+              {
+                "name": "",
+                "description": "",
+                "image": "*"
+              },
+              {
+                "name": "",
+                "description": "*$",
+                "image": ""
+              },
+              {
+                "name": "*",
+                "description": "",
+                "image": ""
+              },
+              {
+                "name": "",
+                "description": "",
+                "image": ""
+              },
+              {
+                "name": "",
+                "description": "",
+                "image": ""
+              },
+              {
+                "name": "",
+                "description": "",
+                "image": ""
+              }
+            ]
           },
           {
             "name": "Bigrock",
@@ -50,7 +179,52 @@
             "type": "Dark",
             "folder": "Dark_Faux_de_l'ombre",
             "image": "Faux_img.png",
-            "codex": "Faux_Codex.png"
+            "codex": "Faux_Codex.png",
+            "stats": "",
+            "evolutions": [
+              {
+                "id": "A0",
+                "number": "0",
+                "type": "passive",
+                "description": ""
+              },
+              {
+                "id": "A1",
+                "number": "1",
+                "type": "passive",
+                "description": ""
+              },
+              {
+                "id": "A2",
+                "number": "2",
+                "type": "passive",
+                "description": ""
+              },
+              {
+                "id": "A3",
+                "number": "3",
+                "type": "passive",
+                "description": ""
+              },
+              {
+                "id": "A4",
+                "number": "4",
+                "type": "passive",
+                "description": ""
+              },
+              {
+                "id": "A5",
+                "number": "5",
+                "type": "passive",
+                "description": ""
+              },
+              {
+                "id": "A6-10",
+                "range": "6-10",
+                "type": "stat",
+                "description": ""
+              }
+            ]
           },
           {
             "name": "Fragment de Zeke",
