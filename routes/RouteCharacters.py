@@ -319,6 +319,7 @@ def characters(app: Flask):
                 'cores': cores
             })
         character_info['equipment_sets'] = equipment_sets
+        write_log(f"Found {len(equipment_sets)} equipment sets for character {char_alias}", log_level="DEBUG")
 
         conn.close()
 
