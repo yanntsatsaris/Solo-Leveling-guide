@@ -332,7 +332,7 @@ def characters(app: Flask):
                 'pieces_required': row[1],
                 'effect': row[2]
             })
-
+        write_log(f"Found {panoplies_effects} panoplies effects for character {char_alias}", log_level="DEBUG")
         conn.close()
 
         return render_template(
