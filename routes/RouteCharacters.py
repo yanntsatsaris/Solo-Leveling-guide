@@ -4,6 +4,7 @@ import psycopg2
 from flask import Flask, render_template, url_for, session
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.ControleurConf import ControleurConf
+from collections import Counter
 
 def get_psql_conn():
     conf = ControleurConf()
@@ -277,6 +278,7 @@ def characters(app: Flask):
                 WHERE a.artefacts_equipment_sets_id = %s AND at.artefact_translations_language = %s
             """, (eq_set_id, language))
             artefacts = []
+            artefact_sets = []
             for a_row in cursor.fetchall():
                 artefact_id, artefact_name, artefact_set, artefact_image, artefact_main_stat = a_row
                 cursor.execute("""
@@ -292,6 +294,8 @@ def characters(app: Flask):
                     'secondary_stats': secondary_stats
                 }
                 artefacts.append(artefact_obj)
+                artefact_sets.append(artefact_set)
+
             # Noyaux
             cursor.execute("""
                 SELECT cores_name, cores_number, cores_image, cores_main_stat, cores_secondary_stat
@@ -308,11 +312,16 @@ def characters(app: Flask):
                     'secondary_stat': core_row[4]
                 }
                 cores.append(core_obj)
+
+            # Compte le nombre de pièces par nom de panoplie
+            set_piece_count = Counter(artefact_sets)
+
             equipment_sets.append({
                 'set_name': eq_set_name,
                 'focus_stats': focus_stats,
                 'artefacts': artefacts,
-                'cores': cores
+                'cores': cores,
+                'set_piece_count': dict(set_piece_count)  # {'Armed': 4, ...}
             })
         character_info['equipment_sets'] = equipment_sets
 

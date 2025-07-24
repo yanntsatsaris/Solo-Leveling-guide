@@ -64,8 +64,17 @@ function showSetEffects(setName, event) {
   effectsList.innerHTML = "";
   effectsTitle.textContent = setName;
 
-  // Filtre les effets pour le set affiché
-  const effects = equipmentSetsEffects.filter((e) => e.set_name === setName);
+  // Récupère le nombre de pièces équipées pour ce set/panoplie
+  const currentSet = equipmentSets.find((set) => set.set_name === setName);
+  const numPieces =
+    currentSet && currentSet.set_piece_count
+      ? currentSet.set_piece_count[setName] || 0
+      : 0;
+
+  // Filtre les effets pour le set affiché et le nombre de pièces
+  const effects = equipmentSetsEffects.filter(
+    (e) => e.set_name === setName && e.pieces_required <= numPieces
+  );
   effects.forEach((effect) => {
     const listItem = document.createElement("li");
     listItem.innerHTML = `
