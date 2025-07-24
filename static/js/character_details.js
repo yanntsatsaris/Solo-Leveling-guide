@@ -67,18 +67,14 @@ document.addEventListener("DOMContentLoaded", () => {
     effectsList.innerHTML = "";
     effectsTitle.textContent = setName;
 
-    // Récupère le set actuellement sélectionné
     const equipmentSelect = document.getElementById("equipment-select");
     const selectedSetIndex = equipmentSelect ? parseInt(equipmentSelect.value) : 0;
     const selectedSet = equipmentSets[selectedSetIndex];
 
-    // Récupère le nombre de pièces pour le set survolé
-    // Attention : set_piece_count est un dict {nom_panoplie: nombre}
     const numPieces = selectedSet.set_piece_count && selectedSet.set_piece_count[setName]
       ? selectedSet.set_piece_count[setName]
       : 0;
 
-    // Filtre les effets pour le set affiché et le nombre de pièces
     const effects = equipmentSetsEffects.filter(
       (e) => e.set_name === setName && e.pieces_required <= numPieces
     );
@@ -98,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    // Positionner la bulle
     const rect = event.target.getBoundingClientRect();
     effectsContainer.style.top = `${rect.bottom + window.scrollY + 10}px`;
     effectsContainer.style.left = `${rect.left + window.scrollX}px`;
