@@ -17,9 +17,6 @@ from static.Controleurs.sql_entities.characters.weapons_sql import WeaponsSql
 from static.Controleurs.sql_entities.characters.equipment_set_sql import EquipmentSetSql
 
 def render_tags(description, tags_list, base_path):
-    write_log(f"[render_tags] Description à traiter: {description}", log_level="DEBUG")
-    write_log(f"[render_tags] tags_list: {tags_list}", log_level="DEBUG")
-    write_log(f"[render_tags] base_path: {base_path}", log_level="DEBUG")
 
     def normalize_tag(tag):
         # Remplace tous les types d'apostrophes par une apostrophe simple
@@ -32,23 +29,18 @@ def render_tags(description, tags_list, base_path):
 
     def find_tag(tag):
         tag_norm = normalize_tag(tag)
-        write_log(f"[find_tag] Recherche du tag normalisé: {tag_norm}", log_level="DEBUG")
         for item in tags_list:
             tag_value = item.get('tag')
             if tag_value and normalize_tag(tag_value) == tag_norm:
-                write_log(f"[find_tag] Tag trouvé: {item}", log_level="DEBUG")
                 return item
-        write_log(f"[find_tag] Aucun tag trouvé pour: {tag_norm}", log_level="DEBUG")
         return None
 
     def replacer(match):
         tag_raw = match.group(1)
-        write_log(f"[replacer] Tag brut trouvé dans la description: {tag_raw}", log_level="DEBUG")
         parts = tag_raw.split('|')
         tag = parts[0].strip()
         only_img = len(parts) > 1 and parts[1].strip().lower() == 'img'
         tag_info = find_tag(tag)
-        write_log(f"[replacer] Résultat de find_tag: {tag_info}", log_level="DEBUG")
         if tag_info and tag_info.get('image'):
             img_path = tag_info['image']
             if not img_path.startswith('images/'):
@@ -56,12 +48,10 @@ def render_tags(description, tags_list, base_path):
             else:
                 img_url = url_for('static', filename=img_path)
             img_html = f"<img src='{img_url}' alt='{tag_info.get('tag', tag)}' class='tag-img'>"
-            write_log(f"[replacer] HTML généré: {img_html}", log_level="DEBUG")
             if only_img:
                 return img_html
             else:
                 return f"{img_html} [{tag_info.get('tag', tag)}]"
-        write_log(f"[replacer] Aucun tag/image trouvé, retour brut: {match.group(0)}", log_level="DEBUG")
         return match.group(0)
 
     result = re.sub(r"\[([^\]]+)\]", replacer, description).replace("\n", "<br>")
@@ -83,9 +73,6 @@ def update_image_paths(description, base_path):
     return updated_description.replace("\n", "<br>")
 
 def process_description(description, tags_list, base_path):
-    write_log(f"[process_description] Description à traiter: {description}", log_level="DEBUG")
-    write_log(f"[process_description] tags_list: {tags_list}", log_level="DEBUG")
-    write_log(f"[process_description] base_path: {base_path}", log_level="DEBUG")
     if not description:
         write_log("[process_description] Description vide", log_level="DEBUG")
         return description
