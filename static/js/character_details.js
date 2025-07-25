@@ -66,7 +66,20 @@ function showSetEffects(setName, event) {
   const effectsTitle = effectsContainer.querySelector("h3");
 
   effectsList.innerHTML = "";
-  effectsTitle.textContent = setName;
+
+  // Récupère le display_name correspondant au set
+  let displayName = setName;
+  const effectSet = equipmentSetsEffects.find(e => e.set_name === setName);
+  if (effectSet && effectSet.display_name) {
+    displayName = effectSet.display_name;
+  } else {
+    // Si non trouvé, tente dans equipmentSets
+    const selectedSet = equipmentSets.find(s => s.name === setName);
+    if (selectedSet && selectedSet.display_name) {
+      displayName = selectedSet.display_name;
+    }
+  }
+  effectsTitle.textContent = displayName;
 
   // Récupère le set actuellement sélectionné
   const equipmentSelect = document.getElementById("equipment-select");
@@ -74,7 +87,6 @@ function showSetEffects(setName, event) {
   const selectedSet = equipmentSets[selectedSetIndex];
 
   // Récupère le nombre de pièces pour le set survolé
-  // Attention : set_piece_count est un dict {nom_panoplie: nombre}
   const numPieces = selectedSet.set_piece_count && selectedSet.set_piece_count[setName]
     ? selectedSet.set_piece_count[setName]
     : 0;
@@ -101,17 +113,15 @@ function showSetEffects(setName, event) {
 
   // Positionner la bulle à gauche de l'image
   const rect = event.target.getBoundingClientRect();
-  const bubbleWidth = effectsContainer.offsetWidth || 300; // largeur estimée si non encore affichée
-  const bubbleHeight = effectsContainer.offsetHeight || 100; // hauteur estimée si non encore affichée
+  const bubbleWidth = effectsContainer.offsetWidth || 300;
+  const bubbleHeight = effectsContainer.offsetHeight || 100;
 
   let leftPosition = rect.left + window.scrollX - bubbleWidth - 10;
   if (leftPosition < 0) {
-    // Si trop à gauche, la mettre à droite de l'image
     leftPosition = rect.right + window.scrollX + 10;
   }
   let topPosition = rect.top + window.scrollY;
 
-  // Si la bulle dépasse en haut, ajuste
   if (topPosition + bubbleHeight > window.innerHeight + window.scrollY) {
     topPosition = window.innerHeight + window.scrollY - bubbleHeight - 10;
   }
