@@ -89,7 +89,7 @@ def process_description(description, tags_list, base_path):
     if not description:
         write_log("[process_description] Description vide", log_level="DEBUG")
         return description
-    if re.search(r"<src\s+img=.*?>\s*\[[^\]]+\]", description):
+    if re.search(r"<img\s+src=.*?>\s*\[[^\]]+\]", description):
         write_log("[process_description] Ancien fonctionnement détecté", log_level="DEBUG")
         return update_image_paths(description, base_path)
     elif re.search(r"\[[^\]]+\]", description):
