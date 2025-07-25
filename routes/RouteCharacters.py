@@ -22,6 +22,8 @@ def render_tags(description, tags_list, base_path):
     write_log(f"[render_tags] base_path: {base_path}", log_level="DEBUG")
 
     def normalize_tag(tag):
+        # Remplace tous les types d'apostrophes par une apostrophe simple
+        tag = tag.replace("’", "'").replace("`", "'").replace("´", "'")
         # Supprime les accents et met en minuscule
         return ''.join(
             c for c in unicodedata.normalize('NFD', tag)
