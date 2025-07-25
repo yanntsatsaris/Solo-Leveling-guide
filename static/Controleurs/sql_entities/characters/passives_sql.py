@@ -4,7 +4,7 @@ class PassivesSql:
     def __init__(self, cursor):
         self.cursor = cursor
 
-    def get_passives(self, char_id, language):
+    def get_passives(self, char_id, language, type_folder, char_folder, update_image_paths):
         write_log(f"Requête get_passives pour char_id={char_id}, langue={language}", log_level="DEBUG")
         self.cursor.execute("""
             SELECT p.passives_principal, pt.passive_translations_name, pt.passive_translations_description, p.passives_image
@@ -12,6 +12,14 @@ class PassivesSql:
             JOIN passive_translations pt ON pt.passive_translations_passives_id = p.passives_id
             WHERE p.passives_characters_id = %s AND pt.passive_translations_language = %s
         """, (char_id, language))
-        return self.cursor.fetchall()
+        return [
+            {
+                'principal': row[0],
+                'name': row[1],
+                'description': update_image_paths(row[2], f'images/Personnages/{type_folder}/{char_folder}'),
+                'image': f'images/Personnages/{type_folder}/{char_folder}/{row[3]}' if row[3] else ''
+            }
+            for row in self.cursor.fetchall()
+        ]
 
     # Ajoute ici create, update, delete pour les passives
