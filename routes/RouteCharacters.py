@@ -38,7 +38,6 @@ def render_tags(description, tags_list, base_path):
         only_img = len(parts) > 1 and parts[1].strip().lower() == 'img'
         tag_info = find_tag(tag)
         if tag_info and tag_info.get('image'):
-            # Si le chemin commence déjà par 'images/', on ne rajoute pas base_path
             img_path = tag_info['image']
             if img_path.startswith('images/'):
                 img_url = url_for('static', filename=img_path)
@@ -206,8 +205,11 @@ def characters(app: Flask):
         }
 
         passives = passives_sql.get_passives(char_id, language, type_folder, char_folder)
+        skills = skills_sql.get_skills(char_id, language, type_folder, char_folder)
+        all_tags = passives + skills
+
         for passive in passives:
-            passive['description'] = process_description(passive['description'], passives, base_path)
+            passive['description'] = process_description(passive['description'], all_tags, base_path)
         character_info['passives'] = passives
 
         evolutions = evolutions_sql.get_evolutions(char_id, language, type_folder, char_folder)
@@ -215,9 +217,8 @@ def characters(app: Flask):
             evo['description'] = update_image_paths(evo['description'], base_path)
         character_info['evolutions'] = evolutions
 
-        skills = skills_sql.get_skills(char_id, language, type_folder, char_folder)
         for skill in skills:
-            skill['description'] = process_description(skill['description'], skills, base_path)
+            skill['description'] = process_description(skill['description'], all_tags, base_path)
         character_info['skills'] = skills
 
         weapons = weapons_sql.get_weapons(char_id, language, type_folder, char_folder)
