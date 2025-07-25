@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import unicodedata
 from flask import Flask, render_template, url_for, session
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.ControleurConf import ControleurConf
@@ -20,16 +21,22 @@ def render_tags(description, tags_list, base_path):
     write_log(f"[render_tags] tags_list: {tags_list}", log_level="DEBUG")
     write_log(f"[render_tags] base_path: {base_path}", log_level="DEBUG")
 
+    def normalize_tag(tag):
+        # Supprime les accents et met en minuscule
+        return ''.join(
+            c for c in unicodedata.normalize('NFD', tag)
+            if unicodedata.category(c) != 'Mn'
+        ).lower().strip()
+
     def find_tag(tag):
-        tag_lower = tag.strip().lower()
-        write_log(f"[find_tag] Recherche du tag: {tag_lower}", log_level="DEBUG")
+        tag_norm = normalize_tag(tag)
+        write_log(f"[find_tag] Recherche du tag normalisé: {tag_norm}", log_level="DEBUG")
         for item in tags_list:
             tag_value = item.get('tag')
-            write_log(f"[find_tag] tag_value: {tag_value}", log_level="DEBUG")
-            if tag_value and tag_value.strip().lower() == tag_lower:
+            if tag_value and normalize_tag(tag_value) == tag_norm:
                 write_log(f"[find_tag] Tag trouvé: {item}", log_level="DEBUG")
                 return item
-        write_log(f"[find_tag] Aucun tag trouvé pour: {tag_lower}", log_level="DEBUG")
+        write_log(f"[find_tag] Aucun tag trouvé pour: {tag_norm}", log_level="DEBUG")
         return None
 
     def replacer(match):
