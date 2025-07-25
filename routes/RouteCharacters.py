@@ -232,7 +232,7 @@ def characters(app: Flask):
 
         evolutions = evolutions_sql.get_evolutions(char_id, language, type_folder, char_folder)
         for evo in evolutions:
-            evo['description'] = update_image_paths(evo['description'], base_path)
+            evo['description'] = process_description(evo['description'], all_tags, base_path)
         character_info['evolutions'] = evolutions
 
         for skill in skills:
@@ -241,9 +241,9 @@ def characters(app: Flask):
 
         weapons = weapons_sql.get_weapons(char_id, language, type_folder, char_folder)
         for weapon in weapons:
-            weapon['stats'] = update_image_paths(weapon.get('stats', ''), base_path)
+            weapon['stats'] = process_description(weapon.get('stats', ''), all_tags, base_path)
             for evo in weapon.get('evolutions', []):
-                evo['description'] = update_image_paths(evo.get('description', ''), base_path)
+                evo['description'] = process_description(evo['description'], all_tags, base_path)
         character_info['weapon'] = weapons
 
         equipment_sets = []
