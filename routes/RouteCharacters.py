@@ -70,31 +70,23 @@ def render_tags(description, tags_list, base_path):
 
 def update_image_paths(description, base_path, tags_list=None):
     """
-    Met à jour les chemins des images dans une description en ajoutant un cache-busting.
-    Si tags_list est fourni, remplace aussi les <src img="..."> par les images du système de tags.
+    Met à jour les chemins des images dans une description en ajoutant le chemin static.
+    Si tags_list est fourni, remplace aussi les <src img="..."> par le chemin complet.
     """
     if not description:
         return description
     updated_description = description
-    # Ajoute le chemin static si besoin
-    updated_description = re.sub(
-        r"src='(?!{0})".format(url_for('static', filename=base_path) + "/"),
-        f"src='{url_for('static', filename=base_path)}/",
-        updated_description
-    )
-    # Si tags_list est fourni, remplace aussi les <src img="..."> par le système de tags
-    if tags_list:
-        def replacer(match):
-            img_file = match.group(1)
-            tag = match.group(2)
-            # Cherche le tag dans tags_list
-            for item in tags_list:
-                if item.get('image') == img_file or normalize_tag(item.get('tag', '')) == normalize_tag(tag):
-                    img_url = url_for('static', filename=f"{base_path}/{img_file}")
-                    img_html = f"<img src='{img_url}' alt='{tag}' class='tag-img'>"
-                    return f"{img_html} [{tag}]"
-            return match.group(0)
-        updated_description = re.sub(r"<src img=['\"]([^'\"]+)['\"]\s*alt=['\"]([^'\"]+)['\"]>\s*\[([^\]]+)\]", replacer, updated_description)
+
+    # Remplacement du chemin pour <src img='...'>
+    def replacer(match):
+        img_file = match.group(1)
+        alt = match.group(2)
+        # Si tags_list est fourni, cherche le tag correspondant pour l'alt
+        img_url = url_for('static', filename=f"{base_path}/{img_file}")
+        img_html = f"<img src='{img_url}' alt='{alt}' class='tag-img'>"
+        return img_html
+
+    updated_description = re.sub(r"<src img=['\"]([^'\"]+)['\"]\s*alt=['\"]([^'\"]+)['\"]>", replacer, updated_description)
     return updated_description.replace("\n", "<br>")
 
 def process_description(description, tags_list, base_path):
@@ -104,7 +96,7 @@ def process_description(description, tags_list, base_path):
     if not description:
         write_log("[process_description] Description vide", log_level="DEBUG")
         return description
-    if re.search(r"<src\s+img=.*?>\s*\[[^\]]+\]", description):
+    if re.search(r"<src\s+img=.*?>", description):
         write_log("[process_description] Ancien fonctionnement détecté", log_level="DEBUG")
         return update_image_paths(description, base_path, tags_list)
     elif re.search(r"\[[^\]]+\]", description):
