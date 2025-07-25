@@ -68,25 +68,18 @@ def render_tags(description, tags_list, base_path):
     write_log(f"[render_tags] Description finale: {result}", log_level="DEBUG")
     return result
 
-def update_image_paths(description, base_path, tags_list=None):
+def update_image_paths(description, base_path):
     """
-    Met à jour les chemins des images dans une description en ajoutant le chemin static.
-    Si tags_list est fourni, remplace aussi les <src img="..."> par le chemin complet.
+    Met à jour les chemins des images dans une description en ajoutant un cache-busting.
     """
     if not description:
         return description
     updated_description = description
-
-    # Remplacement du chemin pour <src img='...'>
-    def replacer(match):
-        img_file = match.group(1)
-        alt = match.group(2)
-        # Si tags_list est fourni, cherche le tag correspondant pour l'alt
-        img_url = url_for('static', filename=f"{base_path}/{img_file}")
-        img_html = f"<img src='{img_url}' alt='{alt}' class='tag-img'>"
-        return img_html
-
-    updated_description = re.sub(r"<src img=['\"]([^'\"]+)['\"]\s*alt=['\"]([^'\"]+)['\"]>", replacer, updated_description)
+    if f"src='{url_for('static', filename=base_path)}/" not in description:
+        updated_description = description.replace(
+            "src='",
+            f"src='{url_for('static', filename=base_path)}/"
+        )
     return updated_description.replace("\n", "<br>")
 
 def process_description(description, tags_list, base_path):
