@@ -1261,42 +1261,36 @@
           {
             "name": "[Gain de bouclier]",
             "tag": "Gain de bouclier",
-            "display_tag": true,
             "description": "Augmente la quantité d’acquisitions du [Bouclier].",
             "image": "Light_Thomas_Buff_GaindShield.webp"
           },
           {
             "name": "[Bouclier]",
             "tag": "Bouclier",
-            "display_tag": true,
             "description": "Résistance aux dégâts et aux reculs.\nActive [Puissance écrasante] 1 fois.\nActive +10% taux & dégâts coup critique.",
             "image": "Light_Thomas_Buff_Shield.webp"
           },
           {
             "name": "[Puissance écrasante] (5 fois)",
             "tag": "Puissance écrasante",
-            "display_tag": true,
             "description": "+10% défense (maximum 50%).\n+2% [Gain de bouclier] (maximum 10%).\n(25 secondes).",
             "image": "Light_Thomas_Buff_Puissanceecrasante.webp"
           },
           {
             "name": "[Tyran d’acier]",
             "tag": "Tyran d’acier",
-            "display_tag": true,
             "description": "+20% DEF.\n+20% DMG RED.\n+10% [Bouclier].\n[Skill 1] & [Skill 2] +100% DMG INC.\n[Ultime] +125% DMG INC.\n(25 secondes)",
             "image": "Light_Thomas_Buff_Tyrandacier.webp"
           },
           {
             "name": "[Overgrowth]",
             "tag": "Overgrowth",
-            "display_tag": true,
             "description": "Transformer en [Tyran d’acier] en utilisant le [Skill 2] active [Surpuissance].\n200% dégâts lumière de la défense total.\n10 000 points [Bouclier] = [Overgrowth] +1000% hausse de dégâts.",
             "image": "Light_Thomas_Buff_Overgrowth.webp"
           },
           {
             "name": "[Armure d'acier]",
             "tag": "Armure d'acier",
-            "display_tag": true,
             "description": "+10% [Bouclier]\n+10 CRIT HIT & CRIT DMG (25 SECONDES).",
             "image": "Light_Thomas_Buff_Armuredacier.webp"
           }
@@ -1310,49 +1304,42 @@
             "principal": "True",
             "name": "[TYRAN D'ACIER]",
             "tag": "Tyran d’acier",
-            "display_tag": false,
             "description": "[CORE] > [SKILL1] > [CORE] > [SKILL2] > [TYRAN D'ACIER|img] CLINIOTE > [ULTIME] > [CORE] > [SKILL1] > [ULTIME] [TYRAN D'ACIER|img]",
             "image": "Light_Thomas_Buff_Tyrandacier.webp"
           },
           {
             "name": "[CORE] COUP DE MARTEAU GEANT",
             "tag": "Core",
-            "display_tag": true,
             "description": "[PUISSANCE ECRASANTE] (1x)\n [SHIELD] +2%",
             "image": "Light_Thomas_Skill_Core.webp"
           },
           {
             "name": "[SKILL1] DEMOLITION ABSOLUE",
             "tag": "Skill1",
-            "display_tag": true,
             "description": "[PUISSANCE ECRASANTE] (1x)\n [SHIELD] +2%",
             "image": "Light_Thomas_Skill1.webp"
           },
           {
             "name": "[SKILL2] ECRASEMENT COLOSSAL",
             "tag": "Skill2",
-            "display_tag": true,
             "description": "[PUISSANCE ECRASANTE] (1x)\n [SHIELD] +2%",
             "image": "Light_Thomas_Skill2.webp"
           },
           {
             "name": "[ULTIME] JUGEMENT DU CHEF",
             "tag": "Ultime",
-            "display_tag": true,
             "description": "TRANSFORMATION [TYRAN D'ACIER] 10000 POINTS [SHIELD] = [ULTIME] +1020% DMG INC.",
             "image": "Light_Thomas_Skill_Ultime.webp"
           },
           {
             "name": "[QTE] COUP A LA VOLEE",
             "tag": "QTE",
-            "display_tag": true,
             "description": "[PUISSANCE ECRASANTE] (1x).",
             "image": "Light_Thomas_Skill_QTE.webp"
           },
           {
             "name": "[SOUTIEN] RETOUR DU ROI",
             "tag": "Soutien",
-            "display_tag": true,
             "description": "[ARMURE D'ACIER].",
             "image": "Light_Thomas_Skill_Soutien.webp"
           }
