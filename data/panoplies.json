@@ -6,11 +6,11 @@
         "set_bonus": [
           {
             "pieces_required": 2,
-            "effect": "Increases the user's Attack by 5%."
+            "effect": "Augmente l’attaque de l’utilisateur de 5%."
           },
           {
             "pieces_required": 4,
-            "effect": "When attacking, the user ignores 18% of the target's Defense."
+            "effect": "En attaquant, l’utilisateur ignore 18% de la défense de la cible."
           }
         ]
       },
@@ -19,15 +19,15 @@
         "set_bonus": [
           {
             "pieces_required": 2,
-            "effect": "Applies the [Curse] effect.\n・Increases damage taken by 20%.\n・Increases damage dealth by 10% and additionally increases damage dealt by 0.1% every 1 second(s) (stacking up to 100 times).\n・Duration: Permanent"
+            "effect": "Applique l’effet [Malédiction].\n . Augmente les dégâts subis de 20%.\n . Augmente les dégâts infligés de 10% et augmente les dégâts infligés de 0.1% toutes les 1 secondes (cumulable jusqu’à 100 fois).\n . Durée : permanent"
           },
           {
             "pieces_required": 4,
-            "effect": "The [Curse] effect becomes the [Enhanced Curse] effect\n[Enhanced Curse]\n・Increases the user's Damage Taken by 20%.\n・Increases the user's damage dealt by 20% and additionally increases damage dealt by 0.1% every 1 second(s) (stacking up to 100 times).\n・Unable to activate the [Curse] effect.\nApplies the [Rescue] effect.\n・If the user has 25% HP or less, they recover 25% of their HP.\n・Activates only once per dungeon."
+            "effect": "L’effet [Malédiction] devient [Malédiction améliorée].\n . Augmente les dégâts subis de 20%.\n . Augmente les dégâts infligés de 20% et augmente les dégâts infligés de 0.1% toutes les 1 secondes (cumulable jusqu’à 100 fois).\n . Rend impossible l’activation de l’effet [Malédiction].\n . Durée : permanent\n . Applique l’effet [Sauvetage].\n . Si l’utilisateur a 25% de PV ou moins, il récupère 25% de ses PV.\n . Ne s’active qu’une fois par donjon."
           },
           {
             "pieces_required": 8,
-            "effect": "The [Enhanced Curse] effect becomes the [Burning Curse] effect\n[Burning Curse]\n・Increases the user's Damage Taken by 20%.\n・Increases the user's damage dealt by 30% and additionally increases damage dealt by 0.2% every 1 second(s) (stacking up to 100 times).\n・Unable to activate the [Curse] and [Enhanced Curse] effects.\n・Duration: Permanent"
+            "effect": "L’effet [Malédiction améliorée] devient [Malédiction ardente].\n . Augmente les dégâts subis par l’utilisateur de 20%.\n . Augmente les dégâts infligés de 30% et augmente les dégâts infligés de 0.2% toutes les 1 secondes (cumulable jusqu’à 100 fois).\n . Rend impossible l’activation de l’effet [Malédiction] et [Malédiction améliorée].\n . Durée : permanent"
           }
         ]
       },
@@ -36,15 +36,15 @@
         "set_bonus": [
           {
             "pieces_required": 2,
-            "effect": "When the user hits a target with an attack that deals [Break] damage, it applies the [Greed] effect.\n・Increases the user's Critical Hit Rate by 1% (stacking up to 10 times).\n・Cooldown: 1.5 second(s).\n・Duration: Permanent"
+            "effect": "Lorsque l’utilisateur touche une cible avec une attaque infligeant des dégâts de [Bris], l’effet [Avarice] s’applique.\n . Augmente le taux de coup critique de l’utilisateur de 1% (cumulable jusqu’à 10 fois).\n . Temps de rechargement : 1.5 secondes\n . Durée : permanent"
           },
           {
             "pieces_required": 4,
-            "effect": "When [Greed] effect stacks 10 times, it changes to [Enhanced Greed].\n[Enhanced Greed]\n・Increases the user and their team members' Critical Hit Rate by 10% and Critical Hit Damage by 15%.\n・[Greed] becomes unavailable after [Enhanced Greed] has been activated.\n・Duration: Permanent"
+            "effect": "Lorsque l’effet [Avarice] atteint 10 cumuls, il se transforme en [Avarice améliorée].\n[Avarice améliorée]\n・Augmente le taux de coup critique de l’utilisateur et de ses coéquipiers de 10% et les dégâts critiques de 15%.\n・[Avarice] devient indisponible après l’activation de [Avarice améliorée].\n・Durée : permanent"
           },
           {
             "pieces_required": 8,
-            "effect": "When attacking enemies that have elemental weakness, the [Break] effect increases by 30%.\n[Enhanced Greed] enhances to [Burning Greed].\n[Burning Greed]\n・Increases the user and their team members' Critical Hit Rate by 15% and Critical Hit Damage by 30%.\n・[Greed] becomes unavailable after [Burning Greed] has been activated.\n・[Enhanced Greed] becomes unavailable.\n・Duration: Permanent"
+            "effect": "Augmente l’effet de [Bris] de 30% en attaquant des ennemis dotés d’une faiblesse élémentaires. L’effet [Avarice améliorée] devient [Avarice ardente].\n .Détails :\n . [Avarice ardente]\n . Augmente le taux de coup critique de l’utilisateur et de ses alliés de 15%, et leurs dégâts de coup critique de 30%.\n . L’effet [Avarice] est indisponible une fois que l’effet [Avarice ardente] a été activé.\n . L’effet [Avarice améliorée] devient indisponible.\n . Durée : permanent"
           }
         ]
       },
@@ -53,15 +53,15 @@
         "set_bonus": [
           {
             "pieces_required": 2,
-            "effect": "Using this skill grants the Infamy effect.\n・Excludes Support Skills\n[Infamy]\n・Increases Basic Skill damage by 1.5% (stacking up to 20 times).\n・Increases the user's damage taken by 1% (stacking up to 20 times)\n・Duration: Permanent"
+            "effect": "Utiliser cette compétence accorde l’effet [Infamy].\n・Exclut les compétences de soutien\n[Infamy]\n・Augmente les dégâts de la compétence de base de 1,5 % (cumule jusqu’à 20 fois).\n・Augmente les dégâts subis par l’utilisateur de 1 % (cumule jusqu’à 20 fois)\n・Durée : Permanente"
           },
           {
             "pieces_required": 4,
-            "effect": "Enhances the [Infamy] effect to Ehnahced Infamy.\n[Enhanced Infamy]\n・Increases the user's Basic Skill damage by 2.5% (stacking up to 20%)\n・Increases the user's damage taken by 1% (stacking up to 20 times)\n・Duration: Permanent\n・When the user uses their Basic Skill, they recover 5% of their MP (Cooldown: 30 second(s)).\n・Unable to activate the Infamy effect."
+            "effect": "Améliore l’effet [Infamy] en [Enhanced Infamy].\n[Enhanced Infamy]\n・Augmente les dégâts de la compétence de base de l’utilisateur de 2,5 % (cumule jusqu’à 20 %)\n・Augmente les dégâts subis par l’utilisateur de 1 % (cumule jusqu’à 20 fois)\n・Durée : Permanente\n・Lorsque l’utilisateur utilise sa compétence de base, il récupère 5 % de son MP (Temps de recharge : 30 seconde(s)).\n・Incapable d’activer l’effet [Infamy]."
           },
           {
             "pieces_required": 8,
-            "effect": "In [Team Fight] mode, the user's damage dealt increases by 40%.\nWhen the [Enhanced Infamy] effect has stacked 10 times, it becomes the [Chaotic Infamy] effect.\n[Chaotic Infamy]\n・Increases the user's Basic Skill and Ultimate Skill damage by 100%.\n・Duration: Permanent\n・Removes the Damage Taken Increase effect on the user.\n・The user regians 5% of their MP when using their Basic Skill (Cooldown: 30 second(s))\n・The user becomes unable to activate the [Infamy] and [Enhanced Infamy] effects."
+            "effect": "En mode [Combat de groupe], les dégâts infligés par l’utilisateur augmentent de 40 %.\nLorsque l’effet [Enhanced Infamy] a cumulé 10 fois, il devient l’effet [Chaotic Infamy].\n[Chaotic Infamy]\n・Augmente les dégâts de la compétence de base et de la compétence ultime de l’utilisateur de 100 %.\n・Durée : Permanente\n・Supprime l’effet d’augmentation des dégâts subis par l’utilisateur.\n・L’utilisateur récupère 5 % de son MP lorsqu’il utilise sa compétence de base (Temps de recharge : 30 seconde(s))\n・L’utilisateur devient incapable d’activer les effets [Infamy] et [Enhanced Infamy]."
           }
         ]
       },
@@ -70,15 +70,15 @@
         "set_bonus": [
           {
             "pieces_required": 2,
-            "effect": "When an attack that deals [Break] damage hits, it triggers the [Desire] effect.\n[Desire]\n・Increases the user's elemental damage by 0.5% (stacking up to 20 times). (Cooldown: 1.5 second(s)).\n・Duration: Permanent"
+            "effect": "Quand une attaque qui inflige des dégâts [Bris] touche, elle déclenche l’effet [Desire].\n[Desire]\n・Augmente les dégâts élémentaires de l’utilisateur de 0,5 % (cumule jusqu’à 20 fois). (Temps de recharge : 1,5 seconde(s)).\n・Durée : Permanente"
           },
           {
             "pieces_required": 4,
-            "effect": "When the [Desire] effect has stacked 20 times, it becomes the [Enhanced Desire] effect.\n[Enhanced Desire]\n・Increases the damage of the user's skill with the [Break] effect by 30%.\n・Increases the user's and team members' elemental damage by 20%\n・Duration: Permanent\n・The user becomes unable to activate the [Desire] effect."
+            "effect": "Quand l’effet [Desire] a cumulé 20 fois, il devient l’effet [Enhanced Desire].\n[Enhanced Desire]\n・Augmente les dégâts de la compétence de l’utilisateur avec l’effet [Bris] de 30%.\n・Augmente les dégâts élémentaires de l’utilisateur et de ses coéquipiers de 20%\n・Durée : Permanente\n・L’utilisateur devient incapable d’activer l’effet [Desire]."
           },
           {
             "pieces_required": 8,
-            "effect": "Attacking enemies that are at an elemental weakness increases the user's [Break] effectiveness by 30%\nThe [Enhanced Desire] effect becomes the [Chaotic Desire] effect\n[Chaotic Desire]\n・Increases the damage of the user's skill with the [Break] effect by 50%.\n・The user and team members' elemental damage increases by 40%\n・Duration: Permanent\n・The user becomes unable to activate the [Desire] and [Enhanced Desire] effects."
+            "effect": "Attaquer des ennemis qui sont à une faiblesse élémentaire augmente l'efficacité [Bris] de l'utilisateur de 30%\nL'effet [Enhanced Desire] devient l'effet [Chaotic Desire]\n[Chaotic Desire]\n・Augmente les dégâts de la compétence de l'utilisateur avec l'effet [Bris] de 50%.\n・Les dégâts élémentaires de l'utilisateur et de ses coéquipiers augmentent de 40%\n・Durée : Permanente\n・L'utilisateur devient incapable d'activer les effets [Desire] et [Enhanced Desire]."
           }
         ]
       },
@@ -87,11 +87,11 @@
         "set_bonus": [
           {
             "pieces_required": 2,
-            "effect": "The damage of user skills with the [Break] effect increases by 30%."
+            "effect": "Les dégâts des compétences de l’utilisateur avec l’effet [Bris] augmentent de 30%."
           },
           {
             "pieces_required": 4,
-            "effect": "The Skill Damage Increase effect increases to 60%."
+            "effect": "L’effet d’augmentation des dégâts des compétences passe à 60%."
           }
         ]
       },
@@ -100,11 +100,11 @@
         "set_bonus": [
           {
             "pieces_required": 2,
-            "effect": "The user's [Shield] effects increase by 30%."
+            "effect": "Les effets de [Bouclier] de l’utilisateur augmentent de 30%."
           },
           {
             "pieces_required": 4,
-            "effect": "When a team member (including the user) activates a [Shield], it increases their individual damage dealt by 10% for 10 second(s)."
+            "effect": "Lorsqu’un membre de l’équipe (joueur compris) active un [Bouclier], les dégâts infligés augmentent de 10% pendant 10 secondes."
           }
         ]
       },
@@ -113,11 +113,11 @@
         "set_bonus": [
           {
             "pieces_required": 2,
-            "effect": "Increases the user's Defense by 8%."
+            "effect": "Augmente la Défense de l’utilisateur de 8%."
           },
           {
             "pieces_required": 4,
-            "effect": "When the user's users their Ultimate Skill, it increase their Defense by 5% (stacking up to 5 times).\n・Duration: Permanent\nIncreases Ultimate Skill damage by 50% 1 time only (Cooldown: 20 second(s))"
+            "effect": "Lorsque l’utilisateur utilise son Ultime, sa Défense augmente de 5% (cumule jusqu’à 5 fois).\n・Durée : Permanente\nAugmente les dégâts de l’Ultime de 50% une seule fois (Temps de recharge : 20 secondes)"
           }
         ]
       },
@@ -126,11 +126,11 @@
         "set_bonus": [
           {
             "pieces_required": 2,
-            "effect": "When the user has 70% or more of their MP, their damage dealt increases by 30%."
+            "effect": "Lorsque les PM de l’utilisateur sont à 70% ou au-dessus, les dégâts infligés augmentent de 30%."
           },
           {
             "pieces_required": 4,
-            "effect": "The Damage Dealt Increase effect potency increases to 60% and this effect now triggers when the user is at 40% or more of their maximum MP."
+            "effect": "L’effet d’augmentation des dégâts infligés s’élève à 60% et il se déclenche dès que les PM de l’utilisateur sont à 40% ou au-dessus."
           }
         ]
       },
@@ -139,11 +139,11 @@
         "set_bonus": [
           {
             "pieces_required": 2,
-            "effect": "When the user uses their QTE Skills, Support Skills, or Ultimate Skill, it increases the user and their team's elemental weakness damage dealt by 5%. - Duration: 30 second(s)"
+            "effect": "Lors de l’utilisation de compétence QTE, de soutien ou ultime, les dégâts de faiblesse élémentaire de l’utilisateur et de son équipe augmentent de 5%.\n . Durée : 30 secondes"
           },
           {
             "pieces_required": 4,
-            "effect": "Increases the skill's duration to 60 second(s) and increases the Elemental Weakness Damage. Increases the effect stack maximum to 3 instances."
+            "effect": "Élève la durée de la compétence à 60 secondes et fait passer le nombre de cumuls d’effet d’augmentation des dégâts de faiblesse élémentaire à 3 cumuls maximum."
           }
         ]
       }
