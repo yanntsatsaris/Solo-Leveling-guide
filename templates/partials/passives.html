@@ -2,7 +2,7 @@
     <h2>Passifs</h2>
     {% if character.passives and character.passives|length > 0 %}
         {% for passive in character.passives %}
-            <div class="passive {% if passive.principal == 'True' %}principal{% endif %}">
+            <div class="passive {% if passive.principal %}principal{% endif %}">
                 {% if passive.image %}
                     <img src="{{ url_for('static', filename=passive.image) }}" alt="{{ passive.name or 'Passive Image' }}">
                 {% endif %}

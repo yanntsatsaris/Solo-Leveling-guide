@@ -2,7 +2,7 @@
     <h2>Skills</h2>
     {% if character.skills and character.skills|length > 0 %}
         {% for skill in character.skills %}
-            <div class="skill {% if skill.principal == 'True' %}principal{% endif %}">
+            <div class="skill {% if skill.principal %}principal{% endif %}">
                 {% if skill.image %}
                     <img src="{{ url_for('static', filename=skill.image) }}" alt="{{ skill.name or 'Skill Image' }}">
                 {% endif %}
