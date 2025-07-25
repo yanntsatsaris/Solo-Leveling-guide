@@ -1,5 +1,6 @@
 import json
 import os
+import re
 from flask import Flask, render_template, url_for, session
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.ControleurConf import ControleurConf
@@ -14,6 +15,37 @@ from static.Controleurs.sql_entities.characters.skills_sql import SkillsSql
 from static.Controleurs.sql_entities.characters.weapons_sql import WeaponsSql
 from static.Controleurs.sql_entities.characters.equipment_set_sql import EquipmentSetSql
 
+def render_tags(description, tags_list, base_path):
+    """
+    Remplace les tags dans la description par l'image et/ou le texte selon la syntaxe.
+    tags_list : liste de dicts [{'tag': ..., 'image': ..., 'name': ...}]
+    base_path : chemin relatif pour les images
+    """
+    if not description:
+        return description.replace("\n", "<br>")
+    def find_tag(tag):
+        tag_lower = tag.strip().lower()
+        for item in tags_list:
+            if item.get('tag', '').strip().lower() == tag_lower:
+                return item
+        return None
+
+    def replacer(match):
+        tag_raw = match.group(1)
+        parts = tag_raw.split('|')
+        tag = parts[0].strip()
+        only_img = len(parts) > 1 and parts[1].strip().lower() == 'img'
+        tag_info = find_tag(tag)
+        if tag_info and tag_info.get('image'):
+            img_url = url_for('static', filename=f"{base_path}/{tag_info['image']}")
+            img_html = f"<img src='{img_url}' alt='{tag_info.get('name', tag)}' class='tag-img'>"
+            if only_img:
+                return img_html
+            else:
+                return f"{img_html} [{tag_info.get('name', tag)}]"
+        return match.group(0)
+    return re.sub(r"\[([^\]]+)\]", replacer, description).replace("\n", "<br>")
+
 def update_image_paths(description, base_path):
     """
     Met à jour les chemins des images dans une description en ajoutant un cache-busting.
@@ -27,6 +59,22 @@ def update_image_paths(description, base_path):
             f"src='{url_for('static', filename=base_path)}/"
         )
     return updated_description.replace("\n", "<br>")
+
+def process_description(description, tags_list, base_path):
+    """
+    Utilise l'ancien fonctionnement si la description contient <src img=...> suivi d'un [TAG],
+    sinon utilise le nouveau système de tags.
+    """
+    if not description:
+        return description
+    # Ancien fonctionnement : présence de <src img=...> suivi d'un [TAG]
+    if re.search(r"<src\s+img=.*?>\s*\[[^\]]+\]", description):
+        return update_image_paths(description, base_path)
+    # Nouveau fonctionnement : présence de [TAG] ou [TAG|img] sans <src img=...>
+    elif re.search(r"\[[^\]]+\]", description):
+        return render_tags(description, tags_list, base_path)
+    else:
+        return description.replace("\n", "<br>")
 
 def characters(app: Flask):
     @app.route('/characters')
@@ -139,6 +187,8 @@ def characters(app: Flask):
         else:
             image_path = personnage_png.replace('static/', '')
 
+        base_path = f'images/Personnages/{type_folder}/{char_folder}'
+
         character_info = {
             'name': char_name,
             'alias': char_alias,
@@ -149,10 +199,25 @@ def characters(app: Flask):
             'background_image': f'images/Personnages/{type_folder}/BG_{char_type}.webp'
         }
 
-        character_info['passives'] = passives_sql.get_passives(char_id, language, type_folder, char_folder, update_image_paths)
-        character_info['evolutions'] = evolutions_sql.get_evolutions(char_id, language, type_folder, char_folder, update_image_paths)
-        character_info['skills'] = skills_sql.get_skills(char_id, language, type_folder, char_folder, update_image_paths)
-        character_info['weapon'] = weapons_sql.get_weapons(char_id, language, type_folder, char_folder, update_image_paths)
+        passives = passives_sql.get_passives(char_id, language, type_folder, char_folder)
+        for passive in passives:
+            passive['description'] = process_description(passive['description'], passives, base_path)
+        character_info['passives'] = passives
+
+        evolutions = evolutions_sql.get_evolutions(char_id, language, type_folder, char_folder)
+        for evo in evolutions:
+            evo['description'] = update_image_paths(evo['description'], base_path)
+        character_info['evolutions'] = evolutions
+
+        skills = skills_sql.get_skills(char_id, language, type_folder, char_folder)
+        for skill in skills:
+            skill['description'] = process_description(skill['description'], skills, base_path)
+        character_info['skills'] = skills
+
+        weapons = weapons_sql.get_weapons(char_id, language, type_folder, char_folder)
+        for weapon in weapons:
+            weapon['description'] = update_image_paths(weapon['description'], base_path)
+        character_info['weapon'] = weapons
 
         equipment_sets = []
         for eq_set_id, eq_set_name in equipment_set_sql.get_equipment_sets(char_id, language):
@@ -170,3 +235,5 @@ def characters(app: Flask):
             language=language,
             panoplies_effects=panoplies_effects
         )
+
+        # ici laisse les commentaire pour le JSON
