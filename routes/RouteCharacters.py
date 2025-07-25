@@ -55,7 +55,6 @@ def render_tags(description, tags_list, base_path):
         return match.group(0)
 
     result = re.sub(r"\[([^\]]+)\]", replacer, description).replace("\n", "<br>")
-    write_log(f"[render_tags] Description finale: {result}", log_level="DEBUG")
     return result
 
 def update_image_paths(description, base_path):
