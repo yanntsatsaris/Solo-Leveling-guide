@@ -73,16 +73,12 @@ def update_image_paths(description, base_path):
 
 def process_description(description, tags_list, base_path):
     if not description:
-        write_log("[process_description] Description vide", log_level="DEBUG")
         return description
     if re.search(r"<img\s+src=.*?>\s*\[[^\]]+\]", description):
-        write_log("[process_description] Ancien fonctionnement détecté", log_level="DEBUG")
         return update_image_paths(description, base_path)
     elif re.search(r"\[[^\]]+\]", description):
-        write_log("[process_description] Nouveau fonctionnement détecté", log_level="DEBUG")
         return render_tags(description, tags_list, base_path)
     else:
-        write_log("[process_description] Aucun tag détecté, retour simple", log_level="DEBUG")
         return description.replace("\n", "<br>")
 
 def characters(app: Flask):
