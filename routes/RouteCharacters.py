@@ -26,7 +26,6 @@ def render_tags(description, tags_list, base_path):
     def find_tag(tag):
         tag_lower = tag.strip().lower()
         for item in tags_list:
-            # Correction : on vérifie que item['tag'] n'est pas None
             tag_value = item.get('tag')
             if tag_value and tag_value.strip().lower() == tag_lower:
                 return item
@@ -39,12 +38,17 @@ def render_tags(description, tags_list, base_path):
         only_img = len(parts) > 1 and parts[1].strip().lower() == 'img'
         tag_info = find_tag(tag)
         if tag_info and tag_info.get('image'):
-            img_url = url_for('static', filename=f"{base_path}/{tag_info['image']}")
-            img_html = f"<img src='{img_url}' alt='{tag_info.get('tag', tag)}' class='tag-img'>"
+            # Si le chemin commence déjà par 'images/', on ne rajoute pas base_path
+            img_path = tag_info['image']
+            if img_path.startswith('images/'):
+                img_url = url_for('static', filename=img_path)
+            else:
+                img_url = url_for('static', filename=f"{base_path}/{img_path}")
+            img_html = f"<img src='{img_url}' alt='{tag_info.get('name', tag)}' class='tag-img'>"
             if only_img:
                 return img_html
             else:
-                return f"{img_html} [{tag_info.get('tag', tag)}]"
+                return f"{img_html} [{tag_info.get('name', tag)}]"
         return match.group(0)
     return re.sub(r"\[([^\]]+)\]", replacer, description).replace("\n", "<br>")
 
