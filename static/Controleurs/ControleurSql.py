@@ -1,6 +1,7 @@
 import psycopg2
 from collections import Counter
 from static.Controleurs.ControleurConf import ControleurConf
+from static.Controleurs.ControleurLog import write_log
 
 class ControleurSql:
     def __init__(self):
@@ -8,6 +9,7 @@ class ControleurSql:
         database = conf.get_config('PSQL', 'database')
         user = conf.get_config('PSQL', 'user')
         password = conf.get_config('PSQL', 'password')
+        write_log("Connexion à la base de données SQL", log_level="DEBUG")
         self.conn = psycopg2.connect(
             dbname=database,
             user=user,
@@ -16,6 +18,7 @@ class ControleurSql:
         self.cursor = self.conn.cursor()
 
     def get_characters(self, language):
+        write_log(f"Requête get_characters pour langue={language}", log_level="DEBUG")
         self.cursor.execute("""
             SELECT c.characters_id, c.characters_type, c.characters_rarity, c.characters_alias, c.characters_folder, ct.character_translations_name
             FROM characters c
@@ -25,6 +28,7 @@ class ControleurSql:
         return self.cursor.fetchall()
 
     def get_panoplies(self, language):
+        write_log(f"Requête get_panoplies pour langue={language}", log_level="DEBUG")
         self.cursor.execute("""
             SELECT p.panoplies_name, pt.panoplie_translations_name, pt.panoplie_translations_language
             FROM panoplies p
@@ -34,6 +38,7 @@ class ControleurSql:
         return self.cursor.fetchall()
 
     def get_character_details(self, language, alias):
+        write_log(f"Requête get_character_details pour langue={language}, alias={alias}", log_level="DEBUG")
         self.cursor.execute("""
             SELECT c.characters_id, c.characters_type, c.characters_rarity, c.characters_alias, c.characters_folder, ct.character_translations_name, ct.character_translations_description
             FROM characters c
@@ -43,6 +48,7 @@ class ControleurSql:
         return self.cursor.fetchone()
 
     def get_passives(self, char_id, language, type_folder, char_folder, update_image_paths):
+        write_log(f"Requête get_passives pour char_id={char_id}, langue={language}", log_level="DEBUG")
         self.cursor.execute("""
             SELECT p.passives_principal, pt.passive_translations_name, pt.passive_translations_description, p.passives_image
             FROM passives p
@@ -60,6 +66,7 @@ class ControleurSql:
         ]
 
     def get_evolutions(self, char_id, language, type_folder, char_folder, update_image_paths):
+        write_log(f"Requête get_evolutions pour char_id={char_id}, langue={language}", log_level="DEBUG")
         self.cursor.execute("""
             SELECT ce.character_evolutions_evolution_id, ce.character_evolutions_number, ce.character_evolutions_type, ce.character_evolutions_range, cet.character_evolution_translations_description
             FROM character_evolutions ce
@@ -78,6 +85,7 @@ class ControleurSql:
         ]
 
     def get_skills(self, char_id, language, type_folder, char_folder, update_image_paths):
+        write_log(f"Requête get_skills pour char_id={char_id}, langue={language}", log_level="DEBUG")
         self.cursor.execute("""
             SELECT s.skills_principal, st.skill_translations_name, st.skill_translations_description, s.skills_image
             FROM skills s
@@ -95,6 +103,7 @@ class ControleurSql:
         ]
 
     def get_weapons(self, char_id, language, type_folder, char_folder, update_image_paths):
+        write_log(f"Requête get_weapons pour char_id={char_id}, langue={language}", log_level="DEBUG")
         self.cursor.execute("""
             SELECT w.weapons_id, wt.weapon_translations_name, wt.weapon_translations_stats, w.weapons_image
             FROM weapons w
@@ -129,6 +138,7 @@ class ControleurSql:
         return weapons
 
     def get_equipment_sets(self, char_id, language):
+        write_log(f"Requête get_equipment_sets pour char_id={char_id}, langue={language}", log_level="DEBUG")
         self.cursor.execute("""
             SELECT es.equipment_sets_id, es.equipment_sets_name
             FROM equipment_sets es
@@ -137,6 +147,7 @@ class ControleurSql:
         return self.cursor.fetchall()
 
     def get_equipment_set_details(self, eq_set_id, eq_set_name, language):
+        write_log(f"Requête get_equipment_set_details pour eq_set_id={eq_set_id}, eq_set_name={eq_set_name}, langue={language}", log_level="DEBUG")
         # Focus stats
         self.cursor.execute("""
             SELECT equipment_focus_stats_name FROM equipment_focus_stats
@@ -194,6 +205,7 @@ class ControleurSql:
         }
 
     def get_panoplies_effects(self, language):
+        write_log(f"Requête get_panoplies_effects pour langue={language}", log_level="DEBUG")
         self.cursor.execute("""
             SELECT p.panoplies_name, psb.panoplie_set_bonus_pieces_required, psbt.panoplie_set_bonus_translations_effect
             FROM panoplies p
@@ -211,4 +223,4 @@ class ControleurSql:
         ]
 
     def close(self):
-        self.conn.close()
+        write_log("Fermeture de la connexion SQL", log_level="DEBUG")

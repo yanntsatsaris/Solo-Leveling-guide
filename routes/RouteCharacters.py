@@ -4,7 +4,15 @@ from flask import Flask, render_template, url_for, session
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.ControleurConf import ControleurConf
 from static.Controleurs.ControleurSql import ControleurSql
-from collections import Counter
+
+# Import des entités SQL segmentées
+from static.Controleurs.sql_entities.characters_sql import CharactersSql
+from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
+from static.Controleurs.sql_entities.characters.passives_sql import PassivesSql
+from static.Controleurs.sql_entities.characters.evolutions_sql import EvolutionsSql
+from static.Controleurs.sql_entities.characters.skills_sql import SkillsSql
+from static.Controleurs.sql_entities.characters.weapons_sql import WeaponsSql
+from static.Controleurs.sql_entities.characters.equipment_set_sql import EquipmentSetSql
 
 def update_image_paths(description, base_path):
     """
@@ -40,11 +48,14 @@ def characters(app: Flask):
         # if not panoplies_data:
         #     return f"No panoplies data found for language: {language}", 404
 
-        # --- Utilisation du contrôleur SQL ---
-        sql = ControleurSql()
-        characters_data = sql.get_characters(language)
-        panoplies_data = sql.get_panoplies(language)
-        sql.close()
+        # --- Utilisation du contrôleur SQL segmenté ---
+        sql_manager = ControleurSql()
+        characters_sql = CharactersSql(sql_manager.cursor)
+        panoplies_sql = PanopliesSql(sql_manager.cursor)
+
+        characters_data = characters_sql.get_characters(language)
+        panoplies_data = panoplies_sql.get_panoplies(language)
+        sql_manager.close()
 
         images = []
         character_types = set()
@@ -105,10 +116,18 @@ def characters(app: Flask):
         # if not panoplies_data:
         #     return f"No panoplies data found for language: {language}", 404
 
-        sql = ControleurSql()
-        row = sql.get_character_details(language, alias)
+        sql_manager = ControleurSql()
+        characters_sql = CharactersSql(sql_manager.cursor)
+        passives_sql = PassivesSql(sql_manager.cursor)
+        evolutions_sql = EvolutionsSql(sql_manager.cursor)
+        skills_sql = SkillsSql(sql_manager.cursor)
+        weapons_sql = WeaponsSql(sql_manager.cursor)
+        equipment_set_sql = EquipmentSetSql(sql_manager.cursor)
+        panoplies_sql = PanopliesSql(sql_manager.cursor)
+
+        row = characters_sql.get_character_details(language, alias)
         if not row:
-            sql.close()
+            sql_manager.close()
             return "Character not found", 404
 
         char_id, char_type, char_rarity, char_alias, char_folder, char_name, char_description = row
@@ -130,21 +149,20 @@ def characters(app: Flask):
             'background_image': f'images/Personnages/{type_folder}/BG_{char_type}.webp'
         }
 
-        character_info['passives'] = sql.get_passives(char_id, language, type_folder, char_folder, update_image_paths)
-        character_info['evolutions'] = sql.get_evolutions(char_id, language, type_folder, char_folder, update_image_paths)
-        character_info['skills'] = sql.get_skills(char_id, language, type_folder, char_folder, update_image_paths)
-        character_info['weapon'] = sql.get_weapons(char_id, language, type_folder, char_folder, update_image_paths)
+        character_info['passives'] = passives_sql.get_passives(char_id, language, type_folder, char_folder, update_image_paths)
+        character_info['evolutions'] = evolutions_sql.get_evolutions(char_id, language, type_folder, char_folder, update_image_paths)
+        character_info['skills'] = skills_sql.get_skills(char_id, language, type_folder, char_folder, update_image_paths)
+        character_info['weapon'] = weapons_sql.get_weapons(char_id, language, type_folder, char_folder, update_image_paths)
 
-        # Sets d'équipement
         equipment_sets = []
-        for eq_set_id, eq_set_name in sql.get_equipment_sets(char_id, language):
+        for eq_set_id, eq_set_name in equipment_set_sql.get_equipment_sets(char_id, language):
             equipment_sets.append(
-                sql.get_equipment_set_details(eq_set_id, eq_set_name, language)
+                equipment_set_sql.get_equipment_set_details(eq_set_id, eq_set_name, language)
             )
         character_info['equipment_sets'] = equipment_sets
 
-        panoplies_effects = sql.get_panoplies_effects(language)
-        sql.close()
+        panoplies_effects = panoplies_sql.get_panoplies_effects(language)
+        sql_manager.close()
 
         return render_template(
             'character_details.html',
