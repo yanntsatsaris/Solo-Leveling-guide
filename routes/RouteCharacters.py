@@ -218,7 +218,9 @@ def characters(app: Flask):
 
         weapons = weapons_sql.get_weapons(char_id, language, type_folder, char_folder)
         for weapon in weapons:
-            weapon['description'] = update_image_paths(weapon['description'], base_path)
+            weapon['stats'] = update_image_paths(weapon.get('stats', ''), base_path)
+            for evo in weapon.get('evolutions', []):
+                evo['description'] = update_image_paths(evo.get('description', ''), base_path)
         character_info['weapon'] = weapons
 
         equipment_sets = []
