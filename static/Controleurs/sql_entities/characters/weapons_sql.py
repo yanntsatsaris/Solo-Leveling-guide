@@ -4,7 +4,7 @@ class WeaponsSql:
     def __init__(self, cursor):
         self.cursor = cursor
 
-    def get_weapons(self, char_id, language, type_folder, char_folder, update_image_paths):
+    def get_weapons(self, char_id, language, type_folder, char_folder):
         write_log(f"Requête get_weapons pour char_id={char_id}, langue={language}", log_level="DEBUG")
         self.cursor.execute("""
             SELECT w.weapons_id, wt.weapon_translations_name, wt.weapon_translations_stats, w.weapons_image
@@ -27,13 +27,13 @@ class WeaponsSql:
                     'number': evo[1],
                     'type': evo[2],
                     'range': evo[3],
-                    'description': update_image_paths(evo[4], f'images/Personnages/{type_folder}/{char_folder}') if evo[4] else ''
+                    'description': evo[4] if evo[4] else ''
                 }
                 for evo in self.cursor.fetchall()
             ]
             weapons.append({
                 'name': weapon_name,
-                'stats': update_image_paths(weapon_stats, f'images/Personnages/{type_folder}/{char_folder}') if weapon_stats else '',
+                'stats': weapon_stats if weapon_stats else '',
                 'image': f'images/Personnages/{type_folder}/{char_folder}/{weapon_image}' if weapon_image else '',
                 'evolutions': evolutions
             })
