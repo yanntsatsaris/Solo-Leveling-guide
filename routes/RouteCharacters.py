@@ -16,13 +16,6 @@ from static.Controleurs.sql_entities.characters.weapons_sql import WeaponsSql
 from static.Controleurs.sql_entities.characters.equipment_set_sql import EquipmentSetSql
 
 def render_tags(description, tags_list, base_path):
-    """
-    Remplace les tags dans la description par l'image et/ou le texte selon la syntaxe.
-    tags_list : liste de dicts [{'tag': ..., 'image': ..., 'name': ...}]
-    base_path : chemin relatif pour les images
-    """
-    if not description:
-        return description.replace("\n", "<br>")
     def find_tag(tag):
         tag_lower = tag.strip().lower()
         for item in tags_list:
@@ -39,10 +32,11 @@ def render_tags(description, tags_list, base_path):
         tag_info = find_tag(tag)
         if tag_info and tag_info.get('image'):
             img_path = tag_info['image']
-            if img_path.startswith('images/'):
-                img_url = url_for('static', filename=img_path)
-            else:
+            # Force le chemin pour les passifs si besoin
+            if not img_path.startswith('images/'):
                 img_url = url_for('static', filename=f"{base_path}/{img_path}")
+            else:
+                img_url = url_for('static', filename=img_path)
             img_html = f"<img src='{img_url}' alt='{tag_info.get('tag', tag)}' class='tag-img'>"
             if only_img:
                 return img_html
