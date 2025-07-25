@@ -26,7 +26,9 @@ def render_tags(description, tags_list, base_path):
     def find_tag(tag):
         tag_lower = tag.strip().lower()
         for item in tags_list:
-            if item.get('tag', '').strip().lower() == tag_lower:
+            # Correction : on vérifie que item['tag'] n'est pas None
+            tag_value = item.get('tag')
+            if tag_value and tag_value.strip().lower() == tag_lower:
                 return item
         return None
 
