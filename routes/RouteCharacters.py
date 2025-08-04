@@ -205,8 +205,14 @@ def characters(app: Flask):
         }
 
         passives = passives_sql.get_passives(char_id, language, type_folder, char_folder)
+        # Filtre les passifs cachés
+        passives = [p for p in passives if not p.get('hidden', False)]
+
         skills = skills_sql.get_skills(char_id, language, type_folder, char_folder)
-        all_tags = passives + skills
+        weapons = weapons_sql.get_weapons(char_id, language, type_folder, char_folder)
+
+        # Ajoute le tag de l'arme dans la liste des tags
+        all_tags = passives + skills + weapons
 
         for passive in passives:
             passive['description'] = process_description(passive['description'], all_tags, base_path)
@@ -221,7 +227,6 @@ def characters(app: Flask):
             skill['description'] = process_description(skill['description'], all_tags, base_path)
         character_info['skills'] = skills
 
-        weapons = weapons_sql.get_weapons(char_id, language, type_folder, char_folder)
         for weapon in weapons:
             weapon['stats'] = process_description(weapon.get('stats', ''), all_tags, base_path)
             for evo in weapon.get('evolutions', []):
