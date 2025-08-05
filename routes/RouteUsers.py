@@ -22,8 +22,11 @@ def users(app):
             # Vérification de l'attribut RightsAgreement
             user_info = ldap.get_user_info(username)
             rights = user_info.get('rightsAgreement', [])
+            rights_decoded = [r.decode() if isinstance(r, bytes) else r for r in rights]
+            # Log du niveau de droits
+            write_log(f"RightsAgreement de {username}: {rights_decoded}", log_level="INFO", username=username)
             # Vérifie si l'attribut existe et contient "SoloLevelingGuide::"
-            if not any(r.decode() if isinstance(r, bytes) else r for r in rights if "SoloLevelingGuide::" in (r.decode() if isinstance(r, bytes) else r)):
+            if not any(r for r in rights_decoded if "SoloLevelingGuide::" in r):
                 write_log(f"Connexion refusée : pas de compte SoloLevelingGuide", log_level="WARNING", username=username)
                 return jsonify({'success': False, 'error': "Aucun compte SoloLevelingGuide n'est associé à cet utilisateur."})
             session['username'] = username
