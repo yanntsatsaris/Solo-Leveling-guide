@@ -7,6 +7,7 @@ from logging.handlers import WatchedFileHandler
 # Récupérer le chemin du fichier de log via ControleurConf
 conf = ControleurConf()
 log_file_path = conf.get_config('LOG', 'file')
+log_level_limit = conf.get_config('LOG', 'level').upper()
 if not log_file_path:
     log_file_path = "/var/log/Solo-Leveling-guide/Solo-Leveling-guide.log"
 log_file_path = os.path.abspath(log_file_path)
@@ -40,10 +41,10 @@ def write_log(message, log_level=None, username=None):
 
     try:
         logger = logging.getLogger("SoloLevelingGuide")
-        logger.setLevel(log_levels[log_level])
+        logger.setLevel(log_levels[log_level_limit])
         if not logger.handlers:
             fh = WatchedFileHandler(log_file_path)
-            fh.setLevel(log_levels[log_level])
+            fh.setLevel(log_levels[log_level_limit])
             formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
             fh.setFormatter(formatter)
             logger.addHandler(fh)
