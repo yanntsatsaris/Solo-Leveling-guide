@@ -145,12 +145,9 @@ function showCoreEffect(color, number, event) {
   const title = document.getElementById("core-effect-title");
   const desc = document.getElementById("core-effect-description");
 
-  // Cherche l'effet correspondant
   const effect = coresEffects.find(
     (e) => e.color === color && e.number === number
   );
-
-  console.log("Recherche core:", color, number, coresEffects);
 
   if (effect) {
     title.textContent = effect.name;
@@ -162,17 +159,17 @@ function showCoreEffect(color, number, event) {
 
   bubble.style.display = "block";
 
-  // Positionne la bulle à côté de la souris
+  // Positionne la bulle à gauche de l'image
   const rect = event.target.getBoundingClientRect();
   const bubbleWidth = bubble.offsetWidth || 300;
   const bubbleHeight = bubble.offsetHeight || 100;
 
-  let leftPosition = rect.right + window.scrollX + 10;
+  let leftPosition = rect.left + window.scrollX - bubbleWidth - 10;
+  if (leftPosition < 0) {
+    leftPosition = rect.right + window.scrollX + 10;
+  }
   let topPosition = rect.top + window.scrollY;
 
-  if (leftPosition + bubbleWidth > window.innerWidth + window.scrollX) {
-    leftPosition = rect.left + window.scrollX - bubbleWidth - 10;
-  }
   if (topPosition + bubbleHeight > window.innerHeight + window.scrollY) {
     topPosition = window.innerHeight + window.scrollY - bubbleHeight - 10;
   }
