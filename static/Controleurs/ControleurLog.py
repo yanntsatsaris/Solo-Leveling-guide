@@ -2,6 +2,7 @@ import logging
 import os
 from flask import session
 from .ControleurConf import ControleurConf
+from logging.handlers import WatchedFileHandler
 
 # Récupérer le chemin du fichier de log via ControleurConf
 conf = ControleurConf()
@@ -41,7 +42,7 @@ def write_log(message, log_level=None, username=None):
         logger = logging.getLogger("SoloLevelingGuide")
         logger.setLevel(logging.DEBUG)
         if not logger.handlers:
-            fh = logging.FileHandler(log_file_path)
+            fh = WatchedFileHandler(log_file_path)
             fh.setLevel(logging.DEBUG)
             formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
             fh.setFormatter(formatter)
