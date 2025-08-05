@@ -22,10 +22,10 @@ def users(app):
             # Vérification de l'attribut RightsAgreement
             user_info = ldap.get_user_info(username)
             rights = user_info.get('rightsAgreement', [])
-            # Vérifie si l'attribut existe et contient "SoloLevelinGuide::"
-            if not any(r.decode() if isinstance(r, bytes) else r for r in rights if "SoloLevelinGuide::" in (r.decode() if isinstance(r, bytes) else r)):
-                write_log(f"Connexion refusée : pas de compte SoloLevelinGuide", log_level="WARNING", username=username)
-                return jsonify({'success': False, 'error': "Aucun compte SoloLevelinGuide n'est associé à cet utilisateur."})
+            # Vérifie si l'attribut existe et contient "SoloLevelingGuide::"
+            if not any(r.decode() if isinstance(r, bytes) else r for r in rights if "SoloLevelingGuide::" in (r.decode() if isinstance(r, bytes) else r)):
+                write_log(f"Connexion refusée : pas de compte SoloLevelingGuide", log_level="WARNING", username=username)
+                return jsonify({'success': False, 'error': "Aucun compte SoloLevelingGuide n'est associé à cet utilisateur."})
             session['username'] = username
             write_log(f"Connexion réussie", log_level="INFO", username=username)
             return jsonify({'success': True})
@@ -59,7 +59,7 @@ def users(app):
             ('cn', [username.encode('utf-8')]),  # Nom complet
             ('mail', [email.encode('utf-8')]),
             ('userPassword', [hashed_password.encode('utf-8')]),
-            ('rightsAgreement', [b'SoloLevelinGuide::New']),  # Accord de droits par défaut
+            ('rightsAgreement', [b'SoloLevelingGuide::New']),  # Accord de droits par défaut
         ]
         if ldap.add_entry(dn, attrs):
             write_log(f"Création de compte réussie ({username})", log_level="INFO", username=username)
