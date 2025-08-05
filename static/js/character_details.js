@@ -150,6 +150,8 @@ function showCoreEffect(color, number, event) {
     (e) => e.color === color && e.number === number
   );
 
+  console.log("Recherche core:", color, number, coresEffects);
+
   if (effect) {
     title.textContent = effect.name;
     desc.innerHTML = effect.effect.replace(/\n/g, "<br>");
