@@ -128,6 +128,8 @@
           src="{{ url_for('static', filename=core.image) }}"
           alt="{{ core.name }}"
           class="core-image"
+          onmouseover="showCoreEffect('{{ core.color }}', '{{ core.number }}', event)"
+          onmouseout="hideCoreEffect()"
         />
         <div class="stats">
           <div class="stat-main">
@@ -150,10 +152,19 @@
           </div>
         </div>
       </div>
-      <pre>{{ core | tojson }}</pre>
       {% endfor %} {% else %}
       <p>Aucun noyau équipé pour ce personnage.</p>
       {% endif %}
     </div>
+  </div>
+
+  <!-- Ajoute le conteneur de bulle pour les effets de core -->
+  <div
+    id="core-effect-bubble"
+    class="effects-container"
+    style="display: none; position: absolute"
+  >
+    <h3 id="core-effect-title"></h3>
+    <div id="core-effect-description"></div>
   </div>
 </div>

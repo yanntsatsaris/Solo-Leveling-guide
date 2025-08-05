@@ -6,6 +6,9 @@ const equipmentSetsEffects = JSON.parse(
   document.getElementById("equipmentSetsEffectsData").textContent
 );
 
+// Les effets de core sont passés depuis Flask
+const coresEffects = JSON.parse(document.getElementById("coresEffectsData").textContent);
+
 // Gestion des onglets
 document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll(".tab");
@@ -134,6 +137,50 @@ function showSetEffects(setName, event) {
 function hideSetEffects() {
   const effectsContainer = document.getElementById("set-effects");
   effectsContainer.style.display = "none";
+}
+
+// Affichage de la bulle d'effet pour un core
+function showCoreEffect(color, number, event) {
+  const bubble = document.getElementById("core-effect-bubble");
+  const title = document.getElementById("core-effect-title");
+  const desc = document.getElementById("core-effect-description");
+
+  // Cherche l'effet correspondant
+  const effect = coresEffects.find(
+    (e) => e.color === color && e.number === number
+  );
+
+  if (effect) {
+    title.textContent = effect.name;
+    desc.innerHTML = effect.effect.replace(/\n/g, "<br>");
+  } else {
+    title.textContent = "Effet inconnu";
+    desc.textContent = "";
+  }
+
+  bubble.style.display = "block";
+
+  // Positionne la bulle à côté de la souris
+  const rect = event.target.getBoundingClientRect();
+  const bubbleWidth = bubble.offsetWidth || 300;
+  const bubbleHeight = bubble.offsetHeight || 100;
+
+  let leftPosition = rect.right + window.scrollX + 10;
+  let topPosition = rect.top + window.scrollY;
+
+  if (leftPosition + bubbleWidth > window.innerWidth + window.scrollX) {
+    leftPosition = rect.left + window.scrollX - bubbleWidth - 10;
+  }
+  if (topPosition + bubbleHeight > window.innerHeight + window.scrollY) {
+    topPosition = window.innerHeight + window.scrollY - bubbleHeight - 10;
+  }
+
+  bubble.style.top = `${topPosition}px`;
+  bubble.style.left = `${leftPosition}px`;
+}
+
+function hideCoreEffect() {
+  document.getElementById("core-effect-bubble").style.display = "none";
 }
 
 // Gestion de la mise à jour dynamique des artefacts, focus_stats et cores

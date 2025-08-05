@@ -357,6 +357,30 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
 }
 
+/* Bulle d'effet pour les noyaux */
+#core-effect-bubble {
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  background-color: #1e1e1e;
+  color: #ffcc00;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 220px;
+}
+
+#core-effect-bubble h3 {
+  margin: 0;
+  font-size: 14px;
+  color: #ffcc00;
+}
+
+#core-effect-description {
+  font-size: 12px;
+  color: #ffffff;
+}
+
 @media (max-width: 767px) {
   /* Conteneur des cores */
   .cores-container {
