@@ -72,6 +72,6 @@ def users(app):
 
     @app.route('/logout')
     def logout():
-        username = session.pop('user', None)
+        username = session.pop('username', None)
         write_log("Déconnexion", log_level="INFO", username=username)
         return jsonify({'success': True})
