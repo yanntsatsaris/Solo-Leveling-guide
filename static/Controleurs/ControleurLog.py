@@ -40,10 +40,10 @@ def write_log(message, log_level=None, username=None):
 
     try:
         logger = logging.getLogger("SoloLevelingGuide")
-        logger.setLevel(logging.DEBUG)
+        logger.setLevel(log_levels[log_level])
         if not logger.handlers:
             fh = WatchedFileHandler(log_file_path)
-            fh.setLevel(logging.DEBUG)
+            fh.setLevel(log_levels[log_level])
             formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
             fh.setFormatter(formatter)
             logger.addHandler(fh)
