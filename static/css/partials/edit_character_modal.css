@@ -27,11 +27,11 @@
 
 /* Espacement général réduit de moitié */
 .edit-character-popup > * {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .edit-tab-content > * {
-  margin-bottom: 9px;
+  margin-bottom: 12px;
 }
 
 /* Titre */
@@ -88,8 +88,8 @@
 
 /* Champs du formulaire */
 .edit-character-popup label {
-  margin-top: 4px;
-  margin-bottom: 2px;
+  margin-top: 6px;
+  margin-bottom: 4px;
   color: #ffcc00;
   font-weight: bold;
 }
@@ -97,10 +97,10 @@
 .edit-character-popup input,
 .edit-character-popup textarea,
 .edit-character-popup select {
-  margin-top: 1.5px;
-  margin-bottom: 3.5px;
-  padding: 4px;
-  font-size: 14px;
+  margin-top: 3px;
+  margin-bottom: 7px;
+  padding: 6px;
+  font-size: 15px;
   border-radius: 6px;
   border: 1px solid #444;
   background: #333;
@@ -181,10 +181,10 @@
 .edit-evolution-block {
   flex: 1;
   background: #232323;
-  padding: 4px;
+  padding: 6px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 /* Pour la grille d'évolutions dans les armes */
@@ -192,7 +192,7 @@
 .edit-weapon-evolution-block {
   flex: 1;
   background: #232323;
-  padding: 4px;
+  padding: 6px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   margin-bottom: 10px;
@@ -202,62 +202,62 @@
 .passives-grid, .skills-grid {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 4px;
+  gap: 12px;
+  margin-top: 6px;
 }
 .passives-row, .skills-row {
   display: flex;
-  gap: 12px;
+  gap: 14px;
 }
 .edit-passive-block, .edit-skill-block {
   flex: 1;
   background: #232323;
-  padding: 4px;
+  padding: 6px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 /* Checkbox styles */
 .checkbox-row {
   display: flex;
-  gap: 9px;
+  gap: 14px;
   align-items: center;
-  margin-top: 3px;
-  margin-bottom: 3px;
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
 .checkbox-row label {
   font-weight: normal;
   color: #ffcc00;
   display: flex;
   align-items: center;
-  gap: 3px;
+  gap: 5px;
 }
 
 /* Artefacts en deux colonnes */
 .artefacts-row {
   display: flex;
-  gap: 12px;
-  margin-top: 6px;
+  gap: 16px;
+  margin-top: 10px;
 }
 .artefacts-col {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
 }
 .edit-artefact-block label:first-child {
   color: #ffcc00;
   font-weight: bold;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
   display: block;
 }
 .edit-artefact-block {
   background: #232323;
-  padding: 4px;
+  padding: 6px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 /* Pour le responsive si besoin */
@@ -266,17 +266,17 @@
     min-width: 95vw;
     max-width: 98vw;
     min-height: 400px;
-    padding: 4px 1vw;
+    padding: 6px 2vw;
   }
   .edit-tabs {
     flex-wrap: wrap;
-    gap: 1px;
+    gap: 2px;
   }
   .artefacts-row {
     flex-direction: column;
-    gap: 6px;
+    gap: 10px;
   }
   .artefacts-col {
-    gap: 4px;
+    gap: 6px;
   }
 }
