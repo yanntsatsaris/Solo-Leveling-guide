@@ -45,14 +45,14 @@
         <h4 style="margin-top:28px;">Évolutions du personnage</h4>
         <div class="evolutions-grid">
           {% for evo in character.evolutions %}
-            {% if loop.index0 % 2 == 0 %}
+            {% if loop.index0 % 3 == 0 %}
               <div class="evolutions-row">
             {% endif %}
             <div class="edit-evolution-block">
               <label>Évolution : {{ 'A' ~ (loop.index) if not loop.last else 'A6-A10' }}</label>
               <textarea name="evolution_description_{{ loop.index0 }}">{{ evo.description_raw }}</textarea>
             </div>
-            {% if loop.index0 % 2 == 1 or loop.last %}
+            {% if loop.index0 % 3 == 1 or loop.last %}
               </div>
             {% endif %}
           {% endfor %}
@@ -62,7 +62,7 @@
       <div class="edit-tab-content" id="edit-tab-passives">
         <div class="passives-grid">
           {% for passive in character.passives %}
-            {% if loop.index0 % 2 == 0 %}
+            {% if loop.index0 % 3 == 0 %}
               <div class="passives-row">
             {% endif %}
             <!-- Exemple pour un passif, à appliquer aussi pour skills, weapons, etc. -->
@@ -86,7 +86,7 @@
                 </label>
               </div>
             </div>
-            {% if loop.index0 % 2 == 1 or loop.last %}
+            {% if loop.index0 % 3 == 1 or loop.last %}
               </div>
             {% endif %}
           {% endfor %}
@@ -96,7 +96,7 @@
       <div class="edit-tab-content" id="edit-tab-skills">
         <div class="skills-grid">
           {% for skill in character.skills %}
-            {% if loop.index0 % 2 == 0 %}
+            {% if loop.index0 % 3 == 0 %}
               <div class="skills-row">
             {% endif %}
             <div class="edit-skill-block">
@@ -131,7 +131,7 @@
                 </label>
               </div>
             </div>
-            {% if loop.index0 % 2 == 1 or loop.last %}
+            {% if loop.index0 % 3 == 1 or loop.last %}
               </div>
             {% endif %}
           {% endfor %}
@@ -172,14 +172,14 @@
           <h4 style="margin-top:18px;">Évolutions de l'arme</h4>
           <div class="evolutions-grid">
             {% for evo in character.evolutions %}
-            {% if loop.index0 % 2 == 0 %}
+            {% if loop.index0 % 3 == 0 %}
               <div class="evolutions-row">
             {% endif %}
             <div class="edit-weapon-evolution-block">
               <label>Évolution : {{ 'A' ~ (loop.index) if not loop.last else 'A6-A10' }}</label>
               <textarea name="weapon_evolution_description_{{ loop.index0 }}">{{ evo.description_raw }}</textarea>
             </div>
-            {% if loop.index0 % 2 == 1 or loop.last %}
+            {% if loop.index0 % 3 == 1 or loop.last %}
               </div>
             {% endif %}
             {% endfor %}
