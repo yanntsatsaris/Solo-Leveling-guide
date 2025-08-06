@@ -168,7 +168,7 @@
 }
 .evolutions-row {
   display: flex;
-  gap: 18px;
+  gap: 24px;
 }
 .edit-evolution-block {
   flex: 1;
@@ -176,6 +176,7 @@
   padding: 12px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 18px;
 }
 
 /* Pour la grille d'évolutions dans les armes */
@@ -186,6 +187,7 @@
   padding: 12px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 18px;
 }
 
 /* Passives et Skills */
@@ -197,7 +199,7 @@
 }
 .passives-row, .skills-row {
   display: flex;
-  gap: 18px;
+  gap: 24px;
 }
 .edit-passive-block, .edit-skill-block {
   flex: 1;
@@ -205,6 +207,7 @@
   padding: 12px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  margin-bottom: 18px;
 }
 
 /* Checkbox styles */
@@ -212,8 +215,8 @@
   display: flex;
   gap: 32px;
   align-items: center;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 .checkbox-row label {
   font-weight: normal;
@@ -235,4 +238,12 @@
     flex-wrap: wrap;
     gap: 4px;
   }
+}
+
+.edit-character-popup > * {
+  margin-bottom: 24px;
+}
+
+.edit-tab-content > * {
+  margin-bottom: 18px;
 }
