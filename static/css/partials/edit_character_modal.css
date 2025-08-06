@@ -11,10 +11,13 @@
   background: #222;
   padding: 32px 24px;
   border-radius: 10px;
-  min-width: 320px;
-  max-width: 90vw;
+  min-width: 600px;      /* largeur minimale augmentée */
+  max-width: 1200px;     /* largeur maximale augmentée */
+  min-height: 600px;     /* hauteur minimale augmentée */
+  max-height: 90vh;      /* hauteur maximale relative à la fenêtre */
   box-shadow: 0 4px 16px rgba(0,0,0,0.3);
   position: relative;
+  overflow-y: auto;      /* scroll si contenu trop grand */
 }
 .edit-character-popup h3 {
   margin-top: 0;
