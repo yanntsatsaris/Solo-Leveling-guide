@@ -261,8 +261,7 @@
       eqSet.artefacts.forEach((artefact, i) => {
         html += `
           <div class="edit-artefact-block">
-            <label>Nom de l'artefact :</label>
-            <input type="text" name="artefact_name_${setIndex}_${i}" value="${artefact.name}">
+            <label style="color:#ffcc00;font-weight:bold;">${artefact.name}</label>
             <label>Set :</label>
             <input type="text" name="artefact_set_${setIndex}_${i}" value="${artefact.set}">
             <label>Image :</label>
