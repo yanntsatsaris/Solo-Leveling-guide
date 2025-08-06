@@ -38,9 +38,7 @@
           required
         />
         <label>Description :</label>
-        <textarea name="description" required>
-{{ character.description }}</textarea
-        >
+        <textarea name="description" required>{{ character.description }}</textarea>
         <label>Image :</label>
         <input type="text" name="image" value="{{ character.image }}" />
         <label>Background :</label>
@@ -49,6 +47,17 @@
           name="background_image"
           value="{{ character.background_image }}"
         />
+        <!-- Ajout de la modification des évolutions du personnage -->
+        <h4>Évolutions du personnage</h4>
+        {% for evo in character.evolutions %}
+        <div class="edit-evolution-block">
+          <label>Nom de l'évolution :</label>
+          <input type="text" name="evolution_name_{{ loop.index0 }}" value="{{ evo.name }}">
+          <label>Description :</label>
+          <textarea name="evolution_description_{{ loop.index0 }}">{{ evo.description_raw }}</textarea>
+        </div>
+        <hr>
+        {% endfor %}
       </div>
       <!-- Onglet Passifs -->
       <div class="edit-tab-content" id="edit-tab-passives">
@@ -61,9 +70,7 @@
             value="{{ passive.name }}"
           />
           <label>Description :</label>
-          <textarea name="passive_description_{{ loop.index0 }}">
-{{ passive.description }}</textarea
-          >
+          <textarea name="passive_description_{{ loop.index0 }}">{{ passive.description_raw }}</textarea>
           <label>Tag :</label>
           <input
             type="text"
@@ -80,23 +87,13 @@
           <input
             type="checkbox"
             name="passive_principal_{{ loop.index0 }}"
-            {%
-            if
-            passive.principal
-            %}checked{%
-            endif
-            %}
+            {% if passive.principal %}checked{% endif %}
           />
           <label>Caché :</label>
           <input
             type="checkbox"
             name="passive_hidden_{{ loop.index0 }}"
-            {%
-            if
-            passive.hidden
-            %}checked{%
-            endif
-            %}
+            {% if passive.hidden %}checked{% endif %}
           />
         </div>
         <hr />
@@ -113,9 +110,7 @@
             value="{{ skill.name }}"
           />
           <label>Description :</label>
-          <textarea name="skill_description_{{ loop.index0 }}">
-{{ skill.description }}</textarea
-          >
+          <textarea name="skill_description_{{ loop.index0 }}">{{ skill.description_raw }}</textarea>
           <label>Tag :</label>
           <input
             type="text"
@@ -132,12 +127,7 @@
           <input
             type="checkbox"
             name="skill_principal_{{ loop.index0 }}"
-            {%
-            if
-            skill.principal
-            %}checked{%
-            endif
-            %}
+            {% if skill.principal %}checked{% endif %}
           />
         </div>
         <hr />
@@ -154,9 +144,7 @@
             value="{{ weapon.name }}"
           />
           <label>Stats :</label>
-          <textarea name="weapon_stats_{{ loop.index0 }}">
-{{ weapon.stats }}</textarea
-          >
+          <textarea name="weapon_stats_{{ loop.index0 }}">{{ weapon.stats_raw }}</textarea>
           <label>Tag :</label>
           <input
             type="text"
@@ -173,13 +161,21 @@
           <input
             type="checkbox"
             name="weapon_principal_{{ loop.index0 }}"
-            {%
-            if
-            weapon.principal
-            %}checked{%
-            endif
-            %}
+            {% if weapon.principal %}checked{% endif %}
           />
+          <!-- Ajout de la modification des évolutions de l'arme -->
+          {% if weapon.evolutions %}
+          <h4>Évolutions de l'arme</h4>
+          {% for evo in weapon.evolutions %}
+          <div class="edit-weapon-evolution-block">
+            <label>Nom de l'évolution :</label>
+            <input type="text" name="weapon_evolution_name_{{ loop.index0 }}_{{ loop.index }}" value="{{ evo.name }}">
+            <label>Description :</label>
+            <textarea name="weapon_evolution_description_{{ loop.index0 }}_{{ loop.index }}">{{ evo.description_raw }}</textarea>
+          </div>
+          <hr>
+          {% endfor %}
+          {% endif %}
         </div>
         <hr />
         {% endfor %}
@@ -242,7 +238,7 @@
         <label>Nom du set :</label>
         <input type="text" name="eqset_name_${setIndex}" value="${eqSet.set_name}">
         <label>Description :</label>
-        <textarea name="eqset_description_${setIndex}">${eqSet.description}</textarea>
+        <textarea name="eqset_description_${setIndex}">${eqSet.description_raw || eqSet.description}</textarea>
         <label>Stats à focus :</label>
         <input type="text" name="eqset_focus_stats_${setIndex}" value="${eqSet.focus_stats.join(', ')}">
         <h4>Artefacts du set</h4>
@@ -256,6 +252,8 @@
             <input type="text" name="artefact_set_${setIndex}_${i}" value="${artefact.set}">
             <label>Image :</label>
             <input type="text" name="artefact_image_${setIndex}_${i}" value="${artefact.image}">
+            <label>Description :</label>
+            <textarea name="artefact_description_${setIndex}_${i}">${artefact.description_raw || artefact.description || ''}</textarea>
             <label>Stat principale :</label>
             <input type="text" name="artefact_main_stat_${setIndex}_${i}" value="${artefact.main_stat}">
             <label>Stats secondaires :</label>
@@ -274,6 +272,8 @@
             <input type="text" name="core_number_${setIndex}_${i}" value="${core.number}">
             <label>Image :</label>
             <input type="text" name="core_image_${setIndex}_${i}" value="${core.image}">
+            <label>Description :</label>
+            <textarea name="core_description_${setIndex}_${i}">${core.description_raw || core.description || ''}</textarea>
             <label>Stat principale :</label>
             <input type="text" name="core_main_stat_${setIndex}_${i}" value="${core.main_stat}">
             <label>Stat secondaire :</label>
@@ -293,27 +293,28 @@
       renderArtefactFields(this.value);
     });
   });
+
   document.addEventListener("DOMContentLoaded", () => {
-  const tabs = document.querySelectorAll(".edit-tab");
-  const tabContents = document.querySelectorAll(".edit-tab-content");
+    const tabs = document.querySelectorAll(".edit-tab");
+    const tabContents = document.querySelectorAll(".edit-tab-content");
 
-  // Onglet actif par défaut (infos principales)
-  tabs.forEach((tab, idx) => {
-    if (tab.classList.contains("active")) {
-      tabContents[idx].classList.add("active");
-    } else {
-      tabContents[idx].classList.remove("active");
-    }
-  });
+    // Onglet actif par défaut (infos principales)
+    tabs.forEach((tab, idx) => {
+      if (tab.classList.contains("active")) {
+        tabContents[idx].classList.add("active");
+      } else {
+        tabContents[idx].classList.remove("active");
+      }
+    });
 
-  // Gestion du clic sur les onglets
-  tabs.forEach((tab, idx) => {
-    tab.addEventListener("click", () => {
-      tabs.forEach((t) => t.classList.remove("active"));
-      tabContents.forEach((tc) => tc.classList.remove("active"));
-      tab.classList.add("active");
-      tabContents[idx].classList.add("active");
+    // Gestion du clic sur les onglets
+    tabs.forEach((tab, idx) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach((t) => t.classList.remove("active"));
+        tabContents.forEach((tc) => tc.classList.remove("active"));
+        tab.classList.add("active");
+        tabContents[idx].classList.add("active");
+      });
     });
   });
-});
 </script>
