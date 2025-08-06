@@ -396,6 +396,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+  const editBtn = document.getElementById('edit-character-btn');
+  const overlay = document.getElementById('edit-character-overlay');
+  const closeBtn = document.getElementById('close-edit-character');
+
+  if (editBtn && overlay) {
+    editBtn.onclick = function() {
+      overlay.style.display = 'flex';
+    };
+  }
+  if (closeBtn && overlay) {
+    closeBtn.onclick = function() {
+      overlay.style.display = 'none';
+    };
+  }
+});
+
 document.getElementById('edit-character-btn')?.addEventListener('click', () => {
   document.getElementById('edit-character-modal').style.display = 'block';
 });
