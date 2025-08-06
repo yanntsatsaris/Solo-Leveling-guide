@@ -1,11 +1,11 @@
-{% set titles = { 'FR': { 'set_description': 'Description du set',
+{% set titles = { 'FR-fr': { 'set_description': 'Description du set',
 'focus_stats': 'Stats à Focus', 'artefacts': 'Artefacts', 'cores': 'Noyaux',
 'no_artefact': 'Aucun artefact équipé pour ce personnage.', 'no_core': 'Aucun
-noyau équipé pour ce personnage.' }, 'EN': { 'set_description': 'Set
+noyau équipé pour ce personnage.' }, 'EN-en': { 'set_description': 'Set
 Description', 'focus_stats': 'Focus Stats', 'artefacts': 'Artifacts', 'cores':
 'Cores', 'no_artefact': 'No artifact equipped for this character.', 'no_core':
 'No core equipped for this character.' } } %} {% set lang = language if language
-in titles else 'EN' %}
+in titles else 'EN-en' %}
 
 <div id="artefacts" class="tab-content">
   <!-- Description du set d'équipement -->
