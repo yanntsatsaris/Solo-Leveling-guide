@@ -48,12 +48,11 @@
           value="{{ character.background_image }}"
         />
         <!-- Ajout de la modification des évolutions du personnage -->
+        <!-- Onglet évolutions du personnage -->
         <h4>Évolutions du personnage</h4>
         {% for evo in character.evolutions %}
         <div class="edit-evolution-block">
-          <label>Nom de l'évolution :</label>
-          <input type="text" name="evolution_name_{{ loop.index0 }}" value="{{ evo.name }}">
-          <label>Description :</label>
+          <label>Évolution : {{ 'A' ~ (loop.index) if not loop.last else 'A6-A10' }}</label>
           <textarea name="evolution_description_{{ loop.index0 }}">{{ evo.description_raw }}</textarea>
         </div>
         <hr>
@@ -168,9 +167,7 @@
           <h4>Évolutions de l'arme</h4>
           {% for evo in weapon.evolutions %}
           <div class="edit-weapon-evolution-block">
-            <label>Nom de l'évolution :</label>
-            <input type="text" name="weapon_evolution_name_{{ loop.index0 }}_{{ loop.index }}" value="{{ evo.name }}">
-            <label>Description :</label>
+            <label>Évolution : {{ 'A' ~ (loop.index) if not loop.last else 'A6-A10' }}</label>
             <textarea name="weapon_evolution_description_{{ loop.index0 }}_{{ loop.index }}">{{ evo.description_raw }}</textarea>
           </div>
           <hr>
