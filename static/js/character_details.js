@@ -241,10 +241,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const focusStatsList = document.querySelector(".focus-stats-list");
   const artefactsContainer = document.querySelector(".artefacts-container");
   const coresContainer = document.querySelector(".cores-container");
-  const descriptionText = document.querySelector(".equipment-set-description-text");
 
   function displaySet(setIndex) {
     const selectedSet = equipmentSets[setIndex];
+    const descriptionText = document.getElementById("equipment-set-description-text");
     descriptionText.innerHTML = selectedSet.description ? selectedSet.description : "";
 
     // Mettre à jour les focus stats
