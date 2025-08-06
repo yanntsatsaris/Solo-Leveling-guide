@@ -44,13 +44,13 @@
 
         <h4 style="margin-top:28px;">Évolutions du personnage</h4>
         <div class="evolutions-grid">
-          {% for evo in weapon.evolutions %}
+          {% for evo in character.evolutions %}
             {% if loop.index0 % 2 == 0 %}
               <div class="evolutions-row">
             {% endif %}
             <div class="edit-evolution-block">
               <label>Évolution : {{ 'A' ~ (loop.index) if not loop.last else 'A6-A10' }}</label>
-              <textarea name="weapon_evolution_description_{{ loop.index0 }}">{{ evo.description_raw }}</textarea>
+              <textarea name="evolution_description_{{ loop.index0 }}">{{ evo.description_raw }}</textarea>
             </div>
             {% if loop.index0 % 2 == 1 or loop.last %}
               </div>
@@ -171,7 +171,7 @@
           {% if weapon.evolutions %}
           <h4 style="margin-top:18px;">Évolutions de l'arme</h4>
           <div class="evolutions-grid">
-            {% for evo in character.evolutions %}
+            {% for evo in weapon.evolutions %}
             {% if loop.index0 % 2 == 0 %}
               <div class="evolutions-row">
             {% endif %}
