@@ -47,16 +47,22 @@
           name="background_image"
           value="{{ character.background_image }}"
         />
-        <!-- Ajout de la modification des évolutions du personnage -->
-        <!-- Onglet évolutions du personnage -->
-        <h4>Évolutions du personnage</h4>
-        {% for evo in character.evolutions %}
-        <div class="edit-evolution-block">
-          <label>Évolution : {{ 'A' ~ (loop.index) if not loop.last else 'A6-A10' }}</label>
-          <textarea name="evolution_description_{{ loop.index0 }}">{{ evo.description_raw }}</textarea>
+
+        <h4 style="margin-top:28px;">Évolutions du personnage</h4>
+        <div class="evolutions-grid">
+          {% for evo in character.evolutions %}
+            {% if loop.index0 % 2 == 0 %}
+              <div class="evolutions-row">
+            {% endif %}
+            <div class="edit-evolution-block">
+              <label>Évolution : {{ 'A' ~ (loop.index) if not loop.last else 'A6-A10' }}</label>
+              <textarea name="evolution_description_{{ loop.index0 }}">{{ evo.description_raw }}</textarea>
+            </div>
+            {% if loop.index0 % 2 == 1 or loop.last %}
+              </div>
+            {% endif %}
+          {% endfor %}
         </div>
-        <hr>
-        {% endfor %}
       </div>
       <!-- Onglet Passifs -->
       <div class="edit-tab-content" id="edit-tab-passives">
