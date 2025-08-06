@@ -61,7 +61,7 @@
       <!-- Onglet Passifs -->
       <div class="edit-tab-content" id="edit-tab-passives">
         <div class="passives-grid">
-          {% for passive in character.passives %}
+          {% for passive in character.passives_all %}
             {% if loop.index0 % 2 == 0 %}
               <div class="passives-row">
             {% endif %}
