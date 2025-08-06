@@ -8,13 +8,14 @@ Description', 'focus_stats': 'Focus Stats', 'artefacts': 'Artifacts', 'cores':
 in titles else 'EN-en' %}
 
 <div id="artefacts" class="tab-content">
-  <!-- Description du set d'équipement -->
-  {% if character.equipment_sets and character.equipment_sets[0].description %}
   <div class="equipment-set-description">
     <h3>{{ titles[lang]['set_description'] }}</h3>
-    <p>{{ character.equipment_sets[0].description|safe }}</p>
+    <p id="equipment-set-description-text">
+      {% if character.equipment_sets and character.equipment_sets[0].description %}
+        {{ character.equipment_sets[0].description|safe }}
+      {% endif %}
+    </p>
   </div>
-  {% endif %}
   <!-- Affichage des statistiques à focus -->
   <div class="focus-stats">
     <h3 hidden>{{ titles[lang]['focus_stats'] }}</h3>
