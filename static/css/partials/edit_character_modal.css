@@ -1,51 +1,174 @@
+/* Overlay */
 .edit-character-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(18,18,18,0.85); /* fond sombre plus marqué */
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
 }
+
+/* Popup */
 .edit-character-popup {
-  background: #222;
-  padding: 32px 24px;
-  border-radius: 10px;
-  min-width: 600px;      /* largeur minimale augmentée */
-  max-width: 1200px;     /* largeur maximale augmentée */
-  min-height: 600px;     /* hauteur minimale augmentée */
-  max-height: 90vh;      /* hauteur maximale relative à la fenêtre */
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  background: #1e1e1e;
+  padding: 32px 32px;
+  border-radius: 12px;
+  min-width: 700px;
+  max-width: 1200px;
+  min-height: 650px;
+  max-height: 95vh;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
   position: relative;
-  overflow-y: auto;      /* scroll si contenu trop grand */
+  overflow-y: auto;
+  color: #fff;
+  font-family: Arial, sans-serif;
 }
-.edit-character-popup h3 {
-  margin-top: 0;
+
+/* Titre */
+.edit-character-popup h2 {
   color: #ffcc00;
+  text-align: center;
+  text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff;
+  margin-bottom: 24px;
 }
+
+/* Onglets */
+.edit-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.edit-tab {
+  padding: 10px 24px;
+  cursor: pointer;
+  background-color: #1e1e1e;
+  color: #fff;
+  border: none;
+  border-radius: 8px 8px 0 0;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.edit-tab.active {
+  background-color: #ffcc00;
+  color: #121212;
+  box-shadow: 0 2px 8px rgba(255,204,0,0.15);
+}
+
+.edit-tab:hover {
+  background-color: #ffcc00;
+  color: #121212;
+}
+
+/* Contenu des onglets */
+.edit-tab-content {
+  display: none;
+  background-color: #232323;
+  color: #fff;
+  padding: 24px;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.edit-tab-content.active {
+  display: block;
+}
+
+/* Champs du formulaire */
 .edit-character-popup label {
   display: block;
-  margin-top: 12px;
-  color: #fff;
+  margin-top: 16px;
+  color: #ffcc00;
+  font-weight: bold;
 }
+
 .edit-character-popup input,
-.edit-character-popup textarea {
+.edit-character-popup textarea,
+.edit-character-popup select {
   width: 100%;
-  margin-top: 4px;
-  margin-bottom: 10px;
-  padding: 8px;
-  border-radius: 4px;
+  margin-top: 6px;
+  margin-bottom: 14px;
+  padding: 10px;
+  border-radius: 6px;
   border: 1px solid #444;
   background: #333;
   color: #fff;
+  font-size: 16px;
+  box-sizing: border-box;
 }
-.edit-character-popup .close-btn {
+
+.edit-character-popup textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+
+.edit-character-popup hr {
+  border: none;
+  border-top: 1px solid #444;
+  margin: 18px 0;
+}
+
+/* Boutons */
+.admin-btn {
+  background-color: #ffcc00;
+  color: #121212;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.admin-btn:hover {
+  background-color: #8000ff;
+  color: #fff;
+}
+
+.close-btn {
   position: absolute;
-  top: 8px;
-  right: 12px;
+  top: 12px;
+  right: 18px;
   background: none;
   border: none;
-  font-size: 22px;
+  font-size: 28px;
   color: #ffcc00;
   cursor: pointer;
+}
+
+/* Sélecteur de set */
+#edit-equipment-select {
+  background-color: #1e1e1e;
+  color: #ffcc00;
+  border: 1px solid #ffcc00;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  width: 250px;
+  margin-left: 12px;
+}
+
+#edit-equipment-select:hover {
+  background-color: #ffcc00;
+  color: #121212;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .edit-character-popup {
+    min-width: 95vw;
+    max-width: 98vw;
+    min-height: 400px;
+    padding: 16px 4vw;
+  }
+  .edit-tabs {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
 }
