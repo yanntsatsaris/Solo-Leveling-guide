@@ -1,25 +1,34 @@
+{% set titles = { 'FR': { 'set_description': 'Description du set',
+'focus_stats': 'Stats à Focus', 'artefacts': 'Artefacts', 'cores': 'Noyaux',
+'no_artefact': 'Aucun artefact équipé pour ce personnage.', 'no_core': 'Aucun
+noyau équipé pour ce personnage.' }, 'EN': { 'set_description': 'Set
+Description', 'focus_stats': 'Focus Stats', 'artefacts': 'Artifacts', 'cores':
+'Cores', 'no_artefact': 'No artifact equipped for this character.', 'no_core':
+'No core equipped for this character.' } } %} {% set lang = language if language
+in titles else 'EN' %}
+
 <div id="artefacts" class="tab-content">
   <!-- Description du set d'équipement -->
   {% if character.equipment_sets and character.equipment_sets[0].description %}
   <div class="equipment-set-description">
-    <h3>Description du set</h3>
+    <h3>{{ titles[lang]['set_description'] }}</h3>
     <p>{{ character.equipment_sets[0].description|safe }}</p>
   </div>
   {% endif %}
   <!-- Affichage des statistiques à focus -->
   <div class="focus-stats">
-    <h3 hidden>Stats à Focus</h3>
+    <h3 hidden>{{ titles[lang]['focus_stats'] }}</h3>
     <ul class="focus-stats-list">
       {% if character.equipment_sets and character.equipment_sets|length > 0 %}
       {% for stat in character.equipment_sets[0].focus_stats %}
       <li>{{ stat }}</li>
       {% endfor %} {% else %}
-      <li>Aucune statistique à focus disponible.</li>
+      <li>{{ titles[lang]['no_artefact'] }}</li>
       {% endif %}
     </ul>
   </div>
 
-  <h2>Artefacts</h2>
+  <h2>{{ titles[lang]['artefacts'] }}</h2>
 
   <!-- Liste des artefacts -->
   <div class="artefacts-container">
@@ -109,7 +118,7 @@
       {% endfor %}
     </div>
     {% else %}
-    <p>Aucun artefact équipé pour ce personnage.</p>
+    <p>{{ titles[lang]['no_artefact'] }}</p>
     {% endif %}
   </div>
 
@@ -125,7 +134,7 @@
 
   <!-- Section des noyaux -->
   <div class="cores-section">
-    <h2>Noyaux</h2>
+    <h2>{{ titles[lang]['cores'] }}</h2>
     <div class="cores-container">
       {% if character.equipment_sets and
       character.equipment_sets[0].cores|length > 0 %} {% for core in
@@ -160,7 +169,7 @@
         </div>
       </div>
       {% endfor %} {% else %}
-      <p>Aucun noyau équipé pour ce personnage.</p>
+      <p>{{ titles[lang]['no_core'] }}</p>
       {% endif %}
     </div>
   </div>
