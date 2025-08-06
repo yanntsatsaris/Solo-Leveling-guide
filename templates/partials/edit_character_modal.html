@@ -250,8 +250,6 @@
       const eqSet = equipmentSets[setIndex];
       let html = `
         <h4>Set : ${eqSet.set_name}</h4>
-        <label>Nom du set :</label>
-        <input type="text" name="eqset_name_${setIndex}" value="${eqSet.set_name}">
         <label>Description :</label>
         <textarea name="eqset_description_${setIndex}">${eqSet.description_raw || eqSet.description}</textarea>
         <label>Stats à focus :</label>
