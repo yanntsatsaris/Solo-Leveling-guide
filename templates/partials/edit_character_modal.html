@@ -1,7 +1,15 @@
-<div id="edit-character-overlay" class="edit-character-overlay" style="display:none;">
+<div
+  id="edit-character-overlay"
+  class="edit-character-overlay"
+  style="display: none"
+>
   <div id="edit-character-menu" class="edit-character-popup">
-    <form id="edit-character-form" method="POST" action="{{ url_for('edit_character', char_id=character.id) }}">
-      <h2 style="text-align:center; color:#ffcc00;">Modifier le personnage</h2>
+    <form
+      id="edit-character-form"
+      method="POST"
+      action="{{ url_for('edit_character', char_id=character.id) }}"
+    >
+      <h2 style="text-align: center; color: #ffcc00">Modifier le personnage</h2>
       <div class="edit-tabs">
         <div class="edit-tab active" data-tab="main">Infos principales</div>
         <div class="edit-tab" data-tab="passives">Passifs</div>
@@ -12,38 +20,86 @@
       <!-- Onglet Infos principales -->
       <div class="edit-tab-content active" id="edit-tab-main">
         <label>Nom :</label>
-        <input type="text" name="name" value="{{ character.name }}" required>
+        <input type="text" name="name" value="{{ character.name }}" required />
         <label>Alias :</label>
-        <input type="text" name="alias" value="{{ character.alias }}" required>
+        <input
+          type="text"
+          name="alias"
+          value="{{ character.alias }}"
+          required
+        />
         <label>Type :</label>
-        <input type="text" name="type" value="{{ character.type }}" required>
+        <input type="text" name="type" value="{{ character.type }}" required />
         <label>Rareté :</label>
-        <input type="text" name="rarity" value="{{ character.rarity }}" required>
+        <input
+          type="text"
+          name="rarity"
+          value="{{ character.rarity }}"
+          required
+        />
         <label>Description :</label>
-        <textarea name="description" required>{{ character.description }}</textarea>
+        <textarea name="description" required>
+{{ character.description }}</textarea
+        >
         <label>Image :</label>
-        <input type="text" name="image" value="{{ character.image }}">
+        <input type="text" name="image" value="{{ character.image }}" />
         <label>Background :</label>
-        <input type="text" name="background_image" value="{{ character.background_image }}">
+        <input
+          type="text"
+          name="background_image"
+          value="{{ character.background_image }}"
+        />
       </div>
       <!-- Onglet Passifs -->
       <div class="edit-tab-content" id="edit-tab-passives">
         {% for passive in character.passives %}
         <div class="edit-passive-block">
           <label>Nom du passif :</label>
-          <input type="text" name="passive_name_{{ loop.index0 }}" value="{{ passive.name }}">
+          <input
+            type="text"
+            name="passive_name_{{ loop.index0 }}"
+            value="{{ passive.name }}"
+          />
           <label>Description :</label>
-          <textarea name="passive_description_{{ loop.index0 }}">{{ passive.description }}</textarea>
+          <textarea name="passive_description_{{ loop.index0 }}">
+{{ passive.description }}</textarea
+          >
           <label>Tag :</label>
-          <input type="text" name="passive_tag_{{ loop.index0 }}" value="{{ passive.tag }}">
+          <input
+            type="text"
+            name="passive_tag_{{ loop.index0 }}"
+            value="{{ passive.tag }}"
+          />
           <label>Image :</label>
-          <input type="text" name="passive_image_{{ loop.index0 }}" value="{{ passive.image }}">
+          <input
+            type="text"
+            name="passive_image_{{ loop.index0 }}"
+            value="{{ passive.image }}"
+          />
           <label>Principal :</label>
-          <input type="checkbox" name="passive_principal_{{ loop.index0 }}" {% if passive.principal %}checked{% endif %}>
+          <input
+            type="checkbox"
+            name="passive_principal_{{ loop.index0 }}"
+            {%
+            if
+            passive.principal
+            %}checked{%
+            endif
+            %}
+          />
           <label>Caché :</label>
-          <input type="checkbox" name="passive_hidden_{{ loop.index0 }}" {% if passive.hidden %}checked{% endif %}>
+          <input
+            type="checkbox"
+            name="passive_hidden_{{ loop.index0 }}"
+            {%
+            if
+            passive.hidden
+            %}checked{%
+            endif
+            %}
+          />
         </div>
-        <hr>
+        <hr />
         {% endfor %}
       </div>
       <!-- Onglet Compétences -->
@@ -51,17 +107,40 @@
         {% for skill in character.skills %}
         <div class="edit-skill-block">
           <label>Nom de la compétence :</label>
-          <input type="text" name="skill_name_{{ loop.index0 }}" value="{{ skill.name }}">
+          <input
+            type="text"
+            name="skill_name_{{ loop.index0 }}"
+            value="{{ skill.name }}"
+          />
           <label>Description :</label>
-          <textarea name="skill_description_{{ loop.index0 }}">{{ skill.description }}</textarea>
+          <textarea name="skill_description_{{ loop.index0 }}">
+{{ skill.description }}</textarea
+          >
           <label>Tag :</label>
-          <input type="text" name="skill_tag_{{ loop.index0 }}" value="{{ skill.tag }}">
+          <input
+            type="text"
+            name="skill_tag_{{ loop.index0 }}"
+            value="{{ skill.tag }}"
+          />
           <label>Image :</label>
-          <input type="text" name="skill_image_{{ loop.index0 }}" value="{{ skill.image }}">
+          <input
+            type="text"
+            name="skill_image_{{ loop.index0 }}"
+            value="{{ skill.image }}"
+          />
           <label>Principal :</label>
-          <input type="checkbox" name="skill_principal_{{ loop.index0 }}" {% if skill.principal %}checked{% endif %}>
+          <input
+            type="checkbox"
+            name="skill_principal_{{ loop.index0 }}"
+            {%
+            if
+            skill.principal
+            %}checked{%
+            endif
+            %}
+          />
         </div>
-        <hr>
+        <hr />
         {% endfor %}
       </div>
       <!-- Onglet Armes -->
@@ -69,96 +148,149 @@
         {% for weapon in character.weapon %}
         <div class="edit-weapon-block">
           <label>Nom de l'arme :</label>
-          <input type="text" name="weapon_name_{{ loop.index0 }}" value="{{ weapon.name }}">
+          <input
+            type="text"
+            name="weapon_name_{{ loop.index0 }}"
+            value="{{ weapon.name }}"
+          />
           <label>Stats :</label>
-          <textarea name="weapon_stats_{{ loop.index0 }}">{{ weapon.stats }}</textarea>
+          <textarea name="weapon_stats_{{ loop.index0 }}">
+{{ weapon.stats }}</textarea
+          >
           <label>Tag :</label>
-          <input type="text" name="weapon_tag_{{ loop.index0 }}" value="{{ weapon.tag }}">
+          <input
+            type="text"
+            name="weapon_tag_{{ loop.index0 }}"
+            value="{{ weapon.tag }}"
+          />
           <label>Image :</label>
-          <input type="text" name="weapon_image_{{ loop.index0 }}" value="{{ weapon.image }}">
+          <input
+            type="text"
+            name="weapon_image_{{ loop.index0 }}"
+            value="{{ weapon.image }}"
+          />
           <label>Principal :</label>
-          <input type="checkbox" name="weapon_principal_{{ loop.index0 }}" {% if weapon.principal %}checked{% endif %}>
+          <input
+            type="checkbox"
+            name="weapon_principal_{{ loop.index0 }}"
+            {%
+            if
+            weapon.principal
+            %}checked{%
+            endif
+            %}
+          />
         </div>
-        <hr>
+        <hr />
         {% endfor %}
       </div>
       <!-- Onglet Artefacts avec sélecteur de set -->
       <div class="edit-tab-content" id="edit-tab-artefacts">
-        <div style="display:flex; align-items:center; gap:12px;">
+        <div style="display: flex; align-items: center; gap: 12px">
           <label for="edit-equipment-select">Sélectionner le set :</label>
           <select id="edit-equipment-select">
             {% for set in character.equipment_sets %}
-              <option value="{{ loop.index0 }}">{{ set.set_name }}</option>
+            <option value="{{ loop.index0 }}">{{ set.set_name }}</option>
             {% endfor %}
           </select>
         </div>
-        {% for eq_set in character.equipment_sets %}
-        <div class="edit-eqset-block" id="edit-eqset-{{ loop.index0 }}" style="{% if not loop.first %}display:none;{% endif %}">
-          <h4>Set : {{ eq_set.set_name }}</h4>
-          <label>Nom du set :</label>
-          <input type="text" name="eqset_name_{{ loop.index0 }}" value="{{ eq_set.set_name }}">
-          <label>Description :</label>
-          <textarea name="eqset_description_{{ loop.index0 }}">{{ eq_set.description }}</textarea>
-          <label>Stats à focus :</label>
-          <input type="text" name="eqset_focus_stats_{{ loop.index0 }}" value="{{ eq_set.focus_stats | join(', ') }}">
-          <!-- Artefacts du set -->
-          <h4>Artefacts du set</h4>
-          {% for artefact in eq_set.artefacts %}
-          <div class="edit-artefact-block">
-            <label>Nom de l'artefact :</label>
-            <input type="text" name="artefact_name_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ artefact.name }}">
-            <label>Set :</label>
-            <input type="text" name="artefact_set_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ artefact.set }}">
-            <label>Image :</label>
-            <input type="text" name="artefact_image_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ artefact.image }}">
-            <label>Stat principale :</label>
-            <input type="text" name="artefact_main_stat_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ artefact.main_stat }}">
-            <label>Stats secondaires :</label>
-            <input type="text" name="artefact_secondary_stats_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ artefact.secondary_stats | join(', ') }}">
-          </div>
-          <hr>
-          {% endfor %}
-          <!-- Noyaux du set -->
-          <h4>Noyaux du set</h4>
-          {% for core in eq_set.cores %}
-          <div class="edit-core-block">
-            <label>Nom du noyau :</label>
-            <input type="text" name="core_name_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ core.name }}">
-            <label>Numéro :</label>
-            <input type="text" name="core_number_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ core.number }}">
-            <label>Image :</label>
-            <input type="text" name="core_image_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ core.image }}">
-            <label>Stat principale :</label>
-            <input type="text" name="core_main_stat_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ core.main_stat }}">
-            <label>Stat secondaire :</label>
-            <input type="text" name="core_secondary_stat_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ core.secondary_stat }}">
-          </div>
-          <hr>
-          {% endfor %}
+        <div id="edit-artefacts-fields">
+          <!-- Les champs du set sélectionné seront injectés ici en JS -->
         </div>
-        {% endfor %}
       </div>
-      <div style="display:flex; justify-content:space-between; margin-top:18px;">
+      <div
+        style="display: flex; justify-content: space-between; margin-top: 18px"
+      >
         <button type="submit" class="admin-btn">Enregistrer</button>
-        <button type="button" id="close-edit-character" class="close-btn" style="font-size:22px;">&times;</button>
+        <button
+          type="button"
+          id="close-edit-character"
+          class="close-btn"
+          style="font-size: 22px"
+        >
+          &times;
+        </button>
       </div>
     </form>
   </div>
 </div>
 <script>
-document.querySelectorAll('.edit-tab').forEach(tab => {
-  tab.addEventListener('click', function() {
-    document.querySelectorAll('.edit-tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.edit-tab-content').forEach(c => c.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById('edit-tab-' + tab.dataset.tab).classList.add('active');
+  document.querySelectorAll('.edit-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.edit-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.edit-tab-content').forEach(c => c.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('edit-tab-' + tab.dataset.tab).classList.add('active');
+    });
   });
-});
-// Sélecteur pour afficher le bon bloc de set à modifier dans l'onglet artefacts
-document.getElementById('edit-equipment-select')?.addEventListener('change', function(e) {
-  const idx = e.target.value;
-  document.querySelectorAll('.edit-eqset-block').forEach((block, i) => {
-    block.style.display = (i == idx) ? 'block' : 'none';
+  // Sélecteur pour afficher le bon bloc de set à modifier dans l'onglet artefacts
+  document.getElementById('edit-equipment-select')?.addEventListener('change', function(e) {
+    const idx = e.target.value;
+    document.querySelectorAll('.edit-eqset-block').forEach((block, i) => {
+      block.style.display = (i == idx) ? 'block' : 'none';
+    });
   });
-});
+  document.addEventListener("DOMContentLoaded", function() {
+    const equipmentSets = {{ character.equipment_sets|tojson }};
+    const select = document.getElementById('edit-equipment-select');
+    const fieldsContainer = document.getElementById('edit-artefacts-fields');
+
+    function renderArtefactFields(setIndex) {
+      const eqSet = equipmentSets[setIndex];
+      let html = `
+        <h4>Set : ${eqSet.set_name}</h4>
+        <label>Nom du set :</label>
+        <input type="text" name="eqset_name_${setIndex}" value="${eqSet.set_name}">
+        <label>Description :</label>
+        <textarea name="eqset_description_${setIndex}">${eqSet.description}</textarea>
+        <label>Stats à focus :</label>
+        <input type="text" name="eqset_focus_stats_${setIndex}" value="${eqSet.focus_stats.join(', ')}">
+        <h4>Artefacts du set</h4>
+      `;
+      eqSet.artefacts.forEach((artefact, i) => {
+        html += `
+          <div class="edit-artefact-block">
+            <label>Nom de l'artefact :</label>
+            <input type="text" name="artefact_name_${setIndex}_${i}" value="${artefact.name}">
+            <label>Set :</label>
+            <input type="text" name="artefact_set_${setIndex}_${i}" value="${artefact.set}">
+            <label>Image :</label>
+            <input type="text" name="artefact_image_${setIndex}_${i}" value="${artefact.image}">
+            <label>Stat principale :</label>
+            <input type="text" name="artefact_main_stat_${setIndex}_${i}" value="${artefact.main_stat}">
+            <label>Stats secondaires :</label>
+            <input type="text" name="artefact_secondary_stats_${setIndex}_${i}" value="${artefact.secondary_stats.join(', ')}">
+          </div>
+          <hr>
+        `;
+      });
+      html += `<h4>Noyaux du set</h4>`;
+      eqSet.cores.forEach((core, i) => {
+        html += `
+          <div class="edit-core-block">
+            <label>Nom du noyau :</label>
+            <input type="text" name="core_name_${setIndex}_${i}" value="${core.name}">
+            <label>Numéro :</label>
+            <input type="text" name="core_number_${setIndex}_${i}" value="${core.number}">
+            <label>Image :</label>
+            <input type="text" name="core_image_${setIndex}_${i}" value="${core.image}">
+            <label>Stat principale :</label>
+            <input type="text" name="core_main_stat_${setIndex}_${i}" value="${core.main_stat}">
+            <label>Stat secondaire :</label>
+            <input type="text" name="core_secondary_stat_${setIndex}_${i}" value="${core.secondary_stat}">
+          </div>
+          <hr>
+        `;
+      });
+      fieldsContainer.innerHTML = html;
+    }
+
+    // Affiche le premier set au chargement
+    renderArtefactFields(select.value);
+
+    // Change les champs quand on change de set
+    select.addEventListener('change', function() {
+      renderArtefactFields(this.value);
+    });
+  });
 </script>
