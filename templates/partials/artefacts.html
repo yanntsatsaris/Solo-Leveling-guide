@@ -1,4 +1,11 @@
 <div id="artefacts" class="tab-content">
+  <!-- Description du set d'équipement -->
+  {% if character.equipment_sets and character.equipment_sets[0].description %}
+  <div class="equipment-set-description">
+    <h3>Description du set</h3>
+    <p>{{ character.equipment_sets[0].description|safe }}</p>
+  </div>
+  {% endif %}
   <!-- Affichage des statistiques à focus -->
   <div class="focus-stats">
     <h3 hidden>Stats à Focus</h3>

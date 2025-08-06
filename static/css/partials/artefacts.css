@@ -381,6 +381,29 @@
   color: #ffffff;
 }
 
+.equipment-set-description {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 2px solid #ffcc00;
+  border-radius: 8px;
+  background-color: rgba(255, 204, 0, 0.08);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #fff;
+}
+
+.equipment-set-description h3 {
+  color: #ffcc00;
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.equipment-set-description p {
+  margin: 0;
+  font-size: 15px;
+  color: #fff;
+}
+
 @media (max-width: 767px) {
   /* Conteneur des cores */
   .cores-container {

@@ -16,6 +16,14 @@ class EquipmentSetSql:
 
     def get_equipment_set_details(self, eq_set_id, eq_set_name, language):
         write_log(f"Requête get_equipment_set_details pour eq_set_id={eq_set_id}, eq_set_name={eq_set_name}, langue={language}", log_level="DEBUG")
+        # Description traduite du set
+        self.cursor.execute("""
+            SELECT equipment_set_translations_description
+            FROM equipment_set_translations
+            WHERE equipment_set_translations_equipment_sets_id = %s AND equipment_set_translations_language = %s
+        """, (eq_set_id, language))
+        desc_row = self.cursor.fetchone()
+        set_description = desc_row[0] if desc_row else ""
         # Focus stats
         self.cursor.execute("""
             SELECT equipment_focus_stats_name FROM equipment_focus_stats
@@ -66,6 +74,7 @@ class EquipmentSetSql:
         set_piece_count = Counter(artefact_sets)
         return {
             'set_name': eq_set_name,
+            'description': set_description,  # Ajout de la description traduite
             'focus_stats': focus_stats,
             'artefacts': artefacts,
             'cores': cores,
