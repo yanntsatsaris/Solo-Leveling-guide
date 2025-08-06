@@ -10,7 +10,7 @@ in titles else 'EN-en' %}
 <div id="artefacts" class="tab-content">
   <div class="equipment-set-description">
     <h3>{{ titles[lang]['set_description'] }}</h3>
-    <p id="equipment-set-description-text">
+    <p class="equipment-set-description-text">
       {% if character.equipment_sets and character.equipment_sets[0].description %}
         {{ character.equipment_sets[0].description|safe }}
       {% endif %}
