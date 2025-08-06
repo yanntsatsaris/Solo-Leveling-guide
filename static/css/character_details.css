@@ -244,6 +244,13 @@ p {
   box-shadow: none; /* Supprime l'effet de glow */
 }
 
+/* Centrer le bouton "Modifier le personnage" */
+#edit-character-btn {
+  display: block;
+  margin: 0 auto 18px auto;
+  text-align: center;
+}
+
 /* Affichage sur téléphone (écrans étroits) */
 @media (max-width: 767px) {
   /* Désactiver le layout */
