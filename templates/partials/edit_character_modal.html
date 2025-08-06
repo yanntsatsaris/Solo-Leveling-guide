@@ -1,0 +1,20 @@
+<div id="edit-character-modal" class="modal" style="display: none">
+  <div class="modal-content">
+    <span class="close" onclick="closeEditModal()">&times;</span>
+    <h2>Modifier les informations du personnage</h2>
+    <form
+      id="edit-character-form"
+      method="POST"
+      action="{{ url_for('edit_character', char_id=character.id) }}"
+    >
+      <label>Nom :</label>
+      <input type="text" name="name" value="{{ character.name }}" />
+      <label>Alias :</label>
+      <input type="text" name="alias" value="{{ character.alias }}" />
+      <label>Description :</label>
+      <textarea name="description">{{ character.description }}</textarea>
+      <!-- Ajoute ici les autres champs à modifier -->
+      <button type="submit">Enregistrer</button>
+    </form>
+  </div>
+</div>

@@ -119,6 +119,11 @@
       </div>
     </div>
 
+    {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
+      <button id="edit-character-btn" class="admin-btn">Modifier le personnage</button>
+      {% include 'partials/edit_character_modal.html' %}
+    {% endif %}
+
     <script id="equipmentSetsData" type="application/json">
       {% if character.equipment_sets and character.equipment_sets|length > 0 %}
           {{ character.equipment_sets|tojson }}
