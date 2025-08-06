@@ -66,77 +66,91 @@
       </div>
       <!-- Onglet Passifs -->
       <div class="edit-tab-content" id="edit-tab-passives">
-        {% for passive in character.passives %}
-        <div class="edit-passive-block">
-          <label>Nom du passif :</label>
-          <input
-            type="text"
-            name="passive_name_{{ loop.index0 }}"
-            value="{{ passive.name }}"
-          />
-          <label>Description :</label>
-          <textarea name="passive_description_{{ loop.index0 }}">{{ passive.description_raw }}</textarea>
-          <label>Tag :</label>
-          <input
-            type="text"
-            name="passive_tag_{{ loop.index0 }}"
-            value="{{ passive.tag }}"
-          />
-          <label>Image :</label>
-          <input
-            type="text"
-            name="passive_image_{{ loop.index0 }}"
-            value="{{ passive.image }}"
-          />
-          <label>Principal :</label>
-          <input
-            type="checkbox"
-            name="passive_principal_{{ loop.index0 }}"
-            {% if passive.principal %}checked{% endif %}
-          />
-          <label>Caché :</label>
-          <input
-            type="checkbox"
-            name="passive_hidden_{{ loop.index0 }}"
-            {% if passive.hidden %}checked{% endif %}
-          />
+        <div class="passives-grid">
+          {% for passive in character.passives %}
+            {% if loop.index0 % 2 == 0 %}
+              <div class="passives-row">
+            {% endif %}
+            <div class="edit-passive-block">
+              <label>Nom du passif :</label>
+              <input
+                type="text"
+                name="passive_name_{{ loop.index0 }}"
+                value="{{ passive.name }}"
+              />
+              <label>Description :</label>
+              <textarea name="passive_description_{{ loop.index0 }}">{{ passive.description_raw }}</textarea>
+              <label>Tag :</label>
+              <input
+                type="text"
+                name="passive_tag_{{ loop.index0 }}"
+                value="{{ passive.tag }}"
+              />
+              <label>Image :</label>
+              <input
+                type="text"
+                name="passive_image_{{ loop.index0 }}"
+                value="{{ passive.image }}"
+              />
+              <label>Principal :</label>
+              <input
+                type="checkbox"
+                name="passive_principal_{{ loop.index0 }}"
+                {% if passive.principal %}checked{% endif %}
+              />
+              <label>Caché :</label>
+              <input
+                type="checkbox"
+                name="passive_hidden_{{ loop.index0 }}"
+                {% if passive.hidden %}checked{% endif %}
+              />
+            </div>
+            {% if loop.index0 % 2 == 1 or loop.last %}
+              </div>
+            {% endif %}
+          {% endfor %}
         </div>
-        <hr />
-        {% endfor %}
       </div>
       <!-- Onglet Compétences -->
       <div class="edit-tab-content" id="edit-tab-skills">
-        {% for skill in character.skills %}
-        <div class="edit-skill-block">
-          <label>Nom de la compétence :</label>
-          <input
-            type="text"
-            name="skill_name_{{ loop.index0 }}"
-            value="{{ skill.name }}"
-          />
-          <label>Description :</label>
-          <textarea name="skill_description_{{ loop.index0 }}">{{ skill.description_raw }}</textarea>
-          <label>Tag :</label>
-          <input
-            type="text"
-            name="skill_tag_{{ loop.index0 }}"
-            value="{{ skill.tag }}"
-          />
-          <label>Image :</label>
-          <input
-            type="text"
-            name="skill_image_{{ loop.index0 }}"
-            value="{{ skill.image }}"
-          />
-          <label>Principal :</label>
-          <input
-            type="checkbox"
-            name="skill_principal_{{ loop.index0 }}"
-            {% if skill.principal %}checked{% endif %}
-          />
+        <div class="skills-grid">
+          {% for skill in character.skills %}
+            {% if loop.index0 % 2 == 0 %}
+              <div class="skills-row">
+            {% endif %}
+            <div class="edit-skill-block">
+              <label>Nom de la compétence :</label>
+              <input
+                type="text"
+                name="skill_name_{{ loop.index0 }}"
+                value="{{ skill.name }}"
+              />
+              <label>Description :</label>
+              <textarea name="skill_description_{{ loop.index0 }}">{{ skill.description_raw }}</textarea>
+              <label>Tag :</label>
+              <input
+                type="text"
+                name="skill_tag_{{ loop.index0 }}"
+                value="{{ skill.tag }}"
+              />
+              <label>Image :</label>
+              <input
+                type="text"
+                name="skill_image_{{ loop.index0 }}"
+                value="{{ skill.image }}"
+              />
+              <label>Principal :</label>
+              <input
+                type="checkbox"
+                name="skill_principal_{{ loop.index0 }}"
+                {% if skill.principal %}checked{% endif %}
+              />
+            </div>
+            {% if loop.index0 % 2 == 1 or loop.last %}
+              </div>
+            {% endif %}
+          {% endfor %}
         </div>
-        <hr />
-        {% endfor %}
       </div>
       <!-- Onglet Armes -->
       <div class="edit-tab-content" id="edit-tab-weapons">
