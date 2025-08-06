@@ -207,6 +207,22 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
+/* Checkbox styles */
+.checkbox-row {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.checkbox-row label {
+  font-weight: normal;
+  color: #ffcc00;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .edit-character-popup {

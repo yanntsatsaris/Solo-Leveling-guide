@@ -71,39 +71,26 @@
             {% if loop.index0 % 2 == 0 %}
               <div class="passives-row">
             {% endif %}
+            <!-- Exemple pour un passif, à appliquer aussi pour skills, weapons, etc. -->
             <div class="edit-passive-block">
               <label>Nom du passif :</label>
-              <input
-                type="text"
-                name="passive_name_{{ loop.index0 }}"
-                value="{{ passive.name }}"
-              />
+              <input type="text" name="passive_name_{{ loop.index0 }}" value="{{ passive.name }}" />
               <label>Description :</label>
               <textarea name="passive_description_{{ loop.index0 }}">{{ passive.description_raw }}</textarea>
               <label>Tag :</label>
-              <input
-                type="text"
-                name="passive_tag_{{ loop.index0 }}"
-                value="{{ passive.tag }}"
-              />
+              <input type="text" name="passive_tag_{{ loop.index0 }}" value="{{ passive.tag }}" />
               <label>Image :</label>
-              <input
-                type="text"
-                name="passive_image_{{ loop.index0 }}"
-                value="{{ passive.image }}"
-              />
-              <label>Principal :</label>
-              <input
-                type="checkbox"
-                name="passive_principal_{{ loop.index0 }}"
-                {% if passive.principal %}checked{% endif %}
-              />
-              <label>Caché :</label>
-              <input
-                type="checkbox"
-                name="passive_hidden_{{ loop.index0 }}"
-                {% if passive.hidden %}checked{% endif %}
-              />
+              <input type="text" name="passive_image_{{ loop.index0 }}" value="{{ passive.image }}" />
+              <div class="checkbox-row">
+                <label>
+                  <input type="checkbox" name="passive_principal_{{ loop.index0 }}" {% if passive.principal %}checked{% endif %} />
+                  Principal
+                </label>
+                <label>
+                  <input type="checkbox" name="passive_hidden_{{ loop.index0 }}" {% if passive.hidden %}checked{% endif %} />
+                  Caché
+                </label>
+              </div>
             </div>
             {% if loop.index0 % 2 == 1 or loop.last %}
               </div>
@@ -139,12 +126,16 @@
                 name="skill_image_{{ loop.index0 }}"
                 value="{{ skill.image }}"
               />
-              <label>Principal :</label>
-              <input
-                type="checkbox"
-                name="skill_principal_{{ loop.index0 }}"
-                {% if skill.principal %}checked{% endif %}
-              />
+              <div class="checkbox-row">
+                <label>
+                  <input
+                    type="checkbox"
+                    name="skill_principal_{{ loop.index0 }}"
+                    {% if skill.principal %}checked{% endif %}
+                  />
+                  Principal
+                </label>
+              </div>
             </div>
             {% if loop.index0 % 2 == 1 or loop.last %}
               </div>
