@@ -178,6 +178,16 @@
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
+/* Pour la grille d'évolutions dans les armes */
+/* filepath: c:\Users\yann\Documents\Projet\Solo-Leveling-guide\static\css\partials\edit_character_modal.css */
+.edit-weapon-evolution-block {
+  flex: 1;
+  background: #232323;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .edit-character-popup {
