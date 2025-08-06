@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const focusStatsList = document.querySelector(".focus-stats-list");
   const artefactsContainer = document.querySelector(".artefacts-container");
   const coresContainer = document.querySelector(".cores-container");
-  const descriptionContainer = document.getElementById("equipment-set-description");
+  const descriptionContainer = document.querySelector(".equipment-set-description");
 
   function displaySet(setIndex) {
     const selectedSet = equipmentSets[setIndex];
