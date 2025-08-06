@@ -106,15 +106,15 @@
           {% for artefact in eq_set.artefacts %}
           <div class="edit-artefact-block">
             <label>Nom de l'artefact :</label>
-            <input type="text" name="artefact_name_{{ loop.parent.index0 }}_{{ loop.index0 }}" value="{{ artefact.name }}">
+            <input type="text" name="artefact_name_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ artefact.name }}">
             <label>Set :</label>
-            <input type="text" name="artefact_set_{{ loop.parent.index0 }}_{{ loop.index0 }}" value="{{ artefact.set }}">
+            <input type="text" name="artefact_set_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ artefact.set }}">
             <label>Image :</label>
-            <input type="text" name="artefact_image_{{ loop.parent.index0 }}_{{ loop.index0 }}" value="{{ artefact.image }}">
+            <input type="text" name="artefact_image_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ artefact.image }}">
             <label>Stat principale :</label>
-            <input type="text" name="artefact_main_stat_{{ loop.parent.index0 }}_{{ loop.index0 }}" value="{{ artefact.main_stat }}">
+            <input type="text" name="artefact_main_stat_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ artefact.main_stat }}">
             <label>Stats secondaires :</label>
-            <input type="text" name="artefact_secondary_stats_{{ loop.parent.index0 }}_{{ loop.index0 }}" value="{{ artefact.secondary_stats | join(', ') }}">
+            <input type="text" name="artefact_secondary_stats_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ artefact.secondary_stats | join(', ') }}">
           </div>
           <hr>
           {% endfor %}
@@ -123,15 +123,15 @@
           {% for core in eq_set.cores %}
           <div class="edit-core-block">
             <label>Nom du noyau :</label>
-            <input type="text" name="core_name_{{ loop.parent.index0 }}_{{ loop.index0 }}" value="{{ core.name }}">
+            <input type="text" name="core_name_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ core.name }}">
             <label>Numéro :</label>
-            <input type="text" name="core_number_{{ loop.parent.index0 }}_{{ loop.index0 }}" value="{{ core.number }}">
+            <input type="text" name="core_number_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ core.number }}">
             <label>Image :</label>
-            <input type="text" name="core_image_{{ loop.parent.index0 }}_{{ loop.index0 }}" value="{{ core.image }}">
+            <input type="text" name="core_image_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ core.image }}">
             <label>Stat principale :</label>
-            <input type="text" name="core_main_stat_{{ loop.parent.index0 }}_{{ loop.index0 }}" value="{{ core.main_stat }}">
+            <input type="text" name="core_main_stat_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ core.main_stat }}">
             <label>Stat secondaire :</label>
-            <input type="text" name="core_secondary_stat_{{ loop.parent.index0 }}_{{ loop.index0 }}" value="{{ core.secondary_stat }}">
+            <input type="text" name="core_secondary_stat_{{ loop.outer.index0 }}_{{ loop.index0 }}" value="{{ core.secondary_stat }}">
           </div>
           <hr>
           {% endfor %}
