@@ -1,8 +1,11 @@
 /* Overlay */
 .edit-character-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(18,18,18,0.85); /* fond sombre plus marqué */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(18, 18, 18, 0.85); /* fond sombre plus marqué */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,7 +21,7 @@
   max-width: 2400px; /* largeur doublée */
   min-height: 650px;
   max-height: 95vh;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   position: relative;
   overflow-y: auto;
   color: #fff;
@@ -55,7 +58,7 @@
 .edit-tab.active {
   background-color: #ffcc00;
   color: #121212;
-  box-shadow: 0 2px 8px rgba(255,204,0,0.15);
+  box-shadow: 0 2px 8px rgba(255, 204, 0, 0.15);
 }
 
 .edit-tab:hover {
@@ -70,7 +73,7 @@
   color: #fff;
   padding: 24px;
   border-radius: 0 0 12px 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .edit-tab-content.active {
@@ -80,8 +83,8 @@
 /* Champs du formulaire */
 .edit-character-popup label {
   display: block;
-  margin-top: 8px;
-  margin-bottom: 4px;
+  margin-top: 4px;
+  margin-bottom: 2px;
   color: #ffcc00;
   font-weight: bold;
 }
@@ -90,14 +93,14 @@
 .edit-character-popup textarea,
 .edit-character-popup select {
   width: 100%;
-  margin-top: 3px;
-  margin-bottom: 7px;
-  padding: 7px;
+  margin-top: 1.5px;
+  margin-bottom: 3px;
+  padding: 5px;
   border-radius: 6px;
   border: 1px solid #444;
   background: #333;
   color: #fff;
-  font-size: 15px;
+  font-size: 14px;
   box-sizing: border-box;
 }
 
@@ -164,20 +167,20 @@
 .evolutions-grid {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 4px;
+  gap: 6px;
+  margin-top: 2px;
 }
 .evolutions-row {
   display: flex;
-  gap: 12px;
+  gap: 7px;
 }
 .edit-evolution-block {
   flex: 1;
   background: #232323;
-  padding: 8px;
+  padding: 5px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 6px;
 }
 
 /* Pour la grille d'évolutions dans les armes */
@@ -185,74 +188,77 @@
 .edit-weapon-evolution-block {
   flex: 1;
   background: #232323;
-  padding: 8px;
+  padding: 5px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 6px;
 }
 
 /* Passives et Skills */
-.passives-grid, .skills-grid {
+.passives-grid,
+.skills-grid {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-top: 4px;
+  gap: 6px;
+  margin-top: 2px;
 }
-.passives-row, .skills-row {
+.passives-row,
+.skills-row {
   display: flex;
-  gap: 12px;
+  gap: 7px;
 }
-.edit-passive-block, .edit-skill-block {
+.edit-passive-block,
+.edit-skill-block {
   flex: 1;
   background: #232323;
-  padding: 8px;
+  padding: 5px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 6px;
 }
 
 /* Checkbox styles */
 .checkbox-row {
   display: flex;
-  gap: 18px;
+  gap: 10px;
   align-items: center;
-  margin-top: 6px;
-  margin-bottom: 6px;
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
 .checkbox-row label {
   font-weight: normal;
   color: #ffcc00;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 3px;
 }
 
 /* Artefacts en deux colonnes */
 .artefacts-row {
   display: flex;
-  gap: 24px;
-  margin-top: 12px;
+  gap: 12px;
+  margin-top: 6px;
 }
 .artefacts-col {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 6px;
 }
 .edit-artefact-block label:first-child {
   color: #ffcc00;
   font-weight: bold;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   display: block;
 }
 
 /* Optionnel : pour que les artefacts soient bien espacés et alignés */
 .edit-artefact-block {
   background: #232323;
-  padding: 8px;
+  padding: 5px;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 6px;
 }
 
 /* Pour le responsive si besoin */
@@ -261,17 +267,17 @@
     min-width: 95vw;
     max-width: 98vw;
     min-height: 400px;
-    padding: 4px 1vw;
+    padding: 2px 1vw;
   }
   .edit-tabs {
     flex-wrap: wrap;
-    gap: 2px;
+    gap: 1px;
   }
   .artefacts-row {
     flex-direction: column;
-    gap: 12px;
+    gap: 6px;
   }
   .artefacts-col {
-    gap: 8px;
+    gap: 3px;
   }
 }
