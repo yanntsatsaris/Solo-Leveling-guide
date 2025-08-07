@@ -51,7 +51,7 @@
             {% endif %}
             <div class="edit-evolution-block">
               <label
-                >Évolution : {{ 'A' ~ (loop.index) if not loop.last else
+                >Évolution : {{ 'A' ~ (loop.index0) if not loop.last else
                 'A6-A10' }}</label
               >
               <textarea name="evolution_description_{{ loop.index0 }}">
@@ -224,7 +224,7 @@
               {% endif %}
               <div class="edit-weapon-evolution-block">
                 <label
-                  >Évolution : {{ 'A' ~ (loop.index) if not loop.last else
+                  >Évolution : {{ 'A' ~ (loop.index0) if not loop.last else
                   'A6-A10' }}</label
                 >
                 <textarea name="weapon_evolution_description_{{ loop.index0 }}">
