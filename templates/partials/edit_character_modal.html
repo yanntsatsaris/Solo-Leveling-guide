@@ -358,15 +358,20 @@
 
         html += `</div></div><hr><h4>Noyaux du set</h4>`;
 
-        // Toujours 3 noyaux, champs vides si manquants
+        const coreOrder = ['01', '02', '03'];
+        let coresByNumber = {};
+        if (eqSet.cores) {
+          eqSet.cores.forEach(core => {
+            if (core.number) coresByNumber[core.number] = core;
+          });
+        }
         for (let i = 0; i < 3; i++) {
-          const core = (eqSet.cores && eqSet.cores[i]) || { name: '', number: '', image_name: '', main_stat: '', secondary_stat: '', description_raw: '' };
+          const num = coreOrder[i];
+          const core = coresByNumber[num] || { name: '', number: num, image_name: '', main_stat: '', secondary_stat: '' };
           html += `
             <div class="edit-core-block">
               <label>Nom du noyau :</label>
               <input type="text" name="core_name_${setIndex}_${i}" value="${core.name}">
-              <label>Numéro :</label>
-              <input type="text" name="core_number_${setIndex}_${i}" value="${core.number}">
               <label>Image :</label>
               <input type="text" name="core_image_${setIndex}_${i}" value="${core.image_name}">
               <label>Stat principale :</label>
