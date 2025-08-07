@@ -248,6 +248,7 @@
             {% for set in character.equipment_sets %}
             <option value="{{ loop.index0 }}">{{ set.set_name }}</option>
             {% endfor %}
+            <option value="add_new_set" style="color:#ff6600;">+ Ajouter un nouveau set</option>
           </select>
         </div>
         <div id="edit-artefacts-fields">
@@ -391,7 +392,49 @@
 
       // Change les champs quand on change de set
       select.addEventListener('change', function() {
-        renderArtefactFields(this.value);
+        if (this.value === "add_new_set") {
+          // Demande le nom du set à l'utilisateur
+          let setName = prompt("Nom du nouveau set :");
+          if (!setName) {
+            // Si l'utilisateur annule ou ne met rien, on revient à l'ancien set
+            select.value = 0;
+            renderArtefactFields(select.value);
+            return;
+          }
+          // Crée un set vide avec le nom donné
+          const emptySet = {
+            set_name: setName,
+            description: '',
+            description_raw: '',
+            focus_stats: [],
+            artefacts: artefactOrder.map(order => ({
+              name: order.keys[0],
+              set: setName,
+              image_name: '',
+              main_stat: '',
+              secondary_stats: [],
+              description_raw: ''
+            })),
+            cores: [
+              { name: '', number: '01', image_name: '', main_stat: '', secondary_stat: '' },
+              { name: '', number: '02', image_name: '', main_stat: '', secondary_stat: '' },
+              { name: '', number: '03', image_name: '', main_stat: '', secondary_stat: '' }
+            ]
+          };
+          equipmentSets.push(emptySet);
+
+          // Ajoute une nouvelle option avant "Ajouter un nouveau set"
+          const newOption = document.createElement('option');
+          newOption.value = equipmentSets.length - 1;
+          newOption.textContent = setName;
+          select.insertBefore(newOption, select.lastElementChild);
+
+          // Sélectionne le nouveau set
+          select.value = equipmentSets.length - 1;
+          renderArtefactFields(select.value);
+        } else {
+          renderArtefactFields(this.value);
+        }
       });
     });
 
