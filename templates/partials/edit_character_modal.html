@@ -63,7 +63,7 @@
       </div>
       <!-- Onglet Passifs -->
       <div class="edit-tab-content" id="edit-tab-passives">
-        <div class="passives-grid">
+        <div class="passives-grid" id="passives-grid">
           {% for passive in character.passives_all %} {% if loop.index0 % 2 == 0
           %}
           <div class="passives-row">
@@ -125,6 +125,7 @@
           </div>
           {% endif %} {% endfor %}
         </div>
+        <button type="button" id="add-passive-btn" class="add-btn">+ Ajouter un passif</button>
       </div>
       <!-- Onglet Compétences -->
       <div class="edit-tab-content" id="edit-tab-skills">
@@ -175,6 +176,7 @@
           </div>
           {% endif %} {% endfor %}
         </div>
+        <button type="button" id="add-skill-btn" class="add-btn">+ Ajouter une compétence</button>
       </div>
       <!-- Onglet Armes -->
       <div class="edit-tab-content" id="edit-tab-weapons">
@@ -545,4 +547,61 @@
       }
     });
   }
+
+  document.addEventListener("DOMContentLoaded", function() {
+  // Ajout d'un passif
+  document.getElementById('add-passive-btn')?.addEventListener('click', function() {
+    const grid = document.getElementById('passives-grid');
+    const index = grid.querySelectorAll('.edit-passive-block').length;
+    const row = document.createElement('div');
+    row.className = 'passives-row';
+    row.innerHTML = `
+      <div class="edit-passive-block">
+        <label>Nom du passif :</label>
+        <input type="text" name="passive_name_${index}" value="" />
+        <label>Description :</label>
+        <textarea name="passive_description_${index}"></textarea>
+        <label>Tag :</label>
+        <input type="text" name="passive_tag_${index}" value="" />
+        <label>Image :</label>
+        <input type="text" name="passive_image_${index}" value="" />
+        <div class="checkbox-row">
+          <label>
+            <input type="checkbox" name="passive_principal_${index}" /> Principal
+          </label>
+          <label>
+            <input type="checkbox" name="passive_hidden_${index}" /> Caché
+          </label>
+        </div>
+      </div>
+    `;
+    grid.appendChild(row);
+  });
+
+  // Ajout d'une compétence
+  document.getElementById('add-skill-btn')?.addEventListener('click', function() {
+    const grid = document.getElementById('skills-grid');
+    const index = grid.querySelectorAll('.edit-skill-block').length;
+    const row = document.createElement('div');
+    row.className = 'skills-row';
+    row.innerHTML = `
+      <div class="edit-skill-block">
+        <label>Nom de la compétence :</label>
+        <input type="text" name="skill_name_${index}" value="" />
+        <label>Description :</label>
+        <textarea name="skill_description_${index}"></textarea>
+        <label>Tag :</label>
+        <input type="text" name="skill_tag_${index}" value="" />
+        <label>Image :</label>
+        <input type="text" name="skill_image_${index}" value="" />
+        <div class="checkbox-row">
+          <label>
+            <input type="checkbox" name="skill_principal_${index}" /> Principal
+          </label>
+        </div>
+      </div>
+    `;
+    grid.appendChild(row);
+  });
+});
 </script>
