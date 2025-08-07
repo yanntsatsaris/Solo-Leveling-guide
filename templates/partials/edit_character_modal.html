@@ -453,16 +453,6 @@
             // Reconstruit le select (toujours, même si vide avant)
             while (select.options.length > 0) select.remove(0);
 
-            // Si la liste est vide, on remet "Aucun set"
-            if (equipmentSets.length === 0) {
-              const noneOption = document.createElement('option');
-              noneOption.value = "none";
-              noneOption.textContent = "Aucun set";
-              noneOption.disabled = true;
-              noneOption.selected = true;
-              select.appendChild(noneOption);
-            }
-
             equipmentSets.forEach((set, i) => {
               const option = document.createElement('option');
               option.value = i;
