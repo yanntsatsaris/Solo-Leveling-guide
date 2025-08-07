@@ -555,11 +555,14 @@
   }
 
   // Permet de déclencher l'ajout même si "add_new_set" est déjà sélectionné
-  select.addEventListener('click', function(e) {
-    if (select.value === "add_new_set") {
-      // Simule un vrai changement pour déclencher l'ajout
-      const event = new Event('change');
-      select.dispatchEvent(event);
-    }
-  });
+  const select = document.getElementById('edit-equipment-select');
+  if (select) {
+    select.addEventListener('click', function(e) {
+      if (select.value === "add_new_set") {
+        // Simule un vrai changement pour déclencher l'ajout
+        const event = new Event('change');
+        select.dispatchEvent(event);
+      }
+    });
+  }
 </script>
