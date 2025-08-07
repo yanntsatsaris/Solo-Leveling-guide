@@ -245,6 +245,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function displaySet(setIndex) {
     const selectedSet = equipmentSets[setIndex];
+    if (!selectedSet) {
+      // Vide les zones si aucun set
+      descriptionText.innerHTML = "";
+      focusStatsList.innerHTML = "";
+      artefactsContainer.innerHTML = "";
+      coresContainer.innerHTML = "";
+      return;
+    }
+
     descriptionText.innerHTML = selectedSet.description ? selectedSet.description : "";
 
     // Mettre à jour les focus stats
@@ -390,8 +399,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Afficher le premier set par défaut au chargement
-  if (equipmentSelect.options.length > 0) {
-    currentSetIndex = equipmentSelect.options[0].value; // Initialiser avec le premier set
+  if (equipmentSelect.options.length > 0 && equipmentSets.length > 0) {
+    currentSetIndex = equipmentSelect.options[0].value;
     displaySet(currentSetIndex);
   }
 });
