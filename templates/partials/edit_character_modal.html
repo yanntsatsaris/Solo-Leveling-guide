@@ -409,8 +409,14 @@
             // Demande le nom du set à l'utilisateur
             let setName = prompt("Nom du nouveau set :");
             if (!setName) {
-              select.value = 0;
-              renderArtefactFields(select.value);
+              // Si aucun set n'existe, on ne sélectionne rien
+              if (equipmentSets.length === 0) {
+                select.selectedIndex = 0;
+                fieldsContainer.innerHTML = "";
+              } else {
+                select.value = 0;
+                renderArtefactFields(select.value);
+              }
               return;
             }
 
@@ -462,8 +468,10 @@
             // Sélectionne le nouveau set et affiche ses champs
             select.value = pos - 1;
             renderArtefactFields(select.value);
-          } else {
+          } else if (equipmentSets.length > 0) {
             renderArtefactFields(this.value);
+          } else {
+            fieldsContainer.innerHTML = "";
           }
         });
       });
