@@ -38,66 +38,101 @@
           required
         />
         <label>Description :</label>
-        <textarea name="description" required>{{ character.description }}</textarea>
+        <textarea name="description" required>
+{{ character.description }}</textarea
+        >
         <label>Image :</label>
         <input type="text" name="image" value="{{ character.image_name }}" />
 
-        <h4 style="margin-top:28px;">Évolutions du personnage</h4>
+        <h4 style="margin-top: 28px">Évolutions du personnage</h4>
         <div class="evolutions-grid">
-          {% for evo in character.evolutions %}
-            {% if loop.index0 % 2 == 0 %}
-              <div class="evolutions-row">
+          {% for evo in character.evolutions %} {% if loop.index0 % 2 == 0 %}
+          <div class="evolutions-row">
             {% endif %}
             <div class="edit-evolution-block">
-              <label>Évolution : {{ 'A' ~ (loop.index) if not loop.last else 'A6-A10' }}</label>
-              <textarea name="evolution_description_{{ loop.index0 }}">{{ evo.description_raw }}</textarea>
+              <label
+                >Évolution : {{ 'A' ~ (loop.index) if not loop.last else
+                'A6-A10' }}</label
+              >
+              <textarea name="evolution_description_{{ loop.index0 }}">
+{{ evo.description_raw }}</textarea
+              >
             </div>
             {% if loop.index0 % 2 == 1 or loop.last %}
-              </div>
-            {% endif %}
-          {% endfor %}
+          </div>
+          {% endif %} {% endfor %}
         </div>
       </div>
       <!-- Onglet Passifs -->
       <div class="edit-tab-content" id="edit-tab-passives">
         <div class="passives-grid">
-          {% for passive in character.passives_all %}
-            {% if loop.index0 % 2 == 0 %}
-              <div class="passives-row">
+          {% for passive in character.passives_all %} {% if loop.index0 % 2 == 0
+          %}
+          <div class="passives-row">
             {% endif %}
             <!-- Exemple pour un passif, à appliquer aussi pour skills, weapons, etc. -->
             <div class="edit-passive-block">
               <label>Nom du passif :</label>
-              <input type="text" name="passive_name_{{ loop.index0 }}" value="{{ passive.name }}" />
+              <input
+                type="text"
+                name="passive_name_{{ loop.index0 }}"
+                value="{{ passive.name }}"
+              />
               <label>Description :</label>
-              <textarea name="passive_description_{{ loop.index0 }}">{{ passive.description_raw }}</textarea>
+              <textarea name="passive_description_{{ loop.index0 }}">
+{{ passive.description_raw }}</textarea
+              >
               <label>Tag :</label>
-              <input type="text" name="passive_tag_{{ loop.index0 }}" value="{{ passive.tag }}" />
+              <input
+                type="text"
+                name="passive_tag_{{ loop.index0 }}"
+                value="{{ passive.tag }}"
+              />
               <label>Image :</label>
-              <input type="text" name="passive_image_{{ loop.index0 }}" value="{{ passive.image_name }}" />
+              <input
+                type="text"
+                name="passive_image_{{ loop.index0 }}"
+                value="{{ passive.image_name }}"
+              />
               <div class="checkbox-row">
                 <label>
-                  <input type="checkbox" name="passive_principal_{{ loop.index0 }}" {% if passive.principal %}checked{% endif %} />
+                  <input
+                    type="checkbox"
+                    name="passive_principal_{{ loop.index0 }}"
+                    {%
+                    if
+                    passive.principal
+                    %}checked{%
+                    endif
+                    %}
+                  />
                   Principal
                 </label>
                 <label>
-                  <input type="checkbox" name="passive_hidden_{{ loop.index0 }}" {% if passive.hidden %}checked{% endif %} />
+                  <input
+                    type="checkbox"
+                    name="passive_hidden_{{ loop.index0 }}"
+                    {%
+                    if
+                    passive.hidden
+                    %}checked{%
+                    endif
+                    %}
+                  />
                   Caché
                 </label>
               </div>
             </div>
             {% if loop.index0 % 2 == 1 or loop.last %}
-              </div>
-            {% endif %}
-          {% endfor %}
+          </div>
+          {% endif %} {% endfor %}
         </div>
       </div>
       <!-- Onglet Compétences -->
       <div class="edit-tab-content" id="edit-tab-skills">
         <div class="skills-grid">
-          {% for skill in character.skills %}
-            {% if loop.index0 % 2 == 0 %}
-              <div class="skills-row">
+          {% for skill in character.skills %} {% if loop.index0 % 2 == 0 %}
+          <div class="skills-row">
             {% endif %}
             <div class="edit-skill-block">
               <label>Nom de la compétence :</label>
@@ -107,7 +142,9 @@
                 value="{{ skill.name }}"
               />
               <label>Description :</label>
-              <textarea name="skill_description_{{ loop.index0 }}">{{ skill.description_raw }}</textarea>
+              <textarea name="skill_description_{{ loop.index0 }}">
+{{ skill.description_raw }}</textarea
+              >
               <label>Tag :</label>
               <input
                 type="text"
@@ -125,16 +162,20 @@
                   <input
                     type="checkbox"
                     name="skill_principal_{{ loop.index0 }}"
-                    {% if skill.principal %}checked{% endif %}
+                    {%
+                    if
+                    skill.principal
+                    %}checked{%
+                    endif
+                    %}
                   />
                   Principal
                 </label>
               </div>
             </div>
             {% if loop.index0 % 2 == 1 or loop.last %}
-              </div>
-            {% endif %}
-          {% endfor %}
+          </div>
+          {% endif %} {% endfor %}
         </div>
       </div>
       <!-- Onglet Armes -->
@@ -148,7 +189,9 @@
             value="{{ weapon.name }}"
           />
           <label>Stats :</label>
-          <textarea name="weapon_stats_{{ loop.index0 }}">{{ weapon.stats_raw }}</textarea>
+          <textarea name="weapon_stats_{{ loop.index0 }}">
+{{ weapon.stats_raw }}</textarea
+          >
           <label>Tag :</label>
           <input
             type="text"
@@ -165,24 +208,32 @@
           <input
             type="checkbox"
             name="weapon_principal_{{ loop.index0 }}"
-            {% if weapon.principal %}checked{% endif %}
+            {%
+            if
+            weapon.principal
+            %}checked{%
+            endif
+            %}
           />
           <!-- Évolutions de l'arme en grille 2 par ligne -->
           {% if weapon.evolutions %}
-          <h4 style="margin-top:18px;">Évolutions de l'arme</h4>
+          <h4 style="margin-top: 18px">Évolutions de l'arme</h4>
           <div class="evolutions-grid">
-            {% for evo in weapon.evolutions %}
-            {% if loop.index0 % 2 == 0 %}
-              <div class="evolutions-row">
-            {% endif %}
-            <div class="edit-weapon-evolution-block">
-              <label>Évolution : {{ 'A' ~ (loop.index) if not loop.last else 'A6-A10' }}</label>
-              <textarea name="weapon_evolution_description_{{ loop.index0 }}">{{ evo.description_raw }}</textarea>
-            </div>
-            {% if loop.index0 % 2 == 1 or loop.last %}
+            {% for evo in weapon.evolutions %} {% if loop.index0 % 2 == 0 %}
+            <div class="evolutions-row">
+              {% endif %}
+              <div class="edit-weapon-evolution-block">
+                <label
+                  >Évolution : {{ 'A' ~ (loop.index) if not loop.last else
+                  'A6-A10' }}</label
+                >
+                <textarea name="weapon_evolution_description_{{ loop.index0 }}">
+{{ evo.description_raw }}</textarea
+                >
               </div>
-            {% endif %}
-            {% endfor %}
+              {% if loop.index0 % 2 == 1 or loop.last %}
+            </div>
+            {% endif %} {% endfor %}
           </div>
           {% endif %}
         </div>
@@ -220,139 +271,150 @@
   </div>
 </div>
 <script>
-  document.querySelectorAll('.edit-tab').forEach(tab => {
-    tab.addEventListener('click', function() {
-      document.querySelectorAll('.edit-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.edit-tab-content').forEach(c => c.classList.remove('active'));
-      tab.classList.add('active');
-      document.getElementById('edit-tab-' + tab.dataset.tab).classList.add('active');
-    });
-  });
-  // Sélecteur pour afficher le bon bloc de set à modifier dans l'onglet artefacts
-  document.getElementById('edit-equipment-select')?.addEventListener('change', function(e) {
-    const idx = e.target.value;
-    document.querySelectorAll('.edit-eqset-block').forEach((block, i) => {
-      block.style.display = (i == idx) ? 'block' : 'none';
-    });
-  });
-  document.addEventListener("DOMContentLoaded", function() {
-    const equipmentSets = {{ character.equipment_sets|tojson }};
-    const select = document.getElementById('edit-equipment-select');
-    const fieldsContainer = document.getElementById('edit-artefacts-fields');
-
-    function renderArtefactFields(setIndex) {
-      const eqSet = equipmentSets[setIndex];
-      let html = `
-        <h4>Set : ${eqSet.set_name}</h4>
-        <label>Description :</label>
-        <textarea name="eqset_description_${setIndex}">${eqSet.description_raw || eqSet.description || ''}</textarea>
-        <label>Stats à focus :</label>
-        <input type="text" name="eqset_focus_stats_${setIndex}" value="${eqSet.focus_stats ? eqSet.focus_stats.join(', ') : ''}">
-        <h4>Artefacts du set</h4>
-        <div class="artefacts-row">
-          <div class="artefacts-col">
-      `;
-
-      // Indexation des artefacts par nom pour accès rapide
-      const artefactsByName = {};
-      eqSet.artefacts.forEach(a => {
-        artefactsByName[a.name.toLowerCase()] = a;
+    document.querySelectorAll('.edit-tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.edit-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.edit-tab-content').forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('edit-tab-' + tab.dataset.tab).classList.add('active');
       });
-
-      // Colonne gauche : pièces d’armure
-      ['Helmet', 'Casque', 'Chestplate', 'Plastron', 'Gloves', 'Gants', 'Boots', 'Bottes'].forEach((type, idx) => {
-        if (idx === 4) html += `</div><div class="artefacts-col">`; // Passe à la colonne bijoux après 4 éléments
-        // Trouve l’artefact correspondant
-        let artefact = null;
-        for (const key of artefactOrder[idx].keys) {
-          artefact = eqSet.artefacts.find(a => a.name && a.name.toLowerCase() === key.toLowerCase());
-          if (artefact) break;
-        }
-        // Si non trouvé, crée un artefact vide
-        if (!artefact) {
-          artefact = {
-            name: artefactOrder[idx].keys[0],
-            set: eqSet.set_name,
-            image_name: '',
-            main_stat: '',
-            secondary_stats: [],
-            description_raw: ''
-          };
-        }
-        html += `
-          <div class="edit-artefact-block">
-            <label>${artefact.name}</label>
-            <label>Set :</label>
-            <input type="text" name="artefact_set_${setIndex}_${idx}" value="${artefact.set || ''}">
-            <label>Image :</label>
-            <input type="text" name="artefact_image_${setIndex}_${idx}" value="${artefact.image_name || ''}">
-            <label>Description :</label>
-            <textarea name="artefact_description_${setIndex}_${idx}">${artefact.description_raw || ''}</textarea>
-            <label>Stat principale :</label>
-            <input type="text" name="artefact_main_stat_${setIndex}_${idx}" value="${artefact.main_stat || ''}">
-            <label>Stats secondaires :</label>
-            <input type="text" name="artefact_secondary_stats_${setIndex}_${idx}" value="${(artefact.secondary_stats || []).join(', ')}">
-          </div>
-        `;
+    });
+    // Sélecteur pour afficher le bon bloc de set à modifier dans l'onglet artefacts
+    document.getElementById('edit-equipment-select')?.addEventListener('change', function(e) {
+      const idx = e.target.value;
+      document.querySelectorAll('.edit-eqset-block').forEach((block, i) => {
+        block.style.display = (i == idx) ? 'block' : 'none';
       });
-
-      html += `</div></div><hr><h4>Noyaux du set</h4>`;
-
-      // Toujours 3 noyaux, champs vides si manquants
-      for (let i = 0; i < 3; i++) {
-        const core = (eqSet.cores && eqSet.cores[i]) || { name: '', number: '', image_name: '', main_stat: '', secondary_stat: '', description_raw: '' };
-        html += `
-          <div class="edit-core-block">
-            <label>Nom du noyau :</label>
-            <input type="text" name="core_name_${setIndex}_${i}" value="${core.name}">
-            <label>Numéro :</label>
-            <input type="text" name="core_number_${setIndex}_${i}" value="${core.number}">
-            <label>Image :</label>
-            <input type="text" name="core_image_${setIndex}_${i}" value="${core.image_name}">
-            <label>Description :</label>
-            <textarea name="core_description_${setIndex}_${i}">${core.description_raw || ''}</textarea>
-            <label>Stat principale :</label>
-            <input type="text" name="core_main_stat_${setIndex}_${i}" value="${core.main_stat}">
-            <label>Stat secondaire :</label>
-            <input type="text" name="core_secondary_stat_${setIndex}_${i}" value="${core.secondary_stat}">
-          </div>
-          <hr>
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+      const equipmentSets = {{ character.equipment_sets|tojson }};
+      const select = document.getElementById('edit-equipment-select');
+      const fieldsContainer = document.getElementById('edit-artefacts-fields');
+      const artefactOrder = [
+        // Colonne gauche : pièces d’armure
+        { keys: ['Helmet', 'Casque'], col: 'left' },
+        { keys: ['Chestplate', 'Plastron'], col: 'left' },
+        { keys: ['Gloves', 'Gants'], col: 'left' },
+        { keys: ['Boots', 'Bottes'], col: 'left' },
+        // Colonne droite : bijoux
+        { keys: ['Necklace', 'Collier'], col: 'right' },
+        { keys: ['Bracelet', 'Bracelet'], col: 'right' },
+        { keys: ['Ring', 'Bague'], col: 'right' },
+        { keys: ['Earring', 'Boucle d\'oreille', 'Earing', 'Boucle'], col: 'right' }
+      ];
+      function renderArtefactFields(setIndex) {
+        const eqSet = equipmentSets[setIndex];
+        let html = `
+          <h4>Set : ${eqSet.set_name}</h4>
+          <label>Description :</label>
+          <textarea name="eqset_description_${setIndex}">${eqSet.description_raw || eqSet.description || ''}</textarea>
+          <label>Stats à focus :</label>
+          <input type="text" name="eqset_focus_stats_${setIndex}" value="${eqSet.focus_stats ? eqSet.focus_stats.join(', ') : ''}">
+          <h4>Artefacts du set</h4>
+          <div class="artefacts-row">
+            <div class="artefacts-col">
         `;
+
+        // Indexation des artefacts par nom pour accès rapide
+        const artefactsByName = {};
+        eqSet.artefacts.forEach(a => {
+          artefactsByName[a.name.toLowerCase()] = a;
+        });
+
+        // Colonne gauche : pièces d’armure
+        ['Helmet', 'Casque', 'Chestplate', 'Plastron', 'Gloves', 'Gants', 'Boots', 'Bottes'].forEach((type, idx) => {
+          if (idx === 4) html += `</div><div class="artefacts-col">`; // Passe à la colonne bijoux après 4 éléments
+          // Trouve l’artefact correspondant
+          let artefact = null;
+          for (const key of artefactOrder[idx].keys) {
+            artefact = eqSet.artefacts.find(a => a.name && a.name.toLowerCase() === key.toLowerCase());
+            if (artefact) break;
+          }
+          // Si non trouvé, crée un artefact vide
+          if (!artefact) {
+            artefact = {
+              name: artefactOrder[idx].keys[0],
+              set: eqSet.set_name,
+              image_name: '',
+              main_stat: '',
+              secondary_stats: [],
+              description_raw: ''
+            };
+          }
+          html += `
+            <div class="edit-artefact-block">
+              <label>${artefact.name}</label>
+              <label>Set :</label>
+              <input type="text" name="artefact_set_${setIndex}_${idx}" value="${artefact.set || ''}">
+              <label>Image :</label>
+              <input type="text" name="artefact_image_${setIndex}_${idx}" value="${artefact.image_name || ''}">
+              <label>Description :</label>
+              <textarea name="artefact_description_${setIndex}_${idx}">${artefact.description_raw || ''}</textarea>
+              <label>Stat principale :</label>
+              <input type="text" name="artefact_main_stat_${setIndex}_${idx}" value="${artefact.main_stat || ''}">
+              <label>Stats secondaires :</label>
+              <input type="text" name="artefact_secondary_stats_${setIndex}_${idx}" value="${(artefact.secondary_stats || []).join(', ')}">
+            </div>
+          `;
+        });
+
+        html += `</div></div><hr><h4>Noyaux du set</h4>`;
+
+        // Toujours 3 noyaux, champs vides si manquants
+        for (let i = 0; i < 3; i++) {
+          const core = (eqSet.cores && eqSet.cores[i]) || { name: '', number: '', image_name: '', main_stat: '', secondary_stat: '', description_raw: '' };
+          html += `
+            <div class="edit-core-block">
+              <label>Nom du noyau :</label>
+              <input type="text" name="core_name_${setIndex}_${i}" value="${core.name}">
+              <label>Numéro :</label>
+              <input type="text" name="core_number_${setIndex}_${i}" value="${core.number}">
+              <label>Image :</label>
+              <input type="text" name="core_image_${setIndex}_${i}" value="${core.image_name}">
+              <label>Description :</label>
+              <textarea name="core_description_${setIndex}_${i}">${core.description_raw || ''}</textarea>
+              <label>Stat principale :</label>
+              <input type="text" name="core_main_stat_${setIndex}_${i}" value="${core.main_stat}">
+              <label>Stat secondaire :</label>
+              <input type="text" name="core_secondary_stat_${setIndex}_${i}" value="${core.secondary_stat}">
+            </div>
+            <hr>
+          `;
+        }
+
+        fieldsContainer.innerHTML = html;
       }
 
-      fieldsContainer.innerHTML = html;
-    }
+      // Affiche le premier set au chargement
+      renderArtefactFields(select.value);
 
-    // Affiche le premier set au chargement
-    renderArtefactFields(select.value);
-
-    // Change les champs quand on change de set
-    select.addEventListener('change', function() {
-      renderArtefactFields(this.value);
-    });
-  });
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const tabs = document.querySelectorAll(".edit-tab");
-    const tabContents = document.querySelectorAll(".edit-tab-content");
-
-    // Onglet actif par défaut (infos principales)
-    tabs.forEach((tab, idx) => {
-      if (tab.classList.contains("active")) {
-        tabContents[idx].classList.add("active");
-      } else {
-        tabContents[idx].classList.remove("active");
-      }
-    });
-
-    // Gestion du clic sur les onglets
-    tabs.forEach((tab, idx) => {
-      tab.addEventListener("click", () => {
-        tabs.forEach((t) => t.classList.remove("active"));
-        tabContents.forEach((tc) => tc.classList.remove("active"));
-        tab.classList.add("active");
-        tabContents[idx].classList.add("active");
+      // Change les champs quand on change de set
+      select.addEventListener('change', function() {
+        renderArtefactFields(this.value);
       });
     });
-  });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const tabs = document.querySelectorAll(".edit-tab");
+      const tabContents = document.querySelectorAll(".edit-tab-content");
+
+      // Onglet actif par défaut (infos principales)
+      tabs.forEach((tab, idx) => {
+        if (tab.classList.contains("active")) {
+          tabContents[idx].classList.add("active");
+        } else {
+          tabContents[idx].classList.remove("active");
+        }
+      });
+
+      // Gestion du clic sur les onglets
+      tabs.forEach((tab, idx) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((t) => t.classList.remove("active"));
+          tabContents.forEach((tc) => tc.classList.remove("active"));
+          tab.classList.add("active");
+          tabContents[idx].classList.add("active");
+        });
+      });
+    });
 </script>
