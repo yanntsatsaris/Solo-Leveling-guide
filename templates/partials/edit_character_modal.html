@@ -178,64 +178,57 @@
       </div>
       <!-- Onglet Armes -->
       <div class="edit-tab-content" id="edit-tab-weapons">
-        {% for weapon in character.weapon %}
-          {% set weapon_idx = loop.index0 %}
-        <div class="edit-weapon-block">
-          <label>Nom de l'arme :</label>
-          <input
-            type="text"
-            name="weapon_name_{{ weapon_idx }}"
-            value="{{ weapon.name }}"
-          />
-          <label>Stats :</label>
-          <textarea name="weapon_stats_{{ weapon_idx }}">
-{{ weapon.stats_raw }}</textarea
-          >
-          <label>Tag :</label>
-          <input
-            type="text"
-            name="weapon_tag_{{ weapon_idx }}"
-            value="{{ weapon.tag }}"
-          />
-          <label>Image :</label>
-          <input
-            type="text"
-            name="weapon_image_{{ weapon_idx }}"
-            value="{{ weapon.image_name }}"
-          />
-          <label>Principal :</label>
-          <input
-            type="checkbox"
-            name="weapon_principal_{{ weapon_idx }}"
-            {%
-            if
-            weapon.principal
-            %}checked{%
-            endif
-            %}
-          />
-          <!-- Toujours 7 évolutions, même si aucune n'est renseignée -->
-          {% set total_evos = 7 %}
-          <h4 style="margin-top: 18px">Évolutions de l'arme</h4>
-          <div class="evolutions-grid">
-            {% for i in range(total_evos) %}
-              {% if i % 2 == 0 %}
-              <div class="evolutions-row">
-              {% endif %}
-                <div class="edit-weapon-evolution-block">
-                  <label>Évolution : {{ 'A' ~ i if not i == 6 else 'A6-A10' }}</label>
-                  <textarea
-                    name="weapon_evolution_description_{{ weapon_idx }}_{{ i }}"
-                  >{{ weapon.evolutions[i].description_raw if weapon.evolutions|length > i else '' }}</textarea
-                  >
+        {% set total_weapons = character.weapon|length if character.weapon|length > 0 else 1 %}
+        {% for weapon_idx in range(total_weapons) %}
+          {% set weapon = character.weapon[weapon_idx] if character.weapon|length > weapon_idx else {} %}
+          <div class="edit-weapon-block">
+            <label>Nom de l'arme :</label>
+            <input
+              type="text"
+              name="weapon_name_{{ weapon_idx }}"
+              value="{{ weapon.name if weapon.name is defined else '' }}"
+            />
+            <label>Stats :</label>
+            <textarea name="weapon_stats_{{ weapon_idx }}">{{ weapon.stats_raw if weapon.stats_raw is defined else '' }}</textarea>
+            <label>Tag :</label>
+            <input
+              type="text"
+              name="weapon_tag_{{ weapon_idx }}"
+              value="{{ weapon.tag if weapon.tag is defined else '' }}"
+            />
+            <label>Image :</label>
+            <input
+              type="text"
+              name="weapon_image_{{ weapon_idx }}"
+              value="{{ weapon.image_name if weapon.image_name is defined else '' }}"
+            />
+            <label>Principal :</label>
+            <input
+              type="checkbox"
+              name="weapon_principal_{{ weapon_idx }}"
+              {% if weapon.principal is defined and weapon.principal %}checked{% endif %}
+            />
+            <!-- Toujours 7 évolutions, même si aucune n'est renseignée -->
+            {% set total_evos = 7 %}
+            <h4 style="margin-top: 18px">Évolutions de l'arme</h4>
+            <div class="evolutions-grid">
+              {% for i in range(total_evos) %}
+                {% if i % 2 == 0 %}
+                <div class="evolutions-row">
+                {% endif %}
+                  <div class="edit-weapon-evolution-block">
+                    <label>Évolution : {{ 'A' ~ i if not i == 6 else 'A6-A10' }}</label>
+                    <textarea
+                      name="weapon_evolution_description_{{ weapon_idx }}_{{ i }}"
+                    >{{ weapon.evolutions[i].description_raw if weapon.evolutions is defined and weapon.evolutions|length > i else '' }}</textarea>
+                  </div>
+                {% if i % 2 == 1 or i == total_evos - 1 %}
                 </div>
-              {% if i % 2 == 1 or i == total_evos - 1 %}
-              </div>
-              {% endif %}
-            {% endfor %}
+                {% endif %}
+              {% endfor %}
+            </div>
           </div>
-        </div>
-        <hr />
+          <hr />
         {% endfor %}
       </div>
       <!-- Onglet Artefacts avec sélecteur de set -->
