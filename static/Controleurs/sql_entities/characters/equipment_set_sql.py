@@ -50,7 +50,7 @@ class EquipmentSetSql:
                 'name': artefact_name,
                 'set': artefact_set,
                 'image': f'images/Artefacts/{artefact_image}' if artefact_image else '',
-                'iamage_name': artefact_image,
+                'image_name': artefact_image,
                 'main_stat': artefact_main_stat,
                 'secondary_stats': secondary_stats
             }
