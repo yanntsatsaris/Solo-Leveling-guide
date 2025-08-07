@@ -409,11 +409,17 @@ const artefactOrder = (language === "fr-fr")
           // Demande le nom du set à l'utilisateur
           let setName = prompt("Nom du nouveau set :");
           if (!setName) {
-            // Si l'utilisateur annule ou ne met rien, on revient à l'ancien set
             select.value = 0;
             renderArtefactFields(select.value);
             return;
           }
+
+          // Demande la position d'insertion
+          let maxPos = equipmentSets.length;
+          let pos = prompt(`À quelle position insérer le set ? (1 = début, ${maxPos + 1} = fin)`, maxPos + 1);
+          pos = parseInt(pos, 10);
+          if (isNaN(pos) || pos < 1 || pos > maxPos + 1) pos = maxPos + 1; // Par défaut à la fin
+
           // Crée un set vide avec le nom donné
           const emptySet = {
             set_name: setName,
@@ -434,16 +440,27 @@ const artefactOrder = (language === "fr-fr")
               { name: '', number: '03', image_name: '', main_stat: '', secondary_stat: '' }
             ]
           };
-          equipmentSets.push(emptySet);
 
-          // Ajoute une nouvelle option avant "Ajouter un nouveau set"
-          const newOption = document.createElement('option');
-          newOption.value = equipmentSets.length - 1;
-          newOption.textContent = setName;
-          select.insertBefore(newOption, select.lastElementChild);
+          // Insère le set à la bonne position dans le tableau
+          equipmentSets.splice(pos - 1, 0, emptySet);
 
-          // Sélectionne le nouveau set
-          select.value = equipmentSets.length - 1;
+          // Reconstruit le select (sauf l'option "ajouter un nouveau set")
+          while (select.options.length > 0) select.remove(0);
+          equipmentSets.forEach((set, i) => {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = set.set_name;
+            select.appendChild(option);
+          });
+          // Ajoute l'option "ajouter un nouveau set"
+          const addOption = document.createElement('option');
+          addOption.value = "add_new_set";
+          addOption.textContent = "+ Ajouter un nouveau set";
+          addOption.style.color = "#ff6600";
+          select.appendChild(addOption);
+
+          // Sélectionne le nouveau set et affiche ses champs
+          select.value = pos - 1;
           renderArtefactFields(select.value);
         } else {
           renderArtefactFields(this.value);
