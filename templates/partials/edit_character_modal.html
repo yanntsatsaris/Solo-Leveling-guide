@@ -474,4 +474,33 @@ const artefactOrder = (language === "fr-fr")
         });
       });
     });
+
+// Sauvegarde l'état initial du formulaire à l'ouverture
+let initialFormData = null;
+const form = document.getElementById('edit-character-form');
+if (form) {
+  // Fonction pour sérialiser tous les champs du formulaire
+  function serializeForm(form) {
+    const formData = new FormData(form);
+    // On convertit en tableau clé=valeur pour comparaison simple
+    return Array.from(formData.entries()).sort();
+  }
+
+  // À l'ouverture de la modale, on sauvegarde l'état initial
+  document.getElementById('edit-character-btn')?.addEventListener('click', () => {
+    initialFormData = serializeForm(form);
+  });
+
+  // Avant soumission, on vérifie si quelque chose a changé
+  form.addEventListener('submit', function(e) {
+    const currentFormData = serializeForm(form);
+    // Compare les deux tableaux (JSON.stringify suffit ici car trié)
+    if (initialFormData && JSON.stringify(initialFormData) === JSON.stringify(currentFormData)) {
+      e.preventDefault();
+      alert("Aucune modification détectée.");
+      return false;
+    }
+    // Sinon, la soumission continue normalement
+  });
+}
 </script>
