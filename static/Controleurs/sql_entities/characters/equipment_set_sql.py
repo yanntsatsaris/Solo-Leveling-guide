@@ -1,5 +1,6 @@
 from collections import Counter
 from static.Controleurs.ControleurLog import write_log
+import re
 
 class EquipmentSetSql:
     def __init__(self, cursor):
@@ -46,10 +47,12 @@ class EquipmentSetSql:
                 WHERE artefact_secondary_stats_artefacts_id = %s
             """, (artefact_id,))
             secondary_stats = [sec_row[0] for sec_row in self.cursor.fetchall()]
+            # Remplacement des espaces par des "_" dans artefact_set pour le chemin image
+            artefact_set_path = artefact_set.replace(" ", "_") if artefact_set else ""
             artefact_obj = {
                 'name': artefact_name,
                 'set': artefact_set,
-                'image': f'images/Artefacts/{artefact_image}' if artefact_image else '',
+                'image': f'images/Artefacts/{artefact_set_path}/{artefact_image}' if artefact_image else '',
                 'image_name': artefact_image,
                 'main_stat': artefact_main_stat,
                 'secondary_stats': secondary_stats
