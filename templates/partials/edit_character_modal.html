@@ -184,29 +184,29 @@
           <label>Nom de l'arme :</label>
           <input
             type="text"
-            name="weapon_name_{{ loop.index0 }}"
+            name="weapon_name_{{ weapon_idx }}"
             value="{{ weapon.name }}"
           />
           <label>Stats :</label>
-          <textarea name="weapon_stats_{{ loop.index0 }}">
+          <textarea name="weapon_stats_{{ weapon_idx }}">
 {{ weapon.stats_raw }}</textarea
           >
           <label>Tag :</label>
           <input
             type="text"
-            name="weapon_tag_{{ loop.index0 }}"
+            name="weapon_tag_{{ weapon_idx }}"
             value="{{ weapon.tag }}"
           />
           <label>Image :</label>
           <input
             type="text"
-            name="weapon_image_{{ loop.index0 }}"
+            name="weapon_image_{{ weapon_idx }}"
             value="{{ weapon.image_name }}"
           />
           <label>Principal :</label>
           <input
             type="checkbox"
-            name="weapon_principal_{{ loop.index0 }}"
+            name="weapon_principal_{{ weapon_idx }}"
             {%
             if
             weapon.principal
@@ -214,26 +214,26 @@
             endif
             %}
           />
-          <!-- Évolutions de l'arme en grille 2 par ligne -->
-          {% if weapon.evolutions %} {% set total_evos = 7 %}
+          <!-- Toujours 7 évolutions, même si aucune n'est renseignée -->
+          {% set total_evos = 7 %}
           <h4 style="margin-top: 18px">Évolutions de l'arme</h4>
           <div class="evolutions-grid">
-            {% for i in range(total_evos) %} {% if i % 2 == 0 %}
-            <div class="evolutions-row">
+            {% for i in range(total_evos) %}
+              {% if i % 2 == 0 %}
+              <div class="evolutions-row">
               {% endif %}
-              <div class="edit-weapon-evolution-block">
-                <label>Évolution : {{ 'A' ~ i if not i == 6 else 'A6-A10' }}</label>
-                <textarea
-                  name="weapon_evolution_description_{{ weapon_idx }}_{{ i }}"
-                >
-{{ weapon.evolutions[i].description_raw if weapon.evolutions|length > i else '' }}</textarea
-                >
-              </div>
+                <div class="edit-weapon-evolution-block">
+                  <label>Évolution : {{ 'A' ~ i }}</label>
+                  <textarea
+                    name="weapon_evolution_description_{{ weapon_idx }}_{{ i }}"
+                  >{{ weapon.evolutions[i].description_raw if weapon.evolutions|length > i else '' }}</textarea
+                  >
+                </div>
               {% if i % 2 == 1 or i == total_evos - 1 %}
-            </div>
-            {% endif %} {% endfor %}
+              </div>
+              {% endif %}
+            {% endfor %}
           </div>
-          {% endif %}
         </div>
         <hr />
         {% endfor %}
