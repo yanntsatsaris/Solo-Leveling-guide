@@ -179,6 +179,7 @@
       <!-- Onglet Armes -->
       <div class="edit-tab-content" id="edit-tab-weapons">
         {% for weapon in character.weapon %}
+          {% set weapon_idx = loop.index0 %}
         <div class="edit-weapon-block">
           <label>Nom de l'arme :</label>
           <input
@@ -223,7 +224,7 @@
               <div class="edit-weapon-evolution-block">
                 <label>Évolution : {{ 'A' ~ i }}</label>
                 <textarea
-                  name="weapon_evolution_description_{{ loop.parent.loop.index0 }}_{{ i }}"
+                  name="weapon_evolution_description_{{ weapon_idx }}_{{ i }}"
                 >
 {{ weapon.evolutions[i].description_raw if weapon.evolutions|length > i else '' }}</textarea
                 >
