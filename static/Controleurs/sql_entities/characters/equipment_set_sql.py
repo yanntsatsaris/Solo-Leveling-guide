@@ -50,6 +50,7 @@ class EquipmentSetSql:
                 'name': artefact_name,
                 'set': artefact_set,
                 'image': f'images/Artefacts/{artefact_image}' if artefact_image else '',
+                'iamage_name': artefact_image,
                 'main_stat': artefact_main_stat,
                 'secondary_stats': secondary_stats
             }
@@ -67,6 +68,7 @@ class EquipmentSetSql:
                 'name': core_row[0],
                 'number': core_row[1],
                 'image': f'images/Noyaux/{core_row[2]}' if core_row[2] else '',
+                'image_name': core_row[2],
                 'main_stat': core_row[3],
                 'secondary_stat': core_row[4]
             }

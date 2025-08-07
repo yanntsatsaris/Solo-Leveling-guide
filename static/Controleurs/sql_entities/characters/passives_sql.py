@@ -18,6 +18,7 @@ class PassivesSql:
                 'name': row[1],
                 'description': row[2],
                 'image': f'images/Personnages/{type_folder}/{char_folder}/{row[3]}' if row[3] else '',
+                'image_name': row[3],
                 'tag': row[4],
                 'hidden': row[5]  # Ajout du champ hidden
             }

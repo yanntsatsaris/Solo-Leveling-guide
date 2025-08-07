@@ -18,6 +18,7 @@ class SkillsSql:
                 'name': row[1],
                 'description': row[2],  # On ne traite plus ici
                 'image': f'images/Personnages/{type_folder}/{char_folder}/{row[3]}' if row[3] else '',
+                'image_name': row[3],
                 'tag': row[4]
             }
             for row in self.cursor.fetchall()

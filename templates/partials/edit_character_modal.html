@@ -40,7 +40,7 @@
         <label>Description :</label>
         <textarea name="description" required>{{ character.description }}</textarea>
         <label>Image :</label>
-        <input type="text" name="image" value="{{ character.image }}" />
+        <input type="text" name="image" value="{{ character.image_name }}" />
 
         <h4 style="margin-top:28px;">Évolutions du personnage</h4>
         <div class="evolutions-grid">
@@ -74,7 +74,7 @@
               <label>Tag :</label>
               <input type="text" name="passive_tag_{{ loop.index0 }}" value="{{ passive.tag }}" />
               <label>Image :</label>
-              <input type="text" name="passive_image_{{ loop.index0 }}" value="{{ passive.image }}" />
+              <input type="text" name="passive_image_{{ loop.index0 }}" value="{{ passive.image_name }}" />
               <div class="checkbox-row">
                 <label>
                   <input type="checkbox" name="passive_principal_{{ loop.index0 }}" {% if passive.principal %}checked{% endif %} />
@@ -118,7 +118,7 @@
               <input
                 type="text"
                 name="skill_image_{{ loop.index0 }}"
-                value="{{ skill.image }}"
+                value="{{ skill.image_name }}"
               />
               <div class="checkbox-row">
                 <label>
@@ -260,7 +260,7 @@
             <label>Set :</label>
             <input type="text" name="artefact_set_${setIndex}_${i}" value="${artefact.set}">
             <label>Image :</label>
-            <input type="text" name="artefact_image_${setIndex}_${i}" value="${artefact.image}">
+            <input type="text" name="artefact_image_${setIndex}_${i}" value="${artefact.image_name}">
             <label>Stat principale :</label>
             <input type="text" name="artefact_main_stat_${setIndex}_${i}" value="${artefact.main_stat}">
             <label>Stats secondaires :</label>
@@ -280,7 +280,7 @@
             <label>Set :</label>
             <input type="text" name="artefact_set_${setIndex}_${i+4}" value="${artefact.set}">
             <label>Image :</label>
-            <input type="text" name="artefact_image_${setIndex}_${i+4}" value="${artefact.image}">
+            <input type="text" name="artefact_image_${setIndex}_${i+4}" value="${artefact.image_name}">
             <label>Stat principale :</label>
             <input type="text" name="artefact_main_stat_${setIndex}_${i+4}" value="${artefact.main_stat}">
             <label>Stats secondaires :</label>
@@ -302,7 +302,7 @@
             <label>Numéro :</label>
             <input type="text" name="core_number_${setIndex}_${i}" value="${core.number}">
             <label>Image :</label>
-            <input type="text" name="core_image_${setIndex}_${i}" value="${core.image}">
+            <input type="text" name="core_image_${setIndex}_${i}" value="${core.image_name}">
             <label>Stat principale :</label>
             <input type="text" name="core_main_stat_${setIndex}_${i}" value="${core.main_stat}">
             <label>Stat secondaire :</label>

@@ -35,6 +35,7 @@ class WeaponsSql:
                 'name': weapon_name,
                 'stats': weapon_stats if weapon_stats else '',
                 'image': f'images/Personnages/{type_folder}/{char_folder}/{weapon_image}' if weapon_image else '',
+                'image_name': weapon_image,
                 'tag': weapon_tag,  # Ajout du tag de l'arme
                 'evolutions': evolutions
             })
