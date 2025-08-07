@@ -412,10 +412,3 @@ document.addEventListener("DOMContentLoaded", function() {
     };
   }
 });
-
-document.getElementById('edit-character-btn')?.addEventListener('click', () => {
-  document.getElementById('edit-character-modal').style.display = 'block';
-});
-function closeEditModal() {
-  document.getElementById('edit-character-modal').style.display = 'none';
-}
