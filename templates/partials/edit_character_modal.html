@@ -345,7 +345,7 @@
           html += `
             <div class="edit-artefact-block">
               <label>${artefact.name}</label>
-              <label>Set :</label>
+              <label>Pannoplie :</label>
               <input type="text" name="artefact_set_${setIndex}_${idx}" value="${artefact.set || ''}">
               <label>Image :</label>
               <input type="text" name="artefact_image_${setIndex}_${idx}" value="${artefact.image_name || ''}">
@@ -409,7 +409,7 @@
             focus_stats: [],
             artefacts: artefactOrder.map(order => ({
               name: order.keys[0],
-              set: setName,
+              set: '',
               image_name: '',
               main_stat: '',
               secondary_stats: [],
