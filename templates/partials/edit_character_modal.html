@@ -291,18 +291,31 @@
       const equipmentSets = {{ character.equipment_sets|tojson }};
       const select = document.getElementById('edit-equipment-select');
       const fieldsContainer = document.getElementById('edit-artefacts-fields');
-      const artefactOrder = [
-        // Colonne gauche : pièces d’armure
-        { keys: ['Helmet', 'Casque'], col: 'left' },
-        { keys: ['Chestplate', 'Plastron'], col: 'left' },
-        { keys: ['Gloves', 'Gants'], col: 'left' },
-        { keys: ['Boots', 'Bottes'], col: 'left' },
-        // Colonne droite : bijoux
-        { keys: ['Necklace', 'Collier'], col: 'right' },
-        { keys: ['Bracelet', 'Bracelet'], col: 'right' },
-        { keys: ['Ring', 'Bague'], col: 'right' },
-        { keys: ['Earring', 'Boucle d\'oreille', 'Earing', 'Boucle'], col: 'right' }
-      ];
+      // Récupère la langue depuis une variable globale ou un attribut data-lang sur le body
+const language = "{{ language }}".toLowerCase(); // Flask/Jinja2 injecte la langue ici
+
+// Définition dynamique de l'ordre des artefacts selon la langue
+const artefactOrder = (language === "fr-fr")
+  ? [
+      { keys: ['Casque'], col: 'left' },
+      { keys: ['Plastron'], col: 'left' },
+      { keys: ['Gants'], col: 'left' },
+      { keys: ['Bottes'], col: 'left' },
+      { keys: ['Collier'], col: 'right' },
+      { keys: ['Bracelet'], col: 'right' },
+      { keys: ['Bague'], col: 'right' },
+      { keys: ['Boucle d\'oreille'], col: 'right' }
+    ]
+  : [
+      { keys: ['Helmet'], col: 'left' },
+      { keys: ['Chestplate'], col: 'left' },
+      { keys: ['Gloves'], col: 'left' },
+      { keys: ['Boots'], col: 'left' },
+      { keys: ['Necklace'], col: 'right' },
+      { keys: ['Bracelet'], col: 'right' },
+      { keys: ['Ring'], col: 'right' },
+      { keys: ['Earring'], col: 'right' }
+    ];
       function renderArtefactFields(setIndex) {
         const eqSet = equipmentSets[setIndex];
         let html = `
