@@ -503,4 +503,16 @@ if (form) {
     // Sinon, la soumission continue normalement
   });
 }
+
+const overlay = document.getElementById('edit-character-overlay');
+const popup = document.getElementById('edit-character-menu');
+
+if (overlay && popup) {
+  overlay.addEventListener('mousedown', function(e) {
+    // Si le clic est sur l'overlay mais pas dans le popup
+    if (e.target === overlay) {
+      overlay.style.display = 'none';
+    }
+  });
+}
 </script>
