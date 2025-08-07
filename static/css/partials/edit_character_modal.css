@@ -261,6 +261,21 @@
   margin-bottom: 6px;
 }
 
+/* Bouton Ajouter */
+.add-btn {
+  margin: 12px 0 0 0;
+  padding: 4px 14px;
+  font-size: 18px;
+  background: #ffcc00;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background: #ffe066;
+}
+
 /* Pour le responsive si besoin */
 @media (max-width: 900px) {
   .edit-character-popup {
