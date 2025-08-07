@@ -288,7 +288,11 @@
         });
       });
       document.addEventListener("DOMContentLoaded", function() {
+        const select = document.getElementById('edit-equipment-select');
+        const fieldsContainer = document.getElementById('edit-artefacts-fields');
         const equipmentSets = {{ character.equipment_sets|tojson }};
+
+        // Ajoute "Aucun set" si la liste est vide
         if (equipmentSets.length === 0) {
           const noneOption = document.createElement('option');
           noneOption.value = "none";
@@ -297,8 +301,7 @@
           noneOption.selected = true;
           select.appendChild(noneOption);
         }
-        const select = document.getElementById('edit-equipment-select');
-        const fieldsContainer = document.getElementById('edit-artefacts-fields');
+
         // Récupère la langue depuis une variable globale ou un attribut data-lang sur le body
   const language = "{{ language }}".toLowerCase(); // Flask/Jinja2 injecte la langue ici
 
