@@ -12,6 +12,7 @@ class EquipmentSetSql:
             SELECT es.equipment_sets_id, es.equipment_sets_name
             FROM equipment_sets es
             WHERE es.equipment_sets_characters_id = %s
+            ORDER BY es.equipment_sets_order ASC, es.equipment_sets_id ASC
         """, (char_id,))
         return self.cursor.fetchall()
 
