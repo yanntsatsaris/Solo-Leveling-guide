@@ -289,6 +289,14 @@
       });
       document.addEventListener("DOMContentLoaded", function() {
         const equipmentSets = {{ character.equipment_sets|tojson }};
+        if (equipmentSets.length === 0) {
+          const noneOption = document.createElement('option');
+          noneOption.value = "none";
+          noneOption.textContent = "Aucun set";
+          noneOption.disabled = true;
+          noneOption.selected = true;
+          select.appendChild(noneOption);
+        }
         const select = document.getElementById('edit-equipment-select');
         const fieldsContainer = document.getElementById('edit-artefacts-fields');
         // Récupère la langue depuis une variable globale ou un attribut data-lang sur le body
@@ -408,7 +416,6 @@
           if (this.value === "add_new_set") {
             let setName = prompt("Nom du nouveau set :");
             if (!setName) {
-              // Si aucun set n'existe, on vide tout
               if (equipmentSets.length === 0) {
                 select.selectedIndex = 0;
                 fieldsContainer.innerHTML = "";
@@ -448,6 +455,8 @@
 
             // Reconstruit le select (toujours, même si vide avant)
             while (select.options.length > 0) select.remove(0);
+
+            // Si "Aucun set" était présent, on ne le remet pas
             equipmentSets.forEach((set, i) => {
               const option = document.createElement('option');
               option.value = i;
