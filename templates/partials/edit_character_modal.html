@@ -46,19 +46,17 @@
 
         <h4 style="margin-top: 28px">Évolutions du personnage</h4>
         <div class="evolutions-grid">
-          {% for evo in character.evolutions %} {% if loop.index0 % 2 == 0 %}
+          {% set total_evos = 7 %} {% for i in range(total_evos) %} {% if i % 2
+          == 0 %}
           <div class="evolutions-row">
             {% endif %}
             <div class="edit-evolution-block">
-              <label
-                >Évolution : {{ 'A' ~ (loop.index0) if not loop.last else
-                'A6-A10' }}</label
-              >
-              <textarea name="evolution_description_{{ loop.index0 }}">
-{{ evo.description_raw }}</textarea
+              <label>Évolution : {{ 'A' ~ i }}</label>
+              <textarea name="evolution_description_{{ i }}">
+{{ character.evolutions[i].description_raw if character.evolutions|length > i else '' }}</textarea
               >
             </div>
-            {% if loop.index0 % 2 == 1 or loop.last %}
+            {% if i % 2 == 1 or i == total_evos - 1 %}
           </div>
           {% endif %} {% endfor %}
         </div>
@@ -216,22 +214,21 @@
             %}
           />
           <!-- Évolutions de l'arme en grille 2 par ligne -->
-          {% if weapon.evolutions %}
+          {% if weapon.evolutions %} {% set total_evos = 7 %}
           <h4 style="margin-top: 18px">Évolutions de l'arme</h4>
           <div class="evolutions-grid">
-            {% for evo in weapon.evolutions %} {% if loop.index0 % 2 == 0 %}
+            {% for i in range(total_evos) %} {% if i % 2 == 0 %}
             <div class="evolutions-row">
               {% endif %}
               <div class="edit-weapon-evolution-block">
-                <label
-                  >Évolution : {{ 'A' ~ (loop.index0) if not loop.last else
-                  'A6-A10' }}</label
+                <label>Évolution : {{ 'A' ~ i }}</label>
+                <textarea
+                  name="weapon_evolution_description_{{ loop.parent.loop.index0 }}_{{ i }}"
                 >
-                <textarea name="weapon_evolution_description_{{ loop.index0 }}">
-{{ evo.description_raw }}</textarea
+{{ weapon.evolutions[i].description_raw if weapon.evolutions|length > i else '' }}</textarea
                 >
               </div>
-              {% if loop.index0 % 2 == 1 or loop.last %}
+              {% if i % 2 == 1 or i == total_evos - 1 %}
             </div>
             {% endif %} {% endfor %}
           </div>
@@ -248,7 +245,9 @@
             {% for set in character.equipment_sets %}
             <option value="{{ loop.index0 }}">{{ set.set_name }}</option>
             {% endfor %}
-            <option value="add_new_set" style="color:#ff6600;">+ Ajouter un nouveau set</option>
+            <option value="add_new_set" style="color: #ff6600">
+              + Ajouter un nouveau set
+            </option>
           </select>
         </div>
         <div id="edit-artefacts-fields">
@@ -272,264 +271,264 @@
   </div>
 </div>
 <script>
-    document.querySelectorAll('.edit-tab').forEach(tab => {
-      tab.addEventListener('click', function() {
-        document.querySelectorAll('.edit-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.edit-tab-content').forEach(c => c.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById('edit-tab-' + tab.dataset.tab).classList.add('active');
-      });
-    });
-    // Sélecteur pour afficher le bon bloc de set à modifier dans l'onglet artefacts
-    document.getElementById('edit-equipment-select')?.addEventListener('change', function(e) {
-      const idx = e.target.value;
-      document.querySelectorAll('.edit-eqset-block').forEach((block, i) => {
-        block.style.display = (i == idx) ? 'block' : 'none';
-      });
-    });
-    document.addEventListener("DOMContentLoaded", function() {
-      const equipmentSets = {{ character.equipment_sets|tojson }};
-      const select = document.getElementById('edit-equipment-select');
-      const fieldsContainer = document.getElementById('edit-artefacts-fields');
-      // Récupère la langue depuis une variable globale ou un attribut data-lang sur le body
-const language = "{{ language }}".toLowerCase(); // Flask/Jinja2 injecte la langue ici
-
-// Définition dynamique de l'ordre des artefacts selon la langue
-const artefactOrder = (language === "fr-fr")
-  ? [
-      { keys: ['Casque'], col: 'left' },
-      { keys: ['Plastron'], col: 'left' },
-      { keys: ['Gants'], col: 'left' },
-      { keys: ['Bottes'], col: 'left' },
-      { keys: ['Collier'], col: 'right' },
-      { keys: ['Bracelet'], col: 'right' },
-      { keys: ['Bague'], col: 'right' },
-      { keys: ['Boucle d\'oreille'], col: 'right' }
-    ]
-  : [
-      { keys: ['Helmet'], col: 'left' },
-      { keys: ['Chestplate'], col: 'left' },
-      { keys: ['Gloves'], col: 'left' },
-      { keys: ['Boots'], col: 'left' },
-      { keys: ['Necklace'], col: 'right' },
-      { keys: ['Bracelet'], col: 'right' },
-      { keys: ['Ring'], col: 'right' },
-      { keys: ['Earring'], col: 'right' }
-    ];
-      function renderArtefactFields(setIndex) {
-        const eqSet = equipmentSets[setIndex];
-        let html = `
-          <h4>Set : ${eqSet.set_name}</h4>
-          <label>Description :</label>
-          <textarea name="eqset_description_${setIndex}">${eqSet.description_raw || eqSet.description || ''}</textarea>
-          <label>Stats à focus :</label>
-          <input type="text" name="eqset_focus_stats_${setIndex}" value="${eqSet.focus_stats ? eqSet.focus_stats.join(', ') : ''}">
-          <h4>Artefacts du set</h4>
-          <div class="artefacts-row">
-            <div class="artefacts-col">
-        `;
-
-        // Indexation des artefacts par nom pour accès rapide
-        const artefactsByName = {};
-        eqSet.artefacts.forEach(a => {
-          artefactsByName[a.name.toLowerCase()] = a;
+      document.querySelectorAll('.edit-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+          document.querySelectorAll('.edit-tab').forEach(t => t.classList.remove('active'));
+          document.querySelectorAll('.edit-tab-content').forEach(c => c.classList.remove('active'));
+          tab.classList.add('active');
+          document.getElementById('edit-tab-' + tab.dataset.tab).classList.add('active');
         });
+      });
+      // Sélecteur pour afficher le bon bloc de set à modifier dans l'onglet artefacts
+      document.getElementById('edit-equipment-select')?.addEventListener('change', function(e) {
+        const idx = e.target.value;
+        document.querySelectorAll('.edit-eqset-block').forEach((block, i) => {
+          block.style.display = (i == idx) ? 'block' : 'none';
+        });
+      });
+      document.addEventListener("DOMContentLoaded", function() {
+        const equipmentSets = {{ character.equipment_sets|tojson }};
+        const select = document.getElementById('edit-equipment-select');
+        const fieldsContainer = document.getElementById('edit-artefacts-fields');
+        // Récupère la langue depuis une variable globale ou un attribut data-lang sur le body
+  const language = "{{ language }}".toLowerCase(); // Flask/Jinja2 injecte la langue ici
 
-        // Colonne gauche : pièces d’armure
-        ['Helmet', 'Casque', 'Chestplate', 'Plastron', 'Gloves', 'Gants', 'Boots', 'Bottes'].forEach((type, idx) => {
-          if (idx === 4) html += `</div><div class="artefacts-col">`; // Passe à la colonne bijoux après 4 éléments
-          // Trouve l’artefact correspondant
-          let artefact = null;
-          for (const key of artefactOrder[idx].keys) {
-            artefact = eqSet.artefacts.find(a => a.name && a.name.toLowerCase() === key.toLowerCase());
-            if (artefact) break;
+  // Définition dynamique de l'ordre des artefacts selon la langue
+  const artefactOrder = (language === "fr-fr")
+    ? [
+        { keys: ['Casque'], col: 'left' },
+        { keys: ['Plastron'], col: 'left' },
+        { keys: ['Gants'], col: 'left' },
+        { keys: ['Bottes'], col: 'left' },
+        { keys: ['Collier'], col: 'right' },
+        { keys: ['Bracelet'], col: 'right' },
+        { keys: ['Bague'], col: 'right' },
+        { keys: ['Boucle d\'oreille'], col: 'right' }
+      ]
+    : [
+        { keys: ['Helmet'], col: 'left' },
+        { keys: ['Chestplate'], col: 'left' },
+        { keys: ['Gloves'], col: 'left' },
+        { keys: ['Boots'], col: 'left' },
+        { keys: ['Necklace'], col: 'right' },
+        { keys: ['Bracelet'], col: 'right' },
+        { keys: ['Ring'], col: 'right' },
+        { keys: ['Earring'], col: 'right' }
+      ];
+        function renderArtefactFields(setIndex) {
+          const eqSet = equipmentSets[setIndex];
+          let html = `
+            <h4>Set : ${eqSet.set_name}</h4>
+            <label>Description :</label>
+            <textarea name="eqset_description_${setIndex}">${eqSet.description_raw || eqSet.description || ''}</textarea>
+            <label>Stats à focus :</label>
+            <input type="text" name="eqset_focus_stats_${setIndex}" value="${eqSet.focus_stats ? eqSet.focus_stats.join(', ') : ''}">
+            <h4>Artefacts du set</h4>
+            <div class="artefacts-row">
+              <div class="artefacts-col">
+          `;
+
+          // Indexation des artefacts par nom pour accès rapide
+          const artefactsByName = {};
+          eqSet.artefacts.forEach(a => {
+            artefactsByName[a.name.toLowerCase()] = a;
+          });
+
+          // Colonne gauche : pièces d’armure
+          ['Helmet', 'Casque', 'Chestplate', 'Plastron', 'Gloves', 'Gants', 'Boots', 'Bottes'].forEach((type, idx) => {
+            if (idx === 4) html += `</div><div class="artefacts-col">`; // Passe à la colonne bijoux après 4 éléments
+            // Trouve l’artefact correspondant
+            let artefact = null;
+            for (const key of artefactOrder[idx].keys) {
+              artefact = eqSet.artefacts.find(a => a.name && a.name.toLowerCase() === key.toLowerCase());
+              if (artefact) break;
+            }
+            // Si non trouvé, crée un artefact vide
+            if (!artefact) {
+              artefact = {
+                name: artefactOrder[idx].keys[0],
+                set: eqSet.set_name,
+                image_name: '',
+                main_stat: '',
+                secondary_stats: [],
+                description_raw: ''
+              };
+            }
+            html += `
+              <div class="edit-artefact-block">
+                <label>${artefact.name}</label>
+                <label>Pannoplie :</label>
+                <input type="text" name="artefact_set_${setIndex}_${idx}" value="${artefact.set || ''}">
+                <label>Image :</label>
+                <input type="text" name="artefact_image_${setIndex}_${idx}" value="${artefact.image_name || ''}">
+                <label>Stat principale :</label>
+                <input type="text" name="artefact_main_stat_${setIndex}_${idx}" value="${artefact.main_stat || ''}">
+                <label>Stats secondaires :</label>
+                <input type="text" name="artefact_secondary_stats_${setIndex}_${idx}" value="${(artefact.secondary_stats || []).join(', ')}">
+              </div>
+            `;
+          });
+
+          html += `</div></div><hr><h4>Noyaux du set</h4>`;
+
+          const coreOrder = ['01', '02', '03'];
+          let coresByNumber = {};
+          if (eqSet.cores) {
+            eqSet.cores.forEach(core => {
+              if (core.number) coresByNumber[core.number] = core;
+            });
           }
-          // Si non trouvé, crée un artefact vide
-          if (!artefact) {
-            artefact = {
-              name: artefactOrder[idx].keys[0],
-              set: eqSet.set_name,
-              image_name: '',
-              main_stat: '',
-              secondary_stats: [],
-              description_raw: ''
+          for (let i = 0; i < 3; i++) {
+            const num = coreOrder[i];
+            const core = coresByNumber[num] || { name: '', number: num, image_name: '', main_stat: '', secondary_stat: '' };
+            html += `
+              <div class="edit-core-block">
+                <label>Nom du noyau :</label>
+                <input type="text" name="core_name_${setIndex}_${i}" value="${core.name}">
+                <label>Image :</label>
+                <input type="text" name="core_image_${setIndex}_${i}" value="${core.image_name}">
+                <label>Stat principale :</label>
+                <input type="text" name="core_main_stat_${setIndex}_${i}" value="${core.main_stat}">
+                <label>Stat secondaire :</label>
+                <input type="text" name="core_secondary_stat_${setIndex}_${i}" value="${core.secondary_stat}">
+              </div>
+              <hr>
+            `;
+          }
+
+          fieldsContainer.innerHTML = html;
+        }
+
+        // Affiche le premier set au chargement
+        renderArtefactFields(select.value);
+
+        // Change les champs quand on change de set
+        select.addEventListener('change', function() {
+          if (this.value === "add_new_set") {
+            // Demande le nom du set à l'utilisateur
+            let setName = prompt("Nom du nouveau set :");
+            if (!setName) {
+              select.value = 0;
+              renderArtefactFields(select.value);
+              return;
+            }
+
+            // Demande la position d'insertion
+            let maxPos = equipmentSets.length;
+            let pos = prompt(`À quelle position insérer le set ? (1 = début, ${maxPos + 1} = fin)`, maxPos + 1);
+            pos = parseInt(pos, 10);
+            if (isNaN(pos) || pos < 1 || pos > maxPos + 1) pos = maxPos + 1; // Par défaut à la fin
+
+            // Crée un set vide avec le nom donné
+            const emptySet = {
+              set_name: setName,
+              description: '',
+              description_raw: '',
+              focus_stats: [],
+              artefacts: artefactOrder.map(order => ({
+                name: order.keys[0],
+                set: '',
+                image_name: '',
+                main_stat: '',
+                secondary_stats: [],
+                description_raw: ''
+              })),
+              cores: [
+                { name: '', number: '01', image_name: '', main_stat: '', secondary_stat: '' },
+                { name: '', number: '02', image_name: '', main_stat: '', secondary_stat: '' },
+                { name: '', number: '03', image_name: '', main_stat: '', secondary_stat: '' }
+              ]
             };
-          }
-          html += `
-            <div class="edit-artefact-block">
-              <label>${artefact.name}</label>
-              <label>Pannoplie :</label>
-              <input type="text" name="artefact_set_${setIndex}_${idx}" value="${artefact.set || ''}">
-              <label>Image :</label>
-              <input type="text" name="artefact_image_${setIndex}_${idx}" value="${artefact.image_name || ''}">
-              <label>Stat principale :</label>
-              <input type="text" name="artefact_main_stat_${setIndex}_${idx}" value="${artefact.main_stat || ''}">
-              <label>Stats secondaires :</label>
-              <input type="text" name="artefact_secondary_stats_${setIndex}_${idx}" value="${(artefact.secondary_stats || []).join(', ')}">
-            </div>
-          `;
-        });
 
-        html += `</div></div><hr><h4>Noyaux du set</h4>`;
+            // Insère le set à la bonne position dans le tableau
+            equipmentSets.splice(pos - 1, 0, emptySet);
 
-        const coreOrder = ['01', '02', '03'];
-        let coresByNumber = {};
-        if (eqSet.cores) {
-          eqSet.cores.forEach(core => {
-            if (core.number) coresByNumber[core.number] = core;
-          });
-        }
-        for (let i = 0; i < 3; i++) {
-          const num = coreOrder[i];
-          const core = coresByNumber[num] || { name: '', number: num, image_name: '', main_stat: '', secondary_stat: '' };
-          html += `
-            <div class="edit-core-block">
-              <label>Nom du noyau :</label>
-              <input type="text" name="core_name_${setIndex}_${i}" value="${core.name}">
-              <label>Image :</label>
-              <input type="text" name="core_image_${setIndex}_${i}" value="${core.image_name}">
-              <label>Stat principale :</label>
-              <input type="text" name="core_main_stat_${setIndex}_${i}" value="${core.main_stat}">
-              <label>Stat secondaire :</label>
-              <input type="text" name="core_secondary_stat_${setIndex}_${i}" value="${core.secondary_stat}">
-            </div>
-            <hr>
-          `;
-        }
+            // Reconstruit le select (sauf l'option "ajouter un nouveau set")
+            while (select.options.length > 0) select.remove(0);
+            equipmentSets.forEach((set, i) => {
+              const option = document.createElement('option');
+              option.value = i;
+              option.textContent = set.set_name;
+              select.appendChild(option);
+            });
+            // Ajoute l'option "ajouter un nouveau set"
+            const addOption = document.createElement('option');
+            addOption.value = "add_new_set";
+            addOption.textContent = "+ Ajouter un nouveau set";
+            addOption.style.color = "#ff6600";
+            select.appendChild(addOption);
 
-        fieldsContainer.innerHTML = html;
-      }
-
-      // Affiche le premier set au chargement
-      renderArtefactFields(select.value);
-
-      // Change les champs quand on change de set
-      select.addEventListener('change', function() {
-        if (this.value === "add_new_set") {
-          // Demande le nom du set à l'utilisateur
-          let setName = prompt("Nom du nouveau set :");
-          if (!setName) {
-            select.value = 0;
+            // Sélectionne le nouveau set et affiche ses champs
+            select.value = pos - 1;
             renderArtefactFields(select.value);
-            return;
+          } else {
+            renderArtefactFields(this.value);
           }
-
-          // Demande la position d'insertion
-          let maxPos = equipmentSets.length;
-          let pos = prompt(`À quelle position insérer le set ? (1 = début, ${maxPos + 1} = fin)`, maxPos + 1);
-          pos = parseInt(pos, 10);
-          if (isNaN(pos) || pos < 1 || pos > maxPos + 1) pos = maxPos + 1; // Par défaut à la fin
-
-          // Crée un set vide avec le nom donné
-          const emptySet = {
-            set_name: setName,
-            description: '',
-            description_raw: '',
-            focus_stats: [],
-            artefacts: artefactOrder.map(order => ({
-              name: order.keys[0],
-              set: '',
-              image_name: '',
-              main_stat: '',
-              secondary_stats: [],
-              description_raw: ''
-            })),
-            cores: [
-              { name: '', number: '01', image_name: '', main_stat: '', secondary_stat: '' },
-              { name: '', number: '02', image_name: '', main_stat: '', secondary_stat: '' },
-              { name: '', number: '03', image_name: '', main_stat: '', secondary_stat: '' }
-            ]
-          };
-
-          // Insère le set à la bonne position dans le tableau
-          equipmentSets.splice(pos - 1, 0, emptySet);
-
-          // Reconstruit le select (sauf l'option "ajouter un nouveau set")
-          while (select.options.length > 0) select.remove(0);
-          equipmentSets.forEach((set, i) => {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = set.set_name;
-            select.appendChild(option);
-          });
-          // Ajoute l'option "ajouter un nouveau set"
-          const addOption = document.createElement('option');
-          addOption.value = "add_new_set";
-          addOption.textContent = "+ Ajouter un nouveau set";
-          addOption.style.color = "#ff6600";
-          select.appendChild(addOption);
-
-          // Sélectionne le nouveau set et affiche ses champs
-          select.value = pos - 1;
-          renderArtefactFields(select.value);
-        } else {
-          renderArtefactFields(this.value);
-        }
-      });
-    });
-
-    document.addEventListener("DOMContentLoaded", () => {
-      const tabs = document.querySelectorAll(".edit-tab");
-      const tabContents = document.querySelectorAll(".edit-tab-content");
-
-      // Onglet actif par défaut (infos principales)
-      tabs.forEach((tab, idx) => {
-        if (tab.classList.contains("active")) {
-          tabContents[idx].classList.add("active");
-        } else {
-          tabContents[idx].classList.remove("active");
-        }
-      });
-
-      // Gestion du clic sur les onglets
-      tabs.forEach((tab, idx) => {
-        tab.addEventListener("click", () => {
-          tabs.forEach((t) => t.classList.remove("active"));
-          tabContents.forEach((tc) => tc.classList.remove("active"));
-          tab.classList.add("active");
-          tabContents[idx].classList.add("active");
         });
       });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const tabs = document.querySelectorAll(".edit-tab");
+        const tabContents = document.querySelectorAll(".edit-tab-content");
+
+        // Onglet actif par défaut (infos principales)
+        tabs.forEach((tab, idx) => {
+          if (tab.classList.contains("active")) {
+            tabContents[idx].classList.add("active");
+          } else {
+            tabContents[idx].classList.remove("active");
+          }
+        });
+
+        // Gestion du clic sur les onglets
+        tabs.forEach((tab, idx) => {
+          tab.addEventListener("click", () => {
+            tabs.forEach((t) => t.classList.remove("active"));
+            tabContents.forEach((tc) => tc.classList.remove("active"));
+            tab.classList.add("active");
+            tabContents[idx].classList.add("active");
+          });
+        });
+      });
+
+  // Sauvegarde l'état initial du formulaire à l'ouverture
+  let initialFormData = null;
+  const form = document.getElementById('edit-character-form');
+  if (form) {
+    // Fonction pour sérialiser tous les champs du formulaire
+    function serializeForm(form) {
+      const formData = new FormData(form);
+      // On convertit en tableau clé=valeur pour comparaison simple
+      return Array.from(formData.entries()).sort();
+    }
+
+    // À l'ouverture de la modale, on sauvegarde l'état initial
+    document.getElementById('edit-character-btn')?.addEventListener('click', () => {
+      initialFormData = serializeForm(form);
     });
 
-// Sauvegarde l'état initial du formulaire à l'ouverture
-let initialFormData = null;
-const form = document.getElementById('edit-character-form');
-if (form) {
-  // Fonction pour sérialiser tous les champs du formulaire
-  function serializeForm(form) {
-    const formData = new FormData(form);
-    // On convertit en tableau clé=valeur pour comparaison simple
-    return Array.from(formData.entries()).sort();
+    // Avant soumission, on vérifie si quelque chose a changé
+    form.addEventListener('submit', function(e) {
+      const currentFormData = serializeForm(form);
+      // Compare les deux tableaux (JSON.stringify suffit ici car trié)
+      if (initialFormData && JSON.stringify(initialFormData) === JSON.stringify(currentFormData)) {
+        e.preventDefault();
+        alert("Aucune modification détectée.");
+        return false;
+      }
+      // Sinon, la soumission continue normalement
+    });
   }
 
-  // À l'ouverture de la modale, on sauvegarde l'état initial
-  document.getElementById('edit-character-btn')?.addEventListener('click', () => {
-    initialFormData = serializeForm(form);
-  });
+  const overlay = document.getElementById('edit-character-overlay');
+  const popup = document.getElementById('edit-character-menu');
 
-  // Avant soumission, on vérifie si quelque chose a changé
-  form.addEventListener('submit', function(e) {
-    const currentFormData = serializeForm(form);
-    // Compare les deux tableaux (JSON.stringify suffit ici car trié)
-    if (initialFormData && JSON.stringify(initialFormData) === JSON.stringify(currentFormData)) {
-      e.preventDefault();
-      alert("Aucune modification détectée.");
-      return false;
-    }
-    // Sinon, la soumission continue normalement
-  });
-}
-
-const overlay = document.getElementById('edit-character-overlay');
-const popup = document.getElementById('edit-character-menu');
-
-if (overlay && popup) {
-  overlay.addEventListener('mousedown', function(e) {
-    // Si le clic est sur l'overlay mais pas dans le popup
-    if (e.target === overlay) {
-      overlay.style.display = 'none';
-    }
-  });
-}
+  if (overlay && popup) {
+    overlay.addEventListener('mousedown', function(e) {
+      // Si le clic est sur l'overlay mais pas dans le popup
+      if (e.target === overlay) {
+        overlay.style.display = 'none';
+      }
+    });
+  }
 </script>
