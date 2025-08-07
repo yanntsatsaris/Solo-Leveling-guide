@@ -243,9 +243,6 @@
         <div style="display: flex; align-items: center; gap: 12px">
           <label for="edit-equipment-select">Sélectionner le set :</label>
           <select id="edit-equipment-select">
-            {% if character.equipment_sets|length == 0 %}
-              <option value="none" disabled selected>Aucun set</option>
-            {% endif %}
             {% for set in character.equipment_sets %}
               <option value="{{ loop.index0 }}">{{ set.set_name }}</option>
             {% endfor %}
