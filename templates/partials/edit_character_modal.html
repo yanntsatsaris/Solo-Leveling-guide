@@ -51,7 +51,7 @@
           <div class="evolutions-row">
             {% endif %}
             <div class="edit-evolution-block">
-              <label>Évolution : {{ 'A' ~ i if not i ==7 else 'A6-A10' }}</label>
+              <label>Évolution : {{ 'A' ~ i if not i == 6 else 'A6-A10' }}</label>
               <textarea name="evolution_description_{{ i }}">
 {{ character.evolutions[i].description_raw if character.evolutions|length > i else '' }}</textarea
               >
@@ -222,7 +222,7 @@
             <div class="evolutions-row">
               {% endif %}
               <div class="edit-weapon-evolution-block">
-                <label>Évolution : {{ 'A' ~ i if not i == 7 else 'A6-A10' }}</label>
+                <label>Évolution : {{ 'A' ~ i if not i == 6 else 'A6-A10' }}</label>
                 <textarea
                   name="weapon_evolution_description_{{ weapon_idx }}_{{ i }}"
                 >
