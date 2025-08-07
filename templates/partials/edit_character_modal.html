@@ -414,8 +414,12 @@
           fieldsContainer.innerHTML = html;
         }
 
-        // Affiche le premier set au chargement
-        renderArtefactFields(select.value);
+        // Affiche le premier set au chargement, seulement si au moins un set existe
+        if (equipmentSets.length > 0) {
+          renderArtefactFields(0);
+        } else {
+          fieldsContainer.innerHTML = "";
+        }
 
         // Change les champs quand on change de set
         select.addEventListener('change', function() {
@@ -487,7 +491,7 @@
             // Sélectionne et affiche le nouveau set
             select.value = pos - 1;
             renderArtefactFields(select.value);
-          } else if (equipmentSets.length > 0) {
+          } else if (equipmentSets.length > 0 && !isNaN(this.value)) {
             renderArtefactFields(this.value);
           } else {
             fieldsContainer.innerHTML = "";
