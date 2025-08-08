@@ -44,14 +44,14 @@ class WeaponsSql:
 
     def get_weapons_full(self, char_id, language):
         self.cursor.execute("""
-            SELECT w.weapons_id, wt.weapon_translations_name, wt.weapon_translations_stats, w.weapons_image, wt.weapon_translations_tag, w.weapons_principal
+            SELECT w.weapons_id, wt.weapon_translations_name, wt.weapon_translations_stats, w.weapons_image, wt.weapon_translations_tag
             FROM weapons w
             JOIN weapon_translations wt ON wt.weapon_translations_weapons_id = w.weapons_id
             WHERE w.weapons_characters_id = %s AND wt.weapon_translations_language = %s
         """, (char_id, language))
         weapons = []
         for w_row in self.cursor.fetchall():
-            weapon_id, weapon_name, weapon_stats, weapon_image, weapon_tag, weapon_principal = w_row
+            weapon_id, weapon_name, weapon_stats, weapon_image, weapon_tag = w_row
             self.cursor.execute("""
                 SELECT we.weapon_evolutions_id, we.weapon_evolutions_number, we.weapon_evolutions_type, we.weapon_evolutions_range, wet.weapon_evolution_translations_description
                 FROM weapon_evolutions we
@@ -74,26 +74,25 @@ class WeaponsSql:
                 'stats': weapon_stats if weapon_stats else '',
                 'image_name': weapon_image,
                 'tag': weapon_tag,
-                'principal': weapon_principal,
                 'evolutions': evolutions
             })
         return weapons
 
-    def update_weapon(self, wid, name, stats, tag, img, principal, language):
+    def update_weapon(self, wid, name, stats, tag, img, language):
         self.cursor.execute("""
-            UPDATE weapons SET weapons_image=%s, weapons_principal=%s
+            UPDATE weapons SET weapons_image=%s
             WHERE weapons_id=%s
-        """, (img, principal, wid))
+        """, (img, wid))
         self.cursor.execute("""
             UPDATE weapon_translations SET weapon_translations_name=%s, weapon_translations_stats=%s, weapon_translations_tag=%s
             WHERE weapon_translations_weapons_id=%s AND weapon_translations_language=%s
         """, (name, stats, tag, wid, language))
 
-    def add_weapon(self, char_id, name, stats, tag, img, principal, language):
+    def add_weapon(self, char_id, name, stats, tag, img, language):
         self.cursor.execute("""
-            INSERT INTO weapons (weapons_characters_id, weapons_image, weapons_principal)
-            VALUES (%s, %s, %s) RETURNING weapons_id
-        """, (char_id, img, principal))
+            INSERT INTO weapons (weapons_characters_id, weapons_image)
+            VALUES (%s, %s) RETURNING weapons_id
+        """, (char_id, img))
         wid = self.cursor.fetchone()[0]
         self.cursor.execute("""
             INSERT INTO weapon_translations (weapon_translations_weapons_id, weapon_translations_language, weapon_translations_name, weapon_translations_stats, weapon_translations_tag)
