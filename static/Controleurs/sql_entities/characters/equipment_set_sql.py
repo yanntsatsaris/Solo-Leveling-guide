@@ -92,16 +92,21 @@ class EquipmentSetSql:
 
     def get_equipment_sets_full(self, char_id, language):
         self.cursor.execute("""
-            SELECT es.equipment_sets_id, es.equipment_sets_name, est.equipment_set_translations_description, efs.equipment_focus_stats_name
+            SELECT es.equipment_sets_id, es.equipment_sets_name, est.equipment_set_translations_description
             FROM equipment_sets es
             LEFT JOIN equipment_set_translations est ON est.equipment_set_translations_equipment_sets_id = es.equipment_sets_id AND est.equipment_set_translations_language = %s
-            LEFT JOIN equipment_focus_stats efs ON efs.equipment_focus_stats_equipment_sets_id = es.equipment_sets_id
             WHERE es.equipment_sets_characters_id = %s
             ORDER BY es.equipment_sets_order ASC, es.equipment_sets_id ASC
         """, (language, char_id))
         sets = []
         for row in self.cursor.fetchall():
-            set_id, set_name, set_desc, set_focus = row
+            set_id, set_name, set_desc = row
+            # Focus stats (récupère toutes les stats pour ce set)
+            self.cursor.execute("""
+                SELECT equipment_focus_stats_name FROM equipment_focus_stats
+                WHERE equipment_focus_stats_equipment_sets_id = %s
+            """, (set_id,))
+            focus_stats = [fs_row[0] for fs_row in self.cursor.fetchall()]
             # Artefacts
             self.cursor.execute("""
                 SELECT a.artefacts_id, at.artefact_translations_name, at.artefact_translations_set, a.artefacts_image, a.artefacts_main_stat
@@ -145,7 +150,7 @@ class EquipmentSetSql:
                 'id': set_id,
                 'name': set_name,
                 'description': set_desc,
-                'focus_stats': set_focus,
+                'focus_stats': focus_stats,
                 'artefacts': artefacts,
                 'cores': cores
             })
