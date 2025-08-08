@@ -26,7 +26,7 @@ class CharactersSql:
 
     def get_character_full(self, char_id, language):
         self.cursor.execute("""
-            SELECT ct.character_translations_name, c.characters_alias, c.characters_type, c.characters_rarity, c.characters_image, ct.character_translations_description
+            SELECT ct.character_translations_name, c.characters_alias, c.characters_type, c.characters_rarity, ct.character_translations_description
             FROM characters c
             JOIN character_translations ct ON ct.character_translations_characters_id = c.characters_id
             WHERE c.characters_id = %s AND ct.character_translations_language = %s
@@ -38,8 +38,7 @@ class CharactersSql:
                 'alias': row[1],
                 'type': row[2],
                 'rarity': row[3],
-                'image_name': row[4],
-                'description': row[5]
+                'description': row[4]
             }
         return {}
 
