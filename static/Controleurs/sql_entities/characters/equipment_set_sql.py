@@ -186,10 +186,29 @@ class EquipmentSetSql:
         return set_id
 
     def delete_equipment_set(self, set_id):
-        self.cursor.execute("DELETE FROM equipment_set_translations WHERE equipment_set_translations_equipment_sets_id=%s", (set_id,))
-        self.cursor.execute("DELETE FROM equipment_focus_stats WHERE equipment_focus_stats_equipment_sets_id=%s", (set_id,))
+        # Supprimer d'abord les stats secondaires des artefacts du set
+        self.cursor.execute("""
+            DELETE FROM artefact_secondary_stats
+            WHERE artefact_secondary_stats_artefacts_id IN (
+                SELECT artefacts_id FROM artefacts WHERE artefacts_equipment_sets_id=%s
+            )
+        """, (set_id,))
+        # Supprimer d'abord les traductions des artefacts du set
+        self.cursor.execute("""
+            DELETE FROM artefact_translations
+            WHERE artefact_translations_artefacts_id IN (
+                SELECT artefacts_id FROM artefacts WHERE artefacts_equipment_sets_id=%s
+            )
+        """, (set_id,))
+        # Supprimer les artefacts du set
         self.cursor.execute("DELETE FROM artefacts WHERE artefacts_equipment_sets_id=%s", (set_id,))
+        # Supprimer les noyaux du set
         self.cursor.execute("DELETE FROM cores WHERE cores_equipment_sets_id=%s", (set_id,))
+        # Supprimer les stats de focus
+        self.cursor.execute("DELETE FROM equipment_focus_stats WHERE equipment_focus_stats_equipment_sets_id=%s", (set_id,))
+        # Supprimer les traductions du set
+        self.cursor.execute("DELETE FROM equipment_set_translations WHERE equipment_set_translations_equipment_sets_id=%s", (set_id,))
+        # Supprimer le set lui-même
         self.cursor.execute("DELETE FROM equipment_sets WHERE equipment_sets_id=%s", (set_id,))
 
     def update_artefact(self, aid, set_id, name, aset, img, main, sec, language):
