@@ -163,10 +163,17 @@ class EquipmentSetSql:
             DELETE FROM equipment_focus_stats WHERE equipment_focus_stats_equipment_sets_id=%s
         """, (set_id,))
         if focus:
-            self.cursor.execute("""
-                INSERT INTO equipment_focus_stats (equipment_focus_stats_equipment_sets_id, equipment_focus_stats_name)
-                VALUES (%s, %s)
-            """, (set_id, focus))
+            if isinstance(focus, str):
+                focus_stats = [f.strip() for f in focus.split(',') if f.strip()]
+            elif isinstance(focus, list):
+                focus_stats = focus
+            else:
+                focus_stats = []
+            for stat in focus_stats:
+                self.cursor.execute("""
+                    INSERT INTO equipment_focus_stats (equipment_focus_stats_equipment_sets_id, equipment_focus_stats_name)
+                    VALUES (%s, %s)
+                """, (set_id, stat))
 
     def add_equipment_set(self, char_id, name, desc, focus, language):
         self.cursor.execute("""
@@ -179,10 +186,17 @@ class EquipmentSetSql:
             VALUES (%s, %s, %s)
         """, (set_id, language, desc))
         if focus:
-            self.cursor.execute("""
-                INSERT INTO equipment_focus_stats (equipment_focus_stats_equipment_sets_id, equipment_focus_stats_name)
-                VALUES (%s, %s)
-            """, (set_id, focus))
+            if isinstance(focus, str):
+                focus_stats = [f.strip() for f in focus.split(',') if f.strip()]
+            elif isinstance(focus, list):
+                focus_stats = focus
+            else:
+                focus_stats = []
+            for stat in focus_stats:
+                self.cursor.execute("""
+                    INSERT INTO equipment_focus_stats (equipment_focus_stats_equipment_sets_id, equipment_focus_stats_name)
+                    VALUES (%s, %s)
+                """, (set_id, stat))
         return set_id
 
     def delete_equipment_set(self, set_id):
