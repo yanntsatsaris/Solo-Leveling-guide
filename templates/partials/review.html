@@ -11,7 +11,7 @@
       <li>
         <img
           src="{{ url_for('static', filename='images/Advancement/' + evolution.evolution_id + '.webp') }}"
-          alt="{{ evolution.id }}"
+          alt="{{ evolution.evolution_id }}"
           class="evolution-image evolution-range"
         />
         <span>{{ evolution.description|safe }}</span>
@@ -21,7 +21,7 @@
       <li>
         <img
           src="{{ url_for('static', filename='images/Advancement/' + evolution.evolution_id + '.webp') }}"
-          alt="{{ evolution.id }}"
+          alt="{{ evolution.evolution_id }}"
           class="evolution-image"
         />
         <span>{{ evolution.description|safe }}</span>
