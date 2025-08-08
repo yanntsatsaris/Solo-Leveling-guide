@@ -615,4 +615,45 @@
     grid.appendChild(row);
   });
 });
+
+if (form) {
+  form.addEventListener('submit', function(e) {
+    // Supprime les anciens champs dynamiques (évite les doublons)
+    document.querySelectorAll('.dynamic-eqset-fields').forEach(el => el.remove());
+
+    // Pour chaque set, génère les champs cachés
+    equipmentSets.forEach((eqSet, setIndex) => {
+      const container = document.createElement('div');
+      container.className = 'dynamic-eqset-fields';
+      container.style.display = 'none';
+
+      // Champs du set
+      container.innerHTML += `<input type="hidden" name="eqset_id_${setIndex}" value="${eqSet.id || ''}">`;
+      container.innerHTML += `<input type="hidden" name="eqset_description_${setIndex}" value="${eqSet.description || ''}">`;
+      container.innerHTML += `<input type="hidden" name="eqset_focus_stats_${setIndex}" value="${eqSet.focus_stats ? eqSet.focus_stats.join(', ') : ''}">`;
+
+      // Artefacts
+      (eqSet.artefacts || []).forEach((artefact, idx) => {
+        container.innerHTML += `<input type="hidden" name="artefact_id_${setIndex}_${idx}" value="${artefact.id || ''}">`;
+        container.innerHTML += `<input type="hidden" name="artefact_name_${setIndex}_${idx}" value="${artefact.name || ''}">`;
+        container.innerHTML += `<input type="hidden" name="artefact_set_${setIndex}_${idx}" value="${artefact.set || ''}">`;
+        container.innerHTML += `<input type="hidden" name="artefact_image_${setIndex}_${idx}" value="${artefact.image_name || ''}">`;
+        container.innerHTML += `<input type="hidden" name="artefact_main_stat_${setIndex}_${idx}" value="${artefact.main_stat || ''}">`;
+        container.innerHTML += `<input type="hidden" name="artefact_secondary_stats_${setIndex}_${idx}" value="${(artefact.secondary_stats || []).join(', ')}">`;
+      });
+
+      // Noyaux (cores)
+      (eqSet.cores || []).forEach((core, idx) => {
+        container.innerHTML += `<input type="hidden" name="core_id_${setIndex}_${idx}" value="${core.id || ''}">`;
+        container.innerHTML += `<input type="hidden" name="core_name_${setIndex}_${idx}" value="${core.name || ''}">`;
+        container.innerHTML += `<input type="hidden" name="core_image_${setIndex}_${idx}" value="${core.image_name || ''}">`;
+        container.innerHTML += `<input type="hidden" name="core_main_stat_${setIndex}_${idx}" value="${core.main_stat || ''}">`;
+        container.innerHTML += `<input type="hidden" name="core_secondary_stat_${setIndex}_${idx}" value="${core.secondary_stat || ''}">`;
+      });
+
+      form.appendChild(container);
+    });
+    // La soumission continue normalement
+  });
+}
 </script>
