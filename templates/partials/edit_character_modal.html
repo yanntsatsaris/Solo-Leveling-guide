@@ -386,7 +386,10 @@
   if (form) {
     function serializeForm(form) {
       const formData = new FormData(form);
-      return Array.from(formData.entries()).sort();
+      // Ignore les champs vides
+      return Array.from(formData.entries())
+        .filter(([k, v]) => v !== null && v !== undefined && v !== '')
+        .sort();
     }
     document.getElementById('edit-character-btn')?.addEventListener('click', () => {
       initialFormData = serializeForm(form);
