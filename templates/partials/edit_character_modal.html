@@ -120,6 +120,7 @@
                   Caché
                 </label>
               </div>
+              <input type="hidden" name="passive_id_{{ loop.index0 }}" value="{{ passive.id }}">
             </div>
             {% if loop.index0 % 2 == 1 or loop.last %}
           </div>
@@ -171,6 +172,7 @@
                   Principal
                 </label>
               </div>
+              <input type="hidden" name="skill_id_{{ loop.index0 }}" value="{{ skill.id }}">
             </div>
             {% if loop.index0 % 2 == 1 or loop.last %}
           </div>
@@ -210,6 +212,7 @@
               name="weapon_principal_{{ weapon_idx }}"
               {% if weapon.principal is defined and weapon.principal %}checked{% endif %}
             />
+            <input type="hidden" name="weapon_id_{{ weapon_idx }}" value="{{ weapon.id if weapon.id is defined else '' }}">
             <!-- Toujours 7 évolutions, même si aucune n'est renseignée -->
             {% set total_evos = 7 %}
             <h4 style="margin-top: 18px">Évolutions de l'arme</h4>
@@ -223,6 +226,7 @@
                     <textarea
                       name="weapon_evolution_description_{{ weapon_idx }}_{{ i }}"
                     >{{ weapon.evolutions[i].description_raw if weapon.evolutions is defined and weapon.evolutions|length > i else '' }}</textarea>
+                    <input type="hidden" name="weapon_evolution_id_{{ weapon_idx }}_{{ i }}" value="{{ weapon.evolutions[i].id if weapon.evolutions is defined and weapon.evolutions|length > i and weapon.evolutions[i].id is defined else '' }}">
                   </div>
                 {% if i % 2 == 1 or i == total_evos - 1 %}
                 </div>
@@ -320,6 +324,7 @@
             <textarea name="eqset_description_${setIndex}">${eqSet.description_raw || eqSet.description || ''}</textarea>
             <label>Stats à focus :</label>
             <input type="text" name="eqset_focus_stats_${setIndex}" value="${eqSet.focus_stats ? eqSet.focus_stats.join(', ') : ''}">
+            <input type="hidden" name="eqset_id_${setIndex}" value="${eqSet.id || ''}">
             <h4>Artefacts du set</h4>
             <div class="artefacts-row">
               <div class="artefacts-col">
@@ -362,6 +367,7 @@
                 <input type="text" name="artefact_main_stat_${setIndex}_${idx}" value="${artefact.main_stat || ''}">
                 <label>Stats secondaires :</label>
                 <input type="text" name="artefact_secondary_stats_${setIndex}_${idx}" value="${(artefact.secondary_stats || []).join(', ')}">
+                <input type="hidden" name="artefact_id_${setIndex}_${idx}" value="${artefact.id || ''}">
               </div>
             `;
           });
@@ -388,6 +394,7 @@
                 <input type="text" name="core_main_stat_${setIndex}_${i}" value="${core.main_stat}">
                 <label>Stat secondaire :</label>
                 <input type="text" name="core_secondary_stat_${setIndex}_${i}" value="${core.secondary_stat}">
+                <input type="hidden" name="core_id_${setIndex}_${i}" value="${core.id || ''}">
               </div>
               <hr>
             `;

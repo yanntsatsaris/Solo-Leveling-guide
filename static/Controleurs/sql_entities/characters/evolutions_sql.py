@@ -14,7 +14,7 @@ class EvolutionsSql:
         """, (char_id, language))
         return [
             {
-                'id': row[0],
+                'id': row[0],  # Ajoute l'id
                 'number': row[1],
                 'type': row[2],
                 'range': row[3],
@@ -22,3 +22,37 @@ class EvolutionsSql:
             }
             for row in self.cursor.fetchall()
         ]
+
+    def get_evolutions_full(self, char_id, language):
+        self.cursor.execute("""
+            SELECT ce.character_evolutions_id, ce.character_evolutions_number, cet.character_evolution_translations_description
+            FROM character_evolutions ce
+            LEFT JOIN character_evolution_translations cet ON cet.character_evolution_translations_character_evolutions_id = ce.character_evolutions_id
+            WHERE ce.character_evolutions_characters_id = %s AND (cet.character_evolution_translations_language = %s OR cet.character_evolution_translations_language IS NULL)
+        """, (char_id, language))
+        return [
+            {
+                'id': row[0],
+                'number': row[1],
+                'description': row[2] if row[2] else ''
+            }
+            for row in self.cursor.fetchall()
+        ]
+
+    def update_evolution(self, eid, char_id, evo_idx, desc, language):
+        self.cursor.execute("""
+            UPDATE character_evolution_translations SET character_evolution_translations_description=%s
+            WHERE character_evolution_translations_character_evolutions_id=%s AND character_evolution_translations_language=%s
+        """, (desc, eid, language))
+
+    def add_evolution(self, char_id, evo_idx, desc, language):
+        self.cursor.execute("""
+            INSERT INTO character_evolutions (character_evolutions_characters_id, character_evolutions_number)
+            VALUES (%s, %s) RETURNING character_evolutions_id
+        """, (char_id, evo_idx))
+        eid = self.cursor.fetchone()[0]
+        self.cursor.execute("""
+            INSERT INTO character_evolution_translations (character_evolution_translations_character_evolutions_id, character_evolution_translations_language, character_evolution_translations_description)
+            VALUES (%s, %s, %s)
+        """, (eid, language, desc))
+        return eid
