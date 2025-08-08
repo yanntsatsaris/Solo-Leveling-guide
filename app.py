@@ -11,7 +11,7 @@ from routes.RouteUsers import users
 # Importer le contrôleur de configuration
 from static.Controleurs.ControleurConf import ControleurConf
 from static.Controleurs.ControleurLog import write_log
-from static.Controleurs.ContoleurUser import user_loader
+from static.Controleurs.ControleurUser import user_loader
 
 app = Flask(__name__)
 conf = ControleurConf()

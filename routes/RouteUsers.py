@@ -4,7 +4,7 @@ from static.Controleurs.ControleurConf import ControleurConf
 from static.Controleurs.ControleurLog import write_log
 from passlib.hash import ldap_salted_sha1, ldap_sha1
 import re
-from static.Controleurs.ContoleurUser import User
+from static.Controleurs.ControleurUser import User
 from flask_login import login_user
 
 def is_hashed(password):
