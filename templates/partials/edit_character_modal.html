@@ -388,8 +388,8 @@
     form.addEventListener('submit', function(e) {
       // Remplace tous les "None" ou null par ""
       Array.from(form.elements).forEach(el => {
-        if (el.value === "None" || el.value === null) {
-          el.value = "";
+        if (el.value === "None") {
+          el.value = null;
         }
       });
       const currentFormData = serializeForm(form);
