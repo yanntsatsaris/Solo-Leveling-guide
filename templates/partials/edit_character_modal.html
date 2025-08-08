@@ -39,10 +39,10 @@
         />
         <label>Description :</label>
         <textarea name="description" required>
-{{ character.description }}</textarea
+{{ character.description or '' }}</textarea
         >
         <label>Image :</label>
-        <input type="text" name="image" value="{{ character.image_name }}" />
+        <input type="text" name="image" value="{{ character.image_name or '' }}" />
 
         <h4 style="margin-top: 28px">Évolutions du personnage</h4>
         <div class="evolutions-grid">
@@ -76,23 +76,23 @@
               <input
                 type="text"
                 name="passive_name_{{ loop.index0 }}"
-                value="{{ passive.name }}"
+                value="{{ passive.name or '' }}"
               />
               <label>Description :</label>
               <textarea name="passive_description_{{ loop.index0 }}">
-{{ passive.description_raw }}</textarea
+{{ passive.description_raw or '' }}</textarea
               >
               <label>Tag :</label>
               <input
                 type="text"
                 name="passive_tag_{{ loop.index0 }}"
-                value="{{ passive.tag }}"
+                value="{{ passive.tag or '' }}"
               />
               <label>Image :</label>
               <input
                 type="text"
                 name="passive_image_{{ loop.index0 }}"
-                value="{{ passive.image_name }}"
+                value="{{ passive.image_name or '' }}"
               />
               <div class="checkbox-row">
                 <label>
@@ -141,23 +141,23 @@
               <input
                 type="text"
                 name="skill_name_{{ loop.index0 }}"
-                value="{{ skill.name }}"
+                value="{{ skill.name or '' }}"
               />
               <label>Description :</label>
               <textarea name="skill_description_{{ loop.index0 }}">
-{{ skill.description_raw }}</textarea
+{{ skill.description_raw or '' }}</textarea
               >
               <label>Tag :</label>
               <input
                 type="text"
                 name="skill_tag_{{ loop.index0 }}"
-                value="{{ skill.tag }}"
+                value="{{ skill.tag or '' }}"
               />
               <label>Image :</label>
               <input
                 type="text"
                 name="skill_image_{{ loop.index0 }}"
-                value="{{ skill.image_name }}"
+                value="{{ skill.image_name or '' }}"
               />
               <div class="checkbox-row">
                 <label>
