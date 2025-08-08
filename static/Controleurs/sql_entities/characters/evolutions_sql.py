@@ -11,6 +11,7 @@ class EvolutionsSql:
             FROM character_evolutions ce
             LEFT JOIN character_evolution_translations cet ON cet.character_evolution_translations_character_evolutions_id = ce.character_evolutions_id
             WHERE ce.character_evolutions_characters_id = %s AND (cet.character_evolution_translations_language = %s OR cet.character_evolution_translations_language IS NULL)
+            ORDER BY ce.character_evolutions_number
         """, (char_id, language))
         return [
             {
@@ -30,6 +31,7 @@ class EvolutionsSql:
             FROM character_evolutions ce
             LEFT JOIN character_evolution_translations cet ON cet.character_evolution_translations_character_evolutions_id = ce.character_evolutions_id
             WHERE ce.character_evolutions_characters_id = %s AND (cet.character_evolution_translations_language = %s OR cet.character_evolution_translations_language IS NULL)
+            ORDER BY ce.character_evolutions_number
         """, (char_id, language))
         return [
             {
