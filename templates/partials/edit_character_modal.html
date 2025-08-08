@@ -71,22 +71,22 @@
               <label>Nom du passif :</label>
               <input
                 type="text"
-                name="passive_name_{{ loop.index0 or ''}}"
-                value="{{ passive.name }}"
+                name="passive_name_{{ loop.index0 }}"
+                value="{{ passive.name or '' }}"
               />
               <label>Description :</label>
               <textarea name="passive_description_{{ loop.index0 }}">{{ passive.description_raw }}</textarea>
               <label>Tag :</label>
               <input
                 type="text"
-                name="passive_tag_{{ loop.index0 or ''}}"
-                value="{{ passive.tag }}"
+                name="passive_tag_{{ loop.index0 }}"
+                value="{{ passive.tag or '' }}"
               />
               <label>Image :</label>
               <input
                 type="text"
-                name="passive_image_{{ loop.index0 or ''}}"
-                value="{{ passive.image_name }}"
+                name="passive_image_{{ loop.index0 }}"
+                value="{{ passive.image_name or '' }}"
               />
               <div class="checkbox-row">
                 <label>
