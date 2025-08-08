@@ -1,5 +1,5 @@
-from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, user_loader
-from flask import current_app, session
+from flask_login import UserMixin
+from flask import session
 
 class User(UserMixin):
     def __init__(self, username, rights):
