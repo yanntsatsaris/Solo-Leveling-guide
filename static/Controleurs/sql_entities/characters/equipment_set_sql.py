@@ -123,7 +123,7 @@ class EquipmentSetSql:
                     'set': artefact_set,
                     'image_name': artefact_image,
                     'main_stat': artefact_main_stat,
-                    'secondary_stats': ','.join(secondary_stats) if isinstance(secondary_stats, list) else secondary_stats
+                    'secondary_stats': secondary_stats
                 })
             # Noyaux
             self.cursor.execute("""
