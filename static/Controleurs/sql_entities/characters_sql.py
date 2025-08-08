@@ -42,11 +42,11 @@ class CharactersSql:
             }
         return {}
 
-    def update_character_main(self, char_id, alias, type_, rarity, image_name, name, description, language):
+    def update_character_main(self, char_id, alias, type_, rarity, name, description, language):
         self.cursor.execute("""
-            UPDATE characters SET characters_alias=%s, characters_type=%s, characters_rarity=%s, characters_image=%s
+            UPDATE characters SET characters_alias=%s, characters_type=%s, characters_rarity=%s
             WHERE characters_id=%s
-        """, (alias, type_, rarity, image_name, char_id))
+        """, (alias, type_, rarity, char_id))
         self.cursor.execute("""
             UPDATE character_translations SET character_translations_name=%s, character_translations_description=%s
             WHERE character_translations_characters_id=%s AND character_translations_language=%s
