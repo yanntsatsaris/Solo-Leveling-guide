@@ -384,10 +384,15 @@
   let initialFormData = null;
   const form = document.getElementById('edit-character-form');
   if (form) {
+    function normalizeNewlines(str) {
+      if (typeof str !== "string") return str;
+      return str.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+    }
+
     function serializeForm(form) {
       const formData = new FormData(form);
-      // On garde tous les champs, même vides
-      return Array.from(formData.entries()).sort();
+      // On normalise les retours à la ligne pour tous les champs
+      return Array.from(formData.entries()).map(([k, v]) => [k, normalizeNewlines(v)]).sort();
     }
     // Initialisation immédiate à l'ouverture de la modale
     initialFormData = serializeForm(form);
