@@ -43,9 +43,13 @@ class EvolutionsSql:
 
     def update_evolution(self, eid, char_id, evo_idx, evolution_id, desc, language):
         self.cursor.execute("""
-            UPDATE character_evolution_translations SET character_evolution_translations_evolution_id=%s, character_evolution_translations_description=%s
+            UPDATE character_evolutions SET character_evolutions_evolution_id=%s
+            WHERE character_evolutions_id=%s
+        """, (evolution_id, eid))
+        self.cursor.execute("""
+            UPDATE character_evolution_translations SET character_evolution_translations_description=%s
             WHERE character_evolution_translations_character_evolutions_id=%s AND character_evolution_translations_language=%s
-        """, (evolution_id, desc, eid, language))
+        """, (desc, eid, language))
 
     def add_evolution(self, char_id, evo_idx, evolution_id, desc, language):
         self.cursor.execute("""
