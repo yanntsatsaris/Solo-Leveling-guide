@@ -16,7 +16,7 @@ class WeaponsSql:
         for w_row in self.cursor.fetchall():
             weapon_id, weapon_name, weapon_stats, weapon_image, weapon_tag = w_row
             self.cursor.execute("""
-                SELECT we.weapon_evolutions_evolution_id, we.weapon_evolutions_number, we.weapon_evolutions_type, we.weapon_evolutions_range, wet.weapon_evolution_translations_description
+                SELECT we.weapon_evolutions_id, we.weapon_evolutions_evolution_id, we.weapon_evolutions_number, we.weapon_evolutions_type, we.weapon_evolutions_range, wet.weapon_evolution_translations_description
                 FROM weapon_evolutions we
                 LEFT JOIN weapon_evolution_translations wet ON wet.weapon_evolution_translations_weapon_evolutions_id = we.weapon_evolutions_id
                 WHERE we.weapon_evolutions_weapons_id = %s AND (wet.weapon_evolution_translations_language = %s OR wet.weapon_evolution_translations_language IS NULL)
@@ -24,10 +24,11 @@ class WeaponsSql:
             evolutions = [
                 {
                     'id': evo[0],
-                    'number': evo[1],
-                    'type': evo[2],
-                    'range': evo[3],
-                    'description': evo[4] if evo[4] else ''
+                    'evolution_id': evo[1],
+                    'number': evo[2],
+                    'type': evo[3],
+                    'range': evo[4],
+                    'description': evo[5] if evo[5] else ''
                 }
                 for evo in self.cursor.fetchall()
             ]
@@ -53,7 +54,7 @@ class WeaponsSql:
         for w_row in self.cursor.fetchall():
             weapon_id, weapon_name, weapon_stats, weapon_image, weapon_tag = w_row
             self.cursor.execute("""
-                SELECT we.weapon_evolutions_id, we.weapon_evolutions_number, we.weapon_evolutions_type, we.weapon_evolutions_range, wet.weapon_evolution_translations_description
+                SELECT we.weapon_evolutions_id, we.weapon_evolutions_evolution_id, we.weapon_evolutions_number, we.weapon_evolutions_type, we.weapon_evolutions_range, wet.weapon_evolution_translations_description
                 FROM weapon_evolutions we
                 LEFT JOIN weapon_evolution_translations wet ON wet.weapon_evolution_translations_weapon_evolutions_id = we.weapon_evolutions_id
                 WHERE we.weapon_evolutions_weapons_id = %s AND (wet.weapon_evolution_translations_language = %s OR wet.weapon_evolution_translations_language IS NULL)
@@ -61,10 +62,11 @@ class WeaponsSql:
             evolutions = [
                 {
                     'id': evo[0],
-                    'number': evo[1],
-                    'type': evo[2],
-                    'range': evo[3],
-                    'description': evo[4] if evo[4] else ''
+                    'evolution_id': evo[1],
+                    'number': evo[2],
+                    'type': evo[3],
+                    'range': evo[4],
+                    'description': evo[5] if evo[5] else ''
                 }
                 for evo in self.cursor.fetchall()
             ]
@@ -104,17 +106,21 @@ class WeaponsSql:
         self.cursor.execute("DELETE FROM weapon_translations WHERE weapon_translations_weapons_id=%s", (wid,))
         self.cursor.execute("DELETE FROM weapons WHERE weapons_id=%s", (wid,))
 
-    def update_weapon_evolution(self, eid, wid, evo_idx, desc, language):
+    def update_weapon_evolution(self, eid, wid, evo_idx, evolution_id, desc, language):
+        self.cursor.execute("""
+            UPDATE weapon_evolutions SET weapon_evolutions_evolution_id=%s
+            WHERE weapon_evolutions_id=%s
+        """, (evolution_id, eid))
         self.cursor.execute("""
             UPDATE weapon_evolution_translations SET weapon_evolution_translations_description=%s
             WHERE weapon_evolution_translations_weapon_evolutions_id=%s AND weapon_evolution_translations_language=%s
         """, (desc, eid, language))
 
-    def add_weapon_evolution(self, wid, evo_idx, desc, language):
+    def add_weapon_evolution(self, wid, evo_idx, evolution_id, desc, language):
         self.cursor.execute("""
-            INSERT INTO weapon_evolutions (weapon_evolutions_weapons_id, weapon_evolutions_number)
-            VALUES (%s, %s) RETURNING weapon_evolutions_id
-        """, (wid, evo_idx))
+            INSERT INTO weapon_evolutions (weapon_evolutions_weapons_id, weapon_evolutions_evolution_id, weapon_evolutions_number)
+            VALUES (%s, %s, %s) RETURNING weapon_evolutions_id
+        """, (wid, evolution_id, evo_idx))
         eid = self.cursor.fetchone()[0]
         self.cursor.execute("""
             INSERT INTO weapon_evolution_translations (weapon_evolution_translations_weapon_evolutions_id, weapon_evolution_translations_language, weapon_evolution_translations_description)
