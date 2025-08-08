@@ -255,53 +255,54 @@
           </select>
         </div>
         <div id="edit-artefacts-fields">
-          {% for set_idx, eqSet in character.equipment_sets|enumerate %}
-    <div class="edit-eqset-block" id="eqset-block-{{ set_idx }}" style="display: {{ 'block' if set_idx == 0 else 'none' }};">
-      <h4>Set : {{ eqSet.set_name }}</h4>
-      <label>Description :</label>
-      <textarea name="eqset_description_{{ set_idx }}">{{ eqSet.description_raw or eqSet.description or '' }}</textarea>
-      <label>Stats à focus :</label>
-      <input type="text" name="eqset_focus_stats_{{ set_idx }}" value="{{ eqSet.focus_stats|join(', ') if eqSet.focus_stats else '' }}">
-      <input type="hidden" name="eqset_id_{{ set_idx }}" value="{{ eqSet.id or '' }}">
-      <h4>Artefacts du set</h4>
-      <div class="artefacts-row">
-        <div class="artefacts-col">
-          {% for a_idx in range(8) %}
-            {% set artefact = eqSet.artefacts[a_idx] if eqSet.artefacts|length > a_idx else {} %}
-            <div class="edit-artefact-block">
-              <label>{{ artefact.name if artefact.name is defined else '' }}</label>
-              <label>Pannoplie :</label>
-              <input type="text" name="artefact_set_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.set if artefact.set is defined else '' }}">
-              <label>Image :</label>
-              <input type="text" name="artefact_image_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.image_name if artefact.image_name is defined else '' }}">
-              <label>Stat principale :</label>
-              <input type="text" name="artefact_main_stat_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.main_stat if artefact.main_stat is defined else '' }}">
-              <label>Stats secondaires :</label>
-              <input type="text" name="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.secondary_stats|join(', ') if artefact.secondary_stats is defined else '' }}">
-              <input type="hidden" name="artefact_id_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.id if artefact.id is defined else '' }}">
-            </div>
-          {% endfor %}
-        </div>
+          {% for eqSet in character.equipment_sets %}
+  {% set set_idx = loop.index0 %}
+  <div class="edit-eqset-block" id="eqset-block-{{ set_idx }}" style="display: {{ 'block' if set_idx == 0 else 'none' }};">
+    <h4>Set : {{ eqSet.set_name }}</h4>
+    <label>Description :</label>
+    <textarea name="eqset_description_{{ set_idx }}">{{ eqSet.description_raw or eqSet.description or '' }}</textarea>
+    <label>Stats à focus :</label>
+    <input type="text" name="eqset_focus_stats_{{ set_idx }}" value="{{ eqSet.focus_stats|join(', ') if eqSet.focus_stats else '' }}">
+    <input type="hidden" name="eqset_id_{{ set_idx }}" value="{{ eqSet.id or '' }}">
+    <h4>Artefacts du set</h4>
+    <div class="artefacts-row">
+      <div class="artefacts-col">
+        {% for a_idx in range(8) %}
+          {% set artefact = eqSet.artefacts[a_idx] if eqSet.artefacts|length > a_idx else {} %}
+          <div class="edit-artefact-block">
+            <label>{{ artefact.name if artefact.name is defined else '' }}</label>
+            <label>Pannoplie :</label>
+            <input type="text" name="artefact_set_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.set if artefact.set is defined else '' }}">
+            <label>Image :</label>
+            <input type="text" name="artefact_image_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.image_name if artefact.image_name is defined else '' }}">
+            <label>Stat principale :</label>
+            <input type="text" name="artefact_main_stat_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.main_stat if artefact.main_stat is defined else '' }}">
+            <label>Stats secondaires :</label>
+            <input type="text" name="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.secondary_stats|join(', ') if artefact.secondary_stats is defined else '' }}">
+            <input type="hidden" name="artefact_id_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.id if artefact.id is defined else '' }}">
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <hr>
+    <h4>Noyaux du set</h4>
+    {% for c_idx in range(3) %}
+      {% set core = eqSet.cores[c_idx] if eqSet.cores|length > c_idx else {} %}
+      <div class="edit-core-block">
+        <label>Nom du noyau :</label>
+        <input type="text" name="core_name_{{ set_idx }}_{{ c_idx }}" value="{{ core.name if core.name is defined else '' }}">
+        <label>Image :</label>
+        <input type="text" name="core_image_{{ set_idx }}_{{ c_idx }}" value="{{ core.image_name if core.image_name is defined else '' }}">
+        <label>Stat principale :</label>
+        <input type="text" name="core_main_stat_{{ set_idx }}_{{ c_idx }}" value="{{ core.main_stat if core.main_stat is defined else '' }}">
+        <label>Stat secondaire :</label>
+        <input type="text" name="core_secondary_stat_{{ set_idx }}_{{ c_idx }}" value="{{ core.secondary_stat if core.secondary_stat is defined else '' }}">
+        <input type="hidden" name="core_id_{{ set_idx }}_{{ c_idx }}" value="{{ core.id if core.id is defined else '' }}">
       </div>
       <hr>
-      <h4>Noyaux du set</h4>
-      {% for c_idx in range(3) %}
-        {% set core = eqSet.cores[c_idx] if eqSet.cores|length > c_idx else {} %}
-        <div class="edit-core-block">
-          <label>Nom du noyau :</label>
-          <input type="text" name="core_name_{{ set_idx }}_{{ c_idx }}" value="{{ core.name if core.name is defined else '' }}">
-          <label>Image :</label>
-          <input type="text" name="core_image_{{ set_idx }}_{{ c_idx }}" value="{{ core.image_name if core.image_name is defined else '' }}">
-          <label>Stat principale :</label>
-          <input type="text" name="core_main_stat_{{ set_idx }}_{{ c_idx }}" value="{{ core.main_stat if core.main_stat is defined else '' }}">
-          <label>Stat secondaire :</label>
-          <input type="text" name="core_secondary_stat_{{ set_idx }}_{{ c_idx }}" value="{{ core.secondary_stat if core.secondary_stat is defined else '' }}">
-          <input type="hidden" name="core_id_{{ set_idx }}_{{ c_idx }}" value="{{ core.id if core.id is defined else '' }}">
-        </div>
-        <hr>
-      {% endfor %}
-    </div>
-  {% endfor %}
+    {% endfor %}
+  </div>
+{% endfor %}
         </div>
       </div>
       <div
