@@ -41,7 +41,7 @@ class EvolutionsSql:
             for row in self.cursor.fetchall()
         ]
 
-    def update_evolution(self, eid, evolution_id, char_id, evo_idx, desc, language):
+    def update_evolution(self, eid, char_id, evo_idx, evolution_id, desc, language):
         self.cursor.execute("""
             UPDATE character_evolution_translations SET character_evolution_translations_evolution_id=%s, character_evolution_translations_description=%s
             WHERE character_evolution_translations_character_evolutions_id=%s AND character_evolution_translations_language=%s
