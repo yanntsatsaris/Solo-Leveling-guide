@@ -7,7 +7,7 @@ class SkillsSql:
     def get_skills(self, char_id, language, type_folder, char_folder):
         write_log(f"Requête get_skills pour char_id={char_id}, langue={language}", log_level="DEBUG")
         self.cursor.execute("""
-            SELECT s.skills_principal, st.skill_translations_name, st.skill_translations_description, s.skills_image, st.skill_translations_tag
+            SELECT s.skills_id, s.skills_principal, st.skill_translations_name, st.skill_translations_description, s.skills_image, st.skill_translations_tag
             FROM skills s
             JOIN skill_translations st ON st.skill_translations_skills_id = s.skills_id
             WHERE s.skills_characters_id = %s AND st.skill_translations_language = %s
