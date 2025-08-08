@@ -52,10 +52,11 @@
             {% endif %}
             <div class="edit-evolution-block">
               <label>Évolution : {{ 'A' ~ i if not i == 6 else 'A6-A10' }}</label>
-              <textarea name="evolution_description_{{ i }}">
+              <textarea name="character_evolution_description_{{ i }}">
 {{ character.evolutions[i].description_raw if character.evolutions|length > i else '' }}</textarea
               >
               <input type="hidden" name="character_evolutions_{{ i }}_evolution_id" value="{{ character.evolutions[i].evolution_id }}">
+              <input type="hidden" name="character_evolutions_id_{{ i }}" value="{{ character.evolutions[i].id }}">
             </div>
             {% if i % 2 == 1 or i == total_evos - 1 %}
           </div>
