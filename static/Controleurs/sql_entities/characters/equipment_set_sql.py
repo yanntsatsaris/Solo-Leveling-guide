@@ -92,7 +92,7 @@ class EquipmentSetSql:
 
     def get_equipment_sets_full(self, char_id, language):
         self.cursor.execute("""
-            SELECT es.equipment_sets_id, est.equipment_set_translations_name, est.equipment_set_translations_description, efs.equipment_focus_stats_name
+            SELECT es.equipment_sets_id, est.equipment_set_translations_description, efs.equipment_focus_stats_name
             FROM equipment_sets es
             LEFT JOIN equipment_set_translations est ON est.equipment_set_translations_equipment_sets_id = es.equipment_sets_id AND est.equipment_set_translations_language = %s
             LEFT JOIN equipment_focus_stats efs ON efs.equipment_focus_stats_equipment_sets_id = es.equipment_sets_id
@@ -156,9 +156,9 @@ class EquipmentSetSql:
             UPDATE equipment_sets SET equipment_sets_name=%s WHERE equipment_sets_id=%s
         """, (name, set_id))
         self.cursor.execute("""
-            UPDATE equipment_set_translations SET equipment_set_translations_description=%s, equipment_set_translations_name=%s
+            UPDATE equipment_set_translations SET equipment_set_translations_description=%s
             WHERE equipment_set_translations_equipment_sets_id=%s AND equipment_set_translations_language=%s
-        """, (desc, name, set_id, language))
+        """, (desc, set_id, language))
         self.cursor.execute("""
             DELETE FROM equipment_focus_stats WHERE equipment_focus_stats_equipment_sets_id=%s
         """, (set_id,))
@@ -175,9 +175,9 @@ class EquipmentSetSql:
         """, (char_id, name))
         set_id = self.cursor.fetchone()[0]
         self.cursor.execute("""
-            INSERT INTO equipment_set_translations (equipment_set_translations_equipment_sets_id, equipment_set_translations_language, equipment_set_translations_name, equipment_set_translations_description)
-            VALUES (%s, %s, %s, %s)
-        """, (set_id, language, name, desc))
+            INSERT INTO equipment_set_translations (equipment_set_translations_equipment_sets_id, equipment_set_translations_language, equipment_set_translations_description)
+            VALUES (%s, %s, %s)
+        """, (set_id, language, desc))
         if focus:
             self.cursor.execute("""
                 INSERT INTO equipment_focus_stats (equipment_focus_stats_equipment_sets_id, equipment_focus_stats_name)
