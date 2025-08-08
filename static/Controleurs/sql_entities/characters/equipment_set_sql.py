@@ -92,7 +92,7 @@ class EquipmentSetSql:
 
     def get_equipment_sets_full(self, char_id, language):
         self.cursor.execute("""
-            SELECT es.equipment_sets_id, est.equipment_set_translations_description, efs.equipment_focus_stats_name
+            SELECT es.equipment_sets_id, es.equipment_sets_name, est.equipment_set_translations_description, efs.equipment_focus_stats_name
             FROM equipment_sets es
             LEFT JOIN equipment_set_translations est ON est.equipment_set_translations_equipment_sets_id = es.equipment_sets_id AND est.equipment_set_translations_language = %s
             LEFT JOIN equipment_focus_stats efs ON efs.equipment_focus_stats_equipment_sets_id = es.equipment_sets_id
