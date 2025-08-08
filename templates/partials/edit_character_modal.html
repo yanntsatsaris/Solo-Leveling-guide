@@ -389,9 +389,14 @@
       // On garde tous les champs, même vides
       return Array.from(formData.entries()).sort();
     }
+    // Initialisation immédiate à l'ouverture de la modale
+    initialFormData = serializeForm(form);
+
+    // Si tu veux aussi la réinitialiser à chaque ouverture de la modale :
     document.getElementById('edit-character-btn')?.addEventListener('click', () => {
       initialFormData = serializeForm(form);
     });
+
     form.addEventListener('submit', function(e) {
       const currentFormData = serializeForm(form);
       if (initialFormData && JSON.stringify(initialFormData) === JSON.stringify(currentFormData)) {
