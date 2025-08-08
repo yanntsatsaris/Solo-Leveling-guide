@@ -321,273 +321,72 @@
   </div>
 </div>
 <script>
-      document.querySelectorAll('.edit-tab').forEach(tab => {
-        tab.addEventListener('click', function() {
-          document.querySelectorAll('.edit-tab').forEach(t => t.classList.remove('active'));
-          document.querySelectorAll('.edit-tab-content').forEach(c => c.classList.remove('active'));
-          tab.classList.add('active');
-          document.getElementById('edit-tab-' + tab.dataset.tab).classList.add('active');
-        });
-      });
-      // Sélecteur pour afficher le bon bloc de set à modifier dans l'onglet artefacts
-      document.getElementById('edit-equipment-select')?.addEventListener('change', function(e) {
-  const idx = e.target.value;
-  document.querySelectorAll('.edit-eqset-block').forEach((block, i) => {
-    block.style.display = (i == idx) ? 'block' : 'none';
+  // Gestion des onglets
+  document.querySelectorAll('.edit-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.edit-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.edit-tab-content').forEach(c => c.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('edit-tab-' + tab.dataset.tab).classList.add('active');
+    });
   });
-});
-      document.addEventListener("DOMContentLoaded", function() {
-        const select = document.getElementById('edit-equipment-select');
-        const fieldsContainer = document.getElementById('edit-artefacts-fields');
-        const equipmentSets = {{ character.equipment_sets|tojson }};
 
-        // Récupère la langue depuis une variable globale ou un attribut data-lang sur le body
-  const language = "{{ language }}".toLowerCase(); // Flask/Jinja2 injecte la langue ici
+  // Sélecteur pour afficher le bon bloc de set à modifier dans l'onglet artefacts
+  document.getElementById('edit-equipment-select')?.addEventListener('change', function(e) {
+    const idx = this.value;
+    document.querySelectorAll('.edit-eqset-block').forEach((block, i) => {
+      block.style.display = (i == idx) ? 'block' : 'none';
+    });
+  });
 
-  // Définition dynamique de l'ordre des artefacts selon la langue
-  const artefactOrder = (language === "fr-fr")
-    ? [
-        { keys: ['Casque'], col: 'left' },
-        { keys: ['Plastron'], col: 'left' },
-        { keys: ['Gants'], col: 'left' },
-        { keys: ['Bottes'], col: 'left' },
-        { keys: ['Collier'], col: 'right' },
-        { keys: ['Bracelet'], col: 'right' },
-        { keys: ['Bague'], col: 'right' },
-        { keys: ['Boucle d\'oreille'], col: 'right' }
-      ]
-    : [
-        { keys: ['Helmet'], col: 'left' },
-        { keys: ['Chestplate'], col: 'left' },
-        { keys: ['Gloves'], col: 'left' },
-        { keys: ['Boots'], col: 'left' },
-        { keys: ['Necklace'], col: 'right' },
-        { keys: ['Bracelet'], col: 'right' },
-        { keys: ['Ring'], col: 'right' },
-        { keys: ['Earring'], col: 'right' }
-      ];
-      /*  function renderArtefactFields(setIndex) {
-          const eqSet = equipmentSets[setIndex];
-          let html = `
-            <h4>Set : ${eqSet.set_name}</h4>
-            <label>Description :</label>
-            <textarea name="eqset_description_${setIndex}">${eqSet.description_raw || eqSet.description || ''}</textarea>
-            <label>Stats à focus :</label>
-            <input type="text" name="eqset_focus_stats_${setIndex}" value="${eqSet.focus_stats ? eqSet.focus_stats.join(', ') : ''}">
-            <input type="hidden" name="eqset_id_${setIndex}" value="${eqSet.id || ''}">
-            <h4>Artefacts du set</h4>
-            <div class="artefacts-row">
-              <div class="artefacts-col">
-          `;
-
-          // Indexation des artefacts par nom pour accès rapide
-          const artefactsByName = {};
-          eqSet.artefacts.forEach(a => {
-            artefactsByName[a.name.toLowerCase()] = a;
-          });
-
-          // Colonne gauche : pièces d’armure
-          ['Helmet', 'Casque', 'Chestplate', 'Plastron', 'Gloves', 'Gants', 'Boots', 'Bottes'].forEach((type, idx) => {
-            if (idx === 4) html += `</div><div class="artefacts-col">`; // Passe à la colonne bijoux après 4 éléments
-            // Trouve l’artefact correspondant
-            let artefact = null;
-            for (const key of artefactOrder[idx].keys) {
-              artefact = eqSet.artefacts.find(a => a.name && a.name.toLowerCase() === key.toLowerCase());
-              if (artefact) break;
-            }
-            // Si non trouvé, crée un artefact vide
-            if (!artefact) {
-              artefact = {
-                name: artefactOrder[idx].keys[0],
-                set: eqSet.set_name,
-                image_name: '',
-                main_stat: '',
-                secondary_stats: [],
-                description_raw: ''
-              };
-            }
-            html += `
-              <div class="edit-artefact-block">
-                <label>${artefact.name}</label>
-                <label>Pannoplie :</label>
-                <input type="text" name="artefact_set_${setIndex}_${idx}" value="${artefact.set || ''}">
-                <label>Image :</label>
-                <input type="text" name="artefact_image_${setIndex}_${idx}" value="${artefact.image_name || ''}">
-                <label>Stat principale :</label>
-                <input type="text" name="artefact_main_stat_${setIndex}_${idx}" value="${artefact.main_stat || ''}">
-                <label>Stats secondaires :</label>
-                <input type="text" name="artefact_secondary_stats_${setIndex}_${idx}" value="${(artefact.secondary_stats || []).join(', ')}">
-                <input type="hidden" name="artefact_id_${setIndex}_${idx}" value="${artefact.id || ''}">
-              </div>
-            `;
-          });
-
-          html += `</div></div><hr><h4>Noyaux du set</h4>`;
-
-          const coreOrder = ['01', '02', '03'];
-          let coresByNumber = {};
-          if (eqSet.cores) {
-            eqSet.cores.forEach(core => {
-              if (core.number) coresByNumber[core.number] = core;
-            });
-          }
-          for (let i = 0; i < 3; i++) {
-            const num = coreOrder[i];
-            const core = coresByNumber[num] || { name: '', number: num, image_name: '', main_stat: '', secondary_stat: '' };
-            html += `
-              <div class="edit-core-block">
-                <label>Nom du noyau :</label>
-                <input type="text" name="core_name_${setIndex}_${i}" value="${core.name}">
-                <label>Image :</label>
-                <input type="text" name="core_image_${setIndex}_${i}" value="${core.image_name}">
-                <label>Stat principale :</label>
-                <input type="text" name="core_main_stat_${setIndex}_${i}" value="${core.main_stat}">
-                <label>Stat secondaire :</label>
-                <input type="text" name="core_secondary_stat_${setIndex}_${i}" value="${core.secondary_stat}">
-                <input type="hidden" name="core_id_${setIndex}_${i}" value="${core.id || ''}">
-              </div>
-              <hr>
-            `;
-          }
-
-          fieldsContainer.innerHTML = html;
-        }*/
-
-        // Affiche le premier set au chargement, seulement si au moins un set existe
-        if (equipmentSets.length > 0) {
-          renderArtefactFields(0);
-        } else {
-          fieldsContainer.innerHTML = "";
-        }
-
-        // Change les champs quand on change de set
-        select.addEventListener('change', function() {
-          if (this.value === "add_new_set") {
-            let setName = prompt("Nom du nouveau set :");
-            if (!setName) {
-              if (equipmentSets.length === 0) {
-                select.selectedIndex = 0;
-                fieldsContainer.innerHTML = "";
-              } else {
-                select.value = 0;
-                renderArtefactFields(select.value);
-              }
-              return;
-            }
-
-            let maxPos = equipmentSets.length;
-            let pos = prompt(`À quelle position insérer le set ? (1 = début, ${maxPos + 1} = fin)`, maxPos + 1);
-            pos = parseInt(pos, 10);
-            if (isNaN(pos) || pos < 1 || pos > maxPos + 1) pos = maxPos + 1;
-
-            const emptySet = {
-              set_name: setName,
-              id: 'NEW',
-              description: '',
-              description_raw: '',
-              focus_stats: [],
-              artefacts: artefactOrder.map(order => ({
-                name: order.keys[0],
-                set: '',
-                image_name: '',
-                main_stat: '',
-                secondary_stats: [],
-                description_raw: ''
-              })),
-              cores: [
-                { name: '', number: '01', image_name: '', main_stat: '', secondary_stat: '' },
-                { name: '', number: '02', image_name: '', main_stat: '', secondary_stat: '' },
-                { name: '', number: '03', image_name: '', main_stat: '', secondary_stat: '' }
-              ]
-            };
-
-            equipmentSets.splice(pos - 1, 0, emptySet);
-
-            // Reconstruit le select (toujours, même si vide avant)
-            while (select.options.length > 0) select.remove(0);
-
-            equipmentSets.forEach((set, i) => {
-              const option = document.createElement('option');
-              option.value = i;
-              option.textContent = set.set_name;
-              select.appendChild(option);
-            });
-            const addOption = document.createElement('option');
-            addOption.value = "add_new_set";
-            addOption.textContent = "+ Ajouter un nouveau set";
-            addOption.style.color = "#ff6600";
-            select.appendChild(addOption);
-
-            // Sélectionne et affiche le nouveau set
-            select.value = pos - 1;
-            renderArtefactFields(select.value);
-          } else if (equipmentSets.length > 0 && !isNaN(this.value)) {
-            renderArtefactFields(this.value);
-          } else {
-            fieldsContainer.innerHTML = "";
-          }
-        });
+  // Onglet actif par défaut (infos principales)
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll(".edit-tab");
+    const tabContents = document.querySelectorAll(".edit-tab-content");
+    tabs.forEach((tab, idx) => {
+      if (tab.classList.contains("active")) {
+        tabContents[idx].classList.add("active");
+      } else {
+        tabContents[idx].classList.remove("active");
+      }
+    });
+    // Gestion du clic sur les onglets
+    tabs.forEach((tab, idx) => {
+      tab.addEventListener("click", () => {
+        tabs.forEach((t) => t.classList.remove("active"));
+        tabContents.forEach((tc) => tc.classList.remove("active"));
+        tab.classList.add("active");
+        tabContents[idx].classList.add("active");
       });
-
-      document.addEventListener("DOMContentLoaded", () => {
-        const tabs = document.querySelectorAll(".edit-tab");
-        const tabContents = document.querySelectorAll(".edit-tab-content");
-
-        // Onglet actif par défaut (infos principales)
-        tabs.forEach((tab, idx) => {
-          if (tab.classList.contains("active")) {
-            tabContents[idx].classList.add("active");
-          } else {
-            tabContents[idx].classList.remove("active");
-          }
-        });
-
-        // Gestion du clic sur les onglets
-        tabs.forEach((tab, idx) => {
-          tab.addEventListener("click", () => {
-            tabs.forEach((t) => t.classList.remove("active"));
-            tabContents.forEach((tc) => tc.classList.remove("active"));
-            tab.classList.add("active");
-            tabContents[idx].classList.add("active");
-          });
-        });
-      });
+    });
+  });
 
   // Sauvegarde l'état initial du formulaire à l'ouverture
   let initialFormData = null;
   const form = document.getElementById('edit-character-form');
   if (form) {
-    // Fonction pour sérialiser tous les champs du formulaire
     function serializeForm(form) {
       const formData = new FormData(form);
-      // On convertit en tableau clé=valeur pour comparaison simple
       return Array.from(formData.entries()).sort();
     }
-
-    // À l'ouverture de la modale, on sauvegarde l'état initial
     document.getElementById('edit-character-btn')?.addEventListener('click', () => {
       initialFormData = serializeForm(form);
     });
-
-    // Avant soumission, on vérifie si quelque chose a changé
     form.addEventListener('submit', function(e) {
       const currentFormData = serializeForm(form);
-      // Compare les deux tableaux (JSON.stringify suffit ici car trié)
       if (initialFormData && JSON.stringify(initialFormData) === JSON.stringify(currentFormData)) {
         e.preventDefault();
         alert("Aucune modification détectée.");
         return false;
       }
-      // Sinon, la soumission continue normalement
     });
   }
 
+  // Fermeture de la modale si clic en dehors du popup
   const overlay = document.getElementById('edit-character-overlay');
   const popup = document.getElementById('edit-character-menu');
-
   if (overlay && popup) {
     overlay.addEventListener('mousedown', function(e) {
-      // Si le clic est sur l'overlay mais pas dans le popup
       if (e.target === overlay) {
         overlay.style.display = 'none';
       }
@@ -599,67 +398,66 @@
   if (select) {
     select.addEventListener('click', function(e) {
       if (select.value === "add_new_set") {
-        // Simule un vrai changement pour déclencher l'ajout
         const event = new Event('change');
         select.dispatchEvent(event);
       }
     });
   }
 
-  document.addEventListener("DOMContentLoaded", function() {
   // Ajout d'un passif
-  document.getElementById('add-passive-btn')?.addEventListener('click', function() {
-    const grid = document.getElementById('passives-grid');
-    const index = grid.querySelectorAll('.edit-passive-block').length;
-    const row = document.createElement('div');
-    row.className = 'passives-row';
-    row.innerHTML = `
-      <div class="edit-passive-block">
-        <label>Nom du passif :</label>
-        <input type="text" name="passive_name_${index}" value="" />
-        <label>Description :</label>
-        <textarea name="passive_description_${index}"></textarea>
-        <label>Tag :</label>
-        <input type="text" name="passive_tag_${index}" value="" />
-        <label>Image :</label>
-        <input type="text" name="passive_image_${index}" value="" />
-        <div class="checkbox-row">
-          <label>
-            <input type="checkbox" name="passive_principal_${index}" /> Principal
-          </label>
-          <label>
-            <input type="checkbox" name="passive_hidden_${index}" /> Caché
-          </label>
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('add-passive-btn')?.addEventListener('click', function() {
+      const grid = document.getElementById('passives-grid');
+      const index = grid.querySelectorAll('.edit-passive-block').length;
+      const row = document.createElement('div');
+      row.className = 'passives-row';
+      row.innerHTML = `
+        <div class="edit-passive-block">
+          <label>Nom du passif :</label>
+          <input type="text" name="passive_name_${index}" value="" />
+          <label>Description :</label>
+          <textarea name="passive_description_${index}"></textarea>
+          <label>Tag :</label>
+          <input type="text" name="passive_tag_${index}" value="" />
+          <label>Image :</label>
+          <input type="text" name="passive_image_${index}" value="" />
+          <div class="checkbox-row">
+            <label>
+              <input type="checkbox" name="passive_principal_${index}" /> Principal
+            </label>
+            <label>
+              <input type="checkbox" name="passive_hidden_${index}" /> Caché
+            </label>
+          </div>
         </div>
-      </div>
-    `;
-    grid.appendChild(row);
-  });
+      `;
+      grid.appendChild(row);
+    });
 
-  // Ajout d'une compétence
-  document.getElementById('add-skill-btn')?.addEventListener('click', function() {
-    const grid = document.getElementById('skills-grid');
-    const index = grid.querySelectorAll('.edit-skill-block').length;
-    const row = document.createElement('div');
-    row.className = 'skills-row';
-    row.innerHTML = `
-      <div class="edit-skill-block">
-        <label>Nom de la compétence :</label>
-        <input type="text" name="skill_name_${index}" value="" />
-        <label>Description :</label>
-        <textarea name="skill_description_${index}"></textarea>
-        <label>Tag :</label>
-        <input type="text" name="skill_tag_${index}" value="" />
-        <label>Image :</label>
-        <input type="text" name="skill_image_${index}" value="" />
-        <div class="checkbox-row">
-          <label>
-            <input type="checkbox" name="skill_principal_${index}" /> Principal
-          </label>
+    // Ajout d'une compétence
+    document.getElementById('add-skill-btn')?.addEventListener('click', function() {
+      const grid = document.getElementById('skills-grid');
+      const index = grid.querySelectorAll('.edit-skill-block').length;
+      const row = document.createElement('div');
+      row.className = 'skills-row';
+      row.innerHTML = `
+        <div class="edit-skill-block">
+          <label>Nom de la compétence :</label>
+          <input type="text" name="skill_name_${index}" value="" />
+          <label>Description :</label>
+          <textarea name="skill_description_${index}"></textarea>
+          <label>Tag :</label>
+          <input type="text" name="skill_tag_${index}" value="" />
+          <label>Image :</label>
+          <input type="text" name="skill_image_${index}" value="" />
+          <div class="checkbox-row">
+            <label>
+              <input type="checkbox" name="skill_principal_${index}" /> Principal
+            </label>
+          </div>
         </div>
-      </div>
-    `;
-    grid.appendChild(row);
+      `;
+      grid.appendChild(row);
+    });
   });
-});
 </script>
