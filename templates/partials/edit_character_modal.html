@@ -39,10 +39,10 @@
         />
         <label>Description :</label>
         <textarea name="description" required>
-{{ character.description or '' }}</textarea
+{{ character.description }}</textarea
         >
         <label>Image :</label>
-        <input type="text" name="image" value="{{ character.image_name or '' }}" />
+        <input type="text" name="image" value="{{ character.image_name }}" />
 
         <h4 style="margin-top: 28px">Évolutions du personnage</h4>
         <div class="evolutions-grid">
@@ -76,23 +76,23 @@
               <input
                 type="text"
                 name="passive_name_{{ loop.index0 }}"
-                value="{{ passive.name or '' }}"
+                value="{{ passive.name }}"
               />
               <label>Description :</label>
               <textarea name="passive_description_{{ loop.index0 }}">
-{{ passive.description_raw or '' }}</textarea
+{{ passive.description_raw }}</textarea
               >
               <label>Tag :</label>
               <input
                 type="text"
                 name="passive_tag_{{ loop.index0 }}"
-                value="{{ passive.tag or '' }}"
+                value="{{ passive.tag }}"
               />
               <label>Image :</label>
               <input
                 type="text"
                 name="passive_image_{{ loop.index0 }}"
-                value="{{ passive.image_name or '' }}"
+                value="{{ passive.image_name }}"
               />
               <div class="checkbox-row">
                 <label>
@@ -141,23 +141,23 @@
               <input
                 type="text"
                 name="skill_name_{{ loop.index0 }}"
-                value="{{ skill.name or '' }}"
+                value="{{ skill.name }}"
               />
               <label>Description :</label>
               <textarea name="skill_description_{{ loop.index0 }}">
-{{ skill.description_raw or '' }}</textarea
+{{ skill.description_raw }}</textarea
               >
               <label>Tag :</label>
               <input
                 type="text"
                 name="skill_tag_{{ loop.index0 }}"
-                value="{{ skill.tag or '' }}"
+                value="{{ skill.tag }}"
               />
               <label>Image :</label>
               <input
                 type="text"
                 name="skill_image_{{ loop.index0 }}"
-                value="{{ skill.image_name or '' }}"
+                value="{{ skill.image_name }}"
               />
               <div class="checkbox-row">
                 <label>
@@ -259,12 +259,12 @@
   {% set set_idx = loop.index0 %}
   <div class="edit-eqset-block" id="eqset-block-{{ set_idx }}" style="display: {{ 'block' if set_idx == 0 else 'none' }};">
     <h4>Set : {{ eqSet.set_name }}</h4>
-    <input type="hidden" name="eqset_name_{{ set_idx }}" value="{{ eqSet.set_name or '' }}">
+    <input type="hidden" name="eqset_name_{{ set_idx }}" value="{{ eqSet.set_name }}">
     <label>Description :</label>
-    <textarea name="eqset_description_{{ set_idx }}">{{ eqSet.description_raw or eqSet.description or '' }}</textarea>
+    <textarea name="eqset_description_{{ set_idx }}">{{ eqSet.description_raw or eqSet.description }}</textarea>
     <label>Stats à focus :</label>
     <input type="text" name="eqset_focus_stats_{{ set_idx }}" value="{{ eqSet.focus_stats|join(', ') if eqSet.focus_stats else '' }}">
-    <input type="hidden" name="eqset_id_{{ set_idx }}" value="{{ eqSet.id or '' }}">
+    <input type="hidden" name="eqset_id_{{ set_idx }}" value="{{ eqSet.id }}">
     <h4>Artefacts du set</h4>
     <div class="artefacts-row" style="display: flex;">
       <div class="artefacts-col" style="flex: 1;">
