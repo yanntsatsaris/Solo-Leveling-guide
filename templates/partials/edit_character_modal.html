@@ -259,12 +259,12 @@
   {% set set_idx = loop.index0 %}
   <div class="edit-eqset-block" id="eqset-block-{{ set_idx }}" style="display: {{ 'block' if set_idx == 0 else 'none' }};">
     <h4>Set : {{ eqSet.set_name }}</h4>
-    <input type="hidden" name="eqset_name_{{ set_idx }}" value="{{ eqSet.set_name }}">
+    <input type="hidden" name="eqset_name_{{ set_idx }}" value="{{ eqSet.set_name or '' }}">
     <label>Description :</label>
-    <textarea name="eqset_description_{{ set_idx }}">{{ eqSet.description_raw or eqSet.description }}</textarea>
+    <textarea name="eqset_description_{{ set_idx }}">{{ eqSet.description_raw or eqSet.description or '' }}</textarea>
     <label>Stats à focus :</label>
     <input type="text" name="eqset_focus_stats_{{ set_idx }}" value="{{ eqSet.focus_stats|join(', ') if eqSet.focus_stats else '' }}">
-    <input type="hidden" name="eqset_id_{{ set_idx }}" value="{{ eqSet.id }}">
+    <input type="hidden" name="eqset_id_{{ set_idx }}" value="{{ eqSet.id or '' }}">
     <h4>Artefacts du set</h4>
     <div class="artefacts-row" style="display: flex;">
       <div class="artefacts-col" style="flex: 1;">
@@ -384,24 +384,13 @@
   let initialFormData = null;
   const form = document.getElementById('edit-character-form');
   if (form) {
-    function normalizeNewlines(str) {
-      if (typeof str !== "string") return str;
-      return str.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
-    }
-
     function serializeForm(form) {
       const formData = new FormData(form);
-      // On normalise les retours à la ligne pour tous les champs
-      return Array.from(formData.entries()).map(([k, v]) => [k, normalizeNewlines(v)]).sort();
+      return Array.from(formData.entries()).sort();
     }
-    // Initialisation immédiate à l'ouverture de la modale
-    initialFormData = serializeForm(form);
-
-    // Si tu veux aussi la réinitialiser à chaque ouverture de la modale :
     document.getElementById('edit-character-btn')?.addEventListener('click', () => {
       initialFormData = serializeForm(form);
     });
-
     form.addEventListener('submit', function(e) {
       const currentFormData = serializeForm(form);
       if (initialFormData && JSON.stringify(initialFormData) === JSON.stringify(currentFormData)) {
