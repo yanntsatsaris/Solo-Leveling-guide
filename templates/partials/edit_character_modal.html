@@ -259,6 +259,7 @@
   {% set set_idx = loop.index0 %}
   <div class="edit-eqset-block" id="eqset-block-{{ set_idx }}" style="display: {{ 'block' if set_idx == 0 else 'none' }};">
     <h4>Set : {{ eqSet.set_name }}</h4>
+    <input type="hidden" name="eqset_name_{{ set_idx }}" value="{{ eqSet.set_name or '' }}">
     <label>Description :</label>
     <textarea name="eqset_description_{{ set_idx }}">{{ eqSet.description_raw or eqSet.description or '' }}</textarea>
     <label>Stats à focus :</label>
