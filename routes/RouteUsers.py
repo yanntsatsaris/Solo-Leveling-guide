@@ -4,6 +4,8 @@ from static.Controleurs.ControleurConf import ControleurConf
 from static.Controleurs.ControleurLog import write_log
 from passlib.hash import ldap_salted_sha1, ldap_sha1
 import re
+from static.Controleurs.ContoleurUser import User
+from flask_login import login_user
 
 def is_hashed(password):
     # Vérifie si le mot de passe est déjà haché avec SHA, SSHA, MD5, CRYPT ou SMD5
@@ -30,6 +32,8 @@ def users(app):
             rights = [r.split("SoloLevelingGuide::")[1] for r in solo_rights]  # Stocke le niveau dans rights
             session['username'] = username
             session['rights'] = rights  # Stocke dans la session
+            user = User(username, rights)
+            login_user(user)
             write_log(f"Connexion réussie", log_level="INFO", username=username)
             write_log(f"Niveau SoloLevelingGuide de {username}: {', '.join(rights)}", log_level="INFO", username=username)
             return jsonify({'success': True})
