@@ -38,7 +38,7 @@
           required
         />
         <label>Description :</label>
-        <textarea name="description" required>{{ character.description }}</textarea>
+        <textarea name="description" required>{{ character.description or '' }}</textarea>
         <label>Image :</label>
         <input type="text" name="image" value="{{ character.image_name }}" />
 
@@ -71,7 +71,7 @@
               <label>Nom du passif :</label>
               <input
                 type="text"
-                name="passive_name_{{ loop.index0 }}"
+                name="passive_name_{{ loop.index0 or ''}}"
                 value="{{ passive.name }}"
               />
               <label>Description :</label>
@@ -79,13 +79,13 @@
               <label>Tag :</label>
               <input
                 type="text"
-                name="passive_tag_{{ loop.index0 }}"
+                name="passive_tag_{{ loop.index0 or ''}}"
                 value="{{ passive.tag }}"
               />
               <label>Image :</label>
               <input
                 type="text"
-                name="passive_image_{{ loop.index0 }}"
+                name="passive_image_{{ loop.index0 or ''}}"
                 value="{{ passive.image_name }}"
               />
               <div class="checkbox-row">
@@ -388,8 +388,8 @@
     form.addEventListener('submit', function(e) {
       // Remplace tous les "None" ou null par ""
       Array.from(form.elements).forEach(el => {
-        if (el.value === "None" || el.value === null) {
-          el.value = "";
+        if (el.value === "") {
+          el.value = "none";
         }
       });
       const currentFormData = serializeForm(form);
@@ -398,6 +398,11 @@
         alert("Aucune modification détectée.");
         return false;
       }
+      Array.from(form.elements).forEach(el => {
+        if (el.value === "none" || el.value === null) {
+          el.value = "";
+        }
+      });
     });
   }
 
