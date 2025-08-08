@@ -55,6 +55,7 @@
               <textarea name="evolution_description_{{ i }}">
 {{ character.evolutions[i].description_raw if character.evolutions|length > i else '' }}</textarea
               >
+              <input type="hidden" name="character_evolutions_{{ i }}_evolution_id" value="{{ character.evolutions[i].evolution_id }}">
             </div>
             {% if i % 2 == 1 or i == total_evos - 1 %}
           </div>
@@ -227,7 +228,6 @@
                       name="weapon_evolution_description_{{ weapon_idx }}_{{ i }}"
                     >{{ weapon.evolutions[i].description_raw if weapon.evolutions is defined and weapon.evolutions|length > i else '' }}</textarea>
                     <input type="hidden" name="weapon_evolution_id_{{ weapon_idx }}_{{ i }}" value="{{ weapon.evolutions[i].id if weapon.evolutions is defined and weapon.evolutions|length > i and weapon.evolutions[i].id is defined else '' }}">
-                    <input type="hidden" name="evolution_evolution_id_{{ i }}" value="{{ character.evolutions[i].evolution_evolution_id">
                   </div>
                 {% if i % 2 == 1 or i == total_evos - 1 %}
                 </div>
