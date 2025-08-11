@@ -256,10 +256,21 @@ class EquipmentSetSql:
         self.cursor.execute("""
             UPDATE artefacts SET artefacts_image=%s, artefacts_main_stat=%s WHERE artefacts_id=%s
         """, (img, main, aid))
+        # Vérifie si la traduction existe déjà
         self.cursor.execute("""
-            UPDATE artefact_translations SET artefact_translations_name=%s, artefact_translations_set=%s
+            SELECT 1 FROM artefact_translations
             WHERE artefact_translations_artefacts_id=%s AND artefact_translations_language=%s
-        """, (name, aset, aid, language))
+        """, (aid, language))
+        if self.cursor.fetchone():
+            self.cursor.execute("""
+                UPDATE artefact_translations SET artefact_translations_name=%s, artefact_translations_set=%s
+                WHERE artefact_translations_artefacts_id=%s AND artefact_translations_language=%s
+            """, (name, aset, aid, language))
+        else:
+            self.cursor.execute("""
+                INSERT INTO artefact_translations (artefact_translations_artefacts_id, artefact_translations_language, artefact_translations_name, artefact_translations_set)
+                VALUES (%s, %s, %s, %s)
+            """, (aid, language, name, aset))
         self.cursor.execute("""
             DELETE FROM artefact_secondary_stats WHERE artefact_secondary_stats_artefacts_id=%s
         """, (aid,))
