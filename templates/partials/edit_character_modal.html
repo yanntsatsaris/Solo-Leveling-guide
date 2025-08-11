@@ -508,6 +508,24 @@
       // Pour l'insertion, on veut l'index (0-based)
       const setOrderIndex = setOrder - 1;
 
+      // === AJOUTE CE BLOC ICI ===
+      // Incrémente data-order de tous les sets >= setOrderIndex
+      options.forEach(opt => {
+        const optOrder = opt.dataset.order !== undefined && opt.dataset.order !== ""
+          ? Number(opt.dataset.order)
+          : Number.MAX_SAFE_INTEGER;
+        if (optOrder >= setOrderIndex) {
+          opt.dataset.order = optOrder + 1;
+          // Mets aussi à jour le champ caché d'ordre dans le bloc correspondant
+          const block = document.getElementById(`eqset-block-${opt.value}`);
+          if (block) {
+            const orderInput = block.querySelector(`input[name="eqset_order_${opt.value}"]`);
+            if (orderInput) orderInput.value = Number(opt.dataset.order) + 1;
+          }
+        }
+      });
+      // === FIN DU BLOC À AJOUTER ===
+
       // Création de la nouvelle option
       const option = document.createElement('option');
       option.value = setOrderIndex;
