@@ -490,6 +490,7 @@
         return;
       }
       const setOrder = prompt("Ordre d'affichage du set (nombre, optionnel) :") || "";
+      setOrder--;
 
       // Trouver le plus grand index déjà utilisé
       const usedIndexes = Array.from(document.querySelectorAll('input[name^="eqset_name_"]'))
@@ -500,7 +501,7 @@
       const option = document.createElement('option');
       option.value = setIdx;
       option.textContent = setName;
-      option.dataset.order = setOrder - 1;
+      option.dataset.order = setOrder;
 
       // Trouver la bonne position d'insertion selon l'ordre
       const select = this;
