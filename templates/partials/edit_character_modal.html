@@ -599,6 +599,36 @@
       } else {
         fields.appendChild(div);
       }
+      reindexSets();
     }
   });
+
+  function reindexSets() {
+    const select = document.getElementById('edit-equipment-select');
+    const addNewSetOption = select.querySelector('option[value="add_new_set"]');
+    const options = Array.from(select.options).filter(opt => opt !== addNewSetOption);
+
+    const fields = document.getElementById('edit-artefacts-fields');
+    const blocks = Array.from(fields.querySelectorAll('.edit-eqset-block'));
+
+    options.forEach((option, idx) => {
+      option.value = idx;
+      // Met à jour le bloc correspondant
+      const block = blocks[idx];
+      if (block) {
+        block.id = `eqset-block-${idx}`;
+        // Met à jour tous les champs du bloc
+        block.querySelectorAll('[name]').forEach(input => {
+          input.name = input.name.replace(/_\d+(_\d+)?/, (m) => {
+            // Pour artefact/core : _setIdx_artefactIdx
+            if (m.includes('_')) {
+              const parts = m.split('_');
+              return `_${idx}${parts.length > 2 ? '_' + parts[2] : ''}`;
+            }
+            return `_${idx}`;
+          });
+        });
+      }
+    });
+  }
 </script>
