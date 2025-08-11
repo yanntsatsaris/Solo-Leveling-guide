@@ -490,7 +490,6 @@
         return;
       }
       const setOrder = prompt("Ordre d'affichage du set (nombre, optionnel) :") || "";
-      setOrder--;
 
       // Trouver le plus grand index déjà utilisé
       const usedIndexes = Array.from(document.querySelectorAll('input[name^="eqset_name_"]'))
