@@ -95,9 +95,9 @@ function showSetEffects(setName, event) {
     : 0;
 
   // Filtre les effets pour le set affiché et le nombre de pièces
-  const effects = equipmentSetsEffects.filter(
-    (e) => e.set_name === setName && e.pieces_required <= numPieces
-  );
+  const effects = equipmentSetsEffects
+    .filter((e) => e.set_name === setName && e.pieces_required <= numPieces)
+    .sort((a, b) => a.pieces_required - b.pieces_required);
 
   effectsContainer.style.display = "block";
   effectsList.innerHTML = "";
