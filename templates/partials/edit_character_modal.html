@@ -503,25 +503,15 @@
       option.dataset.order = setOrder;
 
       // Trouver la bonne position d'insertion selon l'ordre
-      const select = this;
-      const addNewSetOption = select.querySelector('option[value="add_new_set"]');
-      const options = Array.from(select.options).filter(opt => opt !== addNewSetOption);
-
       const setOrderNum = setOrder !== "" ? Number(setOrder) : Number.MAX_SAFE_INTEGER;
-      let insertPos = options.length;
-      for (let i = 0; i < options.length; i++) {
-        const optOrder = options[i].dataset.order !== undefined && options[i].dataset.order !== ""
-          ? Number(options[i].dataset.order)
+      let insertPos = options.filter(opt => {
+        const optOrder = opt.dataset.order !== undefined && opt.dataset.order !== ""
+          ? Number(opt.dataset.order)
           : Number.MAX_SAFE_INTEGER;
-        if (setOrderNum < optOrder) {
-          select.insertBefore(option, options[i]);
-          insertPos = i;
-          break;
-        }
-      }
-      if (insertPos === options.length) {
-        select.insertBefore(option, addNewSetOption);
-      }
+        return optOrder < setOrderNum;
+      }).length;
+
+      select.insertBefore(option, options[insertPos] || addNewSetOption);
       select.value = setIdx;
 
       // Crée le bloc HTML du nouveau set
