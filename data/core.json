@@ -1,0 +1,148 @@
+[
+  {
+    "FR-fr": [
+      {
+        "Bleu": [
+          {
+            "number": "01",
+            "name": "Obsession du Spectre Antique",
+            "effect": "Augmente l'Attaque de l'utilisateur de 5%."
+          },
+          {
+            "number": "02",
+            "name": "Main droite du Spectre Antique",
+            "effect": "Lorsque l'utilisateur est touché, sa réduction de dégâts augmente de 10% pendant 10 seconde(s). (Temps de recharge : 25 seconde(s))"
+          },
+          {
+            "number": "03",
+            "name": "Énergie de Mana du Spectre Antique",
+            "effect": "Lorsque l'Attaque de base de l'utilisateur touche sa cible 3 fois, sa jauge de puissance se remplit de 3% (temps de rechargement : 10 secondes)."
+          }
+        ],
+        "Orange" : [
+            {
+                "number": "01",
+                "name": "Tromperie du Démon Anonyme",
+                "effect": "Lors de l'utilisation de la compétence ultime, les Dégâts de coup critique de l'utilisateur augmentent de 20% pendant 8 secondes."
+            },
+            {
+                "number": "02",
+                "name": "Corne du Démon Anonyme",
+                "effect": "Lors de l'utilisation de la Compétence ultime, l'utilisateur bénéficie d'un Bouclier équivalent à 10% de ses PV max pendant 8 secondes."
+            },
+            {
+                "number": "03",
+                "name": "Magisphère du Démon Anonyme",
+                "effect": "Lors de l'utilisation de la Compétence ultime, l'utilisateur récupère des PM équivalents à 5% de ses PM max (temps de rechargement : 20 secondes)."
+            }
+        ],
+        "Rouge": [
+            {
+                "number": "01",
+                "name": "Faim du Prédateur écarlate",
+                "effect": "Augmente l'Attaque de 6% lorsque les PM sont à 50% ou moins."
+            },
+            {
+                "number": "02",
+                "name": "Désirs du Prédateur écarlate",
+                "effect": "Augmente la Défense de 6% à 50% de PM ou moins."
+            },
+            {
+                "number": "03",
+                "name": "Punition du Prédateur écarlate",
+                "effect": "lorsque l'utilisateur a 20% de ses PM ou moins, il récupère des PM équivalents à 30% de ses PM max. Cet effet ne s'active qu'une seule fois pendant le combat."
+            }
+        ],
+        "Violet": [
+            {
+                "number": "01",
+                "name": "Yeux du Veilleur",
+                "effect": "Augmente les Dégâts de coup critique des attaques de noyau de 20%."
+            },
+            {
+                "number": "02",
+                "name": "Membres du Veilleur",
+                "effect": "Augmente la Défense de 6% à 70% de PV ou moins."
+            },
+            {
+                "number": "03",
+                "name": "Dents du Veilleur",
+                "effect": "Diminue le Taux de récupération de PM de 10% et la Consommation de PM de 12% lors de l'utilisation d'une compétence."
+            }
+        ]
+      }
+    ],
+    "EN-en": [
+      {
+        "Bleu": [
+          {
+            "number": "01",
+            "name": "Ancient Wraith's Obession",
+            "effect": "Increases the user's Attack by 5%."
+          },
+          {
+            "number": "02",
+            "name": "Ancient Wraith's Right Hand",
+            "effect": "When the user is hit, their damage reduction increases by 10% for 10 second(s). (Cooldown: 25 second(s))"
+          },
+          {
+            "number": "03",
+            "name": "Ancient Wraith's Mana Power",
+            "effect": "When the user's Basic Attack hits 3 time(s), it restores 3% of their Power Gauge. (Cooldown: 10 second(s))"
+          }
+        ],
+        "Orange" : [
+            {
+                "number": "01",
+                "name": "Nameless Demon's Deception",
+                "effect": "When the user uses their Ultimate Skill, it increases the Critical Hit Damage of their Basic Skill by 20% for 8 second(s)."
+            },
+            {
+                "number": "02",
+                "name": "Nameless Demon's Horn",
+                "effect": "When the user uses their Ultimate Skill, it grants a Shield equal to 10% of their Max HP for 8 second(s)."
+            },
+            {
+                "number": "03",
+                "name": "Nameless Demon's Magisphere",
+                "effect": "When the user uses their Ultimate Skill, it grants recovers MP equal to 5% of their Max MP. (Cooldown: 20 second(s))"
+            }
+        ],
+        "Rouge": [
+            {
+                "number": "01",
+                "name": "Hunger of the Crimson Apex",
+                "effect": "Increases Attack by 6% when MP is 50% or below."
+            },
+            {
+                "number": "02",
+                "name": "Desires of the Crimson Apex",
+                "effect": "Increases Defense by 6% when MP is 50% or below."
+            },
+            {
+                "number": "03",
+                "name": "Punishment of the Crimson Apex",
+                "effect": "When the user has 20% of their MP or less they recover MP equal to 30% of their maximum MP. This effect activates only once during combat."
+            }
+        ],
+        "Violet": [
+            {
+                "number": "01",
+                "name": "Eyes of the Watcher",
+                "effect": "Increases the Critical Hit damage of Core Attacks by 20%."
+            },
+            {
+                "number": "02",
+                "name": "Limbs of the Watcher",
+                "effect": "Increases Defense by 6% at 70% or fewer HP."
+            },
+            {
+                "number": "03",
+                "name": "Teeth of the Watcher",
+                "effect": "Decreases MP Recovery Rate by 10% and MP Consumption of Basic Skills by 12%."
+            }
+        ]
+      }
+    ]
+  }
+]

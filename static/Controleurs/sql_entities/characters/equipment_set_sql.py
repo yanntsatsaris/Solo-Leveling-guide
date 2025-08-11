@@ -92,7 +92,7 @@ class EquipmentSetSql:
 
     def get_equipment_sets_full(self, char_id, language):
         self.cursor.execute("""
-            SELECT es.equipment_sets_id, es.equipment_sets_name, est.equipment_set_translations_description
+            SELECT es.equipment_sets_id, es.equipment_sets_name, est.equipment_set_translations_description, es.equipment_sets_order
             FROM equipment_sets es
             LEFT JOIN equipment_set_translations est ON est.equipment_set_translations_equipment_sets_id = es.equipment_sets_id AND est.equipment_set_translations_language = %s
             WHERE es.equipment_sets_characters_id = %s
@@ -100,7 +100,7 @@ class EquipmentSetSql:
         """, (language, char_id))
         sets = []
         for row in self.cursor.fetchall():
-            set_id, set_name, set_desc = row
+            set_id, set_name, set_desc, set_order = row
             # Focus stats (récupère toutes les stats pour ce set)
             self.cursor.execute("""
                 SELECT equipment_focus_stats_name FROM equipment_focus_stats
@@ -152,14 +152,15 @@ class EquipmentSetSql:
                 'description': set_desc,
                 'focus_stats': focus_stats,
                 'artefacts': artefacts,
-                'cores': cores
+                'cores': cores,
+                'order': set_order  # <-- Ajout de l'ordre ici
             })
         return sets
 
-    def update_equipment_set(self, set_id, char_id, name, desc, focus, language):
+    def update_equipment_set(self, set_id, char_id, name, desc, focus, order, language):
         self.cursor.execute("""
-            UPDATE equipment_sets SET equipment_sets_name=%s WHERE equipment_sets_id=%s
-        """, (name, set_id))
+            UPDATE equipment_sets SET equipment_sets_name=%s, equipment_sets_order=%s WHERE equipment_sets_id=%s
+        """, (name, order, set_id))
         self.cursor.execute("""
             UPDATE equipment_set_translations SET equipment_set_translations_description=%s
             WHERE equipment_set_translations_equipment_sets_id=%s AND equipment_set_translations_language=%s
@@ -180,11 +181,11 @@ class EquipmentSetSql:
                     VALUES (%s, %s)
                 """, (set_id, stat))
 
-    def add_equipment_set(self, char_id, name, desc, focus, language):
+    def add_equipment_set(self, char_id, name, desc, focus, order, language):
         self.cursor.execute("""
-            INSERT INTO equipment_sets (equipment_sets_characters_id, equipment_sets_name)
-            VALUES (%s, %s) RETURNING equipment_sets_id
-        """, (char_id, name))
+            INSERT INTO equipment_sets (equipment_sets_characters_id, equipment_sets_name, equipment_sets_order)
+            VALUES (%s, %s, %s) RETURNING equipment_sets_id
+        """, (char_id, name, order))
         set_id = self.cursor.fetchone()[0]
         self.cursor.execute("""
             INSERT INTO equipment_set_translations (equipment_set_translations_equipment_sets_id, equipment_set_translations_language, equipment_set_translations_description)

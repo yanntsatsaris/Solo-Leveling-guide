@@ -213,16 +213,16 @@ def SJW(app: Flask):
 
                     # Mettre à jour l'arme associée à l'ombre
                     if 'weapon' in shadow:
-                        weapon = shadow['weapon']
-                        if 'image' in weapon:
-                            weapon['image'] = f'images/{character_folder}/Shadows/Weapons/{weapon["image"]}'
-                        if 'codex' in weapon:
-                            weapon['codex'] = f'images/{character_folder}/Shadows/Weapons/{weapon["codex"]}'
-                        if 'stats' in weapon:
-                            weapon['stats'] = update_image_paths(weapon['stats'], f'images/{character_folder}/Shadows/Weapons')
-                        for evolution in weapon.get('evolutions', []):
-                            if 'description' in evolution:
-                                evolution['description'] = update_image_paths(evolution['description'], f'images/{character_folder}/Shadows/Weapons/Evolutions')
+                        for weapon in shadow['weapon']:  # <-- Correction ici
+                            if 'image' in weapon:
+                                weapon['image'] = f'images/{character_folder}/Shadows/Weapons/{weapon["image"]}'
+                            if 'codex' in weapon:
+                                weapon['codex'] = f'images/{character_folder}/Shadows/Weapons/{weapon["codex"]}'
+                            if 'stats' in weapon:
+                                weapon['stats'] = update_image_paths(weapon['stats'], f'images/{character_folder}/Shadows/Weapons')
+                            for evolution in weapon.get('evolutions', []):
+                                if 'description' in evolution:
+                                    evolution['description'] = update_image_paths(evolution['description'], f'images/{character_folder}/Shadows/Weapons/Evolutions')
 
                     break
 

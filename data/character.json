@@ -115,94 +115,116 @@
         "weapon": [
           {
             "name": "[ARME] UNE CONVICTION ET UNE VOCATION",
+            "tag": "Arme",
             "image": "Light_GGH_Weapon.webp",
-            "stats": "+12% DEF.\nTOUCHE MOB<img src='Light_GGH_Skill1.webp' alt='Skill1'> [SKILL1] <img src='Light_GGH_DBuff_LightDMGUp.webp' alt='LightDmgInc'> [LIGHT DMG UP]."
+            "stats": "+12% DEF.\nTOUCHE MOB [SKILL1] [LIGHT DMG UP]."
           }
         ],
         "passives": [
           {
             "principal": "True",
-            "description": "+12% DEF.\n<img src='Light_GGH_Buff_Vaisseaubrise.webp' alt='VaisseauBrise'> [VAISSEAU BRISE]."
+            "description": "+12% DEF.\n[VAISSEAU BRISE]."
           },
           {
             "name": "[SHIELD]",
+            "tag": "Shield",
             "description": "EMPECHE LE KNOCKBACK ET PROTEGE DES DEGATS.",
             "image": "Light_GGH_Buff_Shield.webp"
           },
           {
             "name": "[VAISSEAU BRISE]",
+            "tag": "Vaisseau Brise",
             "description": "-50% RECUPERATION HEAL.",
             "image": "Light_GGH_Buff_Vaisseaubrise.webp"
           },
           {
             "name": "[AURA DE DIRIGEANT]",
-            "description": "+50% DEF\n+20%DMG RED.\n <img src='Light_GGH_Buff_Shield.webp' alt='Shield'> [SHIELD] +20% (15 SECONDES).",
+            "tag": "Aura de Dirigeant",
+            "description": "+50% DEF\n+20%DMG RED.\n [SHIELD] +20% (15 SECONDES).",
             "image": "Light_GGH_Buff_Aura.webp"
           },
           {
             "name": "[Fragment LUMIERE BRILLANTE]",
-            "description": "CHARGE <img src='Light_GGH_Skill_Core.webp' alt='Core'> [CORE]\n<img src='Light_GGH_Skill1.webp' alt='Skill1'> [SKILL1] +60% DMG INC. (15 SECONDES)",
+            "tag": "Fragment LUMIERE BRILLANTE",
+            "description": "CHARGE [CORE]\n[SKILL1] +60% DMG INC. (15 SECONDES)",
             "image": "Light_GGH_Buff_Fragment.webp"
           },
           {
             "name": "[VOLONTE LUMIERE BRILLANTE]",
+            "tag": "Volonte LUMIERE BRILLANTE",
             "description": "[PAR LIGHT] TEAM +8% LIGHT DMG INC. & +8% CRIT DMG.",
             "image": "Light_GGH_Buff_VolonteBrillante.webp"
           },
           {
             "name": "[VOLONTE DU Fragment]",
+            "tag": "Volonte du Fragment",
             "description": "[TEAM] +30% CRIT DMG & [QTE] +150% DMG INC. (20 SECONDES)",
             "image": "Light_GGH_Buff_VolonteFragment.webp"
           },
           {
             "name": "[LIGHT DMG UP]",
+            "tag": "Light DMG UP",
             "description": "[DBUFF MOB] +12% LIGHT DMG INC. (15 SECONDES)",
             "image": "Light_GGH_DBuff_LightDMGUp.webp"
           },
           {
             "name": "[AURA LUMIERE BRILLANTE]",
-            "description": "[SJW BUFF] +10% DEF & <img src='Light_GGH_Buff_Shield.webp' alt='Shield'> [SHIELD] +10% & +10% LIGHT DMG INC. (20 SECONDES)",
+            "tag": "Aura Lumiere Brillante",
+            "description": "[SJW BUFF] +10% DEF & [SHIELD] +10% & +10% LIGHT DMG INC. (20 SECONDES)",
             "image": "Light_GGH_Buff_Aura.webp"
+          },
+          {
+            "name": "[BREAK]",
+            "tag": "Break",
+            "image": "Light_GGH_BreakDMG.webp",
+            "hidden": true
           }
         ],
         "skills": [
           {
             "principal": "True",
-            "description": "<img src='Light_GGH_Skill_QTE.webp' alt='QTE'> [QTE] > <img src='Light_GGH_Skill1.webp' alt='Ultime'> [SKILL1] > <img src='Light_GGH_Skill_Core.webp' alt='Core'> [CORE] > <img src='Light_GGH_Skill2.webp' alt='Skill2'> [SKILL2] > <img src='Light_GGH_Skill_Core.webp' alt='Core'> [CORE] > <img src='Light_GGH_Skill1.webp' alt='Skill1'> [SKILL1] > <img src='Light_GGH_Skill_Ultime.webp' alt='Ultime'> [ULTIME] > <img src='Light_GGH_Skill_Core.webp' alt='Core'> [Core] > [QTE]"
+            "description": "[QTE] > [SKILL1] > [CORE] > [SKILL2] > [CORE] > [SKILL1] > [ULTIME] > [CORE] > [QTE]"
           },
           {
             "name": "[BASE ATK] VOLONTE DU PRESIDENT",
-            "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [LEGERS].",
+            "tag": "Base Atk",
+            "description": "[Break|img] [LEGERS].",
             "image": "Light_GGH_Skill_Base.webp"
           },
           {
             "name": "[CORE] ECRASEMENT ABDOMINAL",
-            "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [LEGERS].",
+            "tag": "Core",
+            "description": "[Break|img] [LEGERS].",
             "image": "Light_GGH_Skill_Core.webp"
           },
           {
             "name": "[SKILL1] ESPRIT COMBATIF",
-            "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [LEGERS].\nCHARGE <img src='Light_GGH_Skill_Core.webp' alt='Core'> [CORE]\n<img src='Light_GGH_Buff_Aura.webp' alt='Aura'> [AURA DE DIRIGEANT]\n<img src='Light_GGH_Weapon_Codex.webp' alt='Arme'> [ARME]\n<img src='Light_GGH_DBuff_LightDMGUp.webp' alt='LightDmgInc'> [LIGHT DMG UP]",
+            "tag": "Skill1",
+            "description": "[Break|img] [LEGERS].\nCHARGE [CORE]\n[AURA DE DIRIGEANT]\n[ARME]\n[LIGHT DMG UP]",
             "image": "Light_GGH_Skill1.webp"
           },
           {
             "name": "[SKILL2] POUVOIR LUMIERE BRILLANTE",
-            "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [LEGERS].\nCHARGE <img src='Light_GGH_Skill_Core.webp' alt='Core'> [CORE] & <img src='Light_GGH_Skill1.webp' alt='Skill1'> [SKILL1]\n<img src='Light_GGH_Buff_Fragment.webp' alt='Fragment'> [Fragment LUMIERE BRILLANTE]\n<img src='Light_GGH_Buff_VolonteBrillante.webp' alt='VolonteBrillante'> [VOLONTE LUMIERE BRILLANTE]",
+            "tag": "Skill2",
+            "description": "[Break|img] [LEGERS].\nCHARGE [CORE] & [SKILL1]\n[Fragment LUMIERE BRILLANTE]\n[VOLONTE LUMIERE BRILLANTE]",
             "image": "Light_GGH_Skill2.webp"
           },
           {
             "name": "[ULTIME] SUPERNOVA",
-            "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [TOUT-PUISSANTS].\n[MOB BREAK] +60% DMG INC\n<img src='Light_GGH_Buff_VolonteFragment.webp' alt='VolonteFragment'> [VOLONTE DU Fragment].",
+            "tag": "Ultime",
+            "description": "[Break|img] [TOUT-PUISSANTS].\n[MOB BREAK] +60% DMG INC\n[VOLONTE DU Fragment].",
             "image": "Light_GGH_Skill_Ultime.webp"
           },
           {
             "name": "[QTE] BALAYAGE",
-            "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [MOYENS]\n<img src='Light_GGH_Buff_Aura.webp' alt='Aura'> [AURA DE DIRIGEANT].",
+            "tag": "QTE",
+            "description": "[Break|img] [MOYENS]\n[AURA DE DIRIGEANT].",
             "image": "Light_GGH_Skill_QTE.webp"
           },
           {
             "name": "[SOUTIEN] DESTRUCTION INSTANTANEE",
-            "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [LEGERS]\n[SJW BUFF] <img src='Light_GGH_Buff_Aura.webp' alt='Core'> [AURA LUMIERE BRILLANTE].",
+            "tag": "Soutien",
+            "description": "[Break|img] [LEGERS]\n[SJW BUFF] [AURA LUMIERE BRILLANTE].",
             "image": "Light_GGH_Skill_Soutien.webp"
           }
         ],
@@ -222,7 +244,7 @@
                 "name": "Casque",
                 "number": "01",
                 "set": "Guardian",
-                "image": "Guardian/Artefact01_Guardian.webp",
+                "image": "Artefact01_Guardian.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -245,7 +267,7 @@
                 "name": "Plastron",
                 "number": "02",
                 "set": "Guardian",
-                "image": "Guardian/Artefact02_Guardian.webp",
+                "image": "Artefact02_Guardian.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -268,7 +290,7 @@
                 "name": "Gants",
                 "number": "03",
                 "set": "Guardian",
-                "image": "Guardian/Artefact03_Guardian.webp",
+                "image": "Artefact03_Guardian.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -291,7 +313,7 @@
                 "name": "Bottes",
                 "number": "04",
                 "set": "Guardian",
-                "image": "Guardian/Artefact04_Guardian.webp",
+                "image": "Artefact04_Guardian.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -314,7 +336,7 @@
                 "name": "Collier",
                 "number": "05",
                 "set": "Sylph Blessing",
-                "image": "Sylph_Blessing/Artefact05_SylphsBlessing.webp",
+                "image": "Artefact05_SylphsBlessing.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -337,7 +359,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Sylph Blessing",
-                "image": "Sylph_Blessing/Artefact06_SylphsBlessing.webp",
+                "image": "Artefact06_SylphsBlessing.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -360,7 +382,7 @@
                 "name": "Bague",
                 "number": "07",
                 "set": "Sylph Blessing",
-                "image": "Sylph_Blessing/Artefact07_SylphsBlessing.webp",
+                "image": "Artefact07_SylphsBlessing.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -383,7 +405,7 @@
                 "name": "Boucle d'oreille",
                 "number": "08",
                 "set": "Sylph Blessing",
-                "image": "Sylph_Blessing/Artefact08_SylphsBlessing.webp",
+                "image": "Artefact08_SylphsBlessing.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -454,7 +476,7 @@
                 "name": "Casque",
                 "number": "01",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact01_Greed.webp",
+                "image": "Artefact01_Greed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -477,7 +499,7 @@
                 "name": "Plastron",
                 "number": "02",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact02_Greed.webp",
+                "image": "Artefact02_Greed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -500,7 +522,7 @@
                 "name": "Gants",
                 "number": "03",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact03_Greed.webp",
+                "image": "Artefact03_Greed.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -523,7 +545,7 @@
                 "name": "Bottes",
                 "number": "04",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact04_Greed.webp",
+                "image": "Artefact04_Greed.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -546,7 +568,7 @@
                 "name": "Collier",
                 "number": "05",
                 "set": "Sylph Blessing",
-                "image": "Sylph_Blessing/Artefact05_SylphsBlessing.webp",
+                "image": "Artefact05_SylphsBlessing.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -569,7 +591,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Sylph Blessing",
-                "image": "Sylph_Blessing/Artefact06_SylphsBlessing.webp",
+                "image": "Artefact06_SylphsBlessing.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -592,7 +614,7 @@
                 "name": "Bague",
                 "number": "07",
                 "set": "Sylph Blessing",
-                "image": "Sylph_Blessing/Artefact07_SylphsBlessing.webp",
+                "image": "Artefact07_SylphsBlessing.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -615,7 +637,7 @@
                 "name": "Boucle d'oreille",
                 "number": "08",
                 "set": "Sylph Blessing",
-                "image": "Sylph_Blessing/Artefact08_SylphsBlessing.webp",
+                "image": "Artefact08_SylphsBlessing.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -686,7 +708,7 @@
                 "name": "Casque",
                 "number": "01",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact01_Greed.webp",
+                "image": "Artefact01_Greed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -709,7 +731,7 @@
                 "name": "Plastron",
                 "number": "02",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact02_Greed.webp",
+                "image": "Artefact02_Greed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -732,7 +754,7 @@
                 "name": "Gants",
                 "number": "03",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact03_Greed.webp",
+                "image": "Artefact03_Greed.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -755,7 +777,7 @@
                 "name": "Bottes",
                 "number": "04",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact04_Greed.webp",
+                "image": "Artefact04_Greed.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -778,7 +800,7 @@
                 "name": "Collier",
                 "number": "05",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact05_Greed.webp",
+                "image": "Artefact05_Greed.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -801,7 +823,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact06_Greed.webp",
+                "image": "Artefact06_Greed.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -824,7 +846,7 @@
                 "name": "Bague",
                 "number": "07",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact07_Greed.webp",
+                "image": "Artefact07_Greed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -847,7 +869,7 @@
                 "name": "Boucle d'oreille",
                 "number": "08",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact08_Greed.webp",
+                "image": "Artefact08_Greed.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -918,7 +940,7 @@
                 "name": "Casque",
                 "number": "01",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact01_Greed.webp",
+                "image": "Artefact01_Greed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -941,7 +963,7 @@
                 "name": "Plastron",
                 "number": "02",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact02_Greed.webp",
+                "image": "Artefact02_Greed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -964,7 +986,7 @@
                 "name": "Gants",
                 "number": "03",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact03_Greed.webp",
+                "image": "Artefact03_Greed.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -987,7 +1009,7 @@
                 "name": "Bottes",
                 "number": "04",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact04_Greed.webp",
+                "image": "Artefact04_Greed.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -1010,7 +1032,7 @@
                 "name": "Collier",
                 "number": "05",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact05_Greed.webp",
+                "image": "Artefact05_Greed.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -1033,7 +1055,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact06_Greed.webp",
+                "image": "Artefact06_Greed.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -1056,7 +1078,7 @@
                 "name": "Bague",
                 "number": "07",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact07_Greed.webp",
+                "image": "Artefact07_Greed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -1079,7 +1101,7 @@
                 "name": "Boucle d'oreille",
                 "number": "08",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact08_Greed.webp",
+                "image": "Artefact08_Greed.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -1163,25 +1185,25 @@
             "id": "A0",
             "number": "0",
             "type": "passive",
-            "description": "Utiliser <img src='Light_Thomas_Skill_Core.webp' alt='Core'> [Core], <img src='Light_Thomas_Skill1.webp' alt='Skill1'> [Skill 1], <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [Skill 2] ou <img src='Light_Thomas_Skill_QTE.webp' alt='QTE'> [QTE] active <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='PuissanceEcrasante'> [Puissance écrasante] 1 fois.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [Ultime] s'active uniquement quand Thomas Andre atteint 5 cumuls de <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='PuissanceEcrasante'> [Puissance écrasante].\nBoss de guilde et Puissance de destruction +24% hausse de dégâts."
+            "description": "Utiliser [CORE], [SKILL1], [SKILL2] ou [QTE] active [PUISSANCE ECRASANTE] 1 fois.\n[ULTIME] s'active uniquement quand Thomas Andre atteint 5 cumuls de [PUISSANCE ECRASANTE].\nBoss de guilde et Puissance de destruction +24% hausse de dégâts."
           },
           {
             "id": "A1",
             "number": "1",
             "type": "passive",
-            "description": "Chaque <img src='Light_Thomas_Buff_Shield.webp' alt='Bouclier'>[Bouclier] active <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='PuissanceEcrasante'> [Puissance écrasante] 1 fois"
+            "description": "Chaque [BOUCLIER] active [PUISSANCE ECRASANTE] 1 fois"
           },
           {
             "id": "A2",
             "number": "2",
             "type": "passive",
-            "description": "<img src='Light_Thomas_Buff_Shield.webp' alt='Bouclier'>[Bouclier] actif +10% taux & dégâts coup critique.\n+8%<img src='Light_Thomas_Buff_GaindShield.webp' alt='Gain de bouclier'> [Gain de bouclier]."
+            "description": "[BOUCLIER] actif +10% taux & dégâts coup critique.\n+8% [GAIN DE BOUCLIER]."
           },
           {
             "id": "A3",
             "number": "3",
             "type": "passive",
-            "description": "Transformer en <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Tyrandacier'> [Tyran d’acier] <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [Skill 2] active <img src='Light_Thomas_Buff_Overgrowth.webp' alt='Surpuissance'>[Surpuissance]."
+            "description": "Transformer en [TYRAN D’ACIER] [SKILL2] active [SURPUISSANCE]."
           },
           {
             "id": "A4",
@@ -1193,7 +1215,7 @@
             "id": "A5",
             "number": "5",
             "type": "passive",
-            "description": "Transformer en <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Tyrandacier'> [Tyran d’acier] <img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [Ultime] +125% hausse de dégâts."
+            "description": "Transformer en [TYRAN D’ACIER] [ULTIME] +125% hausse de dégâts."
           },
           {
             "id": "A6-10",
@@ -1205,44 +1227,45 @@
         "weapon": [
           {
             "name": "[Arme] LE VERITABLE ROI",
+            "tag": "Arme",
             "image": "Light_Thomas_Weapon.webp",
-            "stats": "+16% DEF.\n<img src='Light_Thomas_Buff_GaindShield.webp' alt='Gain de bouclier'> [Gain de bouclier] +24%.",
+            "stats": "+16% DEF.\n[GAIN DE BOUCLIER] +24%.",
             "evolutions": [
               {
                 "id": "A0",
                 "number": "0",
                 "type": "passive",
-                "description": "+4% DEF & +6% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Gain de bouclier'> [Gain de bouclier]."
+                "description": "+4% DEF & +6% [GAIN DE BOUCLIER]."
               },
               {
                 "id": "A1",
                 "number": "1",
                 "type": "passive",
-                "description": "+6% DEF & +10% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Gain de bouclier'> [Gain de bouclier]."
+                "description": "+6% DEF & +10% [GAIN DE BOUCLIER]."
               },
               {
                 "id": "A2",
                 "number": "2",
                 "type": "passive",
-                "description": "+8% DEF & +12% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Gaindebouclier'> [Gain de bouclier]."
+                "description": "+8% DEF & +12% [GAIN DE BOUCLIER]."
               },
               {
                 "id": "A3",
                 "number": "3",
                 "type": "passive",
-                "description": "+10% DEF & +15% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Gaindebouclier'> [Gain de bouclier]."
+                "description": "+10% DEF & +15% [GAIN DE BOUCLIER]."
               },
               {
                 "id": "A4",
                 "number": "4",
                 "type": "passive",
-                "description": "+12% DEF & +18% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Gaindebouclier'> [Gain de bouclier]."
+                "description": "+12% DEF & +18% [GAIN DE BOUCLIER]."
               },
               {
                 "id": "A5",
                 "number": "5",
                 "type": "passive",
-                "description": "+16% DEF & +24% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Gaindebouclier'> [Gain de bouclier]."
+                "description": "+16% DEF & +24% [GAIN DE BOUCLIER]."
               },
               {
                 "id": "A6-10",
@@ -1255,7 +1278,7 @@
         ],
         "passives": [
           {
-            "principal": "True",
+            "principal": true,
             "description": "+16% DEF.\n[Gain de bouclier] +8%.\n+24% hausse de dégâts [Combat d'équipe]."
           },
           {
@@ -1272,20 +1295,20 @@
           },
           {
             "name": "[Puissance écrasante] (5 fois)",
-            "tag": "Puissance écrasante",
+            "tag": "Puissance ecrasante",
             "description": "+10% défense (maximum 50%).\n+2% [Gain de bouclier] (maximum 10%).\n(25 secondes).",
             "image": "Light_Thomas_Buff_Puissanceecrasante.webp"
           },
           {
             "name": "[Tyran d’acier]",
             "tag": "Tyran d’acier",
-            "description": "+20% DEF.\n+20% DMG RED.\n+10% [Bouclier].\n[Skill 1] & [Skill 2] +100% DMG INC.\n[Ultime] +125% DMG INC.\n(25 secondes)",
+            "description": "+20% DEF.\n+20% DMG RED.\n+10% [Bouclier].\n[Skill1] & [Skill2] +100% DMG INC.\n[Ultime] +125% DMG INC.\n(25 secondes)",
             "image": "Light_Thomas_Buff_Tyrandacier.webp"
           },
           {
-            "name": "[Overgrowth]",
-            "tag": "Overgrowth",
-            "description": "Transformer en [Tyran d’acier] en utilisant le [Skill 2] active [Surpuissance].\n200% dégâts lumière de la défense total.\n10 000 points [Bouclier] = [Overgrowth] +1000% hausse de dégâts.",
+            "name": "[Surpuissance]",
+            "tag": "Surpuissance",
+            "description": "Transformer en [Tyran d’acier] en utilisant le [Skill2] active [Surpuissance].\n200% dégâts lumière de la défense total.\n10 000 points [Bouclier] = [Surpuissance] +1000% hausse de dégâts.",
             "image": "Light_Thomas_Buff_Overgrowth.webp"
           },
           {
@@ -1297,38 +1320,37 @@
         ],
         "skills": [
           {
-            "principal": "True",
-            "description": "[QTE] > [SKILL1] > [CORE] > [ULTIME] [TYRAN D'ACIER|img]>"
+            "principal": true,
+            "description": "[QTE] > [SKILL1] > [CORE] > [ULTIME] [TYRAN D'ACIER|img]"
           },
           {
-            "principal": "True",
+            "principal": true,
             "name": "[TYRAN D'ACIER]",
-            "tag": "Tyran d’acier",
             "description": "[CORE] > [SKILL1] > [CORE] > [SKILL2] > [TYRAN D'ACIER|img] CLINIOTE > [ULTIME] > [CORE] > [SKILL1] > [ULTIME] [TYRAN D'ACIER|img]",
             "image": "Light_Thomas_Buff_Tyrandacier.webp"
           },
           {
             "name": "[CORE] COUP DE MARTEAU GEANT",
             "tag": "Core",
-            "description": "[PUISSANCE ECRASANTE] (1x)\n [SHIELD] +2%",
+            "description": "[PUISSANCE ECRASANTE] (1x)\n [Bouclier] +2%",
             "image": "Light_Thomas_Skill_Core.webp"
           },
           {
             "name": "[SKILL1] DEMOLITION ABSOLUE",
             "tag": "Skill1",
-            "description": "[PUISSANCE ECRASANTE] (1x)\n [SHIELD] +2%",
+            "description": "[PUISSANCE ECRASANTE] (1x)\n [Bouclier] +2%",
             "image": "Light_Thomas_Skill1.webp"
           },
           {
             "name": "[SKILL2] ECRASEMENT COLOSSAL",
             "tag": "Skill2",
-            "description": "[PUISSANCE ECRASANTE] (1x)\n [SHIELD] +2%",
+            "description": "[PUISSANCE ECRASANTE] (1x)\n [Bouclier] +2%",
             "image": "Light_Thomas_Skill2.webp"
           },
           {
             "name": "[ULTIME] JUGEMENT DU CHEF",
             "tag": "Ultime",
-            "description": "TRANSFORMATION [TYRAN D'ACIER] 10000 POINTS [SHIELD] = [ULTIME] +1020% DMG INC.",
+            "description": "Transformation [TYRAN D'ACIER] 10000 point [Bouclier] = [ULTIME] +1020% DMG INC.",
             "image": "Light_Thomas_Skill_Ultime.webp"
           },
           {
@@ -1346,6 +1368,7 @@
         ],
         "equipment_sets": [
           {
+            "description": "Le set est utile au début pour la DEF PEN, sa 2ème utilité sera pour le boss de guilde fachna.",
             "set_name": "Early Game",
             "focus_stats": [
               "DEF",
@@ -1360,7 +1383,7 @@
                 "name": "Casque",
                 "number": "01",
                 "set": "Armed",
-                "image": "Armed/Artefact01_Armed.webp",
+                "image": "Artefact01_Armed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -1383,7 +1406,7 @@
                 "name": "Plastron",
                 "number": "02",
                 "set": "Armed",
-                "image": "Armed/Artefact02_Armed.webp",
+                "image": "Artefact02_Armed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -1406,7 +1429,7 @@
                 "name": "Gants",
                 "number": "03",
                 "set": "Armed",
-                "image": "Armed/Artefact03_Armed.webp",
+                "image": "Artefact03_Armed.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -1429,7 +1452,7 @@
                 "name": "Bottes",
                 "number": "04",
                 "set": "Armed",
-                "image": "Armed/Artefact04_Armed.webp",
+                "image": "Artefact04_Armed.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -1452,7 +1475,7 @@
                 "name": "Collier",
                 "number": "05",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
+                "image": "Artefact05_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -1475,7 +1498,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
+                "image": "Artefact06_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -1498,7 +1521,7 @@
                 "name": "Bague",
                 "number": "07",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
+                "image": "Artefact07_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -1521,7 +1544,7 @@
                 "name": "Boucle d'oreille",
                 "number": "08",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
+                "image": "Artefact08_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -1578,6 +1601,7 @@
             ]
           },
           {
+            "description": "Full set DMG INC le problème c'est le malus de -20% DMG RES, ce qui fera perdre votre shield plus rapidement.",
             "set_name": "Mid Game",
             "focus_stats": [
               "DEF",
@@ -1592,7 +1616,7 @@
                 "name": "Casque",
                 "number": "01",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact01_Curse.webp",
+                "image": "Artefact01_Curse.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -1615,7 +1639,7 @@
                 "name": "Plastron",
                 "number": "02",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact02_Curse.webp",
+                "image": "Artefact02_Curse.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -1638,7 +1662,7 @@
                 "name": "Gants",
                 "number": "03",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact03_Curse.webp",
+                "image": "Artefact03_Curse.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -1661,7 +1685,7 @@
                 "name": "Bottes",
                 "number": "04",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact04_Curse.webp",
+                "image": "Artefact04_Curse.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -1684,7 +1708,7 @@
                 "name": "Collier",
                 "number": "05",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
+                "image": "Artefact05_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -1707,7 +1731,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
+                "image": "Artefact06_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -1730,7 +1754,7 @@
                 "name": "Bague",
                 "number": "07",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
+                "image": "Artefact07_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -1753,7 +1777,7 @@
                 "name": "Boucle d'oreille",
                 "number": "08",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
+                "image": "Artefact08_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -1810,6 +1834,7 @@
             ]
           },
           {
+            "description": "Thomas Andre à déjà un boost teamfight & dans son kit a beaucoup de [skills] & [ultimate] DMG INC. Overgrowth et son shield pendant son ultime sont basés sur sa def, et on a en plus de ça un boost ultime.",
             "set_name": "End Game",
             "focus_stats": [
               "DEF",
@@ -1824,7 +1849,7 @@
                 "name": "Casque",
                 "number": "01",
                 "set": "Iron Will",
-                "image": "Iron_Will/Artefact01_IronWill.webp",
+                "image": "Artefact01_IronWill.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -1847,7 +1872,7 @@
                 "name": "Plastron",
                 "number": "02",
                 "set": "Iron Will",
-                "image": "Iron_Will/Artefact02_IronWill.webp",
+                "image": "Artefact02_IronWill.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -1870,7 +1895,7 @@
                 "name": "Gants",
                 "number": "03",
                 "set": "Iron Will",
-                "image": "Iron_Will/Artefact03_IronWill.webp",
+                "image": "Artefact03_IronWill.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -1893,7 +1918,7 @@
                 "name": "Bottes",
                 "number": "04",
                 "set": "Iron Will",
-                "image": "Iron_Will/Artefact04_IronWill.webp",
+                "image": "Artefact04_IronWill.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -1916,7 +1941,7 @@
                 "name": "Collier",
                 "number": "05",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
+                "image": "Artefact05_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -1939,7 +1964,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
+                "image": "Artefact06_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -1962,7 +1987,7 @@
                 "name": "Bague",
                 "number": "07",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
+                "image": "Artefact07_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -1985,7 +2010,7 @@
                 "name": "Boucle d'oreille",
                 "number": "08",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
+                "image": "Artefact08_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -2042,6 +2067,7 @@
             ]
           },
           {
+            "description": "Thomas Andre à déjà un boost teamfight & dans son kit a beaucoup de [skills] & [ultimate] DMG INC. Overgrowth et son shield pendant son ultime sont basés sur sa def, et on a en plus de ça un boost ultime.",
             "set_name": "Guild & POD",
             "focus_stats": [
               "DEF",
@@ -2056,7 +2082,7 @@
                 "name": "Casque",
                 "number": "01",
                 "set": "Chaotic Infamy",
-                "image": "Chaotic_Infamy/Artefact01_Infamy.webp",
+                "image": "Artefact01_Infamy.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -2079,7 +2105,7 @@
                 "name": "Plastron",
                 "number": "02",
                 "set": "Chaotic Infamy",
-                "image": "Chaotic_Infamy/Artefact02_Infamy.webp",
+                "image": "Artefact02_Infamy.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -2102,7 +2128,7 @@
                 "name": "Gants",
                 "number": "03",
                 "set": "Chaotic Infamy",
-                "image": "Chaotic_Infamy/Artefact03_Infamy.webp",
+                "image": "Artefact03_Infamy.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -2125,7 +2151,7 @@
                 "name": "Bottes",
                 "number": "04",
                 "set": "Chaotic Infamy",
-                "image": "Chaotic_Infamy/Artefact04_Infamy.webp",
+                "image": "Artefact04_Infamy.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -2148,7 +2174,7 @@
                 "name": "Collier",
                 "number": "05",
                 "set": "Chaotic Infamy",
-                "image": "Chaotic_Infamy/Artefact05_Infamy.webp",
+                "image": "Artefact05_Infamy.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -2171,7 +2197,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Chaotic Infamy",
-                "image": "Chaotic_Infamy/Artefact06_Infamy.webp",
+                "image": "Artefact06_Infamy.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -2194,7 +2220,7 @@
                 "name": "Bague",
                 "number": "07",
                 "set": "Chaotic Infamy",
-                "image": "Chaotic_Infamy/Artefact07_Infamy.webp",
+                "image": "Artefact07_Infamy.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -2217,7 +2243,7 @@
                 "name": "Boucle d'oreille",
                 "number": "08",
                 "set": "Chaotic Infamy",
-                "image": "Chaotic_Infamy/Artefact08_Infamy.webp",
+                "image": "Artefact08_Infamy.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -2483,95 +2509,117 @@
         "folder": "SSR_Light_GoGunHee",
         "weapon": [
           {
-            "name": "[ARME] UNE CONVICTION ET UNE VOCATION",
+            "name": "[WEAPON] UNE CONVICTION ET UNE VOCATION",
+            "tag": "Weapon",
             "image": "Light_GGH_Weapon.webp",
-            "stats": "+12% DEF.\nTOUCHE MOB<img src='Light_GGH_Skill1.webp' alt='Skill1'> [SKILL1] <img src='Light_GGH_DBuff_LightDMGUp.webp' alt='LightDmgInc'> [LIGHT DMG UP]."
+            "stats": "+12% DEF.\nTouche Mob [SKILL1] [LIGHT DMG UP]."
           }
         ],
         "passives": [
           {
             "principal": "True",
-            "description": "+12% DEF.\n<img src='Light_GGH_Buff_Vaisseaubrise.webp' alt='VaisseauBrise'> [VAISSEAU BRISE]."
+            "description": "+12% DEF.\n[VAISSEAU BRISE]."
           },
           {
             "name": "[SHIELD]",
+            "tag": "Shield",
             "description": "EMPECHE LE KNOCKBACK ET PROTEGE DES DEGATS.",
             "image": "Light_GGH_Buff_Shield.webp"
           },
           {
             "name": "[VAISSEAU BRISE]",
+            "tag": "Vaisseau Brise",
             "description": "-50% RECUPERATION HEAL.",
             "image": "Light_GGH_Buff_Vaisseaubrise.webp"
           },
           {
             "name": "[AURA DE DIRIGEANT]",
-            "description": "+50% DEF\n+20%DMG RED.\n <img src='Light_GGH_Buff_Shield.webp' alt='Shield'> [SHIELD] +20% (15 SECONDES).",
+            "tag": "Aura de Dirigeant",
+            "description": "+50% DEF\n+20%DMG RED.\n[SHIELD] +20% (15 SECONDES).",
             "image": "Light_GGH_Buff_Aura.webp"
           },
           {
-            "name": "[Fragment LUMIERE BRILLANTE]",
-            "description": "CHARGE <img src='Light_GGH_Skill_Core.webp' alt='Core'> [CORE]\n<img src='Light_GGH_Skill1.webp' alt='Skill1'> [SKILL1] +60% DMG INC. (15 SECONDES)",
+            "name": "[FRAGMENT LUMIERE BRILLANTE]",
+            "tag": "Fragment Lumiere Brillante",
+            "description": "CHARGE [CORE]\n[SKILL1] +60% DMG INC. (15 SECONDES)",
             "image": "Light_GGH_Buff_Fragment.webp"
           },
           {
             "name": "[VOLONTE LUMIERE BRILLANTE]",
+            "tag": "Volonte Lumiere Brillante",
             "description": "[PAR LIGHT] TEAM +8% LIGHT DMG INC. & +8% CRIT DMG.",
             "image": "Light_GGH_Buff_VolonteBrillante.webp"
           },
           {
-            "name": "[VOLONTE DU Fragment]",
+            "name": "[VOLONTE DU FRAGMENT]",
+            "tag": "Volonte du Fragment",
             "description": "[TEAM] +30% CRIT DMG & [QTE] +150% DMG INC. (20 SECONDES)",
             "image": "Light_GGH_Buff_VolonteFragment.webp"
           },
           {
             "name": "[LIGHT DMG UP]",
+            "tag": "Light DMG Up",
             "description": "[DBUFF MOB] +12% LIGHT DMG INC. (15 SECONDES)",
             "image": "Light_GGH_DBuff_LightDMGUp.webp"
           },
           {
             "name": "[AURA LUMIERE BRILLANTE]",
-            "description": "[SJW BUFF] +10% DEF & <img src='Light_GGH_Buff_Shield.webp' alt='Shield'> [SHIELD] +10% & +10% LIGHT DMG INC. (20 SECONDES)",
+            "tag": "Aura Lumiere Brillante",
+            "description": "[SJW BUFF] +10% DEF & [SHIELD] +10% & +10% LIGHT DMG INC. (20 SECONDES)",
             "image": "Light_GGH_Buff_Aura.webp"
+          },
+          {
+            "name": "[BREAK]",
+            "tag": "Break",
+            "image": "Light_GGH_BreakDMG.webp",
+            "hidden": true
           }
         ],
         "skills": [
           {
             "principal": "True",
-            "description": "<img src='Light_GGH_Skill_QTE.webp' alt='QTE'> [QTE] > <img src='Light_GGH_Skill1.webp' alt='Ultime'> [SKILL1] > <img src='Light_GGH_Skill_Core.webp' alt='Core'> [CORE] > <img src='Light_GGH_Skill2.webp' alt='Skill2'> [SKILL2] > <img src='Light_GGH_Skill_Core.webp' alt='Core'> [CORE] > <img src='Light_GGH_Skill1.webp' alt='Skill1'> [SKILL1] > <img src='Light_GGH_Skill_Ultime.webp' alt='Ultime'> [ULTIME] > <img src='Light_GGH_Skill_Core.webp' alt='Core'> [Core] > [QTE]"
+            "description": "[QTE] > [SKILL1] > [CORE] > [SKILL2] > [CORE] > [SKILL1] > [ULTIME] > [CORE] > [QTE]"
           },
           {
             "name": "[BASE ATK] VOLONTE DU PRESIDENT",
-            "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [LEGERS].",
+            "tag": "Base ATK",
+            "description": "[BREAK|img] [LEGERS].",
             "image": "Light_GGH_Skill_Base.webp"
           },
           {
             "name": "[CORE] ECRASEMENT ABDOMINAL",
-            "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [LEGERS].",
+            "tag": "Core",
+            "description": "[Break|img] [LEGERS].",
             "image": "Light_GGH_Skill_Core.webp"
           },
           {
             "name": "[SKILL1] ESPRIT COMBATIF",
-            "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [LEGERS].\nCHARGE <img src='Light_GGH_Skill_Core.webp' alt='Core'> [CORE]\n<img src='Light_GGH_Buff_Aura.webp' alt='Aura'> [AURA DE DIRIGEANT]\n<img src='Light_GGH_Weapon_Codex.webp' alt='Arme'> [ARME]\n<img src='Light_GGH_DBuff_LightDMGUp.webp' alt='LightDmgInc'> [LIGHT DMG UP]",
+            "tag": "Skill1",
+            "description": "[Break|img] [LEGERS].\nCHARGE [CORE]\n[AURA DE DIRIGEANT]\n[WEAPON]\n[LIGHT DMG UP]",
             "image": "Light_GGH_Skill1.webp"
           },
           {
             "name": "[SKILL2] POUVOIR LUMIERE BRILLANTE",
-            "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [LEGERS].\nCHARGE <img src='Light_GGH_Skill_Core.webp' alt='Core'> [CORE] & <img src='Light_GGH_Skill1.webp' alt='Skill1'> [SKILL1]\n<img src='Light_GGH_Buff_Fragment.webp' alt='Fragment'> [Fragment LUMIERE BRILLANTE]\n<img src='Light_GGH_Buff_VolonteBrillante.webp' alt='VolonteBrillante'> [VOLONTE LUMIERE BRILLANTE]",
+            "tag": "Skill2",
+            "description": "[Break|img] [LEGERS].\nCHARGE [CORE] & [SKILL1]\n[Fragment LUMIERE BRILLANTE]\n[Volonte LUMIERE BRILLANTE]",
             "image": "Light_GGH_Skill2.webp"
           },
           {
             "name": "[ULTIME] SUPERNOVA",
-            "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [TOUT-PUISSANTS].\n[MOB BREAK] +60% DMG INC\n<img src='Light_GGH_Buff_VolonteFragment.webp' alt='VolonteFragment'> [VOLONTE DU Fragment].",
+            "tag": "Ultime",
+            "description": "[Break|img] [TOUT-PUISSANTS].\n[MOB BREAK] +60% DMG INC\n[VOLONTE DU Fragment].",
             "image": "Light_GGH_Skill_Ultime.webp"
           },
           {
             "name": "[QTE] BALAYAGE",
-            "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [MOYENS]\n<img src='Light_GGH_Buff_Aura.webp' alt='Aura'> [AURA DE DIRIGEANT].",
+            "tag": "QTE",
+            "description": "[Break|img] [MOYENS]\n[AURA DE DIRIGEANT].",
             "image": "Light_GGH_Skill_QTE.webp"
           },
           {
             "name": "[SOUTIEN] DESTRUCTION INSTANTANEE",
-            "description": "<img src='Light_GGH_BreakDMG.webp' alt='Break'> [LEGERS]\n[SJW BUFF] <img src='Light_GGH_Buff_Aura.webp' alt='Core'> [AURA LUMIERE BRILLANTE].",
+            "tag": "Soutien",
+            "description": "[Break|img] [LEGERS]\n[SJW BUFF] [AURA LUMIERE BRILLANTE].",
             "image": "Light_GGH_Skill_Soutien.webp"
           }
         ],
@@ -2591,7 +2639,7 @@
                 "name": "Helmet",
                 "number": "01",
                 "set": "Guardian",
-                "image": "Guardian/Artefact01_Guardian.webp",
+                "image": "Artefact01_Guardian.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -2614,7 +2662,7 @@
                 "name": "Chestplate",
                 "number": "02",
                 "set": "Guardian",
-                "image": "Guardian/Artefact02_Guardian.webp",
+                "image": "Artefact02_Guardian.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -2637,7 +2685,7 @@
                 "name": "Gloves",
                 "number": "03",
                 "set": "Guardian",
-                "image": "Guardian/Artefact03_Guardian.webp",
+                "image": "Artefact03_Guardian.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -2660,7 +2708,7 @@
                 "name": "Boots",
                 "number": "04",
                 "set": "Guardian",
-                "image": "Guardian/Artefact04_Guardian.webp",
+                "image": "Artefact04_Guardian.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -2683,7 +2731,7 @@
                 "name": "Necklace",
                 "number": "05",
                 "set": "Sylph Blessing",
-                "image": "Sylph_Blessing/Artefact05_SylphsBlessing.webp",
+                "image": "Artefact05_SylphsBlessing.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -2706,7 +2754,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Sylph Blessing",
-                "image": "Sylph_Blessing/Artefact06_SylphsBlessing.webp",
+                "image": "Artefact06_SylphsBlessing.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -2729,7 +2777,7 @@
                 "name": "Ring",
                 "number": "07",
                 "set": "Sylph Blessing",
-                "image": "Sylph_Blessing/Artefact07_SylphsBlessing.webp",
+                "image": "Artefact07_SylphsBlessing.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -2752,7 +2800,7 @@
                 "name": "Earring",
                 "number": "08",
                 "set": "Sylph Blessing",
-                "image": "Sylph_Blessing/Artefact08_SylphsBlessing.webp",
+                "image": "Artefact08_SylphsBlessing.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -2823,7 +2871,7 @@
                 "name": "Helmet",
                 "number": "01",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact01_Greed.webp",
+                "image": "Artefact01_Greed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -2846,7 +2894,7 @@
                 "name": "Chestplate",
                 "number": "02",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact02_Greed.webp",
+                "image": "Artefact02_Greed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -2869,7 +2917,7 @@
                 "name": "Gloves",
                 "number": "03",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact03_Greed.webp",
+                "image": "Artefact03_Greed.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -2892,7 +2940,7 @@
                 "name": "Boots",
                 "number": "04",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact04_Greed.webp",
+                "image": "Artefact04_Greed.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -2915,7 +2963,7 @@
                 "name": "Necklace",
                 "number": "05",
                 "set": "Sylph Blessing",
-                "image": "Sylph_Blessing/Artefact05_SylphsBlessing.webp",
+                "image": "Artefact05_SylphsBlessing.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -2938,7 +2986,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Sylph Blessing",
-                "image": "Sylph_Blessing/Artefact06_SylphsBlessing.webp",
+                "image": "Artefact06_SylphsBlessing.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -2961,7 +3009,7 @@
                 "name": "Ring",
                 "number": "07",
                 "set": "Sylph Blessing",
-                "image": "Sylph_Blessing/Artefact07_SylphsBlessing.webp",
+                "image": "Artefact07_SylphsBlessing.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -2984,7 +3032,7 @@
                 "name": "Earring",
                 "number": "08",
                 "set": "Sylph Blessing",
-                "image": "Sylph_Blessing/Artefact08_SylphsBlessing.webp",
+                "image": "Artefact08_SylphsBlessing.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -3055,7 +3103,7 @@
                 "name": "Helmet",
                 "number": "01",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact01_Greed.webp",
+                "image": "Artefact01_Greed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -3078,7 +3126,7 @@
                 "name": "Chestplate",
                 "number": "02",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact02_Greed.webp",
+                "image": "Artefact02_Greed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -3101,7 +3149,7 @@
                 "name": "Gloves",
                 "number": "03",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact03_Greed.webp",
+                "image": "Artefact03_Greed.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -3124,7 +3172,7 @@
                 "name": "Boots",
                 "number": "04",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact04_Greed.webp",
+                "image": "Artefact04_Greed.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -3147,7 +3195,7 @@
                 "name": "Necklace",
                 "number": "05",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact05_Greed.webp",
+                "image": "Artefact05_Greed.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -3170,7 +3218,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact06_Greed.webp",
+                "image": "Artefact06_Greed.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -3193,7 +3241,7 @@
                 "name": "Ring",
                 "number": "07",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact07_Greed.webp",
+                "image": "Artefact07_Greed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -3216,7 +3264,7 @@
                 "name": "Earring",
                 "number": "08",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact08_Greed.webp",
+                "image": "Artefact08_Greed.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -3287,7 +3335,7 @@
                 "name": "Helmet",
                 "number": "01",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact01_Greed.webp",
+                "image": "Artefact01_Greed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -3310,7 +3358,7 @@
                 "name": "Chestplate",
                 "number": "02",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact02_Greed.webp",
+                "image": "Artefact02_Greed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -3333,7 +3381,7 @@
                 "name": "Gloves",
                 "number": "03",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact03_Greed.webp",
+                "image": "Artefact03_Greed.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -3356,7 +3404,7 @@
                 "name": "Boots",
                 "number": "04",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact04_Greed.webp",
+                "image": "Artefact04_Greed.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -3379,7 +3427,7 @@
                 "name": "Necklace",
                 "number": "05",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact05_Greed.webp",
+                "image": "Artefact05_Greed.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -3402,7 +3450,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact06_Greed.webp",
+                "image": "Artefact06_Greed.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -3425,7 +3473,7 @@
                 "name": "Ring",
                 "number": "07",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact07_Greed.webp",
+                "image": "Artefact07_Greed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -3448,7 +3496,7 @@
                 "name": "Earring",
                 "number": "08",
                 "set": "Burning Greed",
-                "image": "Burning_Greed/Artefact08_Greed.webp",
+                "image": "Artefact08_Greed.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -3532,25 +3580,25 @@
             "id": "A0",
             "number": "0",
             "type": "passive",
-            "description": "Use <img src='Light_Thomas_Skill_Core.webp' alt='Core'> [Core], <img src='Light_Thomas_Skill1.webp' alt='Skill1'> [Skill 1], <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [Skill 2] or <img src='Light_Thomas_Skill_QTE.webp' alt='QTE'> [QTE] activate <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='OverwhelmingPower'> [Overwhelming Power] 1 time.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultimate'> [Ultimate]  unlock only when Thomas Andre get 5 stacks of <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='OverwhelmingPower'> [Overwhelming Power].\nGuild boss and Power of destruction +24% DMG inc."
+            "description": "Use [Core], [Skill1], [Skill2] or [QTE] activate [Overwhelming Power] 1 time.\n[Ultime] unlock only when Thomas Andre get 5 stacks of [Overwhelming Power].\nGuild boss and Power of destruction +24% DMG inc."
           },
           {
             "id": "A1",
             "number": "1",
             "type": "passive",
-            "description": "Get <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[Shield] activate <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='OverwhelmingPower'> [Overwhelming Power] 1 time."
+            "description": "Get [Shield] activate [Overwhelming Power] 1 time."
           },
           {
             "id": "A2",
             "number": "2",
             "type": "passive",
-            "description": "Active <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[Shield] +10% Critical Hit & DMG.\n+8% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Gain de bouclier'> [Shield gain]."
+            "description": "Active [Shield] +10% Critical Hit & DMG.\n+8% [Shield gain]."
           },
           {
             "id": "A3",
             "number": "3",
             "type": "passive",
-            "description": "Transformed into <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='SteelTyran'> [Steel Tyran] <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [Skill 2] activate <img src='Light_Thomas_Buff_Overgrowth.webp' alt='Overgrowth'>[Overgrowth]."
+            "description": "Transformed into [Steel Tyrant] [Skill2] activate [Overgrowth]."
           },
           {
             "id": "A4",
@@ -3562,7 +3610,7 @@
             "id": "A5",
             "number": "5",
             "type": "passive",
-            "description": "Transformed into <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='SteelTyran'> [Steel Tyran] <img src='Light_Thomas_Skill_Ultime.webp' alt='Ultimate'> [Ultimate] +125% DMG inc."
+            "description": "Transformed into [Steel Tyrant] [Ultime] +125% DMG inc."
           },
           {
             "id": "A6-10",
@@ -3574,134 +3622,148 @@
         "weapon": [
           {
             "name": "[Weapon] True King",
+            "tag": "Weapon",
             "image": "Light_Thomas_Weapon.webp",
-            "stats": "+16% DEF.\n<img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain] +24%.",
+            "stats": "+16% DEF.\n[Shield gain] +24%.",
             "evolutions": [
               {
                 "id": "A0",
                 "number": "0",
                 "type": "passive",
-                "description": "+4% DEF & +6% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain]."
+                "description": "+4% DEF & +6% [Shield gain]."
               },
               {
                 "id": "A1",
                 "number": "1",
                 "type": "passive",
-                "description": "+6% DEF & +10% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain]."
+                "description": "+6% DEF & +10% [Shield gain]."
               },
               {
                 "id": "A2",
                 "number": "2",
                 "type": "passive",
-                "description": "+8% DEF & +12% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain]."
+                "description": "+8% DEF & +12% [Shield gain]."
               },
               {
                 "id": "A3",
                 "number": "3",
                 "type": "passive",
-                "description": "+10% DEF & +15% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain]."
+                "description": "+10% DEF & +15% [Shield gain]."
               },
               {
                 "id": "A4",
                 "number": "4",
                 "type": "passive",
-                "description": "+12% DEF & +18% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain]."
+                "description": "+12% DEF & +18% [Shield gain]."
               },
               {
                 "id": "A5",
                 "number": "5",
                 "type": "passive",
-                "description": "+16% DEF & +24% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain]."
+                "description": "+16% DEF & +24% [Shield gain]."
               },
               {
                 "id": "A6-10",
                 "range": "6-10",
                 "type": "stat",
-                "description": "+16% DEF & +24% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain].\n+3% ATK/DEF/HP for each Advancement (maximum 15%).\nThese stats only apply ingame, you can't see them on the character."
+                "description": "+16% DEF & +24% [Shield gain].\n+3% ATK/DEF/HP for each Advancement (maximum 15%).\nThese stats only apply ingame, you can't see them on the character."
               }
             ]
           }
         ],
         "passives": [
           {
-            "principal": "True",
-            "description": "+16% DEF.\n<img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain] +8%."
+            "principal": true,
+            "description": "+16% DEF.\n[Shield gain] +8%."
           },
           {
             "name": "[Shield gain]",
-            "description": "Increase the amount of <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[Shield] acquisitions.",
+            "tag": "Shield gain",
+            "description": "Increase the amount of [Shield] acquisitions.",
             "image": "Light_Thomas_Buff_GaindShield.webp"
           },
           {
             "name": "[Shield]",
-            "description": "Knockback and damage resistance.\nActivate <img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='OverwhelmingPower'> [Overwhelming Power] 1 time.\n+10% Critical Hit & DMG when [Shield] is active.",
+            "tag": "Shield",
+            "description": "Knockback and damage resistance.\nActivate [Overwhelming Power] 1 time.\n+10% Critical Hit & DMG when [Shield] is active.",
             "image": "Light_Thomas_Buff_Shield.webp"
           },
           {
             "name": "[Overwhelming Power] (5 stacks)",
-            "description": "+10% DEF (maximum 50%).\n+2% <img src='Light_Thomas_Buff_GaindShield.webp' alt='Shieldgain'> [Shield gain] (maximum 10%).\n(25 SECONDES).",
+            "tag": "Overwhelming Power",
+            "description": "+10% DEF (maximum 50%).\n+2% [Shield gain] (maximum 10%).\n(25 SECONDES).",
             "image": "Light_Thomas_Buff_Puissanceecrasante.webp"
           },
           {
             "name": "[Steel Tyrant]",
-            "description": "+20% DEF.\n+20% DMG RED.\n+10% <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [Shield].\n<img src='Light_Thomas_Skill1.webp' alt='Skill1'> [Skill 1] & <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [Skill 2] +100% DMG inc.\n<img src='Light_Thomas_Skill_Ultime.webp' alt='Ultimate'> [Ultimate] +125% DMG inc.\n(25 seconds)",
+            "tag": "Steel Tyrant",
+            "description": "+20% DEF.\n+20% DMG RED.\n+10% [Shield].\n[Skill1] & [Skill2] +100% DMG inc.\n[Ultime] +125% DMG inc.\n(25 seconds)",
             "image": "Light_Thomas_Buff_Tyrandacier.webp"
           },
           {
             "name": "[Overgrowth]",
-            "description": "Transformed into <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Steel Tyran'>[Steel Tyran] <img src='Light_Thomas_Skill2.webp' alt='Skill2'>[Skill 2] activate <img src='Light_Thomas_Buff_Overgrowth.webp' alt='Overgrowth'>[Overgrowth].\n200% Light DMG of defense.\n10 000 points <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'>[Shield] = [Overgrowth] +1000% DMG inc.",
+            "tag": "Overgrowth",
+            "description": "Transformed into [Steel Tyrant] [Skill2] activate [Overgrowth].\n200% Light DMG of defense.\n10 000 points [Shield] = [Overgrowth] +1000% DMG inc.",
             "image": "Light_Thomas_Buff_Overgrowth.webp"
           },
           {
             "name": "[Steel Armor]",
-            "description": "+10%<img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [Shield].\n+10% Critical Hit & DMG\n(25 SECONDES).",
+            "tag": "Steel Armor",
+            "description": "+10% [Shield].\n+10% Critical Hit & DMG\n(25 SECONDES).",
             "image": "Light_Thomas_Buff_Armuredacier.webp"
           }
         ],
         "skills": [
           {
-            "principal": "True",
-            "description": "<img src='Light_Thomas_Skill_QTE.webp' alt='QTE'> [QTE] > <img src='Light_Thomas_Skill1.webp' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Core.webp' alt='Core'> [CORE] > <img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [ULTIME] <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Tyrandacier'>"
+            "principal": true,
+            "description": "[QTE] > [SKILL1] > [CORE] > [ULTIME] [STEEL TYRANT|img]"
           },
           {
-            "principal": "True",
-            "name": "[TYRAN D'ACIER]",
-            "description": "<img src='Light_Thomas_Skill_Core.webp' alt='Core'> [CORE] > <img src='Light_Thomas_Skill1.webp' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Core.webp' alt='Core'> [CORE] > <img src='Light_Thomas_Skill2.webp' alt='Skill2'> [SKILL2] > <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Tyrandacier'> CLINIOTE > <img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [ULTIME] > <img src='Light_Thomas_Skill_Core.webp' alt='Core'> [CORE] > <img src='Light_Thomas_Skill1.webp' alt='Skill1'> [SKILL1] > <img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [ULTIME] <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Tyrandacier'>.",
+            "principal": true,
+            "name": "[Steel Tyrant]",
+            "description": "[CORE] > [SKILL1] > [CORE] > [SKILL2] > [STEEL TYRANT|img] blink > [ULTIME] > [CORE] > [SKILL1] > [ULTIME] [STEEL TYRANT|img].",
             "image": "Light_Thomas_Buff_Tyrandacier.webp"
           },
           {
-            "name": "[CORE] COUP DE MARTEAU GEANT",
-            "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='Puissanceecrasante'> [PUISSANCE ECRASANTE] (1x)\n<img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD] +2%",
+            "name": "[CORE] GIGANTIC HAMMER SLAM",
+            "tag": "Core",
+            "description": "[OVERWHELMING POWER] (1x)\n[SHIELD] +2%",
             "image": "Light_Thomas_Skill_Core.webp"
           },
           {
-            "name": "[SKILL1] DEMOLITION ABSOLUE",
-            "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='Puissanceecrasante'> [PUISSANCE ECRASANTE] (1x)\n<img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD] +2%",
+            "name": "[SKILL1] ABSOLUTE DEMOLITION",
+            "tag": "Skill1",
+            "description": "[OVERWHELMING POWER] (1x)\n[SHIELD] +2%",
             "image": "Light_Thomas_Skill1.webp"
           },
           {
-            "name": "[SKILL2] ECRASEMENT COLOSSAL",
-            "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='Puissanceecrasante'> [PUISSANCE ECRASANTE] (1x)\n<img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD] +2%",
+            "name": "[SKILL2] COLOSSAL CRUSH",
+            "tag": "Skill2",
+            "description": "[OVERWHELMING POWER] (1x)\n[SHIELD] +2%",
             "image": "Light_Thomas_Skill2.webp"
           },
           {
-            "name": "[ULTIME] JUGEMENT DU CHEF",
-            "description": "TRANSFORMATION <img src='Light_Thomas_Buff_Tyrandacier.webp' alt='Tyrandacier'> [TYRAN D'ACIER] 10000 POINTS <img src='Light_Thomas_Buff_Shield.webp' alt='Shield'> [SHIELD] = <img src='Light_Thomas_Skill_Ultime.webp' alt='Ultime'> [ULTIME] +1020% DMG INC.",
+            "name": "[ULTIME] RULER'S JUDGEMENT",
+            "tag": "Ultime",
+            "description": "Transformation [STEEL TYRANT] 10000 point [SHIELD] = [ULTIME] +1020% DMG INC.",
             "image": "Light_Thomas_Skill_Ultime.webp"
           },
           {
-            "name": "[QTE] COUP A LA VOLEE",
-            "description": "<img src='Light_Thomas_Buff_Puissanceecrasante.webp' alt='Puissanceecrasante'> [PUISSANCE ECRASANTE] (1x).",
+            "name": "[QTE] VOLLEY CRASH",
+            "tag": "QTE",
+            "description": "[OVERWHELMING POWER] (1x).",
             "image": "Light_Thomas_Skill_QTE.webp"
           },
           {
-            "name": "[SOUTIEN] RETOUR DU ROI",
-            "description": "<img src='Light_Thomas_Buff_Armuredacier.webp' alt='Armuredacier'> [ARMURE D'ACIER].",
+            "name": "[SUPPORT] RETURN OF THE KING",
+            "tag": "Support",
+            "description": "[STEEL ARMOR].",
             "image": "Light_Thomas_Skill_Soutien.webp"
           }
         ],
         "equipment_sets": [
           {
+            "description": "The set is usefull in the early game for the DEF PEN, its 2nd utility will be for the guild boss Fachna.",
             "set_name": "Early Game",
             "focus_stats": [
               "DEF",
@@ -3716,7 +3778,7 @@
                 "name": "Helmet",
                 "number": "01",
                 "set": "Armed",
-                "image": "Armed/Artefact01_Armed.webp",
+                "image": "Artefact01_Armed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -3739,7 +3801,7 @@
                 "name": "Chestplate",
                 "number": "02",
                 "set": "Armed",
-                "image": "Armed/Artefact02_Armed.webp",
+                "image": "Artefact02_Armed.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -3762,7 +3824,7 @@
                 "name": "Gloves",
                 "number": "03",
                 "set": "Armed",
-                "image": "Armed/Artefact03_Armed.webp",
+                "image": "Artefact03_Armed.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -3785,7 +3847,7 @@
                 "name": "Boots",
                 "number": "04",
                 "set": "Armed",
-                "image": "Armed/Artefact04_Armed.webp",
+                "image": "Artefact04_Armed.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -3808,7 +3870,7 @@
                 "name": "Necklace",
                 "number": "05",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
+                "image": "Artefact05_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -3831,7 +3893,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
+                "image": "Artefact06_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -3854,7 +3916,7 @@
                 "name": "Ring",
                 "number": "07",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
+                "image": "Artefact07_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -3877,7 +3939,7 @@
                 "name": "Earring",
                 "number": "08",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
+                "image": "Artefact08_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -3934,6 +3996,7 @@
             ]
           },
           {
+            "description": "Full set DMG INC the problem is the malus of -20% DMG RES, witch will make your shield disappear faster.",
             "set_name": "Mid Game",
             "focus_stats": [
               "DEF",
@@ -3948,7 +4011,7 @@
                 "name": "Helmet",
                 "number": "01",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact01_Curse.webp",
+                "image": "Artefact01_Curse.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -3971,7 +4034,7 @@
                 "name": "Chestplate",
                 "number": "02",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact02_Curse.webp",
+                "image": "Artefact02_Curse.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -3994,7 +4057,7 @@
                 "name": "Gloves",
                 "number": "03",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact03_Curse.webp",
+                "image": "Artefact03_Curse.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -4017,7 +4080,7 @@
                 "name": "Boots",
                 "number": "04",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact04_Curse.webp",
+                "image": "Artefact04_Curse.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -4040,7 +4103,7 @@
                 "name": "Necklace",
                 "number": "05",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
+                "image": "Artefact05_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -4063,7 +4126,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
+                "image": "Artefact06_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -4086,7 +4149,7 @@
                 "name": "Ring",
                 "number": "07",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
+                "image": "Artefact07_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -4109,7 +4172,7 @@
                 "name": "Earring",
                 "number": "08",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
+                "image": "Artefact08_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -4166,6 +4229,7 @@
             ]
           },
           {
+            "description": "Thomas Andre has already a teamfight boost & in his kit has a lot of [skills] & [ultimate] DMG INC. Overgrowth and his shield during his ultimate are based on his def, and on top of that we have an ultimate boost.",
             "set_name": "End Game",
             "focus_stats": [
               "DEF",
@@ -4180,7 +4244,7 @@
                 "name": "Helmet",
                 "number": "01",
                 "set": "Iron Will",
-                "image": "Iron_Will/Artefact01_IronWill.webp",
+                "image": "Artefact01_IronWill.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -4203,7 +4267,7 @@
                 "name": "Chestplate",
                 "number": "02",
                 "set": "Iron Will",
-                "image": "Iron_Will/Artefact02_IronWill.webp",
+                "image": "Artefact02_IronWill.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -4226,7 +4290,7 @@
                 "name": "Gloves",
                 "number": "03",
                 "set": "Iron Will",
-                "image": "Iron_Will/Artefact03_IronWill.webp",
+                "image": "Artefact03_IronWill.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -4249,7 +4313,7 @@
                 "name": "Boots",
                 "number": "04",
                 "set": "Iron Will",
-                "image": "Iron_Will/Artefact04_IronWill.webp",
+                "image": "Artefact04_IronWill.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -4272,7 +4336,7 @@
                 "name": "Necklace",
                 "number": "05",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
+                "image": "Artefact05_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -4295,7 +4359,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
+                "image": "Artefact06_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -4318,7 +4382,7 @@
                 "name": "Ring",
                 "number": "07",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
+                "image": "Artefact07_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -4341,7 +4405,7 @@
                 "name": "Earring",
                 "number": "08",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
+                "image": "Artefact08_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -4398,6 +4462,7 @@
             ]
           },
           {
+            "description": "Thomas Andre has already a teamfight boost & in his kit has a lot of [skills] & [ultimate] DMG INC. Overgrowth and his shield during his ultimate are based on his def, and on top of that we have an ultimate boost.",
             "set_name": "Guild & POD",
             "focus_stats": [
               "DEF",
@@ -4412,7 +4477,7 @@
                 "name": "Helmet",
                 "number": "01",
                 "set": "Chaotic Infamy",
-                "image": "Chaotic_Infamy/Artefact01_Infamy.webp",
+                "image": "Artefact01_Infamy.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -4435,7 +4500,7 @@
                 "name": "Chestplate",
                 "number": "02",
                 "set": "Chaotic Infamy",
-                "image": "Chaotic_Infamy/Artefact02_Infamy.webp",
+                "image": "Artefact02_Infamy.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -4458,7 +4523,7 @@
                 "name": "Gloves",
                 "number": "03",
                 "set": "Chaotic Infamy",
-                "image": "Chaotic_Infamy/Artefact03_Infamy.webp",
+                "image": "Artefact03_Infamy.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -4481,7 +4546,7 @@
                 "name": "Boots",
                 "number": "04",
                 "set": "Chaotic Infamy",
-                "image": "Chaotic_Infamy/Artefact04_Infamy.webp",
+                "image": "Artefact04_Infamy.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -4504,7 +4569,7 @@
                 "name": "Necklace",
                 "number": "05",
                 "set": "Chaotic Infamy",
-                "image": "Chaotic_Infamy/Artefact05_Infamy.webp",
+                "image": "Artefact05_Infamy.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -4527,7 +4592,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Chaotic Infamy",
-                "image": "Chaotic_Infamy/Artefact06_Infamy.webp",
+                "image": "Artefact06_Infamy.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -4550,7 +4615,7 @@
                 "name": "Ring",
                 "number": "07",
                 "set": "Chaotic Infamy",
-                "image": "Chaotic_Infamy/Artefact07_Infamy.webp",
+                "image": "Artefact07_Infamy.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -4573,7 +4638,7 @@
                 "name": "Earring",
                 "number": "08",
                 "set": "Chaotic Infamy",
-                "image": "Chaotic_Infamy/Artefact08_Infamy.webp",
+                "image": "Artefact08_Infamy.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
