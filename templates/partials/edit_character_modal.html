@@ -348,8 +348,8 @@
   // Sélecteur pour afficher le bon bloc de set à modifier dans l'onglet artefacts
   document.getElementById('edit-equipment-select')?.addEventListener('change', function(e) {
     const idx = this.value;
-    document.querySelectorAll('.edit-eqset-block').forEach((block, i) => {
-      block.style.display = (i == idx) ? 'block' : 'none';
+    document.querySelectorAll('.edit-eqset-block').forEach((block) => {
+      block.style.display = (block.id === `eqset-block-${idx}`) ? 'block' : 'none';
     });
   });
 
