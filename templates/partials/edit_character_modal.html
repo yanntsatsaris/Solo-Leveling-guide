@@ -531,6 +531,7 @@
       option.value = setOrderIndex;
       option.textContent = setName;
       option.dataset.order = setOrderIndex;
+      option.dataset.originalIndex = setOrderIndex; // Ajouté
 
       // Trouver la bonne position d'insertion selon l'ordre
       const select = this;
@@ -554,6 +555,7 @@
       const div = document.createElement('div');
       div.className = 'edit-eqset-block';
       div.id = `eqset-block-${setOrderIndex}`;
+      div.dataset.originalIndex = setOrderIndex; // Ajouté
       div.style.display = 'block';
       document.querySelectorAll('.edit-eqset-block').forEach(b => b.style.display = 'none');
       div.innerHTML = `
@@ -643,24 +645,18 @@
     const options = Array.from(select.options).filter(opt => opt !== addNewSetOption);
 
     const fields = document.getElementById('edit-artefacts-fields');
-    // On récupère tous les blocs existants
     let blocks = Array.from(fields.querySelectorAll('.edit-eqset-block'));
 
     // Trie les options selon data-order croissant
     options.sort((a, b) => Number(a.dataset.order) - Number(b.dataset.order));
 
-    // Réindexe tout et replace les blocs dans le bon ordre
     options.forEach((option, idx) => {
       option.value = idx;
       option.dataset.order = idx;
       select.insertBefore(option, addNewSetOption);
 
-      // Trouve le bloc correspondant à l'ancien index (avant réindexation)
-      let block = blocks.find(b => b.id === `eqset-block-${option.dataset.order}` || b.id === `eqset-block-${option.value}` || b.id === `eqset-block-${idx}`);
-      if (!block) {
-        // Si pas trouvé, on tente de trouver un bloc non encore utilisé
-        block = blocks[idx];
-      }
+      // Cherche le bloc qui a le même data-original-index
+      let block = blocks.find(b => b.dataset.originalIndex == option.dataset.originalIndex);
       if (block) {
         // Replace le bloc à la bonne position dans le DOM
         if (fields.children[idx] !== block) {
@@ -675,7 +671,6 @@
             }
             return `_${idx}`;
           });
-          // Met à jour le champ caché d'ordre si besoin
           if (input.name === `eqset_order_${idx}`) {
             input.value = idx + 1;
           }
