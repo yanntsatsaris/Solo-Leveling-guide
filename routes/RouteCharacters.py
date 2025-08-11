@@ -284,13 +284,7 @@ def characters(app: Flask):
         # Ajout de l'extraction de la couleur des cœurs
         for eq_set in character_info['equipment_sets']:
             for core in eq_set['cores']:
-                # Extraction de la couleur depuis le nom, ex: "Noyau Orange 01"
-                import re
-                match = re.search(r'Noyau\s+(\w+)', core['name'])
-                if match:
-                    core['color'] = match.group(1)
-                else:
-                    core['color'] = ""  # ou None si non trouvé
+                core['color'] = core['name']
 
         panoplies_effects = panoplies_sql.get_panoplies_effects(language)
         cores_effects = cores_sql.get_cores_effects(language)
