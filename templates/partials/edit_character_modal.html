@@ -509,12 +509,13 @@
 
       // Trouver la bonne position d'insertion selon l'ordre
       const setOrderNum = setOrder !== "" ? Number(setOrder) : Number.MAX_SAFE_INTEGER;
-      let insertPos = options.filter(opt => {
+      let insertPos = options.findIndex(opt => {
         const optOrder = opt.dataset.order !== undefined && opt.dataset.order !== ""
           ? Number(opt.dataset.order)
           : Number.MAX_SAFE_INTEGER;
-        return optOrder < setOrderNum;
-      }).length;
+        return optOrder >= setOrderNum;
+      });
+      if (insertPos === -1) insertPos = options.length;
 
       select.insertBefore(option, options[insertPos] || addNewSetOption);
       select.value = setIdx;
