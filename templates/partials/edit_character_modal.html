@@ -469,7 +469,7 @@
   });
 
   // Ajout d'un set d'équipement
-  document.getElementById('edit-equipment-select')?.addEventListener('change', function(e) {
+  document.getElementById('edit-equipment-select')?.addEventListener('click', function(e) {
     if (this.value === "add_new_set") {
       const setName = prompt("Nom du nouveau set :");
       if (!setName) {
