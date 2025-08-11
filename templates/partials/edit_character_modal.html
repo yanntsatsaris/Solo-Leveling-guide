@@ -678,4 +678,24 @@
       }
     });
   }
+
+  function reindexEqsetBlocks() {
+    const fields = document.getElementById('edit-artefacts-fields');
+    const blocks = Array.from(fields.querySelectorAll('.edit-eqset-block'));
+    blocks.forEach((block, idx) => {
+      block.id = `eqset-block-${idx}`;
+      // Met à jour tous les champs du bloc
+      block.querySelectorAll('[name]').forEach(input => {
+        input.name = input.name.replace(/_(\d+)(?:_(\d+))?/, function(_, oldIdx, subIdx) {
+          if (typeof subIdx !== "undefined") {
+            return `_${idx}_${subIdx}`;
+          }
+          return `_${idx}`;
+        });
+        if (input.name === `eqset_order_${idx}`) {
+          input.value = idx + 1;
+        }
+      });
+    });
+  }
 </script>
