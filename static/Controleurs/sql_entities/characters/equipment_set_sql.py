@@ -78,6 +78,7 @@ class EquipmentSetSql:
             SELECT cores_id, cores_name, cores_number, cores_image, cores_main_stat, cores_secondary_stat
             FROM cores
             WHERE cores_equipment_sets_id = %s
+            ORDER BY cores_number
         """, (eq_set_id,))
         cores = []
         for core_row in self.cursor.fetchall():
@@ -156,6 +157,7 @@ class EquipmentSetSql:
                 SELECT cores_id, cores_name, cores_number, cores_image, cores_main_stat, cores_secondary_stat
                 FROM cores
                 WHERE cores_equipment_sets_id = %s
+                ORDER BY cores_number
             """, (set_id,))
             cores = []
             for core_row in self.cursor.fetchall():
