@@ -266,7 +266,13 @@
         {% for a_idx in range(4) %}
           {% set artefact = eqSet.artefacts[a_idx] if eqSet.artefacts|length > a_idx else {} %}
           <div class="edit-artefact-block">
-            <label>{{ artefact.name if artefact.name is defined else '' }}</label>
+            <label>
+              {% set artefact_types = {
+                'FR-fr': ['Casque', 'Plastron', 'Gants', 'Bottes', 'Collier', 'Bracelet', 'Bague', "Boucle d'oreille"],
+                'EN-en': ['Helmet', 'Chestplate', 'Gloves', 'Boots', 'Necklace', 'Bracelet', 'Ring', 'Earring']
+              } %}
+              {{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}
+            </label>
             <label>Pannoplie :</label>
             <input type="text" name="artefact_set_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.set if artefact.set is defined else '' }}">
             <label>Image :</label>
@@ -283,7 +289,13 @@
         {% for a_idx in range(4, 8) %}
           {% set artefact = eqSet.artefacts[a_idx] if eqSet.artefacts|length > a_idx else {} %}
           <div class="edit-artefact-block">
-            <label>{{ artefact.name if artefact.name is defined else '' }}</label>
+            <label>
+              {% set artefact_types = {
+                'FR-fr': ['Casque', 'Plastron', 'Gants', 'Bottes', 'Collier', 'Bracelet', 'Bague', "Boucle d'oreille"],
+                'EN-en': ['Helmet', 'Chestplate', 'Gloves', 'Boots', 'Necklace', 'Bracelet', 'Ring', 'Earring']
+              } %}
+              {{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}
+            </label>
             <label>Pannoplie :</label>
             <input type="text" name="artefact_set_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.set if artefact.set is defined else '' }}">
             <label>Image :</label>
@@ -556,7 +568,7 @@
           <div class="artefacts-col" style="flex: 1;">
             ${[0,1,2,3].map(a_idx => `
               <div class="edit-artefact-block">
-                <label></label>
+                <label>${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}</label>
                 <label>Pannoplie :</label>
                 <input type="text" name="artefact_set_${setOrderIndex}_${a_idx}" value="">
                 <label>Image :</label>
@@ -572,7 +584,7 @@
           <div class="artefacts-col" style="flex: 1;">
             ${[4,5,6,7].map(a_idx => `
               <div class="edit-artefact-block">
-                <label></label>
+                <label>${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}</label>
                 <label>Pannoplie :</label>
                 <input type="text" name="artefact_set_${setOrderIndex}_${a_idx}" value="">
                 <label>Image :</label>
@@ -644,4 +656,12 @@
       option.dataset.order = idx;
     });
   }
+
+  // Dictionnaire des types d'artefacts par langue
+  const artefactTypeLabels = {
+    "FR-fr": ["Casque", "Plastron", "Gants", "Bottes", "Collier", "Bracelet", "Bague", "Boucle d'oreille"],
+    "EN-en": ["Helmet", "Chestplate", "Gloves", "Boots", "Necklace", "Bracelet", "Ring", "Earring"]
+  };
+  // Détecte la langue courante (à adapter selon ton contexte)
+  const currentLang = "{{ language if language is defined else 'FR-fr' }}";
 </script>
