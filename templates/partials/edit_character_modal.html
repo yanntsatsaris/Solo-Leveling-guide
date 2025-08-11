@@ -603,6 +603,15 @@
         fields.appendChild(div);
       }
       reindexSets();
+
+      // Affiche l'ordre de chaque set dans la console après ajout
+      const selectElem = document.getElementById('edit-equipment-select');
+      const addNewSetOptionLocal = selectElem.querySelector('option[value="add_new_set"]');
+      const setOptionsAfterAdd = Array.from(selectElem.options).filter(opt => opt !== addNewSetOptionLocal);
+      console.log('Ordre des sets après ajout :');
+      setOptionsAfterAdd.forEach((opt, idx) => {
+        console.log(`Index ${idx} : nom="${opt.textContent}", data-order=${opt.dataset.order}`);
+      });
     }
   });
 
