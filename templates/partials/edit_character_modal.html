@@ -502,23 +502,26 @@
       option.textContent = setName;
       option.dataset.order = setOrder;
 
-      // Ajoute l'option AVANT de trier
+      // Trouver la bonne position d'insertion selon l'ordre
       const select = this;
       const addNewSetOption = select.querySelector('option[value="add_new_set"]');
-      select.insertBefore(option, addNewSetOption);
-
-      // Trie toutes les options (hors add_new_set)
       const options = Array.from(select.options).filter(opt => opt !== addNewSetOption);
-      options.sort((a, b) => {
-        const orderA = a.dataset.order !== undefined && a.dataset.order !== "" ? Number(a.dataset.order) : Number.MAX_SAFE_INTEGER;
-        const orderB = b.dataset.order !== undefined && b.dataset.order !== "" ? Number(b.dataset.order) : Number.MAX_SAFE_INTEGER;
-        return orderA - orderB;
-      });
-      options.forEach(opt => select.insertBefore(opt, addNewSetOption));
 
-      // Trouve la position d'insertion du bloc HTML (index de la nouvelle option dans le select)
-      const insertPos = options.findIndex(opt => opt.value == setIdx.toString());
-
+      const setOrderNum = setOrder !== "" ? Number(setOrder) : Number.MAX_SAFE_INTEGER;
+      let insertPos = options.length;
+      for (let i = 0; i < options.length; i++) {
+        const optOrder = options[i].dataset.order !== undefined && options[i].dataset.order !== ""
+          ? Number(options[i].dataset.order)
+          : Number.MAX_SAFE_INTEGER;
+        if (setOrderNum < optOrder) {
+          select.insertBefore(option, options[i]);
+          insertPos = i;
+          break;
+        }
+      }
+      if (insertPos === options.length) {
+        select.insertBefore(option, addNewSetOption);
+      }
       select.value = setIdx;
 
       // Crée le bloc HTML du nouveau set
