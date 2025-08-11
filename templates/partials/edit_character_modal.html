@@ -489,7 +489,8 @@
         this.value = 0;
         return;
       }
-      const setOrder = prompt("Ordre d'affichage du set (nombre, optionnel) :") || "";
+      let setOrder = prompt("Ordre d'affichage du set (nombre, optionnel) :") || "";
+      setOrder = setOrder - 1;
 
       // Trouver le plus grand index déjà utilisé
       const usedIndexes = Array.from(document.querySelectorAll('input[name^="eqset_name_"]'))
