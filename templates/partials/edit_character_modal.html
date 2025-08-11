@@ -611,6 +611,7 @@
         fields.appendChild(div);
       }
       reindexEqsetBlocks();
+      reindexEqsetOptions();
     }
   });
 
@@ -631,6 +632,16 @@
           input.value = idx + 1;
         }
       });
+    });
+  }
+
+  function reindexEqsetOptions() {
+    const select = document.getElementById('edit-equipment-select');
+    const addNewSetOption = select.querySelector('option[value="add_new_set"]');
+    const options = Array.from(select.options).filter(opt => opt !== addNewSetOption);
+    options.forEach((option, idx) => {
+      option.value = idx;
+      option.dataset.order = idx;
     });
   }
 </script>
