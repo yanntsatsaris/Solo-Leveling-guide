@@ -595,7 +595,12 @@
           <hr>
         `).join('')}
       `;
-      fields.appendChild(div);
+      const blocks = Array.from(fields.querySelectorAll('.edit-eqset-block'));
+      if (insertPos < blocks.length) {
+        fields.insertBefore(div, blocks[insertPos]);
+      } else {
+        fields.appendChild(div);
+      }
     }
   });
 </script>
