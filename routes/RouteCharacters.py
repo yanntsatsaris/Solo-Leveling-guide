@@ -450,7 +450,7 @@ def characters(app: Flask):
                 db_weapon = next((w for w in current_weapons if str(w['id']) == str(wid)), None)
                 if db_weapon and (
                     (db_weapon['name'] or '') != (wname or '') or
-                    (normalize_text(db_weapon['stats']) or '') != (normalize_text(wstats) or '') or
+                    (normalize_text db_weapon['stats']) or '') != (normalize_text(wstats) or '') or
                     (db_weapon['tag'] or '') != (wtag or '') or
                     (db_weapon['image_name'] or '') != (wimg or '')
                 ):
@@ -593,20 +593,22 @@ def characters(app: Flask):
                 cmain = request.form.get(f"core_main_stat_{set_idx}_{core_idx}")
                 csec = request.form.get(f"core_secondary_stat_{set_idx}_{core_idx}")
                 cid = request.form.get(f"core_id_{set_idx}_{core_idx}")
+                cnumber = f"{core_idx+1:02d}"  # Ajoute cette ligne pour numéroter 01, 02, 03
                 db_core = next((c for c in current_cores if str(c['id']) == str(cid)), None) if cid else None
                 if cid:
                     if db_core and (
                         db_core['name'] != cname or
                         db_core['image_name'] != cimg or
                         db_core['main_stat'] != cmain or
-                        db_core['secondary_stat'] != csec
+                        db_core['secondary_stat'] != csec or
+                        str(db_core.get('number', '')) != cnumber
                     ):
-                        equipment_set_sql.update_core(cid, set_id, cname, cimg, cmain, csec, language)
+                        equipment_set_sql.update_core(cid, set_id, cname, cimg, cmain, csec, cnumber, language)
                         set_modif = True
                         write_log(f"Modification noyau {cid} du set {set_id}", log_level="INFO")
                     form_core_ids.append(cid)
                 else:
-                    new_cid = equipment_set_sql.add_core(set_id, cname, cimg, cmain, csec, language)
+                    new_cid = equipment_set_sql.add_core(set_id, cname, cimg, cmain, csec, cnumber, language)
                     set_modif = True
                     write_log(f"Ajout noyau {new_cid} au set {set_id}", log_level="INFO")
                     form_core_ids.append(new_cid)

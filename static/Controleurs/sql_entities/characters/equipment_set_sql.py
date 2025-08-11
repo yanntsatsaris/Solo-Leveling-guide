@@ -34,30 +34,42 @@ class EquipmentSetSql:
         focus_stats = [fs_row[0] for fs_row in self.cursor.fetchall()]
         # Artefacts
         self.cursor.execute("""
-            SELECT a.artefacts_id, at.artefact_translations_name, at.artefact_translations_set, a.artefacts_image, a.artefacts_main_stat
+            SELECT a.artefacts_id, a.artefacts_image, a.artefacts_main_stat
             FROM artefacts a
-            JOIN artefact_translations at ON at.artefact_translations_artefacts_id = a.artefacts_id
-            WHERE a.artefacts_equipment_sets_id = %s AND at.artefact_translations_language = %s
-        """, (eq_set_id, language))
+            WHERE a.artefacts_equipment_sets_id = %s
+        """, (eq_set_id,))
         artefacts = []
         artefact_sets = []
         for a_row in self.cursor.fetchall():
-            artefact_id, artefact_name, artefact_set, artefact_image, artefact_main_stat = a_row
+            artefact_id, artefact_image, artefact_main_stat = a_row
+            # Récupère toutes les traductions de cet artefact
+            self.cursor.execute("""
+                SELECT artefact_translations_language, artefact_translations_name, artefact_translations_set
+                FROM artefact_translations
+                WHERE artefact_translations_artefacts_id = %s
+            """, (artefact_id,))
+            translations = {}
+            for lang, name, aset in self.cursor.fetchall():
+                translations[lang] = {'name': name, 'set': aset}
+            # Récupère les secondary_stats
             self.cursor.execute("""
                 SELECT artefact_secondary_stats_name FROM artefact_secondary_stats
                 WHERE artefact_secondary_stats_artefacts_id = %s
             """, (artefact_id,))
             secondary_stats = [sec_row[0] for sec_row in self.cursor.fetchall()]
-            # Remplacement des espaces par des "_" dans artefact_set pour le chemin image
+            # Pour compatibilité, on peut garder la traduction dans la langue demandée
+            artefact_name = translations.get(language, {}).get('name', '')
+            artefact_set = translations.get(language, {}).get('set', '')
             artefact_set_path = artefact_set.replace(" ", "_") if artefact_set else ""
             artefact_obj = {
-                'id': artefact_id,  # <-- AJOUT DE L'ID
+                'id': artefact_id,
                 'name': artefact_name,
                 'set': artefact_set,
                 'image': f'images/Artefacts/{artefact_set_path}/{artefact_image}' if artefact_image else '',
                 'image_name': artefact_image,
                 'main_stat': artefact_main_stat,
-                'secondary_stats': secondary_stats
+                'secondary_stats': secondary_stats,
+                'translations': translations  # Ajout de toutes les traductions
             }
             artefacts.append(artefact_obj)
             artefact_sets.append(artefact_set)
@@ -109,14 +121,23 @@ class EquipmentSetSql:
             focus_stats = [fs_row[0] for fs_row in self.cursor.fetchall()]
             # Artefacts
             self.cursor.execute("""
-                SELECT a.artefacts_id, at.artefact_translations_name, at.artefact_translations_set, a.artefacts_image, a.artefacts_main_stat
+                SELECT a.artefacts_id, a.artefacts_image, a.artefacts_main_stat
                 FROM artefacts a
-                JOIN artefact_translations at ON at.artefact_translations_artefacts_id = a.artefacts_id
-                WHERE a.artefacts_equipment_sets_id = %s AND at.artefact_translations_language = %s
-            """, (set_id, language))
+                WHERE a.artefacts_equipment_sets_id = %s
+            """, (set_id,))
             artefacts = []
             for a_row in self.cursor.fetchall():
-                artefact_id, artefact_name, artefact_set, artefact_image, artefact_main_stat = a_row
+                artefact_id, artefact_image, artefact_main_stat = a_row
+                # Récupère toutes les traductions de cet artefact
+                self.cursor.execute("""
+                    SELECT artefact_translations_language, artefact_translations_name, artefact_translations_set
+                    FROM artefact_translations
+                    WHERE artefact_translations_artefacts_id = %s
+                """, (artefact_id,))
+                translations = {}
+                for lang, name, aset in self.cursor.fetchall():
+                    translations[lang] = {'name': name, 'set': aset}
+                # Récupère les secondary_stats
                 self.cursor.execute("""
                     SELECT artefact_secondary_stats_name FROM artefact_secondary_stats
                     WHERE artefact_secondary_stats_artefacts_id = %s
@@ -124,8 +145,8 @@ class EquipmentSetSql:
                 secondary_stats = [sec_row[0] for sec_row in self.cursor.fetchall()]
                 artefacts.append({
                     'id': artefact_id,
-                    'name': artefact_name,
-                    'set': artefact_set,
+                    'name': translations.get(language, {}).get('name', ''),
+                    'set': translations.get(language, {}).get('set', ''),
                     'image_name': artefact_image,
                     'main_stat': artefact_main_stat,
                     'secondary_stats': secondary_stats
@@ -301,18 +322,18 @@ class EquipmentSetSql:
         self.cursor.execute("DELETE FROM artefact_translations WHERE artefact_translations_artefacts_id=%s", (aid,))
         self.cursor.execute("DELETE FROM artefacts WHERE artefacts_id=%s", (aid,))
 
-    def update_core(self, cid, set_id, name, img, main, sec, language):
+    def update_core(self, cid, set_id, name, img, main, sec, number, language):
         self.cursor.execute("""
             UPDATE cores
-            SET cores_name=%s, cores_image=%s, cores_main_stat=%s, cores_secondary_stat=%s, cores_equipment_sets_id=%s
+            SET cores_name=%s, cores_image=%s, cores_main_stat=%s, cores_secondary_stat=%s, cores_equipment_sets_id=%s, cores_number=%s
             WHERE cores_id=%s
-        """, (name, img, main, sec, set_id, cid))
+        """, (name, img, main, sec, set_id, number, cid))
 
-    def add_core(self, set_id, name, img, main, sec, language):
+    def add_core(self, set_id, name, img, main, sec, number, language):
         self.cursor.execute("""
-            INSERT INTO cores (cores_equipment_sets_id, cores_name, cores_image, cores_main_stat, cores_secondary_stat)
-            VALUES (%s, %s, %s, %s, %s) RETURNING cores_id
-        """, (set_id, name, img, main, sec))
+            INSERT INTO cores (cores_equipment_sets_id, cores_name, cores_image, cores_main_stat, cores_secondary_stat, cores_number)
+            VALUES (%s, %s, %s, %s, %s, %s) RETURNING cores_id
+        """, (set_id, name, img, main, sec, number))
         return self.cursor.fetchone()[0]
 
     def delete_core(self, cid):
