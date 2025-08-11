@@ -484,30 +484,46 @@
   // Ajout d'un set d'équipement
   document.getElementById('edit-equipment-select')?.addEventListener('change', function(e) {
     if (this.value === "add_new_set") {
-      // Demande le nom et l'ordre du set
       const setName = prompt("Nom du nouveau set :");
       if (!setName) {
         this.value = 0;
         return;
       }
       const setOrder = prompt("Ordre d'affichage du set (nombre, optionnel) :") || "";
-      // Trouve le nouvel index
       const setsCount = document.querySelectorAll('.edit-eqset-block').length;
       const setIdx = setsCount;
-      // Ajoute l'option dans le select
+
+      // Création de la nouvelle option
       const option = document.createElement('option');
       option.value = setIdx;
       option.textContent = setName;
-      this.insertBefore(option, this.querySelector('option[value="add_new_set"]'));
-      this.value = setIdx;
+      option.dataset.order = setOrder;
 
-      // Crée le bloc HTML du nouveau set
+      // Trouver la bonne position selon l'ordre
+      let inserted = false;
+      const select = this;
+      const addNewSetOption = select.querySelector('option[value="add_new_set"]');
+      const options = Array.from(select.options).filter(opt => opt !== addNewSetOption);
+
+      for (let i = 0; i < options.length; i++) {
+        const optOrder = options[i].dataset.order !== undefined ? Number(options[i].dataset.order) : i;
+        if (setOrder !== "" && Number(setOrder) < optOrder) {
+          select.insertBefore(option, options[i]);
+          inserted = true;
+          break;
+        }
+      }
+      if (!inserted) {
+        select.insertBefore(option, addNewSetOption);
+      }
+      select.value = setIdx;
+
+      // Crée le bloc HTML du nouveau set (inchangé)
       const fields = document.getElementById('edit-artefacts-fields');
       const div = document.createElement('div');
       div.className = 'edit-eqset-block';
       div.id = `eqset-block-${setIdx}`;
       div.style.display = 'block';
-      // Cache les autres blocs
       document.querySelectorAll('.edit-eqset-block').forEach(b => b.style.display = 'none');
       div.innerHTML = `
         <h4>Set : ${setName}</h4>
