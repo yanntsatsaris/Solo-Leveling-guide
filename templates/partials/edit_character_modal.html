@@ -503,6 +503,11 @@
       option.dataset.order = setOrder;
 
       // Trouver la bonne position d'insertion selon l'ordre
+      const select = this;
+      const addNewSetOption = select.querySelector('option[value="add_new_set"]');
+      const options = Array.from(select.options).filter(opt => opt !== addNewSetOption);
+
+      // Trouver la bonne position d'insertion selon l'ordre
       const setOrderNum = setOrder !== "" ? Number(setOrder) : Number.MAX_SAFE_INTEGER;
       let insertPos = options.filter(opt => {
         const optOrder = opt.dataset.order !== undefined && opt.dataset.order !== ""
