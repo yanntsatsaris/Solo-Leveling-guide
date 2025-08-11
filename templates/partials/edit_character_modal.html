@@ -476,22 +476,60 @@
         this.value = 0;
         return;
       }
-      let setOrder;
+      // Récupère toutes les options sauf "add_new_set"
       const options = Array.from(this.options).filter(opt => opt.value !== "add_new_set");
       const setCount = options.length;
+      let setOrder;
+      do {
+        setOrder = prompt(`Ordre d'affichage du set (entrez un chiffre entre 1 et ${setCount + 1}) :`);
+        if (setOrder === null) { // Annulation
+          this.value = 0;
+          return;
+        }
+        if (setOrder.trim() === "") {
+          setOrder = setCount + 1; // Valeur max si vide
+          break;
+        }
+        setOrder = Number(setOrder);
+      } while (!Number.isInteger(setOrder) || setOrder < 1 || setOrder > setCount + 1);
 
+      // Pour l'insertion, on veut l'index (0-based)
+      const setOrderIndex = setOrder - 1;
+
+      // Incrémente data-order de tous les sets >= setOrderIndex
+      options.forEach(opt => {
+        const optOrder = opt.dataset.order !== undefined && opt.dataset.order !== ""
+          ? Number(opt.dataset.order)
+          : Number.MAX_SAFE_INTEGER;
+        if (optOrder >= setOrderIndex) {
+          opt.dataset.order = optOrder + 1;
+          // Mets aussi à jour le champ caché d'ordre dans le bloc correspondant
+          const block = document.getElementById(`eqset-block-${opt.value}`);
+          if (block) {
+            const orderInput = block.querySelector(`input[name="eqset_order_${opt.value}"]`);
+            if (orderInput) orderInput.value = Number(opt.dataset.order) + 1;
+          }
+        }
+      });
+
+      // Création de la nouvelle option
+      const option = document.createElement('option');
+      option.value = setOrderIndex;
+      option.textContent = setName;
+      option.dataset.order = setOrderIndex;
+
+      // Trouver la bonne position d'insertion selon l'ordre
       const select = this;
       const addNewSetOption = select.querySelector('option[value="add_new_set"]');
       const setOptions = Array.from(select.options).filter(opt => opt !== addNewSetOption);
 
-      const setOrderNum = setOrderIndex;
       let insertPos = 0;
       if (setOptions.length > 0) {
         insertPos = setOptions.filter(opt => {
           const optOrder = opt.dataset.order !== undefined && opt.dataset.order !== ""
             ? Number(opt.dataset.order)
             : Number.MAX_SAFE_INTEGER;
-          return optOrder < setOrderNum;
+          return optOrder < setOrderIndex;
         }).length;
       }
       select.insertBefore(option, setOptions[insertPos] || addNewSetOption);
@@ -573,15 +611,6 @@
         fields.appendChild(div);
       }
       reindexEqsetBlocks();
-
-      // Affiche l'ordre de chaque set dans la console après ajout
-      const selectElem = document.getElementById('edit-equipment-select');
-      const addNewSetOptionLocal = selectElem.querySelector('option[value="add_new_set"]');
-      const setOptionsAfterAdd = Array.from(selectElem.options).filter(opt => opt !== addNewSetOptionLocal);
-      console.log('Ordre des sets après ajout :');
-      setOptionsAfterAdd.forEach((opt, idx) => {
-        console.log(`Index ${idx} : nom="${opt.textContent}", data-order=${opt.dataset.order}`);
-      });
     }
   });
 
