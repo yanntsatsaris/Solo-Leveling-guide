@@ -500,7 +500,7 @@
       const option = document.createElement('option');
       option.value = setIdx;
       option.textContent = setName;
-      option.dataset.order = setOrder;
+      option.dataset.order = setOrder - 1;
 
       // Trouver la bonne position d'insertion selon l'ordre
       const select = this;
@@ -509,13 +509,12 @@
 
       // Trouver la bonne position d'insertion selon l'ordre
       const setOrderNum = setOrder !== "" ? Number(setOrder) : Number.MAX_SAFE_INTEGER;
-      let insertPos = options.findIndex(opt => {
+      let insertPos = options.filter(opt => {
         const optOrder = opt.dataset.order !== undefined && opt.dataset.order !== ""
           ? Number(opt.dataset.order)
           : Number.MAX_SAFE_INTEGER;
-        return optOrder >= setOrderNum;
-      });
-      if (insertPos === -1) insertPos = options.length;
+        return optOrder < setOrderNum;
+      }).length;
 
       select.insertBefore(option, options[insertPos] || addNewSetOption);
       select.value = setIdx;
