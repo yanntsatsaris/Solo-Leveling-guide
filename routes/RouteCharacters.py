@@ -463,6 +463,8 @@ def characters(app: Flask):
                 weapon_modif = True
                 write_log(f"Ajout arme {wid} au personnage {char_id}", log_level="INFO")
                 form_weapon_ids.append(wid)
+                db_weapon = None
+                current_evos = []
             # --- Evolutions de l'arme ---
             current_evos = db_weapon['evolutions'] if wid and db_weapon and 'evolutions' in db_weapon else []
             existing_evo_ids = [str(e['id']) for e in current_evos]
