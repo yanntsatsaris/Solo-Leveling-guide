@@ -241,7 +241,7 @@
           <label for="edit-equipment-select">Sélectionner le set :</label>
           <select id="edit-equipment-select">
             {% for set in character.equipment_sets %}
-              <option value="{{ loop.index0 }}" data-order="{{ set.order if set.order is defined else loop.index0 }}">{{ set.set_name }}</option>
+              <option value="{{ loop.index0 }}" data-order="{{ set.order if set.order is defined else loop.index0 }}" data-original-index="{{ loop.index0 }}">{{ set.set_name }}</option>
             {% endfor %}
             <option value="add_new_set" style="color: #ff6600">
               + Ajouter un nouveau set
@@ -251,7 +251,7 @@
         <div id="edit-artefacts-fields">
           {% for eqSet in character.equipment_sets %}
   {% set set_idx = loop.index0 %}
-  <div class="edit-eqset-block" id="eqset-block-{{ set_idx }}" style="display: {{ 'block' if set_idx == 0 else 'none' }};">
+  <div class="edit-eqset-block" id="eqset-block-{{ set_idx }}" data-original-index="{{ set_idx }}" style="display: {{ 'block' if set_idx == 0 else 'none' }};">
     <h4>Set : {{ eqSet.set_name }}</h4>
     <input type="hidden" name="eqset_name_{{ set_idx }}" value="{{ eqSet.set_name }}">
     <label>Description :</label>
