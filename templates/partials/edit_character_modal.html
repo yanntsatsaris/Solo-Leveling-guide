@@ -489,53 +489,60 @@
         this.value = 0;
         return;
       }
-      let setOrder = prompt("Ordre d'affichage du set (nombre, optionnel) :") || "";
-      setOrder = setOrder - 1;
+      let setOrder;
+      const options = Array.from(this.options).filter(opt => opt.value !== "add_new_set");
+      const setCount = options.length;
+      do {
+        setOrder = prompt(`Ordre d'affichage du set (entrez un chiffre entre 1 et ${setCount + 1}) :`);
+        if (setOrder === null) { // Annulation
+          this.value = 0;
+          return;
+        }
+        setOrder = Number(setOrder);
+      } while (!Number.isInteger(setOrder) || setOrder < 1 || setOrder > setCount + 1);
 
-      // Trouver le plus grand index déjà utilisé
-      const usedIndexes = Array.from(document.querySelectorAll('input[name^="eqset_name_"]'))
-        .map(input => Number(input.name.match(/eqset_name_(\d+)/)[1]));
-      const setIdx = usedIndexes.length ? Math.max(...usedIndexes) + 1 : 0;
+      // Pour l'insertion, on veut l'index (0-based)
+      const setOrderIndex = setOrder - 1;
 
       // Création de la nouvelle option
       const option = document.createElement('option');
-      option.value = setIdx;
+      option.value = setOrderIndex;
       option.textContent = setName;
-      option.dataset.order = setOrder;
+      option.dataset.order = setOrderIndex;
 
       // Trouver la bonne position d'insertion selon l'ordre
       const select = this;
       const addNewSetOption = select.querySelector('option[value="add_new_set"]');
-      const options = Array.from(select.options).filter(opt => opt !== addNewSetOption);
+      const setOptions = Array.from(select.options).filter(opt => opt !== addNewSetOption);
 
       // Trouver la bonne position d'insertion selon l'ordre
-      const setOrderNum = setOrder !== "" ? Number(setOrder) : Number.MAX_SAFE_INTEGER;
-      let insertPos = options.filter(opt => {
+      const setOrderNum = setOrderIndex;
+      let insertPos = setOptions.filter(opt => {
         const optOrder = opt.dataset.order !== undefined && opt.dataset.order !== ""
           ? Number(opt.dataset.order)
           : Number.MAX_SAFE_INTEGER;
         return optOrder < setOrderNum;
       }).length;
 
-      select.insertBefore(option, options[insertPos] || addNewSetOption);
-      select.value = setIdx;
+      select.insertBefore(option, setOptions[insertPos] || addNewSetOption);
+      select.value = setOrderIndex;
 
       // Crée le bloc HTML du nouveau set
       const fields = document.getElementById('edit-artefacts-fields');
       const div = document.createElement('div');
       div.className = 'edit-eqset-block';
-      div.id = `eqset-block-${setIdx}`;
+      div.id = `eqset-block-${setOrderIndex}`;
       div.style.display = 'block';
       document.querySelectorAll('.edit-eqset-block').forEach(b => b.style.display = 'none');
       div.innerHTML = `
         <h4>Set : ${setName}</h4>
-        <input type="hidden" name="eqset_name_${setIdx}" value="${setName}">
-        <input type="hidden" name="eqset_id_${setIdx}" value="">
+        <input type="hidden" name="eqset_name_${setOrderIndex}" value="${setName}">
+        <input type="hidden" name="eqset_id_${setOrderIndex}" value="">
         <label>Description :</label>
-        <textarea name="eqset_description_${setIdx}"></textarea>
+        <textarea name="eqset_description_${setOrderIndex}"></textarea>
         <label>Stats à focus :</label>
-        <input type="text" name="eqset_focus_stats_${setIdx}" value="">
-        <input type="hidden" name="eqset_order_${setIdx}" value="${setOrder}">
+        <input type="text" name="eqset_focus_stats_${setOrderIndex}" value="">
+        <input type="hidden" name="eqset_order_${setOrderIndex}" value="${setOrder}">
         <h4>Artefacts du set</h4>
         <div class="artefacts-row" style="display: flex;">
           <div class="artefacts-col" style="flex: 1;">
@@ -543,14 +550,14 @@
               <div class="edit-artefact-block">
                 <label></label>
                 <label>Pannoplie :</label>
-                <input type="text" name="artefact_set_${setIdx}_${a_idx}" value="">
+                <input type="text" name="artefact_set_${setOrderIndex}_${a_idx}" value="">
                 <label>Image :</label>
-                <input type="text" name="artefact_image_${setIdx}_${a_idx}" value="">
+                <input type="text" name="artefact_image_${setOrderIndex}_${a_idx}" value="">
                 <label>Stat principale :</label>
-                <input type="text" name="artefact_main_stat_${setIdx}_${a_idx}" value="">
+                <input type="text" name="artefact_main_stat_${setOrderIndex}_${a_idx}" value="">
                 <label>Stats secondaires :</label>
-                <input type="text" name="artefact_secondary_stats_${setIdx}_${a_idx}" value="">
-                <input type="hidden" name="artefact_id_${setIdx}_${a_idx}" value="">
+                <input type="text" name="artefact_secondary_stats_${setOrderIndex}_${a_idx}" value="">
+                <input type="hidden" name="artefact_id_${setOrderIndex}_${a_idx}" value="">
               </div>
             `).join('')}
           </div>
@@ -559,14 +566,14 @@
               <div class="edit-artefact-block">
                 <label></label>
                 <label>Pannoplie :</label>
-                <input type="text" name="artefact_set_${setIdx}_${a_idx}" value="">
+                <input type="text" name="artefact_set_${setOrderIndex}_${a_idx}" value="">
                 <label>Image :</label>
-                <input type="text" name="artefact_image_${setIdx}_${a_idx}" value="">
+                <input type="text" name="artefact_image_${setOrderIndex}_${a_idx}" value="">
                 <label>Stat principale :</label>
-                <input type="text" name="artefact_main_stat_${setIdx}_${a_idx}" value="">
+                <input type="text" name="artefact_main_stat_${setOrderIndex}_${a_idx}" value="">
                 <label>Stats secondaires :</label>
-                <input type="text" name="artefact_secondary_stats_${setIdx}_${a_idx}" value="">
-                <input type="hidden" name="artefact_id_${setIdx}_${a_idx}" value="">
+                <input type="text" name="artefact_secondary_stats_${setOrderIndex}_${a_idx}" value="">
+                <input type="hidden" name="artefact_id_${setOrderIndex}_${a_idx}" value="">
               </div>
             `).join('')}
           </div>
@@ -576,14 +583,14 @@
         ${[0,1,2].map(c_idx => `
           <div class="edit-core-block">
             <label>Nom du noyau :</label>
-            <input type="text" name="core_name_${setIdx}_${c_idx}" value="">
+            <input type="text" name="core_name_${setOrderIndex}_${c_idx}" value="">
             <label>Image :</label>
-            <input type="text" name="core_image_${setIdx}_${c_idx}" value="">
+            <input type="text" name="core_image_${setOrderIndex}_${c_idx}" value="">
             <label>Stat principale :</label>
-            <input type="text" name="core_main_stat_${setIdx}_${c_idx}" value="">
+            <input type="text" name="core_main_stat_${setOrderIndex}_${c_idx}" value="">
             <label>Stat secondaire :</label>
-            <input type="text" name="core_secondary_stat_${setIdx}_${c_idx}" value="">
-            <input type="hidden" name="core_id_${setIdx}_${c_idx}" value="">
+            <input type="text" name="core_secondary_stat_${setOrderIndex}_${c_idx}" value="">
+            <input type="hidden" name="core_id_${setOrderIndex}_${c_idx}" value="">
           </div>
           <hr>
         `).join('')}
