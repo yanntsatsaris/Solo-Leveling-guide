@@ -623,22 +623,32 @@
     const fields = document.getElementById('edit-artefacts-fields');
     const blocks = Array.from(fields.querySelectorAll('.edit-eqset-block'));
 
+    // Trie les options selon data-order croissant
+    options.sort((a, b) => Number(a.dataset.order) - Number(b.dataset.order));
+
+    // Réindexe tout
     options.forEach((option, idx) => {
       option.value = idx;
+      option.dataset.order = idx; // <-- met à jour data-order
+      // Replace option dans le select à la bonne position
+      select.insertBefore(option, addNewSetOption);
+
       // Met à jour le bloc correspondant
-      const block = blocks[idx];
+      const block = blocks.find(b => b.id === `eqset-block-${option.value}` || b.id === `eqset-block-${idx}`);
       if (block) {
         block.id = `eqset-block-${idx}`;
         // Met à jour tous les champs du bloc
         block.querySelectorAll('[name]').forEach(input => {
-          input.name = input.name.replace(/_\d+(_\d+)?/, (m) => {
-            // Pour artefact/core : _setIdx_artefactIdx
-            if (m.includes('_')) {
-              const parts = m.split('_');
-              return `_${idx}${parts.length > 2 ? '_' + parts[2] : ''}`;
+          input.name = input.name.replace(/_(\d+)(?:_(\d+))?/, function(_, oldIdx, subIdx) {
+            if (typeof subIdx !== "undefined") {
+              return `_${idx}_${subIdx}`;
             }
             return `_${idx}`;
           });
+          // Met à jour le champ caché d'ordre si besoin
+          if (input.name === `eqset_order_${idx}`) {
+            input.value = idx + 1; // Pour l'utilisateur, l'ordre commence à 1
+          }
         });
       }
     });
