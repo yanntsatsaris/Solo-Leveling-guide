@@ -450,7 +450,7 @@ def characters(app: Flask):
                 db_weapon = next((w for w in current_weapons if str(w['id']) == str(wid)), None)
                 if db_weapon and (
                     (db_weapon['name'] or '') != (wname or '') or
-                    (normalize_text db_weapon['stats']) or '') != (normalize_text(wstats) or '') or
+                    ((normalize_text(db_weapon['stats']) or '') != (normalize_text(wstats) or '')) or
                     (db_weapon['tag'] or '') != (wtag or '') or
                     (db_weapon['image_name'] or '') != (wimg or '')
                 ):
