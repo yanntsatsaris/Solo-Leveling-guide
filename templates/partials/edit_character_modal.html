@@ -364,7 +364,6 @@
         tabContents[idx].classList.remove("active");
       }
     });
-    // Gestion du clic sur les onglets
     tabs.forEach((tab, idx) => {
       tab.addEventListener("click", () => {
         tabs.forEach((t) => t.classList.remove("active"));
@@ -387,7 +386,6 @@
       initialFormData = serializeForm(form);
     });
     form.addEventListener('submit', function(e) {
-      // Remplace tous les "None" ou null par ""
       Array.from(form.elements).forEach(el => {
         if (el.value === "None") {
           el.value = null;
@@ -409,17 +407,6 @@
     overlay.addEventListener('mousedown', function(e) {
       if (e.target === overlay) {
         overlay.style.display = 'none';
-      }
-    });
-  }
-
-  // Permet de déclencher l'ajout même si "add_new_set" est déjà sélectionné
-  const select = document.getElementById('edit-equipment-select');
-  if (select) {
-    select.addEventListener('click', function(e) {
-      if (select.value === "add_new_set") {
-        const event = new Event('change');
-        select.dispatchEvent(event);
       }
     });
   }
@@ -508,7 +495,6 @@
       // Pour l'insertion, on veut l'index (0-based)
       const setOrderIndex = setOrder - 1;
 
-      // === AJOUTE CE BLOC ICI ===
       // Incrémente data-order de tous les sets >= setOrderIndex
       options.forEach(opt => {
         const optOrder = opt.dataset.order !== undefined && opt.dataset.order !== ""
@@ -524,21 +510,18 @@
           }
         }
       });
-      // === FIN DU BLOC À AJOUTER ===
 
       // Création de la nouvelle option
       const option = document.createElement('option');
       option.value = setOrderIndex;
       option.textContent = setName;
       option.dataset.order = setOrderIndex;
-      option.dataset.originalIndex = setOrderIndex; // Ajouté
 
       // Trouver la bonne position d'insertion selon l'ordre
       const select = this;
       const addNewSetOption = select.querySelector('option[value="add_new_set"]');
       const setOptions = Array.from(select.options).filter(opt => opt !== addNewSetOption);
 
-      // Trouver la bonne position d'insertion selon l'ordre
       const setOrderNum = setOrderIndex;
       let insertPos = setOptions.filter(opt => {
         const optOrder = opt.dataset.order !== undefined && opt.dataset.order !== ""
@@ -555,7 +538,6 @@
       const div = document.createElement('div');
       div.className = 'edit-eqset-block';
       div.id = `eqset-block-${setOrderIndex}`;
-      div.dataset.originalIndex = setOrderIndex; // Ajouté
       div.style.display = 'block';
       document.querySelectorAll('.edit-eqset-block').forEach(b => b.style.display = 'none');
       div.innerHTML = `
@@ -638,46 +620,6 @@
       });
     }
   });
-
-  function reindexSets() {
-    const select = document.getElementById('edit-equipment-select');
-    const addNewSetOption = select.querySelector('option[value="add_new_set"]');
-    const options = Array.from(select.options).filter(opt => opt !== addNewSetOption);
-
-    const fields = document.getElementById('edit-artefacts-fields');
-    let blocks = Array.from(fields.querySelectorAll('.edit-eqset-block'));
-
-    // Trie les options selon data-order croissant
-    options.sort((a, b) => Number(a.dataset.order) - Number(b.dataset.order));
-
-    options.forEach((option, idx) => {
-      option.value = idx;
-      option.dataset.order = idx;
-      select.insertBefore(option, addNewSetOption);
-
-      // Cherche le bloc qui a le même data-original-index
-      let block = blocks.find(b => b.dataset.originalIndex == option.dataset.originalIndex);
-      if (block) {
-        // Replace le bloc à la bonne position dans le DOM
-        if (fields.children[idx] !== block) {
-          fields.insertBefore(block, fields.children[idx]);
-        }
-        block.id = `eqset-block-${idx}`;
-        // Met à jour tous les champs du bloc
-        block.querySelectorAll('[name]').forEach(input => {
-          input.name = input.name.replace(/_(\d+)(?:_(\d+))?/, function(_, oldIdx, subIdx) {
-            if (typeof subIdx !== "undefined") {
-              return `_${idx}_${subIdx}`;
-            }
-            return `_${idx}`;
-          });
-          if (input.name === `eqset_order_${idx}`) {
-            input.value = idx + 1;
-          }
-        });
-      }
-    });
-  }
 
   function reindexEqsetBlocks() {
     const fields = document.getElementById('edit-artefacts-fields');
