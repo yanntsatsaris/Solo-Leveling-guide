@@ -241,7 +241,7 @@
           <label for="edit-equipment-select">Sélectionner le set :</label>
           <select id="edit-equipment-select">
             {% for set in character.equipment_sets %}
-              <option value="{{ loop.index0 }}" data-order="{{ eqSet.order if eqSet.order is defined else loop.index0 }}">{{ set.set_name }}</option>
+              <option value="{{ loop.index0 }}" data-order="{{ set.order if set.order is defined else loop.index0 }}">{{ set.set_name }}</option>
             {% endfor %}
             <option value="add_new_set" style="color: #ff6600">
               + Ajouter un nouveau set
