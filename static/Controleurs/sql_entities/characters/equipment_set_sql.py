@@ -250,22 +250,51 @@ class EquipmentSetSql:
                 """, (aid, stat.strip()))
 
     def add_artefact(self, set_id, name, aset, img, main, sec, language):
+        # Recherche d'un artefact existant pour ce set avec la même image et main_stat
         self.cursor.execute("""
-            INSERT INTO artefacts (artefacts_equipment_sets_id, artefacts_image, artefacts_main_stat)
-            VALUES (%s, %s, %s) RETURNING artefacts_id
+            SELECT artefacts_id FROM artefacts
+            WHERE artefacts_equipment_sets_id=%s AND artefacts_image=%s AND artefacts_main_stat=%s
         """, (set_id, img, main))
-        aid = self.cursor.fetchone()[0]
-        self.cursor.execute("""
-            INSERT INTO artefact_translations (artefact_translations_artefacts_id, artefact_translations_language, artefact_translations_name, artefact_translations_set)
-            VALUES (%s, %s, %s, %s)
-        """, (aid, language, name, aset))
-        if sec:
-            for stat in sec.split(','):
+        row = self.cursor.fetchone()
+        if row:
+            aid = row[0]
+            # Vérifie si la traduction existe déjà
+            self.cursor.execute("""
+                SELECT 1 FROM artefact_translations
+                WHERE artefact_translations_artefacts_id=%s AND artefact_translations_language=%s
+            """, (aid, language))
+            if not self.cursor.fetchone():
                 self.cursor.execute("""
-                    INSERT INTO artefact_secondary_stats (artefact_secondary_stats_artefacts_id, artefact_secondary_stats_name)
-                    VALUES (%s, %s)
-                """, (aid, stat.strip()))
-        return aid
+                    INSERT INTO artefact_translations (artefact_translations_artefacts_id, artefact_translations_language, artefact_translations_name, artefact_translations_set)
+                    VALUES (%s, %s, %s, %s)
+                """, (aid, language, name, aset))
+            # Mets à jour les secondary_stats si besoin
+            self.cursor.execute("DELETE FROM artefact_secondary_stats WHERE artefact_secondary_stats_artefacts_id=%s", (aid,))
+            if sec:
+                for stat in sec.split(','):
+                    self.cursor.execute("""
+                        INSERT INTO artefact_secondary_stats (artefact_secondary_stats_artefacts_id, artefact_secondary_stats_name)
+                        VALUES (%s, %s)
+                    """, (aid, stat.strip()))
+            return aid
+        else:
+            # Création normale
+            self.cursor.execute("""
+                INSERT INTO artefacts (artefacts_equipment_sets_id, artefacts_image, artefacts_main_stat)
+                VALUES (%s, %s, %s) RETURNING artefacts_id
+            """, (set_id, img, main))
+            aid = self.cursor.fetchone()[0]
+            self.cursor.execute("""
+                INSERT INTO artefact_translations (artefact_translations_artefacts_id, artefact_translations_language, artefact_translations_name, artefact_translations_set)
+                VALUES (%s, %s, %s, %s)
+            """, (aid, language, name, aset))
+            if sec:
+                for stat in sec.split(','):
+                    self.cursor.execute("""
+                        INSERT INTO artefact_secondary_stats (artefact_secondary_stats_artefacts_id, artefact_secondary_stats_name)
+                        VALUES (%s, %s)
+                    """, (aid, stat.strip()))
+            return aid
 
     def delete_artefact(self, aid):
         self.cursor.execute("DELETE FROM artefact_secondary_stats WHERE artefact_secondary_stats_artefacts_id=%s", (aid,))
