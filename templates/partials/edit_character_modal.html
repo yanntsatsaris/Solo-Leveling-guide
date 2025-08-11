@@ -241,7 +241,7 @@
           <label for="edit-equipment-select">Sélectionner le set :</label>
           <select id="edit-equipment-select">
             {% for set in character.equipment_sets %}
-              <option value="{{ loop.index0 }}">{{ set.set_name }}</option>
+              <option value="{{ loop.index0 }}" data-order="{{ eqSet.order if eqSet.order is defined else loop.index0 }}">{{ set.set_name }}</option>
             {% endfor %}
             <option value="add_new_set" style="color: #ff6600">
               + Ajouter un nouveau set
@@ -490,6 +490,7 @@
         return;
       }
       const setOrder = prompt("Ordre d'affichage du set (nombre, optionnel) :") || "";
+      const setOrderNum = Number(setOrder);
       const setsCount = document.querySelectorAll('.edit-eqset-block').length;
       const setIdx = setsCount;
 
@@ -499,15 +500,16 @@
       option.textContent = setName;
       option.dataset.order = setOrder;
 
-      // Trouver la bonne position selon l'ordre
       let inserted = false;
       const select = this;
       const addNewSetOption = select.querySelector('option[value="add_new_set"]');
       const options = Array.from(select.options).filter(opt => opt !== addNewSetOption);
 
       for (let i = 0; i < options.length; i++) {
-        const optOrder = options[i].dataset.order !== undefined ? Number(options[i].dataset.order) : i;
-        if (setOrder !== "" && Number(setOrder) < optOrder) {
+        const optOrder = options[i].dataset.order !== undefined && options[i].dataset.order !== ""
+          ? Number(options[i].dataset.order)
+          : Number.MAX_SAFE_INTEGER;
+        if (setOrderNum < optOrder) {
           select.insertBefore(option, options[i]);
           inserted = true;
           break;
