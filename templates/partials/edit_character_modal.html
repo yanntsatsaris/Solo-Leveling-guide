@@ -273,6 +273,7 @@
               } %}
               {{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}
             </label>
+            <input type="hidden" name="artefact_name_{{ set_idx }}_{{ a_idx }}" value="{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}">
             <label>Pannoplie :</label>
             <input type="text" name="artefact_set_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.set if artefact.set is defined else '' }}">
             <label>Image :</label>
@@ -296,6 +297,7 @@
               } %}
               {{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}
             </label>
+            <input type="hidden" name="artefact_name_{{ set_idx }}_{{ a_idx }}" value="{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}">
             <label>Pannoplie :</label>
             <input type="text" name="artefact_set_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.set if artefact.set is defined else '' }}">
             <label>Image :</label>
@@ -569,6 +571,7 @@
             ${[0,1,2,3].map(a_idx => `
               <div class="edit-artefact-block">
                 <label>${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}</label>
+                <input type="hidden" name="artefact_name_${setOrderIndex}_${a_idx}" value="${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}">
                 <label>Pannoplie :</label>
                 <input type="text" name="artefact_set_${setOrderIndex}_${a_idx}" value="">
                 <label>Image :</label>
@@ -585,6 +588,7 @@
             ${[4,5,6,7].map(a_idx => `
               <div class="edit-artefact-block">
                 <label>${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}</label>
+                <input type="hidden" name="artefact_name_${setOrderIndex}_${a_idx}" value="${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}">
                 <label>Pannoplie :</label>
                 <input type="text" name="artefact_set_${setOrderIndex}_${a_idx}" value="">
                 <label>Image :</label>
