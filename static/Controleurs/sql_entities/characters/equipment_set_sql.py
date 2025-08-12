@@ -37,6 +37,7 @@ class EquipmentSetSql:
             SELECT a.artefacts_id, a.artefacts_image, a.artefacts_main_stat, a.artefacts_set
             FROM artefacts a
             WHERE a.artefacts_equipment_sets_id = %s
+            ORDER by a.artefacts_image
         """, (eq_set_id,))
         artefacts = []
         artefact_sets = []
@@ -111,7 +112,7 @@ class EquipmentSetSql:
             'set_name': eq_set_name,
             'description': set_description,
             'focus_stats': focus_stats,
-            'artefacts': artefacts_sorted,  # <-- renvoie la liste triée
+            'artefacts': artefacts,  # <-- renvoie la liste triée
             'cores': cores,
             'set_piece_count': dict(set_piece_count)
         }
@@ -145,6 +146,7 @@ class EquipmentSetSql:
                 SELECT a.artefacts_id, a.artefacts_image, a.artefacts_main_stat, a.artefacts_set
                 FROM artefacts a
                 WHERE a.artefacts_equipment_sets_id = %s
+                ORDER by a.artefacts_image
             """, (set_id,))
             artefacts = []
             for a_row in self.cursor.fetchall():
@@ -200,7 +202,7 @@ class EquipmentSetSql:
                 'name': set_name,
                 'description': set_desc,
                 'focus_stats': focus_stats,
-                'artefacts': artefacts_sorted,  # <-- liste triée
+                'artefacts': artefacts,  # <-- liste triée
                 'cores': cores,
                 'order': set_order
             })
