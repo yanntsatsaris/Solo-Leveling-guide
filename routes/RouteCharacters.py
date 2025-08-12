@@ -466,21 +466,34 @@ def characters(app: Flask):
             for evo_idx in range(7):
                 evolution_id = request.form.get(f"weapon_evolutions_{weapon_idx}_{evo_idx}_evolution_id")
                 if not evolution_id or len(evolution_id) > 10:
-                    evolution_id = f"A{evo_idx+1}" if evo_idx != 6 else "A6-A10"
+                    evolution_id = f"A{evo_idx}" if evo_idx != 6 else "A6-A10"
                 edesc = request.form.get(f"weapon_evolution_description_{weapon_idx}_{evo_idx}")
                 eid = request.form.get(f"weapon_evolutions_id_{weapon_idx}_{evo_idx}")
+
+                # Définition du type et du range selon la position
+                if evo_idx == 6:
+                    evo_type = "stat"
+                    evo_range = "6-10"
+                    evo_number = None
+                else:
+                    evo_type = "passives"
+                    evo_range = None
+                    evo_number = evo_idx
+
                 db_evo = next((e for e in current_evos if str(e['id']) == str(eid)), None) if eid else None
                 if eid:
                     if db_evo and (
                         normalize_text(db_evo['description']) != normalize_text(edesc) or
-                        (db_evo['evolution_id'] or '') != (evolution_id or '')
+                        (db_evo['evolution_id'] or '') != (evolution_id or '') or
+                        (db_evo.get('type') or '') != (evo_type or '') or
+                        (db_evo.get('range') or '') != (evo_range or '')
                     ):
-                        weapons_sql.update_weapon_evolution(eid, wid, evo_idx, evolution_id, edesc, language)
+                        weapons_sql.update_weapon_evolution(eid, wid, evo_number, evolution_id, edesc, evo_type, evo_range, language)
                         weapon_modif = True
                         write_log(f"Modification évolution arme {eid} de l'arme {wid}", log_level="INFO")
                     form_evo_ids.append(eid)
                 else:
-                    new_eid = weapons_sql.add_weapon_evolution(wid, evo_idx, evolution_id, edesc, language)
+                    new_eid = weapons_sql.add_weapon_evolution(wid, evo_number, evolution_id, edesc, evo_type, evo_range, language)
                     weapon_modif = True
                     write_log(f"Ajout évolution arme {new_eid} à l'arme {wid}", log_level="INFO")
                     form_evo_ids.append(new_eid)
@@ -503,20 +516,33 @@ def characters(app: Flask):
         for evo_idx in range(7):
             evolution_id = request.form.get(f"character_evolutions_{evo_idx}_evolution_id")
             if not evolution_id or len(evolution_id) > 10:
-                evolution_id = f"A{evo_idx+1}" if evo_idx != 6 else "A6-A10"
+                evolution_id = f"A{evo_idx}" if evo_idx != 6 else "A6-A10"
             edesc = request.form.get(f"character_evolution_description_{evo_idx}")
             eid = request.form.get(f"character_evolutions_id_{evo_idx}")
+
+            # Définition du type et du range selon la position
+            if evo_idx == 6:
+                evo_type = "stat"
+                evo_range = "6-10"
+                evo_number = None
+            else:
+                evo_type = "passives"
+                evo_range = None
+                evo_number = evo_idx
+
             db_evo = next((e for e in current_evos if str(e['id']) == str(eid)), None) if eid else None
             if eid:
                 if db_evo and (
                     (db_evo['evolution_id'] or '') != (evolution_id or '') or
-                    normalize_text(db_evo['description']) != normalize_text(edesc)
-                    ):
-                    evolutions_sql.update_evolution(eid, char_id, evo_idx, evolution_id, edesc, language)
+                    normalize_text(db_evo['description']) != normalize_text(edesc) or
+                    (db_evo.get('type') or '') != (evo_type or '') or
+                    (db_evo.get('range') or '') != (evo_range or '')
+                ):
+                    evolutions_sql.update_evolution(eid, char_id, evo_number, evolution_id, edesc, evo_type, evo_range, language)
                     evo_modif = True
                     write_log(f"Modification évolution {eid} du personnage {char_id}", log_level="INFO")
             else:
-                evolutions_sql.add_evolution(char_id, evo_idx, evolution_id, edesc, language)
+                evolutions_sql.add_evolution(char_id, evo_number, evolution_id, edesc, evo_type, evo_range, language)
                 evo_modif = True
                 write_log(f"Ajout évolution {evo_idx} au personnage {char_id}", log_level="INFO")
 

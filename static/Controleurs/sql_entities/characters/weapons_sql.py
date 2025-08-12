@@ -106,21 +106,21 @@ class WeaponsSql:
         self.cursor.execute("DELETE FROM weapon_translations WHERE weapon_translations_weapons_id=%s", (wid,))
         self.cursor.execute("DELETE FROM weapons WHERE weapons_id=%s", (wid,))
 
-    def update_weapon_evolution(self, eid, wid, evo_idx, evolution_id, desc, language):
+    def update_weapon_evolution(self, eid, wid, evo_idx, evolution_id, desc, evo_type, evo_range, language):
         self.cursor.execute("""
-            UPDATE weapon_evolutions SET weapon_evolutions_evolution_id=%s
+            UPDATE weapon_evolutions SET weapon_evolutions_evolution_id=%s, weapon_evolutions_number=%s, weapon_evolutions_type=%s, weapon_evolutions_range=%s
             WHERE weapon_evolutions_id=%s
-        """, (evolution_id, eid))
+        """, (evolution_id, evo_idx if evo_idx is not None else None, evo_type, evo_range, eid))
         self.cursor.execute("""
             UPDATE weapon_evolution_translations SET weapon_evolution_translations_description=%s
             WHERE weapon_evolution_translations_weapon_evolutions_id=%s AND weapon_evolution_translations_language=%s
         """, (desc, eid, language))
 
-    def add_weapon_evolution(self, wid, evo_idx, evolution_id, desc, language):
+    def add_weapon_evolution(self, wid, evo_idx, evolution_id, desc, evo_type, evo_range, language):
         self.cursor.execute("""
-            INSERT INTO weapon_evolutions (weapon_evolutions_weapons_id, weapon_evolutions_evolution_id, weapon_evolutions_number)
-            VALUES (%s, %s, %s) RETURNING weapon_evolutions_id
-        """, (wid, evolution_id, evo_idx))
+            INSERT INTO weapon_evolutions (weapon_evolutions_weapons_id, weapon_evolutions_evolution_id, weapon_evolutions_number, weapon_evolutions_type, weapon_evolutions_range)
+            VALUES (%s, %s, %s, %s, %s) RETURNING weapon_evolutions_id
+        """, (wid, evolution_id, evo_idx if evo_idx is not None else None, evo_type, evo_range))
         eid = self.cursor.fetchone()[0]
         self.cursor.execute("""
             INSERT INTO weapon_evolution_translations (weapon_evolution_translations_weapon_evolutions_id, weapon_evolution_translations_language, weapon_evolution_translations_description)
