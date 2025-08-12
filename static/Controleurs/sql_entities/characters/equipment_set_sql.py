@@ -91,13 +91,27 @@ class EquipmentSetSql:
                 'secondary_stat': core_row[5]
             }
             cores.append(core_obj)
+        # Dictionnaire d'ordre des artefacts par langue
+        artefact_types = {
+            'FR-fr': ['Casque', 'Plastron', 'Gants', 'Bottes', 'Collier', 'Bracelet', 'Bague', "Boucle d'oreille"],
+            'EN-en': ['Helmet', 'Chestplate', 'Gloves', 'Boots', 'Necklace', 'Bracelet', 'Ring', 'Earring']
+        }
+        artefact_type_list = artefact_types.get(language, artefact_types['FR-fr'])
+
+        # Construction de la liste artefacts
+        artefacts_sorted = []
+        for type_name in artefact_type_list:
+            found = next((a for a in artefacts if a['name'] == type_name), None)
+            if found:
+                artefacts_sorted.append(found)
+
         set_piece_count = Counter(artefact_sets)
         return {
-            'id': eq_set_id,  # <-- AJOUT DE L'ID DU SET
+            'id': eq_set_id,
             'set_name': eq_set_name,
             'description': set_description,
             'focus_stats': focus_stats,
-            'artefacts': artefacts,
+            'artefacts': artefacts_sorted,  # <-- renvoie la liste triée
             'cores': cores,
             'set_piece_count': dict(set_piece_count)
         }
@@ -111,6 +125,13 @@ class EquipmentSetSql:
             ORDER BY es.equipment_sets_order ASC, es.equipment_sets_id ASC
         """, (language, char_id))
         sets = []
+        # Dictionnaire d'ordre des artefacts par langue
+        artefact_types = {
+            'FR-fr': ['Casque', 'Plastron', 'Gants', 'Bottes', 'Collier', 'Bracelet', 'Bague', "Boucle d'oreille"],
+            'EN-en': ['Helmet', 'Chestplate', 'Gloves', 'Boots', 'Necklace', 'Bracelet', 'Ring', 'Earring']
+        }
+        artefact_type_list = artefact_types.get(language, artefact_types['FR-fr'])
+
         for row in self.cursor.fetchall():
             set_id, set_name, set_desc, set_order = row
             # Focus stats (récupère toutes les stats pour ce set)
@@ -151,6 +172,12 @@ class EquipmentSetSql:
                     'main_stat': artefact_main_stat,
                     'secondary_stats': secondary_stats
                 })
+            # Trie les artefacts selon l'ordre défini
+            artefacts_sorted = []
+            for type_name in artefact_type_list:
+                found = next((a for a in artefacts if a['name'] == type_name), None)
+                if found:
+                    artefacts_sorted.append(found)
             # Noyaux
             self.cursor.execute("""
                 SELECT cores_id, cores_name, cores_number, cores_image, cores_main_stat, cores_secondary_stat
@@ -173,9 +200,9 @@ class EquipmentSetSql:
                 'name': set_name,
                 'description': set_desc,
                 'focus_stats': focus_stats,
-                'artefacts': artefacts,
+                'artefacts': artefacts_sorted,  # <-- liste triée
                 'cores': cores,
-                'order': set_order  # <-- Ajout de l'ordre ici
+                'order': set_order
             })
         return sets
 
