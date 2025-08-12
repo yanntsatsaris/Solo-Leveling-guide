@@ -2,6 +2,7 @@ import json
 import os
 import re
 import unicodedata
+import glob
 from flask import Flask, render_template, url_for, session, request, redirect, abort
 from flask_login import login_required, current_user
 from static.Controleurs.ControleurLog import write_log
@@ -586,10 +587,21 @@ def characters(app: Flask):
             for artefact_idx in range(8):
                 aname = request.form.get(f"artefact_name_{set_idx}_{artefact_idx}")
                 aset = request.form.get(f"artefact_set_{set_idx}_{artefact_idx}")
-                aimg = request.form.get(f"artefact_image_{set_idx}_{artefact_idx}")
+                # aimg = request.form.get(f"artefact_image_{set_idx}_{artefact_idx}")  # <-- Supprime cette ligne
                 amain = request.form.get(f"artefact_main_stat_{set_idx}_{artefact_idx}")
                 asec = request.form.get(f"artefact_secondary_stats_{set_idx}_{artefact_idx}")
                 aid = request.form.get(f"artefact_id_{set_idx}_{artefact_idx}")
+
+                # Recherche automatique de l'image
+                aset_folder = (aset or '').replace(' ', '_')
+                artefact_folder = os.path.join('static', 'images', 'Artefacts', aset_folder)
+                pattern = os.path.join(artefact_folder, f"Artefact0{artefact_idx}_*")
+                found_images = glob.glob(pattern)
+                if found_images:
+                    aimg = os.path.basename(found_images[0])
+                else:
+                    aimg = ""
+
                 db_artefact = next((a for a in current_artefacts if str(a['id']) == str(aid)), None) if aid else None
                 if aid:
                     if db_artefact and (
