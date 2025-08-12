@@ -262,7 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .join("");
 
     // Trie les artefacts selon l'ordre défini par la langue
-    const artefactOrder = artefactTypeLabels[currentLang] || artefactTypeLabels["FR-fr"];
+    const artefactOrder = artefactTypeLabelsDetails[currentLang] || artefactTypeLabelsDetails["FR-fr"];
     const artefactsOrdered = artefactOrder
       .map(typeName => selectedSet.artefacts.find(a => a.name === typeName))
       .filter(Boolean);
@@ -428,7 +428,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-const artefactTypeLabels = {
+const artefactTypeLabelsDetails = {
   "FR-fr": ["Casque", "Plastron", "Gants", "Bottes", "Collier", "Bracelet", "Bague", "Boucle d'oreille"],
   "EN-en": ["Helmet", "Chestplate", "Gloves", "Boots", "Necklace", "Bracelet", "Ring", "Earring"]
 };
