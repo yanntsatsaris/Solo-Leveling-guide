@@ -469,7 +469,10 @@ def characters(app: Flask):
                 eid = request.form.get(f"weapon_evolutions_id_{weapon_idx}_{evo_idx}")
                 db_evo = next((e for e in current_evos if str(e['id']) == str(eid)), None) if eid else None
                 if eid:
-                    if db_evo and normalize_text(db_evo['description']) != normalize_text(edesc):
+                    if db_evo and (
+                        normalize_text(db_evo['description']) != normalize_text(edesc) or
+                        (db_evo['evolution_id'] or '') != (evolution_id or '')
+                    ):
                         weapons_sql.update_weapon_evolution(eid, wid, evo_idx, evolution_id, edesc, language)
                         weapon_modif = True
                         write_log(f"Modification évolution arme {eid} de l'arme {wid}", log_level="INFO")
@@ -501,7 +504,10 @@ def characters(app: Flask):
             eid = request.form.get(f"character_evolutions_id_{evo_idx}")
             db_evo = next((e for e in current_evos if str(e['id']) == str(eid)), None) if eid else None
             if eid:
-                if db_evo and normalize_text(db_evo['description']) != normalize_text(edesc):
+                if db_evo and (
+                    (db_evo['evolution_id'] or '') != (evolution_id or '') or
+                    normalize_text(db_evo['description']) != normalize_text(edesc)
+                    ):
                     evolutions_sql.update_evolution(eid, char_id, evo_idx, evolution_id, edesc, language)
                     evo_modif = True
                     write_log(f"Modification évolution {eid} du personnage {char_id}", log_level="INFO")
