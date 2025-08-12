@@ -595,7 +595,7 @@ def characters(app: Flask):
                 # Recherche automatique de l'image
                 aset_folder = (aset or '').replace(' ', '_')
                 artefact_folder = os.path.join('static', 'images', 'Artefacts', aset_folder)
-                pattern = os.path.join(artefact_folder, f"Artefact0{artefact_idx}_*")
+                pattern = os.path.join(artefact_folder, f"Artefact0{artefact_idx + 1}_*")
                 found_images = glob.glob(pattern)
                 if found_images:
                     aimg = os.path.basename(found_images[0])
