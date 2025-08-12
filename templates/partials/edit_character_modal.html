@@ -51,7 +51,12 @@
             <div class="edit-evolution-block">
               <label>Évolution : {{ 'A' ~ i if not i == 6 else 'A6-A10' }}</label>
               <textarea name="character_evolution_description_{{ i }}">{{ character.evolutions[i].description_raw if character.evolutions|length > i else '' }}</textarea>
-              <input type="hidden" name="character_evolutions_{{ i }}_evolution_id" value="{{ character.evolutions[i].evolution_id if character.evolutions|length > i else '' }}">
+              <input type="hidden" name="character_evolutions_{{ i }}_evolution_id"
+  value="{% if character.evolutions|length > i and character.evolutions[i].evolution_id %}
+           {{ character.evolutions[i].evolution_id }}
+         {% else %}
+           {{ 'A' ~ i if not i == 6 else 'A6-A10' }}
+         {% endif %}">
               <input type="hidden" name="character_evolutions_id_{{ i }}" value="{{ character.evolutions[i].id if character.evolutions|length > i else '' }}">
             </div>
             {% if i % 2 == 1 or i == total_evos - 1 %}
@@ -223,7 +228,11 @@
                       name="weapon_evolution_description_{{ weapon_idx }}_{{ i }}"
                     >{{ weapon.evolutions[i].description_raw if weapon.evolutions is defined and weapon.evolutions|length > i else '' }}</textarea>
 
-              <input type="hidden" name="weapon_evolutions_{{ weapon_idx }}_{{ i }}_evolution_id" value="{{ weapon.evolutions[i].evolution_id if weapon.evolutions is defined and weapon.evolutions|length > i else '' }}">
+              <input type="hidden" name="weapon_evolutions_{{ weapon_idx }}_{{ i }}_evolution_id" value="{% if weapon.evolutions is defined and weapon.evolutions|length > i and weapon.evolutions[i].evolution_id %}
+           {{ weapon.evolutions[i].evolution_id }}
+         {% else %}
+           {{ 'A' ~ i if not i == 6 else 'A6-A10' }}
+         {% endif %}">
               <input type="hidden" name="weapon_evolutions_id_{{ weapon_idx }}_{{ i }}" value="{{ weapon.evolutions[i].id if weapon.evolutions is defined and weapon.evolutions|length > i else '' }}">
                   </div>
                 {% if i % 2 == 1 or i == total_evos - 1 %}
@@ -318,8 +327,6 @@
       <div class="edit-core-block">
         <label>Nom du noyau :</label>
         <input type="text" name="core_name_{{ set_idx }}_{{ c_idx }}" value="{{ core.name if core.name is defined else '' }}">
-        <label>Image :</label>
-        <input type="text" name="core_image_{{ set_idx }}_{{ c_idx }}" value="{{ core.image_name if core.image_name is defined else '' }}">
         <label>Stat principale :</label>
         <input type="text" name="core_main_stat_{{ set_idx }}_{{ c_idx }}" value="{{ core.main_stat if core.main_stat is defined else '' }}">
         <label>Stat secondaire :</label>
@@ -608,8 +615,6 @@
           <div class="edit-core-block">
             <label>Nom du noyau :</label>
             <input type="text" name="core_name_${setOrderIndex}_${c_idx}" value="">
-            <label>Image :</label>
-            <input type="text" name="core_image_${setOrderIndex}_${c_idx}" value="">
             <label>Stat principale :</label>
             <input type="text" name="core_main_stat_${setOrderIndex}_${c_idx}" value="">
             <label>Stat secondaire :</label>
