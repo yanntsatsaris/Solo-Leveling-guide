@@ -145,11 +145,6 @@
   cursor: pointer;
 }
 
-/* Affichage caché par défaut pour l'overlay */
-.edit-character-overlay[hidden] {
-  display: none !important;
-}
-
 /* Sélecteur de set */
 #edit-equipment-select {
   background-color: #1e1e1e;
@@ -189,13 +184,15 @@
   margin-bottom: 6px;
 }
 
-/* Titre des évolutions */
-.evolutions-title {
-  margin-top: 28px;
-}
-
-.weapon-evolutions-title {
-  margin-top: 18px;
+/* Pour la grille d'évolutions dans les armes */
+/* filepath: c:\Users\yann\Documents\Projet\Solo-Leveling-guide\static\css\partials\edit_character_modal.css */
+.edit-weapon-evolution-block {
+  flex: 1;
+  background: #232323;
+  padding: 5px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 6px;
 }
 
 /* Passives et Skills */
@@ -237,17 +234,10 @@
   gap: 3px;
 }
 
-/* Ligne de sélection des artefacts */
-.artefacts-select-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
 /* Artefacts en deux colonnes */
 .artefacts-row {
   display: flex;
-  gap: 6px;
+  gap: 12px;
 }
 .artefacts-col {
   flex: 1;
@@ -270,13 +260,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Ligne d'actions (boutons) en bas */
-.edit-character-actions-row {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 18px;
-}
-
 /* Bouton Ajouter */
 .add-btn {
   margin: 12px 0 0 0;
@@ -290,11 +273,6 @@
 
 .add-btn:hover {
   background: #ffe066;
-}
-
-/* Nouvelle classe pour l'option d'ajout de set */
-.add-new-set-option {
-  color: #ff6600;
 }
 
 /* Pour le responsive si besoin */
@@ -316,12 +294,4 @@
   .artefacts-col {
     gap: 3px;
   }
-}
-
-/* Bloc de set d'équipement */
-.edit-eqset-block {
-  display: none;
-}
-.edit-eqset-block.visible {
-  display: block;
 }
