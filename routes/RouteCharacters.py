@@ -583,16 +583,16 @@ def characters(app: Flask):
             form_core_ids = []
             for core_idx in range(3):
                 cname = request.form.get(f"core_name_{set_idx}_{core_idx}")
-                cimg = request.form.get(f"core_image_{set_idx}_{core_idx}")
+                #cimg = request.form.get(f"core_image_{set_idx}_{core_idx}")
                 cmain = request.form.get(f"core_main_stat_{set_idx}_{core_idx}")
                 csec = request.form.get(f"core_secondary_stat_{set_idx}_{core_idx}")
                 cid = request.form.get(f"core_id_{set_idx}_{core_idx}")
                 cnumber = f"{core_idx+1:02d}"  # Ajoute cette ligne pour numéroter 01, 02, 03
+                cimg = cname + cnumber + ".webp"  # Utilise le nom du noyau et le numéro pour l'image
                 db_core = next((c for c in current_cores if str(c['id']) == str(cid)), None) if cid else None
                 if cid:
                     if db_core and (
                         db_core['name'] != cname or
-                        db_core['image_name'] != cimg or
                         db_core['main_stat'] != cmain or
                         db_core['secondary_stat'] != csec or
                         str(db_core.get('number', '')) != cnumber
