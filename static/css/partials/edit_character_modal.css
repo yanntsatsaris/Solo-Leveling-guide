@@ -81,7 +81,6 @@
 /* Champs du formulaire */
 .edit-character-popup label {
   display: block;
-  margin-top: 4px;
   margin-bottom: 2px;
   color: #ffcc00;
   font-weight: bold;
@@ -255,7 +254,6 @@
   padding: 5px;
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  margin-bottom: 6px;
 }
 
 /* Bouton Ajouter */
