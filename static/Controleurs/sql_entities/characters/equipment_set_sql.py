@@ -255,8 +255,8 @@ class EquipmentSetSql:
 
     def update_artefact(self, aid, set_id, name, aset, img, main, sec, language):
         self.cursor.execute("""
-            UPDATE artefacts SET artefacts_image=%s, artefacts_main_stat=%s WHERE artefacts_id=%s
-        """, (img, main, aid))
+            UPDATE artefacts SET artefacts_image=%s, artefacts_main_stat=%s, artefacts_set=%s WHERE artefacts_id=%s
+        """, (img, main, aset, aid))
         # Vérifie si la traduction existe déjà
         self.cursor.execute("""
             SELECT 1 FROM artefact_translations
@@ -264,14 +264,14 @@ class EquipmentSetSql:
         """, (aid, language))
         if self.cursor.fetchone():
             self.cursor.execute("""
-                UPDATE artefact_translations SET artefact_translations_name=%s, artefact_translations_set=%s
+                UPDATE artefact_translations SET artefact_translations_name=%s
                 WHERE artefact_translations_artefacts_id=%s AND artefact_translations_language=%s
-            """, (name, aset, aid, language))
+            """, (name, aid, language))
         else:
             self.cursor.execute("""
-                INSERT INTO artefact_translations (artefact_translations_artefacts_id, artefact_translations_language, artefact_translations_name, artefact_translations_set)
-                VALUES (%s, %s, %s, %s)
-            """, (aid, language, name, aset))
+                INSERT INTO artefact_translations (artefact_translations_artefacts_id, artefact_translations_language, artefact_translations_name)
+                VALUES (%s, %s, %s)
+            """, (aid, language, name))
         self.cursor.execute("""
             DELETE FROM artefact_secondary_stats WHERE artefact_secondary_stats_artefacts_id=%s
         """, (aid,))
@@ -286,8 +286,8 @@ class EquipmentSetSql:
         # Recherche d'un artefact existant pour ce set avec la même image et main_stat
         self.cursor.execute("""
             SELECT artefacts_id FROM artefacts
-            WHERE artefacts_equipment_sets_id=%s AND artefacts_image=%s AND artefacts_main_stat=%s
-        """, (set_id, img, main))
+            WHERE artefacts_equipment_sets_id=%s AND artefacts_image=%s AND artefacts_main_stat=%s AND artefacts_set=%s
+        """, (set_id, img, main, aset))
         row = self.cursor.fetchone()
         if row:
             aid = row[0]
@@ -298,9 +298,9 @@ class EquipmentSetSql:
             """, (aid, language))
             if not self.cursor.fetchone():
                 self.cursor.execute("""
-                    INSERT INTO artefact_translations (artefact_translations_artefacts_id, artefact_translations_language, artefact_translations_name, artefact_translations_set)
-                    VALUES (%s, %s, %s, %s)
-                """, (aid, language, name, aset))
+                    INSERT INTO artefact_translations (artefact_translations_artefacts_id, artefact_translations_language, artefact_translations_name)
+                    VALUES (%s, %s, %s)
+                """, (aid, language, name))
             # Mets à jour les secondary_stats si besoin
             self.cursor.execute("DELETE FROM artefact_secondary_stats WHERE artefact_secondary_stats_artefacts_id=%s", (aid,))
             if sec:
@@ -313,14 +313,14 @@ class EquipmentSetSql:
         else:
             # Création normale
             self.cursor.execute("""
-                INSERT INTO artefacts (artefacts_equipment_sets_id, artefacts_image, artefacts_main_stat)
-                VALUES (%s, %s, %s) RETURNING artefacts_id
-            """, (set_id, img, main))
+                INSERT INTO artefacts (artefacts_equipment_sets_id, artefacts_image, artefacts_main_stat, artefacts_set)
+                VALUES (%s, %s, %s, %s) RETURNING artefacts_id
+            """, (set_id, img, main, aset))
             aid = self.cursor.fetchone()[0]
             self.cursor.execute("""
-                INSERT INTO artefact_translations (artefact_translations_artefacts_id, artefact_translations_language, artefact_translations_name, artefact_translations_set)
-                VALUES (%s, %s, %s, %s)
-            """, (aid, language, name, aset))
+                INSERT INTO artefact_translations (artefact_translations_artefacts_id, artefact_translations_language, artefact_translations_name)
+                VALUES (%s, %s, %s)
+            """, (aid, language, name))
             if sec:
                 for stat in sec.split(','):
                     self.cursor.execute("""
