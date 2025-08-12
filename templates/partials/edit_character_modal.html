@@ -1,7 +1,7 @@
 <div
   id="edit-character-overlay"
   class="edit-character-overlay"
-  hidden
+  style="display: none"
 >
   <div id="edit-character-menu" class="edit-character-popup">
     <form
@@ -9,7 +9,7 @@
       method="POST"
       action="{{ url_for('edit_character', char_id=character.id) }}"
     >
-      <h2 class="edit-character-title">Modifier le personnage</h2>
+      <h2 style="text-align: center; color: #ffcc00">Modifier le personnage</h2>
       <div class="edit-tabs">
         <div class="edit-tab active" data-tab="main">Infos principales</div>
         <div class="edit-tab" data-tab="passives">Passifs</div>
@@ -42,7 +42,7 @@
         <label>Image :</label>
         <input type="text" name="image" value="{{ character.image_name }}" />
 
-        <h4 class="evolutions-title">Évolutions du personnage</h4>
+        <h4 style="margin-top: 28px">Évolutions du personnage</h4>
         <div class="evolutions-grid">
           {% set total_evos = 7 %} {% for i in range(total_evos) %} {% if i % 2
           == 0 %}
@@ -216,7 +216,7 @@
             <input type="hidden" name="weapon_id_{{ weapon_idx }}" value="{{ weapon.id if weapon.id is defined else '' }}">
             <!-- Toujours 7 évolutions, même si aucune n'est renseignée -->
             {% set total_evos = 7 %}
-            <h4 class="weapon-evolutions-title">Évolutions de l'arme</h4>
+            <h4 style="margin-top: 18px">Évolutions de l'arme</h4>
             <div class="evolutions-grid">
               {% for i in range(total_evos) %}
                 {% if i % 2 == 0 %}
@@ -270,8 +270,8 @@
     <input type="hidden" name="eqset_id_{{ set_idx }}" value="{{ eqSet.id }}">
     <input type="hidden" name="eqset_order_{{ set_idx }}" value="{{ eqSet.order if eqSet.order is defined else set_idx }}">
     <h4>Artefacts du set</h4>
-    <div class="artefacts-row">
-      <div class="artefacts-col">
+    <div class="artefacts-row" style="display: flex;">
+      <div class="artefacts-col" style="flex: 1;">
         {% for a_idx in range(4) %}
           {% set artefact = eqSet.artefacts[a_idx] if eqSet.artefacts|length > a_idx else {} %}
           <div class="edit-artefact-block">
@@ -293,7 +293,7 @@
           </div>
         {% endfor %}
       </div>
-      <div class="artefacts-col">
+      <div class="artefacts-col" style="flex: 1;">
         {% for a_idx in range(4, 8) %}
           {% set artefact = eqSet.artefacts[a_idx] if eqSet.artefacts|length > a_idx else {} %}
           <div class="edit-artefact-block">
