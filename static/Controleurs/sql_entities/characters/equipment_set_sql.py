@@ -34,23 +34,23 @@ class EquipmentSetSql:
         focus_stats = [fs_row[0] for fs_row in self.cursor.fetchall()]
         # Artefacts
         self.cursor.execute("""
-            SELECT a.artefacts_id, a.artefacts_image, a.artefacts_main_stat
+            SELECT a.artefacts_id, a.artefacts_image, a.artefacts_main_stat, a.artefacts_set
             FROM artefacts a
             WHERE a.artefacts_equipment_sets_id = %s
         """, (eq_set_id,))
         artefacts = []
         artefact_sets = []
         for a_row in self.cursor.fetchall():
-            artefact_id, artefact_image, artefact_main_stat = a_row
+            artefact_id, artefact_image, artefact_main_stat, artefact_set = a_row
             # Récupère toutes les traductions de cet artefact
             self.cursor.execute("""
-                SELECT artefact_translations_language, artefact_translations_name, artefact_translations_set
+                SELECT artefact_translations_language, artefact_translations_name
                 FROM artefact_translations
                 WHERE artefact_translations_artefacts_id = %s
             """, (artefact_id,))
             translations = {}
-            for lang, name, aset in self.cursor.fetchall():
-                translations[lang] = {'name': name, 'set': aset}
+            for lang, name in self.cursor.fetchall():
+                translations[lang] = {'name': name}
             # Récupère les secondary_stats
             self.cursor.execute("""
                 SELECT artefact_secondary_stats_name FROM artefact_secondary_stats
@@ -59,7 +59,6 @@ class EquipmentSetSql:
             secondary_stats = [sec_row[0] for sec_row in self.cursor.fetchall()]
             # Pour compatibilité, on peut garder la traduction dans la langue demandée
             artefact_name = translations.get(language, {}).get('name', '')
-            artefact_set = translations.get(language, {}).get('set', '')
             artefact_set_path = artefact_set.replace(" ", "_") if artefact_set else ""
             artefact_obj = {
                 'id': artefact_id,
@@ -122,22 +121,22 @@ class EquipmentSetSql:
             focus_stats = [fs_row[0] for fs_row in self.cursor.fetchall()]
             # Artefacts
             self.cursor.execute("""
-                SELECT a.artefacts_id, a.artefacts_image, a.artefacts_main_stat
+                SELECT a.artefacts_id, a.artefacts_image, a.artefacts_main_stat, a.artefacts_set
                 FROM artefacts a
                 WHERE a.artefacts_equipment_sets_id = %s
             """, (set_id,))
             artefacts = []
             for a_row in self.cursor.fetchall():
-                artefact_id, artefact_image, artefact_main_stat = a_row
+                artefact_id, artefact_image, artefact_main_stat, artefact_set = a_row
                 # Récupère toutes les traductions de cet artefact
                 self.cursor.execute("""
-                    SELECT artefact_translations_language, artefact_translations_name, artefact_translations_set
+                    SELECT artefact_translations_language, artefact_translations_name
                     FROM artefact_translations
                     WHERE artefact_translations_artefacts_id = %s
                 """, (artefact_id,))
                 translations = {}
-                for lang, name, aset in self.cursor.fetchall():
-                    translations[lang] = {'name': name, 'set': aset}
+                for lang, name in self.cursor.fetchall():
+                    translations[lang] = {'name': name}
                 # Récupère les secondary_stats
                 self.cursor.execute("""
                     SELECT artefact_secondary_stats_name FROM artefact_secondary_stats
@@ -147,7 +146,7 @@ class EquipmentSetSql:
                 artefacts.append({
                     'id': artefact_id,
                     'name': translations.get(language, {}).get('name', ''),
-                    'set': translations.get(language, {}).get('set', ''),
+                    'set': artefact_set,
                     'image_name': artefact_image,
                     'main_stat': artefact_main_stat,
                     'secondary_stats': secondary_stats
