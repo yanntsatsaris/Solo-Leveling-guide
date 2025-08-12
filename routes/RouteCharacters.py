@@ -466,7 +466,7 @@ def characters(app: Flask):
             for evo_idx in range(7):
                 evolution_id = request.form.get(f"weapon_evolutions_{weapon_idx}_{evo_idx}_evolution_id")
                 if not evolution_id or len(evolution_id) > 10:
-                    evolution_id = f"A{evo_idx}" if evo_idx != 6 else "A6-A10"
+                    evolution_id = f"A{evo_idx}" if evo_idx != 6 else "A6-10"
                 edesc = request.form.get(f"weapon_evolution_description_{weapon_idx}_{evo_idx}")
                 eid = request.form.get(f"weapon_evolutions_id_{weapon_idx}_{evo_idx}")
 
@@ -516,7 +516,7 @@ def characters(app: Flask):
         for evo_idx in range(7):
             evolution_id = request.form.get(f"character_evolutions_{evo_idx}_evolution_id")
             if not evolution_id or len(evolution_id) > 10:
-                evolution_id = f"A{evo_idx}" if evo_idx != 6 else "A6-A10"
+                evolution_id = f"A{evo_idx}" if evo_idx != 6 else "A6-10"
             edesc = request.form.get(f"character_evolution_description_{evo_idx}")
             eid = request.form.get(f"character_evolutions_id_{evo_idx}")
 
