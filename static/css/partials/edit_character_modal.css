@@ -235,7 +235,6 @@
 .artefacts-row {
   display: flex;
   gap: 12px;
-  margin-top: 6px;
 }
 .artefacts-col {
   flex: 1;
