@@ -428,9 +428,3 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-const artefactTypeLabels = {
-  "FR-fr": ["Casque", "Plastron", "Gants", "Bottes", "Collier", "Bracelet", "Bague", "Boucle d'oreille"],
-  "EN-en": ["Helmet", "Chestplate", "Gloves", "Boots", "Necklace", "Bracelet", "Ring", "Earring"]
-};
-// Récupère la langue courante (adapte selon ton contexte)
-const currentLang = document.documentElement.lang || "FR-fr";
