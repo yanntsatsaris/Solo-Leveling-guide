@@ -285,8 +285,6 @@
             <input type="hidden" name="artefact_name_{{ set_idx }}_{{ a_idx }}" value="{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}">
             <label>Pannoplie :</label>
             <input type="text" name="artefact_set_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.set if artefact.set is defined else '' }}">
-            <label>Image :</label>
-            <input type="text" name="artefact_image_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.image_name if artefact.image_name is defined else '' }}">
             <label>Stat principale :</label>
             <input type="text" name="artefact_main_stat_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.main_stat if artefact.main_stat is defined else '' }}">
             <label>Stats secondaires :</label>
@@ -309,8 +307,6 @@
             <input type="hidden" name="artefact_name_{{ set_idx }}_{{ a_idx }}" value="{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}">
             <label>Pannoplie :</label>
             <input type="text" name="artefact_set_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.set if artefact.set is defined else '' }}">
-            <label>Image :</label>
-            <input type="text" name="artefact_image_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.image_name if artefact.image_name is defined else '' }}">
             <label>Stat principale :</label>
             <input type="text" name="artefact_main_stat_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.main_stat if artefact.main_stat is defined else '' }}">
             <label>Stats secondaires :</label>
@@ -581,8 +577,6 @@
                 <input type="hidden" name="artefact_name_${setOrderIndex}_${a_idx}" value="${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}">
                 <label>Pannoplie :</label>
                 <input type="text" name="artefact_set_${setOrderIndex}_${a_idx}" value="">
-                <label>Image :</label>
-                <input type="text" name="artefact_image_${setOrderIndex}_${a_idx}" value="">
                 <label>Stat principale :</label>
                 <input type="text" name="artefact_main_stat_${setOrderIndex}_${a_idx}" value="">
                 <label>Stats secondaires :</label>
@@ -598,8 +592,6 @@
                 <input type="hidden" name="artefact_name_${setOrderIndex}_${a_idx}" value="${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}">
                 <label>Pannoplie :</label>
                 <input type="text" name="artefact_set_${setOrderIndex}_${a_idx}" value="">
-                <label>Image :</label>
-                <input type="text" name="artefact_image_${setOrderIndex}_${a_idx}" value="">
                 <label>Stat principale :</label>
                 <input type="text" name="artefact_main_stat_${setOrderIndex}_${a_idx}" value="">
                 <label>Stats secondaires :</label>
