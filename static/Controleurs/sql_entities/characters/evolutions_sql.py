@@ -56,13 +56,43 @@ class EvolutionsSql:
         """, (desc, eid, language))
 
     def add_evolution(self, char_id, evo_idx, evolution_id, desc, evo_type, evo_range, language):
+        # Vérifie s'il existe déjà une évolution pour ce personnage avec ce evolution_id
         self.cursor.execute("""
-            INSERT INTO character_evolutions (character_evolutions_characters_id, character_evolutions_number, character_evolutions_evolution_id, character_evolutions_type, character_evolutions_range)
-            VALUES (%s, %s, %s, %s, %s) RETURNING character_evolutions_id
-        """, (char_id, evo_idx if evo_idx is not None else None, evolution_id, evo_type, evo_range))
-        eid = self.cursor.fetchone()[0]
-        self.cursor.execute("""
-            INSERT INTO character_evolution_translations (character_evolution_translations_character_evolutions_id, character_evolution_translations_language, character_evolution_translations_description)
-            VALUES (%s, %s, %s)
-        """, (eid, language, desc))
-        return eid
+            SELECT character_evolutions_id FROM character_evolutions
+            WHERE character_evolutions_characters_id = %s AND character_evolutions_evolution_id = %s
+        """, (char_id, evolution_id))
+        row = self.cursor.fetchone()
+        if row:
+            eid = row[0]
+            # Met à jour la traduction si besoin
+            self.cursor.execute("""
+                SELECT 1 FROM character_evolution_translations
+                WHERE character_evolution_translations_character_evolutions_id = %s AND character_evolution_translations_language = %s
+            """, (eid, language))
+            if not self.cursor.fetchone():
+                self.cursor.execute("""
+                    INSERT INTO character_evolution_translations (character_evolution_translations_character_evolutions_id, character_evolution_translations_language, character_evolution_translations_description)
+                    VALUES (%s, %s, %s)
+                """, (eid, language, desc))
+            else:
+                self.cursor.execute("""
+                    UPDATE character_evolution_translations SET character_evolution_translations_description=%s
+                    WHERE character_evolution_translations_character_evolutions_id=%s AND character_evolution_translations_language=%s
+                """, (desc, eid, language))
+            # Mets à jour les autres champs si besoin
+            self.cursor.execute("""
+                UPDATE character_evolutions SET character_evolutions_number=%s, character_evolutions_type=%s, character_evolutions_range=%s
+                WHERE character_evolutions_id=%s
+            """, (evo_idx if evo_idx is not None else None, evo_type, evo_range, eid))
+            return eid
+        else:
+            self.cursor.execute("""
+                INSERT INTO character_evolutions (character_evolutions_characters_id, character_evolutions_number, character_evolutions_evolution_id, character_evolutions_type, character_evolutions_range)
+                VALUES (%s, %s, %s, %s, %s) RETURNING character_evolutions_id
+            """, (char_id, evo_idx if evo_idx is not None else None, evolution_id, evo_type, evo_range))
+            eid = self.cursor.fetchone()[0]
+            self.cursor.execute("""
+                INSERT INTO character_evolution_translations (character_evolution_translations_character_evolutions_id, character_evolution_translations_language, character_evolution_translations_description)
+                VALUES (%s, %s, %s)
+            """, (eid, language, desc))
+            return eid
