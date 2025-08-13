@@ -687,6 +687,7 @@ def characters(app: Flask):
         folder_path = os.path.join(
             'static', 'images', 'Personnages', f"SLA_Personnages_{type_}", folder_name
         )
+        write_log(f"Vérification de l'existence du dossier : {folder_path}", log_level="INFO")
         exists = os.path.isdir(folder_path)
         return jsonify({'exists': exists, 'folder': folder_name})
 
