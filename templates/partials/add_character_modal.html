@@ -481,7 +481,7 @@
     // Vérifie si le dossier existe côté serveur (nécessite une route Flask dédiée)
     let folderExists = false;
     try {
-      const resp = await fetch(`/check_image_folder?type=${encodeURIComponent(type)}&alias=${encodeURIComponent(alias)}&rarity=${encodeURIComponent(rarity)}`);
+      const resp = await fetch(`/character/add/check_image_folder?type=${encodeURIComponent(type)}&alias=${encodeURIComponent(alias)}&rarity=${encodeURIComponent(rarity)}`);
       folderExists = (await resp.json()).exists;
     } catch (e) {
       // Si la vérification échoue, on continue quand même
