@@ -704,7 +704,6 @@ def characters(app: Flask):
         description = request.form.get('description')
         rarity = request.form.get('rarity')
         type_ = request.form.get('type')
-        image_name = request.form.get('image')
         image_folder = request.form.get('image_folder', '')
 
         sql_manager = ControleurSql()
@@ -718,7 +717,6 @@ def characters(app: Flask):
             rarity=rarity,
             name=name,
             description=description,
-            image=image_name,
             folder=image_folder,
             language=language
         )

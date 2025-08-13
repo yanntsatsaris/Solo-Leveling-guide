@@ -52,7 +52,7 @@ class CharactersSql:
             WHERE character_translations_characters_id=%s AND character_translations_language=%s
         """, (name, description, char_id, language))
 
-    def add_character(self, alias, type_, rarity, name, description, image, folder, language):
+    def add_character(self, alias, type_, rarity, name, description, folder, language):
         # Vérifie si un personnage avec cet alias existe déjà
         self.cursor.execute("""
             SELECT characters_id FROM characters WHERE characters_alias = %s
@@ -64,9 +64,9 @@ class CharactersSql:
 
         # Ajoute le personnage principal
         self.cursor.execute("""
-            INSERT INTO characters (characters_alias, characters_type, characters_rarity, characters_image, characters_folder)
-            VALUES (%s, %s, %s, %s, %s) RETURNING characters_id
-        """, (alias, type_, rarity, image, folder))
+            INSERT INTO characters (characters_alias, characters_type, characters_rarity, characters_folder)
+            VALUES (%s, %s, %s, %s) RETURNING characters_id
+        """, (alias, type_, rarity, folder))
         char_id = self.cursor.fetchone()[0]
 
         # Ajoute la traduction principale
