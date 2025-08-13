@@ -358,6 +358,7 @@ def characters(app: Flask):
             pimg = request.form.get(f"passive_image_{i}")
             pprincipal = request.form.get(f"passive_principal_{i}") == "on"
             phidden = request.form.get(f"passive_hidden_{i}") == "on"
+            # Ajoute l'index à la méthode
             pid = request.form.get(f"passive_id_{i}")
             if pid:
                 db_passive = next((p for p in current_passives if str(p['id']) == str(pid)), None)
@@ -369,12 +370,12 @@ def characters(app: Flask):
                     db_passive['principal'] != pprincipal or
                     db_passive['hidden'] != phidden
                 ):
-                    passives_sql.update_passive(pid, pname, pdesc, ptag, pimg, pprincipal, phidden, language)
+                    passives_sql.update_passive(pid, pname, pdesc, ptag, pimg, pprincipal, phidden, language, i)
                     passif_modif = True
                     write_log(f"Modification passif {pid} du personnage {char_id}", log_level="INFO")
                 form_passive_ids.append(pid)
             else:
-                new_id = passives_sql.add_passive(char_id, pname, pdesc, ptag, pimg, pprincipal, phidden, language)
+                new_id = passives_sql.add_passive(char_id, pname, pdesc, ptag, pimg, pprincipal, phidden, language, i)
                 passif_modif = True
                 write_log(f"Ajout passif {new_id} au personnage {char_id}", log_level="INFO")
                 form_passive_ids.append(new_id)
@@ -410,12 +411,12 @@ def characters(app: Flask):
                     (db_skill['image_name'] or '') != (simg or '') or
                     db_skill['principal'] != sprincipal
                 ):
-                    skills_sql.update_skill(sid, sname, sdesc, stag, simg, sprincipal, language)
+                    skills_sql.update_skill(sid, sname, sdesc, stag, simg, sprincipal, language, i)
                     skill_modif = True
                     write_log(f"Modification skill {sid} du personnage {char_id}", log_level="INFO")
                 form_skill_ids.append(sid)
             else:
-                new_id = skills_sql.add_skill(char_id, sname, sdesc, stag, simg, sprincipal, language)
+                new_id = skills_sql.add_skill(char_id, sname, sdesc, stag, simg, sprincipal, language, i)
                 skill_modif = True
                 write_log(f"Ajout skill {new_id} au personnage {char_id}", log_level="INFO")
                 form_skill_ids.append(new_id)

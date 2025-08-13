@@ -71,17 +71,17 @@ class PassivesSql:
             })
         return passives
 
-    def update_passive(self, pid, name, desc, tag, img, principal, hidden, language):
+    def update_passive(self, pid, name, desc, tag, img, principal, hidden, language, order):
         self.cursor.execute("""
-            UPDATE passives SET passives_image=%s, passives_principal=%s, passives_hidden=%s
+            UPDATE passives SET passives_image=%s, passives_principal=%s, passives_hidden=%s, passives_order=%s
             WHERE passives_id=%s
-        """, (img, principal, hidden, pid))
+        """, (img, principal, hidden, order, pid))
         self.cursor.execute("""
             UPDATE passive_translations SET passive_translations_name=%s, passive_translations_description=%s, passive_translations_tag=%s
             WHERE passive_translations_passives_id=%s AND passive_translations_language=%s
         """, (name, desc, tag, pid, language))
 
-    def add_passive(self, char_id, name, desc, tag, img, principal, hidden, language):
+    def add_passive(self, char_id, name, desc, tag, img, principal, hidden, language, order):
         # Vérifie unicité par image (None inclus)
         self.cursor.execute(
             "SELECT passives_id FROM passives WHERE passives_characters_id = %s AND passives_image IS NOT DISTINCT FROM %s",
@@ -107,14 +107,14 @@ class PassivesSql:
                 )
             # Mets à jour l'image, principal et hidden si besoin
             self.cursor.execute(
-                "UPDATE passives SET passives_image=%s, passives_principal=%s, passives_hidden=%s WHERE passives_id=%s",
-                (img, principal, hidden, pid)
+                "UPDATE passives SET passives_image=%s, passives_principal=%s, passives_hidden=%s, passives_order=%s WHERE passives_id=%s",
+                (img, principal, hidden, order, pid)
             )
             return pid
         else:
             self.cursor.execute(
-                "INSERT INTO passives (passives_characters_id, passives_image, passives_principal, passives_hidden) VALUES (%s, %s, %s, %s) RETURNING passives_id",
-                (char_id, img, principal, hidden)
+                "INSERT INTO passives (passives_characters_id, passives_image, passives_principal, passives_hidden, passives_order) VALUES (%s, %s, %s, %s, %s) RETURNING passives_id",
+                (char_id, img, principal, hidden, order)
             )
             pid = self.cursor.fetchone()[0]
             self.cursor.execute(

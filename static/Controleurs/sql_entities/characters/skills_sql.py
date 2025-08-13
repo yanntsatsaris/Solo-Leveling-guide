@@ -69,17 +69,17 @@ class SkillsSql:
             })
         return skills
 
-    def update_skill(self, sid, name, desc, tag, img, principal, language):
+    def update_skill(self, sid, name, desc, tag, img, principal, language, order):
         self.cursor.execute("""
-            UPDATE skills SET skills_image=%s, skills_principal=%s
+            UPDATE skills SET skills_image=%s, skills_principal=%s, skills_order=%s
             WHERE skills_id=%s
-        """, (img, principal, sid))
+        """, (img, principal, order, sid))
         self.cursor.execute("""
             UPDATE skill_translations SET skill_translations_name=%s, skill_translations_description=%s, skill_translations_tag=%s
             WHERE skill_translations_skills_id=%s AND skill_translations_language=%s
         """, (name, desc, tag, sid, language))
 
-    def add_skill(self, char_id, name, desc, tag, img, principal, language):
+    def add_skill(self, char_id, name, desc, tag, img, principal, language, order):
         # Vérifie unicité par image (None inclus)
         self.cursor.execute(
             "SELECT skills_id FROM skills WHERE skills_characters_id = %s AND skills_image IS NOT DISTINCT FROM %s",
@@ -105,14 +105,14 @@ class SkillsSql:
                 )
             # Mets à jour l'image et principal si besoin
             self.cursor.execute(
-                "UPDATE skills SET skills_image=%s, skills_principal=%s WHERE skills_id=%s",
-                (img, principal, sid)
+                "UPDATE skills SET skills_image=%s, skills_principal=%s, skills_order=%s WHERE skills_id=%s",
+                (img, principal, order, sid)
             )
             return sid
         else:
             self.cursor.execute(
-                "INSERT INTO skills (skills_characters_id, skills_image, skills_principal) VALUES (%s, %s, %s) RETURNING skills_id",
-                (char_id, img, principal)
+                "INSERT INTO skills (skills_characters_id, skills_image, skills_principal, skills_order) VALUES (%s, %s, %s, %s) RETURNING skills_id",
+                (char_id, img, principal, order)
             )
             sid = self.cursor.fetchone()[0]
             self.cursor.execute(
