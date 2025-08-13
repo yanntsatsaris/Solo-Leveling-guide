@@ -3,7 +3,7 @@ import os
 import re
 import unicodedata
 import glob
-from flask import Flask, render_template, url_for, session, request, redirect, abort
+from flask import Flask, render_template, url_for, session, request, redirect, abort, jsonify
 from flask_login import login_required, current_user
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.ControleurConf import ControleurConf
@@ -677,4 +677,167 @@ def characters(app: Flask):
 
         return redirect(url_for('character_details', alias=alias))
 
-        # ici laisse les commentaire pour le JSON
+    @app.route('/characters/add/check_image_folder')
+    @login_required
+    def check_image_folder():
+        type_ = request.args.get('type', '').replace(' ', '_')
+        alias = request.args.get('alias', '').replace(' ', '_')
+        rarity = request.args.get('rarity', '').replace(' ', '_')
+        folder_name = f"{rarity}_{type_}_{alias}"
+        folder_path = os.path.join(
+            'static', 'images', 'Personnages', f"SLA_Personnages_{type_}", folder_name
+        )
+        exists = os.path.isdir(folder_path)
+        return jsonify({'exists': exists, 'folder': folder_name})
+
+    @app.route('/characters/add', methods=['POST'])
+    @login_required
+    def add_character():
+        # Vérification des droits
+        if not session.get('username') or not session.get('rights') or not ('Admin' in session['rights'] or 'SuperAdmin' in session['rights']):
+            abort(403)
+
+        language = session.get('language', "EN-en")
+        name = request.form.get('name')
+        alias = request.form.get('alias')
+        description = request.form.get('description')
+        rarity = request.form.get('rarity')
+        type_ = request.form.get('type')
+        image_name = request.form.get('image')
+        image_folder = request.form.get('image_folder', '')
+
+        sql_manager = ControleurSql()
+        cursor = sql_manager.cursor
+
+        characters_sql = CharactersSql(cursor)
+        # Ajoute le personnage principal
+        char_id = characters_sql.add_character(
+            alias=alias,
+            type_=type_,
+            rarity=rarity,
+            name=name,
+            description=description,
+            image=image_name,
+            folder=image_folder,
+            language=language
+        )
+        write_log(f"Ajout personnage {char_id} ({alias})", log_level="INFO")
+
+        # --- Passifs ---
+        passives_sql = PassivesSql(cursor)
+        i = 0
+        while True:
+            pname = request.form.get(f"passive_name_{i}")
+            if pname is None:
+                break
+            pdesc = request.form.get(f"passive_description_{i}")
+            ptag = request.form.get(f"passive_tag_{i}")
+            pimg = request.form.get(f"passive_image_{i}")
+            pprincipal = request.form.get(f"passive_principal_{i}") == "on"
+            phidden = request.form.get(f"passive_hidden_{i}") == "on"
+            passives_sql.add_passive(char_id, pname, pdesc, ptag, pimg, pprincipal, phidden, language, i)
+            i += 1
+
+        # --- Skills ---
+        skills_sql = SkillsSql(cursor)
+        i = 0
+        while True:
+            sname = request.form.get(f"skill_name_{i}")
+            if sname is None:
+                break
+            sdesc = request.form.get(f"skill_description_{i}")
+            stag = request.form.get(f"skill_tag_{i}")
+            simg = request.form.get(f"skill_image_{i}")
+            sprincipal = request.form.get(f"skill_principal_{i}") == "on"
+            skills_sql.add_skill(char_id, sname, sdesc, stag, simg, sprincipal, language, i)
+            i += 1
+
+        # --- Armes ---
+        weapons_sql = WeaponsSql(cursor)
+        weapon_idx = 0
+        while True:
+            wname = request.form.get(f"weapon_name_{weapon_idx}")
+            if wname is None:
+                break
+            wstats = request.form.get(f"weapon_stats_{weapon_idx}")
+            wtag = request.form.get(f"weapon_tag_{weapon_idx}")
+            wimg = request.form.get(f"weapon_image_{weapon_idx}")
+            wid = weapons_sql.add_weapon(char_id, wname, wstats, wtag, wimg, language)
+            # --- Evolutions de l'arme ---
+            for evo_idx in range(7):
+                evolution_id = request.form.get(f"weapon_evolutions_{weapon_idx}_{evo_idx}_evolution_id")
+                if not evolution_id or len(evolution_id) > 10:
+                    evolution_id = f"A{evo_idx}" if evo_idx != 6 else "A6-10"
+                edesc = request.form.get(f"weapon_evolution_description_{weapon_idx}_{evo_idx}")
+                # Définition du type et du range selon la position
+                if evo_idx == 6:
+                    evo_type = "stat"
+                    evo_range = "6-10"
+                    evo_number = None
+                else:
+                    evo_type = "passives"
+                    evo_range = None
+                    evo_number = evo_idx
+                weapons_sql.add_weapon_evolution(wid, evo_number, evolution_id, edesc, evo_type, evo_range, language)
+        weapon_idx += 1
+
+        # --- Evolutions du personnage ---
+        evolutions_sql = EvolutionsSql(cursor)
+        for evo_idx in range(7):
+            evolution_id = request.form.get(f"character_evolutions_{evo_idx}_evolution_id")
+            if not evolution_id or len(evolution_id) > 10:
+                evolution_id = f"A{evo_idx}" if evo_idx != 6 else "A6-10"
+            edesc = request.form.get(f"character_evolution_description_{evo_idx}")
+            # Définition du type et du range selon la position
+            if evo_idx == 6:
+                evo_type = "stat"
+                evo_range = "6-10"
+                evo_number = None
+            else:
+                evo_type = "passives"
+                evo_range = None
+                evo_number = evo_idx
+            evolutions_sql.add_evolution(char_id, evo_number, evolution_id, edesc, evo_type, evo_range, language)
+
+        # --- Sets d'équipement, artefacts et noyaux ---
+        equipment_set_sql = EquipmentSetSql(cursor)
+        set_idx = 0
+        while True:
+            set_name = request.form.get(f"eqset_name_{set_idx}")
+            if set_name is None:
+                break
+            set_desc = request.form.get(f"eqset_description_{set_idx}")
+            set_focus = request.form.get(f"eqset_focus_stats_{set_idx}")
+            set_order = request.form.get(f"eqset_order_{set_idx}")
+            set_id = equipment_set_sql.add_equipment_set(char_id, set_name, set_desc, set_focus, set_order, language)
+            # --- Artefacts du set ---
+            for artefact_idx in range(8):
+                aname = request.form.get(f"artefact_name_{set_idx}_{artefact_idx}")
+                aset = request.form.get(f"artefact_set_{set_idx}_{artefact_idx}")
+                amain = request.form.get(f"artefact_main_stat_{set_idx}_{artefact_idx}")
+                asec = request.form.get(f"artefact_secondary_stats_{set_idx}_{artefact_idx}")
+                # Recherche automatique de l'image
+                aset_folder = (aset or '').replace(' ', '_')
+                artefact_folder = os.path.join('static', 'images', 'Artefacts', aset_folder)
+                pattern = os.path.join(artefact_folder, f"Artefact0{artefact_idx + 1}_*")
+                found_images = glob.glob(pattern)
+                if found_images:
+                    aimg = os.path.basename(found_images[0])
+                else:
+                    aimg = ""
+                equipment_set_sql.add_artefact(set_id, aname, aset, aimg, amain, asec, language)
+            # --- Noyaux du set ---
+            for core_idx in range(3):
+                cname = request.form.get(f"core_name_{set_idx}_{core_idx}")
+                cmain = request.form.get(f"core_main_stat_{set_idx}_{core_idx}")
+                csec = request.form.get(f"core_secondary_stat_{set_idx}_{core_idx}")
+                cnumber = f"{core_idx+1:02d}"
+                cimg = cname + cnumber + ".webp"
+                equipment_set_sql.add_core(set_id, cname, cimg, cmain, csec, cnumber, language)
+            set_idx += 1
+
+        sql_manager.conn.commit()
+        sql_manager.close()
+
+        write_log(f"Ajout complet du personnage {char_id} ({alias})", log_level="INFO")
+        return redirect(url_for('character_details', alias=alias))

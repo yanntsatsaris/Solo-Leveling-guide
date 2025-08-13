@@ -81,6 +81,7 @@
         </tr>
       </table>
     </div>
+    {% include 'partials/add_character_modal.html' %}
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const typeButtons = document.querySelectorAll(".type-button");
@@ -116,6 +117,10 @@
           });
         });
       });
+
+      document.getElementById('add-character-btn')?.addEventListener('click', function() {
+    document.getElementById('add-character-overlay').style.display = 'block';
+  });
     </script>
   </body>
 </html>
