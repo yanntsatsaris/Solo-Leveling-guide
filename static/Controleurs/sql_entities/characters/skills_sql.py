@@ -11,6 +11,7 @@ class SkillsSql:
             SELECT skills_id, skills_principal, skills_image
             FROM skills
             WHERE skills_characters_id = %s
+            ORDER By skills_order
         """, (char_id,))
         skills = []
         for s_row in self.cursor.fetchall():
@@ -42,6 +43,7 @@ class SkillsSql:
             SELECT skills_id, skills_image, skills_principal
             FROM skills
             WHERE skills_characters_id = %s
+            ORDER BY skills_order
         """, (char_id,))
         skills = []
         for s_row in self.cursor.fetchall():

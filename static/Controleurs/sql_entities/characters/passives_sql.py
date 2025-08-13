@@ -11,6 +11,7 @@ class PassivesSql:
             SELECT passives_id, passives_principal, passives_image, passives_hidden
             FROM passives
             WHERE passives_characters_id = %s
+            ORDER By passives_order
         """, (char_id,))
         passives = []
         for p_row in self.cursor.fetchall():
@@ -43,6 +44,7 @@ class PassivesSql:
             SELECT passives_id, passives_image, passives_principal, passives_hidden
             FROM passives
             WHERE passives_characters_id = %s
+            ORDER BY passives_order
         """, (char_id,))
         passives = []
         for p_row in self.cursor.fetchall():
