@@ -735,6 +735,7 @@ def characters(app: Flask):
             pprincipal = request.form.get(f"passive_principal_{i}") == "on"
             phidden = request.form.get(f"passive_hidden_{i}") == "on"
             passives_sql.add_passive(char_id, pname, pdesc, ptag, pimg, pprincipal, phidden, language, i)
+            write_log(f"Ajout passif {pname} au personnage {char_id}", log_level="INFO")
             i += 1
 
         # --- Skills ---
@@ -749,6 +750,7 @@ def characters(app: Flask):
             simg = request.form.get(f"skill_image_{i}")
             sprincipal = request.form.get(f"skill_principal_{i}") == "on"
             skills_sql.add_skill(char_id, sname, sdesc, stag, simg, sprincipal, language, i)
+            write_log(f"Ajout skill {sname} au personnage {char_id}", log_level="INFO")
             i += 1
 
         # --- Armes ---
@@ -762,6 +764,7 @@ def characters(app: Flask):
             wtag = request.form.get(f"weapon_tag_{weapon_idx}")
             wimg = request.form.get(f"weapon_image_{weapon_idx}")
             wid = weapons_sql.add_weapon(char_id, wname, wstats, wtag, wimg, language)
+            write_log(f"Ajout arme {wname} au personnage {char_id}", log_level="INFO")
             # --- Evolutions de l'arme ---
             for evo_idx in range(7):
                 evolution_id = request.form.get(f"weapon_evolutions_{weapon_idx}_{evo_idx}_evolution_id")
@@ -778,6 +781,7 @@ def characters(app: Flask):
                     evo_range = None
                     evo_number = evo_idx
                 weapons_sql.add_weapon_evolution(wid, evo_number, evolution_id, edesc, evo_type, evo_range, language)
+                write_log(f"Ajout évolution {evolution_id} à l'arme {wname}", log_level="INFO")
         weapon_idx += 1
 
         # --- Evolutions du personnage ---
@@ -797,6 +801,7 @@ def characters(app: Flask):
                 evo_range = None
                 evo_number = evo_idx
             evolutions_sql.add_evolution(char_id, evo_number, evolution_id, edesc, evo_type, evo_range, language)
+            write_log(f"Ajout évolution {evolution_id} au personnage {char_id}", log_level="INFO")
 
         # --- Sets d'équipement, artefacts et noyaux ---
         equipment_set_sql = EquipmentSetSql(cursor)
@@ -809,6 +814,7 @@ def characters(app: Flask):
             set_focus = request.form.get(f"eqset_focus_stats_{set_idx}")
             set_order = request.form.get(f"eqset_order_{set_idx}")
             set_id = equipment_set_sql.add_equipment_set(char_id, set_name, set_desc, set_focus, set_order, language)
+            write_log(f"Ajout set d'équipement {set_name} au personnage {char_id}", log_level="INFO")
             # --- Artefacts du set ---
             for artefact_idx in range(8):
                 aname = request.form.get(f"artefact_name_{set_idx}_{artefact_idx}")
@@ -825,6 +831,7 @@ def characters(app: Flask):
                 else:
                     aimg = ""
                 equipment_set_sql.add_artefact(set_id, aname, aset, aimg, amain, asec, language)
+                write_log(f"Ajout artefact {aname} au set {set_name}", log_level="INFO")
             # --- Noyaux du set ---
             for core_idx in range(3):
                 cname = request.form.get(f"core_name_{set_idx}_{core_idx}")
@@ -833,6 +840,7 @@ def characters(app: Flask):
                 cnumber = f"{core_idx+1:02d}"
                 cimg = cname + cnumber + ".webp"
                 equipment_set_sql.add_core(set_id, cname, cimg, cmain, csec, cnumber, language)
+                write_log(f"Ajout noyau {cname} au set {set_name}", log_level="INFO")
             set_idx += 1
 
         sql_manager.conn.commit()
