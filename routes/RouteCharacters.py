@@ -782,7 +782,7 @@ def characters(app: Flask):
                     evo_number = evo_idx
                 weapons_sql.add_weapon_evolution(wid, evo_number, evolution_id, edesc, evo_type, evo_range, language)
                 write_log(f"Ajout évolution {evolution_id} à l'arme {wname}", log_level="INFO")
-        weapon_idx += 1
+            weapon_idx += 1
 
         # --- Evolutions du personnage ---
         evolutions_sql = EvolutionsSql(cursor)
