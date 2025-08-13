@@ -109,6 +109,13 @@ p {
   text-align: center
 }
 
+/* Centrer le bouton "Ajouter un personnage" */
+#add-character-btn {
+  display: block;
+  margin: 0 auto 18px auto;
+  text-align: center;
+}
+
 /* Responsive Design */
 
 /* Pour les écrans de taille moyenne (tablettes) */

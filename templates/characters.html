@@ -18,6 +18,11 @@
     {% include 'navbar.html' %}
     <div class="container">
       <h1>Characters</h1>
+      {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
+      <button id="add-character-btn" class="admin-btn">
+        Ajouter un personnage
+      </button>
+      {% endif %}
       <p>
         Discover the characters from Solo Leveling Arise.
       </p>
