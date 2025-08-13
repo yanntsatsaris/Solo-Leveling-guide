@@ -17,6 +17,8 @@
 .passive > img {
     max-height: 50px; /* Définit la hauteur des images à la taille de la police */
     max-width: 50px; /* Maintient les proportions de l'image */
+    min-width: 50px;
+    min-height: 50px;
     height: auto;
     width: auto;
     margin-right: 10px; /* Ajoute un espacement entre l'image et le texte */
