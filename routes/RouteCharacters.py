@@ -504,7 +504,7 @@ def characters(app: Flask):
                     weapons_sql.delete_weapon_evolution(db_id)
                     weapon_modif = True
                     write_log(f"Suppression évolution arme {db_id} de l'arme {wid}", log_level="INFO")
-            weapon_idx += 1
+            weapon_idx += 1  # <-- Correction : à l'intérieur de la boucle
         for db_id in existing_weapon_ids:
             if str(db_id) not in form_weapon_ids:
                 weapons_sql.delete_weapon(db_id)
