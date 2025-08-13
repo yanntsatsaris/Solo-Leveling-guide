@@ -80,11 +80,19 @@ class SkillsSql:
         """, (name, desc, tag, sid, language))
 
     def add_skill(self, char_id, name, desc, tag, img, principal, language, order):
-        # Vérifie unicité par image (None inclus)
-        self.cursor.execute(
-            "SELECT skills_id FROM skills WHERE skills_characters_id = %s AND skills_image IS NOT DISTINCT FROM %s",
-            (char_id, img)
-        )
+        # Vérifie unicité par image OU par nom si image vide
+        if not img:
+            self.cursor.execute(
+                "SELECT skills_id FROM skills "
+                "JOIN skill_translations ON skill_translations_skills_id = skills_id "
+                "WHERE skills_characters_id = %s AND skill_translations_name = %s AND skill_translations_language = %s",
+                (char_id, name, language)
+            )
+        else:
+            self.cursor.execute(
+                "SELECT skills_id FROM skills WHERE skills_characters_id = %s AND skills_image IS NOT DISTINCT FROM %s",
+                (char_id, img)
+            )
         result = self.cursor.fetchone()
         if result:
             sid = result[0]

@@ -82,11 +82,19 @@ class PassivesSql:
         """, (name, desc, tag, pid, language))
 
     def add_passive(self, char_id, name, desc, tag, img, principal, hidden, language, order):
-        # Vérifie unicité par image (None inclus)
-        self.cursor.execute(
-            "SELECT passives_id FROM passives WHERE passives_characters_id = %s AND passives_image IS NOT DISTINCT FROM %s",
-            (char_id, img)
-        )
+        # Vérifie unicité par image OU par nom si image vide
+        if not img:
+            self.cursor.execute(
+                "SELECT passives_id FROM passives "
+                "JOIN passive_translations ON passive_translations_passives_id = passives_id "
+                "WHERE passives_characters_id = %s AND passive_translations_name = %s AND passive_translations_language = %s",
+                (char_id, name, language)
+            )
+        else:
+            self.cursor.execute(
+                "SELECT passives_id FROM passives WHERE passives_characters_id = %s AND passives_image IS NOT DISTINCT FROM %s",
+                (char_id, img)
+            )
         result = self.cursor.fetchone()
         if result:
             pid = result[0]
