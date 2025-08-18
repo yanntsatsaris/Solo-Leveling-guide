@@ -64,8 +64,8 @@ class CharactersSql:
         self.cursor.execute("""
             SELECT c.characters_id, c.characters_type, c.characters_rarity, c.characters_alias, c.characters_folder
             FROM characters c
-            WHERE c.characters_alias = %s
-        """, (alias,))
+            WHERE c.characters_id = %s
+        """, (char_id,))
         char_row = self.cursor.fetchone()
         if not char_row:
             return None
