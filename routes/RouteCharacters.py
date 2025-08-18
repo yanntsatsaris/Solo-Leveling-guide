@@ -210,8 +210,6 @@ def characters(app: Flask):
         char_name = row['character_translations_name']
         char_description = row['character_translations_description']
 
-        write_log(f"char_id = {char_id}, char_type = {char_type}, char_rarity = {char_rarity}, char_alias = {char_alias}, char_folder = {char_folder}, char_name = {char_name}")
-
         type_folder = f"SLA_Personnages_{char_type}"
         personnage_png = f'static/images/Personnages/{type_folder}/{char_folder}/{char_type}_{char_alias}_Personnage.png'
         personnage_webp = f'static/images/Personnages/{type_folder}/{char_folder}/{char_type}_{char_alias}_Personnage.webp'
@@ -324,7 +322,7 @@ def characters(app: Flask):
 
         char_modif = False
         if (
-            current_character['name'] != name or
+            (current_character['name'] or '') != (name or '') or
             current_character['alias'] != alias or
             current_character['type'] != type_ or
             current_character['rarity'] != rarity or
