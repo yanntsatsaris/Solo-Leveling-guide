@@ -130,10 +130,8 @@ def characters(app: Flask):
         # --- Utilisation du contrôleur SQL segmenté ---
         sql_manager = ControleurSql()
         characters_sql = CharactersSql(sql_manager.cursor)
-        panoplies_sql = PanopliesSql(sql_manager.cursor)
 
-        characters_data = characters_sql.get_characters(language)
-        panoplies_data = panoplies_sql.get_panoplies(language)
+        characters_data = characters_sql.get_characters()
         sql_manager.close()
 
         images = []
@@ -163,17 +161,11 @@ def characters(app: Flask):
         character_types = sorted(character_types)
         rarities = sorted(rarities)
 
-        panoplies_data = [
-            {'name': row[0], 'translation': row[1], 'language': row[2]}
-            for row in panoplies_data
-        ]
-
         return render_template(
             'characters.html',
             images=images,
             character_types=character_types,
             rarities=rarities,
-            panoplies=panoplies_data
         )
 
     @app.route('/characters/<alias>')
