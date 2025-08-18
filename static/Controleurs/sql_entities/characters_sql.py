@@ -13,6 +13,7 @@ class CharactersSql:
             LEFT JOIN character_translations ct
               ON ct.character_translations_characters_id = c.characters_id
              AND ct.character_translations_language = %s
+            ORDER BY c.characters_rarity ASC
         """, (language,))
         return self.cursor.fetchall()
 
