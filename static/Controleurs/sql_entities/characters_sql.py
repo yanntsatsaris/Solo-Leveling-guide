@@ -69,8 +69,19 @@ class CharactersSql:
         """, (alias,))
         row = self.cursor.fetchone()
         if row:
-            # Retourne l'id existant si déjà présent
-            return row[0]
+            char_id = row[0]
+            # Vérifie si une traduction existe déjà pour cette langue
+            self.cursor.execute("""
+                SELECT 1 FROM character_translations
+                WHERE character_translations_characters_id = %s AND character_translations_language = %s
+            """, (char_id, language))
+            if not self.cursor.fetchone():
+                # Ajoute la traduction manquante
+                self.cursor.execute("""
+                    INSERT INTO character_translations (character_translations_characters_id, character_translations_language, character_translations_name, character_translations_description)
+                    VALUES (%s, %s, %s, %s)
+                """, (char_id, language, name, description))
+            return char_id
 
         # Ajoute le personnage principal
         self.cursor.execute("""
