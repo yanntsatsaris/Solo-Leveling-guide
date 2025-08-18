@@ -62,21 +62,35 @@ class CharactersSql:
 
     def get_character_full(self, char_id, language):
         self.cursor.execute("""
-            SELECT ct.character_translations_name, c.characters_alias, c.characters_type, c.characters_rarity, ct.character_translations_description
+            SELECT c.characters_id, c.characters_type, c.characters_rarity, c.characters_alias, c.characters_folder
             FROM characters c
-            JOIN character_translations ct ON ct.character_translations_characters_id = c.characters_id
-            WHERE c.characters_id = %s AND ct.character_translations_language = %s
+            WHERE c.characters_alias = %s
+        """, (alias,))
+        char_row = self.cursor.fetchone()
+        if not char_row:
+            return None
+
+        char_id, type_, rarity, alias, folder = char_row
+
+        # Récupère la traduction pour la langue demandée
+        self.cursor.execute("""
+            SELECT character_translations_name, character_translations_description
+            FROM character_translations
+            WHERE character_translations_characters_id = %s AND character_translations_language = %s
         """, (char_id, language))
-        row = self.cursor.fetchone()
-        if row:
-            return {
-                'name': row[0] or '',
-                'alias': row[1] or '',
-                'type': row[2] or '',
-                'rarity': row[3] or '',
-                'description': row[4] or ''
-            }
-        return {}
+        trans_row = self.cursor.fetchone()
+        if trans_row:
+            name, description = trans_row
+        else:
+            name, description = '', ''
+ 
+        return {
+            'name': name or '',
+            'alias': alias or '',
+            'type': type_ or '',
+            'rarity': rarity or '',
+            'description': description or ''
+        }
 
     def update_character_main(self, char_id, alias, type_, rarity, name, description, language):
         self.cursor.execute("""
