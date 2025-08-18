@@ -314,7 +314,6 @@ def characters(app: Flask):
         description = request.form.get('description')
         rarity = request.form.get('rarity')
         type_ = request.form.get('type')
-        image_name = request.form.get('image')
 
         sql_manager = ControleurSql()
         cursor = sql_manager.cursor
