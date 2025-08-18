@@ -70,11 +70,11 @@ class CharactersSql:
         row = self.cursor.fetchone()
         if row:
             return {
-                'name': row[0],
-                'alias': row[1],
-                'type': row[2],
-                'rarity': row[3],
-                'description': row[4]
+                'name': row[0] or '',
+                'alias': row[1] or '',
+                'type': row[2] or '',
+                'rarity': row[3] or '',
+                'description': row[4] or ''
             }
         return {}
 
