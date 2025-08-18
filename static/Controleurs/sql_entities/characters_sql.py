@@ -20,7 +20,7 @@ class CharactersSql:
                     ELSE 3
                 END,
                 c.characters_type,
-                ct.character_alias
+                c.character_alias
         """, (language,))
         return self.cursor.fetchall()
 
