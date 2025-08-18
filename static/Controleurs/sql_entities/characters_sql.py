@@ -5,7 +5,7 @@ class CharactersSql:
         self.cursor = cursor
 
     def get_characters(self, language):
-        write_log(f"Requête get_characters (toutes langues, traduction {language})", log_level="DEBUG")
+        write_log(f"Requête get_characters (ordre rareté/type/nom, traduction {language})", log_level="DEBUG")
         self.cursor.execute("""
             SELECT c.characters_id, c.characters_type, c.characters_rarity, c.characters_alias, c.characters_folder,
                    ct.character_translations_name
@@ -13,7 +13,14 @@ class CharactersSql:
             LEFT JOIN character_translations ct
               ON ct.character_translations_characters_id = c.characters_id
              AND ct.character_translations_language = %s
-            ORDER BY c.characters_rarity
+            ORDER BY
+                CASE c.characters_rarity
+                    WHEN 'SSR' THEN 1
+                    WHEN 'SR' THEN 2
+                    ELSE 3
+                END,
+                c.characters_type,
+                ct.character_translations_name
         """, (language,))
         return self.cursor.fetchall()
 
