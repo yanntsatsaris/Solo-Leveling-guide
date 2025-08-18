@@ -202,7 +202,14 @@ def characters(app: Flask):
             sql_manager.close()
             return "Character not found", 404
 
-        char_id, char_type, char_rarity, char_alias, char_folder, char_name, char_description = row
+        char_id = row['characters_id']
+        char_type = row['characters_type']
+        char_rarity = row['characters_rarity']
+        char_alias = row['characters_alias']
+        char_folder = row['characters_folder']
+        char_name = row['character_translations_name']
+        char_description = row['character_translations_description']
+
         type_folder = f"SLA_Personnages_{char_type}"
         personnage_png = f'static/images/Personnages/{type_folder}/{char_folder}/{char_type}_{char_alias}_Personnage.png'
         personnage_webp = f'static/images/Personnages/{type_folder}/{char_folder}/{char_type}_{char_alias}_Personnage.webp'
