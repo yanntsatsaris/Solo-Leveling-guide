@@ -26,13 +26,39 @@ class CharactersSql:
 
     def get_character_details(self, language, alias):
         write_log(f"Requête get_character_details pour langue={language}, alias={alias}", log_level="DEBUG")
+        # Récupère les infos principales du personnage
         self.cursor.execute("""
-            SELECT c.characters_id, c.characters_type, c.characters_rarity, c.characters_alias, c.characters_folder, ct.character_translations_name, ct.character_translations_description
+            SELECT c.characters_id, c.characters_type, c.characters_rarity, c.characters_alias, c.characters_folder
             FROM characters c
-            JOIN character_translations ct ON ct.character_translations_characters_id = c.characters_id
-            WHERE ct.character_translations_language = %s AND c.characters_alias = %s
-        """, (language, alias))
-        return self.cursor.fetchone()
+            WHERE c.characters_alias = %s
+        """, (alias,))
+        char_row = self.cursor.fetchone()
+        if not char_row:
+            return None
+
+        char_id, type_, rarity, alias, folder = char_row
+
+        # Récupère la traduction pour la langue demandée
+        self.cursor.execute("""
+            SELECT character_translations_name, character_translations_description
+            FROM character_translations
+            WHERE character_translations_characters_id = %s AND character_translations_language = %s
+        """, (char_id, language))
+        trans_row = self.cursor.fetchone()
+        if trans_row:
+            name, description = trans_row
+        else:
+            name, description = '', ''
+
+        return {
+            'characters_id': char_id,
+            'characters_type': type_,
+            'characters_rarity': rarity,
+            'characters_alias': alias,
+            'characters_folder': folder,
+            'character_translations_name': name,
+            'character_translations_description': description
+        }
 
     def get_character_full(self, char_id, language):
         self.cursor.execute("""
