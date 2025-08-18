@@ -28,7 +28,7 @@ class CharactersSql:
         write_log(f"Requête get_character_details pour alias={alias} (toutes langues)", log_level="DEBUG")
         self.cursor.execute("""
             SELECT c.characters_id, c.characters_type, c.characters_rarity, c.characters_alias, c.characters_folder,
-                   ct.character_translations_language, ct.character_translations_name, ct.character_translations_description
+                   ct.character_translations_name, ct.character_translations_description
             FROM characters c
             LEFT JOIN character_translations ct ON ct.character_translations_characters_id = c.characters_id
             WHERE c.characters_alias = %s
