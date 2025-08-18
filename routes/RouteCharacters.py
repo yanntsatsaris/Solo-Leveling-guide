@@ -131,7 +131,7 @@ def characters(app: Flask):
         sql_manager = ControleurSql()
         characters_sql = CharactersSql(sql_manager.cursor)
 
-        characters_data = characters_sql.get_characters()
+        characters_data = characters_sql.get_characters(language)
         sql_manager.close()
 
         images = []

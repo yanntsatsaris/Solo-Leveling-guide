@@ -4,12 +4,16 @@ class CharactersSql:
     def __init__(self, cursor):
         self.cursor = cursor
 
-    def get_characters(self):
-        write_log(f"Requête get_characters", log_level="DEBUG")
+    def get_characters(self, language):
+        write_log(f"Requête get_characters (toutes langues, traduction {language})", log_level="DEBUG")
         self.cursor.execute("""
-            SELECT c.characters_id, c.characters_type, c.characters_rarity, c.characters_alias, c.characters_folder, ct.character_translations_name
+            SELECT c.characters_id, c.characters_type, c.characters_rarity, c.characters_alias, c.characters_folder,
+                   ct.character_translations_name
             FROM characters c
-        """)
+            LEFT JOIN character_translations ct
+              ON ct.character_translations_characters_id = c.characters_id
+             AND ct.character_translations_language = %s
+        """, (language,))
         return self.cursor.fetchall()
 
     def get_character_details(self, language, alias):
