@@ -97,10 +97,23 @@ class CharactersSql:
             UPDATE characters SET characters_alias=%s, characters_type=%s, characters_rarity=%s
             WHERE characters_id=%s
         """, (alias, type_, rarity, char_id))
+        # Vérifie si une traduction existe déjà pour cette langue
         self.cursor.execute("""
-            UPDATE character_translations SET character_translations_name=%s, character_translations_description=%s
-            WHERE character_translations_characters_id=%s AND character_translations_language=%s
-        """, (name, description, char_id, language))
+            SELECT 1 FROM character_translations
+            WHERE character_translations_characters_id = %s AND character_translations_language = %s
+        """, (char_id, language))
+        if self.cursor.fetchone():
+            # Mise à jour si existe
+            self.cursor.execute("""
+                UPDATE character_translations SET character_translations_name=%s, character_translations_description=%s
+                WHERE character_translations_characters_id=%s AND character_translations_language=%s
+            """, (name, description, char_id, language))
+        else:
+            # Création sinon
+            self.cursor.execute("""
+                INSERT INTO character_translations (character_translations_characters_id, character_translations_language, character_translations_name, character_translations_description)
+                VALUES (%s, %s, %s, %s)
+            """, (char_id, language, name, description))
 
     def add_character(self, alias, type_, rarity, name, description, folder, language):
         # Vérifie si un personnage avec cet alias existe déjà
