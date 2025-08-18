@@ -197,7 +197,7 @@ def characters(app: Flask):
         panoplies_sql = PanopliesSql(sql_manager.cursor)
         cores_sql = CoresSql(sql_manager.cursor)  # Ajout du contrôleur cores
 
-        row = characters_sql.get_character_details(language, alias)
+        row = characters_sql.get_character_details(alias)
         if not row:
             sql_manager.close()
             return "Character not found", 404
