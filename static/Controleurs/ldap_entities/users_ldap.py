@@ -118,6 +118,7 @@ class UsersLdap:
             result = self.ldap.conn.search_s(base_dn, ldap.SCOPE_SUBTREE, search_filter)
             if result:
                 entry = result[0][1]
+                write_log(f"Informations utilisateur récupérées pour {username}")
                 return {attr: entry[attr] for attr in entry}
             else:
                 write_log(f"Utilisateur {username} non trouvé dans get_user_info", 'WARNING')
