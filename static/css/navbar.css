@@ -217,14 +217,15 @@
     display: block;
     width: 100%;
     margin-bottom: 12px;
-    padding: 8px;
+    padding: 8px 16px; /* Ajoute du padding à gauche et à droite */
     font-size: 1em;
     border-radius: 8px;
-    border: 1px solid #8000ff; /* Bordure violette */
+    border: 1px solid #8000ff;
     background: #121212; /* Fond sombre */
     color: #ffcc00; /* Texte doré */
     box-shadow: 0 2px 8px rgba(128,0,255,0.10);
     transition: border 0.2s, background 0.2s;
+    box-sizing: border-box; /* S'assure que le padding ne déborde pas */
 }
 .user-menu-popup input:focus {
     border-color: #ffcc00; /* Bordure dorée au focus */
