@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
             effectsDiv.innerHTML += `<div><b>${effect.pieces} pièces :</b> <input type="text" name="effect_${effect.pieces}" value="${effect.text || ''}" class="effect-input"></div>`;
           });
           // Affiche la modale
-          document.getElementById('edit-panoplie-overlay').style.display = 'block';
+          document.getElementById('edit-panoplie-overlay').style.display = 'flex';
           // Met à jour l'action du formulaire
           document.getElementById('edit-panoplie-form').action = `/admin/panoplie/${panoplieName}`;
         });
