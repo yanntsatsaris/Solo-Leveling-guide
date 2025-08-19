@@ -71,6 +71,14 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById('edit-panoplie-overlay').style.display = 'none';
   };
 });
+function autoResizeAllTextareas() {
+  document.querySelectorAll("textarea.effect-input").forEach(function(el) {
+    el.style.height = "auto";
+    el.style.height = (el.scrollHeight) + "px";
+  });
+}
+document.addEventListener("DOMContentLoaded", autoResizeAllTextareas);
+// Si tu ajoutes dynamiquement des textarea, appelle autoResizeAllTextareas() après l'injection.
 </script>
 </body>
 </html>
