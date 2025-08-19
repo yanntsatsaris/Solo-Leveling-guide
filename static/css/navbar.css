@@ -67,7 +67,7 @@
   display: flex;
   align-items: center;
   margin-left: auto; /* Ajoute un espacement automatique à gauche */
-  margin-right: 20px; /* Ajoute un espacement fixe à droite */
+  margin-right: 30px; /* Ajoute un espacement fixe à droite */
 }
 
 .user-logo img {
