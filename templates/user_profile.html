@@ -21,7 +21,7 @@
       <h2>Mon compte : {{ user.username }}</h2>
       <form method="POST" id="profile-form" autocomplete="off">
         <label>Email :</label>
-        <input type="email" name="email" id="profile_email" value="{{ user.email }}" required />
+        <input type="email" name="email" id="profile_email" value="{{ user.email }}" placeholder="Entrez votre email" required />
         <label>Nouveau mot de passe :</label>
         <input type="password" name="password" id="password" placeholder="Laisser vide pour ne pas changer" />
         <label>Confirmer le mot de passe :</label>
