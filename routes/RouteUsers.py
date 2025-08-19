@@ -93,18 +93,30 @@ def users(app):
     @login_required
     def user_profile(username):
         write_log(f"Accès au profil de {username}", log_level="INFO", username=username)
-        # Vérifie que l'utilisateur connecté correspond à la page demandée ou qu'il est admin
-        if session.get('username') != username and not (
-            session.get('rights') and ('Admin' in session['rights'] or 'SuperAdmin' in session['rights'])
-        ):
-            abort(403)
+        RIGHTS_ORDER = ['New', 'User', 'Admin', 'SuperAdmin']
 
         ldap = ControleurLdap()
         users_ldap = UsersLdap(ldap)
-        # Récupère les infos utilisateur depuis la BDD (à adapter selon ta structure)
+        # Récupère les infos utilisateur depuis la base LDAP
         user_info = users_ldap.get_user_info(username)
         if not user_info:
             abort(404)
+
+        # Récupère les droits du profil consulté
+        target_rights = user_info.get('rightsAgreement', [])
+        target_rights = [r.decode() if isinstance(r, bytes) else r for r in target_rights]
+        target_rights = [r.split("SoloLevelingGuide::")[1] for r in target_rights if "SoloLevelingGuide::" in (r.decode() if isinstance(r, bytes) else r)]
+        target_max = max((RIGHTS_ORDER.index(r) for r in target_rights if r in RIGHTS_ORDER), default=0)
+
+        # Récupère les droits de l'utilisateur connecté
+        my_rights = session.get('rights', [])
+        my_max = max((RIGHTS_ORDER.index(r) for r in my_rights if r in RIGHTS_ORDER), default=0)
+
+        # Vérifie l'accès
+        if session.get('username') != username:
+            # Il faut être admin ou superadmin ET avoir un droit strictement supérieur
+            if my_max < RIGHTS_ORDER.index('Admin') or not (my_max > target_max):
+                abort(403)
 
         if request.method == 'POST':
             # Récupère les champs à modifier
@@ -126,5 +138,5 @@ def users(app):
                 write_log(f"Modification du compte {username}", log_level="INFO", username=username)
             return redirect(url_for('user_profile', username=username))
 
-        is_admin = session.get('rights') and ('Admin' in session['rights'] or 'SuperAdmin' in session['rights'])
+        is_admin = my_max >= RIGHTS_ORDER.index('Admin')
         return render_template('user_profile.html', user=user_info, is_admin=is_admin)
