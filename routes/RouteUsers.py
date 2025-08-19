@@ -91,6 +91,7 @@ def users(app):
     @app.route('/<username>', methods=['GET', 'POST'])
     @login_required
     def user_profile(username):
+        write_log(f"Accès au profil de {username}", log_level="INFO", username=username)
         # Vérifie que l'utilisateur connecté correspond à la page demandée ou qu'il est admin
         if session.get('username') != username and not (
             session.get('rights') and ('Admin' in session['rights'] or 'SuperAdmin' in session['rights'])
