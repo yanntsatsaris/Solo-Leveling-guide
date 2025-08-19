@@ -61,7 +61,7 @@ class PanopliesSql:
         self.cursor.execute("""
             UPDATE panoplie_translations
             SET panoplie_translations_display_name = %s
-            WHERE panoplies_id = (SELECT panoplies_id FROM panoplies WHERE panoplies_name = %s)
+            WHERE panoplie_translations_panoplies_id = (SELECT panoplies_id FROM panoplies WHERE panoplies_name = %s)
             AND panoplie_translations_language = %s
         """, (new_display_name, panoplie_name, language))
 
