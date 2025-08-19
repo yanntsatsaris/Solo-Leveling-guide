@@ -1,6 +1,6 @@
 from static.Controleurs.ControleurLdap import ControleurLdap
 import ldap
-from .ControleurLog import write_log
+from static.Controleurs.ControleurLog import write_log
 
 class EntriesLdap:
     def __init__(self, ds):
