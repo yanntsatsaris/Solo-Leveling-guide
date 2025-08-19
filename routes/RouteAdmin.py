@@ -66,14 +66,9 @@ def admin_routes(app):
     def api_get_panoplie(panoplie_name):
         if not is_admin():
             abort(403)
-        language = session.get('language', 'FR-fr')
         sql_manager = ControleurSql()
         cursor = sql_manager.cursor
         panoplies_sql = PanopliesSql(cursor)
-        panoplie = panoplies_sql.get_panoplie_by_name(panoplie_name, language)
-        effects = panoplies_sql.get_panoplie_effects(panoplie_name, language)
+        data = panoplies_sql.get_panoplie_all_languages(panoplie_name)
         sql_manager.close()
-        return {
-            "display_name": panoplie[1] if panoplie else "",
-            "effects": [{"pieces": e[0], "text": e[1]} for e in effects]
-        }
+        return data

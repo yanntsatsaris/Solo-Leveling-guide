@@ -43,16 +43,26 @@ document.addEventListener("DOMContentLoaded", function() {
       fetch(`/admin/panoplie/api/${panoplieName}`)
         .then(resp => resp.json())
         .then(data => {
-          document.getElementById('edit-panoplie-display-name').value = data.display_name || '';
-          // Affiche les effets
-          const effectsDiv = document.getElementById('edit-panoplie-effects');
-          effectsDiv.innerHTML = '';
-          (data.effects || []).forEach(effect => {
-            effectsDiv.innerHTML += `<div><b>${effect.pieces} pièces :</b> <input type="text" name="effect_${effect.pieces}" value="${effect.text || ''}" class="effect-input"></div>`;
-          });
-          // Affiche la modale
+          const langDiv = document.getElementById('edit-panoplie-languages');
+          langDiv.innerHTML = '';
+          for (const [lang, trans] of Object.entries(data.translations)) {
+            langDiv.innerHTML += `
+              <fieldset style="margin-bottom:18px">
+                <legend style="color:#8000ff">${lang}</legend>
+                <label>Nom affiché :</label>
+                <input type="text" name="display_name_${lang}" value="${trans.display_name || ''}" required>
+                <h4>Effets</h4>
+                <div>
+                  ${(data.effects[lang] || []).map(effect =>
+                    `<div><b>${effect.pieces} pièces :</b>
+                      <input type="text" name="effect_${lang}_${effect.pieces}" value="${effect.effect || ''}" class="effect-input">
+                    </div>`
+                  ).join('')}
+                </div>
+              </fieldset>
+            `;
+          }
           document.getElementById('edit-panoplie-overlay').style.display = 'flex';
-          // Met à jour l'action du formulaire
           document.getElementById('edit-panoplie-form').action = `/admin/panoplie/${panoplieName}`;
         });
     });
