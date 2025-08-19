@@ -1,0 +1,19 @@
+<div
+  id="edit-panoplie-overlay"
+  class="edit-character-overlay"
+  style="display: none"
+>
+  <div id="edit-panoplie-menu" class="edit-character-popup">
+    <form id="edit-panoplie-form" method="POST" action="">
+      <h2 style="text-align: center; color: #ffcc00">Modifier la panoplie</h2>
+      <label>Nom affiché :</label>
+      <input type="text" name="display_name" id="edit-panoplie-display-name" required />
+      <h4>Effets</h4>
+      <div id="edit-panoplie-effects"></div>
+      <div style="display: flex; justify-content: space-between; margin-top: 18px">
+        <button type="submit" class="admin-btn">Enregistrer</button>
+        <button type="button" id="close-edit-panoplie" class="close-btn" style="font-size: 22px">&times;</button>
+      </div>
+    </form>
+  </div>
+</div>

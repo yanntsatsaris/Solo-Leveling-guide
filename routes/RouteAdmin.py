@@ -60,3 +60,20 @@ def admin_routes(app):
         # Récupération des noyaux existants pour affichage
         cores = []  # À remplacer par la récupération réelle
         return render_template('admin_cores.html', cores=cores)
+
+    @app.route('/admin/panoplie/api/<panoplie_name>')
+    @login_required
+    def api_get_panoplie(panoplie_name):
+        if not is_admin():
+            abort(403)
+        language = session.get('language', 'FR-fr')
+        sql_manager = ControleurSql()
+        cursor = sql_manager.cursor
+        panoplies_sql = PanopliesSql(cursor)
+        panoplie = panoplies_sql.get_panoplie_by_name(panoplie_name, language)
+        effects = panoplies_sql.get_panoplie_effects(panoplie_name, language)
+        sql_manager.close()
+        return {
+            "display_name": panoplie[1] if panoplie else "",
+            "effects": [{"pieces": e[0], "text": e[1]} for e in effects]
+        }
