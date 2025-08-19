@@ -89,6 +89,8 @@ def admin_routes(app):
                 panoplies_sql.update_panoplie_display_name(panoplie_name, lang, value)
             elif key.startswith('effect_'):
                 _, lang, pieces = key.split('_', 2)
+                # Normalise les retours à la ligne
+                value = value.replace('\r\n', '\n').replace('\r', '\n')
                 panoplies_sql.update_panoplie_effect(panoplie_name, lang, pieces, value)
 
         sql_manager.close()
