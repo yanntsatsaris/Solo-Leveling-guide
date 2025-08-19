@@ -147,6 +147,18 @@
   margin-top: 18px;
 }
 
+.effect-row {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.effect-row b {
+  min-width: 80px;
+  margin-top: 6px;
+  display: inline-block;
+}
+
 @media (max-width: 600px) {
   .edit-character-popup {
     min-width: 90vw;

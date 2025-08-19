@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 <h4>Effets</h4>
                 <div>
                   ${(data.effects[lang] || []).map(effect =>
-                    `<div><b>${effect.pieces} pièces :</b>
+                    `<div class="effect-row"><b>${effect.pieces} pièces :</b>
                       <textarea name="effect_${lang}_${effect.pieces}" class="effect-input">${effect.effect || ''}</textarea>
                     </div>`
                   ).join('')}
