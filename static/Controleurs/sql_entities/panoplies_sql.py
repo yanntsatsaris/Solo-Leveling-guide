@@ -57,10 +57,22 @@ class PanopliesSql:
         self.cursor.execute("""
             UPDATE panoplie_translations
             SET panoplie_translations_display_name = %s
-            WHERE panoplie_translations_panoplies_id = (
-                SELECT panoplies_id FROM panoplies WHERE panoplies_name = %s
-            ) AND panoplie_translations_language = %s
+            WHERE panoplies_id = (SELECT panoplies_id FROM panoplies WHERE panoplies_name = %s)
+            AND panoplie_translations_language = %s
         """, (new_display_name, panoplie_name, language))
+
+    def update_panoplie_effect(self, panoplie_name, language, pieces, effect):
+        self.cursor.execute("""
+            UPDATE panoplie_set_bonus_translations
+            SET panoplie_set_bonus_translations_effect = %s
+            WHERE panoplie_set_bonus_translations_panoplie_set_bonus_id = (
+                SELECT psb.panoplie_set_bonus_id
+                FROM panoplies p
+                JOIN panoplie_set_bonus psb ON psb.panoplie_set_bonus_panoplies_id = p.panoplies_id
+                WHERE p.panoplies_name = %s AND psb.panoplie_set_bonus_pieces_required = %s
+            )
+            AND panoplie_set_bonus_translations_language = %s
+        """, (effect, panoplie_name, pieces, language))
 
     def get_panoplie_all_languages(self, panoplie_name):
         self.cursor.execute("""

@@ -1,4 +1,4 @@
-from flask import request, render_template, session, redirect, url_for, abort
+from flask import request, render_template, session, redirect, url_for, abort, flash
 from flask_login import login_required
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
@@ -72,3 +72,25 @@ def admin_routes(app):
         data = panoplies_sql.get_panoplie_all_languages(panoplie_name)
         sql_manager.close()
         return data
+
+    @app.route('/admin/panoplie/<panoplie_name>', methods=['POST'])
+    @login_required
+    def admin_edit_panoplie(panoplie_name):
+        if not is_admin():
+            abort(403)
+        sql_manager = ControleurSql()
+        cursor = sql_manager.cursor
+        panoplies_sql = PanopliesSql(cursor)
+
+        # Parcours tous les champs du formulaire
+        for key, value in request.form.items():
+            if key.startswith('display_name_'):
+                lang = key.split('_', 2)[2]
+                panoplies_sql.update_panoplie_display_name(panoplie_name, lang, value)
+            elif key.startswith('effect_'):
+                _, lang, pieces = key.split('_', 2)
+                panoplies_sql.update_panoplie_effect(panoplie_name, lang, pieces, value)
+
+        sql_manager.close()
+        write_log(f"Panoplie '{panoplie_name}' mise à jour avec succès.", log_level="INFO", username=session.get('username'))
+        return redirect(url_for('admin_panoplie'))
