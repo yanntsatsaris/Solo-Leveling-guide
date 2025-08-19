@@ -83,6 +83,7 @@ def admin_routes(app):
         panoplies_sql = PanopliesSql(cursor)
 
         # Parcours tous les champs du formulaire
+            
         for key, value in request.form.items():
             if key.startswith('display_name_'):
                 lang = key.split('_', 2)[2]
