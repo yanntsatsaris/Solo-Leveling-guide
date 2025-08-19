@@ -102,6 +102,8 @@ def users(app):
         users_ldap = UsersLdap(ldap)
         # Récupère les infos utilisateur depuis la BDD (à adapter selon ta structure)
         user_info = users_ldap.get_user_info(username)
+        if not user_info:
+            abort(404)
 
         if request.method == 'POST':
             # Récupère les champs à modifier
