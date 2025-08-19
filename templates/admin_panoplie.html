@@ -68,9 +68,25 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
   });
+
+  // Fermer la modale en cliquant sur la croix
   document.getElementById('close-edit-panoplie').onclick = function() {
     document.getElementById('edit-panoplie-overlay').style.display = 'none';
   };
+
+  // Fermer la modale en cliquant en dehors du menu
+  document.getElementById('edit-panoplie-overlay').addEventListener('mousedown', function(e) {
+    if (e.target === this) {
+      this.style.display = 'none';
+    }
+  });
+
+  // Fermer la modale avec la touche Échap
+  document.addEventListener('keydown', function(e) {
+    if (e.key === "Escape") {
+      document.getElementById('edit-panoplie-overlay').style.display = 'none';
+    }
+  });
 });
 function autoResizeAllTextareas() {
   document.querySelectorAll("textarea.effect-input").forEach(function(el) {
