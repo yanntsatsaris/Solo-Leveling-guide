@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Gestion des Panoplies</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_panoplie.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit_panoplie_modal.css') }}">
 </head>
 <body>
     {% include 'navbar.html' %}
@@ -20,7 +21,7 @@
                 <td>
                     {% if panoplie.image %}
                         <a href="#" data-panoplie-name="{{ panoplie.name }}">
-                            <img src="{{ panoplie.image }}" alt="{{ panoplie.display_name }}" width="120" style="cursor:pointer;">
+                            <img src="{{ panoplie.image }}" alt="{{ panoplie.display_name }}">
                         </a>
                     {% else %}
                         <span style="color:#ff3333;">Aucune image</span>
@@ -34,30 +35,32 @@
     </div>
     {% include 'partials/edit_panoplie_modal.html' %}
     <script>
-document.querySelectorAll('a[data-panoplie-name]').forEach(link => {
-  link.addEventListener('click', function(e) {
-    e.preventDefault();
-    const panoplieName = this.getAttribute('data-panoplie-name');
-    fetch(`/admin/panoplie/api/${panoplieName}`)
-      .then(resp => resp.json())
-      .then(data => {
-        document.getElementById('edit-panoplie-display-name').value = data.display_name || '';
-        // Affiche les effets
-        const effectsDiv = document.getElementById('edit-panoplie-effects');
-        effectsDiv.innerHTML = '';
-        (data.effects || []).forEach(effect => {
-          effectsDiv.innerHTML += `<div><b>${effect.pieces} pièces :</b> <input type="text" name="effect_${effect.pieces}" value="${effect.text || ''}" style="width:70%"></div>`;
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll('a[data-panoplie-name]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const panoplieName = this.getAttribute('data-panoplie-name');
+      fetch(`/admin/panoplie/api/${panoplieName}`)
+        .then(resp => resp.json())
+        .then(data => {
+          document.getElementById('edit-panoplie-display-name').value = data.display_name || '';
+          // Affiche les effets
+          const effectsDiv = document.getElementById('edit-panoplie-effects');
+          effectsDiv.innerHTML = '';
+          (data.effects || []).forEach(effect => {
+            effectsDiv.innerHTML += `<div><b>${effect.pieces} pièces :</b> <input type="text" name="effect_${effect.pieces}" value="${effect.text || ''}" class="effect-input"></div>`;
+          });
+          // Affiche la modale
+          document.getElementById('edit-panoplie-overlay').style.display = 'block';
+          // Met à jour l'action du formulaire
+          document.getElementById('edit-panoplie-form').action = `/admin/panoplie/${panoplieName}`;
         });
-        // Affiche la modale
-        document.getElementById('edit-panoplie-overlay').style.display = 'block';
-        // Met à jour l'action du formulaire
-        document.getElementById('edit-panoplie-form').action = `/admin/panoplie/${panoplieName}`;
-      });
+    });
   });
+  document.getElementById('close-edit-panoplie').onclick = function() {
+    document.getElementById('edit-panoplie-overlay').style.display = 'none';
+  };
 });
-document.getElementById('close-edit-panoplie').onclick = function() {
-  document.getElementById('edit-panoplie-overlay').style.display = 'none';
-};
 </script>
 </body>
 </html>
