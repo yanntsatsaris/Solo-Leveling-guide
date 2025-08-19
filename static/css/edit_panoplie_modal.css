@@ -88,6 +88,27 @@
   background: #232323;
 }
 
+.edit-character-popup textarea.effect-input {
+  width: 70%;
+  min-height: 38px;
+  max-height: 120px;
+  margin-left: 8px;
+  background: #181818;
+  color: #ffcc00;
+  border: 1px solid #8000ff;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 1em;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.edit-character-popup textarea.effect-input:focus {
+  outline: none;
+  border-color: #ffcc00;
+  background: #232323;
+}
+
 .edit-character-popup .admin-btn {
   background-color: #ffcc00;
   color: #121212;
