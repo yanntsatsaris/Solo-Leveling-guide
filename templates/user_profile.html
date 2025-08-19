@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mon compte - {{ user.uid[0] }}</title>
+    <title>Mon compte - {{ user.uid[0].decode() if user.uid and user.uid[0] is not none else '' }}</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/user_profile.css') }}"
@@ -18,7 +18,7 @@
   <body>
     {% include 'navbar.html' %}
     <div class="user-profile-container">
-      <h2>Mon compte : {{ user.uid[0] }}</h2>
+      <h2>Mon compte : {{ user.uid[0].decode() if user.uid and user.uid[0] is not none else '' }}</h2>
       <form method="POST" id="profile-form" autocomplete="off">
         <label>Email :</label>
         <input type="email" name="email" id="profile_email" value="{{ user.email }}" placeholder="Entrez votre email" required />
@@ -30,7 +30,7 @@
         <div id="profile-error" class="form-error"></div>
       </form>
 
-      {% if is_admin and user.uid[0] == session['username'] %}
+      {% if is_admin and user.uid[0].decode() == session['username'] %}
       <hr />
       <h3>Administration</h3>
       <a href="/admin/effects" class="admin-btn">Gérer les effets de pannoplie</a>
