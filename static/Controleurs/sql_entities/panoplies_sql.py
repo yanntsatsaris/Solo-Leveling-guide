@@ -54,6 +54,10 @@ class PanopliesSql:
         return self.cursor.fetchall()
 
     def update_panoplie_display_name(self, panoplie_name, language, new_display_name):
+        write_log(
+            f"Modification du nom affiché de la panoplie '{panoplie_name}' pour la langue '{language}' : '{new_display_name}'",
+            log_level="INFO"
+        )
         self.cursor.execute("""
             UPDATE panoplie_translations
             SET panoplie_translations_display_name = %s
@@ -62,6 +66,10 @@ class PanopliesSql:
         """, (new_display_name, panoplie_name, language))
 
     def update_panoplie_effect(self, panoplie_name, language, pieces, effect):
+        write_log(
+            f"Modification de l'effet ({pieces} pièces) de la panoplie '{panoplie_name}' pour la langue '{language}' : '{effect}'",
+            log_level="INFO"
+        )
         self.cursor.execute("""
             UPDATE panoplie_set_bonus_translations
             SET panoplie_set_bonus_translations_effect = %s
