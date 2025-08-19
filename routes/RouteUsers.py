@@ -88,7 +88,7 @@ def users(app):
         write_log("Déconnexion", log_level="INFO", username=username)
         return jsonify({'success': True})
 
-    @app.route('/<username>', methods=['GET', 'POST'])
+    @app.route('/user/<username>', methods=['GET', 'POST'])
     @login_required
     def user_profile(username):
         write_log(f"Accès au profil de {username}", log_level="INFO", username=username)

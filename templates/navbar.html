@@ -24,7 +24,7 @@
     </ul>
     {% if session.get('username') %}
     <div class="user-info">
-        <a href="/{{ session.get('username') }}" class="username-link">{{ session.get('username') }}</a>
+        <a href="/user/{{ session.get('username') }}" class="username-link">{{ session.get('username') }}</a>
         <button id="logout-btn" class="logout-btn">Déconnexion</button>
     </div>
     {% else %}
