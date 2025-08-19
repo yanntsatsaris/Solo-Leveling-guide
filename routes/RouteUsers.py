@@ -5,7 +5,7 @@ from static.Controleurs.ControleurLog import write_log
 from passlib.hash import ldap_salted_sha1, ldap_sha1
 import re
 from static.Controleurs.ControleurUser import User
-from flask_login import login_user, login_required
+from flask_login import login_user, login_required, logout_user
 
 # Import des entités ldap segmentées
 from static.Controleurs.ldap_entities.users_ldap import UsersLdap
@@ -85,6 +85,7 @@ def users(app):
     @app.route('/logout')
     def logout():
         username = session.pop('username', None)
+        logout_user()
         write_log("Déconnexion", log_level="INFO", username=username)
         return jsonify({'success': True})
 
