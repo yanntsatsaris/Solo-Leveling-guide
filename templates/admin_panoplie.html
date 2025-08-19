@@ -47,8 +47,8 @@ document.addEventListener("DOMContentLoaded", function() {
           langDiv.innerHTML = '';
           for (const [lang, trans] of Object.entries(data.translations)) {
             langDiv.innerHTML += `
-              <fieldset style="margin-bottom:18px">
-                <legend style="color:#8000ff">${lang}</legend>
+              <fieldset>
+                <legend>${lang}</legend>
                 <label>Nom affiché :</label>
                 <input type="text" name="display_name_${lang}" value="${trans.display_name || ''}" required>
                 <h4>Effets</h4>
@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
           }
           document.getElementById('edit-panoplie-overlay').style.display = 'flex';
           document.getElementById('edit-panoplie-form').action = `/admin/panoplie/${panoplieName}`;
+          autoResizeAllTextareas();
         });
     });
   });
