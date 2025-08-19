@@ -83,7 +83,7 @@ def admin_routes(app):
         panoplies_sql = PanopliesSql(cursor)
 
         # Parcours tous les champs du formulaire
-            
+
         for key, value in request.form.items():
             if key.startswith('display_name_'):
                 lang = key.split('_', 2)[2]
@@ -94,6 +94,7 @@ def admin_routes(app):
                 value = value.replace('\r\n', '\n').replace('\r', '\n')
                 panoplies_sql.update_panoplie_effect(panoplie_name, lang, pieces, value)
 
+        sql_manager.conn.commit()
         sql_manager.close()
         write_log(f"Panoplie '{panoplie_name}' mise à jour avec succès.", log_level="INFO", username=session.get('username'))
         return redirect(url_for('admin_panoplie'))
