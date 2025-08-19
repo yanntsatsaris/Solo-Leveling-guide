@@ -16,7 +16,7 @@ class ControleurSql:
             password=password
         )
         self.cursor = self.conn.cursor()
-
+    '''
     def get_characters(self, language):
         write_log(f"Requête get_characters pour langue={language}", log_level="DEBUG")
         self.cursor.execute("""
@@ -221,6 +221,7 @@ class ControleurSql:
             }
             for row in self.cursor.fetchall()
         ]
+    '''
 
     def close(self):
         write_log("Fermeture de la connexion SQL", log_level="DEBUG")

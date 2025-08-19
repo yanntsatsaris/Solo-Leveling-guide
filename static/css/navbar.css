@@ -296,3 +296,12 @@
     margin-top: 6px;
     min-height: 18px;
 }
+.username-link {
+    color: #ffcc00;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.username-link:hover {
+    color: #8000ff;
+}

@@ -1,0 +1,121 @@
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Conteneur principal */
+.user-profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 24px;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  margin: 70px auto;
+  width: fit-content;
+  min-width: 340px;
+  max-width: 500px;
+}
+
+/* Titre */
+.user-profile-container h2 {
+  color: #ffcc00;
+  text-align: center;
+  text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff;
+  margin-bottom: 24px;
+}
+
+/* Formulaire */
+.user-profile-container form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.user-profile-container label {
+  color: #ffcc00;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.user-profile-container input[type="email"],
+.user-profile-container input[type="password"] {
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #8000ff;
+  background: #232323;
+  color: #ffcc00;
+  font-size: 1em;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
+
+.user-profile-container button[type="submit"] {
+  background-color: #ffcc00;
+  color: #121212;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  margin-top: 10px;
+}
+
+.user-profile-container button[type="submit"]:hover {
+  background-color: #8000ff;
+  color: #fff;
+}
+
+/* Section admin */
+.user-profile-container hr {
+  border: none;
+  border-top: 1px solid #444;
+  margin: 24px 0 18px 0;
+}
+
+.user-profile-container .admin-btn {
+  background-color: #8000ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 8px 0;
+  transition: background 0.3s, color 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+}
+
+.user-profile-container .admin-btn:hover {
+  background-color: #ffcc00;
+  color: #121212;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .user-profile-container {
+    min-width: 90vw;
+    max-width: 98vw;
+    padding: 10px;
+  }
+  .user-profile-container h2 {
+    font-size: 1.2em;
+  }
+  .user-profile-container button[type="submit"],
+  .user-profile-container .admin-btn {
+    font-size: 1em;
+    padding: 8px 12px;
+  }
+}

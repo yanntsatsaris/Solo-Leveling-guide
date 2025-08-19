@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mon compte - {{ user.username }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/user_profile.css') }}"
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='images/icon-onglet.png') }}"
+    />
+  </head>
+
+  <body>
+    {% include 'navbar.html' %}
+    <div class="user-profile-container">
+      <h2>Mon compte : {{ user.username }}</h2>
+      <form method="POST" onsubmit="return checkPasswordMatch();">
+        <label>Email :</label>
+        <input type="email" name="email" value="{{ user.email }}" required />
+        <label>Nouveau mot de passe :</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          placeholder="Laisser vide pour ne pas changer"
+        />
+        <label>Confirmer le mot de passe :</label>
+        <input
+          type="password"
+          name="password_confirm"
+          id="password_confirm"
+          placeholder="Répéter le mot de passe"
+        />
+        <button type="submit">Mettre à jour</button>
+      </form>
+
+      {% if is_admin %}
+      <hr />
+      <h3>Administration</h3>
+      <a href="/admin/effects" class="admin-btn">Gérer les effets de pannoplie</a>
+      <a href="/admin/cores" class="admin-btn">Gérer les noyaux et effets</a>
+      <!-- Ajoute d'autres liens d'administration ici -->
+      {% endif %}
+    </div>
+    <script>
+      function checkPasswordMatch() {
+        const pwd = document.getElementById('password').value;
+        const pwd2 = document.getElementById('password_confirm').value;
+        if (pwd !== pwd2) {
+          if (pwd || pwd2) {
+            alert("Les mots de passe ne correspondent pas.");
+            return false;
+          }
+        }
+        return true;
+      }
+    </script>
+  </body>
+</html>

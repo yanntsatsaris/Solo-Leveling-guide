@@ -1,11 +1,16 @@
-from flask import request, jsonify, session
+from flask import request, jsonify, session, render_template, redirect, url_for, abort
 from static.Controleurs.ControleurLdap import ControleurLdap
 from static.Controleurs.ControleurConf import ControleurConf
 from static.Controleurs.ControleurLog import write_log
 from passlib.hash import ldap_salted_sha1, ldap_sha1
 import re
 from static.Controleurs.ControleurUser import User
-from flask_login import login_user
+from flask_login import login_user, login_required
+
+# Import des entités ldap segmentées
+from static.Controleurs.ldap_entities.users_ldap import UsersLdap
+from static.Controleurs.ldap_entities.entries_ldap import EntriesLdap
+
 
 def is_hashed(password):
     # Vérifie si le mot de passe est déjà haché avec SHA, SSHA, MD5, CRYPT ou SMD5
@@ -18,9 +23,10 @@ def users(app):
     @app.route('/login', methods=['POST'])
     def login():
         ldap = ControleurLdap()
+        users_ldap = UsersLdap(ldap)
         username = request.form.get('username')
         password = request.form.get('password')
-        if ldap.authenticate_user(username, password):
+        if users_ldap.authenticate(username, password):
             # Vérification de l'attribut RightsAgreement
             user_info = ldap.get_user_info(username)
             rights = user_info.get('rightsAgreement', [])
@@ -43,6 +49,7 @@ def users(app):
     @app.route('/register', methods=['POST'])
     def register():
         ldap = ControleurLdap()
+        users_ldap = UsersLdap(ldap)
         username = request.form.get('new_username')
         email = request.form.get('new_email')
         password = request.form.get('new_password')
@@ -69,7 +76,7 @@ def users(app):
             ('userPassword', [hashed_password.encode('utf-8')]),
             ('rightsAgreement', [b'SoloLevelingGuide::New']),  # Accord de droits par défaut
         ]
-        if ldap.add_entry(dn, attrs):
+        if users_ldap.add_user(dn, attrs):
             write_log(f"Création de compte réussie ({username})", log_level="INFO", username=username)
             return jsonify({'success': True})
         write_log(f"Échec de création de compte ({username})", log_level="ERROR", username=username)
@@ -80,3 +87,40 @@ def users(app):
         username = session.pop('username', None)
         write_log("Déconnexion", log_level="INFO", username=username)
         return jsonify({'success': True})
+
+    @app.route('/<username>', methods=['GET', 'POST'])
+    @login_required
+    def user_profile(username):
+        # Vérifie que l'utilisateur connecté correspond à la page demandée ou qu'il est admin
+        if session.get('username') != username and not (
+            session.get('rights') and ('Admin' in session['rights'] or 'SuperAdmin' in session['rights'])
+        ):
+            abort(403)
+
+        ldap = ControleurLdap()
+        users_ldap = UsersLdap(ldap)
+        # Récupère les infos utilisateur depuis la BDD (à adapter selon ta structure)
+        user_info = users_ldap.get_user_info(username)
+
+        if request.method == 'POST':
+            # Récupère les champs à modifier
+            new_email = request.form.get('email')
+            new_password = request.form.get('password')
+            attributes = {}
+            if new_email:
+                attributes['mail'] = new_email
+            if new_password:
+                if not is_hashed(new_password):
+                    new_hashed_password = ldap_salted_sha1.hash(new_password)
+                else:
+                    new_hashed_password = new_password
+                attributes['userPassword'] = new_hashed_password
+            # Ajoute d'autres champs si besoin
+
+            if attributes:
+                users_ldap.update_user(username, attributes)
+                write_log(f"Modification du compte {username}", log_level="INFO", username=username)
+            return redirect(url_for('user_profile', username=username))
+
+        is_admin = session.get('rights') and ('Admin' in session['rights'] or 'SuperAdmin' in session['rights'])
+        return render_template('user_profile.html', user=user_info, is_admin=is_admin)
