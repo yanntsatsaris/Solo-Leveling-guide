@@ -1,0 +1,100 @@
+/* Fond et police */
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Conteneur principal */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 24px;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  margin: 70px auto;
+  width: fit-content;
+  min-width: 340px;
+  max-width: 700px;
+}
+
+/* Titre */
+h1 {
+  color: #ffcc00;
+  text-align: center;
+  text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff;
+  margin-bottom: 24px;
+}
+
+/* Tableau */
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  background: #232323;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+th {
+  background: #8000ff;
+  color: #fff;
+  font-size: 1.1em;
+}
+
+tr:nth-child(even) {
+  background: #181818;
+}
+
+tr:nth-child(odd) {
+  background: #232323;
+}
+
+/* Images */
+table img {
+  display: block;
+  margin: 10px auto;
+  width: 120px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transition: transform 0.3s;
+}
+
+table img:hover {
+  transform: scale(1.08);
+}
+
+/* Message d'absence d'image */
+.no-image {
+  color: #ff3333;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    min-width: 90vw;
+    max-width: 98vw;
+    padding: 10px;
+  }
+  table img {
+    width: 80px;
+  }
+  th, td {
+    padding: 8px 4px;
+    font-size: 0.95em;
+  }
+}

@@ -7,6 +7,7 @@ from routes.RouteCharacters import characters
 from routes.RouteGuides import guides
 from routes.RouteSJW import SJW
 from routes.RouteUsers import users
+from routes.RouteAdmin import admin_routes
 
 # Importer le contrôleur de configuration
 from static.Controleurs.ControleurConf import ControleurConf
@@ -39,6 +40,7 @@ characters(app)
 guides(app)
 SJW(app)
 users(app)
+admin_routes(app)
 
 
 if __name__ == '__main__':

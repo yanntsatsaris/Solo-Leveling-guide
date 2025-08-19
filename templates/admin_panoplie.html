@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des Panoplies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_panoplie.css') }}">
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <h1>Gestion des Panoplies</h1>
+        <table>
+            <tr>
+                <th>Image</th>
+                <th>Nom</th>
+                <th>Nom affiché</th>
+            </tr>
+            {% for panoplie in panoplies %}
+            <tr>
+                <td>
+                    {% if panoplie.image %}
+                        <img src="{{ panoplie.image }}" alt="{{ panoplie.display_name }}" width="120">
+                    {% else %}
+                        <span style="color:#ff3333;">Aucune image</span>
+                    {% endif %}
+                </td>
+                <td>{{ panoplie.name }}</td>
+                <td>{{ panoplie.display_name }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
