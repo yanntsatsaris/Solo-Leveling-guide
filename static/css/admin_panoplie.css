@@ -83,6 +83,23 @@ table img:hover {
   color: #ff3333;
   font-style: italic;
 }
+/* Boutons */
+.admin-btn {
+  background-color: #ffcc00;
+  color: #121212;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+
+.admin-btn:hover {
+  background-color: #8000ff;
+  color: #fff;
+}
 
 /* Responsive */
 @media (max-width: 600px) {
