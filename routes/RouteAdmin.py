@@ -148,7 +148,7 @@ def admin_routes(app):
         cores_with_img = []
         for core in cores:
             core_name = core['color']
-            img_path = f'/static/images/Noyeaux/{core_name}{core["number"]}.webp'
+            img_path = f'/static/images/Noyaux/{core_name}{core["number"]}.webp'
             cores_with_img.append({
                 'id': core['id'],
                 'color': core['color'],
