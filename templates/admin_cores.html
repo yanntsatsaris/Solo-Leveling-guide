@@ -93,6 +93,79 @@ document.addEventListener("DOMContentLoaded", function() {
       document.getElementById('edit-core-overlay').style.display = 'none';
     }
   });
+
+  // Création d'un nouveau core
+  document.getElementById('create-core-btn').onclick = async function() {
+    let color = prompt("Couleur du noyau ?");
+    if (!color) return;
+    let number = prompt("Numéro du noyau ? (ex: 01, 02, ...)");
+    if (!number || !/^\d{2}$/.test(number)) {
+      alert("Numéro invalide. Il doit être sur 2 chiffres (ex: 01, 02, ...)");
+      return;
+    }
+
+    // Vérifie si le core existe déjà
+    let exists = false;
+    {% for core in cores %}
+      if ("{{ core.color|e }}" === color && "{{ core.number|e }}" === number) exists = true;
+    {% endfor %}
+    if (exists) {
+      alert("Un noyau avec cette couleur et ce numéro existe déjà !");
+      return;
+    }
+
+    // Vérifie la présence de l'image
+    let imgPath = `/static/images/Noyaux/${color}${number}.webp`;
+    let imgExists = await fetch(imgPath, {method: "HEAD"}).then(r => r.ok).catch(() => false);
+    if (!imgExists) {
+      alert("Aucune image trouvée pour ce noyau !");
+      return;
+    }
+
+    // Prépare la modale vide pour FR et EN
+    document.getElementById('edit-core-form').setAttribute('data-mode', 'create');
+    const langDiv = document.getElementById('edit-core-languages');
+    langDiv.innerHTML = '';
+    ['FR-fr', 'EN-en'].forEach(function(lang) {
+      langDiv.innerHTML += `
+        <fieldset>
+          <legend>${lang}</legend>
+          <label>Nom :</label>
+          <input type="text" name="name_${lang}" value="" required>
+          <label>Effet :</label>
+          <textarea name="effect_${lang}" class="effect-input"></textarea>
+        </fieldset>
+      `;
+    });
+    document.getElementById('edit-core-overlay').style.display = 'flex';
+    document.getElementById('edit-core-form').action = `/admin/cores/${encodeURIComponent(color)}/${number}`;
+    autoResizeAllTextareas();
+  };
+
+  // Soumission du formulaire de création (PUT)
+  document.getElementById('edit-core-form').onsubmit = async function(e) {
+    const mode = this.getAttribute('data-mode');
+    if (mode === "edit") return; // édition classique (POST)
+    e.preventDefault();
+    const url = this.action;
+    const names = {};
+    const effects = {};
+    document.querySelectorAll('#edit-core-languages fieldset').forEach(fs => {
+      const lang = fs.querySelector('legend').textContent;
+      names[lang] = fs.querySelector(`input[name="name_${lang}"]`).value;
+      effects[lang] = fs.querySelector(`textarea[name="effect_${lang}"]`).value;
+    });
+    const resp = await fetch(url, {
+      method: "PUT",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({names, effects})
+    });
+    if (resp.ok) {
+      location.reload();
+    } else {
+      alert("Erreur lors de la création du noyau.");
+    }
+  };
 });
 function autoResizeAllTextareas() {
   document.querySelectorAll("textarea.effect-input").forEach(function(el) {

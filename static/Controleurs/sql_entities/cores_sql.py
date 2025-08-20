@@ -90,3 +90,20 @@ class CoresSql:
               AND ce.cores_effects_number = %s
               AND cet.core_effect_translations_language = %s
         """, (new_effect, color, number, language))
+
+    def core_exists(self, color, number):
+        self.cursor.execute("SELECT 1 FROM cores_effects WHERE cores_effects_color = %s AND cores_effects_number = %s", (color, number))
+        return self.cursor.fetchone() is not None
+
+    def create_core(self, color, number):
+        self.cursor.execute(
+            "INSERT INTO cores_effects (cores_effects_color, cores_effects_number) VALUES (%s, %s) RETURNING cores_effects_id",
+            (color, number)
+        )
+        return self.cursor.fetchone()[0]
+
+    def create_core_translation(self, core_id, lang, name, effect):
+        self.cursor.execute(
+            "INSERT INTO core_effect_translations (core_effect_translations_cores_effects_id, core_effect_translations_language, core_effect_translations_name, core_effect_translations_effect) VALUES (%s, %s, %s, %s)",
+            (core_id, lang, name, effect)
+        )

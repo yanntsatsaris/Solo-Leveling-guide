@@ -204,3 +204,31 @@ def admin_routes(app):
             username=session.get('username')
         )
         return redirect(url_for('admin_cores'))
+
+    @app.route('/admin/cores/<color>/<number>', methods=['PUT'])
+    @login_required
+    def admin_create_core(color, number):
+        if not is_admin():
+            abort(403)
+        sql_manager = ControleurSql()
+        cursor = sql_manager.cursor
+        cores_sql = CoresSql(cursor)
+
+        data = request.get_json()
+        names = data.get('names', {})
+        effects = data.get('effects', {})
+
+        # Vérifie si le core existe déjà
+        if cores_sql.core_exists(color, number):
+            sql_manager.close()
+            return {"error": "Core already exists"}, 400
+
+        # Création du core
+        core_id = cores_sql.create_core(color, number)
+        for lang in ['FR-fr', 'EN-en']:
+            cores_sql.create_core_translation(core_id, lang, names.get(lang, ""), effects.get(lang, ""))
+
+        sql_manager.conn.commit()
+        sql_manager.close()
+        write_log(f"Core '{color}{number}' créé avec succès.", log_level="INFO", username=session.get('username'))
+        return {"success": True}, 200
