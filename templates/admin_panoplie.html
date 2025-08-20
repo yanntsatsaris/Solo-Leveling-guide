@@ -72,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function() {
           }
           document.getElementById('edit-panoplie-overlay').style.display = 'flex';
           document.getElementById('edit-panoplie-form').action = `/admin/panoplie/${panoplieName}`;
+          document.getElementById('edit-panoplie-form').setAttribute('data-mode', 'edit');
           autoResizeAllTextareas();
         });
     });
@@ -134,6 +135,8 @@ document.addEventListener("DOMContentLoaded", function() {
       return;
     }
 
+    document.getElementById('edit-panoplie-form').setAttribute('data-mode', 'create');
+
     // Prépare le menu d'édition vide pour FR et EN
     const langDiv = document.getElementById('edit-panoplie-languages');
     langDiv.innerHTML = '';
@@ -176,7 +179,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 document.getElementById('edit-panoplie-form').onsubmit = async function(e) {
-  if (this.action.includes('/admin/panoplie/') && this.method === "post") return; // édition classique
+  const mode = this.getAttribute('data-mode');
+  if (mode === "edit") return; // édition classique (POST)
   e.preventDefault();
   const url = this.action;
   const display_names = {};
