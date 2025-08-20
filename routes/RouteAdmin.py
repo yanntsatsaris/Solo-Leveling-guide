@@ -2,6 +2,7 @@ from flask import request, render_template, session, redirect, url_for, abort, f
 from flask_login import login_required
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
+from static.Controleurs.sql_entities.cores_sql import CoresSql
 from static.Controleurs.ControleurSql import ControleurSql
 import glob
 import os
@@ -46,20 +47,6 @@ def admin_routes(app):
 
         sql_manager.close()
         return render_template('admin_panoplie.html', panoplies=panoplies_with_img)
-
-    @app.route('/admin/cores', methods=['GET', 'POST'])
-    @login_required
-    def admin_cores():
-        if not is_admin():
-            abort(403)
-        write_log("Accès à la gestion des noyaux", log_level="INFO", username=session.get('username'))
-        # Ajoute ici la logique pour gérer les noyaux et leurs effets
-        if request.method == 'POST':
-            # Traitement du formulaire d'ajout/modification de noyau
-            pass
-        # Récupération des noyaux existants pour affichage
-        cores = []  # À remplacer par la récupération réelle
-        return render_template('admin_cores.html', cores=cores)
 
     @app.route('/admin/panoplie/api/<panoplie_name>')
     @login_required
@@ -145,3 +132,31 @@ def admin_routes(app):
                 found = True
                 break
         return jsonify({"exists": found})
+
+    @app.route('/admin/core', methods=['GET'])
+    @login_required
+    def admin_core():
+        if not is_admin():
+            abort(403)
+        write_log("Accès à la gestion des cores", log_level="INFO", username=session.get('username'))
+        language = session.get('language', 'FR-fr')
+        sql_manager = ControleurSql()
+        cursor = sql_manager.cursor
+        cores_sql = CoresSql(cursor)
+        cores = cores_sql.get_all_cores(language=language)
+
+        cores_with_img = []
+        for core in cores:
+            core_name = core['color']
+            img_path = f'/static/images/Noyeaux/{core_name}{core["number"]}.webp'
+            cores_with_img.append({
+                'id': core['id'],
+                'color': core['color'],
+                'number': core['number'],
+                'effect_name': core['effect_name'],
+                'effect': core['effect'],
+                'image': img_path
+            })
+
+        sql_manager.close()
+        return render_template('admin_cores.html', cores=cores_with_img)

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion des Noyaux</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_cores.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/edit_cores_modal.css') }}">
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='images/icon-onglet.png') }}"
+    />
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <h1>Gestion des Noyaux</h1>
+        <div style="text-align:center; margin-bottom: 24px;">
+            <button id="create-core-btn" class="admin-btn">Créer un nouveau noyaux</button>
+        </div>
+        <table>
+            <tr>
+                <th>Image</th>
+                <th>Couleur</th>
+                <th>Numero</th>
+            </tr>
+            {% for core in cores %}
+            <tr>
+                <td>
+                    {% if core.image %}
+                        <a href="#" data-core-name="{{ core.color }}">
+                            <img src="{{ core.image }}" alt="{{ core.color }}">
+                        </a>
+                    {% else %}
+                        <span style="color:#ff3333;">Aucune image</span>
+                    {% endif %}
+                </td>
+                <td>{{ core.color }}</td>
+                <td>{{ core.number }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

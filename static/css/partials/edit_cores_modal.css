@@ -1,5 +1,5 @@
 /* Overlay de la modale */
-.edit-character-overlay {
+.edit-core-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(18, 18, 18, 0.85);
@@ -10,7 +10,7 @@
 }
 
 /* Popup centrale */
-.edit-character-popup {
+.edit-core-popup {
   background: #1e1e1e;
   border-radius: 12px;
   box-shadow: 0 8px 32px rgba(128,0,255,0.25);
@@ -22,21 +22,21 @@
   position: relative;
 }
 
-.edit-character-popup h2 {
+.edit-core-popup h2 {
   color: #ffcc00;
   text-align: center;
   margin-bottom: 18px;
   text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff;
 }
 
-.edit-character-popup label {
+.edit-core-popup label {
   font-weight: bold;
   color: #ffcc00;
   margin-top: 10px;
   display: block;
 }
 
-.edit-character-popup input[type="text"] {
+.edit-core-popup input[type="text"] {
   width: 100%;
   padding: 8px 14px;
   border-radius: 8px;
@@ -48,7 +48,7 @@
   box-sizing: border-box;
 }
 
-.edit-character-popup fieldset {
+.edit-core-popup fieldset {
   border: 1.5px solid #8000ff;
   border-radius: 8px;
   margin-bottom: 18px;
@@ -56,7 +56,7 @@
   background: #232323;
 }
 
-.edit-character-popup legend {
+.edit-core-popup legend {
   color: #ffcc00;
   font-weight: bold;
   padding: 0 10px;
@@ -65,13 +65,13 @@
   text-shadow: 0 0 8px #8000ff;
 }
 
-.edit-character-popup h4 {
+.edit-core-popup h4 {
   color: #ffcc00;
   margin: 14px 0 8px 0;
   font-size: 1em;
 }
 
-.edit-character-popup .effect-input {
+.edit-core-popup .effect-input {
   width: 70%;
   margin-left: 8px;
   background: #181818;
@@ -82,13 +82,13 @@
   font-size: 1em;
 }
 
-.edit-character-popup .effect-input:focus {
+.edit-core-popup .effect-input:focus {
   outline: none;
   border-color: #ffcc00;
   background: #232323;
 }
 
-.edit-character-popup textarea.effect-input {
+.edit-core-popup textarea.effect-input {
   width: 70%;
   min-height: 38px;
   max-height: 120px;
@@ -103,13 +103,13 @@
   box-sizing: border-box;
 }
 
-.edit-character-popup textarea.effect-input:focus {
+.edit-core-popup textarea.effect-input:focus {
   outline: none;
   border-color: #ffcc00;
   background: #232323;
 }
 
-.edit-character-popup .admin-btn {
+.edit-core-popup .admin-btn {
   background-color: #ffcc00;
   color: #121212;
   border: none;
@@ -121,12 +121,12 @@
   transition: background 0.3s, color 0.3s;
 }
 
-.edit-character-popup .admin-btn:hover {
+.edit-core-popup .admin-btn:hover {
   background-color: #8000ff;
   color: #fff;
 }
 
-.edit-character-popup .close-btn {
+.edit-core-popup .close-btn {
   background: none;
   border: none;
   color: #ff3333;
@@ -136,11 +136,11 @@
   transition: color 0.2s;
 }
 
-.edit-character-popup .close-btn:hover {
+.edit-core-popup .close-btn:hover {
   color: #8000ff;
 }
 
-.edit-panoplie-actions {
+.edit-core-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -160,7 +160,7 @@
 }
 
 @media (max-width: 600px) {
-  .edit-character-popup {
+  .edit-core-popup {
     min-width: 90vw;
     max-width: 98vw;
     padding: 12px 4vw 12px 4vw;
