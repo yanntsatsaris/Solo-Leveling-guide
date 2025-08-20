@@ -15,6 +15,9 @@
     {% include 'navbar.html' %}
     <div class="container">
         <h1>Gestion des Panoplies</h1>
+        <div style="text-align:center; margin-bottom: 24px;">
+            <button id="create-panoplie-btn" class="admin-btn">Créer une nouvelle panoplie</button>
+        </div>
         <table>
             <tr>
                 <th>Image</th>
@@ -92,6 +95,62 @@ document.addEventListener("DOMContentLoaded", function() {
       document.getElementById('edit-panoplie-overlay').style.display = 'none';
     }
   });
+
+  // Création d'une nouvelle panoplie
+  document.getElementById('create-panoplie-btn').onclick = async function() {
+    let name = prompt("Nom interne de la nouvelle panoplie ?");
+    if (!name) return;
+
+    // Vérifie si la panoplie existe déjà
+    let exists = false;
+    {% for panoplie in panoplies %}
+      if ("{{ panoplie.name|e }}" === name) exists = true;
+    {% endfor %}
+    if (exists) {
+      alert("Une panoplie avec ce nom existe déjà !");
+      return;
+    }
+
+    // Vérifie la présence d'au moins une image Artefact02 ou Artefact05
+    let name_folder = name.replace(/ /g, "_");
+    let img02 = `/static/images/Artefacts/${name_folder}/Artefact02_${name_folder}.webp`;
+    let img05 = `/static/images/Artefacts/${name_folder}/Artefact05_${name_folder}.webp`;
+
+    // Teste la présence d'au moins une image
+    let imgExists = await fetch(img02, {method: "HEAD"}).then(r => r.ok).catch(() => false);
+    if (!imgExists) {
+      imgExists = await fetch(img05, {method: "HEAD"}).then(r => r.ok).catch(() => false);
+    }
+    if (!imgExists) {
+      alert("Aucune image Artefact02 ou Artefact05 trouvée pour cette panoplie !");
+      return;
+    }
+
+    // Prépare le menu d'édition vide pour FR et EN
+    const langDiv = document.getElementById('edit-panoplie-languages');
+    langDiv.innerHTML = '';
+    ['FR-fr', 'EN-en'].forEach(function(lang) {
+      langDiv.innerHTML += `
+        <fieldset>
+          <legend>${lang}</legend>
+          <label>Nom affiché :</label>
+          <input type="text" name="display_name_${lang}" value="" required>
+          <h4>Effets</h4>
+          <div>
+            <div class="effect-row"><b>2 pièces :</b>
+              <textarea name="effect_${lang}_2" class="effect-input"></textarea>
+            </div>
+            <div class="effect-row"><b>4 pièces :</b>
+              <textarea name="effect_${lang}_4" class="effect-input"></textarea>
+            </div>
+          </div>
+        </fieldset>
+      `;
+    });
+    document.getElementById('edit-panoplie-overlay').style.display = 'flex';
+    document.getElementById('edit-panoplie-form').action = `/admin/panoplie/${encodeURIComponent(name)}`;
+    autoResizeAllTextareas();
+  };
 });
 function autoResizeAllTextareas() {
   document.querySelectorAll("textarea.effect-input").forEach(function(el) {
