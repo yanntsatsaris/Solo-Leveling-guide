@@ -98,3 +98,36 @@ def admin_routes(app):
         sql_manager.close()
         write_log(f"Panoplie '{panoplie_name}' mise à jour avec succès.", log_level="INFO", username=session.get('username'))
         return redirect(url_for('admin_panoplie'))
+
+    @app.route('/admin/panoplie/<panoplie_name>', methods=['PUT'])
+    @login_required
+    def admin_create_panoplie(panoplie_name):
+        if not is_admin():
+            abort(403)
+        sql_manager = ControleurSql()
+        cursor = sql_manager.cursor
+        panoplies_sql = PanopliesSql(cursor)
+
+        # Récupère les données du formulaire (PUT => JSON)
+        data = request.get_json()
+        display_names = data.get('display_names', {})
+        effects = data.get('effects', {})
+
+        # Vérifie si la panoplie existe déjà
+        if panoplies_sql.panoplie_exists(panoplie_name):
+            sql_manager.close()
+            return {"error": "Panoplie already exists"}, 400
+
+        # Création de la panoplie
+        panoplie_id = panoplies_sql.create_panoplie(panoplie_name)
+        for lang, display_name in display_names.items():
+            panoplies_sql.create_panoplie_translation(panoplie_id, lang, panoplie_name, display_name)
+        for lang, lang_effects in effects.items():
+            for pieces, effect in lang_effects.items():
+                set_bonus_id = panoplies_sql.create_panoplie_set_bonus(panoplie_id, int(pieces))
+                panoplies_sql.create_panoplie_set_bonus_translation(set_bonus_id, lang, effect)
+
+        sql_manager.conn.commit()
+        sql_manager.close()
+        write_log(f"Panoplie '{panoplie_name}' créée avec succès.", log_level="INFO", username=session.get('username'))
+        return redirect(url_for('admin_panoplie'))

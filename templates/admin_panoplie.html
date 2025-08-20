@@ -174,6 +174,36 @@ document.addEventListener("DOMContentLoaded", function() {
     autoResizeAllTextareas();
   };
 });
+
+document.getElementById('edit-panoplie-form').onsubmit = async function(e) {
+  if (this.action.includes('/admin/panoplie/') && this.method === "post") return; // édition classique
+  e.preventDefault();
+  const url = this.action;
+  const display_names = {};
+  const effects = {};
+  document.querySelectorAll('#edit-panoplie-languages fieldset').forEach(fs => {
+    const lang = fs.querySelector('legend').textContent;
+    display_names[lang] = fs.querySelector(`input[name="display_name_${lang}"]`).value;
+    effects[lang] = {};
+    fs.querySelectorAll('textarea.effect-input').forEach(area => {
+      const match = area.name.match(/^effect_([A-Za-z\-]+)_(\d+)$/);
+      if (match) {
+        effects[lang][match[2]] = area.value;
+      }
+    });
+  });
+  const resp = await fetch(url, {
+    method: "PUT",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({display_names, effects})
+  });
+  if (resp.ok) {
+    location.reload();
+  } else {
+    alert("Erreur lors de la création de la panoplie.");
+  }
+};
+
 function autoResizeAllTextareas() {
   document.querySelectorAll("textarea.effect-input").forEach(function(el) {
     el.style.height = "auto";
@@ -181,7 +211,6 @@ function autoResizeAllTextareas() {
   });
 }
 document.addEventListener("DOMContentLoaded", autoResizeAllTextareas);
-// Si tu ajoutes dynamiquement des textarea, appelle autoResizeAllTextareas() après l'injection.
 </script>
 </body>
 </html>

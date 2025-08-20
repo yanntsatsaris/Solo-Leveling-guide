@@ -104,3 +104,33 @@ class PanopliesSql:
             effects.setdefault(lang, []).append({'pieces': pieces, 'effect': effect})
 
         return {'translations': translations, 'effects': effects}
+
+    def panoplie_exists(self, panoplie_name):
+        self.cursor.execute("SELECT 1 FROM panoplies WHERE panoplies_name = %s", (panoplie_name,))
+        return self.cursor.fetchone() is not None
+
+    def create_panoplie(self, panoplie_name):
+        self.cursor.execute(
+            "INSERT INTO panoplies (panoplies_name) VALUES (%s) RETURNING panoplies_id",
+            (panoplie_name,)
+        )
+        return self.cursor.fetchone()[0]
+
+    def create_panoplie_translation(self, panoplie_id, lang, name, display_name):
+        self.cursor.execute(
+            "INSERT INTO panoplie_translations (panoplie_translations_panoplies_id, panoplie_translations_language, panoplie_translations_name, panoplie_translations_display_name) VALUES (%s, %s, %s, %s)",
+            (panoplie_id, lang, name, display_name)
+        )
+
+    def create_panoplie_set_bonus(self, panoplie_id, pieces_required):
+        self.cursor.execute(
+            "INSERT INTO panoplie_set_bonus (panoplie_set_bonus_panoplies_id, panoplie_set_bonus_pieces_required) VALUES (%s, %s) RETURNING panoplie_set_bonus_id",
+            (panoplie_id, pieces_required)
+        )
+        return self.cursor.fetchone()[0]
+
+    def create_panoplie_set_bonus_translation(self, set_bonus_id, lang, effect):
+        self.cursor.execute(
+            "INSERT INTO panoplie_set_bonus_translations (panoplie_set_bonus_translations_panoplie_set_bonus_id, panoplie_set_bonus_translations_language, panoplie_set_bonus_translations_effect) VALUES (%s, %s, %s)",
+            (set_bonus_id, lang, effect)
+        )
