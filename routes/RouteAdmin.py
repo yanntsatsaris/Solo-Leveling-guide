@@ -130,4 +130,4 @@ def admin_routes(app):
         sql_manager.conn.commit()
         sql_manager.close()
         write_log(f"Panoplie '{panoplie_name}' créée avec succès.", log_level="INFO", username=session.get('username'))
-        return redirect(url_for('admin_panoplie'))
+        return {"success": True}
