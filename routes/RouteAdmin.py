@@ -161,7 +161,7 @@ def admin_routes(app):
         sql_manager.close()
         return render_template('admin_cores.html', cores=cores_with_img)
 
-    @app.route('/admin/cores/api/<color>/<int:number>')
+    @app.route('/admin/cores/api/<color>/<number>')
     @login_required
     def api_get_core(color, number):
         if not is_admin():
@@ -169,10 +169,9 @@ def admin_routes(app):
         sql_manager = ControleurSql()
         cursor = sql_manager.cursor
         cores_sql = CoresSql(cursor)
-        # On récupère les effets pour FR-fr et EN-en
         data = {}
         for lang in ['FR-fr', 'EN-en']:
-            effect = cores_sql.get_core_effect(color, number, lang)
+            effect = cores_sql.get_core_effect(color, str(number).zfill(2), lang)
             data[lang] = effect
         sql_manager.close()
         return jsonify(data)
