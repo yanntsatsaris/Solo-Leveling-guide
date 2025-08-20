@@ -133,7 +133,7 @@ def admin_routes(app):
                 break
         return jsonify({"exists": found})
 
-    @app.route('/admin/core', methods=['GET'])
+    @app.route('/admin/cores', methods=['GET'])
     @login_required
     def admin_core():
         if not is_admin():
