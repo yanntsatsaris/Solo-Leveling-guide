@@ -45,3 +45,18 @@ class CoresSql:
             }
             for row in self.cursor.fetchall()
         ]
+
+    def get_core_effect(self, color, number, language):
+        self.cursor.execute("""
+            SELECT cet.core_effect_translations_name, cet.core_effect_translations_effect
+            FROM cores_effects ce
+            LEFT JOIN core_effect_translations cet
+                ON cet.core_effect_translations_cores_effects_id = ce.cores_effects_id
+                AND cet.core_effect_translations_language = %s
+            WHERE ce.cores_effects_color = %s AND ce.cores_effects_number = %s
+        """, (language, color, number))
+        row = self.cursor.fetchone()
+        return {
+            "name": row[0] if row else "",
+            "effect": row[1] if row else ""
+        }

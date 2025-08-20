@@ -41,5 +41,65 @@
             {% endfor %}
         </table>
     </div>
+    {% include 'partials/edit_cores_modal.html' %}
+    <script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Ouvre la modale d'édition d'un core
+  document.querySelectorAll('a[data-core-name]').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const color = this.getAttribute('data-core-name');
+      // On récupère le numéro dans la même ligne du tableau
+      const number = this.closest('tr').querySelector('td:nth-child(3)').textContent.trim();
+      fetch(`/admin/cores/api/${encodeURIComponent(color)}/${number}`)
+        .then(resp => resp.json())
+        .then(data => {
+          const langDiv = document.getElementById('edit-core-languages');
+          langDiv.innerHTML = '';
+          ['FR-fr', 'EN-en'].forEach(function(lang) {
+            const effect = data[lang] || {};
+            langDiv.innerHTML += `
+              <fieldset>
+                <legend>${lang}</legend>
+                <label>Nom :</label>
+                <input type="text" name="name_${lang}" value="${effect.name || ''}" required>
+                <label>Effet :</label>
+                <textarea name="effect_${lang}" class="effect-input">${effect.effect || ''}</textarea>
+              </fieldset>
+            `;
+          });
+          document.getElementById('edit-core-overlay').style.display = 'flex';
+          document.getElementById('edit-core-form').action = `/admin/cores/${encodeURIComponent(color)}/${number}`;
+          autoResizeAllTextareas();
+        });
+    });
+  });
+
+  // Fermer la modale en cliquant sur la croix
+  document.getElementById('close-edit-core').onclick = function() {
+    document.getElementById('edit-core-overlay').style.display = 'none';
+  };
+
+  // Fermer la modale en cliquant en dehors du menu
+  document.getElementById('edit-core-overlay').addEventListener('mousedown', function(e) {
+    if (e.target === this) {
+      this.style.display = 'none';
+    }
+  });
+
+  // Fermer la modale avec la touche Échap
+  document.addEventListener('keydown', function(e) {
+    if (e.key === "Escape") {
+      document.getElementById('edit-core-overlay').style.display = 'none';
+    }
+  });
+});
+function autoResizeAllTextareas() {
+  document.querySelectorAll("textarea.effect-input").forEach(function(el) {
+    el.style.height = "auto";
+    el.style.height = (el.scrollHeight) + "px";
+  });
+}
+</script>
 </body>
 </html>
