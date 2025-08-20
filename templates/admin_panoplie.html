@@ -122,16 +122,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Vérifie la présence d'au moins une image Artefact02 ou Artefact05
     let name_folder = name.replace(/ /g, "_");
-    let img02 = `/static/images/Artefacts/${name_folder}/Artefact02_${name_folder}.webp`;
-    let img05 = `/static/images/Artefacts/${name_folder}/Artefact05_${name_folder}.webp`;
-    console.log(img02, img05);
-
-    // Teste la présence d'au moins une image
-    let imgExists = await fetch(img02, {method: "HEAD"}).then(r => r.ok).catch(() => false);
-    if (!imgExists) {
-      imgExists = await fetch(img05, {method: "HEAD"}).then(r => r.ok).catch(() => false);
-    }
-    if (!imgExists) {
+    let imgCheck = await fetch(`/admin/panoplie/check_image/${encodeURIComponent(name)}`).then(r => r.json());
+    if (!imgCheck.exists) {
       alert("Aucune image Artefact02 ou Artefact05 trouvée pour cette panoplie !");
       return;
     }

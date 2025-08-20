@@ -1,4 +1,4 @@
-from flask import request, render_template, session, redirect, url_for, abort, flash
+from flask import request, render_template, session, redirect, url_for, abort, flash, jsonify
 from flask_login import login_required
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
@@ -131,3 +131,17 @@ def admin_routes(app):
         sql_manager.close()
         write_log(f"Panoplie '{panoplie_name}' créée avec succès.", log_level="INFO", username=session.get('username'))
         return {"success": True}, 200
+
+    @app.route('/admin/panoplie/check_image/<panoplie_name>')
+    @login_required
+    def check_panoplie_image(panoplie_name):
+        if not is_admin():
+            abort(403)
+        folder = os.path.join('static', 'images', 'Artefacts', panoplie_name.replace(' ', '_'))
+        found = False
+        for prefix in ['Artefact02_', 'Artefact05_']:
+            pattern = os.path.join(folder, f"{prefix}*.webp")
+            if glob.glob(pattern):
+                found = True
+                break
+        return jsonify({"exists": found})
