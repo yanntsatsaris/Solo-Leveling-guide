@@ -135,7 +135,7 @@ def admin_routes(app):
 
     @app.route('/admin/cores', methods=['GET'])
     @login_required
-    def admin_core():
+    def admin_cores():
         if not is_admin():
             abort(403)
         write_log("Accès à la gestion des cores", log_level="INFO", username=session.get('username'))
