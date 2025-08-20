@@ -124,6 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let name_folder = name.replace(/ /g, "_");
     let img02 = `/static/images/Artefacts/${name_folder}/Artefact02_${name_folder}.webp`;
     let img05 = `/static/images/Artefacts/${name_folder}/Artefact05_${name_folder}.webp`;
+    console.log(img02, img05);
 
     // Teste la présence d'au moins une image
     let imgExists = await fetch(img02, {method: "HEAD"}).then(r => r.ok).catch(() => false);
