@@ -60,3 +60,33 @@ class CoresSql:
             "name": row[0] if row else "",
             "effect": row[1] if row else ""
         }
+
+    def update_core_effect_name(self, color, number, language, new_name):
+        write_log(
+            f"Modification du nom du core '{color}{number}' pour la langue '{language}' : '{new_name}'",
+            log_level="INFO"
+        )
+        self.cursor.execute("""
+            UPDATE core_effect_translations cet
+            SET core_effect_translations_name = %s
+            FROM cores_effects ce
+            WHERE cet.core_effect_translations_cores_effects_id = ce.cores_effects_id
+              AND ce.cores_effects_color = %s
+              AND ce.cores_effects_number = %s
+              AND cet.core_effect_translations_language = %s
+        """, (new_name, color, number, language))
+
+    def update_core_effect(self, color, number, language, new_effect):
+        write_log(
+            f"Modification de l'effet du core '{color}{number}' pour la langue '{language}' : '{new_effect}'",
+            log_level="INFO"
+        )
+        self.cursor.execute("""
+            UPDATE core_effect_translations cet
+            SET core_effect_translations_effect = %s
+            FROM cores_effects ce
+            WHERE cet.core_effect_translations_cores_effects_id = ce.cores_effects_id
+              AND ce.cores_effects_color = %s
+              AND ce.cores_effects_number = %s
+              AND cet.core_effect_translations_language = %s
+        """, (new_effect, color, number, language))

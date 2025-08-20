@@ -175,3 +175,32 @@ def admin_routes(app):
             data[lang] = effect
         sql_manager.close()
         return jsonify(data)
+
+    @app.route('/admin/cores/<color>/<number>', methods=['POST'])
+    @login_required
+    def admin_edit_core(color, number):
+        if not is_admin():
+            abort(403)
+        sql_manager = ControleurSql()
+        cursor = sql_manager.cursor
+        cores_sql = CoresSql(cursor)
+
+        # Parcours tous les champs du formulaire
+        for key, value in request.form.items():
+            if key.startswith('name_'):
+                lang = key.split('_', 1)[1]
+                cores_sql.update_core_effect_name(color, str(number).zfill(2), lang, value)
+            elif key.startswith('effect_'):
+                lang = key.split('_', 1)[1]
+                # Normalise les retours à la ligne
+                value = value.replace('\r\n', '\n').replace('\r', '\n')
+                cores_sql.update_core_effect(color, str(number).zfill(2), lang, value)
+
+        sql_manager.conn.commit()
+        sql_manager.close()
+        write_log(
+            f"Core '{color}{str(number).zfill(2)}' modifié avec succès.",
+            log_level="INFO",
+            username=session.get('username')
+        )
+        return redirect(url_for('admin_cores'))
