@@ -11,6 +11,7 @@ class PanopliesSql:
             FROM panoplies p
             JOIN panoplie_translations pt ON pt.panoplie_translations_panoplies_id = p.panoplies_id
             WHERE pt.panoplie_translations_language = %s
+            ORDER BY p.panoplies_name
         """, (language,))
         return self.cursor.fetchall()
 
