@@ -120,12 +120,50 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     pieces = parseInt(pieces.trim(), 10);
 
+    // Si 2 ou 4 pièces, demander le type
+    let type = "";
+    if (pieces === 2 || pieces === 4) {
+      type = prompt("La panoplie est composée de pièces d'armure ou d'accessoire ? (armure/accessoire)");
+      if (!["armure", "accessoire"].includes(type.trim().toLowerCase())) {
+        alert("Réponse invalide. Il faut répondre 'armure' ou 'accessoire'.");
+        return;
+      }
+      type = type.trim().toLowerCase();
+    }
+
     // Vérifie la présence d'au moins une image Artefact02 ou Artefact05
     let name_folder = name.replace(/ /g, "_");
     let imgCheck = await fetch(`/admin/panoplie/check_image/${encodeURIComponent(name)}`).then(r => r.json());
     if (!imgCheck.exists) {
-      alert("Aucune image Artefact02 ou Artefact05 trouvée pour cette panoplie !");
-      return;
+      if (confirm("Aucune image trouvée pour cette panoplie. Voulez-vous uploader des images maintenant ?")) {
+        // Affiche un formulaire d'upload (simple exemple, à améliorer)
+        let uploadDiv = document.createElement('div');
+        uploadDiv.innerHTML = `
+          <form id="upload-panoplie-img-form" enctype="multipart/form-data" style="margin:20px 0;">
+            <label>Uploader une ou plusieurs images (webp, png, jpg) :</label>
+            <input type="file" name="files" multiple required accept=".webp,.png,.jpg,.jpeg">
+            <input type="hidden" name="panoplie_name" value="${name}">
+            <button type="submit">Envoyer</button>
+            <button type="button" onclick="this.parentElement.parentElement.remove()">Annuler</button>
+          </form>
+        `;
+        document.body.appendChild(uploadDiv);
+
+        document.getElementById('upload-panoplie-img-form').onsubmit = async function(e) {
+          e.preventDefault();
+          let formData = new FormData(this);
+          let resp = await fetch('/admin/upload_panoplie_images', {
+            method: 'POST',
+            body: formData
+          });
+          let txt = await resp.text();
+          alert(txt);
+          uploadDiv.remove();
+        };
+        return;
+      } else {
+        return;
+      }
     }
 
     document.getElementById('edit-panoplie-form').setAttribute('data-mode', 'create');

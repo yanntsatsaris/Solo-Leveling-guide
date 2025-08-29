@@ -4,6 +4,9 @@ from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
 from static.Controleurs.sql_entities.cores_sql import CoresSql
 from static.Controleurs.ControleurSql import ControleurSql
+from static.Controleurs.ControleurImages import (
+    allowed_file, is_image_size_allowed, verify_image, save_image, rename_image, get_image_format
+)
 import glob
 import os
 
@@ -232,3 +235,33 @@ def admin_routes(app):
         sql_manager.close()
         write_log(f"Core '{color}{number}' créé avec succès.", log_level="INFO", username=session.get('username'))
         return {"success": True}, 200
+
+    @app.route('/admin/upload_panoplie_images', methods=['POST'])
+    @login_required
+    def upload_panoplie_images():
+        if not is_admin():
+            abort(403)
+        panoplie_name = request.form.get('panoplie_name')
+        if not panoplie_name:
+            return "Nom de panoplie manquant", 400
+        files = request.files.getlist('files')
+        if not files:
+            return "Aucun fichier reçu", 400
+
+        folder = os.path.join('static', 'images', 'Artefacts', panoplie_name.replace(' ', '_'))
+        errors = []
+        for file in files:
+            if not allowed_file(file.filename):
+                errors.append(f"{file.filename}: extension non autorisée")
+                continue
+            if not is_image_size_allowed(file.stream):
+                errors.append(f"{file.filename}: fichier trop volumineux")
+                continue
+            try:
+                verify_image(file.stream)
+                save_image(file.stream, folder, file.filename)
+            except Exception as e:
+                errors.append(f"{file.filename}: {e}")
+        if errors:
+            return "Erreurs lors de l'upload :\n" + "\n".join(errors), 400
+        return "Images uploadées et vérifiées", 200
