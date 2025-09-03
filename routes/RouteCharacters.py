@@ -421,8 +421,8 @@ def characters(app: Flask):
                     normalize_text(db_skill['description']) != normalize_text(sdesc) or
                     (db_skill['tag'] or '') != (stag or '') or
                     (db_skill['image_name'] or '') != (simg or '') or
-                    db_skill['principal'] != sprincipal
-                    db_passive['order'] != int(sorder)
+                    db_skill['principal'] != sprincipal or
+                    db_skill['order'] != int(sorder)
                 ):
                     skills_sql.update_skill(sid, sname, sdesc, stag, simg, sprincipal, language, int(sorder))
                     skill_modif = True
