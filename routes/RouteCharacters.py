@@ -875,7 +875,7 @@ def characters(app: Flask):
         if not os.path.isdir(img_dir):
             write_log(f"Le dossier d'images n'existe pas : {img_dir}", log_level="WARNING")
             return jsonify([])
-        images = [f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))]
+        images = sorted([f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))])
         return jsonify(images)
 
 def focus_stats_equal(a, b):
