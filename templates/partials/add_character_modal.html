@@ -170,7 +170,7 @@
         images = await fetch(`/characters/images_for/${encodeURIComponent(typeFolder)}/${encodeURIComponent(folderName)}`).then(r => r.json());
       } catch (e) { images = []; }
     }
-    const selectOptions = ['<option value="">(vide)</option>']
+    const selectOptions = ['<option value=""></option>']
       .concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
     const row = document.createElement('div');
     row.className = 'passives-row';
@@ -215,7 +215,7 @@
         images = await fetch(`/characters/images_for/${encodeURIComponent(typeFolder)}/${encodeURIComponent(folderName)}`).then(r => r.json());
       } catch (e) { images = []; }
     }
-    const selectOptions = ['<option value="">(vide)</option>']
+    const selectOptions = ['<option value=""></option>']
       .concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
     const row = document.createElement('div');
     row.className = 'skills-row';
