@@ -117,68 +117,6 @@
           </select>
         </div>
         <div id="add-artefacts-fields">
-          {% set set_idx = 0 %}
-          <div class="edit-eqset-block" id="eqset-block-0" data-original-index="0" style="display: block;">
-            <h4>Set : Set 1</h4>
-            <input type="hidden" name="eqset_name_0" value="Set 1">
-            <label>Description :</label>
-            <textarea name="eqset_description_0"></textarea>
-            <label>Stats à focus :</label>
-            <input type="text" name="eqset_focus_stats_0" value="">
-            <input type="hidden" name="eqset_id_0" value="">
-            <input type="hidden" name="eqset_order_0" value="0">
-            <h4>Artefacts du set</h4>
-            <div class="artefacts-row" style="display: flex;">
-                    {% set artefact_types = {
-                      'FR-fr': ['Casque', 'Plastron', 'Gants', 'Bottes', 'Collier', 'Bracelet', 'Bague', "Boucle d'oreille"],
-                      'EN-en': ['Helmet', 'Chestplate', 'Gloves', 'Boots', 'Necklace', 'Bracelet', 'Ring', 'Earring']
-                    } %}
-              <div class="artefacts-col" style="flex: 1;">
-                {% for a_idx in range(4) %}
-                  <div class="edit-artefact-block">
-                    <label>{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}</label>
-                    <input type="hidden" name="artefact_name_0_{{ a_idx }}" value="{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}">
-                    <label>Pannoplie :</label>
-                    <input type="text" name="artefact_set_0_{{ a_idx }}" value="">
-                    <label>Stat principale :</label>
-                    <input type="text" name="artefact_main_stat_0_{{ a_idx }}" value="">
-                    <label>Stats secondaires :</label>
-                    <input type="text" name="artefact_secondary_stats_0_{{ a_idx }}" value="">
-                    <input type="hidden" name="artefact_id_0_{{ a_idx }}" value="">
-                  </div>
-                {% endfor %}
-              </div>
-              <div class="artefacts-col" style="flex: 1;">
-                {% for a_idx in range(4, 8) %}
-                  <div class="edit-artefact-block">
-                    <label>{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}</label>
-                    <input type="hidden" name="artefact_name_0_{{ a_idx }}" value="{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}">
-                    <label>Pannoplie :</label>
-                    <input type="text" name="artefact_set_0_{{ a_idx }}" value="">
-                    <label>Stat principale :</label>
-                    <input type="text" name="artefact_main_stat_0_{{ a_idx }}" value="">
-                    <label>Stats secondaires :</label>
-                    <input type="text" name="artefact_secondary_stats_0_{{ a_idx }}" value="">
-                    <input type="hidden" name="artefact_id_0_{{ a_idx }}" value="">
-                  </div>
-                {% endfor %}
-              </div>
-            </div>
-            <hr>
-            <h4>Noyaux du set</h4>
-            {% for c_idx in range(3) %}
-              <div class="edit-core-block">
-                <label>Nom du noyau :</label>
-                <input type="text" name="core_name_0_{{ c_idx }}" value="">
-                <label>Stat principale :</label>
-                <input type="text" name="core_main_stat_0_{{ c_idx }}" value="">
-                <label>Stat secondaire :</label>
-                <input type="text" name="core_secondary_stat_0_{{ c_idx }}" value="">
-                <input type="hidden" name="core_id_0_{{ c_idx }}" value="">
-              </div>
-              <hr>
-            {% endfor %}
-          </div>
         </div>
       </div>
       <div style="display: flex; justify-content: space-between; margin-top: 18px">
