@@ -569,7 +569,7 @@ def characters(app: Flask):
                 if db_set and (
                     (db_set['name'] or '') != (set_name or '') or
                     (db_set['description'] or '') != (set_desc or '') or
-                    tuple(normalize_focus_stats(db_set['focus_stats'])) != tuple(normalize_focus_stats(set_focus)) or
+                    not focus_stats_equal(db_set['focus_stats'], set_focus) or
                     (db_set['order'] or '') != (set_order or '')
                 ):
                     write_log(f"DEBUG: db_set['focus_stats']={db_set['focus_stats']} | set_focus={set_focus}", log_level="INFO")
@@ -863,3 +863,6 @@ def characters(app: Flask):
             return jsonify([])
         images = [f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))]
         return jsonify(images)
+
+def focus_stats_equal(a, b):
+    return set(normalize_focus_stats(a)) == set(normalize_focus_stats(b))
