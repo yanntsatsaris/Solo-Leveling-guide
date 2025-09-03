@@ -32,6 +32,7 @@ class WeaponsSql:
                 FROM weapon_evolutions we
                 LEFT JOIN weapon_evolution_translations wet ON wet.weapon_evolution_translations_weapon_evolutions_id = we.weapon_evolutions_id
                 WHERE we.weapon_evolutions_weapons_id = %s AND (wet.weapon_evolution_translations_language = %s OR wet.weapon_evolution_translations_language IS NULL)
+                ORDER by we.weapon_evolutions_number
             """, (weapon_id, language))
             evolutions = [
                 {
