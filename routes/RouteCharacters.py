@@ -21,6 +21,9 @@ from static.Controleurs.sql_entities.cores_sql import CoresSql
 
 def normalize_focus_stats(val):
     if isinstance(val, list):
+        # Si la liste contient une seule chaîne avec des virgules, découpe-la
+        if len(val) == 1 and isinstance(val[0], str) and ',' in val[0]:
+            return sorted([v.strip() for v in val[0].split(',') if v.strip()])
         return sorted([v.strip() for v in val if v])
     if isinstance(val, str):
         return sorted([v.strip() for v in val.split(',') if v.strip()])
