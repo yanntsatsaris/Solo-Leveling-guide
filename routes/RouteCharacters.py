@@ -376,7 +376,8 @@ def characters(app: Flask):
                     (db_passive['tag'] or '') != (ptag or '') or
                     (db_passive['image_name'] or '') != (pimg or '') or
                     db_passive['principal'] != pprincipal or
-                    db_passive['hidden'] != phidden
+                    db_passive['hidden'] != phidden or
+                    db_passive['order'] != int(porder)
                 ):
                     passives_sql.update_passive(pid, pname, pdesc, ptag, pimg, pprincipal, phidden, language, int(porder))
                     passif_modif = True
@@ -421,6 +422,7 @@ def characters(app: Flask):
                     (db_skill['tag'] or '') != (stag or '') or
                     (db_skill['image_name'] or '') != (simg or '') or
                     db_skill['principal'] != sprincipal
+                    db_passive['order'] != int(sorder)
                 ):
                     skills_sql.update_skill(sid, sname, sdesc, stag, simg, sprincipal, language, int(sorder))
                     skill_modif = True
