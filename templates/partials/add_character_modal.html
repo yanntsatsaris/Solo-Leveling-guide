@@ -93,7 +93,7 @@
                     <label>Évolution : {{ 'A' ~ i if not i == 6 else 'A6-10' }}</label>
                     <textarea name="weapon_evolution_description_{{ weapon_idx }}_{{ i }}"></textarea>
                     <input type="hidden" name="weapon_evolutions_{{ weapon_idx }}_{{ i }}_evolution_id"
-                      value="{{ 'A' ~ i if not i == 6 else 'A6-A10' }}">
+                      value="{{ 'A' ~ i if not i == 6 else 'A6-10' }}">
                     <input type="hidden" name="weapon_evolutions_id_{{ weapon_idx }}_{{ i }}" value="">
                   </div>
                 {% if i % 2 == 1 or i == total_evos - 1 %}
