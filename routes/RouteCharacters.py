@@ -574,7 +574,6 @@ def characters(app: Flask):
                 ):
                     equipment_set_sql.update_equipment_set(set_id, char_id, set_name, set_desc, set_focus, set_order, language)
                     set_modif = True
-                    write_log(f'Diff name: {db_set["name"]} : {set_name}, desc : {normalize_text(db_set["description"])} : {normalize_text(set_desc)}, focus : {normalize_focus_stats(db_set["focus_stats"])} : {normalize_focus_stats(set_focus)}, order : {db_set["order"]} : {set_order}', log_level="INFO")
                     write_log(f"Modification set {set_id} du personnage {char_id}", log_level="INFO")
                 form_set_ids.append(set_id)
             else:
