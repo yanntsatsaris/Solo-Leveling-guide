@@ -283,6 +283,9 @@ def characters(app: Flask):
                 equipment_set_sql.get_equipment_set_details(eq_set_id, eq_set_name, language)
             )
         character_info['equipment_sets'] = equipment_sets
+        for eq_set in character_info['equipment_sets']:
+            eq_set['description_raw'] = eq_set['description']  # version brute
+            eq_set['description'] = process_description(eq_set['description'], all_tags, base_path)
 
         # Ajout de l'extraction de la couleur des cœurs
         for eq_set in character_info['equipment_sets']:
@@ -849,12 +852,13 @@ def characters(app: Flask):
         write_log(f"Ajout complet du personnage {char_id} ({alias})", log_level="INFO")
         return redirect(url_for('character_details', alias=alias))
 
-    @app.route('/characters/images_for/<folder>')
+    @app.route('/characters/images_for/<type_folder>/<folder>')
     @login_required
-    def images_for_character(folder):
-        # Sécurise le nom du dossier
+    def images_for_character(type_folder, folder):
+        # Sécurise les noms
+        type_folder = type_folder.replace('..', '').replace('/', '').replace('\\', '')
         folder = folder.replace('..', '').replace('/', '').replace('\\', '')
-        img_dir = os.path.join('static', 'images', 'Personnage', folder)
+        img_dir = os.path.join('static', 'images', 'Personnages', f'SLA_Personnages_{type_folder}', folder)
         if not os.path.isdir(img_dir):
             return jsonify([])
         images = [f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))]
