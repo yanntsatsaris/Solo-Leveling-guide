@@ -425,7 +425,7 @@
 
   // Ajout d'un passif
   document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById('add-passive-btn')?.addEventListener('click', function() {
+    document.getElementById('add-passive-btn')?.addEventListener('click', async function() {
       const grid = document.getElementById('passives-grid');
       const index = grid.querySelectorAll('.edit-passive-block').length;
       // Récupère le dossier image du personnage
@@ -473,7 +473,7 @@
     });
 
     // Ajout d'une compétence
-    document.getElementById('add-skill-btn')?.addEventListener('click', function() {
+    document.getElementById('add-skill-btn')?.addEventListener('click', async function() {
       const grid = document.getElementById('skills-grid');
       const index = grid.querySelectorAll('.edit-skill-block').length;
       const folder = document.querySelector('#edit-character-form input[name="image_folder"]').value;
