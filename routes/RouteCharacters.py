@@ -565,7 +565,6 @@ def characters(app: Flask):
             set_order = request.form.get(f"eqset_order_{set_idx}")
             set_id = request.form.get(f"eqset_id_{set_idx}")
             db_set = next((s for s in current_sets if str(s['id']) == str(set_id)), None) if set_id else None
-            write_log(f"FOCUS DEBUG: db={db_set['focus_stats']} | form={set_focus} | eq={focus_stats_equal(db_set['focus_stats'], set_focus)}", log_level="INFO")
             if set_id:
                 if db_set and (
                     (db_set['name'] or '') != (set_name or '') or
@@ -573,9 +572,6 @@ def characters(app: Flask):
                     not focus_stats_equal(db_set['focus_stats'], set_focus) or
                     (str(db_set['order']) or '') != (str(set_order) or '')
                 ):
-                    write_log(f"DEBUG: db_set['focus_stats']={db_set['focus_stats']} | set_focus={set_focus}", log_level="INFO")
-                    write_log(f"DEBUG: normalized_db={normalize_focus_stats(db_set['focus_stats'])} | normalized_form={normalize_focus_stats(set_focus)}", log_level="INFO")
-                    write_log(f"TYPE db_set['focus_stats']={type(db_set['focus_stats'])} | set_focus={type(set_focus)}", log_level="INFO")
                     equipment_set_sql.update_equipment_set(set_id, char_id, set_name, set_desc, set_focus, set_order, language)
                     set_modif = True
                     write_log(f'Diff name: {db_set["name"]} : {set_name}, desc : {normalize_text(db_set["description"])} : {normalize_text(set_desc)}, focus : {normalize_focus_stats(db_set["focus_stats"])} : {normalize_focus_stats(set_focus)}, order : {db_set["order"]} : {set_order}', log_level="INFO")
