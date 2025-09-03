@@ -571,7 +571,7 @@ def characters(app: Flask):
                     (db_set['name'] or '') != (set_name or '') or
                     (db_set['description'] or '') != (set_desc or '') or
                     not focus_stats_equal(db_set['focus_stats'], set_focus) or
-                    (db_set['order'] or '') != (set_order or '')
+                    (str(db_set['order']) or '') != (str(set_order) or '')
                 ):
                     write_log(f"DEBUG: db_set['focus_stats']={db_set['focus_stats']} | set_focus={set_focus}", log_level="INFO")
                     write_log(f"DEBUG: normalized_db={normalize_focus_stats(db_set['focus_stats'])} | normalized_form={normalize_focus_stats(set_focus)}", log_level="INFO")
