@@ -152,9 +152,19 @@
   });
 
   // Ajout d'un passif
-  document.getElementById('add-passive-btn')?.addEventListener('click', function() {
+  document.getElementById('add-passive-btn')?.addEventListener('click', async function() {
     const grid = document.getElementById('passives-grid');
     const index = grid.querySelectorAll('.edit-passive-block').length;
+    // Récupère le dossier image du personnage
+    const folder = document.querySelector('#add-character-form input[name="image_folder"]').value;
+    let images = [];
+    if (folder) {
+      try {
+        images = await fetch(`/characters/images_for/${encodeURIComponent(folder)}`).then(r => r.json());
+      } catch (e) { images = []; }
+    }
+    const selectOptions = ['<option value="">(vide)</option>']
+      .concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
     const row = document.createElement('div');
     row.className = 'passives-row';
     row.innerHTML = `
@@ -166,7 +176,7 @@
         <label>Tag :</label>
         <input type="text" name="passive_tag_${index}" value="" />
         <label>Image :</label>
-        <input type="text" name="passive_image_${index}" value="" />
+        <select name="passive_image_${index}">${selectOptions}</select>
         <div class="checkbox-row">
           <label>
             <input type="checkbox" name="passive_principal_${index}" /> Principal
@@ -181,9 +191,18 @@
   });
 
   // Ajout d'une compétence
-  document.getElementById('add-skill-btn')?.addEventListener('click', function() {
+  document.getElementById('add-skill-btn')?.addEventListener('click', async function() {
     const grid = document.getElementById('skills-grid');
     const index = grid.querySelectorAll('.edit-skill-block').length;
+    const folder = document.querySelector('#add-character-form input[name="image_folder"]').value;
+    let images = [];
+    if (folder) {
+      try {
+        images = await fetch(`/characters/images_for/${encodeURIComponent(folder)}`).then(r => r.json());
+      } catch (e) { images = []; }
+    }
+    const selectOptions = ['<option value="">(vide)</option>']
+      .concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
     const row = document.createElement('div');
     row.className = 'skills-row';
     row.innerHTML = `
@@ -195,7 +214,7 @@
         <label>Tag :</label>
         <input type="text" name="skill_tag_${index}" value="" />
         <label>Image :</label>
-        <input type="text" name="skill_image_${index}" value="" />
+        <select name="skill_image_${index}">${selectOptions}</select>
         <div class="checkbox-row">
           <label>
             <input type="checkbox" name="skill_principal_${index}" /> Principal

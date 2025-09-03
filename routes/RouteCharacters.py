@@ -848,3 +848,14 @@ def characters(app: Flask):
 
         write_log(f"Ajout complet du personnage {char_id} ({alias})", log_level="INFO")
         return redirect(url_for('character_details', alias=alias))
+
+    @app.route('/characters/images_for/<folder>')
+    @login_required
+    def images_for_character(folder):
+        # Sécurise le nom du dossier
+        folder = folder.replace('..', '').replace('/', '').replace('\\', '')
+        img_dir = os.path.join('static', 'images', 'Personnage', folder)
+        if not os.path.isdir(img_dir):
+            return jsonify([])
+        images = [f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))]
+        return jsonify(images)
