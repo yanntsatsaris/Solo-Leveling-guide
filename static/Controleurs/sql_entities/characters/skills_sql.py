@@ -8,14 +8,14 @@ class SkillsSql:
         write_log(f"Requête get_skills pour char_id={char_id}, langue={language}", log_level="DEBUG")
         # Récupère d'abord tous les skills du personnage
         self.cursor.execute("""
-            SELECT skills_id, skills_principal, skills_image
+            SELECT skills_id, skills_principal, skills_image, skills_order
             FROM skills
             WHERE skills_characters_id = %s
             ORDER By skills_order
         """, (char_id,))
         skills = []
         for s_row in self.cursor.fetchall():
-            skill_id, skill_principal, skill_image = s_row
+            skill_id, skill_principal, skill_image, skill_order = s_row
             # Récupère la traduction pour la langue demandée
             self.cursor.execute("""
                 SELECT skill_translations_name, skill_translations_description, skill_translations_tag
@@ -34,20 +34,21 @@ class SkillsSql:
                 'description': skill_desc,
                 'image': f'images/Personnages/{type_folder}/{char_folder}/{skill_image}' if skill_image else '',
                 'image_name': skill_image,
-                'tag': skill_tag
+                'tag': skill_tag,
+                'order': skill_order
             })
         return skills
 
     def get_skills_full(self, char_id, language):
         self.cursor.execute("""
-            SELECT skills_id, skills_image, skills_principal
+            SELECT skills_id, skills_image, skills_principal, skills_order
             FROM skills
             WHERE skills_characters_id = %s
             ORDER BY skills_order
         """, (char_id,))
         skills = []
         for s_row in self.cursor.fetchall():
-            skill_id, skill_image, skill_principal = s_row
+            skill_id, skill_image, skill_principal, skill_order = s_row
             # Récupère la traduction pour la langue demandée
             self.cursor.execute("""
                 SELECT skill_translations_name, skill_translations_description, skill_translations_tag
@@ -65,7 +66,8 @@ class SkillsSql:
                 'description': skill_desc,
                 'tag': skill_tag,
                 'image_name': skill_image,
-                'principal': skill_principal
+                'principal': skill_principal,
+                'order': skill_order
             })
         return skills
 

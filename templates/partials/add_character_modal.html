@@ -191,6 +191,8 @@
           <label>
             <input type="checkbox" name="passive_hidden_${index}" /> Caché
           </label>
+          <label>Ordre :</label>
+          <input type="number" name="passive_order_${index}" value="${index}" min="0" style="width:60px;">
         </div>
       </div>
     `;
@@ -234,6 +236,8 @@
             <input type="checkbox" name="skill_principal_${index}" /> Principal
           </label>
         </div>
+        <label>Ordre :</label>
+        <input type="number" name="skill_order_${index}" value="${index}" min="0" style="width:60px;">
       </div>
     `;
     grid.appendChild(row);

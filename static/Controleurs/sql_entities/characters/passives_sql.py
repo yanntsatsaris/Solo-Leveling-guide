@@ -8,14 +8,14 @@ class PassivesSql:
         write_log(f"Requête get_passives pour char_id={char_id}, langue={language}", log_level="DEBUG")
         # Récupère d'abord tous les passifs du personnage
         self.cursor.execute("""
-            SELECT passives_id, passives_principal, passives_image, passives_hidden
+            SELECT passives_id, passives_principal, passives_image, passives_hidden, passives_order
             FROM passives
             WHERE passives_characters_id = %s
             ORDER By passives_order
         """, (char_id,))
         passives = []
         for p_row in self.cursor.fetchall():
-            passive_id, passive_principal, passive_image, passive_hidden = p_row
+            passive_id, passive_principal, passive_image, passive_hidden, passive_order = p_row
             # Récupère la traduction pour la langue demandée
             self.cursor.execute("""
                 SELECT passive_translations_name, passive_translations_description, passive_translations_tag
@@ -35,20 +35,21 @@ class PassivesSql:
                 'image': f'images/Personnages/{type_folder}/{char_folder}/{passive_image}' if passive_image else '',
                 'image_name': passive_image,
                 'tag': passive_tag,
-                'hidden': passive_hidden
+                'hidden': passive_hidden,
+                'order': passive_order
             })
         return passives
 
     def get_passives_full(self, char_id, language):
         self.cursor.execute("""
-            SELECT passives_id, passives_image, passives_principal, passives_hidden
+            SELECT passives_id, passives_image, passives_principal, passives_hidden, passives_order
             FROM passives
             WHERE passives_characters_id = %s
             ORDER BY passives_order
         """, (char_id,))
         passives = []
         for p_row in self.cursor.fetchall():
-            passive_id, passive_image, passive_principal, passive_hidden = p_row
+            passive_id, passive_image, passive_principal, passive_hidden, passive_order = p_row
             # Récupère la traduction pour la langue demandée
             self.cursor.execute("""
                 SELECT passive_translations_name, passive_translations_description, passive_translations_tag
@@ -67,7 +68,8 @@ class PassivesSql:
                 'tag': passive_tag,
                 'image_name': passive_image,
                 'principal': passive_principal,
-                'hidden': passive_hidden
+                'hidden': passive_hidden,
+                'order': passive_order
             })
         return passives
 

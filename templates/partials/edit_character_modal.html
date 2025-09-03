@@ -119,6 +119,8 @@
                   Caché
                 </label>
               </div>
+              <label>Ordre :</label>
+              <input type="number" name="passive_order_{{ loop.index0 }}" value="{{ passive.order if passive.order is defined else loop.index0 }}" min="0" style="width:60px;">
               <input type="hidden" name="passive_id_{{ loop.index0 }}" value="{{ passive.id }}">
             </div>
             {% if loop.index0 % 2 == 1 or loop.last %}
@@ -171,6 +173,8 @@
                   Principal
                 </label>
               </div>
+              <label>Ordre :</label>
+              <input type="number" name="skill_order_{{ loop.index0 }}" value="{{ skill.order if skill.order is defined else loop.index0 }}" min="0" style="width:60px;">
               <input type="hidden" name="skill_id_{{ loop.index0 }}" value="{{ skill.id }}">
             </div>
             {% if loop.index0 % 2 == 1 or loop.last %}
@@ -451,6 +455,8 @@
               <input type="checkbox" name="passive_hidden_${index}" /> Caché
             </label>
           </div>
+          <label>Ordre :</label>
+          <input type="number" name="passive_order_${index}" value="${index}" min="0" style="width:60px;">
         </div>
       `;
       grid.appendChild(row);
@@ -477,6 +483,8 @@
               <input type="checkbox" name="skill_principal_${index}" /> Principal
             </label>
           </div>
+          <label>Ordre :</label>
+          <input type="number" name="skill_order_${index}" value="${index}" min="0" style="width:60px;">
         </div>
       `;
       grid.appendChild(row);

@@ -362,6 +362,9 @@ def characters(app: Flask):
             pimg = request.form.get(f"passive_image_{i}")
             pprincipal = request.form.get(f"passive_principal_{i}") == "on"
             phidden = request.form.get(f"passive_hidden_{i}") == "on"
+            porder = request.form.get(f"passive_order_{i}")
+            if porder is None or porder == "":
+                porder = i
             # Ajoute l'index à la méthode
             pid = request.form.get(f"passive_id_{i}")
             if pid:
@@ -374,12 +377,12 @@ def characters(app: Flask):
                     db_passive['principal'] != pprincipal or
                     db_passive['hidden'] != phidden
                 ):
-                    passives_sql.update_passive(pid, pname, pdesc, ptag, pimg, pprincipal, phidden, language, i)
+                    passives_sql.update_passive(pid, pname, pdesc, ptag, pimg, pprincipal, phidden, language, int(porder))
                     passif_modif = True
                     write_log(f"Modification passif {pid} du personnage {char_id}", log_level="INFO")
                 form_passive_ids.append(pid)
             else:
-                new_id = passives_sql.add_passive(char_id, pname, pdesc, ptag, pimg, pprincipal, phidden, language, i)
+                new_id = passives_sql.add_passive(char_id, pname, pdesc, ptag, pimg, pprincipal, phidden, language, int(porder))
                 passif_modif = True
                 write_log(f"Ajout passif {new_id} au personnage {char_id}", log_level="INFO")
                 form_passive_ids.append(new_id)
@@ -405,6 +408,9 @@ def characters(app: Flask):
             stag = request.form.get(f"skill_tag_{i}")
             simg = request.form.get(f"skill_image_{i}")
             sprincipal = request.form.get(f"skill_principal_{i}") == "on"
+            sorder = request.form.get(f"skill_order_{i}")
+            if sorder is None or sorder == "":
+                sorder = i
             sid = request.form.get(f"skill_id_{i}")
             if sid:
                 db_skill = next((s for s in current_skills if str(s['id']) == str(sid)), None)
@@ -415,12 +421,12 @@ def characters(app: Flask):
                     (db_skill['image_name'] or '') != (simg or '') or
                     db_skill['principal'] != sprincipal
                 ):
-                    skills_sql.update_skill(sid, sname, sdesc, stag, simg, sprincipal, language, i)
+                    skills_sql.update_skill(sid, sname, sdesc, stag, simg, sprincipal, language, int(sorder))
                     skill_modif = True
                     write_log(f"Modification skill {sid} du personnage {char_id}", log_level="INFO")
                 form_skill_ids.append(sid)
             else:
-                new_id = skills_sql.add_skill(char_id, sname, sdesc, stag, simg, sprincipal, language, i)
+                new_id = skills_sql.add_skill(char_id, sname, sdesc, stag, simg, sprincipal, language, int(sorder))
                 skill_modif = True
                 write_log(f"Ajout skill {new_id} au personnage {char_id}", log_level="INFO")
                 form_skill_ids.append(new_id)
@@ -737,7 +743,10 @@ def characters(app: Flask):
             pimg = request.form.get(f"passive_image_{i}")
             pprincipal = request.form.get(f"passive_principal_{i}") == "on"
             phidden = request.form.get(f"passive_hidden_{i}") == "on"
-            passives_sql.add_passive(char_id, pname, pdesc, ptag, pimg, pprincipal, phidden, language, i)
+            porder = request.form.get(f"passive_order_{i}")
+            if porder is None or porder == "":
+                porder = i
+            passives_sql.add_passive(char_id, pname, pdesc, ptag, pimg, pprincipal, phidden, language, int(porder))
             write_log(f"Ajout passif {pname} au personnage {char_id}", log_level="INFO")
             i += 1
 
@@ -752,7 +761,10 @@ def characters(app: Flask):
             stag = request.form.get(f"skill_tag_{i}")
             simg = request.form.get(f"skill_image_{i}")
             sprincipal = request.form.get(f"skill_principal_{i}") == "on"
-            skills_sql.add_skill(char_id, sname, sdesc, stag, simg, sprincipal, language, i)
+            sorder = request.form.get(f"skill_order_{i}")
+            if sorder is None or sorder == "":
+                sorder = i
+            skills_sql.add_skill(char_id, sname, sdesc, stag, simg, sprincipal, language, int(sorder))
             write_log(f"Ajout skill {sname} au personnage {char_id}", log_level="INFO")
             i += 1
 
