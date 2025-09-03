@@ -873,10 +873,9 @@ def characters(app: Flask):
         folder = folder.replace('..', '').replace('/', '').replace('\\', '')
         img_dir = os.path.join('static', 'images', 'Personnages', f'SLA_Personnages_{type_folder}', folder)
         if not os.path.isdir(img_dir):
-            write_log(f"Dossier d'images non trouvé : {img_dir}", log_level="WARNING")
+            write_log(f"Le dossier d'images n'existe pas : {img_dir}", log_level="WARNING")
             return jsonify([])
         images = [f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))]
-        write_log(f"Récupération des images pour {type_folder}/{folder}: {images}", log_level="INFO")
         return jsonify(images)
 
 def focus_stats_equal(a, b):
