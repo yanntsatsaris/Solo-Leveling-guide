@@ -404,7 +404,7 @@
   color: #fff;
 }
 
-.equipment-set-description img {
+.equipment-set-description-text img {
     height: 1em; /* Définit la hauteur des images à la taille de la police */
     width: auto; /* Maintient les proportions de l'image */
     vertical-align: -0.2em; /* Ajuste légèrement la position verticale */
