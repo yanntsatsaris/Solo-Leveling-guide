@@ -157,8 +157,15 @@
     const index = grid.querySelectorAll('.edit-passive-block').length;
     // Récupère le dossier image du personnage
     const folder = document.querySelector('#add-character-form input[name="image_folder"]').value;
+    const type = document.querySelector('#add-character-form input[name="type"]').value;
+    const alias = document.querySelector('#add-character-form input[name="alias"]').value;
+    const rarity = document.querySelector('#add-character-form input[name="rarity"]').value;
+    const typeFolder = type.replace(/ /g, "_");
+    const aliasFolder = alias.replace(/ /g, "_");
+    const rarityFolder = rarity.replace(/ /g, "_");
+    const folderName = `${rarityFolder}_${typeFolder}_${aliasFolder}`;
     let images = [];
-    if (folder) {
+    if (folderName && typeFolder) {
       try {
         images = await fetch(`/characters/images_for/${encodeURIComponent(typeFolder)}/${encodeURIComponent(folderName)}`).then(r => r.json());
       } catch (e) { images = []; }
@@ -195,8 +202,15 @@
     const grid = document.getElementById('skills-grid');
     const index = grid.querySelectorAll('.edit-skill-block').length;
     const folder = document.querySelector('#add-character-form input[name="image_folder"]').value;
+    const type = document.querySelector('#add-character-form input[name="type"]').value;
+    const alias = document.querySelector('#add-character-form input[name="alias"]').value;
+    const rarity = document.querySelector('#add-character-form input[name="rarity"]').value;
+    const typeFolder = type.replace(/ /g, "_");
+    const aliasFolder = alias.replace(/ /g, "_");
+    const rarityFolder = rarity.replace(/ /g, "_");
+    const folderName = `${rarityFolder}_${typeFolder}_${aliasFolder}`;
     let images = [];
-    if (folder) {
+    if (folderName && typeFolder) {
       try {
         images = await fetch(`/characters/images_for/${encodeURIComponent(typeFolder)}/${encodeURIComponent(folderName)}`).then(r => r.json());
       } catch (e) { images = []; }
