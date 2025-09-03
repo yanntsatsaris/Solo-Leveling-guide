@@ -435,6 +435,23 @@
     document.getElementById('add-passive-btn')?.addEventListener('click', function() {
       const grid = document.getElementById('passives-grid');
       const index = grid.querySelectorAll('.edit-passive-block').length;
+      // Récupère le dossier image du personnage
+      const folder = document.querySelector('#add-character-form input[name="image_folder"]').value;
+      const type = document.querySelector('#add-character-form input[name="type"]').value;
+      const alias = document.querySelector('#add-character-form input[name="alias"]').value;
+      const rarity = document.querySelector('#add-character-form input[name="rarity"]').value;
+      const typeFolder = type.replace(/ /g, "_");
+      const aliasFolder = alias.replace(/ /g, "_");
+      const rarityFolder = rarity.replace(/ /g, "_");
+      const folderName = `${rarityFolder}_${typeFolder}_${aliasFolder}`;
+      let images = [];
+      if (folderName && typeFolder) {
+        try {
+          images = await fetch(`/characters/images_for/${encodeURIComponent(typeFolder)}/${encodeURIComponent(folderName)}`).then(r => r.json());
+        } catch (e) { images = []; }
+      }
+      const selectOptions = ['<option value=""></option>']
+        .concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
       const row = document.createElement('div');
       row.className = 'passives-row';
       row.innerHTML = `
@@ -446,7 +463,7 @@
           <label>Tag :</label>
           <input type="text" name="passive_tag_${index}" value="" />
           <label>Image :</label>
-          <input type="text" name="passive_image_${index}" value="" />
+          <select name="passive_image_${index}">${selectOptions}</select>
           <div class="checkbox-row">
             <label>
               <input type="checkbox" name="passive_principal_${index}" /> Principal
@@ -466,6 +483,22 @@
     document.getElementById('add-skill-btn')?.addEventListener('click', function() {
       const grid = document.getElementById('skills-grid');
       const index = grid.querySelectorAll('.edit-skill-block').length;
+      const folder = document.querySelector('#add-character-form input[name="image_folder"]').value;
+      const type = document.querySelector('#add-character-form input[name="type"]').value;
+      const alias = document.querySelector('#add-character-form input[name="alias"]').value;
+      const rarity = document.querySelector('#add-character-form input[name="rarity"]').value;
+      const typeFolder = type.replace(/ /g, "_");
+      const aliasFolder = alias.replace(/ /g, "_");
+      const rarityFolder = rarity.replace(/ /g, "_");
+      const folderName = `${rarityFolder}_${typeFolder}_${aliasFolder}`;
+      let images = [];
+      if (folderName && typeFolder) {
+        try {
+          images = await fetch(`/characters/images_for/${encodeURIComponent(typeFolder)}/${encodeURIComponent(folderName)}`).then(r => r.json());
+        } catch (e) { images = []; }
+      }
+      const selectOptions = ['<option value=""></option>']
+        .concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
       const row = document.createElement('div');
       row.className = 'skills-row';
       row.innerHTML = `
@@ -477,7 +510,7 @@
           <label>Tag :</label>
           <input type="text" name="skill_tag_${index}" value="" />
           <label>Image :</label>
-          <input type="text" name="skill_image_${index}" value="" />
+          <select name="skill_image_${index}">${selectOptions}</select>
           <div class="checkbox-row">
             <label>
               <input type="checkbox" name="skill_principal_${index}" /> Principal
