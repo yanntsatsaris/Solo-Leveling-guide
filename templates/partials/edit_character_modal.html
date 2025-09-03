@@ -87,11 +87,7 @@
                 value="{{ passive.tag }}"
               />
               <label>Image :</label>
-              <input
-                type="text"
-                name="passive_image_{{ loop.index0 }}"
-                value="{{ passive.image_name }}"
-              />
+              <select name="passive_image_{{ loop.index0 }}" class="passive-image-select" data-current="{{ passive.image_name|default('') }}"></select>
               <div class="checkbox-row">
                 <label>
                   <input
@@ -154,11 +150,7 @@
                 value="{{ skill.tag }}"
               />
               <label>Image :</label>
-              <input
-                type="text"
-                name="skill_image_{{ loop.index0 }}"
-                value="{{ skill.image_name }}"
-              />
+              <select name="skill_image_{{ loop.index0 }}" class="skill-image-select" data-current="{{ skill.image_name|default('') }}"></select>
               <div class="checkbox-row">
                 <label>
                   <input
@@ -705,4 +697,37 @@
   };
   // Détecte la langue courante (à adapter selon ton contexte)
   const currentLang = "{{ language if language is defined else 'FR-fr' }}";
+
+  async function fillImageSelects() {
+  const folder = document.querySelector('#edit-character-form input[name="image_folder"]').value;
+  const type = document.querySelector('#edit-character-form input[name="type"]').value;
+  const alias = document.querySelector('#edit-character-form input[name="alias"]').value;
+  const rarity = document.querySelector('#edit-character-form input[name="rarity"]').value;
+  const typeFolder = type.replace(/ /g, "_");
+  const aliasFolder = alias.replace(/ /g, "_");
+  const rarityFolder = rarity.replace(/ /g, "_");
+  const folderName = `${rarityFolder}_${typeFolder}_${aliasFolder}`;
+  let images = [];
+  if (folderName && typeFolder) {
+    try {
+      images = await fetch(`/characters/images_for/${encodeURIComponent(typeFolder)}/${encodeURIComponent(folderName)}`).then(r => r.json());
+    } catch (e) { images = []; }
+  }
+  // Pour les passifs
+  document.querySelectorAll('.passive-image-select').forEach(select => {
+    const current = select.dataset.current || "";
+    select.innerHTML = ['<option value=""></option>']
+      .concat(images.map(img => `<option value="${img}"${img === current ? ' selected' : ''}>${img}</option>`)).join('');
+  });
+  // Pour les skills
+  document.querySelectorAll('.skill-image-select').forEach(select => {
+    const current = select.dataset.current || "";
+    select.innerHTML = ['<option value=""></option>']
+      .concat(images.map(img => `<option value="${img}"${img === current ? ' selected' : ''}>${img}</option>`)).join('');
+  });
+}
+
+// Appelle la fonction à l'ouverture de la modale
+document.getElementById('edit-character-btn')?.addEventListener('click', fillImageSelects);
+// Ou si la modale s'ouvre autrement, appelle fillImageSelects() juste après l'ouverture
 </script>
