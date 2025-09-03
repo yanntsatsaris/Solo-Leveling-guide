@@ -565,6 +565,7 @@ def characters(app: Flask):
             set_order = request.form.get(f"eqset_order_{set_idx}")
             set_id = request.form.get(f"eqset_id_{set_idx}")
             db_set = next((s for s in current_sets if str(s['id']) == str(set_id)), None) if set_id else None
+            write_log(f"FOCUS DEBUG: db={db_set['focus_stats']} | form={set_focus} | eq={focus_stats_equal(db_set['focus_stats'], set_focus)}", log_level="INFO")
             if set_id:
                 if db_set and (
                     (db_set['name'] or '') != (set_name or '') or
