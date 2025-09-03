@@ -404,6 +404,15 @@
   color: #fff;
 }
 
+.equipment-set-description img {
+    height: 1em; /* Définit la hauteur des images à la taille de la police */
+    width: auto; /* Maintient les proportions de l'image */
+    vertical-align: -0.2em; /* Ajuste légèrement la position verticale */
+    display: inline; /* S'assure que les images restent dans le flux du texte */
+    margin: 0; /* Supprime tout espacement supplémentaire */
+}
+
+
 @media (max-width: 767px) {
   /* Conteneur des cores */
   .cores-container {
