@@ -160,7 +160,7 @@
     let images = [];
     if (folder) {
       try {
-        images = await fetch(`/characters/images_for/${encodeURIComponent(folder)}`).then(r => r.json());
+        images = await fetch(`/characters/images_for/${encodeURIComponent(typeFolder)}/${encodeURIComponent(folderName)}`).then(r => r.json());
       } catch (e) { images = []; }
     }
     const selectOptions = ['<option value="">(vide)</option>']
@@ -198,7 +198,7 @@
     let images = [];
     if (folder) {
       try {
-        images = await fetch(`/characters/images_for/${encodeURIComponent(folder)}`).then(r => r.json());
+        images = await fetch(`/characters/images_for/${encodeURIComponent(typeFolder)}/${encodeURIComponent(folderName)}`).then(r => r.json());
       } catch (e) { images = []; }
     }
     const selectOptions = ['<option value="">(vide)</option>']

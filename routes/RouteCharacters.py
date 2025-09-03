@@ -862,6 +862,7 @@ def characters(app: Flask):
         if not os.path.isdir(img_dir):
             return jsonify([])
         images = [f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))]
+        write_log(f"Images récupérées pour {folder}: {images}", log_level="INFO")
         return jsonify(images)
 
 def focus_stats_equal(a, b):
