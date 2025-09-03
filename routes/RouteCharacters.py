@@ -232,7 +232,8 @@ def characters(app: Flask):
             'image': image_path,
             'image_name': f'{char_type}_{char_alias}_Personnage.webp' if os.path.exists(personnage_webp) else f'{char_type}_{char_alias}_Personnage.png',
             'description': char_description,
-            'background_image': f'images/Personnages/{type_folder}/BG_{char_type}.webp'
+            'background_image': f'images/Personnages/{type_folder}/BG_{char_type}.webp',
+            'images_folder' : char_folder
         }
 
         passives = passives_sql.get_passives(char_id, language, type_folder, char_folder)
