@@ -569,6 +569,8 @@ def characters(app: Flask):
                     normalize_focus_stats(db_set['focus_stats']) != normalize_focus_stats(set_focus) or
                     (db_set['order'] or '') != (set_order or '')
                 ):
+                    write_log(f"DEBUG: db_set['focus_stats']={db_set['focus_stats']} | set_focus={set_focus}", log_level="INFO")
+                    write_log(f"DEBUG: normalized_db={normalize_focus_stats(db_set['focus_stats'])} | normalized_form={normalize_focus_stats(set_focus)}", log_level="INFO")
                     equipment_set_sql.update_equipment_set(set_id, char_id, set_name, set_desc, set_focus, set_order, language)
                     set_modif = True
                     write_log(f'Diff name: {db_set["name"]} : {set_name}, desc : {normalize_text(db_set["description"])} : {normalize_text(set_desc)}, focus : {normalize_focus_stats(db_set["focus_stats"])} : {normalize_focus_stats(set_focus)}, order : {db_set["order"]} : {set_order}', log_level="INFO")
