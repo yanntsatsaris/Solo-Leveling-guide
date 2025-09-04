@@ -432,7 +432,7 @@
         <select name="core_name_{{ set_idx }}_{{ c_idx }}">
               <option value=""></option>
               {% for cor in cores_list %}
-                <option value="{{ cor }}" {% if core.name == cor.name %}selected{% endif %}>{{ cor.name }}</option>
+                <option value="{{ cor }}" {% if core.name == cor %}selected{% endif %}>{{ cor }}</option>
               {% endfor %}
             </select>
         <label>Stat principale :</label>
