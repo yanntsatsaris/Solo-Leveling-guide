@@ -140,10 +140,8 @@ def characters(app: Flask):
 
         panoplies_effects = panoplies_sql.get_panoplies_effects(language)
         panoplies_names = sorted(list({p['set_name'] for p in panoplies_effects}))
-        write_log(f"Panoplies names: {panoplies_names}", log_level="INFO")
         cores_effects = cores_sql.get_cores_effects(language)
         cores_names = sorted(list({c['color'] for c in cores_effects}))
-        write_log(f"Cores names: {cores_names}", log_level="INFO")
         sql_manager.close()
 
         images = []
