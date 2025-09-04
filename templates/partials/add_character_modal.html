@@ -454,6 +454,27 @@
           </div>
         `;
       }
+      for (let coreIdx = 0; coreIdx < 3; coreIdx++) {
+        const coreNumber = `${coreIdx + 1}`.padStart(2, "0"); // "01", "02", "03"
+        const coreNameSelect = `
+          <select name="core_name_${setOrderIndex}_${coreIdx}">
+            <option value=""></option>
+            ${coreList.map(c => `<option value="${c}">${c}</option>`).join('')}
+          </select>
+        `;
+        const coreMainStatSelect = `
+          <select name="core_main_stat_${setOrderIndex}_${coreIdx}">
+            <option value=""></option>
+            ${coreMainStats[coreNumber].map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+          </select>
+        `;
+        const coreSecondaryStatSelect = `
+          <select name="core_secondary_stat_${setOrderIndex}_${coreIdx}">
+            <option value=""></option>
+            ${coreMainStats[coreNumber].map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+          </select>
+        `;
+      }
       div.innerHTML = `
         <h4>Set : ${setName}</h4>
         <input type="hidden" name="eqset_name_${setOrderIndex}" value="${setName}">
