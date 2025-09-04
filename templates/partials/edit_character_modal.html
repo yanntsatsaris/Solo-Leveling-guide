@@ -431,8 +431,8 @@
         <label>Nom du noyau :</label>
         <select name="core_name_{{ set_idx }}_{{ c_idx }}">
               <option value=""></option>
-              {% for core in cores_list %}
-                <option value="{{ core }}" {% if artefact.set == core %}selected{% endif %}>{{ core }}</option>
+              {% for cor in cores_list %}
+                <option value="{{ cor }}" {% if core.name == cor.name %}selected{% endif %}>{{ cor.name }}</option>
               {% endfor %}
             </select>
         <label>Stat principale :</label>
@@ -833,6 +833,7 @@
         ${[0,1,2].map(c_idx => `
           <div class="edit-core-block">
             <label>Nom du noyau :</label>
+            <input type="text" name="core_name_${setOrderIndex}_${c_idx}" value="">
             <select name="core_name_${setOrderIndex}_${c_idx}">
                   <option value=""></option>
                   ${coresList.map(c => `<option value="${c}">${c}</option>`).join('')}
