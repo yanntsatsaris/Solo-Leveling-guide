@@ -48,7 +48,7 @@ class CoresSql:
 
     def get_core_effect(self, color, number, language):
         self.cursor.execute("""
-            SELECT cet.core_effect_translations_name, cet.core_effect_translations_effect
+            SELECT cet.core_effect_translations_name, cet.core_effect_translations_effect, ce.cores_effects_color
             FROM cores_effects ce
             LEFT JOIN core_effect_translations cet
                 ON cet.core_effect_translations_cores_effects_id = ce.cores_effects_id
@@ -58,7 +58,8 @@ class CoresSql:
         row = self.cursor.fetchone()
         return {
             "name": row[0] if row else "",
-            "effect": row[1] if row else ""
+            "effect": row[1] if row else "",
+            "color": row[2] if row else ""
         }
 
     def update_core_effect_name(self, color, number, language, new_name):

@@ -296,7 +296,7 @@ def characters(app: Flask):
         panoplies_effects = panoplies_sql.get_panoplies_effects(language)
         panoplies_names = sorted(list({p['set_name'] for p in panoplies_effects}))
         cores_effects = cores_sql.get_cores_effects(language)
-        cores_names = sorted(list({c['name'] for c in cores_effects}))
+        cores_names = sorted(list({c['color'] for c in cores_effects}))
         if cores_effects is None:
             cores_effects = []
         sql_manager.close()
