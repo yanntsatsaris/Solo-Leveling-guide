@@ -432,9 +432,9 @@
     } %}
     
     {% set coreSecondaryStats = {
-      "01": ["ATK", "ATK %"],
-      "02": ["DEF", "DEF %"],
-      "03": ["HP", "HP %"]
+      "01": ["CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],
+      "02": ["CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],
+      "03": ["CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"]
     } %}
     {% for c_idx in range(3) %}
       {% set core = eqSet.cores[c_idx] if eqSet.cores|length > c_idx else {} %}
