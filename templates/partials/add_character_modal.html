@@ -596,4 +596,32 @@
       alert("Aucun dossier d'image trouvé pour ce personnage. Il faudra l'ajouter manuellement.");
     }
   });
+  document.addEventListener('change', function(e) {
+  // Limite à 4 stats secondaires
+  if (e.target.classList.contains('artefact-secondary-multiselect')) {
+    const select = e.target;
+    const selected = Array.from(select.selectedOptions).map(opt => opt.value);
+    if (selected.length > 4) {
+      select.options[select.selectedIndex].selected = false;
+      alert("Vous ne pouvez sélectionner que 4 stats secondaires maximum.");
+      return;
+    }
+    const inputName = select.dataset.target;
+    const input = select.parentElement.querySelector(`input[name="${inputName}"]`);
+    if (input) input.value = selected.join(', ');
+  }
+  // Limite à 6 stats à focus
+  if (e.target.classList.contains('eqset-focus-multiselect')) {
+    const select = e.target;
+    const selected = Array.from(select.selectedOptions).map(opt => opt.value);
+    if (selected.length > 6) {
+      select.options[select.selectedIndex].selected = false;
+      alert("Vous ne pouvez sélectionner que 6 stats à focus maximum.");
+      return;
+    }
+    const inputName = select.dataset.target;
+    const input = select.parentElement.querySelector(`input[name="${inputName}"]`);
+    if (input) input.value = selected.join(', ');
+  }
+});
 </script>
