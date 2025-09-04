@@ -139,25 +139,24 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('edit-panoplie-overlay').style.display = 'none'; // Ferme le menu modal
         let overlay = document.createElement('div');
         overlay.id = "upload-panoplie-overlay";
+        overlay.className = "upload-panoplie-overlay"; // même classe que l'édition
         overlay.style.display = "flex";
         overlay.innerHTML = `
-          <div class="upload-panoplie-modal">
-            <span id="close-upload-panoplie" style="position:absolute;top:12px;right:18px;cursor:pointer;font-size:2em;">&times;</span>
+          <div class="upload-panoplie-popup">
             <form id="upload-panoplie-img-form" enctype="multipart/form-data">
+              <h2>Uploader des images de panoplie</h2>
               <label>Uploader une ou plusieurs images (webp, png, jpg) :</label>
               <input type="file" name="files" multiple required accept=".webp,.png,.jpg,.jpeg">
               <input type="hidden" name="panoplie_name" value="${name}">
-              <button type="submit">Envoyer</button>
-              <button type="button" id="cancel-upload-panoplie">Annuler</button>
+              <div style="margin-top:16px;">
+                <button type="submit" class="admin-btn">Envoyer</button>
+                <button type="button" id="cancel-upload-panoplie" class="close-btn">&times;</button>
+              </div>
             </form>
           </div>
         `;
         document.body.appendChild(overlay);
 
-        // Fermer la modale
-        document.getElementById('close-upload-panoplie').onclick = function() {
-          overlay.remove();
-        };
         document.getElementById('cancel-upload-panoplie').onclick = function() {
           overlay.remove();
         };

@@ -122,6 +122,18 @@ table img:hover {
   justify-content: center;
 }
 
+.upload-panoplie-overlay,
+#upload-panoplie-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(30, 30, 30, 0.85);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-panoplie-popup,
 .upload-panoplie-modal {
   background: #fff;
   color: #121212;
