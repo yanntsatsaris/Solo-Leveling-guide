@@ -425,6 +425,11 @@
     </div>
     <hr>
     <h4>Noyaux du set</h4>
+    {% set coreMainStats = {
+      "01": ["ATK", "ATK %", "CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],
+      "02": ["DEF", "DEF %", "CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],
+      "03": ["HP", "HP %", "CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"]
+    } %}
     {% for c_idx in range(3) %}
       {% set core = eqSet.cores[c_idx] if eqSet.cores|length > c_idx else {} %}
       <div class="edit-core-block">
@@ -435,10 +440,21 @@
                 <option value="{{ cor }}" {% if core.name == cor %}selected{% endif %}>{{ cor }}</option>
               {% endfor %}
             </select>
+        {% set core_number = "%02d"|format(core_idx + 1) %}
         <label>Stat principale :</label>
-        <input type="text" name="core_main_stat_{{ set_idx }}_{{ c_idx }}" value="{{ core.main_stat if core.main_stat is defined else '' }}">
+        <select name="core_main_stat_{{ set_idx }}_{{ core_idx }}">
+          <option value=""></option>
+          {% for stat in coreMainStats[core_number] %}
+            <option value="{{ stat }}" {% if core.main_stat == stat %}selected{% endif %}>{{ stat }}</option>
+          {% endfor %}
+        </select>
         <label>Stat secondaire :</label>
-        <input type="text" name="core_secondary_stat_{{ set_idx }}_{{ c_idx }}" value="{{ core.secondary_stat if core.secondary_stat is defined else '' }}">
+        <select name="core_secondary_stat_{{ set_idx }}_{{ core_idx }}">
+          <option value=""></option>
+          {% for stat in coreMainStats[core_number] %}
+            <option value="{{ stat }}" {% if core.secondary_stat == stat %}selected{% endif %}>{{ stat }}</option>
+          {% endfor %}
+        </select>
         <input type="hidden" name="core_id_{{ set_idx }}_{{ c_idx }}" value="{{ core.id if core.id is defined else '' }}">
       </div>
       <hr>
@@ -519,6 +535,11 @@
       "{{ core.name }}"{% if not loop.last %},{% endif %}
     {% endfor %}
   ];
+  const coreMainStats = {
+    "01": ["ATK", "ATK%", "CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],
+    "02": ["DEF", "DEF%", "CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],
+    "03": ["HP", "HP%", "CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"]
+  };
   // Gestion des onglets
   document.querySelectorAll('.edit-tab').forEach(tab => {
     tab.addEventListener('click', function() {
@@ -770,6 +791,23 @@
           ${mainStatOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
         </select>
       `;
+      for (let coreIdx = 0; coreIdx < 3; coreIdx++) {
+        const coreNumber = `${coreIdx + 1}`.padStart(2, "0"); // "01", "02", "03"
+        const mainStats = coreMainStats[coreNumber] || [];
+        const coreMainStatSelect = `
+          <select name="core_main_stat_${setOrderIndex}_${coreIdx}">
+            <option value=""></option>
+            ${mainStats.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+          </select>
+        `;
+        const coreSecondaryStatSelect = `
+          <select name="core_secondary_stat_${setOrderIndex}_${coreIdx}">
+            <option value=""></option>
+            ${mainStats.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+          </select>
+        `;
+        // ... génère le bloc HTML du core avec ces selecteurs ...
+      }
       document.querySelectorAll('.edit-eqset-block').forEach(b => b.style.display = 'none');
       div.innerHTML = `
         <h4>Set : ${setName}</h4>
@@ -839,9 +877,9 @@
                   ${coresList.map(c => `<option value="${c}">${c}</option>`).join('')}
                 </select>
             <label>Stat principale :</label>
-            <input type="text" name="core_main_stat_${setOrderIndex}_${c_idx}" value="">
+            ${coreMainStatSelect}
             <label>Stat secondaire :</label>
-            <input type="text" name="core_secondary_stat_${setOrderIndex}_${c_idx}" value="">
+            ${coreSecondaryStatSelect}
             <input type="hidden" name="core_id_${setOrderIndex}_${c_idx}" value="">
           </div>
           <hr>
