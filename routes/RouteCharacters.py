@@ -294,6 +294,7 @@ def characters(app: Flask):
                 core['color'] = core['name']
 
         panoplies_effects = panoplies_sql.get_panoplies_effects(language)
+        panoplies_names = sorted(list({p['set_name'] for p in panoplies_effects}))
         cores_effects = cores_sql.get_cores_effects(language)
         if cores_effects is None:
             cores_effects = []
@@ -304,7 +305,8 @@ def characters(app: Flask):
             character=character_info,
             language=language,
             panoplies_effects=panoplies_effects,
-            cores_effects=cores_effects  # Passage à la vue
+            cores_effects=cores_effects,  # Passage à la vue
+            panoplies_list=panoplies_names
         )
 
     @app.route('/characters/edit/<int:char_id>', methods=['POST'])

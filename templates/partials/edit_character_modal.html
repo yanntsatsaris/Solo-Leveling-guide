@@ -359,7 +359,7 @@
 <script>
   // Liste des noms de panoplies récupérée depuis Flask
   const panopliesList = [
-    {% for panoplie in panoplies_effects %}
+    {% for panoplie in panoplies_list %}
       "{{ panoplie.set_name }}"{% if not loop.last %},{% endif %}
     {% endfor %}
   ];
