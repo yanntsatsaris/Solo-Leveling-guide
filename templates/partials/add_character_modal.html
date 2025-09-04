@@ -375,6 +375,12 @@
       div.className = 'edit-eqset-block';
       div.id = `eqset-block-${setOrderIndex}`;
       div.style.display = 'block';
+      const focusStatsSelect = `
+        <select multiple size="6" class="eqset-focus-multiselect" data-target="eqset_focus_stats_${setOrderIndex}">
+          ${focusStatsOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+        </select>
+        <input type="text" name="eqset_focus_stats_${setOrderIndex}" value="" readonly style="margin-top:4px;">
+      `;
       let artefactsCol1 = '';
       for (let a_idx = 0; a_idx < 4; a_idx++) {
         const artefactLabel = artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx];
