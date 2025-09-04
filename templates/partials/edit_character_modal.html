@@ -426,9 +426,15 @@
     <hr>
     <h4>Noyaux du set</h4>
     {% set coreMainStats = {
-      "01": ["ATK", "ATK %", "CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],
-      "02": ["DEF", "DEF %", "CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],
-      "03": ["HP", "HP %", "CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"]
+      "01": ["ATK"],
+      "02": ["DEF"],
+      "03": ["HP"]
+    } %}
+    
+    {% set coreSecondaryStats = {
+      "01": ["ATK", "ATK %"],
+      "02": ["DEF", "DEF %"],
+      "03": ["HP", "HP %"]
     } %}
     {% for c_idx in range(3) %}
       {% set core = eqSet.cores[c_idx] if eqSet.cores|length > c_idx else {} %}
@@ -451,7 +457,7 @@
         <label>Stat secondaire :</label>
         <select name="core_secondary_stat_{{ set_idx }}_{{ c_idx }}">
           <option value=""></option>
-          {% for stat in coreMainStats[core_number] %}
+          {% for stat in coreSecondaryStats[core_number] %}
             <option value="{{ stat }}" {% if core.secondary_stat == stat %}selected{% endif %}>{{ stat }}</option>
           {% endfor %}
         </select>
