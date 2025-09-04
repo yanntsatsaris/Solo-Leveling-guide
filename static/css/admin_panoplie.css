@@ -111,6 +111,28 @@ table img:hover {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
+/* Overlay et modal d'upload */
+#upload-panoplie-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(30, 30, 30, 0.85);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-panoplie-modal {
+  background: #fff;
+  color: #121212;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  padding: 32px 24px 24px 24px;
+  position: relative;
+  min-width: 320px;
+  max-width: 420px;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .container {

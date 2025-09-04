@@ -137,18 +137,30 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!imgCheck.exists) {
       if (confirm("Aucune image trouvée pour cette panoplie. Voulez-vous uploader des images maintenant ?")) {
         document.getElementById('edit-panoplie-overlay').style.display = 'none'; // Ferme le menu modal
-        let uploadDiv = document.createElement('div');
-        uploadDiv.innerHTML = `
-          <form id="upload-panoplie-img-form" enctype="multipart/form-data" style="margin:20px 0;">
-            <label>Uploader une ou plusieurs images (webp, png, jpg) :</label>
-            <input type="file" name="files" multiple required accept=".webp,.png,.jpg,.jpeg">
-            <input type="hidden" name="panoplie_name" value="${name}">
-            <button type="submit">Envoyer</button>
-            <button type="button" onclick="this.parentElement.parentElement.remove()">Annuler</button>
-          </form>
+        let overlay = document.createElement('div');
+        overlay.id = "upload-panoplie-overlay";
+        overlay.style.display = "flex";
+        overlay.innerHTML = `
+          <div class="upload-panoplie-modal">
+            <span id="close-upload-panoplie" style="position:absolute;top:12px;right:18px;cursor:pointer;font-size:2em;">&times;</span>
+            <form id="upload-panoplie-img-form" enctype="multipart/form-data">
+              <label>Uploader une ou plusieurs images (webp, png, jpg) :</label>
+              <input type="file" name="files" multiple required accept=".webp,.png,.jpg,.jpeg">
+              <input type="hidden" name="panoplie_name" value="${name}">
+              <button type="submit">Envoyer</button>
+              <button type="button" id="cancel-upload-panoplie">Annuler</button>
+            </form>
+          </div>
         `;
-        document.querySelector('.container').appendChild(uploadDiv);
-        console.log("Formulaire d'upload ajouté");
+        document.body.appendChild(overlay);
+
+        // Fermer la modale
+        document.getElementById('close-upload-panoplie').onclick = function() {
+          overlay.remove();
+        };
+        document.getElementById('cancel-upload-panoplie').onclick = function() {
+          overlay.remove();
+        };
 
         document.getElementById('upload-panoplie-img-form').onsubmit = async function(e) {
           e.preventDefault();
@@ -159,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function() {
           });
           let txt = await resp.text();
           alert(txt);
-          uploadDiv.remove();
+          overlay.remove();
         };
         return;
       } else {
