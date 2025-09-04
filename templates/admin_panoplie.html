@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function() {
     let imgCheck = await fetch(`/admin/panoplie/check_image/${encodeURIComponent(name)}`).then(r => r.json());
     if (!imgCheck.exists) {
       if (confirm("Aucune image trouvée pour cette panoplie. Voulez-vous uploader des images maintenant ?")) {
-        // Affiche un formulaire d'upload (simple exemple, à améliorer)
+        document.getElementById('edit-panoplie-overlay').style.display = 'none'; // Ferme le menu modal
         let uploadDiv = document.createElement('div');
         uploadDiv.innerHTML = `
           <form id="upload-panoplie-img-form" enctype="multipart/form-data" style="margin:20px 0;">
@@ -147,7 +147,8 @@ document.addEventListener("DOMContentLoaded", function() {
             <button type="button" onclick="this.parentElement.parentElement.remove()">Annuler</button>
           </form>
         `;
-        document.body.appendChild(uploadDiv);
+        document.querySelector('.container').appendChild(uploadDiv);
+        console.log("Formulaire d'upload ajouté");
 
         document.getElementById('upload-panoplie-img-form').onsubmit = async function(e) {
           e.preventDefault();

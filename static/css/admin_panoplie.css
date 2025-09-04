@@ -101,6 +101,16 @@ table img:hover {
   color: #fff;
 }
 
+/* Formulaire d'upload d'images */
+#upload-panoplie-img-form {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 24px auto;
+  max-width: 400px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .container {
