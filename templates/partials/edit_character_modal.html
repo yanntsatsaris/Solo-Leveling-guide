@@ -286,7 +286,31 @@
               {% endfor %}
             </select>
             <label>Stat principale :</label>
-            <input type="text" name="artefact_main_stat_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.main_stat if artefact.main_stat is defined else '' }}">
+            <select name="artefact_main_stat_{{ set_idx }}_{{ a_idx }}">
+              <option value=""></option>
+              {% set artefact_label = artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] %}
+              {% set main_stats = {
+                "Casque": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
+                "Plastron": ["DEF", "DEF %"],
+                "Gants": ["ATK", "ATK %"],
+                "Bottes": ["CRIT DMG", "DEF", "DEF %", "HP", "HP %"],
+                "Collier": ["HP", "HP %"],
+                "Bracelet": ["LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"],
+                "Bague": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
+                "Boucle d'oreille": ["MP MAX"],
+                "Helmet": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
+                "Chestplate": ["DEF", "DEF %"],
+                "Gloves": ["ATK", "ATK %"],
+                "Boots": ["CRIT DMG", "DEF", "DEF %", "HP", "HP %"],
+                "Necklace": ["HP", "HP %"],
+                "Bracelet": ["LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"],
+                "Ring": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
+                "Earring": ["MP MAX"]
+              }[artefact_label] %}
+              {% for stat in main_stats %}
+                <option value="{{ stat }}" {% if artefact.main_stat == stat %}selected{% endif %}>{{ stat }}</option>
+              {% endfor %}
+            </select>
             <label>Stats secondaires :</label>
             <input type="text" name="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.secondary_stats|join(', ') if artefact.secondary_stats is defined else '' }}">
             <input type="hidden" name="artefact_id_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.id if artefact.id is defined else '' }}">
@@ -313,7 +337,31 @@
               {% endfor %}
             </select>
             <label>Stat principale :</label>
-            <input type="text" name="artefact_main_stat_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.main_stat if artefact.main_stat is defined else '' }}">
+            <select name="artefact_main_stat_{{ set_idx }}_{{ a_idx }}">
+              <option value=""></option>
+              {% set artefact_label = artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] %}
+              {% set main_stats = {
+                "Casque": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
+                "Plastron": ["DEF", "DEF %"],
+                "Gants": ["ATK", "ATK %"],
+                "Bottes": ["CRIT DMG", "DEF", "DEF %", "HP", "HP %"],
+                "Collier": ["HP", "HP %"],
+                "Bracelet": ["LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"],
+                "Bague": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
+                "Boucle d'oreille": ["MP MAX"],
+                "Helmet": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
+                "Chestplate": ["DEF", "DEF %"],
+                "Gloves": ["ATK", "ATK %"],
+                "Boots": ["CRIT DMG", "DEF", "DEF %", "HP", "HP %"],
+                "Necklace": ["HP", "HP %"],
+                "Bracelet": ["LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"],
+                "Ring": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
+                "Earring": ["MP MAX"]
+              }[artefact_label] %}
+              {% for stat in main_stats %}
+                <option value="{{ stat }}" {% if artefact.main_stat == stat %}selected{% endif %}>{{ stat }}</option>
+              {% endfor %}
+            </select>
             <label>Stats secondaires :</label>
             <input type="text" name="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.secondary_stats|join(', ') if artefact.secondary_stats is defined else '' }}">
             <input type="hidden" name="artefact_id_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.id if artefact.id is defined else '' }}">
@@ -363,6 +411,25 @@
       "{{ panoplie.set_name }}"{% if not loop.last %},{% endif %}
     {% endfor %}
   ];
+  const artefactMainStats = {
+    "Casque": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
+    "Plastron": ["DEF", "DEF %"],
+    "Gants": ["ATK", "ATK %"],
+    "Bottes": ["CRIT DMG", "DEF", "DEF %", "HP", "HP %"],
+    "Collier": ["HP", "HP %"],
+    "Bracelet": ["LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"],
+    "Bague": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
+    "Boucle d'oreille": ["MP MAX"],
+    // EN version si besoin
+    "Helmet": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
+    "Chestplate": ["DEF", "DEF %"],
+    "Gloves": ["ATK", "ATK %"],
+    "Boots": ["CRIT DMG", "DEF", "DEF %", "HP", "HP %"],
+    "Necklace": ["HP", "HP %"],
+    "Bracelet": ["LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"],
+    "Ring": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
+    "Earring": ["MP MAX"]
+  };
   // Gestion des onglets
   document.querySelectorAll('.edit-tab').forEach(tab => {
     tab.addEventListener('click', function() {
@@ -606,6 +673,14 @@
       div.className = 'edit-eqset-block';
       div.id = `eqset-block-${setOrderIndex}`;
       div.style.display = 'block';
+      const artefactLabel = artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx];
+      const mainStatOptions = artefactMainStats[artefactLabel] || [];
+      const mainStatSelect = `
+        <select name="artefact_main_stat_${setOrderIndex}_${a_idx}">
+          <option value=""></option>
+          ${mainStatOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+        </select>
+      `;
       document.querySelectorAll('.edit-eqset-block').forEach(b => b.style.display = 'none');
       div.innerHTML = `
         <h4>Set : ${setName}</h4>
@@ -629,7 +704,7 @@
                   ${panopliesList.map(p => `<option value="${p}">${p}</option>`).join('')}
                 </select>
                 <label>Stat principale :</label>
-                <input type="text" name="artefact_main_stat_${setOrderIndex}_${a_idx}" value="">
+                ${mainStatSelect}
                 <label>Stats secondaires :</label>
                 <input type="text" name="artefact_secondary_stats_${setOrderIndex}_${a_idx}" value="">
                 <input type="hidden" name="artefact_id_${setOrderIndex}_${a_idx}" value="">
@@ -647,7 +722,7 @@
                   ${panopliesList.map(p => `<option value="${p}">${p}</option>`).join('')}
                 </select>
                 <label>Stat principale :</label>
-                <input type="text" name="artefact_main_stat_${setOrderIndex}_${a_idx}" value="">
+                ${mainStatSelect}
                 <label>Stats secondaires :</label>
                 <input type="text" name="artefact_secondary_stats_${setOrderIndex}_${a_idx}" value="">
                 <input type="hidden" name="artefact_id_${setOrderIndex}_${a_idx}" value="">
