@@ -794,32 +794,119 @@
       div.className = 'edit-eqset-block';
       div.id = `eqset-block-${setOrderIndex}`;
       div.style.display = 'block';
-      const artefactLabel = artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx];
-      const mainStatOptions = artefactMainStats[artefactLabel] || [];
-      const mainStatSelect = `
-        <select name="artefact_main_stat_${setOrderIndex}_${a_idx}">
-          <option value=""></option>
-          ${mainStatOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+      const focusStatsSelect = `
+        <select multiple size="6" class="eqset-focus-multiselect" data-target="eqset_focus_stats_${setOrderIndex}">
+          ${focusStatsOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
         </select>
+        <input type="text" name="eqset_focus_stats_${setOrderIndex}" value="" readonly style="margin-top:4px;">
       `;
+      let artefactsCol1 = '';
+      for (let a_idx = 0; a_idx < 4; a_idx++) {
+        const artefactLabel = artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx];
+        const mainStatOptions = artefactMainStats[artefactLabel] || [];
+        const mainStatSelect = `
+          <select name="artefact_main_stat_${setOrderIndex}_${a_idx}">
+            <option value=""></option>
+            ${mainStatOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+          </select>
+        `;
+        const secondaryStatSelect = `
+          <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_${setOrderIndex}_${a_idx}">
+            ${secondaryStatsOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+          </select>
+          <input type="text" name="artefact_secondary_stats_${setOrderIndex}_${a_idx}" value="" readonly style="margin-top:4px;">
+        `;
+        const panoplieSelect = `
+          <select name="artefact_set_${setOrderIndex}_${a_idx}">
+            <option value=""></option>
+            ${panopliesList.map(p => `<option value="${p}">${p}</option>`).join('')}
+          </select>
+        `;
+        artefactsCol1 += `
+          <div class="edit-artefact-block">
+            <label>${artefactLabel}</label>
+            <input type="hidden" name="artefact_name_${setOrderIndex}_${a_idx}" value="${artefactLabel}">
+            <label>Pannoplie :</label>
+            ${panoplieSelect}
+            <label>Stat principale :</label>
+            ${mainStatSelect}
+            <label>Stats secondaires :</label>
+            ${secondaryStatSelect}
+            <input type="hidden" name="artefact_id_${setOrderIndex}_${a_idx}" value="">
+          </div>
+        `;
+      }
+
+      let artefactsCol2 = '';
+      for (let a_idx = 4; a_idx < 8; a_idx++) {
+        const artefactLabel = artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx];
+        const mainStatOptions = artefactMainStats[artefactLabel] || [];
+        const mainStatSelect = `
+          <select name="artefact_main_stat_${setOrderIndex}_${a_idx}">
+            <option value=""></option>
+            ${mainStatOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+          </select>
+        `;
+        const secondaryStatSelect = `
+          <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_${setOrderIndex}_${a_idx}">
+            ${secondaryStatsOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+          </select>
+          <input type="text" name="artefact_secondary_stats_${setOrderIndex}_${a_idx}" value="" readonly style="margin-top:4px;">
+        `;
+        const panoplieSelect = `
+          <select name="artefact_set_${setOrderIndex}_${a_idx}">
+            <option value=""></option>
+            ${panopliesList.map(p => `<option value="${p}">${p}</option>`).join('')}
+          </select>
+        `;
+        artefactsCol2 += `
+          <div class="edit-artefact-block">
+            <label>${artefactLabel}</label>
+            <input type="hidden" name="artefact_name_${setOrderIndex}_${a_idx}" value="${artefactLabel}">
+            <label>Pannoplie :</label>
+            ${panoplieSelect}
+            <label>Stat principale :</label>
+            ${mainStatSelect}
+            <label>Stats secondaires :</label>
+            ${secondaryStatSelect}
+            <input type="hidden" name="artefact_id_${setOrderIndex}_${a_idx}" value="">
+          </div>
+        `;
+      }
+      let coresHtml = '';
       for (let coreIdx = 0; coreIdx < 3; coreIdx++) {
         const coreNumber = `${coreIdx + 1}`.padStart(2, "0"); // "01", "02", "03"
-        const mainStats = coreMainStats[coreNumber] || [];
-        const secondaryStats = coreSecondaryStats[coreNumber] || [];
+        const coreNameSelect = `
+          <select name="core_name_${setOrderIndex}_${coreIdx}">
+            <option value=""></option>
+            ${coresList.map(c => `<option value="${c}">${c}</option>`).join('')}
+          </select>
+        `;
         const coreMainStatSelect = `
           <select name="core_main_stat_${setOrderIndex}_${coreIdx}">
             <option value=""></option>
-            ${mainStats.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+            ${coreMainStats[coreNumber].map(stat => `<option value="${stat}">${stat}</option>`).join('')}
           </select>
         `;
         const coreSecondaryStatSelect = `
           <select name="core_secondary_stat_${setOrderIndex}_${coreIdx}">
             <option value=""></option>
-            ${secondaryStats.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+            ${coreSecondaryStats[coreNumber].map(stat => `<option value="${stat}">${stat}</option>`).join('')}
           </select>
         `;
+        coresHtml += `
+          <div class="edit-core-block">
+            <label>Nom du noyau :</label>
+            ${coreNameSelect}
+            <label>Stat principale :</label>
+            ${coreMainStatSelect}
+            <label>Stat secondaire :</label>
+            ${coreSecondaryStatSelect}
+            <input type="hidden" name="core_id_${setOrderIndex}_${coreIdx}" value="">
+          </div>
+          <hr>
+        `;
       }
-      document.querySelectorAll('.edit-eqset-block').forEach(b => b.style.display = 'none');
       div.innerHTML = `
         <h4>Set : ${setName}</h4>
         <input type="hidden" name="eqset_name_${setOrderIndex}" value="${setName}">
@@ -827,76 +914,21 @@
         <label>Description :</label>
         <textarea name="eqset_description_${setOrderIndex}"></textarea>
         <label>Stats à focus :</label>
-        <select multiple size="6" class="eqset-focus-multiselect" data-target="eqset_focus_stats_${setOrderIndex}">
-          ${focusStatsOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
-        </select>
-        <input type="text" name="eqset_focus_stats_${setOrderIndex}" value="" readonly style="margin-top:4px;">
+        ${focusStatsSelect}
         <input type="hidden" name="eqset_order_${setOrderIndex}" value="${setOrder}">
         <h4>Artefacts du set</h4>
         <div class="artefacts-row" style="display: flex;">
           <div class="artefacts-col" style="flex: 1;">
-            ${[0,1,2,3].map(a_idx => `
-              <div class="edit-artefact-block">
-                <label>${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}</label>
-                <input type="hidden" name="artefact_name_${setOrderIndex}_${a_idx}" value="${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}">
-                <label>Pannoplie :</label>
-                <select name="artefact_set_${setOrderIndex}_${a_idx}">
-                  <option value=""></option>
-                  ${panopliesList.map(p => `<option value="${p}">${p}</option>`).join('')}
-                </select>
-                <label>Stat principale :</label>
-                ${mainStatSelect}
-                <label>Stats secondaires :</label>
-                <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_${setOrderIndex}_${a_idx}">
-                  ${secondaryStatsOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
-                </select>
-                <input type="text" name="artefact_secondary_stats_${setOrderIndex}_${a_idx}" value="" readonly style="margin-top:4px;">
-                <input type="hidden" name="artefact_id_${setOrderIndex}_${a_idx}" value="">
-              </div>
-            `).join('')}
+            ${artefactsCol1}
           </div>
           <div class="artefacts-col" style="flex: 1;">
-            ${[4,5,6,7].map(a_idx => `
-              <div class="edit-artefact-block">
-                <label>${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}</label>
-                <input type="hidden" name="artefact_name_${setOrderIndex}_${a_idx}" value="${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}">
-                <label>Pannoplie :</label>
-                <select name="artefact_set_${setOrderIndex}_${a_idx}">
-                  <option value=""></option>
-                  ${panopliesList.map(p => `<option value="${p}">${p}</option>`).join('')}
-                </select>
-                <label>Stat principale :</label>
-                ${mainStatSelect}
-                <label>Stats secondaires :</label>
-                <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_${setOrderIndex}_${a_idx}">
-                  ${secondaryStatsOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
-                </select>
-                <input type="text" name="artefact_secondary_stats_${setOrderIndex}_${a_idx}" value="" readonly style="margin-top:4px;">
-                <input type="hidden" name="artefact_id_${setOrderIndex}_${a_idx}" value="">
-              </div>
-            `).join('')}
+            ${artefactsCol2}
           </div>
         </div>
         <hr>
         <h4>Noyaux du set</h4>
-        ${[0,1,2].map(c_idx => `
-          <div class="edit-core-block">
-            <label>Nom du noyau :</label>
-            <input type="text" name="core_name_${setOrderIndex}_${c_idx}" value="">
-            <select name="core_name_${setOrderIndex}_${c_idx}">
-                  <option value=""></option>
-                  ${coresList.map(c => `<option value="${c}">${c}</option>`).join('')}
-                </select>
-            <label>Stat principale :</label>
-            ${coreMainStatSelect}
-            <label>Stat secondaire :</label>
-            ${coreSecondaryStatSelect}
-            <input type="hidden" name="core_id_${setOrderIndex}_${c_idx}" value="">
-          </div>
-          <hr>
-        `).join('')}
+        ${coresHtml}
       `;
-      // Insère le bloc HTML à la même position que l'option dans le select
       const blocks = Array.from(fields.querySelectorAll('.edit-eqset-block'));
       if (insertPos < blocks.length) {
         fields.insertBefore(div, blocks[insertPos]);
