@@ -312,7 +312,25 @@
               {% endfor %}
             </select>
             <label>Stats secondaires :</label>
-            <input type="text" name="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.secondary_stats|join(', ') if artefact.secondary_stats is defined else '' }}">
+            <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}">
+              {% set secondary_stats = [
+                "ATK", "ATK %", "ATK % +3/4",
+                "DEF", "DEF %", "DEF % +3/4",
+                "HP", "HP %", "HP % +3/4",
+                "CRIT HIT",
+                "CRIT DMG",
+                "DMG INC",
+                "DEF PEN",
+                "MP CONS",
+                "MP MAX",
+                "MP Regen %",
+                "DMG RES"
+              ] %}
+              {% for stat in secondary_stats %}
+                <option value="{{ stat }}" {% if artefact.secondary_stats is defined and stat in artefact.secondary_stats %}selected{% endif %}>{{ stat }}</option>
+              {% endfor %}
+            </select>
+            <input type="text" name="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.secondary_stats|join(', ') if artefact.secondary_stats is defined else '' }}" readonly style="margin-top:4px;">
             <input type="hidden" name="artefact_id_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.id if artefact.id is defined else '' }}">
           </div>
         {% endfor %}
@@ -363,7 +381,25 @@
               {% endfor %}
             </select>
             <label>Stats secondaires :</label>
-            <input type="text" name="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.secondary_stats|join(', ') if artefact.secondary_stats is defined else '' }}">
+            <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}">
+              {% set secondary_stats = [
+                "ATK", "ATK %", "ATK % +3/4",
+                "DEF", "DEF %", "DEF % +3/4",
+                "HP", "HP %", "HP % +3/4",
+                "CRIT HIT",
+                "CRIT DMG",
+                "DMG INC",
+                "DEF PEN",
+                "MP CONS",
+                "MP MAX",
+                "MP Regen %",
+                "DMG RES"
+              ] %}
+              {% for stat in secondary_stats %}
+                <option value="{{ stat }}" {% if artefact.secondary_stats is defined and stat in artefact.secondary_stats %}selected{% endif %}>{{ stat }}</option>
+              {% endfor %}
+            </select>
+            <input type="text" name="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.secondary_stats|join(', ') if artefact.secondary_stats is defined else '' }}" readonly style="margin-top:4px;">
             <input type="hidden" name="artefact_id_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.id if artefact.id is defined else '' }}">
           </div>
         {% endfor %}
@@ -420,7 +456,6 @@
     "Bracelet": ["LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"],
     "Bague": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
     "Boucle d'oreille": ["MP MAX"],
-    // EN version si besoin
     "Helmet": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
     "Chestplate": ["DEF", "DEF %"],
     "Gloves": ["ATK", "ATK %"],
@@ -430,6 +465,19 @@
     "Ring": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
     "Earring": ["MP MAX"]
   };
+  const secondaryStatsOptions = [
+    "ATK", "ATK %", "ATK % +3/4",
+    "DEF", "DEF %", "DEF % +3/4",
+    "HP", "HP %", "HP % +3/4",
+    "CRIT HIT",
+    "CRIT DMG",
+    "DMG INC",
+    "DEF PEN",
+    "MP CONS",
+    "MP MAX",
+    "MP Regen %",
+    "DMG RES"
+  ];
   // Gestion des onglets
   document.querySelectorAll('.edit-tab').forEach(tab => {
     tab.addEventListener('click', function() {
@@ -706,7 +754,10 @@
                 <label>Stat principale :</label>
                 ${mainStatSelect}
                 <label>Stats secondaires :</label>
-                <input type="text" name="artefact_secondary_stats_${setOrderIndex}_${a_idx}" value="">
+                <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_${setOrderIndex}_${a_idx}">
+                  ${secondaryStatsOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+                </select>
+                <input type="text" name="artefact_secondary_stats_${setOrderIndex}_${a_idx}" value="" readonly style="margin-top:4px;">
                 <input type="hidden" name="artefact_id_${setOrderIndex}_${a_idx}" value="">
               </div>
             `).join('')}
@@ -724,7 +775,10 @@
                 <label>Stat principale :</label>
                 ${mainStatSelect}
                 <label>Stats secondaires :</label>
-                <input type="text" name="artefact_secondary_stats_${setOrderIndex}_${a_idx}" value="">
+                <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_${setOrderIndex}_${a_idx}">
+                  ${secondaryStatsOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+                </select>
+                <input type="text" name="artefact_secondary_stats_${setOrderIndex}_${a_idx}" value="" readonly style="margin-top:4px;">
                 <input type="hidden" name="artefact_id_${setOrderIndex}_${a_idx}" value="">
               </div>
             `).join('')}
@@ -827,4 +881,20 @@
 // Appelle la fonction à l'ouverture de la modale
 document.getElementById('edit-character-btn')?.addEventListener('click', fillImageSelects);
 // Ou si la modale s'ouvre autrement, appelle fillImageSelects() juste après l'ouverture
+document.addEventListener('change', function(e) {
+  if (e.target.classList.contains('artefact-secondary-multiselect')) {
+    const select = e.target;
+    const selected = Array.from(select.selectedOptions).map(opt => opt.value);
+    if (selected.length > 4) {
+      // Désélectionne le dernier choisi
+      select.options[select.selectedIndex].selected = false;
+      alert("Vous ne pouvez sélectionner que 4 stats secondaires maximum.");
+      return;
+    }
+    // Met à jour le champ texte associé
+    const inputName = select.dataset.target;
+    const input = select.parentElement.querySelector(`input[name="${inputName}"]`);
+    if (input) input.value = selected.join(', ');
+  }
+});
 </script>
