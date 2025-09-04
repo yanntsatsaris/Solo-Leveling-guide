@@ -803,7 +803,15 @@ def characters(app: Flask):
                 break
             wstats = request.form.get(f"weapon_stats_{weapon_idx}")
             wtag = request.form.get(f"weapon_tag_{weapon_idx}")
-            wimg = request.form.get(f"weapon_image_{weapon_idx}")
+            # Recherche automatique de l'image
+            folder = os.path.join('static', 'images', 'Personnages', f"SLA_Personnages_{type_}", image_folder)
+            pattern = os.path.join(folder, f"{rarity}_{type_}_Weapon.*")
+            found_images = glob.glob(pattern)
+            if found_images:
+                wimg = os.path.basename(found_images[0])
+            else:
+                wimg = ""
+            # wimg = request.form.get(f"weapon_image_{weapon_idx}")
             wid = weapons_sql.add_weapon(char_id, wname, wstats, wtag, wimg, language)
             write_log(f"Ajout arme {wname} au personnage {char_id}", log_level="INFO")
             # --- Evolutions de l'arme ---
