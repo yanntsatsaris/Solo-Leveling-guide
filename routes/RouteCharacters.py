@@ -177,7 +177,7 @@ def characters(app: Flask):
             character_types=character_types,
             rarities=rarities,
             panoplies_list=panoplies_names,
-            cores_list=cores_names
+            cores_list=cores_names  # Passage à la vue
         )
 
     @app.route('/characters/<alias>')
