@@ -139,10 +139,10 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById('edit-panoplie-overlay').style.display = 'none'; // Ferme le menu modal
         let overlay = document.createElement('div');
         overlay.id = "upload-panoplie-overlay";
-        overlay.className = "upload-panoplie-overlay"; // même classe que l'édition
+        overlay.className = "edit-panoplie-overlay"; // même overlay que l'édition
         overlay.style.display = "flex";
         overlay.innerHTML = `
-          <div class="upload-panoplie-popup">
+          <div class="edit-panoplie-popup">
             <form id="upload-panoplie-img-form" enctype="multipart/form-data">
               <h2>Uploader des images de panoplie</h2>
               <label>Uploader une ou plusieurs images (webp, png, jpg) :</label>

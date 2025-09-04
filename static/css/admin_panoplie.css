@@ -122,27 +122,26 @@ table img:hover {
   justify-content: center;
 }
 
-.upload-panoplie-overlay,
-#upload-panoplie-overlay {
+.edit-panoplie-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(30, 30, 30, 0.85);
-  z-index: 9999;
+  background: rgba(18, 18, 18, 0.85);
+  z-index: 1000;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.upload-panoplie-popup,
-.upload-panoplie-modal {
-  background: #fff;
-  color: #121212;
+.edit-panoplie-popup {
+  background: #1e1e1e;
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-  padding: 32px 24px 24px 24px;
+  box-shadow: 0 8px 32px rgba(128,0,255,0.25);
+  padding: 32px 28px 24px 28px;
+  min-width: 340px;
+  max-width: 1000px;
+  width: 100%;
+  color: #ffcc00;
   position: relative;
-  min-width: 320px;
-  max-width: 420px;
 }
 
 /* Responsive */
