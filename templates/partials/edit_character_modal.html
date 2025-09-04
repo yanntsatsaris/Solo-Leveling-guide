@@ -426,9 +426,9 @@
     <hr>
     <h4>Noyaux du set</h4>
     {% set coreMainStats = {
-      "01": ["ATK"],
-      "02": ["DEF"],
-      "03": ["HP"]
+      "01": ["ATK", "ATK%"],
+      "02": ["DEF", "DEF%"],
+      "03": ["HP", "HP%"]
     } %}
     
     {% set coreSecondaryStats = {
@@ -542,9 +542,9 @@
     {% endfor %}
   ];
   const coreMainStats = {
-    "01": ["ATK"],
-    "02": ["DEF"],
-    "03": ["HP"]
+    "01": ["ATK", "ATK%"],
+    "02": ["DEF", "DEF%"],
+    "03": ["HP", "HP%"]
   };
   const coreSecondaryStats = {
     "01": ["CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],

@@ -135,6 +135,13 @@ def characters(app: Flask):
         characters_sql = CharactersSql(sql_manager.cursor)
 
         characters_data = characters_sql.get_characters(language)
+        panoplies_sql = PanopliesSql(sql_manager.cursor)
+        cores_sql = CoresSql(sql_manager.cursor)
+
+        panoplies_effects = panoplies_sql.get_panoplies_effects(language)
+        panoplies_names = sorted(list({p['set_name'] for p in panoplies_effects}))
+        cores_effects = cores_sql.get_cores_effects(language)
+        cores_names = sorted(list({c['color'] for c in cores_effects}))
         sql_manager.close()
 
         images = []
@@ -169,6 +176,8 @@ def characters(app: Flask):
             images=images,
             character_types=character_types,
             rarities=rarities,
+            panoplies_list=panoplies_names,
+            cores_list=cores_names
         )
 
     @app.route('/characters/<alias>')
