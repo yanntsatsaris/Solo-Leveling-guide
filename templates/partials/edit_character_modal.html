@@ -430,6 +430,12 @@
       <div class="edit-core-block">
         <label>Nom du noyau :</label>
         <input type="text" name="core_name_{{ set_idx }}_{{ c_idx }}" value="{{ core.name if core.name is defined else '' }}">
+        <select name="core_name_{{ set_idx }}_{{ c_idx }}">
+              <option value=""></option>
+              {% for core in cores_list %}
+                <option value="{{ core }}" {% if artefact.set == core %}selected{% endif %}>{{ core }}</option>
+              {% endfor %}
+            </select>
         <label>Stat principale :</label>
         <input type="text" name="core_main_stat_{{ set_idx }}_{{ c_idx }}" value="{{ core.main_stat if core.main_stat is defined else '' }}">
         <label>Stat secondaire :</label>
@@ -508,6 +514,11 @@
     "MP MAX",
     "MP Regen%",
     "DMG RES"
+  ];
+  const coreList = [
+    {% for core in cores_list %}
+      "{{ core.name }}"{% if not loop.last %},{% endif %}
+    {% endfor %}
   ];
   // Gestion des onglets
   document.querySelectorAll('.edit-tab').forEach(tab => {
@@ -824,6 +835,10 @@
           <div class="edit-core-block">
             <label>Nom du noyau :</label>
             <input type="text" name="core_name_${setOrderIndex}_${c_idx}" value="">
+            <select name="core_name_${setOrderIndex}_${c_idx}">
+                  <option value=""></option>
+                  ${coresList.map(c => `<option value="${c}">${c}</option>`).join('')}
+                </select>
             <label>Stat principale :</label>
             <input type="text" name="core_main_stat_${setOrderIndex}_${c_idx}" value="">
             <label>Stat secondaire :</label>
