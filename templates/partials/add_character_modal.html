@@ -454,24 +454,26 @@
           </div>
         `;
       }
-      for (let coreIdx = 0; coreIdx < 3; coreIdx++) {
-        const coreNumber = `${coreIdx + 1}`.padStart(2, "0"); // "01", "02", "03"
-        const coreNameSelect = `
+      const coreNameSelect = `
           <select name="core_name_${setOrderIndex}_${coreIdx}">
             <option value=""></option>
             ${coreList.map(c => `<option value="${c}">${c}</option>`).join('')}
           </select>
         `;
+      for (let coreIdx = 0; coreIdx < 3; coreIdx++) {
+        const coreNumber = `${coreIdx + 1}`.padStart(2, "0"); // "01", "02", "03"
+        const mainStats = coreMainStats[coreNumber] || [];
+        const secondaryStats = coreSecondaryStats[coreNumber] || [];
         const coreMainStatSelect = `
           <select name="core_main_stat_${setOrderIndex}_${coreIdx}">
             <option value=""></option>
-            ${coreMainStats[coreNumber].map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+            ${mainStats.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
           </select>
         `;
         const coreSecondaryStatSelect = `
           <select name="core_secondary_stat_${setOrderIndex}_${coreIdx}">
             <option value=""></option>
-            ${coreMainStats[coreNumber].map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+            ${secondaryStats.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
           </select>
         `;
       }
