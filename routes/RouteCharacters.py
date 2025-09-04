@@ -333,6 +333,7 @@ def characters(app: Flask):
         description = request.form.get('description')
         rarity = request.form.get('rarity')
         type_ = request.form.get('type')
+        char_folder = request.form.get('images_folder')
 
         sql_manager = ControleurSql()
         cursor = sql_manager.cursor
@@ -460,21 +461,30 @@ def characters(app: Flask):
         form_weapon_ids = []
         weapon_modif = False
         weapon_idx = 0
+       
         while True:
             wname = request.form.get(f"weapon_name_{weapon_idx}")
             if wname is None:
                 break
             wstats = request.form.get(f"weapon_stats_{weapon_idx}")
             wtag = request.form.get(f"weapon_tag_{weapon_idx}")
-            wimg = request.form.get(f"weapon_image_{weapon_idx}")
+            # Recherche automatique de l'image
+            folder = os.path.join('static', 'images', 'Personnages', f"SLA_Personnages_{type_}", char_folder)
+            pattern = os.path.join(folder, f"{rarity}_{type_}_Weapon.*")
+            found_images = glob.glob(pattern)
+            if found_images:
+                wimg = os.path.basename(found_images[0])
+            else:
+                wimg = ""
+            # wimg = request.form.get(f"weapon_image_{weapon_idx}")
             wid = request.form.get(f"weapon_id_{weapon_idx}")
             if wid:
                 db_weapon = next((w for w in current_weapons if str(w['id']) == str(wid)), None)
                 if db_weapon and (
                     (db_weapon['name'] or '') != (wname or '') or
                     ((normalize_text(db_weapon['stats']) or '') != (normalize_text(wstats) or '')) or
-                    (db_weapon['tag'] or '') != (wtag or '') or
-                    (db_weapon['image_name'] or '') != (wimg or '')
+                    (db_weapon['tag'] or '') != (wtag or '') 
+                    #(db_weapon['image_name'] or '') != (wimg or '')
                 ):
                     weapons_sql.update_weapon(wid, wname, wstats, wtag, wimg, language)
                     weapon_modif = True
