@@ -279,7 +279,12 @@
             </label>
             <input type="hidden" name="artefact_name_{{ set_idx }}_{{ a_idx }}" value="{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}">
             <label>Pannoplie :</label>
-            <input type="text" name="artefact_set_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.set if artefact.set is defined else '' }}">
+            <select name="artefact_set_{{ set_idx }}_{{ a_idx }}">
+              <option value=""></option>
+              {% for panoplie in panoplies_list %}
+                <option value="{{ panoplie }}" {% if artefact.set == panoplie %}selected{% endif %}>{{ panoplie }}</option>
+              {% endfor %}
+            </select>
             <label>Stat principale :</label>
             <input type="text" name="artefact_main_stat_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.main_stat if artefact.main_stat is defined else '' }}">
             <label>Stats secondaires :</label>
@@ -301,7 +306,12 @@
             </label>
             <input type="hidden" name="artefact_name_{{ set_idx }}_{{ a_idx }}" value="{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}">
             <label>Pannoplie :</label>
-            <input type="text" name="artefact_set_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.set if artefact.set is defined else '' }}">
+            <select name="artefact_set_{{ set_idx }}_{{ a_idx }}">
+              <option value=""></option>
+              {% for panoplie in panoplies_list %}
+                <option value="{{ panoplie }}" {% if artefact.set == panoplie %}selected{% endif %}>{{ panoplie }}</option>
+              {% endfor %}
+            </select>
             <label>Stat principale :</label>
             <input type="text" name="artefact_main_stat_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.main_stat if artefact.main_stat is defined else '' }}">
             <label>Stats secondaires :</label>
@@ -347,6 +357,12 @@
   </div>
 </div>
 <script>
+  // Liste des noms de panoplies récupérée depuis Flask
+  const panopliesList = [
+    {% for panoplie in panoplies_effects %}
+      "{{ panoplie.set_name }}"{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ];
   // Gestion des onglets
   document.querySelectorAll('.edit-tab').forEach(tab => {
     tab.addEventListener('click', function() {
@@ -608,7 +624,10 @@
                 <label>${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}</label>
                 <input type="hidden" name="artefact_name_${setOrderIndex}_${a_idx}" value="${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}">
                 <label>Pannoplie :</label>
-                <input type="text" name="artefact_set_${setOrderIndex}_${a_idx}" value="">
+                <select name="artefact_set_${setOrderIndex}_${a_idx}">
+                  <option value=""></option>
+                  ${panopliesList.map(p => `<option value="${p}">${p}</option>`).join('')}
+                </select>
                 <label>Stat principale :</label>
                 <input type="text" name="artefact_main_stat_${setOrderIndex}_${a_idx}" value="">
                 <label>Stats secondaires :</label>
@@ -623,7 +642,10 @@
                 <label>${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}</label>
                 <input type="hidden" name="artefact_name_${setOrderIndex}_${a_idx}" value="${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}">
                 <label>Pannoplie :</label>
-                <input type="text" name="artefact_set_${setOrderIndex}_${a_idx}" value="">
+                <select name="artefact_set_${setOrderIndex}_${a_idx}">
+                  <option value=""></option>
+                  ${panopliesList.map(p => `<option value="${p}">${p}</option>`).join('')}
+                </select>
                 <label>Stat principale :</label>
                 <input type="text" name="artefact_main_stat_${setOrderIndex}_${a_idx}" value="">
                 <label>Stats secondaires :</label>
