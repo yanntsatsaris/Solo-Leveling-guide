@@ -536,9 +536,14 @@
     {% endfor %}
   ];
   const coreMainStats = {
-    "01": ["ATK", "ATK%", "CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],
-    "02": ["DEF", "DEF%", "CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],
-    "03": ["HP", "HP%", "CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"]
+    "01": ["ATK"],
+    "02": ["DEF"],
+    "03": ["HP"]
+  };
+  const coreMainStats = {
+    "01": ["CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],
+    "02": ["CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],
+    "03": ["CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"]
   };
   // Gestion des onglets
   document.querySelectorAll('.edit-tab').forEach(tab => {
@@ -794,6 +799,7 @@
       for (let coreIdx = 0; coreIdx < 3; coreIdx++) {
         const coreNumber = `${coreIdx + 1}`.padStart(2, "0"); // "01", "02", "03"
         const mainStats = coreMainStats[coreNumber] || [];
+        const secondaryStats = coreSecondaryStats[coreNumber] || [];
         const coreMainStatSelect = `
           <select name="core_main_stat_${setOrderIndex}_${coreIdx}">
             <option value=""></option>
@@ -803,7 +809,7 @@
         const coreSecondaryStatSelect = `
           <select name="core_secondary_stat_${setOrderIndex}_${coreIdx}">
             <option value=""></option>
-            ${mainStats.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+            ${secondaryStats.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
           </select>
         `;
         // ... génère le bloc HTML du core avec ces selecteurs ...
