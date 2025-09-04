@@ -440,10 +440,7 @@
                 <label>${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}</label>
                 <input type="hidden" name="artefact_name_${setOrderIndex}_${a_idx}" value="${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}">
                 <label>Pannoplie :</label>
-                <select name="artefact_set_${setOrderIndex}_${a_idx}">
-                  <option value=""></option>
-                  ${panopliesList.map(p => `<option value="${p}">${p}</option>`).join('')}
-                </select>
+                ${panoplieSelect}
                 <label>Stat principale :</label>
                 ${mainStatSelect}
                 <label>Stats secondaires :</label>
@@ -458,10 +455,7 @@
                 <label>${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}</label>
                 <input type="hidden" name="artefact_name_${setOrderIndex}_${a_idx}" value="${artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx]}">
                 <label>Pannoplie :</label>
-                <select name="artefact_set_${setOrderIndex}_${a_idx}">
-                  <option value=""></option>
-                  ${panopliesList.map(p => `<option value="${p}">${p}</option>`).join('')}
-                </select>
+                ${panoplieSelect}
                 <label>Stat principale :</label>
                 ${mainStatSelect}
                 <label>Stats secondaires :</label>
