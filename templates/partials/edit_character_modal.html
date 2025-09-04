@@ -261,7 +261,25 @@
     <label>Description :</label>
     <textarea name="eqset_description_{{ set_idx }}">{{ eqSet.description_raw or eqSet.description }}</textarea>
     <label>Stats à focus :</label>
-    <input type="text" name="eqset_focus_stats_{{ set_idx }}" value="{{ eqSet.focus_stats|join(', ') if eqSet.focus_stats else '' }}">
+    <select multiple size="6" class="eqset-focus-multiselect" data-target="eqset_focus_stats_{{ set_idx }}">
+      {% set focusStatsOptions = [
+        "ATK",
+        "DEF",
+        "HP",
+        "CRIT HIT",
+        "CRIT DMG",
+        "DMG INC",
+        "DEF PEN",
+        "MP CONS",
+        "MP MAX",
+        "MP Regen%",
+        "DMG RES"
+      ] %}
+      {% for stat in focusStatsOptions %}
+        <option value="{{ stat }}" {% if eqSet.focus_stats is defined and stat in eqSet.focus_stats %}selected{% endif %}>{{ stat }}</option>
+      {% endfor %}
+    </select>
+    <input type="text" name="eqset_focus_stats_{{ set_idx }}" value="{{ eqSet.focus_stats|join(', ') if eqSet.focus_stats else '' }}" readonly style="margin-top:4px;">
     <input type="hidden" name="eqset_id_{{ set_idx }}" value="{{ eqSet.id }}">
     <input type="hidden" name="eqset_order_{{ set_idx }}" value="{{ eqSet.order if eqSet.order is defined else set_idx }}">
     <h4>Artefacts du set</h4>
@@ -476,6 +494,19 @@
     "MP CONS",
     "MP MAX",
     "MP Regen %",
+    "DMG RES"
+  ];
+  const focusStatsOptions = [
+    "ATK",
+    "DEF",
+    "HP",
+    "CRIT HIT",
+    "CRIT DMG",
+    "DMG INC",
+    "DEF PEN",
+    "MP CONS",
+    "MP MAX",
+    "MP Regen%",
     "DMG RES"
   ];
   // Gestion des onglets
@@ -737,7 +768,10 @@
         <label>Description :</label>
         <textarea name="eqset_description_${setOrderIndex}"></textarea>
         <label>Stats à focus :</label>
-        <input type="text" name="eqset_focus_stats_${setOrderIndex}" value="">
+        <select multiple size="6" class="eqset-focus-multiselect" data-target="eqset_focus_stats_${setOrderIndex}">
+          ${focusStatsOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+        </select>
+        <input type="text" name="eqset_focus_stats_${setOrderIndex}" value="" readonly style="margin-top:4px;">
         <input type="hidden" name="eqset_order_${setOrderIndex}" value="${setOrder}">
         <h4>Artefacts du set</h4>
         <div class="artefacts-row" style="display: flex;">
@@ -882,16 +916,28 @@
 document.getElementById('edit-character-btn')?.addEventListener('click', fillImageSelects);
 // Ou si la modale s'ouvre autrement, appelle fillImageSelects() juste après l'ouverture
 document.addEventListener('change', function(e) {
+  // Limite à 4 stats secondaires
   if (e.target.classList.contains('artefact-secondary-multiselect')) {
     const select = e.target;
     const selected = Array.from(select.selectedOptions).map(opt => opt.value);
     if (selected.length > 4) {
-      // Désélectionne le dernier choisi
       select.options[select.selectedIndex].selected = false;
       alert("Vous ne pouvez sélectionner que 4 stats secondaires maximum.");
       return;
     }
-    // Met à jour le champ texte associé
+    const inputName = select.dataset.target;
+    const input = select.parentElement.querySelector(`input[name="${inputName}"]`);
+    if (input) input.value = selected.join(', ');
+  }
+  // Limite à 6 stats à focus
+  if (e.target.classList.contains('eqset-focus-multiselect')) {
+    const select = e.target;
+    const selected = Array.from(select.selectedOptions).map(opt => opt.value);
+    if (selected.length > 6) {
+      select.options[select.selectedIndex].selected = false;
+      alert("Vous ne pouvez sélectionner que 6 stats à focus maximum.");
+      return;
+    }
     const inputName = select.dataset.target;
     const input = select.parentElement.querySelector(`input[name="${inputName}"]`);
     if (input) input.value = selected.join(', ');
