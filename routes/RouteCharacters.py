@@ -333,7 +333,7 @@ def characters(app: Flask):
         description = request.form.get('description')
         rarity = request.form.get('rarity')
         type_ = request.form.get('type')
-        char_folder = request.form.get('images_folder')
+        char_folder = request.form.get('image_folder')
 
         sql_manager = ControleurSql()
         cursor = sql_manager.cursor
