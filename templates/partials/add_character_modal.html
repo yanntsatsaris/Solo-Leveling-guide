@@ -454,12 +454,6 @@
           </div>
         `;
       }
-      const focusStatsSelect = `
-        <select multiple size="6" class="eqset-focus-multiselect" data-target="eqset_focus_stats_${setOrderIndex}">
-          ${focusStatsOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
-        </select>
-        <input type="text" name="eqset_focus_stats_${setOrderIndex}" value="" readonly style="margin-top:4px;">
-      `;
       let coresHtml = '';
       for (let coreIdx = 0; coreIdx < 3; coreIdx++) {
         const coreNumber = `${coreIdx + 1}`.padStart(2, "0"); // "01", "02", "03"
