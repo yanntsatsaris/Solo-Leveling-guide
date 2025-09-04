@@ -136,7 +136,7 @@
   // Liste des noms de panoplies récupérée depuis Flask
   const panopliesList = [
     {% for panoplie in panoplies_list %}
-      "{{ panoplie.set_name }}"{% if not loop.last %},{% endif %}
+      "{{ panoplie }}"{% if not loop.last %},{% endif %}
     {% endfor %}
   ];
   const artefactMainStats = {
@@ -185,7 +185,7 @@
   ];
   const coresList = [
     {% for core in cores_list %}
-      "{{ core.name }}"{% if not loop.last %},{% endif %}
+      "{{ core }}"{% if not loop.last %},{% endif %}
     {% endfor %}
   ];
   const coreMainStats = {
