@@ -440,16 +440,16 @@
                 <option value="{{ cor }}" {% if core.name == cor %}selected{% endif %}>{{ cor }}</option>
               {% endfor %}
             </select>
-        {% set core_number = "%02d"|format(core_idx + 1) %}
+        {% set core_number = "%02d"|format(c_idx + 1) %}
         <label>Stat principale :</label>
-        <select name="core_main_stat_{{ set_idx }}_{{ core_idx }}">
+        <select name="core_main_stat_{{ set_idx }}_{{ c_idx }}">
           <option value=""></option>
           {% for stat in coreMainStats[core_number] %}
             <option value="{{ stat }}" {% if core.main_stat == stat %}selected{% endif %}>{{ stat }}</option>
           {% endfor %}
         </select>
         <label>Stat secondaire :</label>
-        <select name="core_secondary_stat_{{ set_idx }}_{{ core_idx }}">
+        <select name="core_secondary_stat_{{ set_idx }}_{{ c_idx }}">
           <option value=""></option>
           {% for stat in coreMainStats[core_number] %}
             <option value="{{ stat }}" {% if core.secondary_stat == stat %}selected{% endif %}>{{ stat }}</option>
