@@ -454,27 +454,44 @@
           </div>
         `;
       }
-      const coreNameSelect = `
-          <select name="core_name_${setOrderIndex}_${coreIdx}">
-            <option value=""></option>
-            ${coreList.map(c => `<option value="${c}">${c}</option>`).join('')}
-          </select>
-        `;
+      const focusStatsSelect = `
+        <select multiple size="6" class="eqset-focus-multiselect" data-target="eqset_focus_stats_${setOrderIndex}">
+          ${focusStatsOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+        </select>
+        <input type="text" name="eqset_focus_stats_${setOrderIndex}" value="" readonly style="margin-top:4px;">
+      `;
+      let coresHtml = '';
       for (let coreIdx = 0; coreIdx < 3; coreIdx++) {
         const coreNumber = `${coreIdx + 1}`.padStart(2, "0"); // "01", "02", "03"
-        const mainStats = coreMainStats[coreNumber] || [];
-        const secondaryStats = coreSecondaryStats[coreNumber] || [];
+        const coreNameSelect = `
+          <select name="core_name_${setOrderIndex}_${coreIdx}">
+            <option value=""></option>
+            ${coresList.map(c => `<option value="${c}">${c}</option>`).join('')}
+          </select>
+        `;
         const coreMainStatSelect = `
           <select name="core_main_stat_${setOrderIndex}_${coreIdx}">
             <option value=""></option>
-            ${mainStats.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+            ${coreMainStats[coreNumber].map(stat => `<option value="${stat}">${stat}</option>`).join('')}
           </select>
         `;
         const coreSecondaryStatSelect = `
           <select name="core_secondary_stat_${setOrderIndex}_${coreIdx}">
             <option value=""></option>
-            ${secondaryStats.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
+            ${coreSecondaryStats[coreNumber].map(stat => `<option value="${stat}">${stat}</option>`).join('')}
           </select>
+        `;
+        coresHtml += `
+          <div class="edit-core-block">
+            <label>Nom du noyau :</label>
+            ${coreNameSelect}
+            <label>Stat principale :</label>
+            ${coreMainStatSelect}
+            <label>Stat secondaire :</label>
+            ${coreSecondaryStatSelect}
+            <input type="hidden" name="core_id_${setOrderIndex}_${coreIdx}" value="">
+          </div>
+          <hr>
         `;
       }
       div.innerHTML = `
@@ -497,18 +514,7 @@
         </div>
         <hr>
         <h4>Noyaux du set</h4>
-        ${[0,1,2].map(c_idx => `
-          <div class="edit-core-block">
-            <label>Nom du noyau :</label>
-            ${coreNameSelect}
-            <label>Stat principale :</label>
-            ${coreMainStatSelect}
-            <label>Stat secondaire :</label>
-            ${coreSecondaryStatSelect}
-            <input type="hidden" name="core_id_${setOrderIndex}_${c_idx}" value="">
-          </div>
-          <hr>
-        `).join('')}
+        ${coresHtml}
       `;
       const blocks = Array.from(fields.querySelectorAll('.edit-eqset-block'));
       if (insertPos < blocks.length) {
