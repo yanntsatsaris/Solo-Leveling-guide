@@ -359,21 +359,21 @@
               <option value=""></option>
               {% set artefact_label = artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] %}
               {% set main_stats = {
-                "Casque": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
-                "Plastron": ["DEF", "DEF %"],
-                "Gants": ["ATK", "ATK %"],
-                "Bottes": ["CRIT DMG", "DEF", "DEF %", "HP", "HP %"],
-                "Collier": ["HP", "HP %"],
+                "Casque": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
+                "Plastron": ["DEF", "DEF%"],
+                "Gants": ["ATK", "ATK%"],
+                "Bottes": ["CRIT DMG", "DEF", "DEF%", "HP", "HP%"],
+                "Collier": ["HP", "HP%"],
                 "Bracelet": ["LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"],
-                "Bague": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
+                "Bague": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
                 "Boucle d'oreille": ["MP MAX"],
-                "Helmet": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
-                "Chestplate": ["DEF", "DEF %"],
-                "Gloves": ["ATK", "ATK %"],
-                "Boots": ["CRIT DMG", "DEF", "DEF %", "HP", "HP %"],
-                "Necklace": ["HP", "HP %"],
+                "Helmet": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
+                "Chestplate": ["DEF", "DEF%"],
+                "Gloves": ["ATK", "ATK%"],
+                "Boots": ["CRIT DMG", "DEF", "DEF%", "HP", "HP%"],
+                "Necklace": ["HP", "HP%"],
                 "Bracelet": ["LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"],
-                "Ring": ["ATK", "ATK %", "DEF", "DEF %", "HP", "HP %"],
+                "Ring": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
                 "Earring": ["MP MAX"]
               }[artefact_label] %}
               {% for stat in main_stats %}
@@ -383,16 +383,16 @@
             <label>Stats secondaires :</label>
             <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}">
               {% set secondary_stats = [
-                "ATK", "ATK %", "ATK % +3/4",
-                "DEF", "DEF %", "DEF % +3/4",
-                "HP", "HP %", "HP % +3/4",
+                "ATK", "ATK%", "ATK% +3/4",
+                "DEF", "DEF%", "DEF% +3/4",
+                "HP", "HP%", "HP% +3/4",
                 "CRIT HIT",
                 "CRIT DMG",
                 "DMG INC",
                 "DEF PEN",
                 "MP CONS",
                 "MP MAX",
-                "MP Regen %",
+                "MP Regen%",
                 "DMG RES"
               ] %}
               {% for stat in secondary_stats %}
