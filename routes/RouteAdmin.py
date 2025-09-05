@@ -289,3 +289,40 @@ def admin_routes(app):
         if errors:
             return "Erreurs lors de l'upload :\n" + "\n".join(errors), 400
         return "Images uploadées et vérifiées", 200
+
+    @app.route('/admin/upload_core_images', methods=['POST'])
+    @login_required
+    def upload_core_images():
+        if not is_admin():
+            abort(403)
+        core_color = request.form.get('core_color')
+        if not core_color:
+            return "Couleur du noyau manquante", 400
+
+        errors = []
+        uploaded = 0
+        for num in [1, 2, 3]:
+            field_name = f"file_{num}"
+            file = request.files.get(field_name)
+            if file and file.filename:
+                if not allowed_file(file.filename):
+                    errors.append(f"{file.filename}: extension non autorisée")
+                    continue
+                if not is_image_size_allowed(file.stream):
+                    errors.append(f"{file.filename}: fichier trop volumineux")
+                    continue
+                try:
+                    verify_image(file.stream)
+                    ext = ".webp"
+                    filename = f"{core_color}{str(num).zfill(2)}{ext}"
+                    folder = os.path.join('static', 'images', 'Noyaux')
+                    save_image(file.stream, folder, filename)
+                    uploaded += 1
+                except Exception as e:
+                    errors.append(f"{file.filename}: {e}")
+
+        if uploaded == 0:
+            return "Aucun fichier reçu", 400
+        if errors:
+            return "Erreurs lors de l'upload :\n" + "\n".join(errors), 400
+        return "Images uploadées et vérifiées", 200
