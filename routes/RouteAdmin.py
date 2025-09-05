@@ -252,11 +252,23 @@ def admin_routes(app):
         piecesAccessoire = ["Collier", "Bracelet", "Bague", "Boucle d'oreille"]
         allPieces = piecesArmure + piecesAccessoire
 
-        folder = os.path.join('static', 'images', 'Artefacts', panoplie_name.replace(' ', '_'))
+        panoplie_name_raw = panoplie_name.replace(' ', '')
+        folder = os.path.join('static', 'images', 'Artefacts', panoplie_name_raw)
         errors = []
         uploaded = 0
 
-        for piece in allPieces:
+        piece_numbers = {
+            "Casque": "01",
+            "Plastron": "02",
+            "Gants": "03",
+            "Bottes": "04",
+            "Collier": "05",
+            "Bracelet": "06",
+            "Bague": "07",
+            "Boucle d'oreille": "08"
+        }
+
+        for piece, num in piece_numbers.items():
             field_name = f"file_{piece.replace(' ', '_')}"
             file = request.files.get(field_name)
             if file:
@@ -268,7 +280,9 @@ def admin_routes(app):
                     continue
                 try:
                     verify_image(file.stream)
-                    save_image(file.stream, folder, file.filename)
+                    ext = os.path.splitext(file.filename)[1].lower()
+                    new_filename = f"Artefact{num}_{panoplie_name_raw}{ext}"
+                    save_image(file.stream, folder, new_filename)
                     uploaded += 1
                 except Exception as e:
                     errors.append(f"{file.filename}: {e}")
