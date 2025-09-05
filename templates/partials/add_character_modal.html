@@ -621,7 +621,43 @@
 
     // Optionnel : affiche une alerte si le dossier n'existe pas
     if (!folderExists) {
-      alert("Aucun dossier d'image trouvé pour ce personnage. Il faudra l'ajouter manuellement.");
+      let overlay = document.createElement('div');
+      overlay.id = "upload-character-images-overlay";
+      overlay.className = "edit-character-overlay";
+      overlay.style.display = "flex";
+      overlay.innerHTML = `
+        <div class="edit-character-popup">
+          <form id="upload-character-images-form" enctype="multipart/form-data">
+            <h2>Uploader les images du personnage (.zip)</h2>
+            <input type="file" name="images_zip" accept=".zip" required>
+            <input type="hidden" name="type" value="${type}">
+            <input type="hidden" name="alias" value="${alias}">
+            <input type="hidden" name="rarity" value="${rarity}">
+            <div style="margin-top:16px;">
+              <button type="submit" class="admin-btn">Envoyer</button>
+              <button type="button" id="cancel-upload-character-images" class="close-btn">&times;</button>
+            </div>
+          </form>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+
+      document.getElementById('cancel-upload-character-images').onclick = function() {
+        overlay.remove();
+      };
+
+      document.getElementById('upload-character-images-form').onsubmit = async function(e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        let resp = await fetch('/admin/upload_character_images_zip', {
+          method: 'POST',
+          body: formData
+        });
+        let txt = await resp.text();
+        overlay.remove();
+        alert(txt);
+        // Optionnel : recharger ou réinitialiser le formulaire
+      };
     }
   });
   document.addEventListener('change', function(e) {

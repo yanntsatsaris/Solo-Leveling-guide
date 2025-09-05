@@ -9,6 +9,8 @@ from static.Controleurs.ControleurImages import (
 )
 import glob
 import os
+import zipfile
+import shutil
 
 def is_admin():
     rights = session.get('rights', [])
@@ -326,3 +328,56 @@ def admin_routes(app):
         if errors:
             return "Erreurs lors de l'upload :\n" + "\n".join(errors), 400
         return "Images uploadées et vérifiées", 200
+    
+    @app.route('/admin/upload_images_zip', methods=['POST'])
+    @login_required
+    def upload_images_zip():
+        if not is_admin():
+            abort(403)
+        images_zip = request.files.get('images_zip')
+        type_ = request.form.get('type')
+        alias = request.form.get('alias')
+        rarity = request.form.get('rarity')
+        if not images_zip or not type_ or not alias or not rarity:
+            return "Données manquantes", 400
+
+        type_folder = type_.replace(" ", "_")
+        alias_folder = alias.replace(" ", "_")
+        rarity_folder = rarity.replace(" ", "_")
+        folder_name = f"{rarity_folder}_{type_folder}_{alias_folder}"
+        base_folder = os.path.join('static', 'images', 'Personnages', f"SLA_Personnages_{type_folder}")
+        target_folder = os.path.join(base_folder, folder_name)
+
+        # Crée le dossier de type si besoin
+        os.makedirs(base_folder, exist_ok=True)
+
+        # Extraction temporaire
+        temp_extract = os.path.join("tmp", "extract_zip")
+        if os.path.exists(temp_extract):
+            shutil.rmtree(temp_extract)
+        os.makedirs(temp_extract, exist_ok=True)
+
+        with zipfile.ZipFile(images_zip) as zf:
+            zf.extractall(temp_extract)
+
+        # Cherche un dossier dans le zip
+        subfolders = [f for f in os.listdir(temp_extract) if os.path.isdir(os.path.join(temp_extract, f))]
+        if subfolders:
+            # Il y a un dossier, on le renomme si besoin
+            src_folder = os.path.join(temp_extract, subfolders[0])
+            if subfolders[0] != folder_name:
+                os.rename(src_folder, os.path.join(temp_extract, folder_name))
+                src_folder = os.path.join(temp_extract, folder_name)
+            shutil.move(src_folder, target_folder)
+        else:
+            # Pas de dossier, on crée le dossier cible et on déplace les images
+            os.makedirs(target_folder, exist_ok=True)
+            for fname in os.listdir(temp_extract):
+                if fname.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
+                    # Vérifie le nom
+                    if not fname.startswith(f"{type_folder}_{alias_folder}_"):
+                        shutil.rmtree(temp_extract)
+                        return f"Image '{fname}' doit commencer par '{type_folder}_{alias_folder}_'", 400
+                    shutil.move(os.path.join(temp_extract, fname), os.path.join(target_folder, fname))
+        shutil.rmtree(temp_extract)
+        return "Images extraites et placées dans le dossier du personnage.", 200
