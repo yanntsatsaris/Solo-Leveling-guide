@@ -476,7 +476,6 @@ def characters(app: Flask):
                 wimg = os.path.basename(found_images[0])
             else:
                 wimg = ""
-            write_log(f"Recherche image arme avec le pattern {pattern}, trouvé: {wimg}", log_level="INFO")
             # wimg = request.form.get(f"weapon_image_{weapon_idx}")
             wid = request.form.get(f"weapon_id_{weapon_idx}")
             if wid:
@@ -487,6 +486,7 @@ def characters(app: Flask):
                     (db_weapon['tag'] or '') != (wtag or '') 
                     #(db_weapon['image_name'] or '') != (wimg or '')
                 ):
+                    write_log(f"Recherche image arme : {wimg}", log_level="INFO")
                     weapons_sql.update_weapon(wid, wname, wstats, wtag, wimg, language)
                     weapon_modif = True
                     write_log(f"Modification arme {wid} du personnage {char_id}", log_level="INFO")
