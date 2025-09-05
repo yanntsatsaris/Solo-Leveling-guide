@@ -136,10 +136,10 @@ document.addEventListener("DOMContentLoaded", function() {
   function showCoreUploadPopup(color, nums) {
     let overlay = document.createElement('div');
     overlay.id = "upload-core-overlay";
-    overlay.className = "edit-panoplie-overlay";
+    overlay.className = "edit-core-overlay";
     overlay.style.display = "flex";
     overlay.innerHTML = `
-      <div class="edit-panoplie-popup">
+      <div class="edit-core-popup">
         <form id="upload-core-img-form" enctype="multipart/form-data">
           <h2>Uploader les images du noyau (${color})</h2>
           ${nums.map(num => `
