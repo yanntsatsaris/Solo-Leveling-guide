@@ -331,7 +331,7 @@ def admin_routes(app):
     
     @app.route('/admin/upload_character_images_zip', methods=['POST'])
     @login_required
-    def upload_images_zip():
+    def upload_character_images_zip():
         if not is_admin():
             abort(403)
         images_zip = request.files.get('images_zip')
