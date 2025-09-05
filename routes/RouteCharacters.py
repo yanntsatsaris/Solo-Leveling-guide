@@ -438,7 +438,7 @@ def characters(app: Flask):
                     db_skill['principal'] != sprincipal or
                     db_skill['order'] != int(sorder)
                 ):
-                    skills_sql.update_skill(sid, sname, sdesc, stag, simg, sprincipal, language, int(sorder))
+                    skills_sql.update_skill(int(sid), sname, sdesc, stag, simg, sprincipal, language, int(sorder))
                     skill_modif = True
                     write_log(f"Modification skill {sid} du personnage {char_id}", log_level="INFO")
                 form_skill_ids.append(sid)
