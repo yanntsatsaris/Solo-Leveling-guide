@@ -471,7 +471,7 @@ def characters(app: Flask):
             # Recherche automatique de l'image
             folder = os.path.join('static', 'images', 'Personnages', f"SLA_Personnages_{type_}", char_folder)
             write_log(f"Recherche image arme dans le dossier : {folder}", log_level="INFO")
-            pattern = os.path.join(folder, f"{rarity}_{type_}_Weapon.*")
+            pattern = os.path.join(folder, f"{rarity}_{type_}_{alias}_Weapon.*")
             write_log(f"Pattern de recherche : {pattern}", log_level="INFO")
             found_images = glob.glob(pattern)
             write_log(f"Images trouvées : {found_images}", log_level="INFO")
