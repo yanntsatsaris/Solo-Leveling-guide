@@ -329,7 +329,7 @@ def admin_routes(app):
             return "Erreurs lors de l'upload :\n" + "\n".join(errors), 400
         return "Images uploadées et vérifiées", 200
     
-    @app.route('admin/upload_character_images_zip', methods=['POST'])
+    @app.route('/admin/upload_character_images_zip', methods=['POST'])
     @login_required
     def upload_images_zip():
         if not is_admin():
