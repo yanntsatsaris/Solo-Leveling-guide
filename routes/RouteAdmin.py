@@ -244,9 +244,6 @@ def admin_routes(app):
         panoplie_name = request.form.get('panoplie_name')
         if not panoplie_name:
             return "Nom de panoplie manquant", 400
-        files = request.files.getlist('files')
-        if not files:
-            return "Aucun fichier reçu", 400
 
         piecesArmure = ["Casque", "Plastron", "Gants", "Bottes"]
         piecesAccessoire = ["Collier", "Bracelet", "Bague", "Boucle d'oreille"]
