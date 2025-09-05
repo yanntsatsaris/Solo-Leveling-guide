@@ -78,10 +78,23 @@ class PassivesSql:
             UPDATE passives SET passives_image=%s, passives_principal=%s, passives_hidden=%s, passives_order=%s
             WHERE passives_id=%s
         """, (img, principal, hidden, order, pid))
-        self.cursor.execute("""
-            UPDATE passive_translations SET passive_translations_name=%s, passive_translations_description=%s, passive_translations_tag=%s
-            WHERE passive_translations_passives_id=%s AND passive_translations_language=%s
-        """, (name, desc, tag, pid, language))
+        # Vérifie si la traduction existe
+        self.cursor.execute(
+            "SELECT 1 FROM passive_translations WHERE passive_translations_passives_id = %s AND passive_translations_language = %s",
+            (pid, language)
+        )
+        if not self.cursor.fetchone():
+            # Crée la traduction si elle n'existe pas
+            self.cursor.execute(
+                "INSERT INTO passive_translations (passive_translations_passives_id, passive_translations_language, passive_translations_name, passive_translations_description, passive_translations_tag) VALUES (%s, %s, %s, %s, %s)",
+                (pid, language, name, desc, tag)
+            )
+        else:
+            # Sinon, modifie la traduction existante
+            self.cursor.execute("""
+                UPDATE passive_translations SET passive_translations_name=%s, passive_translations_description=%s, passive_translations_tag=%s
+                WHERE passive_translations_passives_id=%s AND passive_translations_language=%s
+            """, (name, desc, tag, pid, language))
 
     def add_passive(self, char_id, name, desc, tag, img, principal, hidden, language, order):
         # Vérifie unicité par image OU par nom si image vide

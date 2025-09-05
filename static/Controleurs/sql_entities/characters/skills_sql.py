@@ -76,10 +76,23 @@ class SkillsSql:
             UPDATE skills SET skills_image=%s, skills_principal=%s, skills_order=%s
             WHERE skills_id= %s
         """, (img, principal, order, sid))
-        self.cursor.execute("""
-            UPDATE skill_translations SET skill_translations_name=%s, skill_translations_description=%s, skill_translations_tag=%s
-            WHERE skill_translations_skills_id= %s AND skill_translations_language=%s
-        """, (name, desc, tag, sid, language))
+        # Vérifie si la traduction existe
+        self.cursor.execute(
+            "SELECT 1 FROM skill_translations WHERE skill_translations_skills_id = %s AND skill_translations_language = %s",
+            (sid, language)
+        )
+        if not self.cursor.fetchone():
+            # Crée la traduction si elle n'existe pas
+            self.cursor.execute(
+                "INSERT INTO skill_translations (skill_translations_skills_id, skill_translations_language, skill_translations_name, skill_translations_description, skill_translations_tag) VALUES (%s, %s, %s, %s, %s)",
+                (sid, language, name, desc, tag)
+            )
+        else:
+            # Sinon, modifie la traduction existante
+            self.cursor.execute("""
+                UPDATE skill_translations SET skill_translations_name=%s, skill_translations_description=%s, skill_translations_tag=%s
+                WHERE skill_translations_skills_id= %s AND skill_translations_language=%s
+            """, (name, desc, tag, sid, language))
 
     def add_skill(self, char_id, name, desc, tag, img, principal, language, order):
         # Vérifie unicité par image OU par nom si image vide
