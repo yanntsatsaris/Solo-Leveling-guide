@@ -248,20 +248,33 @@ def admin_routes(app):
         if not files:
             return "Aucun fichier reçu", 400
 
+        piecesArmure = ["Casque", "Plastron", "Gants", "Bottes"]
+        piecesAccessoire = ["Collier", "Bracelet", "Bague", "Boucle d'oreille"]
+        allPieces = piecesArmure + piecesAccessoire
+
         folder = os.path.join('static', 'images', 'Artefacts', panoplie_name.replace(' ', '_'))
         errors = []
-        for file in files:
-            if not allowed_file(file.filename):
-                errors.append(f"{file.filename}: extension non autorisée")
-                continue
-            if not is_image_size_allowed(file.stream):
-                errors.append(f"{file.filename}: fichier trop volumineux")
-                continue
-            try:
-                verify_image(file.stream)
-                save_image(file.stream, folder, file.filename)
-            except Exception as e:
-                errors.append(f"{file.filename}: {e}")
+        uploaded = 0
+
+        for piece in allPieces:
+            field_name = f"file_{piece.replace(' ', '_')}"
+            file = request.files.get(field_name)
+            if file:
+                if not allowed_file(file.filename):
+                    errors.append(f"{file.filename}: extension non autorisée")
+                    continue
+                if not is_image_size_allowed(file.stream):
+                    errors.append(f"{file.filename}: fichier trop volumineux")
+                    continue
+                try:
+                    verify_image(file.stream)
+                    save_image(file.stream, folder, file.filename)
+                    uploaded += 1
+                except Exception as e:
+                    errors.append(f"{file.filename}: {e}")
+
+        if uploaded == 0:
+            return "Aucun fichier reçu", 400
         if errors:
             return "Erreurs lors de l'upload :\n" + "\n".join(errors), 400
         return "Images uploadées et vérifiées", 200

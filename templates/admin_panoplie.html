@@ -137,16 +137,33 @@ document.addEventListener("DOMContentLoaded", function() {
     if (!imgCheck.exists) {
       if (confirm("Aucune image trouvée pour cette panoplie. Voulez-vous uploader des images maintenant ?")) {
         document.getElementById('edit-panoplie-overlay').style.display = 'none'; // Ferme le menu modal
+        let piecesToUpload = [];
+        if (pieces === 8) {
+          piecesToUpload = allPieces;
+        } else if (pieces === 4) {
+          if (type === "armure") {
+            piecesToUpload = piecesArmure;
+          } else if (type === "accessoire") {
+            piecesToUpload = piecesAccessoire;
+          }
+        }
+
+        // Génère le HTML des inputs
+        let inputsHtml = piecesToUpload.map(piece => `
+          <div style="margin-bottom:12px;">
+            <label>${piece} :</label>
+            <input type="file" name="file_${piece.replace(/ /g, "_")}" accept=".webp,.png,.jpg,.jpeg" required>
+          </div>
+        `).join('');
         let overlay = document.createElement('div');
         overlay.id = "upload-panoplie-overlay";
-        overlay.className = "edit-panoplie-overlay"; // même overlay que l'édition
+        overlay.className = "edit-panoplie-overlay";
         overlay.style.display = "flex";
         overlay.innerHTML = `
           <div class="edit-panoplie-popup">
             <form id="upload-panoplie-img-form" enctype="multipart/form-data">
-              <h2>Uploader des images de panoplie</h2>
-              <label>Uploader une ou plusieurs images (webp, png, jpg) :</label>
-              <input type="file" name="files" multiple required accept=".webp,.png,.jpg,.jpeg">
+              <h2>Uploader les images de la panoplie</h2>
+              ${inputsHtml}
               <input type="hidden" name="panoplie_name" value="${name}">
               <div style="margin-top:16px;">
                 <button type="submit" class="admin-btn">Envoyer</button>
@@ -250,6 +267,10 @@ document.getElementById('edit-panoplie-form').onsubmit = async function(e) {
     alert("Erreur lors de la création de la panoplie.");
   }
 };
+
+const piecesArmure = ["Casque", "Plastron", "Gants", "Bottes"];
+const piecesAccessoire = ["Collier", "Bracelet", "Bague", "Boucle d'oreille"];
+const allPieces = [...piecesArmure, ...piecesAccessoire];
 
 function autoResizeAllTextareas() {
   document.querySelectorAll("textarea.effect-input").forEach(function(el) {
