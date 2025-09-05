@@ -476,6 +476,7 @@ def characters(app: Flask):
                 wimg = os.path.basename(found_images[0])
             else:
                 wimg = ""
+            write_log(f"Recherche image arme avec le pattern {pattern}, trouvé: {wimg}", log_level="INFO")
             # wimg = request.form.get(f"weapon_image_{weapon_idx}")
             wid = request.form.get(f"weapon_id_{weapon_idx}")
             if wid:
