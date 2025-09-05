@@ -250,7 +250,7 @@ def admin_routes(app):
         allPieces = piecesArmure + piecesAccessoire
 
         panoplie_name_raw = panoplie_name.replace(' ', '')
-        folder = os.path.join('static', 'images', 'Artefacts', panoplie_name_raw)
+        folder = os.path.join('static', 'images', 'Artefacts', panoplie_name.replace(' ', '_'))
         errors = []
         uploaded = 0
 
