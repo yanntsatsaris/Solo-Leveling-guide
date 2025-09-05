@@ -470,11 +470,8 @@ def characters(app: Flask):
             wtag = request.form.get(f"weapon_tag_{weapon_idx}")
             # Recherche automatique de l'image
             folder = os.path.join('static', 'images', 'Personnages', f"SLA_Personnages_{type_}", char_folder)
-            write_log(f"Recherche image arme dans le dossier : {folder}", log_level="INFO")
             pattern = os.path.join(folder, f"{type_}_{alias}_Weapon.*")
-            write_log(f"Pattern de recherche : {pattern}", log_level="INFO")
             found_images = glob.glob(pattern)
-            write_log(f"Images trouvées : {found_images}", log_level="INFO")
             if found_images:
                 wimg = os.path.basename(found_images[0])
             else:
@@ -489,7 +486,6 @@ def characters(app: Flask):
                     (db_weapon['tag'] or '') != (wtag or '') 
                     #(db_weapon['image_name'] or '') != (wimg or '')
                 ):
-                    write_log(f"Recherche image arme : {wimg}", log_level="INFO")
                     weapons_sql.update_weapon(wid, wname, wstats, wtag, wimg, language)
                     weapon_modif = True
                     write_log(f"Modification arme {wid} du personnage {char_id}", log_level="INFO")

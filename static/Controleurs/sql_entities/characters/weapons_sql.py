@@ -110,10 +110,23 @@ class WeaponsSql:
             UPDATE weapons SET weapons_image=%s
             WHERE weapons_id=%s
         """, (img, wid))
+        # Vérifie si la traduction existe
         self.cursor.execute("""
-            UPDATE weapon_translations SET weapon_translations_name=%s, weapon_translations_stats=%s, weapon_translations_tag=%s
+            SELECT 1 FROM weapon_translations
             WHERE weapon_translations_weapons_id=%s AND weapon_translations_language=%s
-        """, (name, stats, tag, wid, language))
+        """, (wid, language))
+        if not self.cursor.fetchone():
+            # Crée la traduction si elle n'existe pas
+            self.cursor.execute("""
+                INSERT INTO weapon_translations (weapon_translations_weapons_id, weapon_translations_language, weapon_translations_name, weapon_translations_stats, weapon_translations_tag)
+                VALUES (%s, %s, %s, %s, %s)
+            """, (wid, language, name, stats, tag))
+        else:
+            # Sinon, modifie la traduction existante
+            self.cursor.execute("""
+                UPDATE weapon_translations SET weapon_translations_name=%s, weapon_translations_stats=%s, weapon_translations_tag=%s
+                WHERE weapon_translations_weapons_id=%s AND weapon_translations_language=%s
+            """, (name, stats, tag, wid, language))
 
     def add_weapon(self, char_id, name, stats, tag, img, language):
         # Vérifie si une arme existe déjà pour ce personnage (par nom et image)
