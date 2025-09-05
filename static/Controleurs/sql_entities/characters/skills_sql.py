@@ -74,11 +74,11 @@ class SkillsSql:
     def update_skill(self, sid, name, desc, tag, img, principal, language, order):
         self.cursor.execute("""
             UPDATE skills SET skills_image=%s, skills_principal=%s, skills_order=%s
-            WHERE skills_id=%s
+            WHERE skills_id= %s
         """, (img, principal, order, sid))
         self.cursor.execute("""
             UPDATE skill_translations SET skill_translations_name=%s, skill_translations_description=%s, skill_translations_tag=%s
-            WHERE skill_translations_skills_id=%s AND skill_translations_language=%s
+            WHERE skill_translations_skills_id= %s AND skill_translations_language=%s
         """, (name, desc, tag, sid, language))
 
     def add_skill(self, char_id, name, desc, tag, img, principal, language, order):
