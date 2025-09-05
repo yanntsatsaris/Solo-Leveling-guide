@@ -186,8 +186,47 @@ document.addEventListener("DOMContentLoaded", function() {
             body: formData
           });
           let txt = await resp.text();
-          alert(txt);
           overlay.remove();
+
+          // Réaffiche le menu de création pour saisir les effets
+          document.getElementById('edit-panoplie-form').setAttribute('data-mode', 'create');
+          const langDiv = document.getElementById('edit-panoplie-languages');
+          langDiv.innerHTML = '';
+          ['FR-fr', 'EN-en'].forEach(function(lang) {
+            let effectsHtml = '';
+            if (pieces >= 2) {
+              effectsHtml += `
+                <div class="effect-row"><b>2 pièces :</b>
+                  <textarea name="effect_${lang}_2" class="effect-input"></textarea>
+                </div>`;
+            }
+            if (pieces >= 4) {
+              effectsHtml += `
+                <div class="effect-row"><b>4 pièces :</b>
+                  <textarea name="effect_${lang}_4" class="effect-input"></textarea>
+                </div>`;
+            }
+            if (pieces === 8) {
+              effectsHtml += `
+                <div class="effect-row"><b>8 pièces :</b>
+                  <textarea name="effect_${lang}_8" class="effect-input"></textarea>
+                </div>`;
+            }
+            langDiv.innerHTML += `
+              <fieldset>
+                <legend>${lang}</legend>
+                <label>Nom affiché :</label>
+                <input type="text" name="display_name_${lang}" value="" required>
+                <h4>Effets</h4>
+                <div>
+                  ${effectsHtml}
+                </div>
+              </fieldset>
+            `;
+          });
+          document.getElementById('edit-panoplie-overlay').style.display = 'flex';
+          document.getElementById('edit-panoplie-form').action = `/admin/panoplie/${encodeURIComponent(name)}`;
+          autoResizeAllTextareas();
         };
         return;
       } else {
