@@ -1,5 +1,14 @@
 import json
 from static.Controleurs.ControleurLog import write_log
+from static.Controleurs.ControleurSql import ControleurSql
+from static.Controleurs.sql_entities.sjw_sql import SJWSql
+from static.Controleurs.sql_entities.sjw.sjw_skills_sql import SJWSkillsSql
+from static.Controleurs.sql_entities.sjw.sjw_shadows_sql import SJWShadowsSql
+from static.Controleurs.sql_entities.sjw.sjw_weapons_sql import SJWWeaponsSql
+from static.Controleurs.sql_entities.sjw.sjw_equipment_set_sql import SJWEquipmentSetSql
+from static.Controleurs.sql_entities.sjw.sjw_blessings_sql import SJWBlessingsSql
+from static.Controleurs.sql_entities.cores_sql import CoresSql
+from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
 from flask import Flask, render_template, session , url_for
 
 def update_image_paths(description, base_path):
@@ -20,153 +29,53 @@ def update_image_paths(description, base_path):
     return updated_description.replace("\n", "<br>")
 
 def SJW(app: Flask):
-        
     @app.route('/SJW')
     def inner_SJW():
         write_log("Accès à la page SJW", log_level="INFO")
-        # Récupérer la langue sélectionnée
         language = session.get('language', "EN-en")
-        if not language:
-            return "Language not set", 400
+        sql_manager = ControleurSql()
+        sjw_sql = SJWSql(sql_manager.cursor)
+        shadows_sql = SJWShadowsSql(sql_manager.cursor)
+        skills_sql = SJWSkillsSql(sql_manager.cursor)
+        weapons_sql = SJWWeaponsSql(sql_manager.cursor)
+        equipment_set_sql = SJWEquipmentSetSql(sql_manager.cursor)
+        blessings_sql = SJWBlessingsSql(sql_manager.cursor)
+        panoplies_sql = PanopliesSql(sql_manager.cursor)
+        cores_sql = CoresSql(sql_manager.cursor)
 
-        # Charger les données des personnages depuis le fichier JSON
-        with open('data/SJW.json', 'r', encoding='utf-8') as f:
-            characters_data = json.load(f)
-
-        # Trouver les données correspondant à la langue sélectionnée
-        characters_data = next((item.get(language) for item in characters_data if language in item), [])
-        if not characters_data:
-            return f"No data found for language: {language}", 404
-
-        # Charger les données des panoplies depuis le fichier JSON
-        with open('data/panoplies.json', 'r', encoding='utf-8') as f:
-            panoplies_data = json.load(f)
-
-        # Trouver les données correspondant à la langue sélectionnée
-        panoplies_data = panoplies_data.get(language, {}).get('panoplies', [])
-        if not panoplies_data:
-            return f"No panoplies data found for language: {language}", 404
-        
-        # Trouver les informations du personnage correspondant
-        character_info = next((char for char in characters_data if char['alias'] == "SJW"), None)
-
+        # Récupération des infos principales
+        character_info = sjw_sql.get_sjw(language)
         if not character_info:
             return "Character not found", 404
 
-        # Construire le chemin de l'image principale
-        character_folder = character_info['folder']
-        image_path = f'images/{character_folder}/Sung_Jinwoo.png'
+        # Récupération des shadows (avec évolutions)
+        character_info['shadows'] = shadows_sql.get_shadows(character_info['id'], language)
 
-        # Ajouter les informations supplémentaires pour le rendu
-        character_info['image'] = image_path
-        character_info['description'] = f"{character_info['name']} is a powerful character of in Solo Leveling Arise."
+        # Récupération des skills
+        character_info['skills'] = skills_sql.get_skills(character_info['id'])
 
-        #character_info['background_image'] = f'images/Personnages/{type_folder}/BG_{character_info["type"]}.webp'
+        # Récupération des armes (avec évolutions)
+        character_info['weapon'] = weapons_sql.get_weapons(character_info['id'], language)
 
-        # Mettre à jour les descriptions des passifs
-        for passive in character_info.get('passives', []):
-            if 'image' in passive:
-                if not passive['image'].startswith('images/'):
-                    # Vérifiez si le chemin est déjà absolu pour éviter les doublons
-                    passive['image'] = f'images/{character_folder}/{passive["image"]}'
-            if 'description' in passive:
-                passive['description'] = update_image_paths(passive['description'], f'images/{character_folder}')
+        # Récupération des sets d'équipement (avec artefacts et cores)
+        character_info['equipment_sets'] = equipment_set_sql.get_equipment_sets_full(character_info['id'], language)
 
-        # Mettre à jour les descriptions des skills
-        for skill in character_info.get('skills', []):
-            if 'image' in skill:
-                if not skill['image'].startswith('images/'):
-                    # Vérifiez si le chemin est déjà absolu pour éviter les doublons
-                    skill['image'] = f'images/{character_folder}/{skill["image"]}'
-            if 'description' in skill:
-                skill['description'] = update_image_paths(skill['description'], f'images/{character_folder}')
+        # Récupération des bénédictions
+        character_info['offensive_blessings'] = blessings_sql.get_offensive_blessings(character_info['id'])
+        character_info['defensive_blessings'] = blessings_sql.get_defensive_blessings(character_info['id'])
 
-        # Récupérer et mettre à jour les données des shadows
-        shadows = character_info.get('shadows', [])
-        for shadow in shadows:
-            if 'image' in shadow:
-                if not shadow['image'].startswith('images/'):
-                    # Vérifiez si le chemin est déjà absolu pour éviter les doublons
-                    shadow['image'] = f'images/{character_folder}/Shadows/{shadow["image"]}'
+        # Récupération des panoplies et noyaux (si besoin pour le contexte global)
+        panoplies_data = panoplies_sql.get_panoplies_effects(language)
+        cores_data = cores_sql.get_cores_effects(language)
 
-        character_info['shadows'] = shadows
-        
-        # Mettre à jour les descriptions des armes
-        for weapon in character_info.get('weapon', []):
-            if 'image' in weapon:
-                # Vérifiez si le chemin est déjà absolu pour éviter les doublons
-                if not weapon['image'].startswith('images/'):
-                    weapon['image'] = f'images/{character_folder}/Armes/{weapon["folder"]}/{weapon["image"]}'
-            if 'codex' in weapon:
-                if not weapon['codex'].startswith('images/'):
-                    weapon['codex'] = f'images/{character_folder}/Armes/{weapon["folder"]}/{weapon["codex"]}'
-            if 'stats' in weapon:
-                weapon['stats'] = update_image_paths(weapon['stats'], f'images/{character_folder}')
-            # Mettre à jour les évolutions des armes
-            for evolution in weapon.get('evolutions', []):
-                if 'description' in evolution:
-                    evolution['description'] = update_image_paths(evolution['description'], f'images/{character_folder}')
+        sql_manager.close()
 
-       # Calculer les effets de panoplie activés pour chaque set
-        equipment_sets_effects = []
-        for equipment_set in character_info.get('equipment_sets', []):
-            equipped_sets = {}
-            for artefact in equipment_set.get('artefacts', []):
-                set_name = artefact.get('set')  # Utiliser le champ 'set' des artefacts
-                if set_name:
-                    equipped_sets[set_name] = equipped_sets.get(set_name, 0) + 1
-
-            # Ajouter les effets activés pour chaque panoplie
-            active_set_effects = []
-            for panoply in panoplies_data:
-                set_name = panoply['name']
-                if set_name in equipped_sets:
-                    pieces_equipped = equipped_sets[set_name]
-                    for bonus in panoply['set_bonus']:
-                        if pieces_equipped >= bonus['pieces_required']:
-                            active_set_effects.append({
-                                'set_name': set_name,
-                                'pieces_required': bonus['pieces_required'],
-                                'effect': bonus['effect']
-                            })
-
-            equipment_sets_effects.append(active_set_effects)
-
-        # Ajouter les effets activés pour chaque set au contexte
-        character_info['equipment_sets_effects'] = equipment_sets_effects
-
-        # Ajouter les évolutions au contexte
-        evolutions = []
-        for evolution in character_info.get('evolutions', []):
-            description = evolution.get('description', '')
-            description = update_image_paths(description, f'images/{character_folder}')
-            evolution['description'] = description
-            evolutions.append(evolution)
-
-        character_info['evolutions'] = evolutions
-
-        # Mettre à jour les données des sets d'équipement
-        for equipment_set in character_info.get('equipment_sets', []):
-            # Mettre à jour les focus_stats
-            equipment_set['focus_stats'] = equipment_set.get('focus_stats', [])
-
-            # Mettre à jour les images des artefacts
-            for artefact in equipment_set.get('artefacts', []):
-                if 'image' in artefact:
-                    # Vérifiez si le chemin est déjà absolu pour éviter les doublons
-                    if not artefact['image'].startswith('images/'):
-                        artefact['image'] = f'images/Artefacts/{artefact["image"]}'
-
-            # Mettre à jour les images des noyaux
-            for core in equipment_set.get('cores', []):
-                core['image'] = f'images/Noyaux/{core["image"]}'
-
-        # Renvoyer le template avec les données du personnage
         return render_template(
             'SJW.html',
             character=character_info,
             language=language,
-            panoplies=panoplies_data
+            panoplies=panoplies_data,
+            cores=cores_data
         )
 
     @app.route('/SJW/shadow/<shadowName>')
