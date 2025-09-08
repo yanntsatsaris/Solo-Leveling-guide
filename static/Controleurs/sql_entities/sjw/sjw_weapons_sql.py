@@ -4,7 +4,7 @@ class SJWWeaponsSql:
 
     def get_weapons(self, sjw_id, language, folder=None):
         self.cursor.execute("""
-            SELECT w.sjw_weapons_id, w.sjw_weapons_image, t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
+            SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_folder, t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
             FROM sjw_weapons w
             JOIN sjw_weapon_translations t ON t.sjw_weapon_translations_sjw_weapons_id = w.sjw_weapons_id
             WHERE w.sjw_weapons_sjw_id = %s AND t.sjw_weapon_translations_language = %s
@@ -12,17 +12,19 @@ class SJWWeaponsSql:
         weapons = []
         for row in self.cursor.fetchall():
             weapon_id = row[0]
+            weapon_folder = row[2]  # Dossier spécifique à l'arme
+            image_path = f'images/{folder}/Armes/{weapon_folder}/{row[1]}' if folder and weapon_folder else row[1]
             weapon = {
                 'id': weapon_id,
-                'image': f'images/{folder}/Armes/{row[1]}' if folder else row[1],
-                'name': row[2],
-                'stats': row[3],
-                'evolutions': self.get_evolutions(weapon_id, language, folder)
+                'image': image_path,
+                'name': row[3],
+                'stats': row[4],
+                'evolutions': self.get_evolutions(weapon_id, language, folder, weapon_folder)
             }
             weapons.append(weapon)
         return weapons
 
-    def get_evolutions(self, weapon_id, language, folder=None):
+    def get_evolutions(self, weapon_id, language, folder=None, weapon_folder=None):
         self.cursor.execute("""
             SELECT e.sjw_weapon_evolutions_id, e.sjw_weapon_evolutions_number, e.sjw_weapon_evolutions_range, e.sjw_weapon_evolutions_type,
                    t.sjw_weapon_evolution_translations_description
@@ -39,8 +41,8 @@ class SJWWeaponsSql:
                 'range': row[2],
                 'type': row[3],
                 'description': row[4],
-                # Si tu as une image d'évolution, adapte ici
-                # 'image': f'images/{folder}/Armes/Evolutions/{row[?]}' if folder else row[?]
+                # Pour une image d'évolution :
+                # 'image': f'images/{folder}/Armes/{weapon_folder}/Evolutions/{row[?]}' if folder and weapon_folder else row[?]
             }
             for row in self.cursor.fetchall()
         ]
