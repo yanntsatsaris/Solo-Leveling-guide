@@ -12,15 +12,15 @@ class SJWWeaponsSql:
         weapons = []
         for row in self.cursor.fetchall():
             weapon_id = row[0]
-            weapon_folder = row[2]  # Dossier spécifique à l'arme
+            weapon_folder = row[3]  # Dossier spécifique à l'arme
             image_path = f'images/{folder}/Armes/{weapon_folder}/{row[1]}' if folder and weapon_folder else row[1]
             codex_path = f'images/{folder}/Armes/{weapon_folder}/{row[2]}' if folder and weapon_folder else row[2]
             weapon = {
                 'id': weapon_id,
-                'image': codex_path,
+                'image': image_path,
                 'codex': codex_path,
-                'name': row[3],
-                'stats': row[4],
+                'name': row[4],
+                'stats': row[5],
                 'evolutions': self.get_evolutions(weapon_id, language, folder, weapon_folder)
             }
             weapons.append(weapon)
