@@ -16,23 +16,22 @@ class SJWShadowsSql:
                 'id': shadow_id,
                 'image': row[1],
                 'name': row[2],
-                'evolutions': self.get_evolutions(shadow_id, language)
+                'evolutions': self.get_evolutions(shadow_id)
             }
             shadows.append(shadow)
         return shadows
 
-    def get_evolutions(self, shadow_id, language):
+    def get_evolutions(self, shadow_id):
         self.cursor.execute("""
-            SELECT e.sjw_shadow_evolutions_id, e.sjw_shadow_evolutions_type, t.sjw_shadow_evolution_translations_name, t.sjw_shadow_evolution_translations_description
-            FROM sjw_shadow_evolutions e
-            JOIN sjw_shadow_evolution_translations t ON t.sjw_shadow_evolution_translations_evolution_id = e.sjw_shadow_evolutions_id
-            WHERE e.sjw_shadow_evolutions_sjw_shadows_id = %s AND t.sjw_shadow_evolution_translations_language = %s
-        """, (shadow_id, language))
+            SELECT sjw_shadow_evolutions_id, sjw_shadow_evolutions_type, sjw_shadow_evolutions_number, sjw_shadow_evolutions_description
+            FROM sjw_shadow_evolutions
+            WHERE sjw_shadow_evolutions_sjw_shadows_id = %s
+        """, (shadow_id,))
         return [
             {
                 'id': row[0],
                 'type': row[1],
-                'name': row[2],
+                'number': row[2],
                 'description': row[3]
             }
             for row in self.cursor.fetchall()
