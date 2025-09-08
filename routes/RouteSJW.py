@@ -52,7 +52,7 @@ def SJW(app: Flask):
         character_info['shadows'] = shadows_sql.get_shadows(character_info['id'], language)
 
         # Récupération des skills
-        character_info['skills'] = skills_sql.get_skills(character_info['id'])
+        character_info['skills'] = skills_sql.get_skills(character_info['id'], language)
 
         # Récupération des armes (avec évolutions)
         character_info['weapon'] = weapons_sql.get_weapons(character_info['id'], language)
