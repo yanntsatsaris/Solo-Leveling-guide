@@ -4,7 +4,7 @@ class SJWShadowsSql:
 
     def get_shadows(self, sjw_id, language):
         self.cursor.execute("""
-            SELECT s.sjw_shadows_id, s.sjw_shadows_image, t.sjw_shadow_translations_name, t.sjw_shadow_translations_description
+            SELECT s.sjw_shadows_id, s.sjw_shadows_image, t.sjw_shadow_translations_name
             FROM sjw_shadows s
             JOIN sjw_shadow_translations t ON t.sjw_shadow_translations_sjw_shadows_id = s.sjw_shadows_id
             WHERE s.sjw_shadows_sjw_id = %s AND t.sjw_shadow_translations_language = %s
@@ -16,7 +16,6 @@ class SJWShadowsSql:
                 'id': shadow_id,
                 'image': row[1],
                 'name': row[2],
-                'description': row[3],
                 'evolutions': self.get_evolutions(shadow_id, language)
             }
             shadows.append(shadow)
