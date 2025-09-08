@@ -17,7 +17,7 @@ class SJWWeaponsSql:
             codex_path = f'images/{folder}/Armes/{weapon_folder}/{row[2]}' if folder and weapon_folder else row[2]
             weapon = {
                 'id': weapon_id,
-                'image': image_path,
+                'image': codex_path,
                 'codex': codex_path,
                 'name': row[3],
                 'stats': row[4],

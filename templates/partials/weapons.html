@@ -65,7 +65,7 @@
             <div class="weapon-card-codex">
               <a href="{{ url_for('weapon_details', weaponName=weapon.name) }}">
                 <img
-                  src="{{ url_for('static', filename=weapon.codex) }}"
+                  src="{{ url_for('static', filename=weapon.image) }}"
                   alt="{{ weapon.name or 'Weapon Image' }}"
                 />
               </a>
