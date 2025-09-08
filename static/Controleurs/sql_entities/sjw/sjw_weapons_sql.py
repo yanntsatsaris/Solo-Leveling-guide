@@ -4,7 +4,7 @@ class SJWWeaponsSql:
 
     def get_weapons(self, sjw_id, language, folder=None):
         self.cursor.execute("""
-            SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_folder, t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
+            SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_codex, w.sjw_weapons_folder, t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
             FROM sjw_weapons w
             JOIN sjw_weapon_translations t ON t.sjw_weapon_translations_sjw_weapons_id = w.sjw_weapons_id
             WHERE w.sjw_weapons_sjw_id = %s AND t.sjw_weapon_translations_language = %s
@@ -14,9 +14,11 @@ class SJWWeaponsSql:
             weapon_id = row[0]
             weapon_folder = row[2]  # Dossier spécifique à l'arme
             image_path = f'images/{folder}/Armes/{weapon_folder}/{row[1]}' if folder and weapon_folder else row[1]
+            codex_path = f'images/{folder}/Armes/{weapon_folder}/{row[2]}' if folder and weapon_folder else row[2]
             weapon = {
                 'id': weapon_id,
                 'image': image_path,
+                'codex': codex_path,
                 'name': row[3],
                 'stats': row[4],
                 'evolutions': self.get_evolutions(weapon_id, language, folder, weapon_folder)
