@@ -46,6 +46,7 @@ def SJW(app: Flask):
         # Récupération des infos principales
         character_info = sjw_sql.get_sjw(language)
         folder = character_info['folder']
+        character_info['image'] = f'images/{folder}/Sung_Jinwoo.png'
 
         # Récupération des shadows (avec évolutions)
         character_info['shadows'] = shadows_sql.get_shadows(character_info['id'], language, folder)
