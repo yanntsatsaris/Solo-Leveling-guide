@@ -2,7 +2,7 @@ class SJWShadowsSql:
     def __init__(self, cursor):
         self.cursor = cursor
 
-    def get_shadows(self, sjw_id, language):
+    def get_shadows(self, sjw_id, language, folder=None):
         self.cursor.execute("""
             SELECT s.sjw_shadows_id, s.sjw_shadows_image, t.sjw_shadow_translations_name
             FROM sjw_shadows s
@@ -14,7 +14,7 @@ class SJWShadowsSql:
             shadow_id = row[0]
             shadow = {
                 'id': shadow_id,
-                'image': row[1],
+                'image': f'images/{folder}/Shadows/{row[1]}' if folder else row[1],
                 'name': row[2],
                 'evolutions': self.get_evolutions(shadow_id)
             }

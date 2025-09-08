@@ -2,7 +2,7 @@ class SJWWeaponsSql:
     def __init__(self, cursor):
         self.cursor = cursor
 
-    def get_weapons(self, sjw_id, language):
+    def get_weapons(self, sjw_id, language, folder=None):
         self.cursor.execute("""
             SELECT w.sjw_weapons_id, w.sjw_weapons_image, t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
             FROM sjw_weapons w
@@ -14,15 +14,15 @@ class SJWWeaponsSql:
             weapon_id = row[0]
             weapon = {
                 'id': weapon_id,
-                'image': row[1],
+                'image': f'images/{folder}/Armes/{row[1]}' if folder else row[1],
                 'name': row[2],
                 'stats': row[3],
-                'evolutions': self.get_evolutions(weapon_id, language)
+                'evolutions': self.get_evolutions(weapon_id, language, folder)
             }
             weapons.append(weapon)
         return weapons
 
-    def get_evolutions(self, weapon_id, language):
+    def get_evolutions(self, weapon_id, language, folder=None):
         self.cursor.execute("""
             SELECT e.sjw_weapon_evolutions_id, e.sjw_weapon_evolutions_number, e.sjw_weapon_evolutions_range, e.sjw_weapon_evolutions_type,
                    t.sjw_weapon_evolution_translations_description
@@ -38,7 +38,9 @@ class SJWWeaponsSql:
                 'number': row[1],
                 'range': row[2],
                 'type': row[3],
-                'description': row[4]
+                'description': row[4],
+                # Si tu as une image d'évolution, adapte ici
+                # 'image': f'images/{folder}/Armes/Evolutions/{row[?]}' if folder else row[?]
             }
             for row in self.cursor.fetchall()
         ]
