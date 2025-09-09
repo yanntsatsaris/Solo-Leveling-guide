@@ -64,7 +64,7 @@ class SJWEquipmentSetSql:
                     'id': artefact_id,
                     'name': translations.get(language, {}).get('name', ''),
                     'set': artefact_set,
-                    'image_name': artefact_image,
+                    'image': artefact_image,  # Uniformisé !
                     'main_stat': artefact_main_stat,
                     'secondary_stats': secondary_stats,
                     'number': artefact_number,
@@ -83,13 +83,14 @@ class SJWEquipmentSetSql:
                     'id': c_row[0],
                     'name': c_row[1],
                     'number': c_row[2],
-                    'image_name': c_row[3],
+                    'image': c_row[3],  # Uniformisé !
                     'main_stat': c_row[4],
-                    'secondary_stat': c_row[5]
+                    'secondary_stat': c_row[5],
+                    'color': c_row[1]   # Pour la bulle d'effet (comme dans character_details.js)
                 })
             sets.append({
                 'id': set_id,
-                'set_name': set_name,
+                'name': set_name,  # Uniformisé !
                 'description': set_description,
                 'focus_stats': focus_stats,
                 'artefacts': artefacts,
