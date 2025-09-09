@@ -12,6 +12,14 @@ class SJWEquipmentSetSql:
         sets = []
         for row in self.cursor.fetchall():
             set_id, set_name = row
+            # Nom traduit du set
+            self.cursor.execute("""
+                SELECT sjw_equipment_set_translations_name
+                FROM sjw_equipment_set_translations
+                WHERE sjw_equipment_set_translations_equipment_sets_id = %s AND sjw_equipment_set_translations_language = %s
+            """, (set_id, language))
+            name_row = self.cursor.fetchone()
+            set_name_translated = name_row[0] if name_row else set_name
             # Description traduite du set
             self.cursor.execute("""
                 SELECT sjw_equipment_set_translations_description
@@ -90,7 +98,7 @@ class SJWEquipmentSetSql:
                 })
             sets.append({
                 'id': set_id,
-                'set_name': set_name,  # Uniformisé !
+                'set_name': set_name_translated,  # <-- Correction ici !
                 'description': set_description,
                 'focus_stats': focus_stats,
                 'artefacts': artefacts,
