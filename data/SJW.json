@@ -369,7 +369,7 @@
                 "name": "Casque",
                 "number": "01",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact01_Curse.webp",
+                "image": "Artefact01_Curse.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -392,7 +392,7 @@
                 "name": "Plastron",
                 "number": "02",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact02_Curse.webp",
+                "image": "Artefact02_Curse.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -415,7 +415,7 @@
                 "name": "Gants",
                 "number": "03",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact03_Curse.webp",
+                "image": "Artefact03_Curse.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -438,7 +438,7 @@
                 "name": "Bottes",
                 "number": "04",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact04_Curse.webp",
+                "image": "Artefact04_Curse.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -461,7 +461,7 @@
                 "name": "Collier",
                 "number": "05",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
+                "image": "Artefact05_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -484,7 +484,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
+                "image": "Artefact06_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -507,7 +507,7 @@
                 "name": "Bague",
                 "number": "07",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
+                "image": "Artefact07_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -530,7 +530,7 @@
                 "name": "Boucle d'oreille",
                 "number": "08",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
+                "image": "Artefact08_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -552,7 +552,7 @@
             ],
             "cores": [
               {
-                "name": "Noyau Bleu 01",
+                "name": "Bleu",
                 "number": "01",
                 "image": "Bleu01.webp",
                 "main_stat": {
@@ -563,7 +563,7 @@
                 }
               },
               {
-                "name": "Noyau Orange 02",
+                "name": "Orange",
                 "number": "02",
                 "image": "Orange02.webp",
                 "main_stat": {
@@ -574,7 +574,7 @@
                 }
               },
               {
-                "name": "Noyau Bleu 03",
+                "name": "Bleu",
                 "number": "03",
                 "image": "Bleu03.webp",
                 "main_stat": {
@@ -601,7 +601,7 @@
                 "name": "Casque",
                 "number": "01",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact01_Curse.webp",
+                "image": "Artefact01_Curse.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -624,7 +624,7 @@
                 "name": "Plastron",
                 "number": "02",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact02_Curse.webp",
+                "image": "Artefact02_Curse.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -647,7 +647,7 @@
                 "name": "Gants",
                 "number": "03",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact03_Curse.webp",
+                "image": "Artefact03_Curse.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -670,7 +670,7 @@
                 "name": "Bottes",
                 "number": "04",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact04_Curse.webp",
+                "image": "Artefact04_Curse.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -693,7 +693,7 @@
                 "name": "Collier",
                 "number": "05",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
+                "image": "Artefact05_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -716,7 +716,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
+                "image": "Artefact06_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -739,7 +739,7 @@
                 "name": "Bague",
                 "number": "07",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
+                "image": "Artefact07_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -762,7 +762,7 @@
                 "name": "Boucle d'oreille",
                 "number": "08",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
+                "image": "Artefact08_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -784,7 +784,7 @@
             ],
             "cores": [
               {
-                "name": "Noyau Bleu 01",
+                "name": "Bleu",
                 "number": "01",
                 "image": "Bleu01.webp",
                 "main_stat": {
@@ -795,7 +795,7 @@
                 }
               },
               {
-                "name": "Noyau Orange 02",
+                "name": "Orange",
                 "number": "02",
                 "image": "Orange02.webp",
                 "main_stat": {
@@ -806,7 +806,7 @@
                 }
               },
               {
-                "name": "Noyau Bleu 03",
+                "name": "Bleu",
                 "number": "03",
                 "image": "Bleu03.webp",
                 "main_stat": {
@@ -1013,10 +1013,10 @@
             ],
             "artefacts": [
               {
-                "name": "Casque",
+                "name": "Helmet",
                 "number": "01",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact01_Curse.webp",
+                "image": "Artefact01_Curse.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -1036,10 +1036,10 @@
                 ]
               },
               {
-                "name": "Plastron",
+                "name": "Chestplate",
                 "number": "02",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact02_Curse.webp",
+                "image": "Artefact02_Curse.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -1059,10 +1059,10 @@
                 ]
               },
               {
-                "name": "Gants",
+                "name": "Gloves",
                 "number": "03",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact03_Curse.webp",
+                "image": "Artefact03_Curse.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -1082,10 +1082,10 @@
                 ]
               },
               {
-                "name": "Bottes",
+                "name": "Boots",
                 "number": "04",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact04_Curse.webp",
+                "image": "Artefact04_Curse.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -1105,10 +1105,10 @@
                 ]
               },
               {
-                "name": "Collier",
+                "name": "Necklace",
                 "number": "05",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
+                "image": "Artefact05_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -1131,7 +1131,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
+                "image": "Artefact06_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -1151,10 +1151,10 @@
                 ]
               },
               {
-                "name": "Bague",
+                "name": "Ring",
                 "number": "07",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
+                "image": "Artefact07_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -1174,10 +1174,10 @@
                 ]
               },
               {
-                "name": "Boucle d'oreille",
+                "name": "Earing",
                 "number": "08",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
+                "image": "Artefact08_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -1199,7 +1199,7 @@
             ],
             "cores": [
               {
-                "name": "Noyau Bleu 01",
+                "name": "Bleu",
                 "number": "01",
                 "image": "Bleu01.webp",
                 "main_stat": {
@@ -1210,7 +1210,7 @@
                 }
               },
               {
-                "name": "Noyau Orange 02",
+                "name": "Orange",
                 "number": "02",
                 "image": "Orange02.webp",
                 "main_stat": {
@@ -1221,7 +1221,7 @@
                 }
               },
               {
-                "name": "Noyau Bleu 03",
+                "name": "Bleu",
                 "number": "03",
                 "image": "Bleu03.webp",
                 "main_stat": {
@@ -1245,10 +1245,10 @@
             ],
             "artefacts": [
               {
-                "name": "Casque",
+                "name": "Helmet",
                 "number": "01",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact01_Curse.webp",
+                "image": "Artefact01_Curse.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -1268,10 +1268,10 @@
                 ]
               },
               {
-                "name": "Plastron",
+                "name": "Chestplate",
                 "number": "02",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact02_Curse.webp",
+                "image": "Artefact02_Curse.webp",
                 "main_stat": {
                   "name": "DEF"
                 },
@@ -1291,10 +1291,10 @@
                 ]
               },
               {
-                "name": "Gants",
+                "name": "Gloves",
                 "number": "03",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact03_Curse.webp",
+                "image": "Artefact03_Curse.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -1314,10 +1314,10 @@
                 ]
               },
               {
-                "name": "Bottes",
+                "name": "Boots",
                 "number": "04",
                 "set": "Burning Curse",
-                "image": "Burning_Curse/Artefact04_Curse.webp",
+                "image": "Artefact04_Curse.webp",
                 "main_stat": {
                   "name": "CRIT DMG"
                 },
@@ -1337,10 +1337,10 @@
                 ]
               },
               {
-                "name": "Collier",
+                "name": "Necklace",
                 "number": "05",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact05_OutstandingAbility.webp",
+                "image": "Artefact05_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "HP"
                 },
@@ -1363,7 +1363,7 @@
                 "name": "Bracelet",
                 "number": "06",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact06_OutstandingAbility.webp",
+                "image": "Artefact06_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "ELEM DMG"
                 },
@@ -1383,10 +1383,10 @@
                 ]
               },
               {
-                "name": "Bague",
+                "name": "Ring",
                 "number": "07",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact07_OutstandingAbility.webp",
+                "image": "Artefact07_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "ATK"
                 },
@@ -1406,10 +1406,10 @@
                 ]
               },
               {
-                "name": "Boucle d'oreille",
+                "name": "Earing",
                 "number": "08",
                 "set": "Outstanding Ability",
-                "image": "Outstanding_Ability/Artefact08_OutstandingAbility.webp",
+                "image": "Artefact08_OutstandingAbility.webp",
                 "main_stat": {
                   "name": "MP MAX"
                 },
@@ -1431,7 +1431,7 @@
             ],
             "cores": [
               {
-                "name": "Noyau Bleu 01",
+                "name": "Bleu",
                 "number": "01",
                 "image": "Bleu01.webp",
                 "main_stat": {
@@ -1442,7 +1442,7 @@
                 }
               },
               {
-                "name": "Noyau Orange 02",
+                "name": "Orange",
                 "number": "02",
                 "image": "Orange02.webp",
                 "main_stat": {
@@ -1453,7 +1453,7 @@
                 }
               },
               {
-                "name": "Noyau Bleu 03",
+                "name": "Bleu",
                 "number": "03",
                 "image": "Bleu03.webp",
                 "main_stat": {
