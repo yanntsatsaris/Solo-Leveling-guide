@@ -29,14 +29,14 @@ class SJWEquipmentSetSql:
             focus_stats = [fs_row[0] for fs_row in self.cursor.fetchall()]
             # Artefacts
             self.cursor.execute("""
-                SELECT a.sjw_artefacts_id, a.sjw_artefacts_image, a.sjw_artefacts_main_stat, a.sjw_artefacts_number, a.sjw_artefacts_set
+                SELECT a.sjw_artefacts_id, a.sjw_artefacts_image, a.sjw_artefacts_main_stat, a.sjw_artefacts_number
                 FROM sjw_artefacts a
                 WHERE a.sjw_artefacts_sjw_equipment_sets_id = %s
                 ORDER BY a.sjw_artefacts_number
             """, (set_id,))
             artefacts = []
             for a_row in self.cursor.fetchall():
-                artefact_id, artefact_image, artefact_main_stat, artefact_number, artefact_set = a_row
+                artefact_id, artefact_image, artefact_main_stat, artefact_number = a_row
                 # Traduction
                 self.cursor.execute("""
                     SELECT sjw_artefact_translations_language, sjw_artefact_translations_name
@@ -51,6 +51,15 @@ class SJWEquipmentSetSql:
                     WHERE sjw_artefact_secondary_stats_sjw_artefacts_id = %s
                 """, (artefact_id,))
                 secondary_stats = [sec_row[0] for sec_row in self.cursor.fetchall()]
+                # Set de l'artefact
+                self.cursor.execute("""
+                    SELECT sjw_artefact_translations_set
+                    FROM sjw_artefact_translations
+                    WHERE sjw_artefact_translations_sjw_artefacts_id = %s AND sjw_artefact_translations_language = %s
+                """, (artefact_id, language))
+                set_row = self.cursor.fetchone()
+                artefact_set = set_row[0] if set_row else ""
+
                 artefacts.append({
                     'id': artefact_id,
                     'name': translations.get(language, {}).get('name', ''),
