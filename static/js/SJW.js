@@ -1,3 +1,12 @@
+const equipmentSets = JSON.parse(
+  document.getElementById("equipmentSetsData").textContent
+);
+const equipmentSetsEffects = JSON.parse(
+  document.getElementById("equipmentSetsEffectsData").textContent
+);
+
+let currentSetIndex = 0; // Variable globale pour suivre le set sélectionné
+
 // Gestion des onglets
 document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll(".tab");
@@ -52,10 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Gestion des effets de panoplie
-const equipmentSetsEffects = JSON.parse(
-  document.getElementById("equipmentSetsEffectsData").textContent
-);
-
 function showSetEffects(setName, event) {
   const effectsContainer = document.getElementById("set-effects");
   const effectsList = document.getElementById("set-effects-list");
@@ -117,17 +122,20 @@ function hideSetEffects() {
 
 // Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
 document.addEventListener("DOMContentLoaded", () => {
+  const tabs = document.querySelectorAll(".tab");
+  const tabContents = document.querySelectorAll(".tab-content");
   const focusStatsList = document.querySelector(".focus-stats-list");
   const artefactsContainer = document.querySelector(".artefacts-container");
   const coresContainer = document.querySelector(".cores-container");
-  const equipmentSets = JSON.parse(
-    document.getElementById("equipmentSetsData").textContent
+  const descriptionText = document.querySelector(
+    ".equipment-set-description-text"
   );
+  const equipmentSelect = document.getElementById("equipment-select");
+  const artefactsTab = document.getElementById("artefacts-tab");
 
   function displaySet(setIndex) {
     const selectedSet = equipmentSets[setIndex];
     if (!selectedSet) {
-      // Vide les zones si aucun set
       descriptionText.innerHTML = "";
       focusStatsList.innerHTML = "";
       artefactsContainer.innerHTML = "";
@@ -139,21 +147,18 @@ document.addEventListener("DOMContentLoaded", () => {
       ? selectedSet.description
       : "";
 
-    // Mettre à jour les focus stats
     focusStatsList.innerHTML = selectedSet.focus_stats
       .map((stat) => `<li>${stat}</li>`)
       .join("");
 
-    // Mettre à jour les artefacts
+    // Artefacts
     const leftColumnArtefacts = selectedSet.artefacts
       .slice(0, 4)
       .map(
         (artefact) => `
             <div class="artefact-item" data-set="${artefact.set}">
                 <div class="artefact-item-content">
-                    <img src="/static/${artefact.image}" alt="${
-          artefact.name
-        }" class="artefact-image"
+                    <img src="/static/${artefact.image}" alt="${artefact.name}" class="artefact-image"
                          onmouseover="showSetEffects('${artefact.set}', event)"
                          onmouseout="hideSetEffects()">
                     <div>
@@ -190,9 +195,7 @@ document.addEventListener("DOMContentLoaded", () => {
         (artefact) => `
             <div class="artefact-item" data-set="${artefact.set}">
                 <div class="artefact-item-content">
-                    <img src="/static/${artefact.image}" alt="${
-          artefact.name
-        }" class="artefact-image"
+                    <img src="/static/${artefact.image}" alt="${artefact.name}" class="artefact-image"
                          onmouseover="showSetEffects('${artefact.set}', event)"
                          onmouseout="hideSetEffects()">
                     <div>
@@ -228,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <div class="artefacts-column">${rightColumnArtefacts}</div>
         `;
 
-    // Mettre à jour les cores
+    // Cores
     coresContainer.innerHTML = selectedSet.cores
       .map(
         (core) => `
@@ -257,45 +260,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Gestion du changement de sélection dans le <select>
-  const equipmentSelect = document.getElementById("equipment-select");
-  const artefactsTab = document.getElementById("artefacts-tab");
-
-  // Gestion du clic sur le <select>
-  equipmentSelect.addEventListener("click", (event) => {
-    event.stopPropagation(); // Empêche le clic de se propager comme un onglet
-    const setIndex = equipmentSelect.value;
-
-    // Si le set sélectionné est déjà affiché, activer l'onglet Artefacts
-    if (setIndex === currentSetIndex) {
-      tabs.forEach((t) => t.classList.remove("active"));
-      tabContents.forEach((tc) => tc.classList.remove("active"));
-      const artefactsTab = document.getElementById("artefacts-tab");
-      artefactsTab.classList.add("active");
-      document.getElementById("artefacts").classList.add("active");
-    }
-  });
-
-  // Gestion du changement de sélection
   equipmentSelect.addEventListener("change", (event) => {
     const setIndex = event.target.value;
-
-    // Mettre à jour le set sélectionné
     currentSetIndex = setIndex;
-
-    // Afficher le set sélectionné
     displaySet(setIndex);
-
-    // Activer l'onglet Artefacts
     tabs.forEach((t) => t.classList.remove("active"));
     tabContents.forEach((tc) => tc.classList.remove("active"));
-    const artefactsTab = document.getElementById("artefacts-tab");
     artefactsTab.classList.add("active");
     document.getElementById("artefacts").classList.add("active");
   });
 
   // Afficher le premier set par défaut au chargement
-  if (equipmentSelect.options.length > 0) {
-    currentSetIndex = equipmentSelect.options[0].value; // Initialiser avec le premier set
+  if (equipmentSelect.options.length > 0 && equipmentSets.length > 0) {
+    currentSetIndex = equipmentSelect.options[0].value;
     displaySet(currentSetIndex);
   }
 });
