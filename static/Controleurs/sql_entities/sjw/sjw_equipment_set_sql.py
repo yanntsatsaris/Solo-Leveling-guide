@@ -59,12 +59,12 @@ class SJWEquipmentSetSql:
                 """, (artefact_id, language))
                 set_row = self.cursor.fetchone()
                 artefact_set = set_row[0] if set_row else ""
-
+                artefact_set_path = artefact_set.replace(" ", "_") if artefact_set else ""
                 artefacts.append({
                     'id': artefact_id,
                     'name': translations.get(language, {}).get('name', ''),
                     'set': artefact_set,
-                    'image': artefact_image,  # Uniformisé !
+                    'image': f'images/Artefacts/{artefact_set_path}/{artefact_image}' if artefact_image else '',
                     'main_stat': artefact_main_stat,
                     'secondary_stats': secondary_stats,
                     'number': artefact_number,
