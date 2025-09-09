@@ -7,7 +7,9 @@ const equipmentSetsEffects = JSON.parse(
 );
 
 // Les effets de core sont passés depuis Flask
-const coresEffects = JSON.parse(document.getElementById("coresEffectsData").textContent);
+const coresEffects = JSON.parse(
+  document.getElementById("coresEffectsData").textContent
+);
 
 // Gestion des onglets
 document.addEventListener("DOMContentLoaded", () => {
@@ -72,12 +74,12 @@ function showSetEffects(setName, event) {
 
   // Récupère le display_name correspondant au set
   let displayName = setName;
-  const effectSet = equipmentSetsEffects.find(e => e.set_name === setName);
+  const effectSet = equipmentSetsEffects.find((e) => e.set_name === setName);
   if (effectSet && effectSet.display_name) {
     displayName = effectSet.display_name;
   } else {
     // Si non trouvé, tente dans equipmentSets
-    const selectedSet = equipmentSets.find(s => s.name === setName);
+    const selectedSet = equipmentSets.find((s) => s.name === setName);
     if (selectedSet && selectedSet.display_name) {
       displayName = selectedSet.display_name;
     }
@@ -86,13 +88,16 @@ function showSetEffects(setName, event) {
 
   // Récupère le set actuellement sélectionné
   const equipmentSelect = document.getElementById("equipment-select");
-  const selectedSetIndex = equipmentSelect ? parseInt(equipmentSelect.value) : 0;
+  const selectedSetIndex = equipmentSelect
+    ? parseInt(equipmentSelect.value)
+    : 0;
   const selectedSet = equipmentSets[selectedSetIndex];
 
   // Récupère le nombre de pièces pour le set survolé
-  const numPieces = selectedSet.set_piece_count && selectedSet.set_piece_count[setName]
-    ? selectedSet.set_piece_count[setName]
-    : 0;
+  const numPieces =
+    selectedSet.set_piece_count && selectedSet.set_piece_count[setName]
+      ? selectedSet.set_piece_count[setName]
+      : 0;
 
   // Filtre les effets pour le set affiché et le nombre de pièces
   const effects = equipmentSetsEffects
@@ -102,13 +107,19 @@ function showSetEffects(setName, event) {
   effectsContainer.style.display = "block";
   effectsList.innerHTML = "";
   if (effects.length === 0) {
-    effectsList.innerHTML = "<li>Aucun effet disponible pour ce nombre de pièces.</li>";
+    effectsList.innerHTML =
+      "<li>Aucun effet disponible pour ce nombre de pièces.</li>";
   } else {
     effects.forEach((effect) => {
       const listItem = document.createElement("li");
       listItem.innerHTML = `
-        <span style="color: #ffcc00; font-weight: bold;">${effect.pieces_required} pièces :</span>
-        <span style="display: block; margin-top: 5px;">${effect.effect.replace(/\n/g, "<br>")}</span>
+        <span style="color: #ffcc00; font-weight: bold;">${
+          effect.pieces_required
+        } pièces :</span>
+        <span style="display: block; margin-top: 5px;">${effect.effect.replace(
+          /\n/g,
+          "<br>"
+        )}</span>
       `;
       effectsList.appendChild(listItem);
     });
@@ -241,7 +252,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const focusStatsList = document.querySelector(".focus-stats-list");
   const artefactsContainer = document.querySelector(".artefacts-container");
   const coresContainer = document.querySelector(".cores-container");
-  const descriptionText = document.querySelector(".equipment-set-description-text");
+  const descriptionText = document.querySelector(
+    ".equipment-set-description-text"
+  );
 
   function displaySet(setIndex) {
     const selectedSet = equipmentSets[setIndex];
@@ -254,7 +267,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    descriptionText.innerHTML = selectedSet.description ? selectedSet.description : "";
+    descriptionText.innerHTML = selectedSet.description
+      ? selectedSet.description
+      : "";
 
     // Mettre à jour les focus stats
     focusStatsList.innerHTML = selectedSet.focus_stats
@@ -268,7 +283,9 @@ document.addEventListener("DOMContentLoaded", () => {
         (artefact) => `
             <div class="artefact-item" data-set="${artefact.set}">
                 <div class="artefact-item-content">
-                    <img src="/static/${artefact.image}" alt="${artefact.name}" class="artefact-image"
+                    <img src="/static/${artefact.image}" alt="${
+          artefact.name
+        }" class="artefact-image"
                          onmouseover="showSetEffects('${artefact.set}', event)"
                          onmouseout="hideSetEffects()">
                     <div>
@@ -305,7 +322,9 @@ document.addEventListener("DOMContentLoaded", () => {
         (artefact) => `
             <div class="artefact-item" data-set="${artefact.set}">
                 <div class="artefact-item-content">
-                    <img src="/static/${artefact.image}" alt="${artefact.name}" class="artefact-image"
+                    <img src="/static/${artefact.image}" alt="${
+          artefact.name
+        }" class="artefact-image"
                          onmouseover="showSetEffects('${artefact.set}', event)"
                          onmouseout="hideSetEffects()">
                     <div>
@@ -374,7 +393,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const artefactsTab = document.getElementById("artefacts-tab");
 
   // Gestion du clic sur le <select>
-  equipmentSelect.addEventListener("click", function(event) {
+  equipmentSelect.addEventListener("click", function (event) {
     event.stopPropagation(); // Empêche le clic de se propager comme un onglet
     const setIndex = equipmentSelect.value;
 
@@ -405,19 +424,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-  const editBtn = document.getElementById('edit-character-btn');
-  const overlay = document.getElementById('edit-character-overlay');
-  const closeBtn = document.getElementById('close-edit-character');
+document.addEventListener("DOMContentLoaded", function () {
+  const editBtn = document.getElementById("edit-character-btn");
+  const overlay = document.getElementById("edit-character-overlay");
+  const closeBtn = document.getElementById("close-edit-character");
 
   if (editBtn && overlay) {
-    editBtn.onclick = function() {
-      overlay.style.display = 'flex';
+    editBtn.onclick = function () {
+      overlay.style.display = "flex";
     };
   }
   if (closeBtn && overlay) {
-    closeBtn.onclick = function() {
-      overlay.style.display = 'none';
+    closeBtn.onclick = function () {
+      overlay.style.display = "none";
     };
   }
 });
