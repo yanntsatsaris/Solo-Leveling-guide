@@ -68,7 +68,9 @@ function showSetEffects(setName, event) {
   effectsTitle.textContent = setName;
 
   // Récupérer les effets activés pour le set actuellement sélectionné
-  const selectedSetEffects = equipmentSetsEffects[currentSetIndex];
+  const selectedSetEffects = equipmentSetsEffects.filter(
+    (effect) => effect.set_name === setName
+  );
 
   // Ajouter les effets activés pour la panoplie survolée
   selectedSetEffects.forEach((effect) => {
