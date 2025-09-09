@@ -115,7 +115,7 @@
                     character.equipment_sets|length > 0 %} {% for set in
                     character.equipment_sets %}
                     <option value="{{ loop.index0 }}">
-                      {{ set.set_name }}
+                      {{ set.name }}
                     </option>
                     {% endfor %} {% else %}
                     <option disabled>Aucun set équipé</option>
