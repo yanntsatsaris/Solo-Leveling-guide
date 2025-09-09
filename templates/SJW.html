@@ -144,6 +144,12 @@
           []
       {% endif %}
     </script>
+    <script id="equipmentSetsEffectsData" type="application/json">
+      {{ panoplies_effects|tojson }}
+    </script>
+    <script id="coresEffectsData" type="application/json">
+      {{ cores_effects | tojson }}
+    </script>
     <script src="{{ url_for('static', filename='js/SJW.js') }}"></script>
   </body>
 </html>
