@@ -90,7 +90,7 @@ class SJWEquipmentSetSql:
                 })
             sets.append({
                 'id': set_id,
-                'name': set_name,  # Uniformisé !
+                'set_name': set_name,  # Uniformisé !
                 'description': set_description,
                 'focus_stats': focus_stats,
                 'artefacts': artefacts,
