@@ -56,10 +56,14 @@ def SJW(app: Flask):
 
         # Récupération des armes (avec évolutions)
         character_info['weapon'] = weapons_sql.get_weapons(character_info['id'], language, folder)
-        write_log(f"Armes récupérées : {character_info['weapon']}", log_level="INFO")
 
         # Récupération des sets d'équipement (avec artefacts et cores)
         character_info['equipment_sets'] = equipment_set_sql.get_equipment_sets_full(character_info['id'], language)
+        
+        # Ajout de l'extraction de la couleur des cœurs
+        for eq_set in character_info['equipment_sets']:
+            for core in eq_set['cores']:
+                core['color'] = core['name']
 
         # Récupération des bénédictions
         character_info['offensive_blessings'] = blessings_sql.get_offensive_blessings(character_info['id'])

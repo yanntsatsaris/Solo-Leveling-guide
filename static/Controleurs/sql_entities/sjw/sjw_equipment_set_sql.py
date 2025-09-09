@@ -83,7 +83,7 @@ class SJWEquipmentSetSql:
                     'id': c_row[0],
                     'name': c_row[1],
                     'number': c_row[2],
-                    'image': c_row[3],  # Uniformisé !
+                    'image': f'images/Noyaux/{c_row[3]}' if c_row[3] else '',
                     'main_stat': c_row[4],
                     'secondary_stat': c_row[5],
                     'color': c_row[1]   # Pour la bulle d'effet (comme dans character_details.js)
