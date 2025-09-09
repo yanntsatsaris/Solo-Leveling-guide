@@ -70,8 +70,8 @@ def SJW(app: Flask):
         character_info['defensive_blessings'] = blessings_sql.get_defensive_blessings(character_info['id'])
 
         # Récupération des panoplies et noyaux (si besoin pour le contexte global)
-        panoplies_data = panoplies_sql.get_panoplies_effects(language)
-        cores_data = cores_sql.get_cores_effects(language)
+        panoplies_effects = panoplies_sql.get_panoplies_effects(language)
+        cores_effects = cores_sql.get_cores_effects(language)
 
         sql_manager.close()
 
@@ -79,8 +79,8 @@ def SJW(app: Flask):
             'SJW.html',
             character=character_info,
             language=language,
-            panoplies=panoplies_data,
-            cores=cores_data
+            panoplies_effects=panoplies_effects,
+            cores_effects=cores_effects,  # Passage à la vue
         )
 
     @app.route('/SJW/shadow/<shadowName>')
