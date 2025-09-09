@@ -126,18 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function displaySet(setIndex) {
     const selectedSet = equipmentSets[setIndex];
-    if (!selectedSet) {
-      // Vide les zones si aucun set
-      descriptionText.innerHTML = "";
-      focusStatsList.innerHTML = "";
-      artefactsContainer.innerHTML = "";
-      coresContainer.innerHTML = "";
-      return;
-    }
-
-    descriptionText.innerHTML = selectedSet.description
-      ? selectedSet.description
-      : "";
 
     // Mettre à jour les focus stats
     focusStatsList.innerHTML = selectedSet.focus_stats
@@ -159,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div>
                         <div class="stat-main">
                             <div class="stat-container">
-                                <span>${artefact.main_stat}</span>
+                                <span>${artefact.main_stat.name}</span>
                                 <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
                             </div>
                         </div>
@@ -169,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 (stat) => `
                                 <div class="stat-secondary">
                                     <div class="stat-container">
-                                        <span>${stat}</span>
+                                        <span>${stat.name}</span>
                                         <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
                                     </div>
                                 </div>
@@ -198,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div>
                         <div class="stat-main">
                             <div class="stat-container">
-                                <span>${artefact.main_stat}</span>
+                                <span>${artefact.main_stat.name}</span>
                                 <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
                             </div>
                         </div>
@@ -208,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 (stat) => `
                                 <div class="stat-secondary">
                                     <div class="stat-container">
-                                        <span>${stat}</span>
+                                        <span>${stat.name}</span>
                                         <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
                                     </div>
                                 </div>
@@ -232,26 +220,24 @@ document.addEventListener("DOMContentLoaded", () => {
     coresContainer.innerHTML = selectedSet.cores
       .map(
         (core) => `
-      <div class="core-item">
-        <img src="/static/${core.image}" alt="${core.name}" class="core-image"
-             onmouseover="showCoreEffect('${core.color}', '${core.number}', event)"
-             onmouseout="hideCoreEffect()">
-        <div class="stats">
-          <div class="stat-main">
-            <div class="stat-container">
-              <span>${core.main_stat}</span>
-              <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
+            <div class="core-item">
+                <img src="/static/${core.image}" alt="${core.name}" class="core-image">
+                <div class="stats">
+                    <div class="stat-main">
+                        <div class="stat-container">
+                            <span>${core.main_stat.name}</span>
+                            <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
+                        </div>
+                    </div>
+                    <div class="stat-secondary">
+                        <div class="stat-container">
+                            <span>${core.secondary_stat.name}</span>
+                            <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="stat-secondary">
-            <div class="stat-container">
-              <span>${core.secondary_stat}</span>
-              <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
-            </div>
-          </div>
-        </div>
-      </div>
-    `
+        `
       )
       .join("");
   }
