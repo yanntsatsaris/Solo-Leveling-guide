@@ -37,7 +37,7 @@ class SJWEquipmentSetSql:
             SELECT a.sjw_artefacts_id, a.sjw_artefacts_image, a.sjw_artefacts_main_stat, a.sjw_artefacts_set
             FROM sjw_artefacts a
             WHERE a.sjw_artefacts_sjw_equipment_sets_id = %s
-            ORDER BY a.sjw_artefacts_number
+            ORDER BY a.sjw_artefacts_image
         """, (eq_set_id,))
         artefacts = []
         artefact_sets = []
