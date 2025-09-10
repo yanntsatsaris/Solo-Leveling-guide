@@ -1,10 +1,7 @@
-import json
 import os
 import re
 import unicodedata
 import glob
-import zipfile
-import shutil
 from flask import Flask, render_template, url_for, session, request, redirect, abort, jsonify
 from flask_login import login_required, current_user
 from static.Controleurs.ControleurLog import write_log

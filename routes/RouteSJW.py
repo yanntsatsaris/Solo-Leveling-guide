@@ -1,4 +1,8 @@
 import json
+import os
+import re
+import unicodedata
+import glob
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.ControleurSql import ControleurSql
 from static.Controleurs.sql_entities.sjw_sql import SJWSql
@@ -11,22 +15,96 @@ from static.Controleurs.sql_entities.cores_sql import CoresSql
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
 from flask import Flask, render_template, session , url_for
 
+def normalize_focus_stats(val):
+    if isinstance(val, list):
+        # Si la liste contient une seule chaîne avec des virgules, découpe-la
+        if len(val) == 1 and isinstance(val[0], str) and ',' in val[0]:
+            return sorted([v.strip() for v in val[0].split(',') if v.strip()])
+        return sorted([v.strip() for v in val if v])
+    if isinstance(val, str):
+        return sorted([v.strip() for v in val.split(',') if v.strip()])
+    return []
+
+def normalize_stats(val):
+    if isinstance(val, list):
+        return ','.join([v.strip() for v in val if v])
+    if isinstance(val, str):
+        return ','.join([v.strip() for v in val.split(',') if v.strip()])
+    return ''
+
+def normalize_text(val):
+    if val is None:
+        return ''
+    # Unifie les retours à la ligne et supprime les espaces superflus
+    return val.replace('\r\n', '\n').replace('\r', '\n').strip()
+
+def render_tags(description, tags_list, base_path):
+
+    def normalize_tag(tag):
+        # Remplace tous les types d'apostrophes par une apostrophe simple
+        tag = tag.replace("’", "'").replace("`", "'").replace("´", "'")
+        # Supprime les accents et met en minuscule
+        return ''.join(
+            c for c in unicodedata.normalize('NFD', tag)
+            if unicodedata.category(c) != 'Mn'
+        ).lower().strip()
+
+    def find_tag(tag):
+        tag_norm = normalize_tag(tag)
+        for item in tags_list:
+            tag_value = item.get('tag')
+            if tag_value and normalize_tag(tag_value) == tag_norm:
+                return item
+        return None
+
+    def replacer(match):
+        tag_raw = match.group(1)
+        parts = tag_raw.split('|')
+        tag = parts[0].strip()
+        only_img = len(parts) > 1 and parts[1].strip().lower() == 'img'
+        tag_info = find_tag(tag)
+        if tag_info and tag_info.get('image'):
+            img_path = tag_info['image']
+            if not img_path.startswith('images/'):
+                img_url = url_for('static', filename=f"{base_path}/{img_path}")
+            else:
+                img_url = url_for('static', filename=img_path)
+            img_html = f"<img src='{img_url}' alt='{tag_info.get('tag', tag)}' class='tag-img'>"
+            if only_img:
+                return img_html
+            else:
+                return f"{img_html} [{tag_info.get('tag', tag)}]"
+        return match.group(0)
+
+    result = re.sub(r"\[([^\]]+)\]", replacer, description).replace("\n", "<br>")
+    return result
+
 def update_image_paths(description, base_path):
     """
     Met à jour les chemins des images dans une description en ajoutant un cache-busting.
     """
     if not description:
         return description
-
-    # Vérifiez si le chemin commence déjà par le chemin de base
     updated_description = description
     if f"src='{url_for('static', filename=base_path)}/" not in description:
         updated_description = description.replace(
             "src='",
             f"src='{url_for('static', filename=base_path)}/"
         )
-
     return updated_description.replace("\n", "<br>")
+
+def process_description(description, tags_list, base_path):
+    if not description:
+        return description
+    if re.search(r"<img\s+src=.*?>\s*\[[^\]]+\]", description):
+        return update_image_paths(description, base_path)
+    elif re.search(r"\[[^\]]+\]", description):
+        return render_tags(description, tags_list, base_path)
+    else:
+        return description.replace("\n", "<br>")
+
+def none_to_empty(val):
+    return "None" if val == "" else val
 
 def SJW(app: Flask):
     @app.route('/SJW')
@@ -46,8 +124,11 @@ def SJW(app: Flask):
         # Récupération des infos principales
         character_info = sjw_sql.get_sjw(language)
         folder = character_info['folder']
+        base_path = f'images/{folder}'
         character_info['image'] = f'images/{folder}/Sung_Jinwoo.png'
-
+        
+        all_tags = []
+        
         # Récupération des shadows (avec évolutions)
         character_info['shadows'] = shadows_sql.get_shadows(character_info['id'], language, folder)
 
@@ -59,12 +140,14 @@ def SJW(app: Flask):
 
         # Récupération des sets d'équipement (avec artefacts et cores)
         equipment_sets = []
-        for eq_set_id, eq_set_name in equipment_set_sql.get_equipment_sets(char_id, language):
+        for eq_set_id, eq_set_name in equipment_set_sql.get_equipment_sets(character_info['id'], language):
             equipment_sets.append(
                 equipment_set_sql.get_equipment_set_details(eq_set_id, eq_set_name, language)
             )
         character_info['equipment_sets'] = equipment_sets
-
+        for eq_set in character_info['equipment_sets']:
+            eq_set['description_raw'] = eq_set['description']  # version brute
+            eq_set['description'] = process_description(eq_set['description'], all_tags, base_path)
         # Ajout de l'extraction de la couleur des cœurs
         for eq_set in character_info['equipment_sets']:
             for core in eq_set['cores']:
