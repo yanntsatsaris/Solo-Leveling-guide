@@ -58,8 +58,13 @@ def SJW(app: Flask):
         character_info['weapon'] = weapons_sql.get_weapons(character_info['id'], language, folder)
 
         # Récupération des sets d'équipement (avec artefacts et cores)
-        character_info['equipment_sets'] = equipment_set_sql.get_equipment_sets_full(character_info['id'], language)
-        
+        equipment_sets = []
+        for eq_set_id, eq_set_name in equipment_set_sql.get_equipment_sets(char_id, language):
+            equipment_sets.append(
+                equipment_set_sql.get_equipment_set_details(eq_set_id, eq_set_name, language)
+            )
+        character_info['equipment_sets'] = equipment_sets
+
         # Ajout de l'extraction de la couleur des cœurs
         for eq_set in character_info['equipment_sets']:
             for core in eq_set['cores']:
