@@ -1,3 +1,16 @@
+// Ces deux lignes doivent être tout en haut du fichier, AVANT toute fonction
+const equipmentSets = JSON.parse(
+  document.getElementById("equipmentSetsData").textContent
+);
+const equipmentSetsEffects = JSON.parse(
+  document.getElementById("equipmentSetsEffectsData").textContent
+);
+
+// Les effets de core sont passés depuis Flask
+const coresEffects = JSON.parse(
+  document.getElementById("coresEffectsData").textContent
+);
+
 // Gestion des onglets
 document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll(".tab");
@@ -52,29 +65,52 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Gestion des effets de panoplie
-const equipmentSetsEffects = JSON.parse(
-  document.getElementById("equipmentSetsEffectsData").textContent
-);
-
 function showSetEffects(setName, event) {
   const effectsContainer = document.getElementById("set-effects");
   const effectsList = document.getElementById("set-effects-list");
   const effectsTitle = effectsContainer.querySelector("h3");
 
-  // Vider la liste des effets
   effectsList.innerHTML = "";
 
-  // Mettre à jour le titre avec le nom de la panoplie
-  effectsTitle.textContent = setName;
+  // Récupère le display_name correspondant au set
+  let displayName = setName;
+  const effectSet = equipmentSetsEffects.find((e) => e.set_name === setName);
+  if (effectSet && effectSet.display_name) {
+    displayName = effectSet.display_name;
+  } else {
+    // Si non trouvé, tente dans equipmentSets
+    const selectedSet = equipmentSets.find((s) => s.name === setName);
+    if (selectedSet && selectedSet.display_name) {
+      displayName = selectedSet.display_name;
+    }
+  }
+  effectsTitle.textContent = displayName;
 
-  // Récupérer les effets activés pour le set actuellement sélectionné
-  const selectedSetEffects = equipmentSetsEffects.filter(
-    (effect) => effect.set_name === setName
-  );
+  // Récupère le set actuellement sélectionné
+  const equipmentSelect = document.getElementById("equipment-select");
+  const selectedSetIndex = equipmentSelect
+    ? parseInt(equipmentSelect.value)
+    : 0;
+  const selectedSet = equipmentSets[selectedSetIndex];
 
-  // Ajouter les effets activés pour la panoplie survolée
-  selectedSetEffects.forEach((effect) => {
-    if (effect.set_name === setName) {
+  // Récupère le nombre de pièces pour le set survolé
+  const numPieces =
+    selectedSet.set_piece_count && selectedSet.set_piece_count[setName]
+      ? selectedSet.set_piece_count[setName]
+      : 0;
+
+  // Filtre les effets pour le set affiché et le nombre de pièces
+  const effects = equipmentSetsEffects
+    .filter((e) => e.set_name === setName && e.pieces_required <= numPieces)
+    .sort((a, b) => a.pieces_required - b.pieces_required);
+
+  effectsContainer.style.display = "block";
+  effectsList.innerHTML = "";
+  if (effects.length === 0) {
+    effectsList.innerHTML =
+      "<li>Aucun effet disponible pour ce nombre de pièces.</li>";
+  } else {
+    effects.forEach((effect) => {
       const listItem = document.createElement("li");
       listItem.innerHTML = `
         <span style="color: #ffcc00; font-weight: bold;">${
@@ -86,25 +122,22 @@ function showSetEffects(setName, event) {
         )}</span>
       `;
       effectsList.appendChild(listItem);
-    }
-  });
+    });
+  }
 
-  // Rendre la bulle visible temporairement pour calculer ses dimensions
-  effectsContainer.style.display = "block";
-  const bubbleWidth = effectsContainer.offsetWidth;
-  const bubbleHeight = effectsContainer.offsetHeight;
-  effectsContainer.style.display = "none";
-
-  // Positionner la bulle
+  // Positionner la bulle à gauche de l'image
   const rect = event.target.getBoundingClientRect();
-  let leftPosition = rect.left - bubbleWidth - 10;
+  const bubbleWidth = effectsContainer.offsetWidth || 300;
+  const bubbleHeight = effectsContainer.offsetHeight || 100;
+
+  let leftPosition = rect.left + window.scrollX - bubbleWidth - 10;
   if (leftPosition < 0) {
-    leftPosition = rect.right + 10;
+    leftPosition = rect.right + window.scrollX + 10;
   }
   let topPosition = rect.top + window.scrollY;
-  const viewportHeight = window.innerHeight;
-  if (topPosition + bubbleHeight > viewportHeight + window.scrollY) {
-    topPosition = viewportHeight + window.scrollY - bubbleHeight - 10;
+
+  if (topPosition + bubbleHeight > window.innerHeight + window.scrollY) {
+    topPosition = window.innerHeight + window.scrollY - bubbleHeight - 10;
   }
 
   effectsContainer.style.top = `${topPosition}px`;
@@ -117,17 +150,126 @@ function hideSetEffects() {
   effectsContainer.style.display = "none";
 }
 
+// Affichage de la bulle d'effet pour un core
+function showCoreEffect(color, number, event) {
+  const bubble = document.getElementById("core-effect-bubble");
+  const title = document.getElementById("core-effect-title");
+  const desc = document.getElementById("core-effect-description");
+
+  const effect = coresEffects.find(
+    (e) => e.color === color && e.number === number
+  );
+
+  if (effect) {
+    title.textContent = effect.name;
+    desc.innerHTML = effect.effect.replace(/\n/g, "<br>");
+  } else {
+    title.textContent = "Effet inconnu";
+    desc.textContent = "";
+  }
+
+  bubble.style.display = "block";
+
+  // Positionne la bulle à gauche de l'image
+  const rect = event.target.getBoundingClientRect();
+  const bubbleWidth = bubble.offsetWidth || 300;
+  const bubbleHeight = bubble.offsetHeight || 100;
+
+  let leftPosition = rect.left + window.scrollX - bubbleWidth - 10;
+  if (leftPosition < 0) {
+    leftPosition = rect.right + window.scrollX + 10;
+  }
+  let topPosition = rect.top + window.scrollY;
+
+  if (topPosition + bubbleHeight > window.innerHeight + window.scrollY) {
+    topPosition = window.innerHeight + window.scrollY - bubbleHeight - 10;
+  }
+
+  bubble.style.top = `${topPosition}px`;
+  bubble.style.left = `${leftPosition}px`;
+}
+
+function hideCoreEffect() {
+  document.getElementById("core-effect-bubble").style.display = "none";
+}
+
 // Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
 document.addEventListener("DOMContentLoaded", () => {
+  // Toutes les variables ici sont accessibles partout dans ce bloc !
+  const tabs = document.querySelectorAll(".tab");
+  const tabContents = document.querySelectorAll(".tab-content");
+  let currentSetIndex = 0;
+
+  // Gestion des onglets
+  // Vérifier si un paramètre "tab" est présent dans l'URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const activeTab = urlParams.get("tab");
+
+  if (activeTab) {
+    // Désactiver tous les onglets et contenus
+    tabs.forEach((tab) => tab.classList.remove("active"));
+    tabContents.forEach((content) => content.classList.remove("active"));
+
+    // Activer l'onglet et le contenu correspondant
+    const targetTab = document.querySelector(`.tab[data-tab="${activeTab}"]`);
+    const targetContent = document.getElementById(activeTab);
+    if (targetTab && targetContent) {
+      targetTab.classList.add("active");
+      targetContent.classList.add("active");
+    }
+  } else {
+    // Activer l'onglet par défaut (Description)
+    const defaultTab = document.querySelector('.tab[data-tab="description"]');
+    const defaultContent = document.getElementById("description");
+    if (defaultTab && defaultContent) {
+      defaultTab.classList.add("active");
+      defaultContent.classList.add("active");
+    }
+  }
+
+  // Gestion du clic sur les onglets
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      // Ignorer le clic sur l'onglet avec la flèche (dropdown-tab)
+      if (tab.id === "dropdown-tab") {
+        return;
+      }
+
+      // Retirer la classe active de tous les onglets et contenus
+      tabs.forEach((t) => t.classList.remove("active"));
+      tabContents.forEach((tc) => tc.classList.remove("active"));
+
+      // Ajouter la classe active à l'onglet cliqué et son contenu
+      tab.classList.add("active");
+      const targetTabContent = document.getElementById(tab.dataset.tab);
+      if (targetTabContent) {
+        targetTabContent.classList.add("active");
+      }
+    });
+  });
+
+  // Gestion de la mise à jour dynamique des artefacts, focus_stats et cores
   const focusStatsList = document.querySelector(".focus-stats-list");
   const artefactsContainer = document.querySelector(".artefacts-container");
   const coresContainer = document.querySelector(".cores-container");
-  const equipmentSets = JSON.parse(
-    document.getElementById("equipmentSetsData").textContent
+  const descriptionText = document.querySelector(
+    ".equipment-set-description-text"
   );
 
   function displaySet(setIndex) {
     const selectedSet = equipmentSets[setIndex];
+    if (!selectedSet) {
+      // Vide les zones si aucun set
+      descriptionText.innerHTML = "";
+      focusStatsList.innerHTML = "";
+      artefactsContainer.innerHTML = "";
+      coresContainer.innerHTML = "";
+      return;
+    }
+
+    descriptionText.innerHTML = selectedSet.description
+      ? selectedSet.description
+      : "";
 
     // Mettre à jour les focus stats
     focusStatsList.innerHTML = selectedSet.focus_stats
@@ -149,7 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div>
                         <div class="stat-main">
                             <div class="stat-container">
-                                <span>${artefact.main_stat.name}</span>
+                                <span>${artefact.main_stat}</span>
                                 <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
                             </div>
                         </div>
@@ -159,7 +301,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 (stat) => `
                                 <div class="stat-secondary">
                                     <div class="stat-container">
-                                        <span>${stat.name}</span>
+                                        <span>${stat}</span>
                                         <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
                                     </div>
                                 </div>
@@ -188,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div>
                         <div class="stat-main">
                             <div class="stat-container">
-                                <span>${artefact.main_stat.name}</span>
+                                <span>${artefact.main_stat}</span>
                                 <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
                             </div>
                         </div>
@@ -198,7 +340,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 (stat) => `
                                 <div class="stat-secondary">
                                     <div class="stat-container">
-                                        <span>${stat.name}</span>
+                                        <span>${stat}</span>
                                         <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
                                     </div>
                                 </div>
@@ -222,24 +364,26 @@ document.addEventListener("DOMContentLoaded", () => {
     coresContainer.innerHTML = selectedSet.cores
       .map(
         (core) => `
-            <div class="core-item">
-                <img src="/static/${core.image}" alt="${core.name}" class="core-image">
-                <div class="stats">
-                    <div class="stat-main">
-                        <div class="stat-container">
-                            <span>${core.main_stat.name}</span>
-                            <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
-                        </div>
-                    </div>
-                    <div class="stat-secondary">
-                        <div class="stat-container">
-                            <span>${core.secondary_stat.name}</span>
-                            <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
-                        </div>
-                    </div>
-                </div>
+      <div class="core-item">
+        <img src="/static/${core.image}" alt="${core.name}" class="core-image"
+             onmouseover="showCoreEffect('${core.color}', '${core.number}', event)"
+             onmouseout="hideCoreEffect()">
+        <div class="stats">
+          <div class="stat-main">
+            <div class="stat-container">
+              <span>${core.main_stat}</span>
+              <img src="/static/images/Stats_Principale.png" alt="Statistique Principale">
             </div>
-        `
+          </div>
+          <div class="stat-secondary">
+            <div class="stat-container">
+              <span>${core.secondary_stat}</span>
+              <img src="/static/images/Stats_Secondaire.png" alt="Statistique Secondaire">
+            </div>
+          </div>
+        </div>
+      </div>
+    `
       )
       .join("");
   }
@@ -249,7 +393,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const artefactsTab = document.getElementById("artefacts-tab");
 
   // Gestion du clic sur le <select>
-  equipmentSelect.addEventListener("click", (event) => {
+  equipmentSelect.addEventListener("click", function (event) {
     event.stopPropagation(); // Empêche le clic de se propager comme un onglet
     const setIndex = equipmentSelect.value;
 
@@ -257,7 +401,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (setIndex === currentSetIndex) {
       tabs.forEach((t) => t.classList.remove("active"));
       tabContents.forEach((tc) => tc.classList.remove("active"));
-      const artefactsTab = document.getElementById("artefacts-tab");
       artefactsTab.classList.add("active");
       document.getElementById("artefacts").classList.add("active");
     }
@@ -266,24 +409,17 @@ document.addEventListener("DOMContentLoaded", () => {
   // Gestion du changement de sélection
   equipmentSelect.addEventListener("change", (event) => {
     const setIndex = event.target.value;
-
-    // Mettre à jour le set sélectionné
     currentSetIndex = setIndex;
-
-    // Afficher le set sélectionné
     displaySet(setIndex);
-
-    // Activer l'onglet Artefacts
     tabs.forEach((t) => t.classList.remove("active"));
     tabContents.forEach((tc) => tc.classList.remove("active"));
-    const artefactsTab = document.getElementById("artefacts-tab");
     artefactsTab.classList.add("active");
     document.getElementById("artefacts").classList.add("active");
   });
 
   // Afficher le premier set par défaut au chargement
-  if (equipmentSelect.options.length > 0) {
-    currentSetIndex = equipmentSelect.options[0].value; // Initialiser avec le premier set
+  if (equipmentSelect.options.length > 0 && equipmentSets.length > 0) {
+    currentSetIndex = equipmentSelect.options[0].value;
     displaySet(currentSetIndex);
   }
 });
