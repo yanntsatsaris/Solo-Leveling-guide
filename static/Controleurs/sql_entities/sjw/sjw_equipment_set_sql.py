@@ -138,7 +138,7 @@ class SJWEquipmentSetSql:
             # Focus stats (récupère toutes les stats pour ce set)
             self.cursor.execute("""
                 SELECT sjw_equipment_focus_stats_name FROM sjw_equipment_focus_stats
-                WHERE sjw_equipment_focus_stats_equipment_sets_id = %s
+                WHERE sjw_equipment_focus_stats_sjw_equipment_sets_id = %s
             """, (set_id,))
             focus_stats = [fs_row[0] for fs_row in self.cursor.fetchall()]
             # Artefacts
