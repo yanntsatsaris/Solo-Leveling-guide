@@ -31,7 +31,7 @@
         />
         <label>Description :</label>
         <textarea name="description">{{ character.description }}</textarea>
-        <input type="hidden" name="image_folder" value="{{ character.images_folder }}">
+        <input type="hidden" name="folder" value="{{ character.folder }}">
 
         <!-- <h4 style="margin-top: 28px">Évolutions du personnage</h4>
         <div class="evolutions-grid">
@@ -1023,7 +1023,7 @@
   const currentLang = "{{ language if language is defined else 'FR-fr' }}";
 
   async function fillImageSelects() {
-  const folder = document.querySelector('#edit-sjw-form input[name="image_folder"]').value;
+  const folder = document.querySelector('#edit-sjw-form input[name="folder"]').value;
   let images = [];
   if (folder) {
     try {
