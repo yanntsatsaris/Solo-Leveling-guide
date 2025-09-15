@@ -84,16 +84,16 @@
 }
 
 /* Champs du formulaire */
-.edit-character-popup label {
+.edit-sjw-popup label {
   display: block;
   margin-bottom: 2px;
   color: #ffcc00;
   font-weight: bold;
 }
 
-.edit-character-popup input,
-.edit-character-popup textarea,
-.edit-character-popup select {
+.edit-sjw-popup input,
+.edit-sjw-popup textarea,
+.edit-sjw-popup select {
   width: 100%;
   margin-top: 1.5px;
   padding: 5px;
@@ -105,12 +105,12 @@
   box-sizing: border-box;
 }
 
-.edit-character-popup textarea {
+.edit-sjw-popup textarea {
   min-height: 60px;
   resize: vertical;
 }
 
-.edit-character-popup hr {
+.edit-sjw-popup hr {
   border: none;
   border-top: 1px solid #444;
   margin: 18px 0;
@@ -277,7 +277,7 @@
 
 /* Pour le responsive si besoin */
 @media (max-width: 900px) {
-  .edit-character-popup {
+  .edit-sjw-popup {
     min-width: 95vw;
     max-width: 98vw;
     min-height: 400px;
