@@ -119,9 +119,9 @@ class SJWEquipmentSetSql:
 
     def get_equipment_sets_full(self, sjw_id, language):
         self.cursor.execute("""
-            SELECT es.sjw_equipment_sets_id, es.sjw_equipment_sets_name, est.equipment_set_translations_description, es.equipment_sets_order
+            SELECT es.sjw_equipment_sets_id, es.sjw_equipment_sets_name, est.sjw_equipment_set_translations_description, es.sjw_equipment_sets_order
             FROM sjw_equipment_sets es
-            LEFT JOIN sjw_equipment_set_translations est ON est.equipment_set_translations_equipment_sets_id = es.equipment_sets_id AND est.equipment_set_translations_language = %s
+            LEFT JOIN sjw_equipment_set_translations est ON est.sjw_equipment_set_translations_equipment_sets_id = es.sjw_equipment_sets_id AND est.sjw_equipment_set_translations_language = %s
             WHERE es.sjw_equipment_sets_characters_id = %s
             ORDER BY es.sjw_equipment_sets_order ASC, es.sjw_equipment_sets_id ASC
         """, (language, sjw_id))
