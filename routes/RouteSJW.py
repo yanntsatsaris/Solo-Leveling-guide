@@ -14,6 +14,7 @@ from static.Controleurs.sql_entities.sjw.sjw_blessings_sql import SJWBlessingsSq
 from static.Controleurs.sql_entities.cores_sql import CoresSql
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
 from flask import Flask, render_template, session , url_for
+from flask_login import login_required
 
 def normalize_focus_stats(val):
     if isinstance(val, list):
@@ -275,3 +276,23 @@ def SJW(app: Flask):
 
         # Renvoyer le template avec les données de l'arme
         return render_template('weapon_details.html', weapon=weapon)
+    
+    @app.route('/SJW/edit', methods=['GET'])
+    @login_required
+    def edit_sjw():
+        # Vérifier les droits de l'utilisateur
+        if not session.get('rights') or not any(right in session['rights'] for right in ['Admin', 'SuperAdmin']):
+            return "Access denied", 403
+
+        language = session.get('language', "EN-en")
+        sql_manager = ControleurSql()
+        sjw_sql = SJWSql(sql_manager.cursor)
+        shadows_sql = SJWShadowsSql(sql_manager.cursor)
+        skills_sql = SJWSkillsSql(sql_manager.cursor)
+        weapons_sql = SJWWeaponsSql(sql_manager.cursor)
+        equipment_set_sql = SJWEquipmentSetSql(sql_manager.cursor)
+        blessings_sql = SJWBlessingsSql(sql_manager.cursor)
+
+        # Récupération des infos principales
+        character_info = sjw_sql.get_sjw(language)
+        folder = character_info['folder']
