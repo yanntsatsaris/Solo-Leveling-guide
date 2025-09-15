@@ -281,7 +281,7 @@ def SJW(app: Flask):
         # Renvoyer le template avec les données de l'arme
         return render_template('weapon_details.html', weapon=weapon)
     
-    @app.route('/SJW/edit', methods=['GET'])
+    @app.route('/SJW/edit', methods=['POST'])
     @login_required
     def edit_sjw():
         # Vérifier les droits de l'utilisateur
