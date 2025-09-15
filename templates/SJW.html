@@ -66,7 +66,12 @@
       <div class="content-column">
         <div class="container">
           <h1>{{ character.name }}</h1>
-
+          {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
+            <button id="edit-sjw-btn" class="admin-btn">
+              Modifier Sung Jinwoo
+            </button>
+            {% include 'partials/edit_sjw_modal.html' %}
+          {% endif %}
           <!-- Image du personnage (affichée sous le type sur téléphone) -->
           <div class="character-image">
             <img

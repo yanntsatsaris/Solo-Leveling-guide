@@ -423,3 +423,20 @@ document.addEventListener("DOMContentLoaded", () => {
     displaySet(currentSetIndex);
   }
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  const editBtn = document.getElementById("edit-sjw-btn");
+  const overlay = document.getElementById("edit-sjw-overlay");
+  const closeBtn = document.getElementById("close-edit-sjw");
+
+  if (editBtn && overlay) {
+    editBtn.onclick = function () {
+      overlay.style.display = "flex";
+    };
+  }
+  if (closeBtn && overlay) {
+    closeBtn.onclick = function () {
+      overlay.style.display = "none";
+    };
+  }
+});
