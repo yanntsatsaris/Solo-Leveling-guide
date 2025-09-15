@@ -155,7 +155,7 @@ class SJWEquipmentSetSql:
                 self.cursor.execute("""
                     SELECT sjw_artefact_translations_language, sjw_artefact_translations_name
                     FROM sjw_artefact_translations
-                    WHERE sjw_artefact_translations_artefacts_id = %s
+                    WHERE sjw_artefact_translations_sjw_artefacts_id = %s
                 """, (artefact_id,))
                 translations = {}
                 for lang, name in self.cursor.fetchall():
@@ -163,7 +163,7 @@ class SJWEquipmentSetSql:
                 # Récupère les secondary_stats
                 self.cursor.execute("""
                     SELECT sjw_artefact_secondary_stats_name FROM sjw_artefact_secondary_stats
-                    WHERE sjw_artefact_secondary_stats_artefacts_id = %s
+                    WHERE sjw_artefact_secondary_stats_sjw_artefacts_id = %s
                 """, (artefact_id,))
                 secondary_stats = [sec_row[0] for sec_row in self.cursor.fetchall()]
                 artefacts.append({
