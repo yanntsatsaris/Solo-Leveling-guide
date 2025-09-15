@@ -145,7 +145,7 @@ class SJWEquipmentSetSql:
             self.cursor.execute("""
                 SELECT a.sjw_artefacts_id, a.sjw_artefacts_image, a.sjw_artefacts_main_stat, a.sjw_artefacts_set
                 FROM sjw_artefacts a
-                WHERE a.sjw_artefacts_equipment_sets_id = %s
+                WHERE a.sjw_artefacts_sjw_equipment_sets_id = %s
                 ORDER by a.sjw_artefacts_image
             """, (set_id,))
             artefacts = []
@@ -184,7 +184,7 @@ class SJWEquipmentSetSql:
             self.cursor.execute("""
                 SELECT sjw_cores_id, sjw_cores_name, sjw_cores_number, sjw_cores_image, sjw_cores_main_stat, sjw_cores_secondary_stat
                 FROM sjw_cores
-                WHERE sjw_cores_equipment_sets_id = %s
+                WHERE sjw_cores_sjw_equipment_sets_id = %s
                 ORDER BY sjw_cores_number
             """, (set_id,))
             cores = []
