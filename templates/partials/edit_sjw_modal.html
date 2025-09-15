@@ -116,7 +116,7 @@
           </div>
           {% endif %} {% endfor %}
         </div>
-        <button type="button" id="add-blessing-btn" class="add-btn">+ Ajouter un passif</button>
+        <button type="button" id="add-blessing-btn" class="add-btn">+ Ajouter une bénédiction</button>
       </div>
       <!-- Onglet Compétences -->
       <div class="edit-tab-content" id="edit-tab-skills">
@@ -224,6 +224,7 @@
           </div>
           <hr />
         {% endfor %}
+
       </div>
       <!-- Onglet Armes -->
       <div class="edit-tab-content" id="edit-tab-weapons">
@@ -635,13 +636,13 @@
 
   // Sauvegarde l'état initial du formulaire à l'ouverture
   let initialFormData = null;
-  const form = document.getElementById('edit-character-form');
+  const form = document.getElementById('edit-sjw-form');
   if (form) {
     function serializeForm(form) {
       const formData = new FormData(form);
       return Array.from(formData.entries()).sort();
     }
-    document.getElementById('edit-character-btn')?.addEventListener('click', () => {
+    document.getElementById('edit-sjw-btn')?.addEventListener('click', () => {
       initialFormData = serializeForm(form);
     });
     form.addEventListener('submit', function(e) {
@@ -660,8 +661,8 @@
   }
 
   // Fermeture de la modale si clic en dehors du popup
-  const overlay = document.getElementById('edit-character-overlay');
-  const popup = document.getElementById('edit-character-menu');
+  const overlay = document.getElementById('edit-sjw-overlay');
+  const popup = document.getElementById('edit-sjw-menu');
   if (overlay && popup) {
     overlay.addEventListener('mousedown', function(e) {
       if (e.target === overlay) {
@@ -676,10 +677,10 @@
       const grid = document.getElementById('blessings-grid');
       const index = grid.querySelectorAll('.edit-blessing-block').length;
       // Récupère le dossier image du personnage
-      const folder = document.querySelector('#edit-character-form input[name="image_folder"]').value;
-      const type = document.querySelector('#edit-character-form input[name="type"]').value;
-      const alias = document.querySelector('#edit-character-form input[name="alias"]').value;
-      const rarity = document.querySelector('#edit-character-form input[name="rarity"]').value;
+      const folder = document.querySelector('#edit-sjw-form input[name="image_folder"]').value;
+      const type = document.querySelector('#edit-sjw-form input[name="type"]').value;
+      const alias = document.querySelector('#edit-sjw-form input[name="alias"]').value;
+      const rarity = document.querySelector('#edit-sjw-form input[name="rarity"]').value;
       const typeFolder = type.replace(/ /g, "_");
       const aliasFolder = alias.replace(/ /g, "_");
       const rarityFolder = rarity.replace(/ /g, "_");
@@ -723,10 +724,10 @@
     document.getElementById('add-skill-btn')?.addEventListener('click', async function() {
       const grid = document.getElementById('skills-grid');
       const index = grid.querySelectorAll('.edit-skill-block').length;
-      const folder = document.querySelector('#edit-character-form input[name="image_folder"]').value;
-      const type = document.querySelector('#edit-character-form input[name="type"]').value;
-      const alias = document.querySelector('#edit-character-form input[name="alias"]').value;
-      const rarity = document.querySelector('#edit-character-form input[name="rarity"]').value;
+      const folder = document.querySelector('#edit-sjw-form input[name="image_folder"]').value;
+      const type = document.querySelector('#edit-sjw-form input[name="type"]').value;
+      const alias = document.querySelector('#edit-sjw-form input[name="alias"]').value;
+      const rarity = document.querySelector('#edit-sjw-form input[name="rarity"]').value;
       const typeFolder = type.replace(/ /g, "_");
       const aliasFolder = alias.replace(/ /g, "_");
       const rarityFolder = rarity.replace(/ /g, "_");
@@ -1022,10 +1023,10 @@
   const currentLang = "{{ language if language is defined else 'FR-fr' }}";
 
   async function fillImageSelects() {
-  const folder = document.querySelector('#edit-character-form input[name="image_folder"]').value;
-  const type = document.querySelector('#edit-character-form input[name="type"]').value;
-  const alias = document.querySelector('#edit-character-form input[name="alias"]').value;
-  const rarity = document.querySelector('#edit-character-form input[name="rarity"]').value;
+  const folder = document.querySelector('#edit-sjw-form input[name="image_folder"]').value;
+  const type = document.querySelector('#edit-sjw-form input[name="type"]').value;
+  const alias = document.querySelector('#edit-sjw-form input[name="alias"]').value;
+  const rarity = document.querySelector('#edit-sjw-form input[name="rarity"]').value;
   const typeFolder = type.replace(/ /g, "_");
   const aliasFolder = alias.replace(/ /g, "_");
   const rarityFolder = rarity.replace(/ /g, "_");
@@ -1051,7 +1052,7 @@
 }
 
 // Appelle la fonction à l'ouverture de la modale
-document.getElementById('edit-character-btn')?.addEventListener('click', fillImageSelects);
+document.getElementById('edit-sjw-btn')?.addEventListener('click', fillImageSelects);
 // Ou si la modale s'ouvre autrement, appelle fillImageSelects() juste après l'ouverture
 document.addEventListener('change', function(e) {
   // Limite à 4 stats secondaires
