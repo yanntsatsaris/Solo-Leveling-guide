@@ -169,7 +169,7 @@
         <button type="button" id="add-skill-btn" class="add-btn">+ Ajouter une compétence</button>
       </div>
       <!-- Onglet Ombres -->
-       <div class="edit-tab-content" id="edit-tab-shadows">
+      <div class="edit-tab-content" id="edit-tab-shadows">
         {% set total_shadows = character.shadows|length if character.shadows|length > 0 else 1 %}
         {% for shadow_idx in range(total_shadows) %}
           {% set shadow = character.shadows[shadow_idx] if character.shadows|length > shadow_idx else {} %}
@@ -224,7 +224,7 @@
           </div>
           <hr />
         {% endfor %}
-
+        <button type="button" id="add-shadow-btn" class="add-btn">+ Ajouter une ombre</button>
       </div>
       <!-- Onglet Armes -->
       <div class="edit-tab-content" id="edit-tab-weapons">
@@ -282,6 +282,7 @@
           </div>
           <hr />
         {% endfor %}
+        <button type="button" id="add-weapon-btn" class="add-btn">+ Ajouter une arme</button>
       </div>
       <!-- Onglet Artefacts avec sélecteur de set -->
       <div class="edit-tab-content" id="edit-tab-artefacts">
@@ -677,18 +678,11 @@
       const grid = document.getElementById('blessings-grid');
       const index = grid.querySelectorAll('.edit-blessing-block').length;
       // Récupère le dossier image du personnage
-      const folder = document.querySelector('#edit-sjw-form input[name="image_folder"]').value;
-      const type = document.querySelector('#edit-sjw-form input[name="type"]').value;
-      const alias = document.querySelector('#edit-sjw-form input[name="alias"]').value;
-      const rarity = document.querySelector('#edit-sjw-form input[name="rarity"]').value;
-      const typeFolder = type.replace(/ /g, "_");
-      const aliasFolder = alias.replace(/ /g, "_");
-      const rarityFolder = rarity.replace(/ /g, "_");
-      const folderName = `${rarityFolder}_${typeFolder}_${aliasFolder}`;
+      const folder = document.querySelector('#edit-sjw-form input[name="folder"]').value;
       let images = [];
-      if (folderName && typeFolder) {
+      if (folder) {
         try {
-          images = await fetch(`/characters/images_for/${encodeURIComponent(typeFolder)}/${encodeURIComponent(folder)}`).then(r => r.json());
+          images = await fetch(`/SJW/images_for/${encodeURIComponent(folder)}`).then(r => r.json());
         } catch (e) { images = []; }
       }
       const selectOptions = ['<option value=""></option>']
@@ -724,18 +718,11 @@
     document.getElementById('add-skill-btn')?.addEventListener('click', async function() {
       const grid = document.getElementById('skills-grid');
       const index = grid.querySelectorAll('.edit-skill-block').length;
-      const folder = document.querySelector('#edit-sjw-form input[name="image_folder"]').value;
-      const type = document.querySelector('#edit-sjw-form input[name="type"]').value;
-      const alias = document.querySelector('#edit-sjw-form input[name="alias"]').value;
-      const rarity = document.querySelector('#edit-sjw-form input[name="rarity"]').value;
-      const typeFolder = type.replace(/ /g, "_");
-      const aliasFolder = alias.replace(/ /g, "_");
-      const rarityFolder = rarity.replace(/ /g, "_");
-      const folderName = `${rarityFolder}_${typeFolder}_${aliasFolder}`;
+      const folder = document.querySelector('#edit-sjw-form input[name="folder"]').value;
       let images = [];
-      if (folderName && typeFolder) {
+      if (folder) {
         try {
-          images = await fetch(`/characters/images_for/${encodeURIComponent(typeFolder)}/${encodeURIComponent(folder)}`).then(r => r.json());
+          images = await fetch(`/SJW/images_for/${encodeURIComponent(folder)}`).then(r => r.json());
         } catch (e) { images = []; }
       }
       const selectOptions = ['<option value=""></option>']
@@ -762,6 +749,83 @@
         </div>
       `;
       grid.appendChild(row);
+    });
+
+    // Ajout d'une arme
+    document.getElementById('add-weapon-btn')?.addEventListener('click', async function() {
+      const grid = document.querySelector('#edit-tab-weapons');
+      const index = grid.querySelectorAll('.edit-weapon-block').length;
+      let images = [];
+      const folder = document.querySelector('#edit-sjw-form input[name="folder"]').value;
+      if (folder) {
+        try {
+          images = await fetch(`/SJW/images_for/${encodeURIComponent(folder)}`).then(r => r.json());
+        } catch (e) { images = []; }
+      }
+      const selectOptions = ['<option value=""></option>']
+        .concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
+      const div = document.createElement('div');
+      div.className = 'edit-weapon-block';
+      div.innerHTML = `
+        <label>Nom de l'arme :</label>
+        <input type="text" name="weapon_name_${index}" value="" />
+        <label>Stats :</label>
+        <textarea name="weapon_stats_${index}"></textarea>
+        <label>Tag :</label>
+        <input type="text" name="weapon_tag_${index}" value="" />
+        <label>Principal :</label>
+        <input type="checkbox" name="weapon_principal_${index}" />
+        <input type="hidden" name="weapon_id_${index}" value="">
+        <h4 style="margin-top: 18px">Évolutions de l'arme</h4>
+        <div class="evolutions-grid">
+          ${Array.from({length: 7}).map((_, i) => `
+            ${i % 2 === 0 ? '<div class="evolutions-row">' : ''}
+            <div class="edit-weapon-evolution-block">
+              <label>Évolution : ${i === 6 ? 'A6-10' : 'A' + i}</label>
+              <textarea name="weapon_evolution_description_${index}_${i}"></textarea>
+              <input type="hidden" name="weapon_evolutions_${index}_${i}_evolution_id" value="${i === 6 ? 'A6-10' : 'A' + i}">
+              <input type="hidden" name="weapon_evolutions_id_${index}_${i}" value="">
+            </div>
+            ${(i % 2 === 1 || i === 6) ? '</div>' : ''}
+          `).join('')}
+        </div>
+        <hr />
+      `;
+      grid.appendChild(div);
+    });
+
+    // Ajout d'une ombre
+    document.getElementById('add-shadow-btn')?.addEventListener('click', function() {
+      const grid = document.querySelector('#edit-tab-shadows');
+      const index = grid.querySelectorAll('.edit-shadow-block').length;
+      const div = document.createElement('div');
+      div.className = 'edit-shadow-block';
+      div.innerHTML = `
+        <label>Nom de l'ombre :</label>
+        <input type="text" name="shadow_name_${index}" value="" />
+        <label>Stats :</label>
+        <textarea name="shadow_stats_${index}"></textarea>
+        <label>Tag :</label>
+        <input type="text" name="shadow_tag_${index}" value="" />
+        <label>Principal :</label>
+        <input type="checkbox" name="shadow_principal_${index}" />
+        <input type="hidden" name="shadow_id_${index}" value="">
+        <h4 style="margin-top: 18px">Évolutions de l'ombre</h4>
+        <div class="evolutions-grid">
+          ${Array.from({length: 7}).map((_, i) => `
+            ${i % 2 === 0 ? '<div class="evolutions-row">' : ''}
+            <div class="edit-shadow-evolution-block">
+              <label>Évolution : ${i === 6 ? 'A6-10' : 'A' + i}</label>
+              <textarea name="shadow_evolution_description_${index}_${i}"></textarea>
+              <input type="hidden" name="shadow_evolutions_${index}_${i}_evolution_id" value="${i === 6 ? 'A6-10' : 'A' + i}">
+              <input type="hidden" name="shadow_evolutions_id_${index}_${i}" value="">
+            </div>
+            ${(i % 2 === 1 || i === 6) ? '</div>' : ''}
+          `).join('')}
+        </div>
+        <hr />
+      `;
+      grid.appendChild(div);
     });
   });
 
