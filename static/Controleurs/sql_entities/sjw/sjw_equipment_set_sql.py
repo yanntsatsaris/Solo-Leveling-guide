@@ -12,7 +12,7 @@ class SJWEquipmentSetSql:
             SELECT es.sjw_equipment_sets_id, es.sjw_equipment_sets_name
             FROM sjw_equipment_sets es
             WHERE es.sjw_equipment_sets_sjw_id = %s
-            ORDER BY es.sjw_equipment_sets_id ASC
+            ORDER BY es.sjw_equipment_sets_order ASC, es.sjw_equipment_sets_id ASC
         """, (sjw_id,))
         return self.cursor.fetchall()
 
@@ -119,37 +119,43 @@ class SJWEquipmentSetSql:
 
     def get_equipment_sets_full(self, sjw_id, language):
         self.cursor.execute("""
-            SELECT es.sjw_equipment_sets_id, es.sjw_equipment_sets_name, est.sjw_equipment_set_translations_description
+            SELECT es.sjw_equipment_sets_id, es.sjw_equipment_sets_name, est.equipment_set_translations_description, es.equipment_sets_order
             FROM sjw_equipment_sets es
-            LEFT JOIN sjw_equipment_set_translations est ON est.sjw_equipment_set_translations_equipment_sets_id = es.sjw_equipment_sets_id AND est.sjw_equipment_set_translations_language = %s
-            WHERE es.sjw_equipment_sets_sjw_id = %s
-            ORDER BY es.sjw_equipment_sets_id ASC
+            LEFT JOIN sjw_equipment_set_translations est ON est.equipment_set_translations_equipment_sets_id = es.equipment_sets_id AND est.equipment_set_translations_language = %s
+            WHERE es.sjw_equipment_sets_characters_id = %s
+            ORDER BY es.sjw_equipment_sets_order ASC, es.sjw_equipment_sets_id ASC
         """, (language, sjw_id))
         sets = []
+        # Dictionnaire d'ordre des artefacts par langue
+        artefact_types = {
+            'FR-fr': ['Casque', 'Plastron', 'Gants', 'Bottes', 'Collier', 'Bracelet', 'Bague', "Boucle d'oreille"],
+            'EN-en': ['Helmet', 'Chestplate', 'Gloves', 'Boots', 'Necklace', 'Bracelet', 'Ring', 'Earring']
+        }
+        artefact_type_list = artefact_types.get(language, artefact_types['FR-fr'])
+
         for row in self.cursor.fetchall():
-            set_id, set_name, set_desc = row
-            # Focus stats
+            set_id, set_name, set_desc, set_order = row
+            # Focus stats (récupère toutes les stats pour ce set)
             self.cursor.execute("""
-                SELECT sjw_equipment_focus_stats_name
-                FROM sjw_equipment_focus_stats
-                WHERE sjw_equipment_focus_stats_sjw_equipment_sets_id = %s
+                SELECT sjw_equipment_focus_stats_name FROM sjw_equipment_focus_stats
+                WHERE sjw_equipment_focus_stats_equipment_sets_id = %s
             """, (set_id,))
             focus_stats = [fs_row[0] for fs_row in self.cursor.fetchall()]
             # Artefacts
             self.cursor.execute("""
-                SELECT a.sjw_artefacts_id, a.sjw_artefacts_image, a.sjw_artefacts_main_stat, a.sjw_artefacts_number
+                SELECT a.sjw_artefacts_id, a.sjw_artefacts_image, a.sjw_artefacts_main_stat, a.sjw_artefacts_set
                 FROM sjw_artefacts a
-                WHERE a.sjw_artefacts_sjw_equipment_sets_id = %s
-                ORDER BY a.sjw_artefacts_number
+                WHERE a.sjw_artefacts_equipment_sets_id = %s
+                ORDER by a.sjw_artefacts_image
             """, (set_id,))
             artefacts = []
             for a_row in self.cursor.fetchall():
-                artefact_id, artefact_image, artefact_main_stat, artefact_number = a_row
+                artefact_id, artefact_image, artefact_main_stat, artefact_set = a_row
                 # Récupère toutes les traductions de cet artefact
                 self.cursor.execute("""
                     SELECT sjw_artefact_translations_language, sjw_artefact_translations_name
                     FROM sjw_artefact_translations
-                    WHERE sjw_artefact_translations_sjw_artefacts_id = %s
+                    WHERE sjw_artefact_translations_artefacts_id = %s
                 """, (artefact_id,))
                 translations = {}
                 for lang, name in self.cursor.fetchall():
@@ -157,35 +163,29 @@ class SJWEquipmentSetSql:
                 # Récupère les secondary_stats
                 self.cursor.execute("""
                     SELECT sjw_artefact_secondary_stats_name FROM sjw_artefact_secondary_stats
-                    WHERE sjw_artefact_secondary_stats_sjw_artefacts_id = %s
+                    WHERE sjw_artefact_secondary_stats_artefacts_id = %s
                 """, (artefact_id,))
                 secondary_stats = [sec_row[0] for sec_row in self.cursor.fetchall()]
-                # Set de l'artefact
-                self.cursor.execute("""
-                    SELECT sjw_artefact_translations_set
-                    FROM sjw_artefact_translations
-                    WHERE sjw_artefact_translations_sjw_artefacts_id = %s AND sjw_artefact_translations_language = %s
-                """, (artefact_id, language))
-                set_row = self.cursor.fetchone()
-                artefact_set = set_row[0] if set_row else ""
-                artefact_set_path = artefact_set.replace(" ", "_") if artefact_set else ""
                 artefacts.append({
                     'id': artefact_id,
                     'name': translations.get(language, {}).get('name', ''),
                     'set': artefact_set,
-                    'image': f'images/Artefacts/{artefact_set_path}/{artefact_image}' if artefact_image else '',
                     'image_name': artefact_image,
                     'main_stat': artefact_main_stat,
-                    'secondary_stats': secondary_stats,
-                    'number': artefact_number,
-                    'translations': translations
+                    'secondary_stats': secondary_stats
                 })
+            # Trie les artefacts selon l'ordre défini
+            artefacts_sorted = []
+            for type_name in artefact_type_list:
+                found = next((a for a in artefacts if a['name'] == type_name), None)
+                if found:
+                    artefacts_sorted.append(found)
             # Noyaux
             self.cursor.execute("""
-                SELECT c.sjw_cores_id, c.sjw_cores_name, c.sjw_cores_number, c.sjw_cores_image, c.sjw_cores_main_stat, c.sjw_cores_secondary_stat
-                FROM sjw_cores c
-                WHERE c.sjw_cores_sjw_equipment_sets_id = %s
-                ORDER BY c.sjw_cores_number
+                SELECT sjw_cores_id, sjw_cores_name, sjw_cores_number, sjw_cores_image, sjw_cores_main_stat, sjw_cores_secondary_stat
+                FROM sjw_cores
+                WHERE sjw_cores_equipment_sets_id = %s
+                ORDER BY sjw_cores_number
             """, (set_id,))
             cores = []
             for core_row in self.cursor.fetchall():
@@ -193,7 +193,6 @@ class SJWEquipmentSetSql:
                     'id': core_row[0],
                     'name': core_row[1],
                     'number': core_row[2],
-                    'image': f'images/Noyaux/{core_row[3]}' if core_row[3] else '',
                     'image_name': core_row[3],
                     'main_stat': core_row[4],
                     'secondary_stat': core_row[5]
@@ -203,8 +202,9 @@ class SJWEquipmentSetSql:
                 'name': set_name,
                 'description': set_desc,
                 'focus_stats': focus_stats,
-                'artefacts': artefacts,
-                'cores': cores
+                'artefacts': artefacts,  # <-- liste triée
+                'cores': cores,
+                'order': set_order
             })
         return sets
 
