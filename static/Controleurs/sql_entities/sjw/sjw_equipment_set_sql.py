@@ -122,7 +122,7 @@ class SJWEquipmentSetSql:
             SELECT es.sjw_equipment_sets_id, es.sjw_equipment_sets_name, est.sjw_equipment_set_translations_description, es.sjw_equipment_sets_order
             FROM sjw_equipment_sets es
             LEFT JOIN sjw_equipment_set_translations est ON est.sjw_equipment_set_translations_equipment_sets_id = es.sjw_equipment_sets_id AND est.sjw_equipment_set_translations_language = %s
-            WHERE es.sjw_equipment_sets_characters_id = %s
+            WHERE es.sjw_equipment_sets_sjw_id = %s
             ORDER BY es.sjw_equipment_sets_order ASC, es.sjw_equipment_sets_id ASC
         """, (language, sjw_id))
         sets = []
