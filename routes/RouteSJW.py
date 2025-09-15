@@ -13,7 +13,7 @@ from static.Controleurs.sql_entities.sjw.sjw_equipment_set_sql import SJWEquipme
 from static.Controleurs.sql_entities.sjw.sjw_blessings_sql import SJWBlessingsSql
 from static.Controleurs.sql_entities.cores_sql import CoresSql
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
-from flask import Flask, render_template, session , url_for
+from flask import Flask, render_template, session , url_for, jsonify
 from flask_login import login_required
 
 def normalize_focus_stats(val):
@@ -300,3 +300,15 @@ def SJW(app: Flask):
         # Récupération des infos principales
         character_info = sjw_sql.get_sjw(language)
         folder = character_info['folder']
+        
+    @app.route('/SJW/images_for/<folder>')
+    @login_required
+    def images_for_SJW(folder):
+        # Sécurise les noms
+        folder = folder.replace('..', '').replace('/', '').replace('\\', '')
+        img_dir = os.path.join('static', 'images', folder)
+        if not os.path.isdir(img_dir):
+            write_log(f"Le dossier d'images n'existe pas : {img_dir}", log_level="WARNING")
+            return jsonify([])
+        images = sorted([f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))])
+        return jsonify(images)

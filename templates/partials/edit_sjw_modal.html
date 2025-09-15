@@ -1024,17 +1024,12 @@
 
   async function fillImageSelects() {
   const folder = document.querySelector('#edit-sjw-form input[name="image_folder"]').value;
-  const type = document.querySelector('#edit-sjw-form input[name="type"]').value;
   const alias = document.querySelector('#edit-sjw-form input[name="alias"]').value;
-  const rarity = document.querySelector('#edit-sjw-form input[name="rarity"]').value;
-  const typeFolder = type.replace(/ /g, "_");
   const aliasFolder = alias.replace(/ /g, "_");
-  const rarityFolder = rarity.replace(/ /g, "_");
-  const folderName = `${rarityFolder}_${typeFolder}_${aliasFolder}`;
   let images = [];
   if (folderName && typeFolder) {
     try {
-      images = await fetch(`/characters/images_for/${encodeURIComponent(typeFolder)}/${encodeURIComponent(folder)}`).then(r => r.json());
+      images = await fetch(`/SJW/images_for/${encodeURIComponent(folder)}`).then(r => r.json());
     } catch (e) { images = []; }
   }
   // Pour les passifs
