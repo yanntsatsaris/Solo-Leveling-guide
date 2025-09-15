@@ -208,10 +208,10 @@ class SJWEquipmentSetSql:
             })
         return sets
 
-    def update_equipment_set(self, set_id, sjw_id, name, desc, focus, order, language):
+    def update_equipment_set(self, set_id, char_id, name, desc, focus, order, language):
         self.cursor.execute("""
-            UPDATE sjw_equipment_sets SET sjw_equipment_sets_name=%s WHERE sjw_equipment_sets_id=%s
-        """, (name, set_id))
+            UPDATE sjw_equipment_sets SET sjw_equipment_sets_name=%s, sjw_equipment_sets_order=%s WHERE sjw_equipment_sets_id=%s
+        """, (name, order, set_id))
         self.cursor.execute("""
             DELETE FROM sjw_equipment_focus_stats WHERE sjw_equipment_focus_stats_sjw_equipment_sets_id=%s
         """, (set_id,))
@@ -235,22 +235,22 @@ class SJWEquipmentSetSql:
         if self.cursor.fetchone():
             self.cursor.execute("""
                 UPDATE sjw_equipment_set_translations SET sjw_equipment_set_translations_description=%s
-                WHERE sjw_equipment_set_translations_equipment_sets_id=%s AND sjw_equipment_set_translations_language=%s
+                WHERE sjw_equipment_set_translations_sjw_equipment_sets_id=%s AND sjw_equipment_set_translations_language=%s
             """, (desc, set_id, language))
         else:
             self.cursor.execute("""
-                INSERT INTO sjw_equipment_set_translations (sjw_equipment_set_translations_equipment_sets_id, sjw_equipment_set_translations_language, sjw_equipment_set_translations_description)
+                INSERT INTO sjw_equipment_set_translations (sjw_equipment_set_translations_sjw_equipment_sets_id, sjw_equipment_set_translations_language, sjw_equipment_set_translations_description)
                 VALUES (%s, %s, %s)
             """, (set_id, language, desc))
 
-    def add_equipment_set(self, sjw_id, name, desc, focus, order, language):
+    def add_equipment_set(self, char_id, name, desc, focus, order, language):
         self.cursor.execute("""
-            INSERT INTO sjw_equipment_sets (sjw_equipment_sets_sjw_id, sjw_equipment_sets_name)
-            VALUES (%s, %s) RETURNING sjw_equipment_sets_id
-        """, (sjw_id, name))
+            INSERT INTO sjw_equipment_sets (sjw_equipment_sets_characters_id, sjw_equipment_sets_name, sjw_equipment_sets_order)
+            VALUES (%s, %s, %s) RETURNING sjw_equipment_sets_id
+        """, (char_id, name, order))
         set_id = self.cursor.fetchone()[0]
         self.cursor.execute("""
-            INSERT INTO sjw_equipment_set_translations (sjw_equipment_set_translations_equipment_sets_id, sjw_equipment_set_translations_language, sjw_equipment_set_translations_description)
+            INSERT INTO sjw_equipment_set_translations (sjw_equipment_set_translations_sjw_equipment_sets_id, sjw_equipment_set_translations_language, sjw_equipment_set_translations_description)
             VALUES (%s, %s, %s)
         """, (set_id, language, desc))
         if focus:
@@ -287,16 +287,16 @@ class SJWEquipmentSetSql:
         # Supprimer les noyaux du set
         self.cursor.execute("DELETE FROM sjw_cores WHERE sjw_cores_equipment_sets_id=%s", (set_id,))
         # Supprimer les stats de focus
-        self.cursor.execute("DELETE FROM sjw_equipment_focus_stats WHERE sjw_equipment_focus_stats_equipment_sets_id=%s", (set_id,))
+        self.cursor.execute("DELETE FROM sjw_equipment_focus_stats WHERE sjw_equipment_focus_stats_sjw_equipment_sets_id=%s", (set_id,))
         # Supprimer les traductions du set
-        self.cursor.execute("DELETE FROM sjw_equipment_set_translations WHERE sjw_equipment_set_translations_equipment_sets_id=%s", (set_id,))
+        self.cursor.execute("DELETE FROM sjw_equipment_set_translations WHERE sjw_equipment_set_translations_sjw_equipment_sets_id=%s", (set_id,))
         # Supprimer le set lui-même
         self.cursor.execute("DELETE FROM sjw_equipment_sets WHERE sjw_equipment_sets_id=%s", (set_id,))
     
-    def update_artefact(self, aid, set_id, name, aset, img, main, sec, number, language):
+    def update_artefact(self, aid, set_id, name, aset, img, main, sec, language):
         self.cursor.execute("""
-            UPDATE sjw_artefacts SET sjw_artefacts_image=%s, sjw_artefacts_main_stat=%s, sjw_artefacts_number=%s WHERE sjw_artefacts_id=%s
-        """, (img, main, number, aid))
+            UPDATE sjw_artefacts SET sjw_artefacts_image=%s, sjw_artefacts_main_stat=%s, sjw_artefacts_set=%s WHERE sjw_artefacts_id=%s
+        """, (img, main, aset, aid))
         # Vérifie si la traduction existe déjà
         self.cursor.execute("""
             SELECT 1 FROM sjw_artefact_translations
@@ -304,29 +304,23 @@ class SJWEquipmentSetSql:
         """, (aid, language))
         if self.cursor.fetchone():
             self.cursor.execute("""
-                UPDATE sjw_artefact_translations SET sjw_artefact_translations_name=%s, sjw_artefact_translations_set=%s
+                UPDATE sjw_artefact_translations SET sjw_artefact_translations_name=%s
                 WHERE sjw_artefact_translations_sjw_artefacts_id=%s AND sjw_artefact_translations_language=%s
-            """, (name, aset, aid, language))
+            """, (name, aid, language))
         else:
             self.cursor.execute("""
-                INSERT INTO sjw_artefact_translations (sjw_artefact_translations_sjw_artefacts_id, sjw_artefact_translations_language, sjw_artefact_translations_name, sjw_artefact_translations_set)
-                VALUES (%s, %s, %s, %s)
-            """, (aid, language, name, aset))
+                INSERT INTO sjw_artefact_translations (sjw_artefact_translations_sjw_artefacts_id, sjw_artefact_translations_language, sjw_artefact_translations_name)
+                VALUES (%s, %s, %s)
+            """, (aid, language, name))
         self.cursor.execute("""
             DELETE FROM sjw_artefact_secondary_stats WHERE sjw_artefact_secondary_stats_sjw_artefacts_id=%s
         """, (aid,))
         if sec:
-            if isinstance(sec, str):
-                sec_stats = [s.strip() for s in sec.split(',') if s.strip()]
-            elif isinstance(sec, list):
-                sec_stats = sec
-            else:
-                sec_stats = []
-            for stat in sec_stats:
+            for stat in sec.split(','):
                 self.cursor.execute("""
                     INSERT INTO sjw_artefact_secondary_stats (sjw_artefact_secondary_stats_sjw_artefacts_id, sjw_artefact_secondary_stats_name)
                     VALUES (%s, %s)
-                """, (aid, stat))
+                """, (aid, stat.strip()))
 
     def add_artefact(self, set_id, name, aset, img, main, sec, language):
         # Recherche d'un artefact existant pour ce set avec la même image et main_stat
