@@ -444,7 +444,7 @@ def SJW(app: Flask):
         if not (char_modif or set_modif):
             write_log(f"Aucune modification détectée pour le personnage {char_id}", log_level="INFO")
 
-        return redirect(url_for('SJW'))
+        return redirect(url_for('inner_SJW'))
         
     @app.route('/SJW/images_for/<folder>')
     @login_required
