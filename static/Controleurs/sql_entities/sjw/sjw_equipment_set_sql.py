@@ -377,7 +377,7 @@ class SJWEquipmentSetSql:
     def update_core(self, cid, set_id, name, img, main, sec, number, language):
         self.cursor.execute("""
             UPDATE sjw_cores
-            SET sjw_cores_name=%s, sjw_cores_image=%s, sjw_cores_main_stat=%s, sjw_cores_secondary_stat=%s, sjw_cores_equipment_sets_id=%s, sjw_cores_number=%s
+            SET sjw_cores_name=%s, sjw_cores_image=%s, sjw_cores_main_stat=%s, sjw_cores_secondary_stat=%s, sjw_cores_sjw_equipment_sets_id=%s, sjw_cores_number=%s
             WHERE sjw_cores_id=%s
         """, (name, img, main, sec, set_id, number, cid))
 
