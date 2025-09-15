@@ -28,15 +28,6 @@
           value="{{ character.alias }}"
           required
         />
-        <label>Type :</label>
-        <input type="text" name="type" value="{{ character.type }}" required />
-        <label>Rareté :</label>
-        <input
-          type="text"
-          name="rarity"
-          value="{{ character.rarity }}"
-          required
-        />
         <label>Description :</label>
         <textarea name="description">{{ character.description }}</textarea>
         <input type="hidden" name="image_folder" value="{{ character.images_folder }}">
