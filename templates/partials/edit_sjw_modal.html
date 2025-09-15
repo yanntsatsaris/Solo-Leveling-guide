@@ -41,7 +41,7 @@
         <textarea name="description">{{ character.description }}</textarea>
         <input type="hidden" name="image_folder" value="{{ character.images_folder }}">
 
-        <h4 style="margin-top: 28px">Évolutions du personnage</h4>
+        <!-- <h4 style="margin-top: 28px">Évolutions du personnage</h4>
         <div class="evolutions-grid">
           {% set total_evos = 7 %} {% for i in range(total_evos) %} {% if i % 2
           == 0 %}
@@ -61,7 +61,7 @@
             {% if i % 2 == 1 or i == total_evos - 1 %}
           </div>
           {% endif %} {% endfor %}
-        </div>
+        </div> -->
       </div>
       <!-- Onglet Passifs -->
       <div class="edit-tab-content" id="edit-tab-passives">
