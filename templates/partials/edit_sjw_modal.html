@@ -1024,10 +1024,8 @@
 
   async function fillImageSelects() {
   const folder = document.querySelector('#edit-sjw-form input[name="image_folder"]').value;
-  const alias = document.querySelector('#edit-sjw-form input[name="alias"]').value;
-  const aliasFolder = alias.replace(/ /g, "_");
   let images = [];
-  if (folderName && typeFolder) {
+  if (folder) {
     try {
       images = await fetch(`/SJW/images_for/${encodeURIComponent(folder)}`).then(r => r.json());
     } catch (e) { images = []; }
