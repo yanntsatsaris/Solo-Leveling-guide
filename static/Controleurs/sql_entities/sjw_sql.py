@@ -20,3 +20,18 @@ class SJWSql:
             'name': row[3],
             'description': row[4]
         }
+        
+    def update_sjw(self, sjw_id, name, description, folder, language):
+        self.cursor.execute("""
+            UPDATE sjw
+            SET sjw_folder = %s
+            WHERE sjw_id = %s
+        """, (folder, sjw_id))
+        
+        self.cursor.execute("""
+            INSERT INTO sjw_translations (sjw_translations_sjw_id, sjw_translations_language, sjw_translations_name, sjw_translations_description)
+            VALUES (%s, %s, %s, %s)
+            ON DUPLICATE KEY UPDATE
+                sjw_translations_name = VALUES(sjw_translations_name),
+                sjw_translations_description = VALUES(sjw_translations_description)
+        """, (sjw_id, language, name, description))

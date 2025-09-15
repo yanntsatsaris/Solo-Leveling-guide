@@ -13,7 +13,7 @@ from static.Controleurs.sql_entities.sjw.sjw_equipment_set_sql import SJWEquipme
 from static.Controleurs.sql_entities.sjw.sjw_blessings_sql import SJWBlessingsSql
 from static.Controleurs.sql_entities.cores_sql import CoresSql
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
-from flask import Flask, render_template, session , url_for, jsonify
+from flask import Flask, render_template, session , request, redirect, url_for, jsonify
 from flask_login import login_required
 
 def normalize_focus_stats(val):
@@ -289,17 +289,162 @@ def SJW(app: Flask):
             return "Access denied", 403
 
         language = session.get('language', "EN-en")
+        name = request.form.get('name')
+        alias = request.form.get('alias')
+        description = request.form.get('description')
+        char_folder = request.form.get('folder')
         sql_manager = ControleurSql()
-        sjw_sql = SJWSql(sql_manager.cursor)
-        shadows_sql = SJWShadowsSql(sql_manager.cursor)
-        skills_sql = SJWSkillsSql(sql_manager.cursor)
-        weapons_sql = SJWWeaponsSql(sql_manager.cursor)
-        equipment_set_sql = SJWEquipmentSetSql(sql_manager.cursor)
-        blessings_sql = SJWBlessingsSql(sql_manager.cursor)
+        cursor = sql_manager.cursor
 
-        # Récupération des infos principales
-        character_info = sjw_sql.get_sjw(language)
-        folder = character_info['folder']
+        sjw_sql = SJWSql(cursor)
+        current_character = sjw_sql.get_sjw(language)
+        
+        char_id = current_character['id']
+
+        char_modif = False
+        if (
+            (current_character['name'] or '') != (name or '') or
+            current_character['alias'] != alias or
+            (current_character['description'] or '') != (description or '')
+        ):
+            sjw_sql.update_sjw(
+                sjw_id=char_id,
+                alias=alias,
+                name=name,
+                description=description,
+                language=language
+            )
+            char_modif = True
+            write_log(f"Modification personnage {char_id} ({alias})", log_level="INFO")
+
+        
+        # --- Sets d'équipement, artefacts et noyaux ---
+        equipment_set_sql = SJWEquipmentSetSql(cursor)
+        current_sets = equipment_set_sql.get_equipment_sets_full(char_id, language)
+        existing_set_ids = [str(s['id']) for s in current_sets]
+        form_set_ids = []
+        set_modif = False
+        set_idx = 0
+        while True:
+            set_name = request.form.get(f"eqset_name_{set_idx}")
+            if set_name is None:
+                break
+            set_desc = request.form.get(f"eqset_description_{set_idx}")
+            set_focus = request.form.get(f"eqset_focus_stats_{set_idx}")
+            set_order = request.form.get(f"eqset_order_{set_idx}")
+            set_id = request.form.get(f"eqset_id_{set_idx}")
+            db_set = next((s for s in current_sets if str(s['id']) == str(set_id)), None) if set_id else None
+            if set_id:
+                if db_set and (
+                    (db_set['name'] or '') != (set_name or '') or
+                    (db_set['description'] or '') != (set_desc or '') or
+                    not focus_stats_equal(db_set['focus_stats'], set_focus) or
+                    (str(db_set['order']) or '') != (str(set_order) or '')
+                ):
+                    equipment_set_sql.update_equipment_set(set_id, char_id, set_name, set_desc, set_focus, set_order, language)
+                    set_modif = True
+                    write_log(f"Modification set {set_id} du personnage {char_id}", log_level="INFO")
+                form_set_ids.append(set_id)
+            else:
+                set_id = equipment_set_sql.add_equipment_set(char_id, set_name, set_desc, set_focus, set_order, language)
+                set_modif = True
+                write_log(f"Ajout set {set_id} au personnage {char_id}", log_level="INFO")
+                form_set_ids.append(set_id)
+            # --- Artefacts du set ---
+            current_artefacts = db_set['artefacts'] if set_id and db_set and 'artefacts' in db_set else []
+            existing_artefact_ids = [str(a['id']) for a in current_artefacts]
+            form_artefact_ids = []
+            for artefact_idx in range(8):
+                aname = request.form.get(f"artefact_name_{set_idx}_{artefact_idx}")
+                aset = request.form.get(f"artefact_set_{set_idx}_{artefact_idx}")
+                # aimg = request.form.get(f"artefact_image_{set_idx}_{artefact_idx}")  # <-- Supprime cette ligne
+                amain = request.form.get(f"artefact_main_stat_{set_idx}_{artefact_idx}")
+                asec = request.form.get(f"artefact_secondary_stats_{set_idx}_{artefact_idx}")
+                aid = request.form.get(f"artefact_id_{set_idx}_{artefact_idx}")
+
+                # Recherche automatique de l'image
+                aset_folder = (aset or '').replace(' ', '_')
+                artefact_folder = os.path.join('static', 'images', 'Artefacts', aset_folder)
+                pattern = os.path.join(artefact_folder, f"Artefact0{artefact_idx + 1}_*")
+                found_images = glob.glob(pattern)
+                if found_images:
+                    aimg = os.path.basename(found_images[0])
+                else:
+                    aimg = ""
+
+                db_artefact = next((a for a in current_artefacts if str(a['id']) == str(aid)), None) if aid else None
+                if aid:
+                    if db_artefact and (
+                        (db_artefact['name'] or '') != (aname or '') or
+                        (db_artefact['set'] or '') != (aset or '') or
+                        (db_artefact['image_name'] or '') != (aimg or '') or
+                        (db_artefact['main_stat'] or '') != (amain or '') or
+                        normalize_stats(db_artefact['secondary_stats']) != normalize_stats(asec)
+                    ):
+                        equipment_set_sql.update_artefact(aid, set_id, aname, aset, aimg, amain, asec, language)
+                        set_modif = True
+                        write_log(f"Modification artefact {aid} du set {set_id}", log_level="INFO")
+                    form_artefact_ids.append(aid)
+                else:
+                    new_aid = equipment_set_sql.add_artefact(set_id, aname, aset, aimg, amain, asec, language)
+                    set_modif = True
+                    write_log(f"Ajout artefact {new_aid} au set {set_id}", log_level="INFO")
+                    form_artefact_ids.append(new_aid)
+            for db_id in existing_artefact_ids:
+                if str(db_id) not in form_artefact_ids:
+                    equipment_set_sql.delete_artefact(db_id)
+                    set_modif = True
+                    write_log(f"Suppression artefact {db_id} du set {set_id}", log_level="INFO")
+            # --- Noyaux du set ---
+            current_cores = db_set['cores'] if set_id and db_set and 'cores' in db_set else []
+            existing_core_ids = [str(c['id']) for c in current_cores]
+            form_core_ids = []
+            for core_idx in range(3):
+                cname = request.form.get(f"core_name_{set_idx}_{core_idx}")
+                #cimg = request.form.get(f"core_image_{set_idx}_{core_idx}")
+                cmain = request.form.get(f"core_main_stat_{set_idx}_{core_idx}")
+                csec = request.form.get(f"core_secondary_stat_{set_idx}_{core_idx}")
+                cid = request.form.get(f"core_id_{set_idx}_{core_idx}")
+                cnumber = f"{core_idx+1:02d}"  # Ajoute cette ligne pour numéroter 01, 02, 03
+                cimg = cname + cnumber + ".webp"  # Utilise le nom du noyau et le numéro pour l'image
+                db_core = next((c for c in current_cores if str(c['id']) == str(cid)), None) if cid else None
+                if cid:
+                    if db_core and (
+                        db_core['name'] != cname or
+                        db_core['main_stat'] != cmain or
+                        db_core['secondary_stat'] != csec or
+                        str(db_core.get('number', '')) != cnumber
+                    ):
+                        equipment_set_sql.update_core(cid, set_id, cname, cimg, cmain, csec, cnumber, language)
+                        set_modif = True
+                        write_log(f"Modification noyau {cid} du set {set_id}", log_level="INFO")
+                    form_core_ids.append(cid)
+                else:
+                    new_cid = equipment_set_sql.add_core(set_id, cname, cimg, cmain, csec, cnumber, language)
+                    set_modif = True
+                    write_log(f"Ajout noyau {new_cid} au set {set_id}", log_level="INFO")
+                    form_core_ids.append(new_cid)
+            # <-- Boucle de suppression déplacée ici
+            for db_id in existing_core_ids:
+                if str(db_id) not in form_core_ids:
+                    equipment_set_sql.delete_core(db_id)
+                    set_modif = True
+                    write_log(f"Suppression noyau {db_id} du set {set_id}", log_level="INFO")
+            set_idx += 1
+        for db_id in existing_set_ids:
+            if str(db_id) not in form_set_ids:
+                equipment_set_sql.delete_equipment_set(db_id)
+                set_modif = True
+                write_log(f"Suppression set {db_id} du personnage {char_id}", log_level="INFO")
+
+        sql_manager.conn.commit()
+        sql_manager.close()
+
+        # Log global
+        if not (char_modif or set_modif):
+            write_log(f"Aucune modification détectée pour le personnage {char_id}", log_level="INFO")
+
+        return redirect(url_for('SJW'))
         
     @app.route('/SJW/images_for/<folder>')
     @login_required
@@ -312,3 +457,6 @@ def SJW(app: Flask):
             return jsonify([])
         images = sorted([f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))])
         return jsonify(images)
+    
+def focus_stats_equal(a, b):
+    return set(normalize_focus_stats(a)) == set(normalize_focus_stats(b))
