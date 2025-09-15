@@ -12,7 +12,7 @@
       <h2 style="text-align: center; color: #ffcc00">Modifier le personnage</h2>
       <div class="edit-tabs">
         <div class="edit-tab active" data-tab="main">Infos principales</div>
-        <div class="edit-tab" data-tab="passives">Passifs</div>
+        <div class="edit-tab" data-tab="blessings">Passifs</div>
         <div class="edit-tab" data-tab="skills">Compétences</div>
         <div class="edit-tab" data-tab="weapons">Armes</div>
         <div class="edit-tab" data-tab="artefacts">Artefacts</div>
@@ -55,38 +55,38 @@
         </div> -->
       </div>
       <!-- Onglet Passifs -->
-      <div class="edit-tab-content" id="edit-tab-passives">
-        <div class="passives-grid" id="passives-grid">
-          {% for passive in character.passives_all %} {% if loop.index0 % 2 == 0
+      <div class="edit-tab-content" id="edit-tab-blessings">
+        <div class="blessings-grid" id="blessings-grid">
+          {% for blessing in character.blessings_all %} {% if loop.index0 % 2 == 0
           %}
-          <div class="passives-row">
+          <div class="blessings-row">
             {% endif %}
             <!-- Exemple pour un passif, à appliquer aussi pour skills, weapons, etc. -->
-            <div class="edit-passive-block">
+            <div class="edit-blessing-block">
               <label>Nom du passif :</label>
               <input
                 type="text"
-                name="passive_name_{{ loop.index0 }}"
-                value="{{ passive.name }}"
+                name="blessing_name_{{ loop.index0 }}"
+                value="{{ blessing.name }}"
               />
               <label>Description :</label>
-              <textarea name="passive_description_{{ loop.index0 }}">{{ passive.description_raw }}</textarea>
+              <textarea name="blessing_description_{{ loop.index0 }}">{{ blessing.description_raw }}</textarea>
               <label>Tag :</label>
               <input
                 type="text"
-                name="passive_tag_{{ loop.index0 }}"
-                value="{{ passive.tag }}"
+                name="blessing_tag_{{ loop.index0 }}"
+                value="{{ blessing.tag }}"
               />
               <label>Image :</label>
-              <select name="passive_image_{{ loop.index0 }}" class="passive-image-select" data-current="{{ passive.image_name|default('') }}"></select>
+              <select name="blessing_image_{{ loop.index0 }}" class="blessing-image-select" data-current="{{ blessing.image_name|default('') }}"></select>
               <div class="checkbox-row">
                 <label>
                   <input
                     type="checkbox"
-                    name="passive_principal_{{ loop.index0 }}"
+                    name="blessing_principal_{{ loop.index0 }}"
                     {%
                     if
-                    passive.principal
+                    blessing.principal
                     %}checked{%
                     endif
                     %}
@@ -96,10 +96,10 @@
                 <label>
                   <input
                     type="checkbox"
-                    name="passive_hidden_{{ loop.index0 }}"
+                    name="blessing_hidden_{{ loop.index0 }}"
                     {%
                     if
-                    passive.hidden
+                    blessing.hidden
                     %}checked{%
                     endif
                     %}
@@ -108,14 +108,14 @@
                 </label>
               </div>
               <label>Ordre :</label>
-              <input type="number" name="passive_order_{{ loop.index0 }}" value="{{ passive.order if passive.order is defined else loop.index0 }}" min="0" style="width:60px;">
-              <input type="hidden" name="passive_id_{{ loop.index0 }}" value="{{ passive.id }}">
+              <input type="number" name="blessing_order_{{ loop.index0 }}" value="{{ blessing.order if blessing.order is defined else loop.index0 }}" min="0" style="width:60px;">
+              <input type="hidden" name="blessing_id_{{ loop.index0 }}" value="{{ blessing.id }}">
             </div>
             {% if loop.index0 % 2 == 1 or loop.last %}
           </div>
           {% endif %} {% endfor %}
         </div>
-        <button type="button" id="add-passive-btn" class="add-btn">+ Ajouter un passif</button>
+        <button type="button" id="add-blessing-btn" class="add-btn">+ Ajouter un passif</button>
       </div>
       <!-- Onglet Compétences -->
       <div class="edit-tab-content" id="edit-tab-skills">
@@ -166,6 +166,63 @@
           {% endif %} {% endfor %}
         </div>
         <button type="button" id="add-skill-btn" class="add-btn">+ Ajouter une compétence</button>
+      </div>
+      <!-- Onglet Ombres -->
+       <div class="edit-tab-content" id="edit-tab-shadows">
+        {% set total_shadows = character.shadows|length if character.shadows|length > 0 else 1 %}
+        {% for shadow_idx in range(total_shadows) %}
+          {% set shadow = character.shadows[shadow_idx] if character.shadows|length > shadow_idx else {} %}
+          <div class="edit-shadow-block">
+            <label>Nom de l'ombre :</label>
+            <input
+              type="text"
+              name="shadow_name_{{ shadow_idx }}"
+              value="{{ shadow.name if shadow.name is defined else '' }}"
+            />
+            <label>Stats :</label>
+            <textarea name="shadow_stats_{{ shadow_idx }}">{{ shadow.stats_raw if shadow.stats_raw is defined else '' }}</textarea>
+            <label>Tag :</label>
+            <input
+              type="text"
+              name="shadow_tag_{{ shadow_idx }}"
+              value="{{ shadow.tag if shadow.tag is defined else '' }}"
+            />
+            <label>Principal :</label>
+            <input
+              type="checkbox"
+              name="shadow_principal_{{ shadow_idx }}"
+              {% if shadow.principal is defined and shadow.principal %}checked{% endif %}
+            />
+            <input type="hidden" name="shadow_id_{{ shadow_idx }}" value="{{ shadow.id if shadow.id is defined else '' }}">
+            <!-- Toujours 7 évolutions, même si aucune n'est renseignée -->
+            {% set total_evos = 7 %}
+            <h4 style="margin-top: 18px">Évolutions de l'ombre</h4>
+            <div class="evolutions-grid">
+              {% for i in range(total_evos) %}
+                {% if i % 2 == 0 %}
+                <div class="evolutions-row">
+                {% endif %}
+                  <div class="edit-shadow-evolution-block">
+                    <label>Évolution : {{ 'A' ~ i if not i == 6 else 'A6-10' }}</label>
+                    <textarea
+                      name="shadow_evolution_description_{{ shadow_idx }}_{{ i }}"
+                    >{{ shadow.evolutions[i].description_raw if shadow.evolutions is defined and shadow.evolutions|length > i else '' }}</textarea>
+
+              <input type="hidden" name="shadow_evolutions_{{ shadow_idx }}_{{ i }}_evolution_id" value="{% if shadow.evolutions is defined and shadow.evolutions|length > i and shadow.evolutions[i].evolution_id %}
+           {{ shadow.evolutions[i].evolution_id }}
+         {% else %}
+           {{ 'A' ~ i if not i == 6 else 'A6-10' }}
+         {% endif %}">
+              <input type="hidden" name="shadow_evolutions_id_{{ shadow_idx }}_{{ i }}" value="{{ shadow.evolutions[i].id if shadow.evolutions is defined and shadow.evolutions|length > i else '' }}">
+                  </div>
+                {% if i % 2 == 1 or i == total_evos - 1 %}
+                </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          <hr />
+        {% endfor %}
       </div>
       <!-- Onglet Armes -->
       <div class="edit-tab-content" id="edit-tab-weapons">
@@ -614,9 +671,9 @@
 
   // Ajout d'un passif
   document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById('add-passive-btn')?.addEventListener('click', async function() {
-      const grid = document.getElementById('passives-grid');
-      const index = grid.querySelectorAll('.edit-passive-block').length;
+    document.getElementById('add-blessing-btn')?.addEventListener('click', async function() {
+      const grid = document.getElementById('blessings-grid');
+      const index = grid.querySelectorAll('.edit-blessing-block').length;
       // Récupère le dossier image du personnage
       const folder = document.querySelector('#edit-character-form input[name="image_folder"]').value;
       const type = document.querySelector('#edit-character-form input[name="type"]').value;
@@ -635,27 +692,27 @@
       const selectOptions = ['<option value=""></option>']
         .concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
       const row = document.createElement('div');
-      row.className = 'passives-row';
+      row.className = 'blessings-row';
       row.innerHTML = `
-        <div class="edit-passive-block">
+        <div class="edit-blessing-block">
           <label>Nom du passif :</label>
-          <input type="text" name="passive_name_${index}" value="" />
+          <input type="text" name="blessing_name_${index}" value="" />
           <label>Description :</label>
-          <textarea name="passive_description_${index}"></textarea>
+          <textarea name="blessing_description_${index}"></textarea>
           <label>Tag :</label>
-          <input type="text" name="passive_tag_${index}" value="" />
+          <input type="text" name="blessing_tag_${index}" value="" />
           <label>Image :</label>
-          <select name="passive_image_${index}">${selectOptions}</select>
+          <select name="blessing_image_${index}">${selectOptions}</select>
           <div class="checkbox-row">
             <label>
-              <input type="checkbox" name="passive_principal_${index}" /> Principal
+              <input type="checkbox" name="blessing_principal_${index}" /> Principal
             </label>
             <label>
-              <input type="checkbox" name="passive_hidden_${index}" /> Caché
+              <input type="checkbox" name="blessing_hidden_${index}" /> Caché
             </label>
           </div>
           <label>Ordre :</label>
-          <input type="number" name="passive_order_${index}" value="${index}" min="0" style="width:60px;">
+          <input type="number" name="blessing_order_${index}" value="${index}" min="0" style="width:60px;">
         </div>
       `;
       grid.appendChild(row);
@@ -979,7 +1036,7 @@
     } catch (e) { images = []; }
   }
   // Pour les passifs
-  document.querySelectorAll('.passive-image-select').forEach(select => {
+  document.querySelectorAll('.blessing-image-select').forEach(select => {
     const current = select.dataset.current || "";
     select.innerHTML = ['<option value=""></option>']
       .concat(images.map(img => `<option value="${img}"${img === current ? ' selected' : ''}>${img}</option>`)).join('');
