@@ -374,18 +374,18 @@ class SJWEquipmentSetSql:
         self.cursor.execute("DELETE FROM sjw_artefact_translations WHERE sjw_artefact_translations_sjw_artefacts_id=%s", (aid,))
         self.cursor.execute("DELETE FROM sjw_artefacts WHERE sjw_artefacts_id=%s", (aid,))
 
-    def update_core(self, cid, set_id, name, number, img, main, sec):
+    def update_core(self, cid, set_id, name, img, main, sec, number, language):
         self.cursor.execute("""
             UPDATE sjw_cores
-            SET sjw_cores_name=%s, sjw_cores_number=%s, sjw_cores_image=%s, sjw_cores_main_stat=%s, sjw_cores_secondary_stat=%s, sjw_cores_sjw_equipment_sets_id=%s
+            SET sjw_cores_name=%s, sjw_cores_image=%s, sjw_cores_main_stat=%s, sjw_cores_secondary_stat=%s, sjw_cores_equipment_sets_id=%s, sjw_cores_number=%s
             WHERE sjw_cores_id=%s
-        """, (name, number, img, main, sec, set_id, cid))
+        """, (name, img, main, sec, set_id, number, cid))
 
-    def add_core(self, set_id, name, number, img, main, sec):
+    def add_core(self, set_id, name, img, main, sec, number, language):
         self.cursor.execute("""
-            INSERT INTO sjw_cores (sjw_cores_sjw_equipment_sets_id, sjw_cores_name, sjw_cores_number, sjw_cores_image, sjw_cores_main_stat, sjw_cores_secondary_stat)
+            INSERT INTO sjw_cores (sjw_cores_sjw_equipment_sets_id, sjw_cores_name, sjw_cores_image, sjw_cores_main_stat, sjw_cores_secondary_stat, sjw_cores_number)
             VALUES (%s, %s, %s, %s, %s, %s) RETURNING sjw_cores_id
-        """, (set_id, name, number, img, main, sec))
+        """, (set_id, name, img, main, sec, number))
         return self.cursor.fetchone()[0]
 
     def delete_core(self, cid):
