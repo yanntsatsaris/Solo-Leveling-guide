@@ -1,5 +1,5 @@
 /* Overlay */
-.edit-character-overlay {
+.edit-sjw-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,7 +13,7 @@
 }
 
 /* Popup */
-.edit-character-popup {
+.edit-sjw-popup {
   background: #1e1e1e;
   padding: 12px 9px; /* padding réduit de moitié */
   border-radius: 12px;
@@ -29,7 +29,7 @@
 }
 
 /* Titre */
-.edit-character-popup h2 {
+.edit-sjw-popup h2 {
   color: #ffcc00;
   text-align: center;
   text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff;
