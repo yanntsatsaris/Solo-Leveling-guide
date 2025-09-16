@@ -15,7 +15,7 @@
           </a>
           {% endif %}
           <p class="shadow-name" hidden>{{ shadow.name }}</p>
-          <p class="shadow-description">{{ shadow.description|safe }}</p>
+          <p class="shadow-description" hidden>{{ shadow.description|safe }}</p>
         </div>
       </td>
       {% if loop.index % 6 == 0 %}
