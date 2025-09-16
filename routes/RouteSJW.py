@@ -139,8 +139,6 @@ def SJW(app: Flask):
         
         # Récupération des shadows (avec évolutions)
         for shadow in shadows:
-            shadow['description_raw'] = shadow['description']  # version brute
-            shadow['description'] = process_description(shadow['description'], all_tags, base_path)
             for skill in shadow.get('skills', []):
                 skill['description_raw'] = skill['description']  # version brute
                 skill['description'] = process_description(skill['description'], all_tags, base_path)
@@ -237,8 +235,6 @@ def SJW(app: Flask):
         # Formatage des descriptions (optionnel, comme dans inner_SJW)
         base_path = f'images/{folder}'
         all_tags = []  # Ajoute ici la liste des tags si besoin
-        shadow['description_raw'] = shadow['description']
-        shadow['description'] = process_description(shadow['description'], all_tags, base_path)
         for skill in shadow.get('skills', []):
             skill['description_raw'] = skill['description']
             skill['description'] = process_description(skill['description'], all_tags, base_path)
