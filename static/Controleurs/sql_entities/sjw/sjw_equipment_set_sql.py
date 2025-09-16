@@ -245,7 +245,7 @@ class SJWEquipmentSetSql:
 
     def add_equipment_set(self, char_id, name, desc, focus, order, language):
         self.cursor.execute("""
-            INSERT INTO sjw_equipment_sets (sjw_equipment_sets_characters_id, sjw_equipment_sets_name, sjw_equipment_sets_order)
+            INSERT INTO sjw_equipment_sets (sjw_equipment_sets_sjw_id, sjw_equipment_sets_name, sjw_equipment_sets_order)
             VALUES (%s, %s, %s) RETURNING sjw_equipment_sets_id
         """, (char_id, name, order))
         set_id = self.cursor.fetchone()[0]
