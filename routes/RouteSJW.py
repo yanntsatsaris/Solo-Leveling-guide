@@ -131,7 +131,7 @@ def SJW(app: Flask):
         skills = skills_sql.get_skills(character_info['id'], language)
         blessings_defensive = blessings_sql.get_defensive_blessings(character_info['id'], language)
         blessings_offensive = blessings_sql.get_offensive_blessings(character_info['id'], language)
-        weapons = weapons_sql.get_weapons(character_info['id'], language)
+        weapons = weapons_sql.get_weapons(character_info['id'], language, folder)
         shadows = shadows_sql.get_shadows(character_info['id'], language, folder)
         
         # Ajoute le tag de l'arme dans la liste des tags
