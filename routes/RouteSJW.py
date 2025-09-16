@@ -139,6 +139,8 @@ def SJW(app: Flask):
         
         # Récupération des shadows (avec évolutions)
         for shadow in shadows:
+            shadow['description_raw'] = shadow['description']  # version brute
+            shadow['description'] = process_description(shadow['description'], all_tags, base_path)
             for skill in shadow.get('skills', []):
                 skill['description_raw'] = skill['description']  # version brute
                 skill['description'] = process_description(skill['description'], all_tags, base_path)
@@ -174,8 +176,8 @@ def SJW(app: Flask):
         
         # Récupération des armes (avec évolutions)
         for weapon in weapons:
-            weapon['description_raw'] = weapon['description']  # version brute
-            weapon['description'] = process_description(weapon['description'], all_tags, base_path)
+            weapon['stats_raw'] = weapon.get('stats', '')  # version brute
+            weapon['stats'] = process_description(weapon.get('stats', ''), all_tags, base_path)
             for evolution in weapon.get('evolutions', []):
                 evolution['description_raw'] = evolution['description']  # version brute
                 evolution['description'] = process_description(evolution['description'], all_tags, base_path)
@@ -235,6 +237,8 @@ def SJW(app: Flask):
         # Formatage des descriptions (optionnel, comme dans inner_SJW)
         base_path = f'images/{folder}'
         all_tags = []  # Ajoute ici la liste des tags si besoin
+        shadow['description_raw'] = shadow['description']
+        shadow['description'] = process_description(shadow['description'], all_tags, base_path)
         for skill in shadow.get('skills', []):
             skill['description_raw'] = skill['description']
             skill['description'] = process_description(skill['description'], all_tags, base_path)
