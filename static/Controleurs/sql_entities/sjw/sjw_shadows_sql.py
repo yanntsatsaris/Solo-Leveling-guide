@@ -40,10 +40,10 @@ class SJWShadowsSql:
 
     def get_weapon_for_shadow(self, shadow_id, language, folder=None):
         self.cursor.execute("""
-            SELECT w.sjw_shadow_weapons_id, w.sjw_shadow_weapons_image, t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
+            SELECT w.sjw_shadow_weapons_id, w.sjw_shadow_weapons_image, t.sjw_shadow_weapon_translations_name, t.sjw_shadow_weapon_translations_stats
             FROM sjw_shadow_weapons w
             JOIN sjw_shadow_weapon_translations t ON t.sjw_shadow_weapon_translations_sjw_shadow_weapons_id = w.sjw_shadow_weapons_id
-            WHERE w.sjw_shadow_weapons_sjw_shadows_id = %s AND t.sjw_weapon_translations_language = %s
+            WHERE w.sjw_shadow_weapons_sjw_shadows_id = %s AND t.sjw_shadow_weapon_translations_language = %s
         """, (shadow_id, language))
         row = self.cursor.fetchone()
         if not row:
