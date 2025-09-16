@@ -182,6 +182,7 @@ def SJW(app: Flask):
                 evolution['description_raw'] = evolution['description']  # version brute
                 evolution['description'] = process_description(evolution['description'], all_tags, base_path)
         character_info['weapons'] = weapons
+        write_log(f"Armes récupérées : {weapons}", log_level="INFO")
 
         # Récupération des sets d'équipement (avec artefacts et cores)
         equipment_sets = []
