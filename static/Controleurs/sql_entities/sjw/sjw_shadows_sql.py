@@ -36,3 +36,104 @@ class SJWShadowsSql:
             }
             for row in self.cursor.fetchall()
         ]
+
+    def get_weapon_for_shadow(self, shadow_id, language, folder=None):
+        self.cursor.execute("""
+            SELECT w.sjw_weapons_id, w.sjw_weapons_image, t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
+            FROM sjw_weapons w
+            JOIN sjw_weapon_translations t ON t.sjw_weapon_translations_sjw_weapons_id = w.sjw_weapons_id
+            WHERE w.sjw_weapons_sjw_shadows_id = %s AND t.sjw_weapon_translations_language = %s
+        """, (shadow_id, language))
+        row = self.cursor.fetchone()
+        if not row:
+            return None
+        weapon_id = row[0]
+        weapon = {
+            'id': weapon_id,
+            'image': f'images/{folder}/Weapons/{row[1]}' if folder else row[1],
+            'name': row[2],
+            'stats': row[3],
+            'evolutions': self.get_weapon_evolutions(weapon_id)
+        }
+        return weapon
+
+    def get_weapon_evolutions(self, weapon_id):
+        self.cursor.execute("""
+            SELECT sjw_weapon_evolutions_id, sjw_weapon_evolutions_description
+            FROM sjw_weapon_evolutions
+            WHERE sjw_weapon_evolutions_sjw_weapons_id = %s
+            ORDER BY sjw_weapon_evolutions_id ASC
+        """, (weapon_id,))
+        return [
+            {
+                'id': row[0],
+                'description': row[1]
+            }
+            for row in self.cursor.fetchall()
+        ]
+
+    def get_shadow_details(self, sjw_id, shadow_name, language, folder=None):
+        self.cursor.execute("""
+            SELECT s.sjw_shadows_id, s.sjw_shadows_image, t.sjw_shadow_translations_name, t.sjw_shadow_translations_description
+            FROM sjw_shadows s
+            JOIN sjw_shadow_translations t ON t.sjw_shadow_translations_sjw_shadows_id = s.sjw_shadows_id
+            WHERE s.sjw_shadows_sjw_id = %s AND t.sjw_shadow_translations_language = %s AND t.sjw_shadow_translations_name = %s
+        """, (sjw_id, language, shadow_name))
+        row = self.cursor.fetchone()
+        if not row:
+            return None
+        shadow_id = row[0]
+        shadow = {
+            'id': shadow_id,
+            'image': f'images/{folder}/Shadows/{row[1]}' if folder else row[1],
+            'name': row[2],
+            'description': row[3],
+            'evolutions': self.get_evolutions(shadow_id),
+            'skills': self.get_skills(shadow_id, language, folder),
+            'weapon': self.get_weapon_for_shadow(shadow_id, language, folder),
+            'authority_passives': self.get_authority_passives(shadow_id, language)
+        }
+        return shadow
+
+    def get_skills(self, shadow_id, language, folder=None):
+        self.cursor.execute("""
+            SELECT s.sjw_shadow_skills_id, s.sjw_shadow_skills_principal, s.sjw_shadow_skills_image, s.sjw_shadow_skills_tag, s.sjw_shadow_skills_order,
+                   t.sjw_shadow_skill_translations_name, t.sjw_shadow_skill_translations_description, t.sjw_shadow_skill_translations_tag
+            FROM sjw_shadow_skills s
+            JOIN sjw_shadow_skill_translations t ON t.sjw_shadow_skill_translations_sjw_shadow_skills_id = s.sjw_shadow_skills_id
+            WHERE s.sjw_shadow_skills_sjw_shadows_id = %s AND t.sjw_shadow_skill_translations_language = %s
+            ORDER BY s.sjw_shadow_skills_order ASC, s.sjw_shadow_skills_id ASC
+        """, (shadow_id, language))
+        return [
+            {
+                'id': row[0],
+                'principal': row[1],
+                'image': f'images/{folder}/Shadows/Skills/{row[2]}' if folder else row[2],
+                'tag': row[3],
+                'order': row[4],
+                'name': row[5],
+                'description': row[6],
+                'translation_tag': row[7]
+            }
+            for row in self.cursor.fetchall()
+        ]
+
+    def get_authority_passives(self, shadow_id, language):
+        self.cursor.execute("""
+            SELECT ap.sjw_shadow_authority_passives_id,
+                   t.sjw_shadow_authority_passive_translations_name,
+                   t.sjw_shadow_authority_passive_translations_description
+            FROM sjw_shadow_authority_passives ap
+            JOIN sjw_shadow_authority_passive_translations t
+              ON t.sjw_shadow_authority_passive_translations_authority_passive_id = ap.sjw_shadow_authority_passives_id
+            WHERE ap.sjw_shadow_authority_passives_sjw_shadows_id = %s
+              AND t.sjw_shadow_authority_passive_translations_language = %s
+        """, (shadow_id, language))
+        return [
+            {
+                'id': row[0],
+                'name': row[1],
+                'description': row[2]
+            }
+            for row in self.cursor.fetchall()
+        ]

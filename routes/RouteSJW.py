@@ -128,16 +128,60 @@ def SJW(app: Flask):
         base_path = f'images/{folder}'
         character_info['image'] = f'images/{folder}/Sung_Jinwoo.png'
         
-        all_tags = []
+        skills = skills_sql.get_skills(character_info['id'], language)
+        blessings_defensive = blessings_sql.get_defensive_blessings(character_info['id'], language)
+        blessings_offensive = blessings_sql.get_offensive_blessings(character_info['id'], language)
+        weapons = weapons_sql.get_weapons(character_info['id'], language)
+        shadows = shadows_sql.get_shadows(character_info['id'], language, folder)
+        
+        # Ajoute le tag de l'arme dans la liste des tags
+        all_tags = blessings_defensive + blessings_offensive + skills + weapons + shadows
         
         # Récupération des shadows (avec évolutions)
-        character_info['shadows'] = shadows_sql.get_shadows(character_info['id'], language, folder)
+        for shadow in shadows:
+            shadow['description_raw'] = shadow['description']  # version brute
+            shadow['description'] = process_description(shadow['description'], all_tags, base_path)
+            for skill in shadow.get('skills', []):
+                skill['description_raw'] = skill['description']  # version brute
+                skill['description'] = process_description(skill['description'], all_tags, base_path)
+            for evolution in shadow.get('evolutions', []):
+                evolution['description_raw'] = evolution['description']  # version brute
+                evolution['description'] = process_description(evolution['description'], all_tags, base_path)
+            for weapon in shadow.get('weapon', []):
+                weapon['description_raw'] = weapon['description']  # version brute
+                weapon['description'] = process_description(weapon['description'], all_tags, base_path)
+                for evolution in weapon.get('evolutions', []):
+                    evolution['description_raw'] = evolution['description']  # version brute
+                    evolution['description'] = process_description(evolution['description'], all_tags, base_path)
+        character_info['shadows'] = shadows
 
+        for blessing in blessings_defensive:
+            blessing['description_raw'] = blessing['description']  # version brute
+            blessing['description'] = process_description(blessing['description'], all_tags, base_path)
+        character_info['defensive_blessings'] = blessings_defensive
+        
+        for blessing in blessings_offensive:
+            blessing['description_raw'] = blessing['description']  # version brute
+            blessing['description'] = process_description(blessing['description'], all_tags, base_path)
+        character_info['offensive_blessings'] = blessings_offensive
+        
         # Récupération des skills
-        character_info['skills'] = skills_sql.get_skills(character_info['id'], language)
-
+        for skill in skills:
+            skill['description_raw'] = skill['description']  # version brute
+            skill['description'] = process_description(skill['description'], all_tags, base_path)
+            for evolution in skill.get('evolutions', []):
+                evolution['description_raw'] = evolution['description']  # version brute
+                evolution['description'] = process_description(evolution['description'], all_tags, base_path)
+        character_info['skills'] = skills
+        
         # Récupération des armes (avec évolutions)
-        character_info['weapon'] = weapons_sql.get_weapons(character_info['id'], language, folder)
+        for weapon in weapons:
+            weapon['description_raw'] = weapon['description']  # version brute
+            weapon['description'] = process_description(weapon['description'], all_tags, base_path)
+            for evolution in weapon.get('evolutions', []):
+                evolution['description_raw'] = evolution['description']  # version brute
+                evolution['description'] = process_description(evolution['description'], all_tags, base_path)
+        character_info['weapons'] = weapons
 
         # Récupération des sets d'équipement (avec artefacts et cores)
         equipment_sets = []
@@ -153,10 +197,6 @@ def SJW(app: Flask):
         for eq_set in character_info['equipment_sets']:
             for core in eq_set['cores']:
                 core['color'] = core['name']
-
-        # Récupération des bénédictions
-        character_info['offensive_blessings'] = blessings_sql.get_offensive_blessings(character_info['id'])
-        character_info['defensive_blessings'] = blessings_sql.get_defensive_blessings(character_info['id'])
 
         # Récupération des panoplies et noyaux (si besoin pour le contexte global)
         panoplies_effects = panoplies_sql.get_panoplies_effects(language)
@@ -178,65 +218,48 @@ def SJW(app: Flask):
 
     @app.route('/SJW/shadow/<shadowName>')
     def shadow_details(shadowName):
-        # Récupérer la langue sélectionnée
         language = session.get('language', "EN-en")
-        if not language:
-            return "Language not set", 400
+        sql_manager = ControleurSql()
+        cursor = sql_manager.cursor
+        sjw_sql = SJWSql(cursor)
+        shadows_sql = SJWShadowsSql(cursor)
 
-        # Charger les données des personnages depuis le fichier JSON
-        with open('data/SJW.json', 'r', encoding='utf-8') as f:
-            characters_data = json.load(f)
+        character_info = sjw_sql.get_sjw(language)
+        sjw_id = character_info['id']
+        folder = character_info['folder']
 
-        # Trouver les données correspondant à la langue sélectionnée
-        characters_data = next((item.get(language) for item in characters_data if language in item), [])
-        if not characters_data:
-            return f"No data found for language: {language}", 404
-
-        # Trouver l'ombre correspondant au nom donné
-        shadow = None
-        character_folder = None
-        for character in characters_data:
-            for s in character.get('shadows', []):
-                if s['name'] == shadowName:
-                    shadow = s
-                    character_folder = character['folder']
-                    # Mettre à jour les chemins des images
-                    if 'image' in shadow:
-                        shadow['image'] = f'images/{character_folder}/Shadows/{shadow["image"]}'
-                    if 'description' in shadow:
-                        shadow['description'] = update_image_paths(shadow['description'], f'images/{character_folder}')
-                    
-                    # Mettre à jour les compétences (skills) de l'ombre
-                    for skill in shadow.get('skills', []):
-                        if 'image' in skill:
-                            skill['image'] = f'images/{character_folder}/Shadows/Skills/{skill["image"]}'
-                        if 'description' in skill:
-                            skill['description'] = update_image_paths(skill['description'], f'images/{character_folder}/Shadows/Skills')
-
-                    # Mettre à jour les évolutions de l'ombre
-                    for evolution in shadow.get('evolutions', []):
-                        if 'description' in evolution:
-                            evolution['description'] = update_image_paths(evolution['description'], f'images/{character_folder}/Shadows/Evolutions')
-
-                    # Mettre à jour l'arme associée à l'ombre
-                    if 'weapon' in shadow:
-                        for weapon in shadow['weapon']:  # <-- Correction ici
-                            if 'image' in weapon:
-                                weapon['image'] = f'images/{character_folder}/Shadows/Weapons/{weapon["image"]}'
-                            if 'codex' in weapon:
-                                weapon['codex'] = f'images/{character_folder}/Shadows/Weapons/{weapon["codex"]}'
-                            if 'stats' in weapon:
-                                weapon['stats'] = update_image_paths(weapon['stats'], f'images/{character_folder}/Shadows/Weapons')
-                            for evolution in weapon.get('evolutions', []):
-                                if 'description' in evolution:
-                                    evolution['description'] = update_image_paths(evolution['description'], f'images/{character_folder}/Shadows/Weapons/Evolutions')
-
-                    break
-
+        # Récupère toutes les infos de la shadow via la BDD
+        shadow = shadows_sql.get_shadow_details(sjw_id, shadowName, language, folder)
+        sql_manager.close()
         if not shadow:
             return "Shadow not found", 404
 
-        # Renvoyer le template avec les données de l'ombre
+        # Formatage des descriptions (optionnel, comme dans inner_SJW)
+        base_path = f'images/{folder}'
+        all_tags = []  # Ajoute ici la liste des tags si besoin
+        shadow['description_raw'] = shadow['description']
+        shadow['description'] = process_description(shadow['description'], all_tags, base_path)
+        for skill in shadow.get('skills', []):
+            skill['description_raw'] = skill['description']
+            skill['description'] = process_description(skill['description'], all_tags, base_path)
+        for evolution in shadow.get('evolutions', []):
+            evolution['description_raw'] = evolution['description']
+            evolution['description'] = process_description(evolution['description'], all_tags, base_path)
+            for passive in evolution.get('authority_passives', []):
+                passive['description_raw'] = passive['description']
+                passive['description'] = process_description(passive['description'], all_tags, base_path)
+        if shadow.get('weapon'):
+            shadow['weapon']['description_raw'] = shadow['weapon'].get('description', '')
+            shadow['weapon']['description'] = process_description(shadow['weapon'].get('description', ''), all_tags, base_path)
+            for evolution in shadow['weapon'].get('evolutions', []):
+                evolution['description_raw'] = evolution['description']
+                evolution['description'] = process_description(evolution['description'], all_tags, base_path)
+
+        # Authority passives directes (si présentes)
+        for passive in shadow.get('authority_passives', []):
+            passive['description_raw'] = passive['description']
+            passive['description'] = process_description(passive['description'], all_tags, base_path)
+
         return render_template('shadow_details.html', shadow=shadow)
 
     @app.route('/SJW/weapon/<weaponName>')
