@@ -235,11 +235,11 @@ class SJWEquipmentSetSql:
         if self.cursor.fetchone():
             self.cursor.execute("""
                 UPDATE sjw_equipment_set_translations SET sjw_equipment_set_translations_description=%s
-                WHERE sjw_equipment_set_translations_sjw_equipment_sets_id=%s AND sjw_equipment_set_translations_language=%s
+                WHERE sjw_equipment_set_translations_equipment_sets_id=%s AND sjw_equipment_set_translations_language=%s
             """, (desc, set_id, language))
         else:
             self.cursor.execute("""
-                INSERT INTO sjw_equipment_set_translations (sjw_equipment_set_translations_sjw_equipment_sets_id, sjw_equipment_set_translations_language, sjw_equipment_set_translations_description)
+                INSERT INTO sjw_equipment_set_translations (sjw_equipment_set_translations_equipment_sets_id, sjw_equipment_set_translations_language, sjw_equipment_set_translations_description)
                 VALUES (%s, %s, %s)
             """, (set_id, language, desc))
 
@@ -250,7 +250,7 @@ class SJWEquipmentSetSql:
         """, (char_id, name, order))
         set_id = self.cursor.fetchone()[0]
         self.cursor.execute("""
-            INSERT INTO sjw_equipment_set_translations (sjw_equipment_set_translations_sjw_equipment_sets_id, sjw_equipment_set_translations_language, sjw_equipment_set_translations_description)
+            INSERT INTO sjw_equipment_set_translations (sjw_equipment_set_translations_equipment_sets_id, sjw_equipment_set_translations_language, sjw_equipment_set_translations_description)
             VALUES (%s, %s, %s)
         """, (set_id, language, desc))
         if focus:
