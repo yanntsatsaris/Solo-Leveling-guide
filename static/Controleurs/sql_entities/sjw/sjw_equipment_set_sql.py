@@ -326,7 +326,7 @@ class SJWEquipmentSetSql:
         # Recherche d'un artefact existant pour ce set avec la même image et main_stat
         self.cursor.execute("""
             SELECT sjw_artefacts_id FROM sjw_artefacts
-            WHERE sjw_artefacts_equipment_sets_id=%s AND sjw_artefacts_image=%s AND sjw_artefacts_main_stat=%s AND sjw_artefacts_set=%s
+            WHERE sjw_artefacts_sjw_equipment_sets_id=%s AND sjw_artefacts_image=%s AND sjw_artefacts_main_stat=%s AND sjw_artefacts_set=%s
         """, (set_id, img, main, aset))
         row = self.cursor.fetchone()
         if row:
@@ -353,7 +353,7 @@ class SJWEquipmentSetSql:
         else:
             # Création normale
             self.cursor.execute("""
-                INSERT INTO sjw_artefacts (sjw_artefacts_equipment_sets_id, sjw_artefacts_image, sjw_artefacts_main_stat, sjw_artefacts_set)
+                INSERT INTO sjw_artefacts (sjw_artefacts_sjw_equipment_sets_id, sjw_artefacts_image, sjw_artefacts_main_stat, sjw_artefacts_set)
                 VALUES (%s, %s, %s, %s) RETURNING sjw_artefacts_id
             """, (set_id, img, main, aset))
             aid = self.cursor.fetchone()[0]
