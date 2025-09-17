@@ -1,4 +1,5 @@
 from static.Controleurs.ControleurLog import write_log
+import os
 
 class SJWWeaponsSql:
     def __init__(self, cursor):
@@ -19,11 +20,18 @@ class SJWWeaponsSql:
             weapon_alias = row[4]
             type = row[5]
             # Si alias et dossier existent, on tente le .webp
-            if folder and weapon_folder and weapon_alias:
-                image_path = f'images/{folder}/Armes/{weapon_folder}/{type}_{weapon_alias}_Arme.webp'
-                codex_path = f'images/{folder}/Armes/{weapon_folder}/{type}_{weapon_alias}_Codex.webp'
+            base_dir = os.path.join('static', 'images', folder, 'Armes', weapon_folder) if folder and weapon_folder else None
+            webp_image = f"{type}_{weapon_alias}_Arme.webp" if weapon_alias else None
+            webp_codex = f"{type}_{weapon_alias}_Codex.webp" if weapon_alias else None
+
+            if base_dir and webp_image and os.path.isfile(os.path.join(base_dir, webp_image)):
+                image_path = f'images/{folder}/Armes/{weapon_folder}/{webp_image}'
             else:
                 image_path = f'images/{folder}/Armes/{weapon_folder}/{row[1]}' if folder and weapon_folder else row[1]
+
+            if base_dir and webp_codex and os.path.isfile(os.path.join(base_dir, webp_codex)):
+                codex_path = f'images/{folder}/Armes/{weapon_folder}/{webp_codex}'
+            else:
                 codex_path = f'images/{folder}/Armes/{weapon_folder}/{row[2]}' if folder and weapon_folder else row[2]
             weapon = {
                 'id': weapon_id,
@@ -53,11 +61,18 @@ class SJWWeaponsSql:
             weapon_alias = row[4]
             type = row[5]
             # Si alias et dossier existent, on tente le .webp
-            if folder and weapon_folder and weapon_alias:
-                image_path = f'images/{folder}/Armes/{weapon_folder}/{type}_{weapon_alias}_Arme.webp'
-                codex_path = f'images/{folder}/Armes/{weapon_folder}/{type}_{weapon_alias}_Codex.webp'
+            base_dir = os.path.join('static', 'images', folder, 'Armes', weapon_folder) if folder and weapon_folder else None
+            webp_image = f"{type}_{weapon_alias}_Arme.webp" if weapon_alias else None
+            webp_codex = f"{type}_{weapon_alias}_Codex.webp" if weapon_alias else None
+
+            if base_dir and webp_image and os.path.isfile(os.path.join(base_dir, webp_image)):
+                image_path = f'images/{folder}/Armes/{weapon_folder}/{webp_image}'
             else:
                 image_path = f'images/{folder}/Armes/{weapon_folder}/{row[1]}' if folder and weapon_folder else row[1]
+
+            if base_dir and webp_codex and os.path.isfile(os.path.join(base_dir, webp_codex)):
+                codex_path = f'images/{folder}/Armes/{weapon_folder}/{webp_codex}'
+            else:
                 codex_path = f'images/{folder}/Armes/{weapon_folder}/{row[2]}' if folder and weapon_folder else row[2]
             weapon = {
                 'id': row[0],
