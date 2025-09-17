@@ -289,8 +289,11 @@ def SJW(app: Flask):
         # Trouver l'arme correspondant au nom donné
         base_path = f'images/{folder}'
         all_tags = []  # Ajoute ici la liste des tags si besoin
-        weapon = None
         character_folder = None
+        if 'evolutions' in weapon and isinstance(weapon['evolutions'], list):
+            for evolution in weapon['evolutions']:
+                evolution['description_raw'] = evolution['description']
+                evolution['description'] = process_description(evolution['description'], all_tags, base_path)
 
         # Renvoyer le template avec les données de l'arme
         return render_template('weapon_details.html', weapon=weapon)
