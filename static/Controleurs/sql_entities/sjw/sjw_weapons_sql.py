@@ -71,6 +71,7 @@ class SJWWeaponsSql:
                 'stats': row[7],
                 'evolutions': self.get_evolutions(weapon_id, language, folder, weapon_folder)
             }
+            write_log(f"Constructed weapon details: {weapon}", "INFO")
             return weapon
         return None
 
