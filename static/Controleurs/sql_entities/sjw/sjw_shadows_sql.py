@@ -24,8 +24,8 @@ class SJWShadowsSql:
                 codex_path = f'images/{folder}/Shadows/{custom_folder}/{codex_file}'
                 image_path = f'images/{folder}/Shadows/{custom_folder}/{ombre_file}'
             else:
-                codex_path = row[1]
-                image_path = row[1]
+                codex_path = f'images/{folder}/Shadows/{row[1]}'
+                image_path = f'images/{folder}/Shadows/{row[1]}'
             shadow = {
                 'id': shadow_id,
                 'image': image_path,
@@ -107,8 +107,8 @@ class SJWShadowsSql:
             codex_path = f'images/{folder}/Shadows/{custom_folder}/{codex_file}'
             image_path = f'images/{folder}/Shadows/{custom_folder}/{ombre_file}'
         else:
-            codex_path = row[1]
-            image_path = row[1]
+            codex_path = f'images/{folder}/Shadows/{row[1]}'
+            image_path = f'images/{folder}/Shadows/{row[1]}'
         shadow = {
             'id': shadow_id,
             'image': image_path,
