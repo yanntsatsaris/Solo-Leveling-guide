@@ -40,7 +40,7 @@
   </head>
   <body
     class="{% if character.background_image %}background-image{% endif %}"
-    style="{% if character.type %}background-image: url('{{ url_for('static', filename='Background/BG_' ~ character.type ~ '.webp') }}');{% endif %}"
+    style="{% if character.type %}background-image: url('{{ url_for('static', filename='images/Background/BG_' ~ character.type ~ '.webp') }}');{% endif %}"
   >
     {% include 'navbar.html' %}
 
