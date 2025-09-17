@@ -806,6 +806,14 @@
       div.innerHTML = `
         <label>Nom de l'arme :</label>
         <input type="text" name="weapon_name_${index}" value="" />
+        <label>Alias de l'arme :</label>
+        <input type="text" name="weapon_alias_${index}" value="" />
+        <label>Type :</label>
+        <input
+          type="text"
+          name="weapon_type_${index}"
+          value="${weapon.type if weapon.type is defined else ''}"
+        />
         <label>Stats :</label>
         <textarea name="weapon_stats_${index}"></textarea>
         <label>Tag :</label>

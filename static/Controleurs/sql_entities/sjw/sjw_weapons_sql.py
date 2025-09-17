@@ -20,19 +20,30 @@ class SJWWeaponsSql:
             weapon_alias = row[4]
             type = row[5]
             # Si alias et dossier existent, on tente le .webp
-            base_dir = os.path.join('static', 'images', folder, 'Armes', weapon_folder) if folder and weapon_folder else None
+            custom_folder = f"{type}_{weapon_alias}" if type and weapon_alias else None
+            base_dir_custom = os.path.join('static', 'images', folder, 'Armes', custom_folder) if folder and custom_folder else None
+            base_dir_bdd = os.path.join('static', 'images', folder, 'Armes', weapon_folder) if folder and weapon_folder else None
+
+            # Vérifie si le dossier custom existe
+            if base_dir_custom and os.path.isdir(base_dir_custom):
+                used_folder = custom_folder
+                base_dir = base_dir_custom
+            else:
+                used_folder = weapon_folder
+                base_dir = base_dir_bdd
+
             webp_image = f"{type}_{weapon_alias}_Arme.webp" if weapon_alias else None
             webp_codex = f"{type}_{weapon_alias}_Codex.webp" if weapon_alias else None
 
             if base_dir and webp_image and os.path.isfile(os.path.join(base_dir, webp_image)):
-                image_path = f'images/{folder}/Armes/{weapon_folder}/{webp_image}'
+                image_path = f'images/{folder}/Armes/{used_folder}/{webp_image}'
             else:
-                image_path = f'images/{folder}/Armes/{weapon_folder}/{row[1]}' if folder and weapon_folder else row[1]
+                image_path = f'images/{folder}/Armes/{used_folder}/{row[1]}' if folder and used_folder else row[1]
 
             if base_dir and webp_codex and os.path.isfile(os.path.join(base_dir, webp_codex)):
-                codex_path = f'images/{folder}/Armes/{weapon_folder}/{webp_codex}'
+                codex_path = f'images/{folder}/Armes/{used_folder}/{webp_codex}'
             else:
-                codex_path = f'images/{folder}/Armes/{weapon_folder}/{row[2]}' if folder and weapon_folder else row[2]
+                codex_path = f'images/{folder}/Armes/{used_folder}/{row[2]}' if folder and used_folder else row[2]
             weapon = {
                 'id': weapon_id,
                 'image': image_path,
@@ -61,19 +72,30 @@ class SJWWeaponsSql:
             weapon_alias = row[4]
             type = row[5]
             # Si alias et dossier existent, on tente le .webp
-            base_dir = os.path.join('static', 'images', folder, 'Armes', weapon_folder) if folder and weapon_folder else None
+            custom_folder = f"{type}_{weapon_alias}" if type and weapon_alias else None
+            base_dir_custom = os.path.join('static', 'images', folder, 'Armes', custom_folder) if folder and custom_folder else None
+            base_dir_bdd = os.path.join('static', 'images', folder, 'Armes', weapon_folder) if folder and weapon_folder else None
+
+            # Vérifie si le dossier custom existe
+            if base_dir_custom and os.path.isdir(base_dir_custom):
+                used_folder = custom_folder
+                base_dir = base_dir_custom
+            else:
+                used_folder = weapon_folder
+                base_dir = base_dir_bdd
+
             webp_image = f"{type}_{weapon_alias}_Arme.webp" if weapon_alias else None
             webp_codex = f"{type}_{weapon_alias}_Codex.webp" if weapon_alias else None
 
             if base_dir and webp_image and os.path.isfile(os.path.join(base_dir, webp_image)):
-                image_path = f'images/{folder}/Armes/{weapon_folder}/{webp_image}'
+                image_path = f'images/{folder}/Armes/{used_folder}/{webp_image}'
             else:
-                image_path = f'images/{folder}/Armes/{weapon_folder}/{row[1]}' if folder and weapon_folder else row[1]
+                image_path = f'images/{folder}/Armes/{used_folder}/{row[1]}' if folder and used_folder else row[1]
 
             if base_dir and webp_codex and os.path.isfile(os.path.join(base_dir, webp_codex)):
-                codex_path = f'images/{folder}/Armes/{weapon_folder}/{webp_codex}'
+                codex_path = f'images/{folder}/Armes/{used_folder}/{webp_codex}'
             else:
-                codex_path = f'images/{folder}/Armes/{weapon_folder}/{row[2]}' if folder and weapon_folder else row[2]
+                codex_path = f'images/{folder}/Armes/{used_folder}/{row[2]}' if folder and used_folder else row[2]
             weapon = {
                 'id': row[0],
                 'image': image_path,
