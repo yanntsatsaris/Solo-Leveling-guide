@@ -273,7 +273,7 @@
             <input
               type="text"
               name="weapon_type_{{ weapon_idx }}"
-              value="{{ weapon.type if weapon.type is defined else '' }}"
+              value=""
             />
             <label>Stats :</label>
             <textarea name="weapon_stats_{{ weapon_idx }}">{{ weapon.stats_raw if weapon.stats_raw is defined else '' }}</textarea>
@@ -809,11 +809,7 @@
         <label>Alias de l'arme :</label>
         <input type="text" name="weapon_alias_${index}" value="" />
         <label>Type :</label>
-        <input
-          type="text"
-          name="weapon_type_${index}"
-          value="${weapon.type if weapon.type is defined else ''}"
-        />
+        <input type="text" name="weapon_type_${index}" value="" />
         <label>Stats :</label>
         <textarea name="weapon_stats_${index}"></textarea>
         <label>Tag :</label>
