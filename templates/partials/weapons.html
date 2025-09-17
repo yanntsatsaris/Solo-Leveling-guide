@@ -63,12 +63,19 @@
           {% for weapon in character.weapon %}
           <td>
             <div class="weapon-card-codex">
+              {% if weapon.alias %}
               <a href="{{ url_for('weapon_details', weaponAlias=weapon.alias) }}">
                 <img
                   src="{{ url_for('static', filename=weapon.codex) }}"
                   alt="{{ weapon.name or 'Weapon Image' }}"
                 />
               </a>
+              {% else %}
+              <img
+                src="{{ url_for('static', filename=weapon.codex) }}"
+                alt="{{ weapon.name or 'Weapon Image' }}"
+              />
+              {% endif %}
               <p class="weapon-name">{{ weapon.name }}</p>
               {% if weapon.stats %}
               <p class="weapon-description">{{ weapon.stats|safe }}</p>
