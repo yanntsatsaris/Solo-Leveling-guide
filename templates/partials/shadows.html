@@ -6,7 +6,7 @@
       {% for shadow in character.shadows %}
       <td>
         <div class="shadow-card">
-          {% if shadow.alias %}
+          {% if shadow.codex %}
               <a href="{{ url_for('shadow_details', shadowName=shadow.name) }}">
                 <img
                   src="{{ url_for('static', filename=shadow.codex) }}"
