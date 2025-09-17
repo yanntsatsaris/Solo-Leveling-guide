@@ -1,4 +1,4 @@
-from ControleurLog import write_log
+from static.Controleurs.ControleurLog import write_log
 
 class SJWWeaponsSql:
     def __init__(self, cursor):
