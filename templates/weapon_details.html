@@ -57,6 +57,39 @@
               <div class="tab-content active" id="review">
                 <h2>Review</h2>
                 <p>{{ weapon.description|safe }}</p>
+                <!-- Section des évolutions -->
+                {% if weapon.evolutions and weapon.evolutions|length > 0 %}
+                <div class="weapon-evolutions">
+                  <h3>Évolutions</h3>
+                  <ul>
+                    {% for evolution in weapon.evolutions %}
+                    {% if evolution.range %}
+                    <!-- Afficher les évolutions groupées (A06-A10) -->
+                    <li>
+                      <img
+                        src="{{ url_for('static', filename='images/Advancement/' + evolution.evolution_id + '.webp') }}"
+                        alt="{{ evolution.evolution_id }}"
+                        class="weapon-evolution-image weapon-evolution-range"
+                      />
+                      <span>{{ evolution.description|safe }}</span>
+                    </li>
+                    {% else %}
+                    <!-- Afficher les évolutions individuelles (A01 à A05) -->
+                    <li>
+                      <img
+                        src="{{ url_for('static', filename='images/Advancement/' + evolution.evolution_id + '.webp') }}"
+                        alt="{{ evolution.evolution_id }}"
+                        class="weapon-evolution-image"
+                      />
+                      <span>{{ evolution.description|safe }}</span>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                  </ul>
+                </div>
+                {% else %}
+                <p>Aucune évolution disponible pour cette arme.</p>
+                {% endif %}
               </div>
 
               <div class="tab-content" id="skills">
