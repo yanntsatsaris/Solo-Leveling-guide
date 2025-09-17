@@ -270,42 +270,30 @@ def SJW(app: Flask):
 
     @app.route('/SJW/weapon/<weaponName>')
     def weapon_details(weaponName):
-        # Récupérer la langue sélectionnée
         language = session.get('language', "EN-en")
-        if not language:
-            return "Language not set", 400
+        sql_manager = ControleurSql()
+        cursor = sql_manager.cursor
+        sjw_sql = SJWSql(cursor)
+        weapon_sql = SJWWeaponsSql(cursor)
 
-        # Charger les données des personnages depuis le fichier JSON
-        with open('data/SJW.json', 'r', encoding='utf-8') as f:
-            characters_data = json.load(f)
+        character_info = sjw_sql.get_sjw(language)
+        sjw_id = character_info['id']
+        folder = character_info['folder']
 
-        # Trouver les données correspondant à la langue sélectionnée
-        characters_data = next((item.get(language) for item in characters_data if language in item), [])
-        if not characters_data:
-            return f"No data found for language: {language}", 404
-
-        # Trouver l'arme correspondant au nom donné
-        weapon = None
-        character_folder = None
-        for character in characters_data:
-            for w in character.get('weapon', []):
-                if w['name'] == weaponName:
-                    weapon = w
-                    character_folder = character['folder']
-                    # Mettre à jour les chemins des images
-                    if 'image' in weapon:
-                        weapon['image'] = f'images/{character_folder}/Armes/{weapon["folder"]}/{weapon["image"]}'
-                    if 'codex' in weapon:
-                        weapon['codex'] = f'images/{character_folder}/Armes/{weapon["folder"]}/{weapon["codex"]}'
-                    if 'stats' in weapon:
-                        weapon['stats'] = update_image_paths(weapon['stats'], f'images/{character_folder}')
-                    for evolution in weapon.get('evolutions', []):
-                        if 'description' in evolution:
-                            evolution['description'] = update_image_paths(evolution['description'], f'images/{character_folder}')
-                    break
-
+        # Récupère toutes les infos de l'arme via la BDD
+        weapon = weapon_sql.get_weapon_details(weaponName, language, folder)
+        sql_manager.close()
         if not weapon:
             return "Weapon not found", 404
+
+        # Trouver l'arme correspondant au nom donné
+        base_path = f'images/{folder}'
+        all_tags = []  # Ajoute ici la liste des tags si besoin
+        weapon = None
+        character_folder = None
+        for evolution in weapon.get('evolutions', []):
+            evolution['description_raw'] = evolution['description']
+            evolution['description'] = process_description(evolution['description'], all_tags, base_path)
 
         # Renvoyer le template avec les données de l'arme
         return render_template('weapon_details.html', weapon=weapon)

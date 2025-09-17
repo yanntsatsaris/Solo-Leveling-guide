@@ -4,7 +4,7 @@ class SJWWeaponsSql:
 
     def get_weapons(self, sjw_id, language, folder=None):
         self.cursor.execute("""
-            SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_codex, w.sjw_weapons_folder, w.sjw_weapons_alias, t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
+            SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_codex, w.sjw_weapons_folder, w.sjw_weapons_alias, w.sjw_weapons_type, t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
             FROM sjw_weapons w
             JOIN sjw_weapon_translations t ON t.sjw_weapon_translations_sjw_weapons_id = w.sjw_weapons_id
             WHERE w.sjw_weapons_sjw_id = %s AND t.sjw_weapon_translations_language = %s
@@ -15,10 +15,11 @@ class SJWWeaponsSql:
             weapon_id = row[0]
             weapon_folder = row[3]
             weapon_alias = row[4]
+            type = row[5]
             # Si alias et dossier existent, on tente le .webp
             if folder and weapon_folder and weapon_alias:
-                image_path = f'images/{folder}/Armes/{weapon_folder}/Fire_{weapon_alias}_Arme.webp'
-                codex_path = f'images/{folder}/Armes/{weapon_folder}/Fire_{weapon_alias}_Codex.webp'
+                image_path = f'images/{folder}/Armes/{weapon_folder}/{type}_{weapon_alias}_Arme.webp'
+                codex_path = f'images/{folder}/Armes/{weapon_folder}/{type}_{weapon_alias}_Codex.webp'
             else:
                 image_path = f'images/{folder}/Armes/{weapon_folder}/{row[1]}' if folder and weapon_folder else row[1]
                 codex_path = f'images/{folder}/Armes/{weapon_folder}/{row[2]}' if folder and weapon_folder else row[2]
@@ -26,12 +27,49 @@ class SJWWeaponsSql:
                 'id': weapon_id,
                 'image': image_path,
                 'codex': codex_path,
-                'name': row[5],
-                'stats': row[6],
+                'folder': weapon_folder,
+                'alias': weapon_alias,
+                'type': type,
+                'name': row[6],
+                'stats': row[7],
                 'evolutions': self.get_evolutions(weapon_id, language, folder, weapon_folder)
             }
             weapons.append(weapon)
         return weapons
+    
+    def get_weapon_details(self, weapon_id, language, folder=None, weapon_folder=None):
+        self.cursor.execute("""
+            SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_codex, w.sjw_weapons_folder, w.sjw_weapons_alias, w.sjw_weapons_type, t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
+            FROM sjw_weapons w
+            JOIN sjw_weapon_translations t ON t.sjw_weapon_translations_sjw_weapons_id = w.sjw_weapons_id
+            WHERE w.sjw_weapons_id = %s AND t.sjw_weapon_translations_language = %s
+        """, (weapon_id, language))
+        row = self.cursor.fetchone()
+        if row:
+            weapon_id = row[0]
+            weapon_folder = row[3]
+            weapon_alias = row[4]
+            type = row[5]
+            # Si alias et dossier existent, on tente le .webp
+            if folder and weapon_folder and weapon_alias:
+                image_path = f'images/{folder}/Armes/{weapon_folder}/{type}_{weapon_alias}_Arme.webp'
+                codex_path = f'images/{folder}/Armes/{weapon_folder}/{type}_{weapon_alias}_Codex.webp'
+            else:
+                image_path = f'images/{folder}/Armes/{weapon_folder}/{row[1]}' if folder and weapon_folder else row[1]
+                codex_path = f'images/{folder}/Armes/{weapon_folder}/{row[2]}' if folder and weapon_folder else row[2]
+            weapon = {
+                'id': row[0],
+                'image': image_path,
+                'codex': codex_path,
+                'folder': weapon_folder,
+                'alias': weapon_alias,
+                'type': type,
+                'name': row[6],
+                'stats': row[7],
+                'evolutions': self.get_evolutions(weapon_id, language, folder, weapon_folder)
+            }
+            return weapon
+        return None
 
     def get_evolutions(self, weapon_id, language, folder=None, weapon_folder=None):
         self.cursor.execute("""
