@@ -24,6 +24,51 @@ body {
   visibility: hidden; /* Rend l'élément invisible */
 }
 
+/* Mise en page principale */
+.layout {
+  display: flex;
+  flex-direction: row; /* Par défaut, disposition en colonnes */
+  width: 100%; /* Prend toute la largeur */
+  height: auto; /* Permet à la hauteur de s'adapter au contenu */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Colonne pour l'image */
+.image-column {
+  flex: 1; /* Prend environ 1/3 de la largeur */
+  max-width: 33%; /* Limite la largeur à 33% */
+  display: flex;
+  justify-content: center; /* Centre l'image horizontalement */
+  align-items: center; /* Centre l'image verticalement */
+  padding-left: 100px; /* Ajoute un léger padding à gauche pour équilibrer */
+}
+
+/* weapon Image */
+.weapon-image {
+  display: flex; /* Active Flexbox pour centrer l'image */
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement */
+  width: 250px; /* Taille de l'image par défaut */
+  height: auto; /* Conserve les proportions */
+  padding: 5px; /* Réduit le padding autour de l'image */
+  margin: 0 auto; /* Centre l'image dans son conteneur */
+  border-radius: 8px; /* Arrondit légèrement les coins */
+  position: relative; /* Change de absolute à relative pour éviter les conflits */
+}
+
+/* Colonne pour le contenu principal */
+.content-column {
+  flex: 2; /* Prend environ 2/3 de la largeur */
+  border-radius: 8px; /* Arrondit les coins */
+  max-width: 66%; /* Limite la largeur à 66% */
+  width: 100%; /* Prend toute la largeur disponible */
+  box-sizing: border-box; /* Inclut le padding dans la largeur */
+  /*overflow-y: auto; /* Ajoute un défilement uniquement si nécessaire */
+  height: calc(100vh - 50px); /* Ajuste la hauteur pour exclure la navbar */
+}
+
 /* Conteneur principal */
 .container {
   width: 1100px; /* Largeur du conteneur */
@@ -32,7 +77,34 @@ body {
   padding: 20px;
   background-color: #1e1e1e;
   border-radius: 8px; /* Coins arrondis */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
+  box-weapon: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
+  box-sizing: border-box; /* Inclut le padding dans la largeur */
+}
+
+/* Image du personnage dans le conteneur principal */
+.container .weapon-image {
+  display: none; /* Utilise Flexbox pour centrer l'image */
+}
+
+/* Conteneur pour l'image et les onglets */
+.weapon-info {
+  display: flex;
+  flex-direction: row; /* Affiche l'image et les onglets côte à côte */
+  align-items: flex-start; /* Aligne les éléments en haut */
+  width: 100%;
+  gap: 20px; /* Espacement entre l'image et les onglets */
+}
+
+/* Conteneur des onglets et du contenu */
+.tabs-and-content {
+  display: flex;
+  flex-direction: column; /* Par défaut, empile les onglets et le contenu */
+  flex: 1;
+  min-height: 500px; /* Ajuste la hauteur minimale */
+  width: 100%; /* Définit une largeur par défaut */
+  max-width: 900px; /* Fixe une largeur maximale constante */
+  margin: 0 auto; /* Centre le conteneur horizontalement */
+  margin-left: 20px; /* Ajoute un espace entre l'image et les onglets */
   box-sizing: border-box; /* Inclut le padding dans la largeur */
 }
 
@@ -40,226 +112,165 @@ body {
 h1 {
   color: #ffffff;
   text-align: center;
-  text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff; /* Glow violet */
+  text-weapon: 0 0 10px #8000ff, 0 0 20px #8000ff; /* Glow violet */
   margin-bottom: 20px;
 }
 
-.weapon-container {
+/* Onglets */
+.tabs {
   display: flex;
-  justify-content: center; /* Centre horizontalement */
-  align-items: center; /* Centre verticalement */
-  flex-direction: column; /* Place les éléments en colonne */
-  margin-top: 20px;
+  justify-content: center; /* Centre les onglets horizontalement */
+  background-color: #1e1e1e;
+  padding: 10px 0; /* Ajoute un peu de padding pour l'espacement vertical */
 }
 
-.weapon-container > div {
-  margin-right: 20px; /* Ajoute un espacement à droite */
+.tab {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border: none; /* Supprime les bordures */
+  transition: background-color 0.3s ease;
+  text-align: center;
 }
 
-/* Conteneur de la carte de l'arme */
-.weapon-card {
-  display: flex;
-  flex-direction: column; /* Organise les éléments en colonne */
-  gap: 20px; /* Ajoute un espacement entre les sections */
-  margin-bottom: 20px; /* Ajoute un espacement entre les cartes */
+.tab.active {
+  background-color: #ffcc00;
+  color: #121212;
+  font-weight: bold;
 }
 
-/* Conteneur pour l'image et les stats */
-.weapon-header {
-  display: flex;
-  justify-content: center; /* Centre horizontalement */
-  align-items: center; /* Centre verticalement */
-  gap: 20px; /* Ajoute un espacement entre l'image et les stats */
-  text-align: center; /* Centre le texte */
+.tab:hover {
+  background-color: #ffcc00;
+  color: #121212;
 }
 
-/* Style pour l'image de l'arme */
-.weapon-image img {
-  width: 300px; /* Largeur de l'image */
-  height: auto; /* Conserve les proportions */
-  border-radius: 8px; /* Coins arrondis */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour un effet visuel */
+/* Contenu des onglets */
+.tab-content {
+  display: none;
+  background-color: #1e1e1e;
+  color: #ffffff;
+  padding: 20px;
+  border: none; /* Supprime les bordures */
+  border-radius: 0; /* Supprime les coins arrondis */
+  height: 100%; /* S'assure que le contenu occupe toute la hauteur disponible */
 }
 
-/* Conteneur des stats de l'arme */
-.weapon-stats {
-  flex: 1; /* Permet aux stats de prendre tout l'espace restant */
-  text-align: left; /* Aligne le texte à gauche */
-  display: flex;
-  flex-direction: column; /* Organise les stats verticalement */
-  justify-content: center; /* Centre verticalement les stats */
+.tab-content.active {
+  display: block;
 }
 
-/* Images dans les descriptions des skills */
-.weapon-stats img {
-  height: 1em; /* Définit la hauteur des images à la taille de la police */
-  width: auto; /* Maintient les proportions de l'image */
-  vertical-align: -0.2em; /* Ajuste légèrement la position verticale */
-  display: inline; /* S'assure que les images restent dans le flux du texte */
-  margin: 0; /* Supprime tout espacement supplémentaire */
-}
-
-.weapon-stats strong,
-.weapon-stats p {
-  text-align: justify;
-  margin: 0;
-}
-
-/* Section des évolutions */
-.weapon-evolutions {
-  display: flex;
-  flex-direction: column; /* Place les éléments en colonne */
-  align-items: center; /* Centre horizontalement */
-  text-align: center; /* Centre le texte */
-  margin-top: 20px;
-  padding: 15px; /* Ajoute un padding interne */
-  border-radius: 8px; /* Coins arrondis */
-}
-
-/* Titre des évolutions */
-.weapon-evolutions h3 {
-  color: #ffcc00; /* Couleur dorée pour le titre */
-  font-size: 18px; /* Taille du texte */
-  margin-bottom: 15px; /* Espace sous le titre */
-  text-align: center; /* Centre le titre */
-}
-
-/* Liste des évolutions */
-.weapon-evolutions ul {
-  list-style-type: none; /* Supprime les puces */
-  padding: 0; /* Supprime le padding interne */
-  margin: 0; /* Supprime les marges */
-}
-
-/* Élément individuel de la liste */
-.weapon-evolutions li {
-  display: flex;
-  flex-direction: column; /* Place l'image au-dessus du texte */
-  align-items: left; /* Centre le contenu horizontalement */
-  text-align: left; /* Centre le texte */
-}
-
-.weapon-evolutions li img {
-  margin-bottom: 10px; /* Ajoute un espacement entre l'image et le texte */
-  margin-right: 0; /* Supprime l'espacement à droite */
-}
-
-.weapon-evolutions li span {
-  text-align: left; /* Centre le texte sous l'image */
-}
-
-/* Dernier élément sans marge */
-.weapon-evolutions li:last-child {
-  margin-bottom: 0; /* Supprime l'espace sous le dernier élément */
-}
-
-/* Image des évolutions */
-.weapon-evolutions li img {
-  margin-right: 10px; /* Espace entre l'image et le texte */
-  border-radius: 8px; /* Coins arrondis pour les images */
-}
-
-/* Texte des évolutions */
-.weapon-evolutions li span {
-  color: #b3b3b3; /* Couleur grise pour le texte */
-  font-style: italic; /* Texte en italique */
-}
-
-/* Images dans les descriptions (dans les balises <span>) */
-.weapon-evolutions li span img {
-  height: 1em; /* Définit la hauteur des images à la taille de la police */
-  width: auto; /* Maintient les proportions de l'image */
-  vertical-align: -0.2em; /* Ajuste légèrement la position verticale pour aligner avec le texte */
-  display: inline; /* S'assure que les images restent dans le flux du texte */
-  margin: 0; /* Supprime tout espacement supplémentaire */
-}
-
-/* Identifiant des évolutions */
-.weapon-evolutions li strong {
-  color: #ffcc00; /* Couleur dorée pour les identifiants */
-  font-weight: bold; /* Texte en gras */
-  margin-right: 5px; /* Espace entre l'identifiant et le texte */
-}
-
-/* Style général pour les images des évolutions */
-.weapon-evolution-image {
-  width: 120px; /* Taille par défaut des images */
-  height: auto;
-  margin-right: 10px; /* Espace entre l'image et le texte */
-  border-radius: 8px; /* Coins arrondis */
-}
-
-/* Style spécifique pour les images des évolutions avec une plage (range) */
-.weapon-evolution-range {
-  width: 150px; /* Taille plus grande pour les images avec une plage */
-  height: auto; /* Conserve les proportions */
-}
-
+/* Affichage sur téléphone (écrans étroits) */
 @media (max-width: 767px) {
-  /* Style pour l'arme sur téléphone */
-  .weapons-container {
-    display: flex;
-    flex-direction: column; /* Place l'image et les stats en colonne */
-    align-items: center; /* Centre le contenu horizontalement */
-    text-align: center; /* Centre le texte */
-  }
-
-  .weapon-stats img {
-    height: 1em; /* Définit la hauteur des images à la taille de la police */
-    width: auto; /* Maintient les proportions de l'image */
-    vertical-align: -0.2em; /* Ajuste légèrement la position verticale */
-    display: inline; /* S'assure que les images restent dans le flux du texte */
-    margin: 0; /* Supprime tout espacement supplémentaire */
-  }
-  .weapon-header {
-    flex-direction: column; /* Passe en colonne sur les petits écrans */
-    align-items: center; /* Centre les éléments horizontalement */
-    text-align: center; /* Centre le texte */
-  }
-
-  .weapon-image img {
-    max-width: 250px; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
-    height: auto; /* Conserve les proportions */
-    border-radius: 8px; /* Ajoute un léger arrondi aux coins */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour un effet visuel */
-    margin-right: 20px; /* Ajoute un espacement à droite */
-  }
-
-  .weapon-stats {
-    text-align: center; /* Centre les stats sous l'image */
-    margin-top: 0; /* Supprime tout espacement supplémentaire */
-    line-height: 1.5; /* Ajuste l'espacement vertical entre les lignes */
-  }
-
-  /* Affichage des évolutions */
-  .weapon-evolutions li {
-    display: flex;
-    flex-direction: column; /* Place l'image au-dessus du texte */
-    align-items: center; /* Centre le contenu horizontalement */
-    text-align: center; /* Centre le texte */
-  }
-
-  .weapon-evolutions li img {
-    margin-bottom: 10px; /* Ajoute un espacement entre l'image et le texte */
-    margin-right: 0; /* Supprime l'espacement à droite */
-  }
-
-  .weapon-evolutions li span {
-    text-align: center; /* Centre le texte sous l'image */
-  }
-
-  /* Images dans les descriptions (dans les balises <span>) */
-  .weapon-evolutions li span img {
-    height: 1em; /* Définit la hauteur des images à la taille de la police */
-    width: auto; /* Maintient les proportions de l'image */
-    vertical-align: -0.2em; /* Ajuste légèrement la position verticale pour aligner avec le texte */
-    display: inline; /* S'assure que les images restent dans le flux du texte */
-    margin: 0; /* Supprime tout espacement supplémentaire */
-  }
-  /* Supprimer les puces des listes des évolutions */
-  .weapon-evolutions ul {
-    list-style-type: none; /* Supprime les puces */
-    padding: 0; /* Supprime le padding interne */
+  /* Désactiver le layout */
+  .layout {
+    display: block; /* Passe le layout en bloc pour empiler les éléments */
+    width: 100%; /* Prend toute la largeur de l'écran */
+    height: 100vh;
     margin: 0; /* Supprime les marges */
+    padding: 0; /* Supprime les paddings */
+  }
+
+  /* Cache la colonne de l'image */
+  .image-column {
+    display: none; /* Cache complètement la colonne de l'image */
+  }
+
+  /* Conteneur principal (content-column) */
+  .content-column {
+    display: block; /* Utilise un affichage en bloc */
+    width: 100%; /* Prend toute la largeur de l'écran */
+    max-width: 100%; /* S'assure que la largeur ne dépasse pas l'écran */
+    height: auto;
+    padding: 1px; /* Ajoute un padding pour l'espacement interne */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+  }
+
+  /* Image du personnage dans le conteneur principal */
+  .container .weapon-image {
+    display: flex; /* Utilise Flexbox pour centrer l'image */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    margin: 20px auto; /* Centre l'image et ajoute un espacement en haut et en bas */
+    width: 150px; /* Réduit la taille de l'image */
+    height: auto; /* Conserve les proportions */
+    position: relative; /* Supprime tout positionnement absolu ou fixe */
+    text-align: center; /* Centre le contenu textuel si nécessaire */
+  }
+
+  /* Image du personnage dans le conteneur principal sur téléphone */
+  .container .weapon-image img {
+    width: 100px; /* Réduit la largeur de l'image */
+    height: auto; /* Conserve les proportions */
+    max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
+  }
+
+  /* Texte et contenu */
+  .container {
+    width: 100%; /* Prend toute la largeur disponible */
+    max-width: 100%; /* S'assure que la largeur ne dépasse pas l'écran */
+    padding: 10px; /* Réduit le padding interne */
+    height: auto;
+  }
+
+  /* Onglets */
+  .tabs {
+    display: flex;
+    flex-wrap: wrap; /* Permet de passer à la ligne si nécessaire */
+    gap: 5px; /* Ajoute un espacement entre les onglets */
+  }
+}
+
+/* Affichage pour les téléphones en mode paysage */
+@media (max-height: 767px) {
+  /* Désactiver le layout */
+  .layout {
+    display: block; /* Passe le layout en bloc pour empiler les éléments */
+    width: 100%; /* Prend toute la largeur de l'écran */
+    height: 100vh;
+    margin: 0; /* Supprime les marges */
+    padding: 0; /* Supprime les paddings */
+  }
+
+  /* Cache la colonne de l'image */
+  .image-column {
+    display: none; /* Cache complètement la colonne de l'image */
+  }
+
+  /* Conteneur principal (content-column) */
+  .content-column {
+    display: block; /* Utilise un affichage en bloc */
+    width: 100%; /* Prend toute la largeur de l'écran */
+    max-width: 100%; /* S'assure que la largeur ne dépasse pas l'écran */
+    height: auto;
+    padding: 1px; /* Ajoute un padding pour l'espacement interne */
+    box-sizing: border-box; /* Inclut le padding dans la largeur totale */
+  }
+
+  /* Image du personnage dans le conteneur principal */
+  .container .weapon-image {
+    display: flex; /* Utilise Flexbox pour centrer l'image */
+    justify-content: center; /* Centre horizontalement */
+    align-items: center; /* Centre verticalement */
+    margin: 20px auto; /* Centre l'image et ajoute un espacement en haut et en bas */
+    width: 150px; /* Réduit la taille de l'image */
+    height: auto; /* Conserve les proportions */
+    position: relative; /* Supprime tout positionnement absolu ou fixe */
+    text-align: center; /* Centre le contenu textuel si nécessaire */
+  }
+
+  /* Image du personnage dans le conteneur principal sur téléphone */
+  .container .weapon-image img {
+    width: 100px; /* Réduit la largeur de l'image */
+    height: auto; /* Conserve les proportions */
+    max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
+  }
+
+  /* Conteneur principal */
+  .container {
+    width: 90%; /* Adapte la largeur à l'écran en mode paysage */
+    max-width: 90%; /* S'assure que la largeur ne dépasse pas 90% */
+    padding: 10px; /* Réduit le padding interne */
+    height: auto; /* Ajuste automatiquement la hauteur */
   }
 }
