@@ -1,3 +1,5 @@
+import os
+
 class SJWShadowsSql:
     def __init__(self, cursor):
         self.cursor = cursor
@@ -12,10 +14,23 @@ class SJWShadowsSql:
         shadows = []
         for row in self.cursor.fetchall():
             shadow_id = row[0]
+            shadow_name = row[2]
+            # Dossier custom du type Shadow_{name}
+            custom_folder = f"Shadow_{shadow_name}"
+            base_dir = os.path.join('static', 'images', folder, 'Shadows', custom_folder) if folder else None
+            codex_file = f"{custom_folder}_Codex.webp"
+            ombre_file = f"{custom_folder}_Ombre.webp"
+            if base_dir and os.path.isdir(base_dir):
+                codex_path = f'images/{folder}/Shadows/{custom_folder}/{codex_file}'
+                image_path = f'images/{folder}/Shadows/{custom_folder}/{ombre_file}'
+            else:
+                codex_path = row[1]
+                image_path = row[1]
             shadow = {
                 'id': shadow_id,
-                'image': f'images/{folder}/Shadows/{row[1]}' if folder else row[1],
-                'name': row[2],
+                'image': image_path,
+                'codex': codex_path,
+                'name': shadow_name,
                 'description': row[3],
                 'evolutions': self.get_evolutions(shadow_id)
             }
@@ -84,9 +99,20 @@ class SJWShadowsSql:
         if not row:
             return None
         shadow_id = row[0]
+        custom_folder = f"Shadow_{shadow_name}"
+        base_dir = os.path.join('static', 'images', folder, 'Shadows', custom_folder) if folder else None
+        codex_file = f"{custom_folder}_Codex.webp"
+        ombre_file = f"{custom_folder}_Ombre.webp"
+        if base_dir and os.path.isdir(base_dir):
+            codex_path = f'images/{folder}/Shadows/{custom_folder}/{codex_file}'
+            image_path = f'images/{folder}/Shadows/{custom_folder}/{ombre_file}'
+        else:
+            codex_path = row[1]
+            image_path = row[1]
         shadow = {
             'id': shadow_id,
-            'image': f'images/{folder}/Shadows/{row[1]}' if folder else row[1],
+            'image': image_path,
+            'codex': codex_path,
             'name': row[2],
             'description': row[3],
             'evolutions': self.get_evolutions(shadow_id),
