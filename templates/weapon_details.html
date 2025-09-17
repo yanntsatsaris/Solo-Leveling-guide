@@ -14,7 +14,9 @@
       href="{{ url_for('static', filename='images/icon-onglet.png') }}"
     />
   </head>
-  <body>
+  <body
+    class="{% if weapon.type %}background-image{% endif %}"
+    style="{% if weapon.type %}background-image: url('{{ url_for('static', filename='images/Background/BG_' ~ weapon.type ~ '.webp') }}');{% endif %}">
     {% include 'navbar.html' %}
 
     
