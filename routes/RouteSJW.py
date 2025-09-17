@@ -11,6 +11,7 @@ from static.Controleurs.sql_entities.sjw.sjw_shadows_sql import SJWShadowsSql
 from static.Controleurs.sql_entities.sjw.sjw_weapons_sql import SJWWeaponsSql
 from static.Controleurs.sql_entities.sjw.sjw_equipment_set_sql import SJWEquipmentSetSql
 from static.Controleurs.sql_entities.sjw.sjw_blessings_sql import SJWBlessingsSql
+from static.Controleurs.sql_entities.sjw.sjw_gems_sql import SJWGemsSql
 from static.Controleurs.sql_entities.cores_sql import CoresSql
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
 from flask import Flask, render_template, session , request, redirect, url_for, jsonify
@@ -119,8 +120,10 @@ def SJW(app: Flask):
         weapons_sql = SJWWeaponsSql(sql_manager.cursor)
         equipment_set_sql = SJWEquipmentSetSql(sql_manager.cursor)
         blessings_sql = SJWBlessingsSql(sql_manager.cursor)
+        gems_sql = SJWGemsSql(sql_manager.cursor)
         panoplies_sql = PanopliesSql(sql_manager.cursor)
         cores_sql = CoresSql(sql_manager.cursor)
+        
 
         # Récupération des infos principales
         character_info = sjw_sql.get_sjw(language)
@@ -133,6 +136,7 @@ def SJW(app: Flask):
         blessings_offensive = blessings_sql.get_offensive_blessings(character_info['id'], language)
         weapons = weapons_sql.get_weapons(character_info['id'], language, folder)
         shadows = shadows_sql.get_shadows(character_info['id'], language, folder)
+        gems = gems_sql.get_gems(character_info['id'])
         
         # Ajoute le tag de l'arme dans la liste des tags
         all_tags = blessings_defensive + blessings_offensive + skills + weapons + shadows
@@ -197,6 +201,8 @@ def SJW(app: Flask):
         for eq_set in character_info['equipment_sets']:
             for core in eq_set['cores']:
                 core['color'] = core['name']
+                
+        character_info['gems'] = gems
 
         # Récupération des panoplies et noyaux (si besoin pour le contexte global)
         panoplies_effects = panoplies_sql.get_panoplies_effects(language)

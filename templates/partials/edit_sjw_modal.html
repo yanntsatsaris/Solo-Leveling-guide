@@ -12,10 +12,11 @@
       <h2 style="text-align: center; color: #ffcc00">Modifier le personnage</h2>
       <div class="edit-tabs">
         <div class="edit-tab active" data-tab="main">Infos principales</div>
+        <div class="edit-tab" data-tab="weapons">Armes</div>
         <div class="edit-tab" data-tab="blessings">Bénédictions</div>
         <div class="edit-tab" data-tab="skills">Compétences</div>
+        <div class="edit-tab" data-tab="gems">Gemmes</div>
         <div class="edit-tab" data-tab="shadows">Ombres</div>
-        <div class="edit-tab" data-tab="weapons">Armes</div>
         <div class="edit-tab" data-tab="artefacts">Artefacts</div>
       </div>
       <!-- Onglet Infos principales -->
@@ -55,16 +56,15 @@
           {% endif %} {% endfor %}
         </div> -->
       </div>
-      <!-- Onglet Passifs -->
+      <!-- Onglet Bénédictions -->
       <div class="edit-tab-content" id="edit-tab-blessings">
         <div class="blessings-grid" id="blessings-grid">
-          {% for blessing in character.blessings_all %} {% if loop.index0 % 2 == 0
-          %}
+          {% for blessing in character.blessings_all %} {% if loop.index0 % 2 == 0 %}
           <div class="blessings-row">
             {% endif %}
-            <!-- Exemple pour un passif, à appliquer aussi pour skills, weapons, etc. -->
+            <!-- Exemple pour un bénédiction, à appliquer aussi pour skills, weapons, etc. -->
             <div class="edit-blessing-block">
-              <label>Nom du passif :</label>
+              <label>Nom du bénédiction :</label>
               <input
                 type="text"
                 name="blessing_name_{{ loop.index0 }}"
@@ -167,6 +167,31 @@
           {% endif %} {% endfor %}
         </div>
         <button type="button" id="add-skill-btn" class="add-btn">+ Ajouter une compétence</button>
+      </div>
+      <!-- Onglet Gemmes -->
+      <div class="edit-tab-content" id="edit-tab-gems">
+        <div class="gems-grid" id="gems-grid">
+          {% set gem_colors = [
+            {'name': 'Rouge', 'key': 'red', 'stats': ['ATK', 'ATK%']},
+            {'name': 'Bleu', 'key': 'blue', 'stats': ['HP', 'HP%']},
+            {'name': 'Vert', 'key': 'green', 'stats': ['DEF', 'DEF%']},
+            {'name': 'Jaune', 'key': 'yellow', 'stats': ['CRIT DMG', 'PRECI']},
+            {'name': 'Violet', 'key': 'purple', 'stats': ['SPD', 'MP CONS']}
+          ] %}
+          {% for gem in gem_colors %}
+            <div class="edit-gem-block">
+              <label>{{ gem.name }}</label>
+              <select name="gem_stat_{{ gem.key }}">
+                <option value=""></option>
+                {% for stat in gem.stats %}
+                  <option value="{{ stat }}"
+                    {% if character.gems and character.gems[gem.key] == stat %}selected{% endif %}
+                  >{{ stat }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          {% endfor %}
+        </div>
       </div>
       <!-- Onglet Ombres -->
       <div class="edit-tab-content" id="edit-tab-shadows">
