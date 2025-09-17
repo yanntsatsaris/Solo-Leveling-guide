@@ -37,13 +37,13 @@ class SJWWeaponsSql:
             weapons.append(weapon)
         return weapons
     
-    def get_weapon_details(self, weapon_id, language, folder=None, weapon_folder=None):
+    def get_weapon_details(self, weapon_alias, language, folder=None, weapon_folder=None):
         self.cursor.execute("""
             SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_codex, w.sjw_weapons_folder, w.sjw_weapons_alias, w.sjw_weapons_type, t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
             FROM sjw_weapons w
             JOIN sjw_weapon_translations t ON t.sjw_weapon_translations_sjw_weapons_id = w.sjw_weapons_id
-            WHERE w.sjw_weapons_id = %s AND t.sjw_weapon_translations_language = %s
-        """, (weapon_id, language))
+            WHERE w.sjw_weapons_alias = %s AND t.sjw_weapon_translations_language = %s
+        """, (weapon_alias, language))
         row = self.cursor.fetchone()
         if row:
             weapon_id = row[0]

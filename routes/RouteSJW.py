@@ -268,8 +268,8 @@ def SJW(app: Flask):
 
         return render_template('shadow_details.html', shadow=shadow)
 
-    @app.route('/SJW/weapon/<weaponName>')
-    def weapon_details(weaponName):
+    @app.route('/SJW/weapon/<weaponAlias>')
+    def weapon_details(weaponAlias):
         language = session.get('language', "EN-en")
         sql_manager = ControleurSql()
         cursor = sql_manager.cursor
@@ -281,7 +281,7 @@ def SJW(app: Flask):
         folder = character_info['folder']
 
         # Récupère toutes les infos de l'arme via la BDD
-        weapon = weapon_sql.get_weapon_details(weaponName, language, folder)
+        weapon = weapon_sql.get_weapon_details(weaponAlias, language, folder)
         sql_manager.close()
         if not weapon:
             return "Weapon not found", 404

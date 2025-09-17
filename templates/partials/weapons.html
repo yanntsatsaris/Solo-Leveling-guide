@@ -63,7 +63,7 @@
           {% for weapon in character.weapon %}
           <td>
             <div class="weapon-card-codex">
-              <a href="{{ url_for('weapon_details', weaponName=weapon.name) }}">
+              <a href="{{ url_for('weapon_details', weaponAlias=weapon.alias) }}">
                 <img
                   src="{{ url_for('static', filename=weapon.codex) }}"
                   alt="{{ weapon.name or 'Weapon Image' }}"
