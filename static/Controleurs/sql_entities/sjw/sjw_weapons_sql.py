@@ -1,3 +1,5 @@
+from ControleurLog import write_log
+
 class SJWWeaponsSql:
     def __init__(self, cursor):
         self.cursor = cursor
@@ -45,6 +47,7 @@ class SJWWeaponsSql:
             WHERE w.sjw_weapons_alias = %s AND t.sjw_weapon_translations_language = %s
         """, (weapon_alias, language))
         row = self.cursor.fetchone()
+        write_log(f"Fetched weapon details for alias '{weapon_alias}': {row}", "INFO")
         if row:
             weapon_id = row[0]
             weapon_folder = row[3]
