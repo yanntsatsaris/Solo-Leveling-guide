@@ -8,6 +8,7 @@ class SJWWeaponsSql:
             FROM sjw_weapons w
             JOIN sjw_weapon_translations t ON t.sjw_weapon_translations_sjw_weapons_id = w.sjw_weapons_id
             WHERE w.sjw_weapons_sjw_id = %s AND t.sjw_weapon_translations_language = %s
+            ORDER by t.sjw_weapon_translations_name
         """, (sjw_id, language))
         weapons = []
         for row in self.cursor.fetchall():
