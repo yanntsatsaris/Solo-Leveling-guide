@@ -4,7 +4,7 @@ class SJWWeaponsSql:
 
     def get_weapons(self, sjw_id, language, folder=None):
         self.cursor.execute("""
-            SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_codex, w.sjw_weapons_folder, t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
+            SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_codex, w.sjw_weapons_folder, w.sjw_weapons_alias, t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
             FROM sjw_weapons w
             JOIN sjw_weapon_translations t ON t.sjw_weapon_translations_sjw_weapons_id = w.sjw_weapons_id
             WHERE w.sjw_weapons_sjw_id = %s AND t.sjw_weapon_translations_language = %s
@@ -12,15 +12,21 @@ class SJWWeaponsSql:
         weapons = []
         for row in self.cursor.fetchall():
             weapon_id = row[0]
-            weapon_folder = row[3]  # Dossier spécifique à l'arme
-            image_path = f'images/{folder}/Armes/{weapon_folder}/{row[1]}' if folder and weapon_folder else row[1]
-            codex_path = f'images/{folder}/Armes/{weapon_folder}/{row[2]}' if folder and weapon_folder else row[2]
+            weapon_folder = row[3]
+            weapon_alias = row[4]
+            # Si alias et dossier existent, on tente le .webp
+            if folder and weapon_folder and weapon_alias:
+                image_path = f'images/{folder}/Armes/{weapon_folder}/Fire_{weapon_alias}_Arme.webp'
+                codex_path = f'images/{folder}/Armes/{weapon_folder}/Fire_{weapon_alias}_Codex.webp'
+            else:
+                image_path = f'images/{folder}/Armes/{weapon_folder}/{row[1]}' if folder and weapon_folder else row[1]
+                codex_path = f'images/{folder}/Armes/{weapon_folder}/{row[2]}' if folder and weapon_folder else row[2]
             weapon = {
                 'id': weapon_id,
                 'image': image_path,
                 'codex': codex_path,
-                'name': row[4],
-                'stats': row[5],
+                'name': row[5],
+                'stats': row[6],
                 'evolutions': self.get_evolutions(weapon_id, language, folder, weapon_folder)
             }
             weapons.append(weapon)
