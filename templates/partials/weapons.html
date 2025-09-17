@@ -30,7 +30,7 @@
               <!-- Afficher les évolutions groupées (A06-A10) -->
               <li>
                 <img
-                  src="{{ url_for('static', filename='images/Advancement/' + evolution.evolution_id + '.webp') }}"
+                  src="{{ url_for('static', filename='images/Advancement/' ~ evolution.evolution_id ~ '.webp') }}"
                   alt="{{ evolution.evolution_id }}"
                   class="weapon-evolution-image weapon-evolution-range"
                 />
@@ -40,7 +40,7 @@
               <!-- Afficher les évolutions individuelles (A01 à A05) -->
               <li>
                 <img
-                  src="{{ url_for('static', filename='images/Advancement/' + evolution.evolution_id + '.webp') }}"
+                  src="{{ url_for('static', filename='images/Advancement/' ~ evolution.evolution_id ~ '.webp') }}"
                   alt="{{ evolution.evolution_id }}"
                   class="weapon-evolution-image"
                 />
