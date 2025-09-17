@@ -220,8 +220,8 @@
               {% if shadow.principal is defined and shadow.principal %}checked{% endif %}
             />
             <input type="hidden" name="shadow_id_{{ shadow_idx }}" value="{{ shadow.id if shadow.id is defined else '' }}">
-            <!-- Toujours 7 évolutions, même si aucune n'est renseignée -->
-            {% set total_evos = 7 %}
+            <!-- Toujours 5 évolutions, même si aucune n'est renseignée -->
+            {% set total_evos = 5 %}
             <h4 style="margin-top: 18px">Évolutions de l'ombre</h4>
             <div class="evolutions-grid">
               {% for i in range(total_evos) %}
@@ -853,7 +853,7 @@
         <input type="hidden" name="shadow_id_${index}" value="">
         <h4 style="margin-top: 18px">Évolutions de l'ombre</h4>
         <div class="evolutions-grid">
-          ${Array.from({length: 7}).map((_, i) => `
+          ${Array.from({length: 5}).map((_, i) => `
             ${i % 2 === 0 ? '<div class="evolutions-row">' : ''}
             <div class="edit-shadow-evolution-block">
               <label>Évolution : ${i === 6 ? 'A6-10' : 'A' + i}</label>
