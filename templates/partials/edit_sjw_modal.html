@@ -249,7 +249,6 @@
           </div>
           <hr />
         {% endfor %}
-        <button type="button" id="add-shadow-btn" class="add-btn">+ Ajouter une ombre</button>
       </div>
       <!-- Onglet Armes -->
       <div class="edit-tab-content" id="edit-tab-weapons">
@@ -834,41 +833,6 @@
       `;
       grid.appendChild(div);
     });
-
-    // Ajout d'une ombre
-    document.getElementById('add-shadow-btn')?.addEventListener('click', function() {
-      const grid = document.querySelector('#edit-tab-shadows');
-      const index = grid.querySelectorAll('.edit-shadow-block').length;
-      const div = document.createElement('div');
-      div.className = 'edit-shadow-block';
-      div.innerHTML = `
-        <label>Nom de l'ombre :</label>
-        <input type="text" name="shadow_name_${index}" value="" />
-        <label>Stats :</label>
-        <textarea name="shadow_stats_${index}"></textarea>
-        <label>Tag :</label>
-        <input type="text" name="shadow_tag_${index}" value="" />
-        <label>Principal :</label>
-        <input type="checkbox" name="shadow_principal_${index}" />
-        <input type="hidden" name="shadow_id_${index}" value="">
-        <h4 style="margin-top: 18px">Évolutions de l'ombre</h4>
-        <div class="evolutions-grid">
-          ${Array.from({length: 5}).map((_, i) => `
-            ${i % 2 === 0 ? '<div class="evolutions-row">' : ''}
-            <div class="edit-shadow-evolution-block">
-              <label>Évolution : ${i === 6 ? 'A6-10' : 'A' + i}</label>
-              <textarea name="shadow_evolution_description_${index}_${i}"></textarea>
-              <input type="hidden" name="shadow_evolutions_${index}_${i}_evolution_id" value="${i === 6 ? 'A6-10' : 'A' + i}">
-              <input type="hidden" name="shadow_evolutions_id_${index}_${i}" value="">
-            </div>
-            ${(i % 2 === 1 || i === 6) ? '</div>' : ''}
-          `).join('')}
-        </div>
-        <hr />
-      `;
-      grid.appendChild(div);
-    });
-  });
 
   // Ajout d'un set d'équipement
   document.getElementById('edit-equipment-select')?.addEventListener('click', function(e) {
