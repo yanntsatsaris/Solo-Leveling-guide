@@ -268,9 +268,9 @@ def SJW(app: Flask):
 
         return render_template('shadow_details.html', shadow=shadow)
     
-    @app.route('/SJW/add_shadow/check_image_folder')
+    @app.route('/SJW/add_shadow/check_image_folder_shadow')
     @login_required
-    def check_image_folder():
+    def check_image_folder_shadow():
         alias = request.args.get('alias', '').replace(' ', '_')
         folder_name = f"Shadow_{alias}"
         folder_path = os.path.join(
