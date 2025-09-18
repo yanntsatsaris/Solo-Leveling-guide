@@ -6,18 +6,19 @@ class SJWShadowsSql:
 
     def get_shadows(self, sjw_id, language, folder=None):
         self.cursor.execute("""
-            SELECT s.sjw_shadows_id, s.sjw_shadows_image, t.sjw_shadow_translations_name, t.sjw_shadow_translations_description
+            SELECT s.sjw_shadows_id, s.sjw_shadows_image, s.sjw_shadows_alias, t.sjw_shadow_translations_name, t.sjw_shadow_translations_description
             FROM sjw_shadows s
             JOIN sjw_shadow_translations t ON t.sjw_shadow_translations_sjw_shadows_id = s.sjw_shadows_id
             WHERE s.sjw_shadows_sjw_id = %s AND t.sjw_shadow_translations_language = %s
-            ORDER BY s.sjw_shadows_translations_name ASC
+            ORDER BY s.sjw_shadows_alias ASC
         """, (sjw_id, language))
         shadows = []
         for row in self.cursor.fetchall():
             shadow_id = row[0]
-            shadow_name = row[2]
+            shadow_alias = row[2]
+            shadow_name = row[3]
             # Dossier custom du type Shadow_{name}
-            custom_folder = f"Shadow_{shadow_name}"
+            custom_folder = f"Shadow_{shadow_alias}"
             base_dir = os.path.join('static', 'images', folder, 'Shadows', custom_folder) if folder else None
             codex_file = f"{custom_folder}_Codex.webp"
             ombre_file = f"{custom_folder}_Ombre.webp"
@@ -31,8 +32,9 @@ class SJWShadowsSql:
                 'id': shadow_id,
                 'image': image_path,
                 'codex': codex_path,
+                'alias': shadow_alias,
                 'name': shadow_name,
-                'description': row[3],
+                'description': row[4],
                 'evolutions': self.get_evolutions(shadow_id)
             }
             shadows.append(shadow)
