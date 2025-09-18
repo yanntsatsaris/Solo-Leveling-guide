@@ -279,6 +279,12 @@ def SJW(app: Flask):
         write_log(f"Vérification de l'existence du dossier : {folder_path}", log_level="INFO")
         exists = os.path.isdir(folder_path)
         return jsonify({'exists': exists, 'folder': folder_name})
+    
+    @app.route('SJW/add_shadow', methods=['POST'])
+    @login_required
+    def add_shadow():
+        write_log("Tentative d'ajout d'une nouvelle ombre", log_level="INFO")
+        
 
     @app.route('/SJW/weapon/<weaponAlias>')
     def weapon_details(weaponAlias):
