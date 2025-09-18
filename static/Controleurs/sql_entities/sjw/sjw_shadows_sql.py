@@ -91,18 +91,18 @@ class SJWShadowsSql:
             for row in self.cursor.fetchall()
         ]
 
-    def get_shadow_details(self, sjw_id, shadow_name, language, folder=None):
+    def get_shadow_details(self, sjw_id, shadow_alias, language, folder=None):
         self.cursor.execute("""
             SELECT s.sjw_shadows_id, s.sjw_shadows_image, t.sjw_shadow_translations_name, t.sjw_shadow_translations_description
             FROM sjw_shadows s
             JOIN sjw_shadow_translations t ON t.sjw_shadow_translations_sjw_shadows_id = s.sjw_shadows_id
-            WHERE s.sjw_shadows_sjw_id = %s AND t.sjw_shadow_translations_language = %s AND t.sjw_shadow_translations_name = %s
-        """, (sjw_id, language, shadow_name))
+            WHERE s.sjw_shadows_sjw_id = %s AND t.sjw_shadow_translations_language = %s AND t.sjw_shadow_alias = %s
+        """, (sjw_id, language, shadow_alias))
         row = self.cursor.fetchone()
         if not row:
             return None
         shadow_id = row[0]
-        custom_folder = f"Shadow_{shadow_name}"
+        custom_folder = f"Shadow_{shadow_alias}"
         base_dir = os.path.join('static', 'images', folder, 'Shadows', custom_folder) if folder else None
         codex_file = f"{custom_folder}_Codex.webp"
         ombre_file = f"{custom_folder}_Ombre.webp"

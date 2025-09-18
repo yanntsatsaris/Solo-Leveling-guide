@@ -7,7 +7,7 @@
       <td>
         <div class="shadow-card">
           {% if shadow.codex %}
-              <a href="{{ url_for('shadow_details', shadowName=shadow.name) }}">
+              <a href="{{ url_for('shadow_details', shadowAlias=shadow.alias) }}">
                 <img
                   src="{{ url_for('static', filename=shadow.codex) }}"
                   alt="{{ shadow.name or 'shadow Image' }}"

@@ -222,8 +222,8 @@ def SJW(app: Flask):
             cores_list=cores_names  # Passage à la vue
         )
 
-    @app.route('/SJW/shadow/<shadowName>')
-    def shadow_details(shadowName):
+    @app.route('/SJW/shadow/<shadowAlias>')
+    def shadow_details(shadowAlias):
         language = session.get('language', "EN-en")
         sql_manager = ControleurSql()
         cursor = sql_manager.cursor
@@ -235,7 +235,7 @@ def SJW(app: Flask):
         folder = character_info['folder']
 
         # Récupère toutes les infos de la shadow via la BDD
-        shadow = shadows_sql.get_shadow_details(sjw_id, shadowName, language, folder)
+        shadow = shadows_sql.get_shadow_details(sjw_id, shadowAlias, language, folder)
         sql_manager.close()
         if not shadow:
             return "Shadow not found", 404
