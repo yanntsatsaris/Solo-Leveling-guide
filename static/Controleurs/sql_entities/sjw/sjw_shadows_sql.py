@@ -96,7 +96,7 @@ class SJWShadowsSql:
             SELECT s.sjw_shadows_id, s.sjw_shadows_image, t.sjw_shadow_translations_name, t.sjw_shadow_translations_description
             FROM sjw_shadows s
             JOIN sjw_shadow_translations t ON t.sjw_shadow_translations_sjw_shadows_id = s.sjw_shadows_id
-            WHERE s.sjw_shadows_sjw_id = %s AND t.sjw_shadow_translations_language = %s AND t.sjw_shadow_alias = %s
+            WHERE s.sjw_shadows_sjw_id = %s AND t.sjw_shadow_translations_language = %s AND s.sjw_shadows_alias = %s
         """, (sjw_id, language, shadow_alias))
         row = self.cursor.fetchone()
         if not row:
