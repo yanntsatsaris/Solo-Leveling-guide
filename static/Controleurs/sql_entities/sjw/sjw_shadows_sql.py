@@ -6,7 +6,7 @@ class SJWShadowsSql:
 
     def get_shadows(self, sjw_id, language, folder=None):
         self.cursor.execute("""
-            SELECT s.sjw_shadows_id, s.sjw_shadows_image, s.sjw_shadows_alias, t.sjw_shadow_translations_name, t.sjw_shadow_translations_description
+            SELECT s.sjw_shadows_id, s.sjw_shadows_alias, t.sjw_shadow_translations_name, t.sjw_shadow_translations_description
             FROM sjw_shadows s
             JOIN sjw_shadow_translations t ON t.sjw_shadow_translations_sjw_shadows_id = s.sjw_shadows_id
             WHERE s.sjw_shadows_sjw_id = %s AND t.sjw_shadow_translations_language = %s
@@ -15,26 +15,22 @@ class SJWShadowsSql:
         shadows = []
         for row in self.cursor.fetchall():
             shadow_id = row[0]
-            shadow_alias = row[2]
-            shadow_name = row[3]
+            shadow_alias = row[1]
+            shadow_name = row[2]
             # Dossier custom du type Shadow_{name}
             custom_folder = f"Shadow_{shadow_alias}"
             base_dir = os.path.join('static', 'images', folder, 'Shadows', custom_folder) if folder else None
             codex_file = f"{custom_folder}_Codex.webp"
             ombre_file = f"{custom_folder}_Ombre.webp"
-            if base_dir and os.path.isdir(base_dir):
-                codex_path = f'images/{folder}/Shadows/{custom_folder}/{codex_file}'
-                image_path = f'images/{folder}/Shadows/{custom_folder}/{ombre_file}'
-            else:
-                codex_path = f'images/{folder}/Shadows/{row[1]}'
-                image_path = f'images/{folder}/Shadows/{row[1]}'
+            codex_path = f'images/{folder}/Shadows/{custom_folder}/{codex_file}' if base_dir and os.path.isdir(base_dir) else f'images/{folder}/Shadows/{shadow_alias}_Codex.webp'
+            image_path = f'images/{folder}/Shadows/{custom_folder}/{ombre_file}' if base_dir and os.path.isdir(base_dir) else f'images/{folder}/Shadows/{shadow_alias}_Ombre.webp'
             shadow = {
                 'id': shadow_id,
                 'image': image_path,
                 'codex': codex_path,
                 'alias': shadow_alias,
                 'name': shadow_name,
-                'description': row[4],
+                'description': row[3],
                 'evolutions': self.get_evolutions(shadow_id)
             }
             shadows.append(shadow)
@@ -93,7 +89,7 @@ class SJWShadowsSql:
 
     def get_shadow_details(self, sjw_id, shadow_alias, language, folder=None):
         self.cursor.execute("""
-            SELECT s.sjw_shadows_id, s.sjw_shadows_image, t.sjw_shadow_translations_name, t.sjw_shadow_translations_description
+            SELECT s.sjw_shadows_id, t.sjw_shadow_translations_name, t.sjw_shadow_translations_description
             FROM sjw_shadows s
             JOIN sjw_shadow_translations t ON t.sjw_shadow_translations_sjw_shadows_id = s.sjw_shadows_id
             WHERE s.sjw_shadows_sjw_id = %s AND t.sjw_shadow_translations_language = %s AND s.sjw_shadows_alias = %s
@@ -106,18 +102,14 @@ class SJWShadowsSql:
         base_dir = os.path.join('static', 'images', folder, 'Shadows', custom_folder) if folder else None
         codex_file = f"{custom_folder}_Codex.webp"
         ombre_file = f"{custom_folder}_Ombre.webp"
-        if base_dir and os.path.isdir(base_dir):
-            codex_path = f'images/{folder}/Shadows/{custom_folder}/{codex_file}'
-            image_path = f'images/{folder}/Shadows/{custom_folder}/{ombre_file}'
-        else:
-            codex_path = f'images/{folder}/Shadows/{row[1]}'
-            image_path = f'images/{folder}/Shadows/{row[1]}'
+        codex_path = f'images/{folder}/Shadows/{custom_folder}/{codex_file}' if base_dir and os.path.isdir(base_dir) else f'images/{folder}/Shadows/{shadow_alias}_Codex.webp'
+        image_path = f'images/{folder}/Shadows/{custom_folder}/{ombre_file}' if base_dir and os.path.isdir(base_dir) else f'images/{folder}/Shadows/{shadow_alias}_Ombre.webp'
         shadow = {
             'id': shadow_id,
             'image': image_path,
             'codex': codex_path,
-            'name': row[2],
-            'description': row[3],
+            'name': row[1],
+            'description': row[2],
             'evolutions': self.get_evolutions(shadow_id),
             'skills': self.get_skills(shadow_id, language, folder),
             'weapon': self.get_weapon_for_shadow(shadow_id, language, folder),
