@@ -440,3 +440,76 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 });
+
+console.log("add_shadow_modal.js chargé");
+    console.log("Bouton trouvé :", document.getElementById('add-shadow-btn'));
+    document.getElementById('add-shadow-btn')?.addEventListener('click', async function() {
+        console.log("Clic sur le bouton Ajouter une ombre");
+        // Demande les infos de base
+        const name = prompt("Nom de l'ombre :");
+        if (!name) return;
+        const alias = prompt("Alias de l'ombre :");
+        if (!alias) return;
+
+        // Construit le chemin du dossier image
+        // On suppose que tu veux remplacer les espaces par des underscores
+        const aliasFolder = alias.replace(/ /g, "_");
+        const folderName = `Shadow_${aliasFolder}`;
+        const folderPath = `static/images/Sung_Jinwoo/Shadows/${folderName}/`;
+
+        // Vérifie si le dossier existe côté serveur (nécessite une route Flask dédiée)
+        let folderExists = false;
+        try {
+        const resp = await fetch(`/sjw/add_shadow/check_image_folder_shadow?alias=${encodeURIComponent(alias)}`);
+        folderExists = (await resp.json()).exists;
+        } catch (e) {
+        // Si la vérification échoue, on continue quand même
+        folderExists = false;
+        }
+
+        // Ouvre la modale d'ajout
+        document.getElementById('add-shadow-overlay').style.display = 'flex';
+
+        // Pré-remplit les champs
+        document.querySelector('#add-shadow-form input[name="name"]').value = name;
+        document.querySelector('#add-shadow-form input[name="alias"]').value = alias;
+
+        // Optionnel : affiche une alerte si le dossier n'existe pas
+        if (!folderExists) {
+        let overlay = document.createElement('div');
+        overlay.id = "upload-shadow-images-overlay";
+        overlay.className = "edit-shadow-overlay";
+        overlay.style.display = "flex";
+        overlay.innerHTML = `
+            <div class="edit-shadow-popup">
+            <form id="upload-shadow-images-form" enctype="multipart/form-data">
+                <h2>Uploader les images de l'ombre (.zip)</h2>
+                <input type="file" name="images_zip" accept=".zip" required>
+                <input type="hidden" name="alias" value="${alias}">
+                <div style="margin-top:16px;">
+                <button type="submit" class="admin-btn">Envoyer</button>
+                <button type="button" id="cancel-upload-shadow-images" class="close-btn">&times;</button>
+                </div>
+            </form>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        document.getElementById('cancel-upload-shadow-images').onclick = function() {
+            overlay.remove();
+        };
+
+        document.getElementById('upload-shadow-images-form').onsubmit = async function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            let resp = await fetch('/admin/upload_shadow_images_zip', {
+            method: 'POST',
+            body: formData
+            });
+            let txt = await resp.text();
+            overlay.remove();
+            alert(txt);
+            // Optionnel : recharger ou réinitialiser le formulaire
+        };
+        }
+    });
