@@ -280,7 +280,7 @@ def SJW(app: Flask):
         exists = os.path.isdir(folder_path)
         return jsonify({'exists': exists, 'folder': folder_name})
     
-    @app.route('SJW/add_shadow', methods=['POST'])
+    @app.route('/SJW/add_shadow', methods=['POST'])
     @login_required
     def add_shadow():
         write_log("Tentative d'ajout d'une nouvelle ombre", log_level="INFO")
