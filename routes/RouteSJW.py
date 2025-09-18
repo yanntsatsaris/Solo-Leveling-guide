@@ -267,6 +267,18 @@ def SJW(app: Flask):
             passive['description'] = process_description(passive['description'], all_tags, base_path)
 
         return render_template('shadow_details.html', shadow=shadow)
+    
+    @app.route('/SJW/add_shadow/check_image_folder')
+    @login_required
+    def check_image_folder():
+        alias = request.args.get('alias', '').replace(' ', '_')
+        folder_name = f"Shadow_{alias}"
+        folder_path = os.path.join(
+            'static', 'images', 'Sung_Jinwoo', 'Shadows', folder_name
+        )
+        write_log(f"Vérification de l'existence du dossier : {folder_path}", log_level="INFO")
+        exists = os.path.isdir(folder_path)
+        return jsonify({'exists': exists, 'folder': folder_name})
 
     @app.route('/SJW/weapon/<weaponAlias>')
     def weapon_details(weaponAlias):

@@ -1,0 +1,189 @@
+<div
+  id="add-shadow-overlay"
+  class="edit-shadow-overlay"
+  style="display: none"
+>
+  <div id="add-shadow-menu" class="edit-shadow-popup">
+    <form
+      id="add-shadow-form"
+      method="POST"
+      action="{{ url_for('add_shadow') }}"
+    >
+      <h2 class="edit-shadow-title">Ajouter un personnage</h2>
+      <div class="edit-tabs">
+        <div class="edit-tab active" data-tab="main">Infos principales</div>
+        <div class="edit-tab" data-tab="passives">Passifs</div>
+        <div class="edit-tab" data-tab="skills">Compétences</div>
+        <div class="edit-tab" data-tab="weapons">Armes</div>
+      </div>
+      <!-- Onglet Infos principales -->
+      <div class="edit-tab-content active" id="edit-tab-main">
+        <label>Nom :</label>
+        <input type="text" name="name" required />
+        <label>Alias :</label>
+        <input type="text" name="alias" required />
+        <label>Type :</label>
+        <input type="text" name="type" required />
+        <label>Rareté :</label>
+        <input type="text" name="rarity" required />
+        <label>Description :</label>
+        <textarea name="description"></textarea>
+        <input type="hidden" name="image_folder" value="">
+
+        <h4 class="evolutions-title">Évolutions du personnage</h4>
+        <div class="evolutions-grid">
+          {% set total_evos = 7 %}
+          {% for i in range(total_evos) %}
+            {% if i % 2 == 0 %}
+            <div class="evolutions-row">
+            {% endif %}
+              <div class="edit-evolution-block">
+                <label>Évolution : {{ 'A' ~ i if not i == 6 else 'A6-10' }}</label>
+                <textarea name="shadow_evolution_description_{{ i }}"></textarea>
+                <input type="hidden" name="shadow_evolutions_{{ i }}_evolution_id"
+                  value="{{ 'A' ~ i if not i == 6 else 'A6-10' }}">
+                <input type="hidden" name="shadow_evolutions_id_{{ i }}" value="">
+              </div>
+            {% if i % 2 == 1 or i == total_evos - 1 %}
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <!-- Onglet Passifs -->
+      <div class="edit-tab-content" id="edit-tab-passives">
+        <div class="passives-grid" id="passives-grid">
+          <!-- Passifs ajoutés dynamiquement -->
+        </div>
+        <button type="button" id="add-passive-btn" class="add-btn">+ Ajouter un passif</button>
+      </div>
+      <!-- Onglet Compétences -->
+      <div class="edit-tab-content" id="edit-tab-skills">
+        <div class="skills-grid" id="skills-grid">
+          <!-- Compétences ajoutées dynamiquement -->
+        </div>
+        <button type="button" id="add-skill-btn" class="add-btn">+ Ajouter une compétence</button>
+      </div>
+      <!-- Onglet Armes -->
+      <div class="edit-tab-content" id="edit-tab-weapons">
+        {% set total_weapons = 1 %}
+        {% for weapon_idx in range(total_weapons) %}
+          <div class="edit-weapon-block">
+            <label>Nom de l'arme :</label>
+            <input type="text" name="weapon_name_{{ weapon_idx }}" value="" />
+            <label>Stats :</label>
+            <textarea name="weapon_stats_{{ weapon_idx }}"></textarea>
+            <label>Tag :</label>
+            <input type="text" name="weapon_tag_{{ weapon_idx }}" value="" />
+            <label>Principal :</label>
+            <input type="checkbox" name="weapon_principal_{{ weapon_idx }}" />
+            <input type="hidden" name="weapon_id_{{ weapon_idx }}" value="">
+            <!-- Toujours 7 évolutions -->
+            {% set total_evos = 7 %}
+            <h4 class="evolutions-title">Évolutions de l'arme</h4>
+            <div class="evolutions-grid">
+              {% for i in range(total_evos) %}
+                {% if i % 2 == 0 %}
+                <div class="evolutions-row">
+                {% endif %}
+                  <div class="edit-weapon-evolution-block">
+                    <label>Évolution : {{ 'A' ~ i if not i == 6 else 'A6-10' }}</label>
+                    <textarea name="weapon_evolution_description_{{ weapon_idx }}_{{ i }}"></textarea>
+                    <input type="hidden" name="weapon_evolutions_{{ weapon_idx }}_{{ i }}_evolution_id"
+                      value="{{ 'A' ~ i if not i == 6 else 'A6-10' }}">
+                    <input type="hidden" name="weapon_evolutions_id_{{ weapon_idx }}_{{ i }}" value="">
+                  </div>
+                {% if i % 2 == 1 or i == total_evos - 1 %}
+                </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          <hr />
+        {% endfor %}
+      </div>
+      <div style="display: flex; justify-content: space-between; margin-top: 18px">
+        <button type="submit" class="admin-btn">Enregistrer</button>
+        <button
+          type="button"
+          id="close-add-shadow"
+          class="close-btn"
+          style="font-size: 22px"
+        >
+          &times;
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+    document.getElementById('add-shadow-btn')?.addEventListener('click', async function() {
+    // Demande les infos de base
+    const name = prompt("Nom de l'ombre :");
+    if (!name) return;
+    const alias = prompt("Alias de l'ombre :");
+    if (!alias) return;
+
+    // Construit le chemin du dossier image
+    // On suppose que tu veux remplacer les espaces par des underscores
+    const aliasFolder = alias.replace(/ /g, "_");
+    const folderName = `Shadow_${aliasFolder}`;
+    const folderPath = `static/images/Sung_Jinwoo/Shadows/${folderName}/`;
+
+    // Vérifie si le dossier existe côté serveur (nécessite une route Flask dédiée)
+    let folderExists = false;
+    try {
+      const resp = await fetch(`/sjw/add_shadow/check_image_folder?alias=${encodeURIComponent(alias)}`);
+      folderExists = (await resp.json()).exists;
+    } catch (e) {
+      // Si la vérification échoue, on continue quand même
+      folderExists = false;
+    }
+
+    // Ouvre la modale d'ajout
+    document.getElementById('add-shadow-overlay').style.display = 'flex';
+
+    // Pré-remplit les champs
+    document.querySelector('#add-shadow-form input[name="name"]').value = name;
+    document.querySelector('#add-shadow-form input[name="alias"]').value = alias;
+
+    // Optionnel : affiche une alerte si le dossier n'existe pas
+    if (!folderExists) {
+      let overlay = document.createElement('div');
+      overlay.id = "upload-shadow-images-overlay";
+      overlay.className = "edit-shadow-overlay";
+      overlay.style.display = "flex";
+      overlay.innerHTML = `
+        <div class="edit-shadow-popup">
+          <form id="upload-shadow-images-form" enctype="multipart/form-data">
+            <h2>Uploader les images de l'ombre (.zip)</h2>
+            <input type="file" name="images_zip" accept=".zip" required>
+            <input type="hidden" name="alias" value="${alias}">
+            <div style="margin-top:16px;">
+              <button type="submit" class="admin-btn">Envoyer</button>
+              <button type="button" id="cancel-upload-shadow-images" class="close-btn">&times;</button>
+            </div>
+          </form>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+
+      document.getElementById('cancel-upload-shadow-images').onclick = function() {
+        overlay.remove();
+      };
+
+      document.getElementById('upload-shadow-images-form').onsubmit = async function(e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        let resp = await fetch('/admin/upload_shadow_images_zip', {
+          method: 'POST',
+          body: formData
+        });
+        let txt = await resp.text();
+        overlay.remove();
+        alert(txt);
+        // Optionnel : recharger ou réinitialiser le formulaire
+      };
+    }
+  });
+</script>
