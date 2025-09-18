@@ -108,6 +108,7 @@ class SJWShadowsSql:
             'id': shadow_id,
             'image': image_path,
             'codex': codex_path,
+            'alias': shadow_alias,
             'name': row[1],
             'description': row[2],
             'evolutions': self.get_evolutions(shadow_id),
