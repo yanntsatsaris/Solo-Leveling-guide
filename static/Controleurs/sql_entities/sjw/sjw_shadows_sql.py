@@ -10,6 +10,7 @@ class SJWShadowsSql:
             FROM sjw_shadows s
             JOIN sjw_shadow_translations t ON t.sjw_shadow_translations_sjw_shadows_id = s.sjw_shadows_id
             WHERE s.sjw_shadows_sjw_id = %s AND t.sjw_shadow_translations_language = %s
+            ORDER BY s.sjw_shadows_translations_name ASC
         """, (sjw_id, language))
         shadows = []
         for row in self.cursor.fetchall():
