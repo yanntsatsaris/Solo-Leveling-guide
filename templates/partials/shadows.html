@@ -1,7 +1,7 @@
 <div id="shadows" class="tab-content">
   <h2>Shadows</h2>
   {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
-    <button id="add-shadow-btn" class="admin-btn" type="button">
+    <button id="add-shadow-btn" class="admin-shadow-btn" type="button">
       Ajouter une ombre
     </button>
     {% include 'partials/add_shadow_modal.html' %}
