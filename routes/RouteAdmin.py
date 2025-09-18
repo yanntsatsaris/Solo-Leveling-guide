@@ -382,9 +382,9 @@ def admin_routes(app):
         shutil.rmtree(temp_extract)
         return "Images extraites et placées dans le dossier du personnage.", 200
     
-    @app.route('/admin/upload_shadows_images_zip', methods=['POST'])
+    @app.route('/admin/upload_shadow_images_zip', methods=['POST'])
     @login_required
-    def upload_shadows_images_zip():
+    def upload_shadow_images_zip():
         if not is_admin():
             abort(403)
         images_zip = request.files.get('images_zip')
