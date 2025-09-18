@@ -43,6 +43,15 @@
 <script>
     console.log("add_shadow_modal.js chargé");
     console.log("Bouton trouvé :", document.getElementById('add-shadow-btn'));
+    document.addEventListener("DOMContentLoaded", function() {
+      const btn = document.getElementById('add-shadow-btn');
+      if (btn) {
+        btn.addEventListener('click', function() {
+          // Ton code JS ici
+          alert("Clic sur le bouton Ajouter une ombre !");
+        });
+      }
+    });
     document.getElementById('add-shadow-btn')?.addEventListener('click', async function() {
         console.log("Clic sur le bouton Ajouter une ombre");
         // Demande les infos de base
