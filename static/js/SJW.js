@@ -440,3 +440,14 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+  const btn = document.getElementById('add-shadow-btn');
+  console.log("Bouton trouvé :", btn);
+  if (btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      alert("Clic sur le bouton Ajouter une ombre !");
+    });
+  }
+});
