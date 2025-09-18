@@ -75,10 +75,6 @@
         <div class="container">
           <h1>{{ character.name }}</h1>
           {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
-            <button id="add-shadow-btn" class="admin-btn" type="button">
-              Ajouter une ombre
-            </button>
-            {% include 'partials/add_shadow_modal.html' %}
           {% endif %}
           <!-- Image du personnage (affichée sous le type sur téléphone) -->
           <div class="character-image">
