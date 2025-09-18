@@ -75,10 +75,6 @@
         <div class="container">
           <h1>{{ character.name }}</h1>
           {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
-            <button id="edit-sjw-btn" class="admin-btn">
-              Modifier Sung Jinwoo
-            </button>
-            {% include 'partials/edit_sjw_modal.html' %}
             <button id="add-shadow-btn" class="admin-btn" type="button">
               Ajouter une ombre
             </button>
