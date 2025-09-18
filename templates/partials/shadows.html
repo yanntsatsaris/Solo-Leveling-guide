@@ -35,8 +35,9 @@
       {% endif %} {% endfor %}
     </tr>
   </table>
-  {% include 'partials/add_shadow_modal.html' %}
   {% else %}
   <p class="no-shadows">No shadows available for this character.</p>
   {% endif %}
+  
+  {% include 'partials/add_shadow_modal.html' %}
 </div>
