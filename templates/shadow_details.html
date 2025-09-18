@@ -26,7 +26,10 @@
       href="{{ url_for('static', filename='css/partials/weapons.css') }}"
     />
   </head>
-  <body>
+  <body
+    class="{% if shadow.alias %}background-image{% endif %}"
+    style="{% if shadow.alias %}background-image: url('{{ url_for('static', filename='images/Background/BG_Dark.webp') }}');{% endif %}"
+  >
     {% include 'navbar.html' %}
 
     <!-- Conteneur principal divisé en deux colonnes -->

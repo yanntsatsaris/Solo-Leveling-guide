@@ -55,8 +55,8 @@
     />
   </head>
   <body
-    class="{% if character.background_image %}background-image{% endif %}"
-    style="{% if character.background_image %}background-image: url('{{ url_for('static', filename=character.background_image) }}');{% endif %}"
+    class="{% if character.alias %}background-image{% endif %}"
+    style="{% if character.alias %}background-image: url('{{ url_for('static', filename='images/Background/BG_Dark.webp') }}');{% endif %}"
   >
     {% include 'navbar.html' %}
     <div class="layout">
