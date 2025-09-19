@@ -133,11 +133,11 @@ class SJWWeaponsSql:
             for row in self.cursor.fetchall()
         ]
         
-    def update_weapon(self, wid, alias, name, stats, tag, language):
+    def update_weapon(self, wid, alias, name, stats, type, tag, language):
         self.cursor.execute("""
-            UPDATE sjw_weapons SET sjw_weapons_alias=%s
+            UPDATE sjw_weapons SET sjw_weapons_alias=%s, sjw_weapons_type=%s
             WHERE sjw_weapons_id=%s
-        """, (alias, wid))
+        """, (alias, type, wid))
         # Vérifie si la traduction existe
         self.cursor.execute("""
             SELECT 1 FROM sjw_weapon_translations
@@ -156,7 +156,7 @@ class SJWWeaponsSql:
                 WHERE sjw_weapon_translations_sjw_weapons_id=%s AND sjw_weapon_translations_language=%s
             """, (name, stats, tag, wid, language))
 
-    def add_weapon(self, sjw_id, alias, name, stats, tag, language):
+    def add_weapon(self, sjw_id, alias, name, stats, type ,tag, language):
         # Vérifie si une arme existe déjà pour ce personnage (par nom et image)
         self.cursor.execute("""
             SELECT w.sjw_weapons_id FROM sjw_weapons w
@@ -183,9 +183,9 @@ class SJWWeaponsSql:
             return wid
         else:
             self.cursor.execute("""
-                INSERT INTO sjw_weapons (sjw_weapons_sjw_id, sjw_weapons_alias)
-                VALUES (%s, %s) RETURNING sjw_weapons_id
-            """, (sjw_id, alias))
+                INSERT INTO sjw_weapons (sjw_weapons_sjw_id, sjw_weapons_alias, sjw_weapons_type)
+                VALUES (%s, %s, %s) RETURNING sjw_weapons_id
+            """, (sjw_id, alias, type))
             wid = self.cursor.fetchone()[0]
             self.cursor.execute("""
                 INSERT INTO sjw_weapon_translations (sjw_weapon_translations_sjw_weapons_id, sjw_weapon_translations_language, sjw_weapon_translations_name, sjw_weapon_translations_stats, sjw_weapon_translations_tag)

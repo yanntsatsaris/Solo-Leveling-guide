@@ -377,6 +377,7 @@ def SJW(app: Flask):
         language = session.get('language', "EN-en")
         name = request.form.get('name')
         alias = request.form.get('alias')
+        type = request.form.get('type')
         description = request.form.get('description')
         sql_manager = ControleurSql()
         cursor = sql_manager.cursor
@@ -386,7 +387,7 @@ def SJW(app: Flask):
         tag = None
 
         weapon_sql = SJWWeaponsSql(cursor)
-        new_weapon_id = weapon_sql.add_weapon(sjw_id, alias, name, description, tag, language)
+        new_weapon_id = weapon_sql.add_weapon(sjw_id, alias, name, description, type, tag, language)
         write_log(f"Nouvelle arme ajoutée avec l'ID {new_weapon_id} ({alias})", log_level="INFO")
         
         for evo_idx in range(5):
