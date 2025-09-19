@@ -73,10 +73,7 @@
         }
         });
     }
-    console.log("add_weapon_modal.js chargé");
-    console.log("Bouton trouvé :", document.getElementById('add-weapon-btn'));
     document.getElementById('add-weapon-btn')?.addEventListener('click', async function() {
-        console.log("Clic sur le bouton Ajouter une arme");
         // Demande les infos de base
         const name = prompt("Nom de l'arme :");
         if (!name) return;
