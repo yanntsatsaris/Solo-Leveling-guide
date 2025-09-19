@@ -299,7 +299,6 @@ def SJW(app: Flask):
         sjw_sql = SJWSql(cursor)
         character_info = sjw_sql.get_sjw(language)
         sjw_id = character_info['id']
-        folder = character_info['folder']
 
         shadow_sql = SJWShadowsSql(cursor)
         new_shadow_id = shadow_sql.add_shadow(sjw_id, alias, name, description, language)
@@ -324,7 +323,7 @@ def SJW(app: Flask):
         sql_manager.close()
         
         write_log(f"Ombre {new_shadow_id} ({alias}) ajoutée avec succès", log_level="INFO")
-        return redirect(url_for('character_details', alias=alias))
+        return redirect(url_for('shadow_details', alias=alias))
 
     @app.route('/SJW/weapon/<weaponAlias>')
     def weapon_details(weaponAlias):
@@ -355,6 +354,62 @@ def SJW(app: Flask):
 
         # Renvoyer le template avec les données de l'arme
         return render_template('weapon_details.html', weapon=weapon)
+    
+    @app.route('/SJW/add_weapon/check_image_folder_weapon')
+    @login_required
+    def check_image_folder_weapon():
+        alias = request.args.get('alias', '').replace(' ', '_')
+        type = request.args.get('type')
+        folder_name = f"{type}_{alias}"
+        folder_path = os.path.join(
+            'static', 'images', 'Sung_Jinwoo', 'Armes', folder_name
+        )
+        write_log(f"Vérification de l'existence du dossier : {folder_path}", log_level="INFO")
+        exists = os.path.isdir(folder_path)
+        return jsonify({'exists': exists, 'folder': folder_name})
+    
+    @app.route('/SJW/add_weapon', methods=['POST'])
+    @login_required
+    def add_weapon():
+        write_log("Tentative d'ajout d'une nouvelle arme", log_level="INFO")
+        # Vérification des droits
+        if not session.get('username') or not session.get('rights') or not ('Admin' in session['rights'] or 'SuperAdmin' in session['rights']):
+            abort(403)
+
+        language = session.get('language', "EN-en")
+        name = request.form.get('name')
+        alias = request.form.get('alias')
+        description = request.form.get('description')
+        sql_manager = ControleurSql()
+        cursor = sql_manager.cursor
+        sjw_sql = SJWSql(cursor)
+        character_info = sjw_sql.get_sjw(language)
+        sjw_id = character_info['id']
+
+        weapon_sql = SJWWeaponsSql(cursor)
+        new_weapon_id = weapon_sql.add_weapon(sjw_id, alias, name, description, language)
+        write_log(f"Nouvelle arme ajoutée avec l'ID {new_weapon_id} ({alias})", log_level="INFO")
+        
+        for evo_idx in range(5):
+            evolution_id = request.form.get(f"shadows_evolutions_{evo_idx}_evolution_id")
+            if not evolution_id or len(evolution_id) > 10:
+                evolution_id = f"A{evo_idx}"
+            edesc = request.form.get(f'evolution_description_{evo_idx}')
+            evo_type = "passive"
+            evo_range = None
+            evo_number =  evo_idx
+            if evolution_id and edesc:
+                weapon_sql.add_evolution(new_weapon_id, evo_number, evolution_id, edesc, evo_type, evo_range, language)
+                write_log(f"  - Évolution ajoutée : {evolution_id}", log_level="INFO")
+
+        if not new_weapon_id:
+            return "Error adding weapon", 500
+        
+        sql_manager.conn.commit()
+        sql_manager.close()
+        
+        write_log(f"Arme {new_weapon_id} ({alias}) ajoutée avec succès", log_level="INFO")
+        return redirect(url_for('weapon_details', alias=alias))
     
     @app.route('/SJW/edit', methods=['POST'])
     @login_required

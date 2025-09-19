@@ -1,0 +1,132 @@
+<div
+  id="add-weapon-overlay"
+  class="edit-weapon-overlay"
+  style="display: none"
+>
+  <div id="add-weapon-menu" class="edit-weapon-popup">
+    <form
+      id="add-weapon-form"
+      method="POST"
+      action="{{ url_for('add_weapon') }}"
+    >
+      <h2 class="edit-weapon-title">Ajouter une ombre</h2>
+      <div class="edit-tabs">
+        <div class="edit-tab active" data-tab="main">Infos principales</div>
+      </div>
+      <div class="edit-tab-content active" id="edit-tab-main">
+        <label>Nom :</label>
+        <input type="text" name="name" required />
+        <label>Alias :</label>
+        <input type="text" name="alias" required />
+        <label>Description :</label>
+        <textarea name="description"></textarea>
+        <input type="hidden" name="image_folder" value="">
+
+        <h4 class="evolutions-title">Évolutions de l'ombre</h4>
+        <div class="evolutions-grid">
+          {% set total_evos = 5 %}
+          {% for i in range(total_evos) %}
+            {% if i % 2 == 0 %}
+            <div class="evolutions-row">
+            {% endif %}
+              <div class="edit-evolution-block">
+                <label>Évolution : {{ 'A' ~ i  }}</label>
+                <textarea name="weapon_evolution_description_{{ i }}"></textarea>
+                <input type="hidden" name="weapon_evolutions_{{ i }}_evolution_id"
+                  value="{{ 'A' ~ i }}">
+                <input type="hidden" name="weapon_evolutions_id_{{ i }}" value="">
+              </div>
+            {% if i % 2 == 1 or i == total_evos - 1 %}
+            </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 18px">
+          <button type="submit" class="admin-btn">Enregistrer</button>
+          <button
+            type="button"
+            id="close-add-weapon"
+            class="close-btn"
+            style="font-size: 22px"
+          >
+            &times;
+          </button>
+        </div>
+      </div> <!-- Fermeture de edit-tab-content -->
+    </form>
+  </div> <!-- Fermeture de edit-weapon-popup -->
+</div> <!-- Fermeture de edit-weapon-overlay -->
+<script>
+    console.log("add_weapon_modal.js chargé");
+    console.log("Bouton trouvé :", document.getElementById('add-weapon-btn'));
+    document.getElementById('add-weapon-btn')?.addEventListener('click', async function() {
+        console.log("Clic sur le bouton Ajouter une ombre");
+        // Demande les infos de base
+        const name = prompt("Nom de l'ombre :");
+        if (!name) return;
+        const alias = prompt("Alias de l'ombre :");
+        if (!alias) return;
+
+        // Construit le chemin du dossier image
+        // On suppose que tu veux remplacer les espaces par des underscores
+        const aliasFolder = alias.replace(/ /g, "_");
+        const folderName = `weapon_${aliasFolder}`;
+        const folderPath = `static/images/Sung_Jinwoo/weapons/${folderName}/`;
+
+        // Vérifie si le dossier existe côté serveur (nécessite une route Flask dédiée)
+        let folderExists = false;
+        try {
+        const resp = await fetch(`/sjw/add_weapon/check_image_folder_weapon?alias=${encodeURIComponent(alias)}`);
+        folderExists = (await resp.json()).exists;
+        } catch (e) {
+        // Si la vérification échoue, on continue quand même
+        folderExists = false;
+        }
+
+        // Ouvre la modale d'ajout
+        document.getElementById('add-weapon-overlay').style.display = 'flex';
+
+        // Pré-remplit les champs
+        document.querySelector('#add-weapon-form input[name="name"]').value = name;
+        document.querySelector('#add-weapon-form input[name="alias"]').value = alias;
+
+        // Optionnel : affiche une alerte si le dossier n'existe pas
+        if (!folderExists) {
+        let overlay = document.createElement('div');
+        overlay.id = "upload-weapon-images-overlay";
+        overlay.className = "edit-weapon-overlay";
+        overlay.style.display = "flex";
+        overlay.innerHTML = `
+            <div class="edit-weapon-popup">
+            <form id="upload-weapon-images-form" enctype="multipart/form-data">
+                <h2>Uploader les images de l'ombre (.zip)</h2>
+                <input type="file" name="images_zip" accept=".zip" required>
+                <input type="hidden" name="alias" value="${alias}">
+                <div style="margin-top:16px;">
+                <button type="submit" class="admin-btn">Envoyer</button>
+                <button type="button" id="cancel-upload-weapon-images" class="close-btn">&times;</button>
+                </div>
+            </form>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        document.getElementById('cancel-upload-weapon-images').onclick = function() {
+            overlay.remove();
+        };
+
+        document.getElementById('upload-weapon-images-form').onsubmit = async function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            let resp = await fetch('/admin/upload_weapon_images_zip', {
+            method: 'POST',
+            body: formData
+            });
+            let txt = await resp.text();
+            overlay.remove();
+            alert(txt);
+            // Optionnel : recharger ou réinitialiser le formulaire
+        };
+        }
+    });
+</script>

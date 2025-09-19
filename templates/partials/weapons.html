@@ -58,6 +58,12 @@
       </div>
     {% else %}
       <!-- Affichage pour plusieurs armes -->
+      {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
+        <button id="add-weapon-btn" class="admin-btn">
+          Ajouter une arme
+        </button>
+        {% include 'partials/add_weapon_modal.html' %}
+      {% endif %}
       <table id="weapons-table">
         <tr>
           {% for weapon in character.weapon %}
