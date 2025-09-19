@@ -383,9 +383,10 @@ def SJW(app: Flask):
         sjw_sql = SJWSql(cursor)
         character_info = sjw_sql.get_sjw(language)
         sjw_id = character_info['id']
+        tag = None
 
         weapon_sql = SJWWeaponsSql(cursor)
-        new_weapon_id = weapon_sql.add_weapon(sjw_id, alias, name, description, language)
+        new_weapon_id = weapon_sql.add_weapon(sjw_id, alias, name, description, tag, language)
         write_log(f"Nouvelle arme ajoutée avec l'ID {new_weapon_id} ({alias})", log_level="INFO")
         
         for evo_idx in range(5):

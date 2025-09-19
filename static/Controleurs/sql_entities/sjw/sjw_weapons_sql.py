@@ -156,7 +156,7 @@ class SJWWeaponsSql:
                 WHERE sjw_weapon_translations_weapons_id=%s AND sjw_weapon_translations_language=%s
             """, (name, stats, tag, wid, language))
 
-    def add_weapon(self, sjw_id, alias, name, stats, tag, img, language):
+    def add_weapon(self, sjw_id, alias, name, stats, tag, language):
         # Vérifie si une arme existe déjà pour ce personnage (par nom et image)
         self.cursor.execute("""
             SELECT w.sjw_weapons_id FROM sjw_weapons w
