@@ -302,7 +302,7 @@ def SJW(app: Flask):
         folder = character_info['folder']
 
         shadow_sql = SJWShadowsSql(cursor)
-        new_shadow_id = shadow_sql.add_shadow(sjw_id, alias, name, description, language, folder)
+        new_shadow_id = shadow_sql.add_shadow(sjw_id, alias, name, description, language)
         write_log(f"Nouvelle ombre ajoutée avec l'ID {new_shadow_id} ({alias})", log_level="INFO")
         
         for evo_idx in range(5):
