@@ -14,7 +14,7 @@ from static.Controleurs.sql_entities.sjw.sjw_blessings_sql import SJWBlessingsSq
 from static.Controleurs.sql_entities.sjw.sjw_gems_sql import SJWGemsSql
 from static.Controleurs.sql_entities.cores_sql import CoresSql
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
-from flask import Flask, render_template, session , request, redirect, url_for, jsonify
+from flask import Flask, render_template, session , request, redirect, url_for, jsonify, abort
 from flask_login import login_required
 
 def normalize_focus_stats(val):
@@ -284,7 +284,45 @@ def SJW(app: Flask):
     @login_required
     def add_shadow():
         write_log("Tentative d'ajout d'une nouvelle ombre", log_level="INFO")
+        # Vérification des droits
+        if not session.get('username') or not session.get('rights') or not ('Admin' in session['rights'] or 'SuperAdmin' in session['rights']):
+            abort(403)
+
+        language = session.get('language', "EN-en")
+        name = request.form.get('name')
+        alias = request.form.get('alias')
+        description = request.form.get('description')
+        sql_manager = ControleurSql()
+        cursor = sql_manager.cursor
+        sjw_sql = SJWSql(cursor)
+        character_info = sjw_sql.get_sjw(language)
+        sjw_id = character_info['id']
+        folder = character_info['folder']
+
+        shadow_sql = SJWShadowsSql(cursor)
+        new_shadow_id = shadow_sql.add_shadow(sjw_id, alias, name, description, language, folder)
+        write_log(f"Nouvelle ombre ajoutée avec l'ID {new_shadow_id} ({alias})", log_level="INFO")
         
+        for evo_idx in range(5):
+            evolution_id = request.form.get(f"shadows_evolutions_{evo_idx}_evolution_id")
+            if not evolution_id or len(evolution_id) > 10:
+                evolution_id = f"A{evo_idx}"
+            edesc = request.form.get(f'evolution_description_{evo_idx}')
+            evo_type = "passive"
+            evo_range = None
+            evo_number =  evo_idx
+            if evolution_id and edesc:
+                shadow_sql.add_evolution(new_shadow_id, evo_number, evolution_id, edesc, evo_type, evo_range, language)
+                write_log(f"  - Évolution ajoutée : {evolution_id}", log_level="INFO")
+
+        if not new_shadow_id:
+            return "Error adding shadow", 500
+        
+        sql_manager.conn.commit()
+        sql_manager.close()
+        
+        write_log(f"Ombre {new_shadow_id} ({alias}) ajoutée avec succès", log_level="INFO")
+        return jsonify({'id': new_shadow_id}), 201
 
     @app.route('/SJW/weapon/<weaponAlias>')
     def weapon_details(weaponAlias):

@@ -36,12 +36,15 @@ class SJWShadowsSql:
             shadows.append(shadow)
         return shadows
 
-    def get_evolutions(self, shadow_id):
+    def get_evolutions(self, shadow_id, language):
         self.cursor.execute("""
-            SELECT sjw_shadow_evolutions_id, sjw_shadow_evolutions_type, sjw_shadow_evolutions_number, sjw_shadow_evolutions_description
-            FROM sjw_shadow_evolutions
-            WHERE sjw_shadow_evolutions_sjw_shadows_id = %s
-        """, (shadow_id,))
+            SELECT e.sjw_shadow_evolutions_id, e.sjw_shadow_evolutions_type, e.sjw_shadow_evolutions_number, t.sjw_shadow_evolution_translations_description
+            FROM sjw_shadow_evolutions e
+            LEFT JOIN sjw_shadow_evolution_translations t
+              ON t.sjw_shadow_evolution_translations_evolution_id = e.sjw_shadow_evolutions_id
+              AND t.sjw_shadow_evolution_translations_language = %s
+            WHERE e.sjw_shadow_evolutions_sjw_shadows_id = %s
+        """, (language, shadow_id))
         return [
             {
                 'id': row[0],
@@ -160,3 +163,92 @@ class SJWShadowsSql:
             }
             for row in self.cursor.fetchall()
         ]
+
+    def add_shadow(self, sjw_id, alias, name, description, language):
+        # Vérifie si un alias existe déjà pour ce SJW
+        self.cursor.execute("""
+            SELECT 1 FROM sjw_shadows
+            WHERE sjw_shadows_sjw_id = %s AND sjw_shadows_alias = %s
+        """, (sjw_id, alias))
+        if self.cursor.fetchone():
+            # Alias déjà utilisé, retourne None ou lève une exception
+            return None
+
+        # Ajout de l'ombre
+        self.cursor.execute("""
+            INSERT INTO sjw_shadows (sjw_shadows_sjw_id, sjw_shadows_alias)
+            VALUES (%s, %s)
+            RETURNING sjw_shadows_id
+        """, (sjw_id, alias))
+        shadow_id = self.cursor.fetchone()[0]
+        self.cursor.execute("""
+            INSERT INTO sjw_shadow_translations (sjw_shadow_translations_sjw_shadows_id, sjw_shadow_translations_language, sjw_shadow_translations_name, sjw_shadow_translations_description)
+            VALUES (%s, %s, %s, %s)
+            RETURNING sjw_shadow_translations_id
+        """, (shadow_id, language, name, description))
+        return shadow_id
+
+    def update_shadow(self, shadow_id, alias, name, description, language):
+        self.cursor.execute("""
+            UPDATE sjw_shadows
+            SET sjw_shadows_alias = %s
+            WHERE sjw_shadows_id = %s
+        """, (alias, shadow_id))
+        self.cursor.execute("""
+            UPDATE sjw_shadow_translations
+            SET sjw_shadow_translations_name = %s,
+                sjw_shadow_translations_description = %s
+            WHERE sjw_shadow_translations_sjw_shadows_id = %s
+              AND sjw_shadow_translations_language = %s
+        """, (name, description, shadow_id, language))
+
+    def add_evolution(self, shadow_id, evo_idx, evolution_id, desc, evo_type, evo_range, language):
+        self.cursor.execute("""
+            SELECT sjw_shadow_evolutions_id FROM sjw_shadow_evolutions
+            WHERE sjw_shadow_evolutions_sjw_shadows_id = %s AND sjw_shadow_evolutions_evolution_id = %s
+        """, (shadow_id, evolution_id))
+        row = self.cursor.fetchone()            
+        if row:
+            eid = row[0]
+            # Met à jour la traduction si besoin
+            self.cursor.execute("""
+                SELECT 1 FROM sjw_shadow_evolution_translations
+                WHERE sjw_shadow_evolution_translations_evolution_id = %s AND sjw_shadow_evolution_translations_language = %s
+            """, (eid, language))
+            if not self.cursor.fetchone():
+                self.cursor.execute("""
+                    INSERT INTO sjw_shadow_evolution_translations (sjw_shadow_evolution_translations_evolution_id, sjw_shadow_evolution_translations_language, sjw_shadow_evolution_translations_description)
+                    VALUES (%s, %s, %s)
+                """, (eid, language, desc))
+            else:
+                self.cursor.execute("""
+                    UPDATE sjw_shadow_evolution_translations SET sjw_shadow_evolution_translations_description=%s
+                    WHERE sjw_shadow_evolution_translations_evolution_id=%s AND sjw_shadow_evolution_translations_language=%s
+                """, (desc, eid, language))
+            # Mets à jour les autres champs si besoin
+            self.cursor.execute("""
+                UPDATE sjw_shadow_evolutions SET sjw_shadow_evolutions_number=%s, sjw_shadow_evolutions_type=%s, sjw_shadow_evolutions_range=%s
+                WHERE sjw_shadow_evolutions_id=%s
+            """, (evo_idx if evo_idx is not None else None, evo_type, evo_range, eid))
+            return eid
+        else:
+            self.cursor.execute("""
+                INSERT INTO sjw_shadow_evolutions (sjw_shadow_evolutions_sjw_shadows_id, sjw_shadow_evolutions_number, sjw_shadow_evolutions_evolution_id, sjw_shadow_evolutions_type, sjw_shadow_evolutions_range)
+                VALUES (%s, %s, %s, %s, %s) RETURNING sjw_shadow_evolutions_id
+            """, (shadow_id, evo_idx if evo_idx is not None else None, evolution_id, evo_type, evo_range))
+            eid = self.cursor.fetchone()[0]
+            self.cursor.execute("""
+                INSERT INTO sjw_shadow_evolution_translations (sjw_shadow_evolution_translations_evolution_id, sjw_shadow_evolution_translations_language, sjw_shadow_evolution_translations_description)
+                VALUES (%s, %s, %s)
+            """, (eid, language, desc))
+            return eid
+
+    def update_evolution(self, eid, shadow_id, evo_idx, evolution_id, desc, evo_type, evo_range, language):
+        self.cursor.execute("""
+            UPDATE sjw_shadow_evolutions SET sjw_shadow_evolutions_evolution_id=%s, sjw_shadow_evolutions_number=%s, sjw_shadow_evolutions_type=%s, sjw_shadow_evolutions_range=%s
+            WHERE sjw_shadow_evolutions_id=%s
+        """, (evolution_id, evo_idx if evo_idx is not None else None, evo_type, evo_range, eid))
+        self.cursor.execute("""
+            UPDATE sjw_shadow_evolution_translations SET sjw_shadow_evolution_translations_description=%s
+            WHERE sjw_shadow_evolution_translations_evolution_id=%s AND sjw_shadow_evolution_translations_language=%s
+        """, (desc, eid, language))

@@ -9,12 +9,9 @@
       method="POST"
       action="{{ url_for('add_shadow') }}"
     >
-      <h2 class="edit-shadow-title">Ajouter un personnage</h2>
+      <h2 class="edit-shadow-title">Ajouter une ombre</h2>
       <div class="edit-tabs">
         <div class="edit-tab active" data-tab="main">Infos principales</div>
-        <div class="edit-tab" data-tab="passives">Passifs</div>
-        <div class="edit-tab" data-tab="skills">Compétences</div>
-        <div class="edit-tab" data-tab="weapons">Armes</div>
       </div>
       <!-- Onglet Infos principales -->
       <div class="edit-tab-content active" id="edit-tab-main">
@@ -26,18 +23,18 @@
         <textarea name="description"></textarea>
         <input type="hidden" name="image_folder" value="">
 
-        <h4 class="evolutions-title">Évolutions du personnage</h4>
+        <h4 class="evolutions-title">Évolutions de l'ombre</h4>
         <div class="evolutions-grid">
-          {% set total_evos = 7 %}
+          {% set total_evos = 5 %}
           {% for i in range(total_evos) %}
             {% if i % 2 == 0 %}
             <div class="evolutions-row">
             {% endif %}
               <div class="edit-evolution-block">
-                <label>Évolution : {{ 'A' ~ i if not i == 6 else 'A6-10' }}</label>
+                <label>Évolution : {{ 'A' ~ i  }}</label>
                 <textarea name="shadow_evolution_description_{{ i }}"></textarea>
                 <input type="hidden" name="shadow_evolutions_{{ i }}_evolution_id"
-                  value="{{ 'A' ~ i if not i == 6 else 'A6-10' }}">
+                  value="{{ 'A' ~ i }}">
                 <input type="hidden" name="shadow_evolutions_id_{{ i }}" value="">
               </div>
             {% if i % 2 == 1 or i == total_evos - 1 %}
@@ -45,59 +42,6 @@
             {% endif %}
           {% endfor %}
         </div>
-      </div>
-      <!-- Onglet Passifs -->
-      <div class="edit-tab-content" id="edit-tab-passives">
-        <div class="passives-grid" id="passives-grid">
-          <!-- Passifs ajoutés dynamiquement -->
-        </div>
-        <button type="button" id="add-passive-btn" class="add-btn">+ Ajouter un passif</button>
-      </div>
-      <!-- Onglet Compétences -->
-      <div class="edit-tab-content" id="edit-tab-skills">
-        <div class="skills-grid" id="skills-grid">
-          <!-- Compétences ajoutées dynamiquement -->
-        </div>
-        <button type="button" id="add-shadow-skill-btn" class="add-btn">+ Ajouter une compétence</button>
-      </div>
-      <!-- Onglet Armes -->
-      <div class="edit-tab-content" id="edit-tab-weapons">
-        {% set total_weapons = 1 %}
-        {% for weapon_idx in range(total_weapons) %}
-          <div class="edit-weapon-block">
-            <label>Nom de l'arme :</label>
-            <input type="text" name="weapon_name_{{ weapon_idx }}" value="" />
-            <label>Stats :</label>
-            <textarea name="weapon_stats_{{ weapon_idx }}"></textarea>
-            <label>Tag :</label>
-            <input type="text" name="weapon_tag_{{ weapon_idx }}" value="" />
-            <label>Principal :</label>
-            <input type="checkbox" name="weapon_principal_{{ weapon_idx }}" />
-            <input type="hidden" name="weapon_id_{{ weapon_idx }}" value="">
-            <!-- Toujours 7 évolutions -->
-            {% set total_evos = 7 %}
-            <h4 class="evolutions-title">Évolutions de l'arme</h4>
-            <div class="evolutions-grid">
-              {% for i in range(total_evos) %}
-                {% if i % 2 == 0 %}
-                <div class="evolutions-row">
-                {% endif %}
-                  <div class="edit-weapon-evolution-block">
-                    <label>Évolution : {{ 'A' ~ i if not i == 6 else 'A6-10' }}</label>
-                    <textarea name="weapon_evolution_description_{{ weapon_idx }}_{{ i }}"></textarea>
-                    <input type="hidden" name="weapon_evolutions_{{ weapon_idx }}_{{ i }}_evolution_id"
-                      value="{{ 'A' ~ i if not i == 6 else 'A6-10' }}">
-                    <input type="hidden" name="weapon_evolutions_id_{{ weapon_idx }}_{{ i }}" value="">
-                  </div>
-                {% if i % 2 == 1 or i == total_evos - 1 %}
-                </div>
-                {% endif %}
-              {% endfor %}
-            </div>
-          </div>
-          <hr />
-        {% endfor %}
-      </div>
       <div style="display: flex; justify-content: space-between; margin-top: 18px">
         <button type="submit" class="admin-btn">Enregistrer</button>
         <button
