@@ -158,8 +158,6 @@ def SJW(app: Flask):
                     evolution['description_raw'] = evolution['description']  # version brute
                     evolution['description'] = process_description(evolution['description'], all_tags, base_path)
         character_info['shadows'] = shadows
-        write_log(f"  - {len(shadows)} ombres chargées", log_level="INFO")
-        write_log(f"Shadows : {shadows}", log_level="INFO")
 
         for blessing in blessings_defensive:
             blessing['description_raw'] = blessing['description']  # version brute
