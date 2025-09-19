@@ -9,7 +9,7 @@
       method="POST"
       action="{{ url_for('add_weapon') }}"
     >
-      <h2 class="edit-weapon-title">Ajouter une ombre</h2>
+      <h2 class="edit-weapon-title">Ajouter une arme</h2>
       <div class="edit-tabs">
         <div class="edit-tab active" data-tab="main">Infos principales</div>
       </div>
@@ -18,11 +18,13 @@
         <input type="text" name="name" required />
         <label>Alias :</label>
         <input type="text" name="alias" required />
+        <label>Type :</label>
+        <input type="text" name="type" required />
         <label>Description :</label>
         <textarea name="description"></textarea>
         <input type="hidden" name="image_folder" value="">
 
-        <h4 class="evolutions-title">Évolutions de l'ombre</h4>
+        <h4 class="evolutions-title">Évolutions de l'arme</h4>
         <div class="evolutions-grid">
           {% set total_evos = 7 %}
           {% for i in range(total_evos) %}
@@ -57,21 +59,37 @@
   </div> <!-- Fermeture de edit-weapon-popup -->
 </div> <!-- Fermeture de edit-weapon-overlay -->
 <script>
+    // Fermeture de la modale
+    document.getElementById('close-add-character')?.addEventListener('click', function() {
+        document.getElementById('add-character-overlay').style.display = 'none';
+    });
+    // Ferme la modale si clic en dehors du popup
+    const addOverlay = document.getElementById('add-character-overlay');
+    const addPopup = document.getElementById('add-character-menu');
+    if (addOverlay && addPopup) {
+        addOverlay.addEventListener('mousedown', function(e) {
+        if (e.target === addOverlay) {
+            addOverlay.style.display = 'none';
+        }
+        });
+    }
     console.log("add_weapon_modal.js chargé");
     console.log("Bouton trouvé :", document.getElementById('add-weapon-btn'));
     document.getElementById('add-weapon-btn')?.addEventListener('click', async function() {
-        console.log("Clic sur le bouton Ajouter une ombre");
+        console.log("Clic sur le bouton Ajouter une arme");
         // Demande les infos de base
-        const name = prompt("Nom de l'ombre :");
+        const name = prompt("Nom de l'arme :");
         if (!name) return;
-        const alias = prompt("Alias de l'ombre :");
+        const alias = prompt("Alias de l'arme :");
         if (!alias) return;
+        const type = prompt("Type de l'arme  :");
+        if (!type) return;
 
         // Construit le chemin du dossier image
         // On suppose que tu veux remplacer les espaces par des underscores
         const aliasFolder = alias.replace(/ /g, "_");
-        const folderName = `weapon_${aliasFolder}`;
-        const folderPath = `static/images/Sung_Jinwoo/weapons/${folderName}/`;
+        const folderName = `${type}_${aliasFolder}`;
+        const folderPath = `static/images/Sung_Jinwoo/Armes/${folderName}/`;
 
         // Vérifie si le dossier existe côté serveur (nécessite une route Flask dédiée)
         let folderExists = false;
@@ -89,6 +107,7 @@
         // Pré-remplit les champs
         document.querySelector('#add-weapon-form input[name="name"]').value = name;
         document.querySelector('#add-weapon-form input[name="alias"]').value = alias;
+        document.querySelector('#add-weapon-form input[name="type"]').value = type;
 
         // Optionnel : affiche une alerte si le dossier n'existe pas
         if (!folderExists) {
@@ -99,7 +118,7 @@
         overlay.innerHTML = `
             <div class="edit-weapon-popup">
             <form id="upload-weapon-images-form" enctype="multipart/form-data">
-                <h2>Uploader les images de l'ombre (.zip)</h2>
+                <h2>Uploader les images de l'arme (.zip)</h2>
                 <input type="file" name="images_zip" accept=".zip" required>
                 <input type="hidden" name="alias" value="${alias}">
                 <div style="margin-top:16px;">

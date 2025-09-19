@@ -57,6 +57,20 @@
   </div> <!-- Fermeture de edit-shadow-popup -->
 </div> <!-- Fermeture de edit-shadow-overlay -->
 <script>
+    // Fermeture de la modale
+    document.getElementById('close-add-character')?.addEventListener('click', function() {
+        document.getElementById('add-character-overlay').style.display = 'none';
+    });
+    // Ferme la modale si clic en dehors du popup
+    const addOverlay = document.getElementById('add-character-overlay');
+    const addPopup = document.getElementById('add-character-menu');
+    if (addOverlay && addPopup) {
+        addOverlay.addEventListener('mousedown', function(e) {
+        if (e.target === addOverlay) {
+            addOverlay.style.display = 'none';
+        }
+        });
+    }
     console.log("add_shadow_modal.js chargé");
     console.log("Bouton trouvé :", document.getElementById('add-shadow-btn'));
     document.getElementById('add-shadow-btn')?.addEventListener('click', async function() {
