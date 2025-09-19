@@ -64,12 +64,12 @@
         document.getElementById('add-weapon-overlay').style.display = 'none';
     });
     // Ferme la modale si clic en dehors du popup
-    const addOverlay = document.getElementById('add-weapon-overlay');
+    const addOverlayWeapon = document.getElementById('add-weapon-overlay');
     const addPopup = document.getElementById('add-weapon-menu');
-    if (addOverlay && addPopup) {
-        addOverlay.addEventListener('mousedown', function(e) {
-        if (e.target === addOverlay) {
-            addOverlay.style.display = 'none';
+    if (addOverlayWeapon && addPopup) {
+        addOverlayWeapon.addEventListener('mousedown', function(e) {
+        if (e.target === addOverlayWeapon) {
+            addOverlayWeapon.style.display = 'none';
         }
         });
     }
