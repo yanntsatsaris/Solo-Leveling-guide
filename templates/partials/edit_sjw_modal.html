@@ -191,63 +191,6 @@
           {% endfor %}
         </div>
       </div>
-      <!-- Onglet Ombres -->
-      <div class="edit-tab-content" id="edit-tab-shadows">
-        {% set total_shadows = character.shadows|length if character.shadows|length > 0 else 1 %}
-        {% for shadow_idx in range(total_shadows) %}
-          {% set shadow = character.shadows[shadow_idx] if character.shadows|length > shadow_idx else {} %}
-          <div class="edit-shadow-block">
-            <label>Nom de l'ombre :</label>
-            <input
-              type="text"
-              name="shadow_name_{{ shadow_idx }}"
-              value="{{ shadow.name if shadow.name is defined else '' }}"
-            />
-            <label>Stats :</label>
-            <textarea name="shadow_stats_{{ shadow_idx }}">{{ shadow.stats_raw if shadow.stats_raw is defined else '' }}</textarea>
-            <label>Tag :</label>
-            <input
-              type="text"
-              name="shadow_tag_{{ shadow_idx }}"
-              value="{{ shadow.tag if shadow.tag is defined else '' }}"
-            />
-            <label>Principal :</label>
-            <input
-              type="checkbox"
-              name="shadow_principal_{{ shadow_idx }}"
-              {% if shadow.principal is defined and shadow.principal %}checked{% endif %}
-            />
-            <input type="hidden" name="shadow_id_{{ shadow_idx }}" value="{{ shadow.id if shadow.id is defined else '' }}">
-            <!-- Toujours 5 évolutions, même si aucune n'est renseignée -->
-            {% set total_evos = 5 %}
-            <h4 style="margin-top: 18px">Évolutions de l'ombre</h4>
-            <div class="evolutions-grid">
-              {% for i in range(total_evos) %}
-                {% if i % 2 == 0 %}
-                <div class="evolutions-row">
-                {% endif %}
-                  <div class="edit-shadow-evolution-block">
-                    <label>Évolution : {{ 'A' ~ i if not i == 6 else 'A6-10' }}</label>
-                    <textarea
-                      name="shadow_evolution_description_{{ shadow_idx }}_{{ i }}"
-                    >{{ shadow.evolutions[i].description_raw if shadow.evolutions is defined and shadow.evolutions|length > i else '' }}</textarea>
-
-              <input type="hidden" name="shadow_evolutions_{{ shadow_idx }}_{{ i }}_evolution_id" value="{% if shadow.evolutions is defined and shadow.evolutions|length > i and shadow.evolutions[i].evolution_id %}
-           {{ shadow.evolutions[i].evolution_id }}
-         {% else %}
-           {{ 'A' ~ i if not i == 6 else 'A6-10' }}
-         {% endif %}">
-              <input type="hidden" name="shadow_evolutions_id_{{ shadow_idx }}_{{ i }}" value="{{ shadow.evolutions[i].id if shadow.evolutions is defined and shadow.evolutions|length > i else '' }}">
-                  </div>
-                {% if i % 2 == 1 or i == total_evos - 1 %}
-                </div>
-                {% endif %}
-              {% endfor %}
-            </div>
-          </div>
-          <hr />
-        {% endfor %}
-      </div>
       <!-- Onglet Artefacts avec sélecteur de set -->
       <div class="edit-tab-content" id="edit-tab-artefacts">
         <div style="display: flex; align-items: center; gap: 12px">
@@ -761,7 +704,8 @@
       `;
       grid.appendChild(div);
     });
-
+  });
+  
   // Ajout d'un set d'équipement
   document.getElementById('edit-equipment-select')?.addEventListener('click', function(e) {
     if (this.value === "add_new_set") {
@@ -1020,26 +964,26 @@
   const currentLang = "{{ language if language is defined else 'FR-fr' }}";
 
   async function fillImageSelects() {
-  const folder = document.querySelector('#edit-sjw-form input[name="folder"]').value;
-  let images = [];
-  if (folder) {
-    try {
-      images = await fetch(`/SJW/images_for/${encodeURIComponent(folder)}`).then(r => r.json());
-    } catch (e) { images = []; }
+    const folder = document.querySelector('#edit-sjw-form input[name="folder"]').value;
+    let images = [];
+    if (folder) {
+      try {
+        images = await fetch(`/SJW/images_for/${encodeURIComponent(folder)}`).then(r => r.json());
+      } catch (e) { images = []; }
+    }
+    // Pour les passifs
+    document.querySelectorAll('.blessing-image-select').forEach(select => {
+      const current = select.dataset.current || "";
+      select.innerHTML = ['<option value=""></option>']
+        .concat(images.map(img => `<option value="${img}"${img === current ? ' selected' : ''}>${img}</option>`)).join('');
+    });
+    // Pour les skills
+    document.querySelectorAll('.skill-image-select').forEach(select => {
+      const current = select.dataset.current || "";
+      select.innerHTML = ['<option value=""></option>']
+        .concat(images.map(img => `<option value="${img}"${img === current ? ' selected' : ''}>${img}</option>`)).join('');
+    });
   }
-  // Pour les passifs
-  document.querySelectorAll('.blessing-image-select').forEach(select => {
-    const current = select.dataset.current || "";
-    select.innerHTML = ['<option value=""></option>']
-      .concat(images.map(img => `<option value="${img}"${img === current ? ' selected' : ''}>${img}</option>`)).join('');
-  });
-  // Pour les skills
-  document.querySelectorAll('.skill-image-select').forEach(select => {
-    const current = select.dataset.current || "";
-    select.innerHTML = ['<option value=""></option>']
-      .concat(images.map(img => `<option value="${img}"${img === current ? ' selected' : ''}>${img}</option>`)).join('');
-  });
-}
 
 // Appelle la fonction à l'ouverture de la modale
 document.getElementById('edit-sjw-btn')?.addEventListener('click', fillImageSelects);
