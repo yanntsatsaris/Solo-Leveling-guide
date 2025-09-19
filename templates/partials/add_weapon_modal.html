@@ -65,8 +65,8 @@
     });
     // Ferme la modale si clic en dehors du popup
     const addOverlayWeapon = document.getElementById('add-weapon-overlay');
-    const addPopup = document.getElementById('add-weapon-menu');
-    if (addOverlayWeapon && addPopup) {
+    const addPopupWeapon = document.getElementById('add-weapon-menu');
+    if (addOverlayWeapon && addPopupWeapon) {
         addOverlayWeapon.addEventListener('mousedown', function(e) {
         if (e.target === addOverlayWeapon) {
             addOverlayWeapon.style.display = 'none';
