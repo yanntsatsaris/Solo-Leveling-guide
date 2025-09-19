@@ -321,7 +321,7 @@ def SJW(app: Flask):
         sql_manager.close()
         
         write_log(f"Ombre {new_shadow_id} ({alias}) ajoutée avec succès", log_level="INFO")
-        return redirect(url_for('shadow_details', alias=alias))
+        return redirect(url_for('shadow_details', shadowAlias=alias))
 
     @app.route('/SJW/weapon/<weaponAlias>')
     def weapon_details(weaponAlias):
@@ -413,7 +413,7 @@ def SJW(app: Flask):
         sql_manager.close()
         
         write_log(f"Arme {new_weapon_id} ({alias}) ajoutée avec succès", log_level="INFO")
-        return redirect(url_for('weapon_details', alias=alias))
+        return redirect(url_for('weapon_details', weaponAlias=alias))
     
     @app.route('/SJW/edit', methods=['POST'])
     @login_required
