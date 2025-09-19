@@ -324,7 +324,7 @@ def SJW(app: Flask):
         sql_manager.close()
         
         write_log(f"Ombre {new_shadow_id} ({alias}) ajoutée avec succès", log_level="INFO")
-        return jsonify({'id': new_shadow_id}), 201
+        return redirect(url_for('character_details', alias=alias))
 
     @app.route('/SJW/weapon/<weaponAlias>')
     def weapon_details(weaponAlias):
