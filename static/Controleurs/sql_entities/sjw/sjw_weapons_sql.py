@@ -133,11 +133,11 @@ class SJWWeaponsSql:
             for row in self.cursor.fetchall()
         ]
         
-    def update_weapon(self, wid, name, stats, tag, img, language):
+    def update_weapon(self, wid, alias, name, stats, tag, language):
         self.cursor.execute("""
-            UPDATE sjw_weapons SET sjw_weapons_image=%s
+            UPDATE sjw_weapons SET sjw_weapons_alias=%s
             WHERE sjw_weapons_id=%s
-        """, (img, wid))
+        """, (alias, wid))
         # Vérifie si la traduction existe
         self.cursor.execute("""
             SELECT 1 FROM sjw_weapon_translations
@@ -156,20 +156,20 @@ class SJWWeaponsSql:
                 WHERE sjw_weapon_translations_weapons_id=%s AND sjw_weapon_translations_language=%s
             """, (name, stats, tag, wid, language))
 
-    def add_weapon(self, sjw_id, name, stats, tag, img, language):
+    def add_weapon(self, sjw_id, alias, name, stats, tag, img, language):
         # Vérifie si une arme existe déjà pour ce personnage (par nom et image)
         self.cursor.execute("""
             SELECT w.sjw_weapons_id FROM sjw_weapons w
             JOIN sjw_weapon_translations wt ON wt.sjw_weapon_translations_weapons_id = w.sjw_weapons_id
-            WHERE w.sjw_weapons_sjw_id = %s AND wt.sjw_weapon_translations_name = %s
-        """, (sjw_id, name))
+            WHERE w.sjw_weapons_sjw_id = %s AND w.sjw_weapons_alias = %s
+        """, (sjw_id, alias))
         row = self.cursor.fetchone()
         if row:
             wid = row[0]
             # Mets à jour l'image si besoin
             self.cursor.execute("""
-                UPDATE sjw_weapons SET sjw_weapons_image=%s WHERE sjw_weapons_id=%s
-            """, (img, wid))
+                UPDATE sjw_weapons SET sjw_weapons_alias=%s WHERE sjw_weapons_id=%s
+            """, (alias, wid))
             # Vérifie si la traduction existe déjà pour cette langue
             self.cursor.execute("""
                 SELECT 1 FROM sjw_weapon_translations
@@ -183,12 +183,64 @@ class SJWWeaponsSql:
             return wid
         else:
             self.cursor.execute("""
-                INSERT INTO sjw_weapons (sjw_weapons_sjw_id, sjw_weapons_image)
+                INSERT INTO sjw_weapons (sjw_weapons_sjw_id, sjw_weapons_alias)
                 VALUES (%s, %s) RETURNING sjw_weapons_id
-            """, (sjw_id, img))
+            """, (sjw_id, alias))
             wid = self.cursor.fetchone()[0]
             self.cursor.execute("""
                 INSERT INTO sjw_weapon_translations (sjw_weapon_translations_weapons_id, sjw_weapon_translations_language, sjw_weapon_translations_name, sjw_weapon_translations_stats, sjw_weapon_translations_tag)
                 VALUES (%s, %s, %s, %s, %s)
             """, (wid, language, name, stats, tag))
             return wid
+        
+    def update_weapon_evolution(self, eid, wid, evo_idx, evolution_id, desc, evo_type, evo_range, language):
+        self.cursor.execute("""
+            UPDATE sjw_weapon_evolutions SET sjw_weapon_evolutions_evolution_id=%s, sjw_weapon_evolutions_number=%s, sjw_weapon_evolutions_type=%s, sjw_weapon_evolutions_range=%s
+            WHERE sjw_weapon_evolutions_id=%s
+        """, (evolution_id, evo_idx if evo_idx is not None else None, evo_type, evo_range, eid))
+        self.cursor.execute("""
+            UPDATE sjw_weapon_evolution_translations SET sjw_weapon_evolution_translations_description=%s
+            WHERE sjw_weapon_evolution_translations_weapon_evolutions_id=%s AND sjw_weapon_evolution_translations_language=%s
+        """, (desc, eid, language))
+
+    def add_weapon_evolution(self, wid, evo_idx, evolution_id, desc, evo_type, evo_range, language):
+        # Vérifie si une évolution existe déjà pour cette arme avec ce evolution_id
+        self.cursor.execute("""
+            SELECT sjw_weapon_evolutions_id FROM sjw_weapon_evolutions
+            WHERE sjw_weapon_evolutions_weapons_id = %s AND sjw_weapon_evolutions_evolution_id = %s
+        """, (wid, evolution_id))
+        row = self.cursor.fetchone()
+        if row:
+            eid = row[0]
+            # Met à jour la traduction si besoin
+            self.cursor.execute("""
+                SELECT 1 FROM sjw_weapon_evolution_translations
+                WHERE sjw_weapon_evolution_translations_weapon_evolutions_id = %s AND sjw_weapon_evolution_translations_language = %s
+            """, (eid, language))
+            if not self.cursor.fetchone():
+                self.cursor.execute("""
+                    INSERT INTO sjw_weapon_evolution_translations (sjw_weapon_evolution_translations_weapon_evolutions_id, sjw_weapon_evolution_translations_language, sjw_weapon_evolution_translations_description)
+                    VALUES (%s, %s, %s)
+                """, (eid, language, desc))
+            else:
+                self.cursor.execute("""
+                    UPDATE sjw_weapon_evolution_translations SET sjw_weapon_evolution_translations_description=%s
+                    WHERE sjw_weapon_evolution_translations_weapon_evolutions_id=%s AND sjw_weapon_evolution_translations_language=%s
+                """, (desc, eid, language))
+            # Mets à jour les autres champs si besoin
+            self.cursor.execute("""
+                UPDATE sjw_weapon_evolutions SET sjw_weapon_evolutions_number=%s, sjw_weapon_evolutions_type=%s, sjw_weapon_evolutions_range=%s
+                WHERE sjw_weapon_evolutions_id=%s
+            """, (evo_idx if evo_idx is not None else None, evo_type, evo_range, eid))
+            return eid
+        else:
+            self.cursor.execute("""
+                INSERT INTO sjw_weapon_evolutions (sjw_weapon_evolutions_weapons_id, sjw_weapon_evolutions_evolution_id, sjw_weapon_evolutions_number, sjw_weapon_evolutions_type, sjw_weapon_evolutions_range)
+                VALUES (%s, %s, %s, %s, %s) RETURNING sjw_weapon_evolutions_id
+            """, (wid, evolution_id, evo_idx if evo_idx is not None else None, evo_type, evo_range))
+            eid = self.cursor.fetchone()[0]
+            self.cursor.execute("""
+                INSERT INTO sjw_weapon_evolution_translations (sjw_weapon_evolution_translations_weapon_evolutions_id, sjw_weapon_evolution_translations_language, sjw_weapon_evolution_translations_description)
+                VALUES (%s, %s, %s)
+            """, (eid, language, desc))
+            return eid
