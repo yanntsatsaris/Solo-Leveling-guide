@@ -13,7 +13,6 @@
       <div class="edit-tabs">
         <div class="edit-tab active" data-tab="main">Infos principales</div>
       </div>
-      <!-- Onglet Infos principales -->
       <div class="edit-tab-content active" id="edit-tab-main">
         <label>Nom :</label>
         <input type="text" name="name" required />
@@ -42,20 +41,21 @@
             {% endif %}
           {% endfor %}
         </div>
-      <div style="display: flex; justify-content: space-between; margin-top: 18px">
-        <button type="submit" class="admin-btn">Enregistrer</button>
-        <button
-          type="button"
-          id="close-add-shadow"
-          class="close-btn"
-          style="font-size: 22px"
-        >
-          &times;
-        </button>
-      </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 18px">
+          <button type="submit" class="admin-btn">Enregistrer</button>
+          <button
+            type="button"
+            id="close-add-shadow"
+            class="close-btn"
+            style="font-size: 22px"
+          >
+            &times;
+          </button>
+        </div>
+      </div> <!-- Fermeture de edit-tab-content -->
     </form>
-  </div>
-</div>
+  </div> <!-- Fermeture de edit-shadow-popup -->
+</div> <!-- Fermeture de edit-shadow-overlay -->
 <script>
     console.log("add_shadow_modal.js chargé");
     console.log("Bouton trouvé :", document.getElementById('add-shadow-btn'));
