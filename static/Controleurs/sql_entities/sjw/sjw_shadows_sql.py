@@ -31,7 +31,7 @@ class SJWShadowsSql:
                 'alias': shadow_alias,
                 'name': shadow_name,
                 'description': row[3],
-                'evolutions': self.get_evolutions(shadow_id)
+                'evolutions': self.get_evolutions(shadow_id, language)
             }
             shadows.append(shadow)
         return shadows
@@ -71,11 +71,11 @@ class SJWShadowsSql:
             'image': f'images/{folder}/Weapons/{row[1]}' if folder else row[1],
             'name': row[2],
             'stats': row[3],
-            'evolutions': self.get_weapon_evolutions(weapon_id)
+            'evolutions': self.get_weapon_evolutions(weapon_id, language)
         }
         return weapon
 
-    def get_weapon_evolutions(self, weapon_id):
+    def get_weapon_evolutions(self, weapon_id, language):
         self.cursor.execute("""
             SELECT sjw_weapon_evolutions_id, sjw_weapon_evolutions_description
             FROM sjw_weapon_evolutions
@@ -114,7 +114,7 @@ class SJWShadowsSql:
             'alias': shadow_alias,
             'name': row[1],
             'description': row[2],
-            'evolutions': self.get_evolutions(shadow_id),
+            'evolutions': self.get_evolutions(shadow_id, language),
             'skills': self.get_skills(shadow_id, language, folder),
             'weapon': self.get_weapon_for_shadow(shadow_id, language, folder),
             'authority_passives': self.get_authority_passives(shadow_id, language)
