@@ -391,11 +391,16 @@ def SJW(app: Flask):
         for evo_idx in range(5):
             evolution_id = request.form.get(f"shadows_evolutions_{evo_idx}_evolution_id")
             if not evolution_id or len(evolution_id) > 10:
-                evolution_id = f"A{evo_idx}"
+                evolution_id = f"A{evo_idx}" if evo_idx != 6 else "A6-10"
             edesc = request.form.get(f'evolution_description_{evo_idx}')
-            evo_type = "passive"
-            evo_range = None
-            evo_number =  evo_idx
+            if evo_idx == 6:
+                evo_type = "stat"
+                evo_range = "6-10"
+                evo_number = None
+            else:
+                evo_type = "passives"
+                evo_range = None
+                evo_number = evo_idx
             if evolution_id and edesc:
                 weapon_sql.add_evolution(new_weapon_id, evo_number, evolution_id, edesc, evo_type, evo_range, language)
                 write_log(f"  - Évolution ajoutée : {evolution_id}", log_level="INFO")

@@ -24,16 +24,16 @@
 
         <h4 class="evolutions-title">Évolutions de l'ombre</h4>
         <div class="evolutions-grid">
-          {% set total_evos = 5 %}
+          {% set total_evos = 7 %}
           {% for i in range(total_evos) %}
             {% if i % 2 == 0 %}
             <div class="evolutions-row">
             {% endif %}
               <div class="edit-evolution-block">
-                <label>Évolution : {{ 'A' ~ i  }}</label>
+                <label>Évolution : {{ 'A' ~ i if not i == 6 else 'A6-10' }}</label>
                 <textarea name="weapon_evolution_description_{{ i }}"></textarea>
                 <input type="hidden" name="weapon_evolutions_{{ i }}_evolution_id"
-                  value="{{ 'A' ~ i }}">
+                  value="{{ 'A' ~ i if not i == 6 else 'A6-10' }}">
                 <input type="hidden" name="weapon_evolutions_id_{{ i }}" value="">
               </div>
             {% if i % 2 == 1 or i == total_evos - 1 %}

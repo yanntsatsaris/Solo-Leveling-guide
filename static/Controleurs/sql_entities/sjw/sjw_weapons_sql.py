@@ -132,3 +132,63 @@ class SJWWeaponsSql:
             }
             for row in self.cursor.fetchall()
         ]
+        
+    def update_weapon(self, wid, name, stats, tag, img, language):
+        self.cursor.execute("""
+            UPDATE sjw_weapons SET sjw_weapons_image=%s
+            WHERE sjw_weapons_id=%s
+        """, (img, wid))
+        # Vérifie si la traduction existe
+        self.cursor.execute("""
+            SELECT 1 FROM sjw_weapon_translations
+            WHERE sjw_weapon_translations_weapons_id=%s AND sjw_weapon_translations_language=%s
+        """, (wid, language))
+        if not self.cursor.fetchone():
+            # Crée la traduction si elle n'existe pas
+            self.cursor.execute("""
+                INSERT INTO sjw_weapon_translations (sjw_weapon_translations_weapons_id, sjw_weapon_translations_language, sjw_weapon_translations_name, sjw_weapon_translations_stats, sjw_weapon_translations_tag)
+                VALUES (%s, %s, %s, %s, %s)
+            """, (wid, language, name, stats, tag))
+        else:
+            # Sinon, modifie la traduction existante
+            self.cursor.execute("""
+                UPDATE sjw_weapon_translations SET sjw_weapon_translations_name=%s, sjw_weapon_translations_stats=%s, sjw_weapon_translations_tag=%s
+                WHERE sjw_weapon_translations_weapons_id=%s AND sjw_weapon_translations_language=%s
+            """, (name, stats, tag, wid, language))
+
+    def add_weapon(self, sjw_id, name, stats, tag, img, language):
+        # Vérifie si une arme existe déjà pour ce personnage (par nom et image)
+        self.cursor.execute("""
+            SELECT w.sjw_weapons_id FROM sjw_weapons w
+            JOIN sjw_weapon_translations wt ON wt.sjw_weapon_translations_weapons_id = w.sjw_weapons_id
+            WHERE w.sjw_weapons_sjw_id = %s AND wt.sjw_weapon_translations_name = %s
+        """, (sjw_id, name))
+        row = self.cursor.fetchone()
+        if row:
+            wid = row[0]
+            # Mets à jour l'image si besoin
+            self.cursor.execute("""
+                UPDATE sjw_weapons SET sjw_weapons_image=%s WHERE sjw_weapons_id=%s
+            """, (img, wid))
+            # Vérifie si la traduction existe déjà pour cette langue
+            self.cursor.execute("""
+                SELECT 1 FROM sjw_weapon_translations
+                WHERE sjw_weapon_translations_weapons_id=%s AND sjw_weapon_translations_language=%s
+            """, (wid, language))
+            if not self.cursor.fetchone():
+                self.cursor.execute("""
+                    INSERT INTO sjw_weapon_translations (sjw_weapon_translations_weapons_id, sjw_weapon_translations_language, sjw_weapon_translations_name, sjw_weapon_translations_stats, sjw_weapon_translations_tag)
+                    VALUES (%s, %s, %s, %s, %s)
+                """, (wid, language, name, stats, tag))
+            return wid
+        else:
+            self.cursor.execute("""
+                INSERT INTO sjw_weapons (sjw_weapons_sjw_id, sjw_weapons_image)
+                VALUES (%s, %s) RETURNING sjw_weapons_id
+            """, (sjw_id, img))
+            wid = self.cursor.fetchone()[0]
+            self.cursor.execute("""
+                INSERT INTO sjw_weapon_translations (sjw_weapon_translations_weapons_id, sjw_weapon_translations_language, sjw_weapon_translations_name, sjw_weapon_translations_stats, sjw_weapon_translations_tag)
+                VALUES (%s, %s, %s, %s, %s)
+            """, (wid, language, name, stats, tag))
+            return wid
