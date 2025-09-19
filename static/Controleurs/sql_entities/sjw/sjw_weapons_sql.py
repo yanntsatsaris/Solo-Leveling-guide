@@ -141,26 +141,26 @@ class SJWWeaponsSql:
         # Vérifie si la traduction existe
         self.cursor.execute("""
             SELECT 1 FROM sjw_weapon_translations
-            WHERE sjw_weapon_translations_weapons_id=%s AND sjw_weapon_translations_language=%s
+            WHERE sjw_weapon_translations_sjw_weapons_id=%s AND sjw_weapon_translations_language=%s
         """, (wid, language))
         if not self.cursor.fetchone():
             # Crée la traduction si elle n'existe pas
             self.cursor.execute("""
-                INSERT INTO sjw_weapon_translations (sjw_weapon_translations_weapons_id, sjw_weapon_translations_language, sjw_weapon_translations_name, sjw_weapon_translations_stats, sjw_weapon_translations_tag)
+                INSERT INTO sjw_weapon_translations (sjw_weapon_translations_sjw_weapons_id, sjw_weapon_translations_language, sjw_weapon_translations_name, sjw_weapon_translations_stats, sjw_weapon_translations_tag)
                 VALUES (%s, %s, %s, %s, %s)
             """, (wid, language, name, stats, tag))
         else:
             # Sinon, modifie la traduction existante
             self.cursor.execute("""
                 UPDATE sjw_weapon_translations SET sjw_weapon_translations_name=%s, sjw_weapon_translations_stats=%s, sjw_weapon_translations_tag=%s
-                WHERE sjw_weapon_translations_weapons_id=%s AND sjw_weapon_translations_language=%s
+                WHERE sjw_weapon_translations_sjw_weapons_id=%s AND sjw_weapon_translations_language=%s
             """, (name, stats, tag, wid, language))
 
     def add_weapon(self, sjw_id, alias, name, stats, tag, language):
         # Vérifie si une arme existe déjà pour ce personnage (par nom et image)
         self.cursor.execute("""
             SELECT w.sjw_weapons_id FROM sjw_weapons w
-            JOIN sjw_weapon_translations wt ON wt.sjw_weapon_translations_weapons_id = w.sjw_weapons_id
+            JOIN sjw_weapon_translations wt ON wt.sjw_weapon_translations_sjw_weapons_id = w.sjw_weapons_id
             WHERE w.sjw_weapons_sjw_id = %s AND w.sjw_weapons_alias = %s
         """, (sjw_id, alias))
         row = self.cursor.fetchone()
@@ -173,11 +173,11 @@ class SJWWeaponsSql:
             # Vérifie si la traduction existe déjà pour cette langue
             self.cursor.execute("""
                 SELECT 1 FROM sjw_weapon_translations
-                WHERE sjw_weapon_translations_weapons_id=%s AND sjw_weapon_translations_language=%s
+                WHERE sjw_weapon_translations_sjw_weapons_id=%s AND sjw_weapon_translations_language=%s
             """, (wid, language))
             if not self.cursor.fetchone():
                 self.cursor.execute("""
-                    INSERT INTO sjw_weapon_translations (sjw_weapon_translations_weapons_id, sjw_weapon_translations_language, sjw_weapon_translations_name, sjw_weapon_translations_stats, sjw_weapon_translations_tag)
+                    INSERT INTO sjw_weapon_translations (sjw_weapon_translations_sjw_weapons_id, sjw_weapon_translations_language, sjw_weapon_translations_name, sjw_weapon_translations_stats, sjw_weapon_translations_tag)
                     VALUES (%s, %s, %s, %s, %s)
                 """, (wid, language, name, stats, tag))
             return wid
@@ -188,7 +188,7 @@ class SJWWeaponsSql:
             """, (sjw_id, alias))
             wid = self.cursor.fetchone()[0]
             self.cursor.execute("""
-                INSERT INTO sjw_weapon_translations (sjw_weapon_translations_weapons_id, sjw_weapon_translations_language, sjw_weapon_translations_name, sjw_weapon_translations_stats, sjw_weapon_translations_tag)
+                INSERT INTO sjw_weapon_translations (sjw_weapon_translations_sjw_weapons_id, sjw_weapon_translations_language, sjw_weapon_translations_name, sjw_weapon_translations_stats, sjw_weapon_translations_tag)
                 VALUES (%s, %s, %s, %s, %s)
             """, (wid, language, name, stats, tag))
             return wid
