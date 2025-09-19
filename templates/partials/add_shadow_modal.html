@@ -58,12 +58,12 @@
 </div> <!-- Fermeture de edit-shadow-overlay -->
 <script>
     // Fermeture de la modale
-    document.getElementById('close-add-character')?.addEventListener('click', function() {
-        document.getElementById('add-character-overlay').style.display = 'none';
+    document.getElementById('close-add-shadow')?.addEventListener('click', function() {
+        document.getElementById('add-shadow-overlay').style.display = 'none';
     });
     // Ferme la modale si clic en dehors du popup
-    const addOverlay = document.getElementById('add-character-overlay');
-    const addPopup = document.getElementById('add-character-menu');
+    const addOverlay = document.getElementById('add-shadow-overlay');
+    const addPopup = document.getElementById('add-shadow-menu');
     if (addOverlay && addPopup) {
         addOverlay.addEventListener('mousedown', function(e) {
         if (e.target === addOverlay) {
