@@ -7,39 +7,42 @@ class SJWWeaponsSql:
 
     def get_weapons(self, sjw_id, language, folder=None):
         self.cursor.execute("""
-            SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_codex, w.sjw_weapons_folder, w.sjw_weapons_alias, w.sjw_weapons_type, t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
+            SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_codex, w.sjw_weapons_folder, w.sjw_weapons_alias, w.sjw_weapons_type
             FROM sjw_weapons w
-            JOIN sjw_weapon_translations t ON t.sjw_weapon_translations_sjw_weapons_id = w.sjw_weapons_id
-            WHERE w.sjw_weapons_sjw_id = %s AND t.sjw_weapon_translations_language = %s
-            ORDER by t.sjw_weapon_translations_name
-        """, (sjw_id, language))
+            WHERE w.sjw_weapons_sjw_id = %s
+            ORDER BY w.sjw_weapons_alias
+        """, (sjw_id,))
         weapons = []
         for row in self.cursor.fetchall():
             weapon_id = row[0]
             weapon_folder = row[3]
             weapon_alias = row[4]
             type = row[5]
-            # Si alias et dossier existent, on tente le .webp
+            # Récupère la traduction pour la langue demandée
+            self.cursor.execute("""
+                SELECT t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
+                FROM sjw_weapon_translations t
+                WHERE t.sjw_weapon_translations_sjw_weapons_id = %s AND t.sjw_weapon_translations_language = %s
+            """, (weapon_id, language))
+            trans_row = self.cursor.fetchone()
+            weapon_name = trans_row[0] if trans_row else ''
+            weapon_stats = trans_row[1] if trans_row else ''
+            # Gestion des images (identique à ton code actuel)
             custom_folder = f"{type}_{weapon_alias}" if type and weapon_alias else None
             base_dir_custom = os.path.join('static', 'images', folder, 'Armes', custom_folder) if folder and custom_folder else None
             base_dir_bdd = os.path.join('static', 'images', folder, 'Armes', weapon_folder) if folder and weapon_folder else None
-
-            # Vérifie si le dossier custom existe
             if base_dir_custom and os.path.isdir(base_dir_custom):
                 used_folder = custom_folder
                 base_dir = base_dir_custom
             else:
                 used_folder = weapon_folder
                 base_dir = base_dir_bdd
-
             webp_image = f"{type}_{weapon_alias}_Arme.webp" if weapon_alias else None
             webp_codex = f"{type}_{weapon_alias}_Codex.webp" if weapon_alias else None
-
             if base_dir and webp_image and os.path.isfile(os.path.join(base_dir, webp_image)):
                 image_path = f'images/{folder}/Armes/{used_folder}/{webp_image}'
             else:
                 image_path = f'images/{folder}/Armes/{used_folder}/{row[1]}' if folder and used_folder else row[1]
-
             if base_dir and webp_codex and os.path.isfile(os.path.join(base_dir, webp_codex)):
                 codex_path = f'images/{folder}/Armes/{used_folder}/{webp_codex}'
             else:
@@ -51,8 +54,8 @@ class SJWWeaponsSql:
                 'folder': weapon_folder,
                 'alias': weapon_alias,
                 'type': type,
-                'name': row[6],
-                'stats': row[7],
+                'name': weapon_name,
+                'stats': weapon_stats,
                 'evolutions': self.get_evolutions(weapon_id, language, folder, weapon_folder)
             }
             weapons.append(weapon)
@@ -60,51 +63,54 @@ class SJWWeaponsSql:
     
     def get_weapon_details(self, weapon_alias, language, folder=None, weapon_folder=None):
         self.cursor.execute("""
-            SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_codex, w.sjw_weapons_folder, w.sjw_weapons_alias, w.sjw_weapons_type, t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
+            SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_codex, w.sjw_weapons_folder, w.sjw_weapons_alias, w.sjw_weapons_type
             FROM sjw_weapons w
-            JOIN sjw_weapon_translations t ON t.sjw_weapon_translations_sjw_weapons_id = w.sjw_weapons_id
-            WHERE w.sjw_weapons_alias = %s AND t.sjw_weapon_translations_language = %s
-        """, (weapon_alias, language))
+            WHERE w.sjw_weapons_alias = %s
+        """, (weapon_alias,))
         row = self.cursor.fetchone()
         if row:
             weapon_id = row[0]
             weapon_folder = row[3]
             weapon_alias = row[4]
             type = row[5]
-            # Si alias et dossier existent, on tente le .webp
+            # Récupère la traduction pour la langue demandée
+            self.cursor.execute("""
+                SELECT t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
+                FROM sjw_weapon_translations t
+                WHERE t.sjw_weapon_translations_sjw_weapons_id = %s AND t.sjw_weapon_translations_language = %s
+            """, (weapon_id, language))
+            trans_row = self.cursor.fetchone()
+            weapon_name = trans_row[0] if trans_row else ''
+            weapon_stats = trans_row[1] if trans_row else ''
+            # Gestion des images (identique à ton code actuel)
             custom_folder = f"{type}_{weapon_alias}" if type and weapon_alias else None
             base_dir_custom = os.path.join('static', 'images', folder, 'Armes', custom_folder) if folder and custom_folder else None
             base_dir_bdd = os.path.join('static', 'images', folder, 'Armes', weapon_folder) if folder and weapon_folder else None
-
-            # Vérifie si le dossier custom existe
             if base_dir_custom and os.path.isdir(base_dir_custom):
                 used_folder = custom_folder
                 base_dir = base_dir_custom
             else:
                 used_folder = weapon_folder
                 base_dir = base_dir_bdd
-
             webp_image = f"{type}_{weapon_alias}_Arme.webp" if weapon_alias else None
             webp_codex = f"{type}_{weapon_alias}_Codex.webp" if weapon_alias else None
-
             if base_dir and webp_image and os.path.isfile(os.path.join(base_dir, webp_image)):
                 image_path = f'images/{folder}/Armes/{used_folder}/{webp_image}'
             else:
                 image_path = f'images/{folder}/Armes/{used_folder}/{row[1]}' if folder and used_folder else row[1]
-
             if base_dir and webp_codex and os.path.isfile(os.path.join(base_dir, webp_codex)):
                 codex_path = f'images/{folder}/Armes/{used_folder}/{webp_codex}'
             else:
                 codex_path = f'images/{folder}/Armes/{used_folder}/{row[2]}' if folder and used_folder else row[2]
             weapon = {
-                'id': row[0],
+                'id': weapon_id,
                 'image': image_path,
                 'codex': codex_path,
                 'folder': weapon_folder,
                 'alias': weapon_alias,
                 'type': type,
-                'name': row[6],
-                'stats': row[7],
+                'name': weapon_name,
+                'stats': weapon_stats,
                 'evolutions': self.get_evolutions(weapon_id, language, folder, weapon_folder)
             }
             return weapon
