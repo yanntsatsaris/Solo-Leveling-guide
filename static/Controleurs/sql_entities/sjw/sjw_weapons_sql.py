@@ -7,10 +7,14 @@ class SJWWeaponsSql:
 
     def get_weapons(self, sjw_id, language, folder=None):
         self.cursor.execute("""
-            SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_codex, w.sjw_weapons_folder, w.sjw_weapons_alias, w.sjw_weapons_type
+            SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_codex, w.sjw_weapons_folder, w.sjw_weapons_alias, w.sjw_weapons_type, w.sjw_weapons_rarity
             FROM sjw_weapons w
             WHERE w.sjw_weapons_sjw_id = %s
-            ORDER BY
+            ORDER BY CASE w.sjw_weapons_rarity
+                    WHEN 'SSR' THEN 1
+                    WHEN 'SR' THEN 2
+                    ELSE 3
+                END,
                 w.sjw_weapons_type,
                 w.sjw_weapons_alias
         """, (sjw_id,))
@@ -56,6 +60,7 @@ class SJWWeaponsSql:
                 'folder': weapon_folder,
                 'alias': weapon_alias,
                 'type': type,
+                'rarity': row[6],
                 'name': weapon_name,
                 'stats': weapon_stats,
                 'evolutions': self.get_evolutions(weapon_id, language, folder, weapon_folder)
@@ -65,7 +70,7 @@ class SJWWeaponsSql:
     
     def get_weapon_details(self, weapon_alias, language, folder=None, weapon_folder=None):
         self.cursor.execute("""
-            SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_codex, w.sjw_weapons_folder, w.sjw_weapons_alias, w.sjw_weapons_type
+            SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_codex, w.sjw_weapons_folder, w.sjw_weapons_alias, w.sjw_weapons_type, w.sjw_weapons_rarity
             FROM sjw_weapons w
             WHERE w.sjw_weapons_alias = %s
         """, (weapon_alias,))
@@ -75,6 +80,7 @@ class SJWWeaponsSql:
             weapon_folder = row[3]
             weapon_alias = row[4]
             type = row[5]
+            rarity = row[6]
             # Récupère la traduction pour la langue demandée
             self.cursor.execute("""
                 SELECT t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
@@ -113,6 +119,7 @@ class SJWWeaponsSql:
                 'type': type,
                 'name': weapon_name,
                 'stats': weapon_stats,
+                'rarity': rarity,
                 'evolutions': self.get_evolutions(weapon_id, language, folder, weapon_folder)
             }
             return weapon
@@ -140,12 +147,12 @@ class SJWWeaponsSql:
             }
             for row in self.cursor.fetchall()
         ]
-        
-    def update_weapon(self, wid, alias, name, stats, type, tag, language):
+
+    def update_weapon(self, wid, alias, name, stats, type, tag, rarity, language):
         self.cursor.execute("""
-            UPDATE sjw_weapons SET sjw_weapons_alias=%s, sjw_weapons_type=%s
+            UPDATE sjw_weapons SET sjw_weapons_alias=%s, sjw_weapons_type=%s, sjw_weapons_rarity=%s
             WHERE sjw_weapons_id=%s
-        """, (alias, type, wid))
+        """, (alias, type, rarity, wid))
         # Vérifie si la traduction existe
         self.cursor.execute("""
             SELECT 1 FROM sjw_weapon_translations
@@ -164,7 +171,7 @@ class SJWWeaponsSql:
                 WHERE sjw_weapon_translations_sjw_weapons_id=%s AND sjw_weapon_translations_language=%s
             """, (name, stats, tag, wid, language))
 
-    def add_weapon(self, sjw_id, alias, name, stats, type ,tag, language):
+    def add_weapon(self, sjw_id, alias, name, stats, type, rarity, tag, language):
         # Vérifie si une arme existe déjà pour ce personnage (par nom et image)
         self.cursor.execute("""
             SELECT w.sjw_weapons_id FROM sjw_weapons w
@@ -191,9 +198,9 @@ class SJWWeaponsSql:
             return wid
         else:
             self.cursor.execute("""
-                INSERT INTO sjw_weapons (sjw_weapons_sjw_id, sjw_weapons_alias, sjw_weapons_type)
-                VALUES (%s, %s, %s) RETURNING sjw_weapons_id
-            """, (sjw_id, alias, type))
+                INSERT INTO sjw_weapons (sjw_weapons_sjw_id, sjw_weapons_alias, sjw_weapons_type, sjw_weapons_rarity)
+                VALUES (%s, %s, %s, %s) RETURNING sjw_weapons_id
+            """, (sjw_id, alias, type, rarity))
             wid = self.cursor.fetchone()[0]
             self.cursor.execute("""
                 INSERT INTO sjw_weapon_translations (sjw_weapon_translations_sjw_weapons_id, sjw_weapon_translations_language, sjw_weapon_translations_name, sjw_weapon_translations_stats, sjw_weapon_translations_tag)
