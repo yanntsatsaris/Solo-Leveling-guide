@@ -82,7 +82,7 @@
                 alt="{{ weapon.name or 'Weapon Image' }}"
               />
               {% endif %}
-              <p class="weapon-name">{{ weapon.name }}</p>
+              <p hidden class="weapon-name">{{ weapon.name }}</p>
               {% if weapon.stats %}
               <p class="weapon-description">{{ weapon.stats|safe }}</p>
               {% endif %}
