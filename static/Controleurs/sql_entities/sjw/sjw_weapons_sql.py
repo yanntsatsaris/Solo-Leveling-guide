@@ -13,7 +13,8 @@ class SJWWeaponsSql:
             ORDER BY CASE w.sjw_weapons_rarity
                     WHEN 'SSR' THEN 1
                     WHEN 'SR' THEN 2
-                    ELSE 3
+                    WHEN 'R' THEN 3
+                    ELSE 4
                 END,
                 w.sjw_weapons_type,
                 w.sjw_weapons_alias
