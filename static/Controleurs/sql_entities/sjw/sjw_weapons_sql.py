@@ -10,11 +10,7 @@ class SJWWeaponsSql:
             SELECT w.sjw_weapons_id, w.sjw_weapons_image, w.sjw_weapons_codex, w.sjw_weapons_folder, w.sjw_weapons_alias, w.sjw_weapons_type
             FROM sjw_weapons w
             WHERE w.sjw_weapons_sjw_id = %s
-            ORDER BY CASE w.sjw_weapons_rarity
-                    WHEN 'SSR' THEN 1
-                    WHEN 'SR' THEN 2
-                    ELSE 3
-                END,
+            ORDER BY
                 w.sjw_weapons_type,
                 w.sjw_weapons_alias
         """, (sjw_id,))
