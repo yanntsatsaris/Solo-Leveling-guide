@@ -189,7 +189,7 @@
     margin-bottom: 20px
 }
 
-.type-button {
+.weapon-type-button {
   margin: 5px;
   padding: 10px 20px;
   background-color: #1e1e1e;
@@ -199,18 +199,18 @@
   cursor: pointer;
 }
 
-.type-button img {
+.weapon-type-button img {
   height: 20px;
   width: 20px;
 }
 
-.rarity-filter {
+.weapon-rarity-filters {
   text-align: center;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.rarity-button {
+.weapon-rarity-button {
   margin: 5px;
   padding: 10px 20px;
   background-color: #1e1e1e;

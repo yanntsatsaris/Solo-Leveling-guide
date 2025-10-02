@@ -65,28 +65,28 @@
         {% include 'partials/add_weapon_modal.html' %}
       {% endif %}
       <div class="weapon-types">
-        <button class="type-button" data-type="All">
+        <button class="weapon-type-button" data-type="All">
           All
         </button>
         {% for type in weapon_types %}
-        <button class="type-button" data-type="{{ type }}">
+        <button class="weapon-type-button" data-type="{{ type }}">
           <img src="{{ url_for('static', filename='images/Types/Type_' ~ type ~ '.webp') }}"
                alt="{{ type }}"/>
         </button>
         {% endfor %}
       </div>
       <div
-        class="rarity-filters"
+        class="weapon-rarity-filters"
       >
         <button
-          class="rarity-button"
+          class="weapon-rarity-button"
           data-rarity="All"
         >
           All
         </button>
         {% for rarity in rarities %}
         <button
-          class="rarity-button"
+          class="weapon-rarity-button"
           data-rarity="{{ rarity }}"
         >
           {{ rarity }}
@@ -130,8 +130,8 @@
 </div>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const typeButtons = document.querySelectorAll(".type-button");
-        const rarityButtons = document.querySelectorAll(".rarity-button");
+        const typeButtons = document.querySelectorAll(".weapon-type-button");
+        const rarityButtons = document.querySelectorAll(".weapon-rarity-button");
         const weaponCells = document.querySelectorAll("#weapons-table td");
 
         let selectedType = "All";
