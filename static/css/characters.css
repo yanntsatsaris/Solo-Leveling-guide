@@ -89,6 +89,11 @@ p {
   cursor: pointer;
 }
 
+.type-button img{
+  height: 15px;
+  width: 15px;
+}
+
 .rarity-filter {
   text-align: center;
   margin-bottom: 20px;
@@ -102,11 +107,6 @@ p {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
-
-.rarity-button img{
-  height: 15px;
-  width: 15px;
 }
 
 .character-table {
