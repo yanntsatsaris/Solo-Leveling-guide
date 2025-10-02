@@ -131,6 +131,9 @@ def SJW(app: Flask):
         base_path = f'images/{folder}'
         character_info['image'] = f'images/{folder}/Sung_Jinwoo.png'
         
+        weapon_types = set()
+        rarities = set()
+        
         skills = skills_sql.get_skills(character_info['id'], language)
         blessings_defensive = blessings_sql.get_defensive_blessings(character_info['id'], language)
         blessings_offensive = blessings_sql.get_offensive_blessings(character_info['id'], language)
@@ -185,6 +188,8 @@ def SJW(app: Flask):
             for evolution in weapon.get('evolutions', []):
                 evolution['description_raw'] = evolution['description']  # version brute
                 evolution['description'] = process_description(evolution['description'], all_tags, base_path)
+            weapon_types.add(weapon['type'])
+            rarities.add(weapon['rarity'])
         character_info['weapon'] = weapons
 
         # Récupération des sets d'équipement (avec artefacts et cores)
@@ -211,6 +216,8 @@ def SJW(app: Flask):
         cores_names = sorted(list({c['color'] for c in cores_effects}))
 
         sql_manager.close()
+        weapon_types = sorted(list(weapon_types))
+        rarities = sorted(list(rarities))
 
         return render_template(
             'SJW.html',

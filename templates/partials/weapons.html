@@ -64,6 +64,42 @@
         </button>
         {% include 'partials/add_weapon_modal.html' %}
       {% endif %}
+      <div
+        class="weapon-types"
+      >
+        <button
+          class="type-button"
+          data-type="All"
+        >
+          All
+        </button>
+        {% for type in weapon_types %}
+        <button
+          class="type-button"
+          data-type="{{ type }}"
+        >
+          {{ type }}
+        </button>
+        {% endfor %}
+      </div>
+      <div
+        class="rarity-filters"
+      >
+        <button
+          class="rarity-button"
+          data-rarity="All"
+        >
+          All
+        </button>
+        {% for rarity in rarities %}
+        <button
+          class="rarity-button"
+          data-rarity="{{ rarity }}"
+        >
+          {{ rarity }}
+        </button>
+        {% endfor %}
+      </div>
       <table id="weapons-table">
         <tr>
           {% for weapon in character.weapon %}
@@ -99,3 +135,39 @@
   <p>Aucune arme disponible pour ce personnage.</p>
   {% endif %}
 </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const typeButtons = document.querySelectorAll(".type-button");
+        const rarityButtons = document.querySelectorAll(".rarity-button");
+        const weaponCells = document.querySelectorAll("#weapons-table td");
+
+        let selectedType = "All";
+        let selectedRarity = "All";
+
+        function filterWeapons() {
+          weaponCells.forEach((cell) => {
+            const matchesType =
+              selectedType === "All" ||
+              cell.getAttribute("data-type") === selectedType;
+            const matchesRarity =
+              selectedRarity === "All" ||
+              cell.getAttribute("data-rarity") === selectedRarity;
+            cell.style.display = matchesType && matchesRarity ? "" : "none";
+          });
+        }
+
+        typeButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            selectedType = button.getAttribute("data-type");
+            filterWeapons();
+          });
+        });
+
+        rarityButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            selectedRarity = button.getAttribute("data-rarity");
+            filterWeapons();
+          });
+        });
+      });
+    </script>
