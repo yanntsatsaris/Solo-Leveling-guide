@@ -64,21 +64,15 @@
         </button>
         {% include 'partials/add_weapon_modal.html' %}
       {% endif %}
-      <div
-        class="weapon-types"
-      >
-        <button
-          class="type-button"
-          data-type="All"
-        >
+      <div class="weapon-types">
+        <button class="type-button" data-type="All">
           All
         </button>
         {% for type in weapon_types %}
-        <button
-          class="type-button"
-          data-type="{{ type }}"
-        >
-          {{ type }}
+        <button class="type-button" data-type="{{ type }}">
+          <img src="{{ url_for('static', filename='images/types/Type_' ~ type ~ '.webp') }}"
+               alt="{{ type }}"
+               style="height: 32px; width: 32px;" />
         </button>
         {% endfor %}
       </div>

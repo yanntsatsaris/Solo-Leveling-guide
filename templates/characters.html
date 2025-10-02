@@ -40,11 +40,10 @@
           All
         </button>
         {% for type in character_types %}
-        <button
-          class="type-button"
-          data-type="{{ type }}"
-        >
-          {{ type }}
+        <button class="type-button" data-type="{{ type }}">
+          <img src="{{ url_for('static', filename='images/types/Type_' ~ type ~ '.webp') }}"
+               alt="{{ type }}"
+               style="height: 32px; width: 32px;" />
         </button>
         {% endfor %}
       </div>
