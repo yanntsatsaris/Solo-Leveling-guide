@@ -25,6 +25,7 @@ class SJWWeaponsSql:
             weapon_folder = row[1]
             weapon_alias = row[2]
             type = row[3]
+            rarity = row[4]
             # Récupère la traduction pour la langue demandée
             self.cursor.execute("""
                 SELECT t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
@@ -48,7 +49,7 @@ class SJWWeaponsSql:
                 'folder': weapon_folder,
                 'alias': weapon_alias,
                 'type': type,
-                'rarity': row[6],
+                'rarity': rarity,
                 'name': weapon_name,
                 'stats': weapon_stats,
                 'evolutions': self.get_evolutions(weapon_id, language, folder, weapon_folder)
