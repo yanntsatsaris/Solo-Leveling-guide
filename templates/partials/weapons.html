@@ -103,7 +103,7 @@
       <table id="weapons-table">
         <tr>
           {% for weapon in character.weapon %}
-          <td>
+          <td data-type="{{ weapon.type }}" data-rarity="{{ weapon.rarity }}">
             <div class="weapon-card-codex">
               {% if weapon.alias %}
               <a href="{{ url_for('weapon_details', weaponAlias=weapon.alias) }}">
