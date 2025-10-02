@@ -226,7 +226,7 @@ def SJW(app: Flask):
             panoplies_effects=panoplies_effects,
             cores_effects=cores_effects,  # Passage à la vue
             panoplies_list=panoplies_names,
-            cores_list=cores_names  # Passage à la vue
+            cores_list=cores_names,  # Passage à la vue
             weapon_types=weapon_types,
             rarities=rarities
         )
