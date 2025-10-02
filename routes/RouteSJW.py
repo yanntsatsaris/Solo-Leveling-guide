@@ -217,7 +217,7 @@ def SJW(app: Flask):
 
         sql_manager.close()
         weapon_types = sorted(list(weapon_types))
-        rarities = sorted(list(rarities))
+        rarities = sorted(list(rarities), reverse=True)
 
         return render_template(
             'SJW.html',
