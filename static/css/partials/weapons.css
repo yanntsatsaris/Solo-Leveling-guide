@@ -185,6 +185,7 @@
 
 .weapon-type {
     text-align: center;
+    align-items: center;
     margin-bottom: 20px
 }
 
@@ -205,6 +206,7 @@
 
 .rarity-filter {
   text-align: center;
+  align-items: center;
   margin-bottom: 20px;
 }
 
