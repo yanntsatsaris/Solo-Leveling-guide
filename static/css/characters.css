@@ -104,6 +104,11 @@ p {
   cursor: pointer;
 }
 
+.rarity-button img{
+  height: 15px;
+  width: 15px;
+}
+
 .character-table {
   width: 100%;
   text-align: center

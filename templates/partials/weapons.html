@@ -71,8 +71,7 @@
         {% for type in weapon_types %}
         <button class="type-button" data-type="{{ type }}">
           <img src="{{ url_for('static', filename='images/Types/Type_' ~ type ~ '.webp') }}"
-               alt="{{ type }}"
-               style="height: 32px; width: 32px;" />
+               alt="{{ type }}"/>
         </button>
         {% endfor %}
       </div>

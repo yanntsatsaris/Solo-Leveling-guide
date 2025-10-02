@@ -213,6 +213,11 @@
   cursor: pointer;
 }
 
+.rarity-button img{
+  height: 15px;
+  width: 15px;
+}
+
 @media (max-width: 767px) {
   /* Style pour l'arme sur téléphone */
   .weapons-container {
