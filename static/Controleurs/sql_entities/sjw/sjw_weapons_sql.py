@@ -80,9 +80,9 @@ class SJWWeaponsSql:
         if row:
             weapon_id = row[0]
             weapon_folder = row[1]
-            weapon_alias = row[4]
-            type = row[5]
-            rarity = row[6]
+            weapon_alias = row[2]
+            type = row[3]
+            rarity = row[4]
             # Récupère la traduction pour la langue demandée
             self.cursor.execute("""
                 SELECT t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
