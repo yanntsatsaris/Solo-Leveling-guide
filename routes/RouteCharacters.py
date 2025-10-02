@@ -168,7 +168,7 @@ def characters(app: Flask):
             rarities.add(char_rarity)
 
         character_types = sorted(character_types)
-        rarities = sorted(rarities)
+        rarities = sorted(rarities, reverse=True)
 
         return render_template(
             'characters.html',
