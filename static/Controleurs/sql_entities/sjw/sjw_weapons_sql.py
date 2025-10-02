@@ -36,12 +36,25 @@ class SJWWeaponsSql:
             weapon_name = trans_row[0] if trans_row else ''
             weapon_stats = trans_row[1] if trans_row else ''
             # Gestion des images (identique à ton code actuel)
-            custom_folder = f"{type}_{weapon_alias}"
-            base_dir = os.path.join('static', 'images', folder, 'Armes', custom_folder) if folder and custom_folder else None
-            webp_image = f"{custom_folder}_Arme.webp"
-            webp_codex = f"{custom_folder}_Codex.webp"
-            image_path = f'images/{folder}/Armes/{custom_folder}/{webp_image}' if base_dir and os.path.isfile(os.path.join(base_dir, webp_image)) else f'images/{folder}/Armes/{custom_folder}/{webp_image}'
-            codex_path = f'images/{folder}/Armes/{custom_folder}/{webp_codex}' if base_dir and os.path.isfile(os.path.join(base_dir, webp_codex)) else f'images/{folder}/Armes/{custom_folder}/{webp_codex}'
+            custom_folder = f"{type}_{weapon_alias}" if type and weapon_alias else None
+            base_dir_custom = os.path.join('static', 'images', folder, 'Armes', custom_folder) if folder and custom_folder else None
+            base_dir_bdd = os.path.join('static', 'images', folder, 'Armes', weapon_folder) if folder and weapon_folder else None
+            if base_dir_custom and os.path.isdir(base_dir_custom):
+                used_folder = custom_folder
+                base_dir = base_dir_custom
+            else:
+                used_folder = weapon_folder
+                base_dir = base_dir_bdd
+            webp_image = f"{type}_{weapon_alias}_Arme.webp" if weapon_alias else None
+            webp_codex = f"{type}_{weapon_alias}_Codex.webp" if weapon_alias else None
+            if base_dir and webp_image and os.path.isfile(os.path.join(base_dir, webp_image)):
+                image_path = f'images/{folder}/Armes/{used_folder}/{webp_image}'
+            else:
+                image_path = f'images/{folder}/Armes/{used_folder}/{row[1]}' if folder and used_folder else row[1]
+            if base_dir and webp_codex and os.path.isfile(os.path.join(base_dir, webp_codex)):
+                codex_path = f'images/{folder}/Armes/{used_folder}/{webp_codex}'
+            else:
+                codex_path = f'images/{folder}/Armes/{used_folder}/{row[2]}' if folder and used_folder else row[2]
             weapon = {
                 'id': weapon_id,
                 'image': image_path,
@@ -67,9 +80,9 @@ class SJWWeaponsSql:
         if row:
             weapon_id = row[0]
             weapon_folder = row[1]
-            weapon_alias = row[2]
-            type = row[3]
-            rarity = row[4]
+            weapon_alias = row[4]
+            type = row[5]
+            rarity = row[6]
             # Récupère la traduction pour la langue demandée
             self.cursor.execute("""
                 SELECT t.sjw_weapon_translations_name, t.sjw_weapon_translations_stats
@@ -80,12 +93,25 @@ class SJWWeaponsSql:
             weapon_name = trans_row[0] if trans_row else ''
             weapon_stats = trans_row[1] if trans_row else ''
             # Gestion des images (identique à ton code actuel)
-            custom_folder = f"{type}_{weapon_alias}"
-            base_dir = os.path.join('static', 'images', folder, 'Armes', custom_folder) if folder and custom_folder else None
-            webp_image = f"{custom_folder}_Arme.webp"
-            webp_codex = f"{custom_folder}_Codex.webp"
-            image_path = f'images/{folder}/Armes/{custom_folder}/{webp_image}' if base_dir and os.path.isfile(os.path.join(base_dir, webp_image)) else f'images/{folder}/Armes/{custom_folder}/{webp_image}'
-            codex_path = f'images/{folder}/Armes/{custom_folder}/{webp_codex}' if base_dir and os.path.isfile(os.path.join(base_dir, webp_codex)) else f'images/{folder}/Armes/{custom_folder}/{webp_codex}'
+            custom_folder = f"{type}_{weapon_alias}" if type and weapon_alias else None
+            base_dir_custom = os.path.join('static', 'images', folder, 'Armes', custom_folder) if folder and custom_folder else None
+            base_dir_bdd = os.path.join('static', 'images', folder, 'Armes', weapon_folder) if folder and weapon_folder else None
+            if base_dir_custom and os.path.isdir(base_dir_custom):
+                used_folder = custom_folder
+                base_dir = base_dir_custom
+            else:
+                used_folder = weapon_folder
+                base_dir = base_dir_bdd
+            webp_image = f"{type}_{weapon_alias}_Arme.webp" if weapon_alias else None
+            webp_codex = f"{type}_{weapon_alias}_Codex.webp" if weapon_alias else None
+            if base_dir and webp_image and os.path.isfile(os.path.join(base_dir, webp_image)):
+                image_path = f'images/{folder}/Armes/{used_folder}/{webp_image}'
+            else:
+                image_path = f'images/{folder}/Armes/{used_folder}/{row[1]}' if folder and used_folder else row[1]
+            if base_dir and webp_codex and os.path.isfile(os.path.join(base_dir, webp_codex)):
+                codex_path = f'images/{folder}/Armes/{used_folder}/{webp_codex}'
+            else:
+                codex_path = f'images/{folder}/Armes/{used_folder}/{row[2]}' if folder and used_folder else row[2]
             weapon = {
                 'id': weapon_id,
                 'image': image_path,
