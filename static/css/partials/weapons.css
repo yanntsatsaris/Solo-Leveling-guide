@@ -184,9 +184,8 @@
 }
 
 .weapon-type {
-    text-align: center;
-    align-items: center;
-    margin-bottom: 20px
+  text-align: center;
+  margin-bottom: 20px
 }
 
 .weapon-type-button {
@@ -206,7 +205,6 @@
 
 .weapon-rarity-filters {
   text-align: center;
-  align-items: center;
   margin-bottom: 20px;
 }
 
