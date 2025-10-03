@@ -608,13 +608,18 @@ def SJW(app: Flask):
     def check_image_folder_skill():
         write_log("Vérification du dossier d'images pour le skill SJW", log_level="INFO")
         type = request.args.get('type', '')
+        write_log(f"Type de skill : {type}", log_level="INFO")
         order = request.args.get('order', '')
+        write_log(f"Ordre du skill : {order}", log_level="INFO")
         folder_name = f"{order}_{type}"
+        write_log(f"Nom du dossier : {folder_name}", log_level="INFO")
         if type == 'skill':
             folder_type = 'Skills'
+        write_log(f"Type de dossier : {folder_type}", log_level="INFO")
         folder_path = os.path.join(
             'static', 'images', 'Sung_Jinwoo', folder_type, folder_name
         )
+        write_log(f"Chemin du dossier : {folder_path}", log_level="INFO")
         write_log(f"Vérification de l'existence du dossier : {folder_path}", log_level="INFO")
         exists = os.path.isdir(folder_path)
         return jsonify({'exists': exists, 'folder': folder_name})
