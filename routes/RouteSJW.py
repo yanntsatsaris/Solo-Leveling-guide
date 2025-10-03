@@ -603,7 +603,7 @@ def SJW(app: Flask):
         images = sorted([f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))])
         return jsonify(images)
     
-    @app.route('/sjw/add_skill/check_image_folder_skill')
+    @app.route('/SJW/add_skill/check_image_folder_skill')
     @login_required
     def check_image_folder_skill():
         write_log("Vérification du dossier d'images pour le skill SJW", log_level="INFO")
