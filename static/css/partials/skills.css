@@ -26,27 +26,42 @@
   margin: 0; /* Supprime les marges inutiles */
 }
 
-.sjw-tabs {
+.sjw-inner-tabs {
   margin-bottom: 1em;
 }
-.sjw-tab-btn {
+.sjw-inner-tab-btns {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.sjw-inner-tab-btn {
   margin-right: 8px;
   padding: 6px 18px;
   cursor: pointer;
-}
-.sjw-tab-btn.active {
-  background: #222;
+  background: #1e1e1e;
   color: #fff;
+  border: none;
+  border-radius: 6px 6px 0 0;
+  font-weight: bold;
+  transition: background 0.2s, color 0.2s;
 }
-.sjw-tab-content {
+.sjw-inner-tab-btn.active {
+  background: #ffcc00;
+  color: #121212;
+}
+.sjw-inner-tab-content {
   display: none;
+  background: #1e1e1e;
+  border-radius: 0 0 8px 8px;
+  padding: 10px 0 0 0;
 }
-.sjw-tab-content.active {
+.sjw-inner-tab-content.active {
   display: block;
 }
 .sjw-skill-images {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
 }
 .sjw-skill-block {
   margin: 8px;
