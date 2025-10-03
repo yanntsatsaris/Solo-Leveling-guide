@@ -22,8 +22,8 @@
           onmouseleave="hideGemTooltip('{{ color }}-{{ i }}')"
         >
           <div class="gem-tooltip" id="gem-tooltip-{{ color }}-{{ i }}">
-            <strong>{{ label }} {{ i+1 }}</strong><br />
-            +10% {{ gem_infos[color] if color in gem_infos else '' }}
+            <strong>{{ label }}</strong><br />
+            {{ gem_infos[color] if color in gem_infos else '' }}
           </div>
         </div>
       {% endfor %}
