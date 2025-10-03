@@ -637,13 +637,12 @@ def SJW(app: Flask):
         write_log(f"Skill SJW ajouté avec succès", log_level="INFO")
         return redirect(url_for('inner_SJW'))
 
-    @app.route('/SJW/skill_images/<type>/<order>')
+    @app.route('/SJW/skill_images')
     @login_required
-    def skill_images(type, order):
-        # Sécurise les noms
-        type = type.replace('..', '').replace('/', '').replace('\\', '')
-        order = order.replace('..', '').replace('/', '').replace('\\', '')
-        if type == 'skill':
+    def skill_images():
+        type = request.args.get('type', '').replace('..', '').replace('/', '').replace('\\', '')
+        order = request.args.get('order', '').replace('..', '').replace('/', '').replace('\\', '')
+        if type == 'Skill':
             folder_type = 'Skills'
         img_dir = os.path.join('static', 'images', 'Sung_Jinwoo', folder_type, order)
         if not os.path.isdir(img_dir):
