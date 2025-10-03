@@ -361,9 +361,20 @@
 }
 
 /* Checkbox row for gems */
+.gem-fields-row label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: bold;
+  color: #ffcc00;
+  margin-bottom: 0;
+  margin-right: 18px;
+}
+
 .gem-fields-row label input[type="checkbox"] {
-  margin-right: 4px;
+  margin: 0 4px 0 0;
   accent-color: #ffcc00;
+  vertical-align: middle;
 }
 
 /* Pour le responsive si besoin */
