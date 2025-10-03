@@ -99,7 +99,7 @@ document.getElementById('add-sjw-skill-btn')?.addEventListener('click', async fu
     // Vérifie si le dossier existe côté serveur (nécessite une route Flask dédiée)
     let folderExists = false;
     try {
-        const resp = await fetch(`/SJW/add_skill/check_image_folder_skill`);
+        const resp = await fetch(`/SJW/add_skill/check_image_folder_skill?type=${encodeURIComponent(type)}&order=${encodeURIComponent(order)}`);
         folderExists = (await resp.json()).exists;
     } catch (e) {
         folderExists = false;
