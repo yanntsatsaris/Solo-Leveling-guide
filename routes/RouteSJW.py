@@ -611,6 +611,10 @@ def SJW(app: Flask):
         folder_name = f"{order}_{type}"
         if type == 'Skill':
             folder_type = 'Skills'
+        if type == 'QTE':
+            folder_type = 'QTE'
+        if type == 'Ultime':
+            folder_type = 'Ultime'
         folder_path = os.path.join(
             'static', 'images', 'Sung_Jinwoo', folder_type, folder_name
         )
@@ -639,6 +643,10 @@ def SJW(app: Flask):
         folder_name = f"{order}_{type}"
         if type == 'Skill':
             folder_type = 'Skills'
+        if type == 'QTE':
+            folder_type = 'QTE'
+        if type == 'Ultime':
+            folder_type = 'Ultime'
         img_dir = os.path.join('static', 'images', 'Sung_Jinwoo', folder_type, folder_name)
         if not os.path.isdir(img_dir):
             write_log(f"Le dossier d'images n'existe pas : {img_dir}", log_level="WARNING")
