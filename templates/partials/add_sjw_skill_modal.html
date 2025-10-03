@@ -186,6 +186,26 @@ const gemTypes = ["Dark", "Fire", "Light", "Neutre", "Water", "Wind"];
 let gemCount = 0;
 const maxGems = 4;
 
+// Désactive le bouton d'ajout de gem si type = Ultime
+function checkGemBtnAvailability() {
+    const type = document.querySelector('#add-sjw-skill-form select[name="type"]').value;
+    const addBtn = document.getElementById('add-sjw-skill-gem-btn');
+    if (type === "Ultime") {
+        addBtn.style.display = "none";
+        // Supprime tous les gems déjà ajoutés
+        document.getElementById('sjw-skill-gems-container').innerHTML = "";
+        gemCount = 0;
+    } else {
+        updateAddGemBtn();
+    }
+}
+
+// Sur changement du type, on vérifie la disponibilité du bouton
+document.querySelector('#add-sjw-skill-form select[name="type"]').addEventListener('change', checkGemBtnAvailability);
+
+// Appel initial au chargement de la modale
+checkGemBtnAvailability();
+
 function updateAddGemBtn() {
     document.getElementById('add-sjw-skill-gem-btn').style.display = (gemCount < maxGems) ? '' : 'none';
 }
@@ -332,26 +352,6 @@ function addGemField(order) {
     gemCount++;
     updateAddGemBtn();
 }
-
-// Désactive le bouton d'ajout de gem si type = Ultime
-function checkGemBtnAvailability() {
-    const type = document.querySelector('#add-sjw-skill-form select[name="type"]').value;
-    const addBtn = document.getElementById('add-sjw-skill-gem-btn');
-    if (type === "Ultime") {
-        addBtn.style.display = "none";
-        // Supprime tous les gems déjà ajoutés
-        document.getElementById('sjw-skill-gems-container').innerHTML = "";
-        gemCount = 0;
-    } else {
-        updateAddGemBtn();
-    }
-}
-
-// Sur changement du type, on vérifie la disponibilité du bouton
-document.querySelector('#add-sjw-skill-form select[name="type"]').addEventListener('change', checkGemBtnAvailability);
-
-// Appel initial au chargement de la modale
-checkGemBtnAvailability();
 
 document.getElementById('add-sjw-skill-gem-btn').onclick = function() {
     if (gemCount < maxGems) {
