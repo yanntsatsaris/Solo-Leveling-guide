@@ -48,6 +48,8 @@
     </form>
   </div>
 </div>
+<div id="sjw-skill-gems-container"></div>
+<button type="button" id="add-sjw-skill-gem-btn" class="admin-btn" style="margin-top:10px;">Ajouter une gem</button>
 <script>
 document.getElementById('add-sjw-skill-btn')?.addEventListener('click', async function() {
     // Demande les infos de base
@@ -181,4 +183,58 @@ if (addOverlaySJW && addPopupSJW) {
         }
     });
 }
+
+const gemTypes = ["Water", "Fire", "Light", "Dark", "Wind"];
+let gemCount = 0;
+const maxGems = 4;
+
+function updateAddGemBtn() {
+    document.getElementById('add-sjw-skill-gem-btn').style.display = (gemCount < maxGems) ? '' : 'none';
+}
+
+function addGemField(order) {
+    const container = document.getElementById('sjw-skill-gems-container');
+    const gemDiv = document.createElement('div');
+    gemDiv.className = 'sjw-skill-gem-block';
+    gemDiv.style.marginBottom = '10px';
+    gemDiv.innerHTML = `
+        <fieldset style="border:1px solid #ccc; padding:8px; border-radius:6px;">
+            <legend>Gem #${order+1}</legend>
+            <label>Type :</label>
+            <select name="gems[${order}][type]" required>
+                ${gemTypes.map(t => `<option value="${t}">${t}</option>`).join('')}
+            </select>
+            <label>Alias :</label>
+            <input type="text" name="gems[${order}][alias]" required style="width:80px;">
+            <label>Image :</label>
+            <input type="text" name="gems[${order}][image]" placeholder="Nom de l'image .webp" required style="width:180px;">
+            <input type="hidden" name="gems[${order}][order]" value="${order}">
+            <button type="button" class="remove-gem-btn" style="margin-left:10px;">Supprimer</button>
+        </fieldset>
+    `;
+    container.appendChild(gemDiv);
+
+    gemDiv.querySelector('.remove-gem-btn').onclick = function() {
+        gemDiv.remove();
+        gemCount--;
+        updateAddGemBtn();
+        // Réattribue les ordres et noms
+        Array.from(container.children).forEach((div, idx) => {
+            div.querySelector('legend').textContent = `Gem #${idx+1}`;
+            div.querySelector('input[type="hidden"]').value = idx;
+            div.querySelector('select').name = `gems[${idx}][type]`;
+            div.querySelector('input[type="text"][name^="gems"][name$="[alias]"]').name = `gems[${idx}][alias]`;
+            div.querySelector('input[type="text"][name^="gems"][name$="[image]"]').name = `gems[${idx}][image]`;
+        });
+    };
+    gemCount++;
+    updateAddGemBtn();
+}
+
+document.getElementById('add-sjw-skill-gem-btn').onclick = function() {
+    if (gemCount < maxGems) {
+        addGemField(gemCount);
+    }
+};
+updateAddGemBtn();
 </script>
