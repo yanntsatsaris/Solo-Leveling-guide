@@ -606,6 +606,7 @@ def SJW(app: Flask):
     @app.route('/sjw/add_skill/check_image_folder_skill/<type>/<order>')
     @login_required
     def check_image_folder_skill(type, order):
+        write_log(f"Vérification du dossier pour le skill SJW : type={type}, order={order}", log_level="INFO")
         folder_name = f"{order}_{type}"
         if type == 'skill':
             folder_type = 'Skills'
