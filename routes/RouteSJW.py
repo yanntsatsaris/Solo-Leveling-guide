@@ -606,20 +606,14 @@ def SJW(app: Flask):
     @app.route('/SJW/add_skill/check_image_folder_skill')
     @login_required
     def check_image_folder_skill():
-        write_log("Vérification du dossier d'images pour le skill SJW", log_level="INFO")
         type = request.args.get('type', '')
-        write_log(f"Type de skill : {type}", log_level="INFO")
         order = request.args.get('order', '')
-        write_log(f"Ordre du skill : {order}", log_level="INFO")
         folder_name = f"{order}_{type}"
-        write_log(f"Nom du dossier : {folder_name}", log_level="INFO")
         if type == 'Skill':
             folder_type = 'Skills'
-        write_log(f"Type de dossier : {folder_type}", log_level="INFO")
         folder_path = os.path.join(
             'static', 'images', 'Sung_Jinwoo', folder_type, folder_name
         )
-        write_log(f"Chemin du dossier : {folder_path}", log_level="INFO")
         write_log(f"Vérification de l'existence du dossier : {folder_path}", log_level="INFO")
         exists = os.path.isdir(folder_path)
         return jsonify({'exists': exists, 'folder': folder_name})
@@ -640,11 +634,16 @@ def SJW(app: Flask):
     @app.route('/SJW/skill_images')
     @login_required
     def skill_images():
+        write_log("Récupération des images de skill SJW", log_level="INFO")
         type = request.args.get('type', '').replace('..', '').replace('/', '').replace('\\', '')
+        write_log(f"Type d'image demandé : {type}", log_level="INFO")
         order = request.args.get('order', '').replace('..', '').replace('/', '').replace('\\', '')
+        write_log(f"Ordre d'image demandé : {order}", log_level="INFO")
         if type == 'Skill':
             folder_type = 'Skills'
+        write_log(f"Dossier d'images déterminé : {folder_type}/{order}", log_level="INFO")
         img_dir = os.path.join('static', 'images', 'Sung_Jinwoo', folder_type, order)
+        write_log(f"Chemin complet du dossier d'images : {img_dir}", log_level="INFO")
         if not os.path.isdir(img_dir):
             write_log(f"Le dossier d'images n'existe pas : {img_dir}", log_level="WARNING")
             return jsonify([])

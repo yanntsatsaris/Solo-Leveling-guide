@@ -87,7 +87,7 @@
         // Vérifie si le dossier existe côté serveur (nécessite une route Flask dédiée)
         let folderExists = false;
         try {
-        const resp = await fetch(`/sjw/add_shadow/check_image_folder_shadow?alias=${encodeURIComponent(alias)}`);
+        const resp = await fetch(`/SJW/add_shadow/check_image_folder_shadow?alias=${encodeURIComponent(alias)}`);
         folderExists = (await resp.json()).exists;
         } catch (e) {
         // Si la vérification échoue, on continue quand même
