@@ -230,6 +230,43 @@ function addGemField(order) {
                 <input type="hidden" name="gems[${order}][order]" value="${order}">
                 <button type="button" class="remove-gem-btn admin-btn" style="margin-left:10px; padding:4px 12px;">Supprimer</button>
             </div>
+            <div class="gem-fields-row">
+                <label><input type="checkbox" name="gems[${order}][break]"> Break</label>
+                <label><input type="checkbox" class="gem-buff-check" name="gems[${order}][buff]"> Buff</label>
+                <label><input type="checkbox" class="gem-debuff-check" name="gems[${order}][debuff]"> Debuff</label>
+            </div>
+            <div class="gem-buff-fields" style="display:none; margin-top:8px; border-top:1px dashed #555; padding-top:8px;">
+                <div style="margin-bottom:4px;">
+                    <label>Nom du Buff :</label>
+                    <input type="text" name="gems[${order}][buff_name]">
+                </div>
+                <div style="margin-bottom:4px;">
+                    <label>Image du Buff :</label>
+                    <select name="gems[${order}][buff_image]" class="gem-buff-image-select">
+                        <option value="">Chargement...</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Description du Buff :</label>
+                    <textarea name="gems[${order}][buff_description]" rows="2" style="width:100%;"></textarea>
+                </div>
+            </div>
+            <div class="gem-debuff-fields" style="display:none; margin-top:8px; border-top:1px dashed #555; padding-top:8px;">
+                <div style="margin-bottom:4px;">
+                    <label>Nom du Debuff :</label>
+                    <input type="text" name="gems[${order}][debuff_name]">
+                </div>
+                <div style="margin-bottom:4px;">
+                    <label>Image du Debuff :</label>
+                    <select name="gems[${order}][debuff_image]" class="gem-debuff-image-select">
+                        <option value="">Chargement...</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Description du Debuff :</label>
+                    <textarea name="gems[${order}][debuff_description]" rows="2" style="width:100%;"></textarea>
+                </div>
+            </div>
         </fieldset>
     `;
     container.appendChild(gemDiv);
@@ -241,16 +278,35 @@ function addGemField(order) {
         .then(resp => resp.json())
         .then(images => {
             const select = gemDiv.querySelector('.gem-image-select');
+            const buffSelect = gemDiv.querySelector('.gem-buff-image-select');
+            const debuffSelect = gemDiv.querySelector('.gem-debuff-image-select');
             if (images.length > 0) {
-                select.innerHTML = images.map(img => `<option value="${img}">${img}</option>`).join('');
+                const opts = images.map(img => `<option value="${img}">${img}</option>`).join('');
+                select.innerHTML = opts;
+                buffSelect.innerHTML = opts;
+                debuffSelect.innerHTML = opts;
             } else {
                 select.innerHTML = '<option value="">Aucune image trouvée</option>';
+                buffSelect.innerHTML = '<option value="">Aucune image trouvée</option>';
+                debuffSelect.innerHTML = '<option value="">Aucune image trouvée</option>';
             }
         })
         .catch(() => {
             const select = gemDiv.querySelector('.gem-image-select');
+            const buffSelect = gemDiv.querySelector('.gem-buff-image-select');
+            const debuffSelect = gemDiv.querySelector('.gem-debuff-image-select');
             select.innerHTML = '<option value="">Erreur lors du chargement</option>';
+            buffSelect.innerHTML = '<option value="">Erreur lors du chargement</option>';
+            debuffSelect.innerHTML = '<option value="">Erreur lors du chargement</option>';
         });
+
+    // Affichage dynamique des champs buff/debuff
+    gemDiv.querySelector('.gem-buff-check').addEventListener('change', function() {
+        gemDiv.querySelector('.gem-buff-fields').style.display = this.checked ? '' : 'none';
+    });
+    gemDiv.querySelector('.gem-debuff-check').addEventListener('change', function() {
+        gemDiv.querySelector('.gem-debuff-fields').style.display = this.checked ? '' : 'none';
+    });
 
     // Suppression de la gem
     gemDiv.querySelector('.remove-gem-btn').onclick = function() {
@@ -266,6 +322,13 @@ function addGemField(order) {
             div.querySelector('select[name^="gems"][name$="[image]"]').name = `gems[${idx}][image]`;
             div.querySelector('input[name^="gems"][name$="[name]"]').name = `gems[${idx}][name]`;
             div.querySelector('textarea[name^="gems"][name$="[description]"]').name = `gems[${idx}][description]`;
+            // Buff/Debuff
+            div.querySelector('input[name^="gems"][name$="[buff_name]"]').name = `gems[${idx}][buff_name]`;
+            div.querySelector('select[name^="gems"][name$="[buff_image]"]').name = `gems[${idx}][buff_image]`;
+            div.querySelector('textarea[name^="gems"][name$="[buff_description]"]').name = `gems[${idx}][buff_description]`;
+            div.querySelector('input[name^="gems"][name$="[debuff_name]"]').name = `gems[${idx}][debuff_name]`;
+            div.querySelector('select[name^="gems"][name$="[debuff_image]"]').name = `gems[${idx}][debuff_image]`;
+            div.querySelector('textarea[name^="gems"][name$="[debuff_description]"]').name = `gems[${idx}][debuff_description]`;
         });
     };
     gemCount++;
