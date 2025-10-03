@@ -1,9 +1,9 @@
-{% set gem_colors = [
-    ('red', 'Rouge', 8),
-    ('blue', 'Bleu', 8),
-    ('green', 'Verte', 8),
-    ('yellow', 'Jaune', 8),
-    ('purple', 'Violette', 8)
+{% set color_labels = [
+    ('red', {'FR_fr': 'Rouge', 'EN_en': 'Red'}, 8),
+    ('blue', {'FR_fr': 'Bleu', 'EN_en': 'Blue'}, 8),
+    ('green', {'FR_fr': 'Verte', 'EN_en': 'Green'}, 8),
+    ('yellow', {'FR_fr': 'Jaune', 'EN_en': 'Yellow'}, 8),
+    ('purple', {'FR_fr': 'Violette', 'EN_en': 'Purple'}, 8)
 ] %}
 
 <div id="gems" class="tab-content">
@@ -14,7 +14,8 @@
       alt="Gems"
       style="max-width: 100%"
     />
-    {% for color, label, count in gem_colors %}
+    {% for color, labels, count in color_labels %}
+      {% set stat = character.gems[color] if color in character.gems else '' %}
       {% for i in range(count) %}
         <div
           class="gem-hotspot gem-{{ color }}-{{ i }}"
@@ -22,8 +23,8 @@
           onmouseleave="hideGemTooltip('{{ color }}-{{ i }}')"
         >
           <div class="gem-tooltip" id="gem-tooltip-{{ color }}-{{ i }}">
-            <strong>{{ label }}</strong><br />
-            {{ gems[color] if color in gems else '' }}
+            <strong>{{ labels[language] }}</strong><br />
+            {{ stat }}
           </div>
         </div>
       {% endfor %}
