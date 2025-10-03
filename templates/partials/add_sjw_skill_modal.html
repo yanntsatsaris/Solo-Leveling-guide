@@ -198,77 +198,77 @@ function addGemField(order) {
     gemDiv.className = 'sjw-skill-gem-block';
     gemDiv.style.marginBottom = '10px';
     gemDiv.innerHTML = `
-        <fieldset class="edit-sjw-skill-gem-fieldset">
-            <legend>Gem #${order+1}</legend>
-            <div class="gem-fields-row">
-                <div style="flex:1; min-width:120px;">
-                    <label>Type :</label>
-                    <select name="gems[${order}][type]" required>
-                        ${gemTypes.map(t => `<option value="${t}">${t}</option>`).join('')}
-                    </select>
-                </div>
-                <div style="flex:1; min-width:120px;">
-                    <label>Alias :</label>
-                    <input type="text" name="gems[${order}][alias]" required style="width:80px;">
-                </div>
-                <div style="flex:2; min-width:200px;">
-                    <label>Image :</label>
-                    <select name="gems[${order}][image]" class="gem-image-select" required>
-                        <option value="">Chargement...</option>
-                    </select>
-                </div>
+    <fieldset class="edit-sjw-skill-gem-fieldset">
+        <legend>Gem #${order+1}</legend>
+        <div class="gem-fields-row">
+            <div class="gem-type-field">
+                <label>Type :</label>
+                <select name="gems[${order}][type]" required>
+                    ${gemTypes.map(t => `<option value="${t}">${t}</option>`).join('')}
+                </select>
             </div>
-            <div class="gem-fields-row">
-                <div style="flex:2; min-width:160px;">
-                    <label>Nom :</label>
-                    <input type="text" name="gems[${order}][name]" required>
-                </div>
-                <div style="flex:3; min-width:220px;">
-                    <label>Description :</label>
-                    <textarea name="gems[${order}][description]" rows="2" style="width:100%;"></textarea>
-                </div>
-                <input type="hidden" name="gems[${order}][order]" value="${order}">
-                <button type="button" class="remove-gem-btn admin-btn" style="margin-left:10px; padding:4px 12px;">Supprimer</button>
+            <div class="gem-alias-field">
+                <label>Alias :</label>
+                <input type="text" name="gems[${order}][alias]" required>
             </div>
-            <div class="gem-fields-row">
-                <label><input type="checkbox" name="gems[${order}][break]"> Break</label>
-                <label><input type="checkbox" class="gem-buff-check" name="gems[${order}][buff]"> Buff</label>
-                <label><input type="checkbox" class="gem-debuff-check" name="gems[${order}][debuff]"> Debuff</label>
+            <div class="gem-image-field">
+                <label>Image :</label>
+                <select name="gems[${order}][image]" class="gem-image-select" required>
+                    <option value="">Chargement...</option>
+                </select>
             </div>
-            <div class="gem-buff-fields" style="display:none; margin-top:8px; border-top:1px dashed #555; padding-top:8px;">
-                <div style="margin-bottom:4px;">
-                    <label>Nom du Buff :</label>
-                    <input type="text" name="gems[${order}][buff_name]">
-                </div>
-                <div style="margin-bottom:4px;">
-                    <label>Image du Buff :</label>
-                    <select name="gems[${order}][buff_image]" class="gem-buff-image-select">
-                        <option value="">Chargement...</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Description du Buff :</label>
-                    <textarea name="gems[${order}][buff_description]" rows="2" style="width:100%;"></textarea>
-                </div>
+        </div>
+        <div class="gem-fields-row">
+            <div class="gem-name-field">
+                <label>Nom :</label>
+                <input type="text" name="gems[${order}][name]" required>
             </div>
-            <div class="gem-debuff-fields" style="display:none; margin-top:8px; border-top:1px dashed #555; padding-top:8px;">
-                <div style="margin-bottom:4px;">
-                    <label>Nom du Debuff :</label>
-                    <input type="text" name="gems[${order}][debuff_name]">
-                </div>
-                <div style="margin-bottom:4px;">
-                    <label>Image du Debuff :</label>
-                    <select name="gems[${order}][debuff_image]" class="gem-debuff-image-select">
-                        <option value="">Chargement...</option>
-                    </select>
-                </div>
-                <div>
-                    <label>Description du Debuff :</label>
-                    <textarea name="gems[${order}][debuff_description]" rows="2" style="width:100%;"></textarea>
-                </div>
+            <div class="gem-description-field">
+                <label>Description :</label>
+                <textarea name="gems[${order}][description]" rows="2"></textarea>
             </div>
-        </fieldset>
-    `;
+            <input type="hidden" name="gems[${order}][order]" value="${order}">
+            <button type="button" class="remove-gem-btn admin-btn">Supprimer</button>
+        </div>
+        <div class="gem-fields-row">
+            <label><input type="checkbox" name="gems[${order}][break]"> Break</label>
+            <label><input type="checkbox" class="gem-buff-check" name="gems[${order}][buff]"> Buff</label>
+            <label><input type="checkbox" class="gem-debuff-check" name="gems[${order}][debuff]"> Debuff</label>
+        </div>
+        <div class="gem-buff-fields" style="display:none;">
+            <div class="gem-buff-name-field">
+                <label>Nom du Buff :</label>
+                <input type="text" name="gems[${order}][buff_name]">
+            </div>
+            <div class="gem-buff-image-field">
+                <label>Image du Buff :</label>
+                <select name="gems[${order}][buff_image]" class="gem-buff-image-select">
+                    <option value="">Chargement...</option>
+                </select>
+            </div>
+            <div class="gem-buff-description-field">
+                <label>Description du Buff :</label>
+                <textarea name="gems[${order}][buff_description]" rows="2"></textarea>
+            </div>
+        </div>
+        <div class="gem-debuff-fields" style="display:none;">
+            <div class="gem-debuff-name-field">
+                <label>Nom du Debuff :</label>
+                <input type="text" name="gems[${order}][debuff_name]">
+            </div>
+            <div class="gem-debuff-image-field">
+                <label>Image du Debuff :</label>
+                <select name="gems[${order}][debuff_image]" class="gem-debuff-image-select">
+                    <option value="">Chargement...</option>
+                </select>
+            </div>
+            <div class="gem-debuff-description-field">
+                <label>Description du Debuff :</label>
+                <textarea name="gems[${order}][debuff_description]" rows="2"></textarea>
+            </div>
+        </div>
+    </fieldset>
+`;
     container.appendChild(gemDiv);
 
     // Remplir le select d'image pour la gem

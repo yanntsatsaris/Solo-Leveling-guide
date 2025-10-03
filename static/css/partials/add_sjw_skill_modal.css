@@ -229,27 +229,43 @@
   background: #ffe066;
 }
 
-/* Gem Fields */
+/* Gems Fieldset */
 .edit-sjw-skill-gem-fieldset {
-  border: 1px solid #444;
-  border-radius: 8px;
+  border: 1.5px solid #444;
+  border-radius: 10px;
   background: #232323;
-  margin-bottom: 8px;
-  padding: 10px 12px;
+  margin-bottom: 14px;
+  padding: 14px 16px 10px 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  position: relative;
 }
+.edit-sjw-skill-gem-fieldset legend {
+  color: #ffcc00;
+  font-weight: bold;
+  font-size: 1.1em;
+  padding: 0 8px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 6px #8000ff44;
+}
+
 .gem-fields-row {
   display: flex;
   gap: 18px;
   align-items: flex-end;
   flex-wrap: wrap;
+  margin-bottom: 8px;
 }
+
 .sjw-skill-gem-block label {
   color: #ffcc00;
   font-weight: bold;
   margin-bottom: 2px;
+  display: block;
 }
+
 .sjw-skill-gem-block select,
-.sjw-skill-gem-block input[type="text"] {
+.sjw-skill-gem-block input[type="text"],
+.sjw-skill-gem-block textarea {
   background: #333;
   color: #fff;
   border: 1px solid #444;
@@ -258,7 +274,15 @@
   font-size: 14px;
   margin-top: 1.5px;
   margin-bottom: 4px;
+  width: 100%;
+  box-sizing: border-box;
 }
+
+.sjw-skill-gem-block textarea {
+  min-height: 38px;
+  resize: vertical;
+}
+
 .sjw-skill-gem-block .remove-gem-btn {
   background: #8000ff;
   color: #fff;
@@ -268,10 +292,65 @@
   border: none;
   cursor: pointer;
   transition: background 0.2s;
+  padding: 6px 16px;
+  margin-top: 6px;
 }
 .sjw-skill-gem-block .remove-gem-btn:hover {
   background: #ffcc00;
   color: #121212;
+}
+
+.gem-buff-fields,
+.gem-debuff-fields {
+  background: #292929;
+  border-radius: 7px;
+  margin-top: 10px;
+  padding: 10px 12px 8px 12px;
+  border: 1px dashed #555;
+}
+
+.gem-buff-fields label,
+.gem-debuff-fields label {
+  color: #80ff80;
+  font-weight: bold;
+}
+
+.gem-debuff-fields label {
+  color: #ff8080;
+}
+
+.gem-buff-fields textarea,
+.gem-debuff-fields textarea {
+  background: #222;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 5px;
+  padding: 4px;
+  font-size: 13px;
+  margin-top: 2px;
+  margin-bottom: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gem-buff-fields select,
+.gem-debuff-fields select {
+  background: #333;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 5px;
+  font-size: 14px;
+  margin-top: 1.5px;
+  margin-bottom: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Checkbox row for gems */
+.gem-fields-row label input[type="checkbox"] {
+  margin-right: 4px;
+  accent-color: #ffcc00;
 }
 
 /* Pour le responsive si besoin */
