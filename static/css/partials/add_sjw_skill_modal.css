@@ -229,6 +229,51 @@
   background: #ffe066;
 }
 
+/* Gem Fields */
+.edit-sjw-skill-gem-fieldset {
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: #232323;
+  margin-bottom: 8px;
+  padding: 10px 12px;
+}
+.gem-fields-row {
+  display: flex;
+  gap: 18px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.sjw-skill-gem-block label {
+  color: #ffcc00;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+.sjw-skill-gem-block select,
+.sjw-skill-gem-block input[type="text"] {
+  background: #333;
+  color: #fff;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 5px;
+  font-size: 14px;
+  margin-top: 1.5px;
+  margin-bottom: 4px;
+}
+.sjw-skill-gem-block .remove-gem-btn {
+  background: #8000ff;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.sjw-skill-gem-block .remove-gem-btn:hover {
+  background: #ffcc00;
+  color: #121212;
+}
+
 /* Pour le responsive si besoin */
 @media (max-width: 900px) {
   .edit-sjw-skill-popup {

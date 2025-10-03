@@ -198,22 +198,53 @@ function addGemField(order) {
     gemDiv.className = 'sjw-skill-gem-block';
     gemDiv.style.marginBottom = '10px';
     gemDiv.innerHTML = `
-        <fieldset style="border:1px solid #ccc; padding:8px; border-radius:6px;">
+        <fieldset class="edit-sjw-skill-gem-fieldset">
             <legend>Gem #${order+1}</legend>
-            <label>Type :</label>
-            <select name="gems[${order}][type]" required>
-                ${gemTypes.map(t => `<option value="${t}">${t}</option>`).join('')}
-            </select>
-            <label>Alias :</label>
-            <input type="text" name="gems[${order}][alias]" required style="width:80px;">
-            <label>Image :</label>
-            <input type="text" name="gems[${order}][image]" placeholder="Nom de l'image .webp" required style="width:180px;">
-            <input type="hidden" name="gems[${order}][order]" value="${order}">
-            <button type="button" class="remove-gem-btn" style="margin-left:10px;">Supprimer</button>
+            <div class="gem-fields-row">
+                <div style="flex:1; min-width:120px;">
+                    <label>Type :</label>
+                    <select name="gems[${order}][type]" required>
+                        ${gemTypes.map(t => `<option value="${t}">${t}</option>`).join('')}
+                    </select>
+                </div>
+                <div style="flex:1; min-width:120px;">
+                    <label>Alias :</label>
+                    <input type="text" name="gems[${order}][alias]" required style="width:80px;">
+                </div>
+                <div style="flex:2; min-width:200px;">
+                    <label>Image :</label>
+                    <select name="gems[${order}][image]" class="gem-image-select" required>
+                        <option value="">Chargement...</option>
+                    </select>
+                </div>
+                <input type="hidden" name="gems[${order}][order]" value="${order}">
+                <button type="button" class="remove-gem-btn admin-btn" style="margin-left:10px; padding:4px 12px;">Supprimer</button>
+            </div>
         </fieldset>
     `;
     container.appendChild(gemDiv);
 
+    // Remplir le select d'image pour la gem
+    const skillType = document.querySelector('#add-sjw-skill-form select[name="type"]').value;
+    const skillOrder = document.querySelector('#add-sjw-skill-form input[name="order"]').value;
+    let folderType = (skillType === 'Skill') ? 'Skills' : skillType;
+    const folderName = `${skillOrder}_${skillType}`;
+    fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
+        .then(resp => resp.json())
+        .then(images => {
+            const select = gemDiv.querySelector('.gem-image-select');
+            if (images.length > 0) {
+                select.innerHTML = images.map(img => `<option value="${img}">${img}</option>`).join('');
+            } else {
+                select.innerHTML = '<option value="">Aucune image trouvée</option>';
+            }
+        })
+        .catch(() => {
+            const select = gemDiv.querySelector('.gem-image-select');
+            select.innerHTML = '<option value="">Erreur lors du chargement</option>';
+        });
+
+    // Suppression de la gem
     gemDiv.querySelector('.remove-gem-btn').onclick = function() {
         gemDiv.remove();
         gemCount--;
@@ -222,9 +253,9 @@ function addGemField(order) {
         Array.from(container.children).forEach((div, idx) => {
             div.querySelector('legend').textContent = `Gem #${idx+1}`;
             div.querySelector('input[type="hidden"]').value = idx;
-            div.querySelector('select').name = `gems[${idx}][type]`;
+            div.querySelector('select[name^="gems"][name$="[type]"]').name = `gems[${idx}][type]`;
             div.querySelector('input[type="text"][name^="gems"][name$="[alias]"]').name = `gems[${idx}][alias]`;
-            div.querySelector('input[type="text"][name^="gems"][name$="[image]"]').name = `gems[${idx}][image]`;
+            div.querySelector('select[name^="gems"][name$="[image]"]').name = `gems[${idx}][image]`;
         });
     };
     gemCount++;
