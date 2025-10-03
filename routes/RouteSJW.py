@@ -603,11 +603,9 @@ def SJW(app: Flask):
         images = sorted([f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))])
         return jsonify(images)
     
-    @app.route('/SJW/add_skill/check_image_folder_skill')
+    @app.route('/sjw/add_skill/check_image_folder_skill/<type>/<order>')
     @login_required
-    def check_image_folder_skill():
-        type = request.args.get('type', '')
-        order = request.args.get('order', '')
+    def check_image_folder_skill(type, order):
         folder_name = f"{order}_{type}"
         if type == 'skill':
             folder_type = 'Skills'
