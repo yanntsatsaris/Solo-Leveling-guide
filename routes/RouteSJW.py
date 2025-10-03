@@ -208,8 +208,6 @@ def SJW(app: Flask):
                 core['color'] = core['name']
                 
         character_info['gems'] = gems
-        
-        write_log(f"Gemmes chargées : {gems}", log_level="INFO")
 
         # Récupération des panoplies et noyaux (si besoin pour le contexte global)
         panoplies_effects = panoplies_sql.get_panoplies_effects(language)

@@ -1,20 +1,69 @@
 <div id="skills" class="tab-content">
     <h2>Skills</h2>
-    {% if character.skills and character.skills|length > 0 %}
-        {% for skill in character.skills %}
-            <div class="skill {% if skill.principal %}principal{% endif %}">
-                {% if skill.image %}
-                    <img src="{{ url_for('static', filename=skill.image) }}" alt="{{ skill.name or 'Skill Image' }}">
-                {% endif %}
-                <div>
-                    {% if skill.name %}
-                        <strong>{{ skill.name }}</strong><br>
-                    {% endif %}
-                    <p>{{ skill.description|safe }}</p>
+    {% if character.alias == "SJW" %}
+        <!-- Onglets -->
+        <div class="sjw-tabs">
+            <button class="sjw-tab-btn active" data-tab="Skills">Skills</button>
+            <button class="sjw-tab-btn" data-tab="QTE">QTE</button>
+            <button class="sjw-tab-btn" data-tab="Ultime">Ultime</button>
+        </div>
+        <!-- Contenus des onglets -->
+        {% for tab in ['Skills', 'QTE', 'Ultime'] %}
+        <div class="sjw-tab-content{% if loop.first %} active{% endif %}" id="sjw-tab-{{ tab }}">
+            <h3>{{ tab }}</h3>
+            {% set skills = character.skills | selectattr('type', 'equalto', tab) | list %}
+            {% if skills %}
+                <div class="sjw-skill-images">
+                    {% for skill in skills %}
+                        <div class="sjw-skill-block">
+                            {% if skill.image %}
+                                <img src="{{ url_for('static', filename=skill.image) }}" alt="Skill Image" style="max-width:120px; margin:8px;">
+                            {% endif %}
+                            {% if skill.gems %}
+                                <div class="sjw-gems-row">
+                                    {% for gem in skill.gems %}
+                                        {% if gem.image %}
+                                            <img src="{{ url_for('static', filename=gem.image) }}" alt="Gem Image" style="max-width:48px; margin:4px;">
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
                 </div>
-            </div>
+            {% else %}
+                <p>Aucune compétence dans cette catégorie.</p>
+            {% endif %}
+        </div>
         {% endfor %}
+        <script>
+        document.querySelectorAll('.sjw-tab-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.sjw-tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.sjw-tab-content').forEach(tab => tab.classList.remove('active'));
+                this.classList.add('active');
+                document.getElementById('sjw-tab-' + this.dataset.tab).classList.add('active');
+            });
+        });
+        </script>
     {% else %}
-        <p>Informations sur les skills du personnage.</p>
+        {# Section classique pour les autres personnages #}
+        {% if character.skills and character.skills|length > 0 %}
+            {% for skill in character.skills %}
+                <div class="skill {% if skill.principal %}principal{% endif %}">
+                    {% if skill.image %}
+                        <img src="{{ url_for('static', filename=skill.image) }}" alt="{{ skill.name or 'Skill Image' }}">
+                    {% endif %}
+                    <div>
+                        {% if skill.name %}
+                            <strong>{{ skill.name }}</strong><br>
+                        {% endif %}
+                        <p>{{ skill.description|safe }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Informations sur les skills du personnage.</p>
+        {% endif %}
     {% endif %}
 </div>

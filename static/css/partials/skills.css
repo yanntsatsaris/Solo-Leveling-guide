@@ -25,3 +25,37 @@
   text-align: justify; /* Justifie le texte */
   margin: 0; /* Supprime les marges inutiles */
 }
+
+.sjw-tabs {
+  margin-bottom: 1em;
+}
+.sjw-tab-btn {
+  margin-right: 8px;
+  padding: 6px 18px;
+  cursor: pointer;
+}
+.sjw-tab-btn.active {
+  background: #222;
+  color: #fff;
+}
+.sjw-tab-content {
+  display: none;
+}
+.sjw-tab-content.active {
+  display: block;
+}
+.sjw-skill-images {
+  display: flex;
+  flex-wrap: wrap;
+}
+.sjw-skill-block {
+  margin: 8px;
+  text-align: center;
+}
+.sjw-gems-row {
+  margin-top: 4px;
+}
+.sjw-gems-row img {
+  border-radius: 6px;
+  box-shadow: 0 1px 4px #0002;
+}
