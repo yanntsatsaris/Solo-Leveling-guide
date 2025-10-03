@@ -233,14 +233,21 @@ p {
   text-align: center;
 }
 
-/* Centrer le bouton "Modifier le personnage" */
+/* Centrer le bouton "Ajouter une compétence" */
+#add-sjw-skill-btn {
+  display: block;
+  margin: 0 auto 18px auto;
+  text-align: center;
+}
+
+/* Centrer le bouton "Ajouter une ombre" */
 #add-shadow-btn {
   display: block;
   margin: 0 auto 18px auto;
   text-align: center;
 }
 
-/* Centrer le bouton "Modifier le personnage" */
+/* Centrer le bouton "Ajouter une arme" */
 #add-weapon-btn {
   display: block;
   margin: 0 auto 18px auto;
