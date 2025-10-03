@@ -254,6 +254,27 @@
   align-items: flex-end;
   flex-wrap: wrap;
   margin-bottom: 8px;
+  width: 100%;
+}
+
+.gem-fields-row > div {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.gem-type-field,
+.gem-alias-field,
+.gem-image-field,
+.gem-name-field,
+.gem-description-field,
+.gem-buff-name-field,
+.gem-buff-image-field,
+.gem-buff-description-field,
+.gem-debuff-name-field,
+.gem-debuff-image-field,
+.gem-debuff-description-field {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .sjw-skill-gem-block label {
@@ -263,17 +284,9 @@
   display: block;
 }
 
+.sjw-skill-gem-block input,
 .sjw-skill-gem-block select,
-.sjw-skill-gem-block input[type="text"],
 .sjw-skill-gem-block textarea {
-  background: #333;
-  color: #fff;
-  border: 1px solid #444;
-  border-radius: 6px;
-  padding: 5px;
-  font-size: 14px;
-  margin-top: 1.5px;
-  margin-bottom: 4px;
   width: 100%;
   box-sizing: border-box;
 }
