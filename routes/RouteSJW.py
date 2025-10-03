@@ -613,7 +613,7 @@ def SJW(app: Flask):
         write_log(f"Ordre du skill : {order}", log_level="INFO")
         folder_name = f"{order}_{type}"
         write_log(f"Nom du dossier : {folder_name}", log_level="INFO")
-        if type == 'skill':
+        if type == 'Skill':
             folder_type = 'Skills'
         write_log(f"Type de dossier : {folder_type}", log_level="INFO")
         folder_path = os.path.join(
