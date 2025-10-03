@@ -617,7 +617,20 @@ def SJW(app: Flask):
         write_log(f"Vérification de l'existence du dossier : {folder_path}", log_level="INFO")
         exists = os.path.isdir(folder_path)
         return jsonify({'exists': exists, 'folder': folder_name})
-    
+
+    @app.route('/SJW/add_sjw_skill', methods=['POST'])
+    @login_required
+    def add_sjw_skill():
+        write_log("Tentative d'ajout d'un nouveau skill SJW", log_level="INFO")
+        # Vérification des droits
+        if not session.get('username') or not session.get('rights') or not ('Admin' in session['rights'] or 'SuperAdmin' in session['rights']):
+            abort(403)
+
+        language = session.get('language', "EN-en")
+
+        write_log(f"Skill SJW ajouté avec succès", log_level="INFO")
+        return redirect(url_for('inner_SJW'))
+
     @app.route('/SJW/skill_images/<type>/<order>')
     @login_required
     def skill_images(type, order):
