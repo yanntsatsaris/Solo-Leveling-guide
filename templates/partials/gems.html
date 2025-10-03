@@ -23,7 +23,7 @@
         >
           <div class="gem-tooltip" id="gem-tooltip-{{ color }}-{{ i }}">
             <strong>{{ label }}</strong><br />
-            {{ gem_infos[color] if color in gem_infos else '' }}
+            {{ gems[color] if color in gems else '' }}
           </div>
         </div>
       {% endfor %}
