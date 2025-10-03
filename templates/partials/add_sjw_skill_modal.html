@@ -160,9 +160,9 @@ document.getElementById('add-sjw-skill-btn')?.addEventListener('click', async fu
         const resp = await fetch(`/SJW/skill_images?type=${encodeURIComponent(type)}&order=${encodeURIComponent(order)}`);
         const images = await resp.json();
         if (images.length > 0) {
-            imageSelect.innerHTML = images.map(img => `<option value="${img}">${img}</option>`).join('');
+            imageSelect.innerHTML = ['<option value=""></option>'].concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
         } else {
-            imageSelect.innerHTML = '<option value="">Aucune image trouvée</option>';
+            imageSelect.innerHTML = '<option value=""></option><option value="">Aucune image trouvée</option>';
         }
     } catch (e) {
         imageSelect.innerHTML = '<option value="">Erreur lors du chargement</option>';
@@ -281,14 +281,14 @@ function addGemField(order) {
             const buffSelect = gemDiv.querySelector('.gem-buff-image-select');
             const debuffSelect = gemDiv.querySelector('.gem-debuff-image-select');
             if (images.length > 0) {
-                const opts = images.map(img => `<option value="${img}">${img}</option>`).join('');
+                const opts = ['<option value=""></option>'].concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
                 select.innerHTML = opts;
                 buffSelect.innerHTML = opts;
                 debuffSelect.innerHTML = opts;
             } else {
-                select.innerHTML = '<option value="">Aucune image trouvée</option>';
-                buffSelect.innerHTML = '<option value="">Aucune image trouvée</option>';
-                debuffSelect.innerHTML = '<option value="">Aucune image trouvée</option>';
+                select.innerHTML = '<option value=""></option><option value="">Aucune image trouvée</option>';
+                buffSelect.innerHTML = '<option value=""></option><option value="">Aucune image trouvée</option>';
+                debuffSelect.innerHTML = '<option value=""></option><option value="">Aucune image trouvée</option>';
             }
         })
         .catch(() => {
