@@ -33,6 +33,8 @@
 
         <label>Description :</label>
         <textarea name="description"></textarea>
+        <div id="sjw-skill-gems-container"></div>
+        <button type="button" id="add-sjw-skill-gem-btn" class="admin-btn" style="margin-top:10px;">Ajouter une gem</button>
       </div>
       <div style="display: flex; justify-content: space-between; margin-top: 18px">
         <button type="submit" class="admin-btn">Enregistrer</button>
@@ -48,8 +50,6 @@
     </form>
   </div>
 </div>
-<div id="sjw-skill-gems-container"></div>
-<button type="button" id="add-sjw-skill-gem-btn" class="admin-btn" style="margin-top:10px;">Ajouter une gem</button>
 <script>
 document.getElementById('add-sjw-skill-btn')?.addEventListener('click', async function() {
     // Demande les infos de base
