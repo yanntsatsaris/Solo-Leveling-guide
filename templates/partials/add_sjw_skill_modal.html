@@ -1,0 +1,184 @@
+<div
+  id="add-sjw-skill-overlay"
+  class="edit-sjw-skill-overlay"
+  style="display: none"
+>
+  <div id="add-sjw-skill-menu" class="edit-sjw-skill-popup">
+    <form
+      id="add-sjw-skill-form"
+      method="POST"
+      action="{{ url_for('add_sjw_skill') }}"
+      enctype="multipart/form-data"
+    >
+      <h2 class="edit-sjw-skill-title">Ajouter un skill SJW</h2>
+      <div class="edit-tabs">
+        <div class="edit-tab active" data-tab="main">Infos principales</div>
+      </div>
+      <div class="edit-tab-content active" id="edit-tab-main">
+        <label>Nom :</label>
+        <input type="text" name="name" required />
+
+        <label>Type :</label>
+        <select name="type" required>
+          <option value="Skill">Skill</option>
+          <option value="QTE">QTE</option>
+          <option value="Ultime">Ultime</option>
+        </select>
+
+        <label>Ordre d'affichage :</label>
+        <input type="number" name="order" min="1" required />
+
+        <label>Image principale :</label>
+        <select name="image" id="sjw-skill-image-select"></select>
+
+        <label>Description :</label>
+        <textarea name="description"></textarea>
+      </div>
+      <div style="display: flex; justify-content: space-between; margin-top: 18px">
+        <button type="submit" class="admin-btn">Enregistrer</button>
+        <button
+          type="button"
+          id="close-add-sjw-skill"
+          class="close-btn"
+          style="font-size: 22px"
+        >
+          &times;
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+document.getElementById('add-sjw-skill-btn')?.addEventListener('click', async function() {
+    // Demande les infos de base
+    const name = prompt("Nom du skill :");
+    if (!name) return;
+    let type = null;
+    while (!["Skill", "QTE", "Ultime"].includes(type)) {
+        type = prompt("Type du skill (Skill, QTE, Ultime) :");
+        if (type === null) return; // Annule si l'utilisateur annule le prompt
+        type = type.trim();
+        if (!["Skill", "QTE", "Ultime"].includes(type)) {
+            alert("Le type doit être exactement : Skill, QTE ou Ultime (respectez la casse).");
+        }
+    }
+    let order = null;
+    if (type === "Skill") {
+        while (!/^\d{3}$/.test(order)) {
+            order = prompt("Ordre d'affichage (3 chiffres, ex : 001, 010, 123) :");
+            if (order === null) return;
+            order = order.trim();
+            if (!/^\d{3}$/.test(order)) {
+                alert("Pour un Skill, l'ordre doit être exactement 3 chiffres (ex : 001, 010, 123).");
+            }
+        }
+    } else {
+        while (!/^\d{2}$/.test(order)) {
+            order = prompt(`Ordre d'affichage (2 chiffres, ex : 01, 02, 10) :`);
+            if (order === null) return;
+            order = order.trim();
+            if (!/^\d{2}$/.test(order)) {
+                alert("Pour un QTE ou Ultime, l'ordre doit être exactement 2 chiffres (ex : 01, 02, 10).");
+            }
+        }
+    }
+    // On force le format 0XX
+    order = order.padStart(3, '0');
+
+    // Construit le chemin du dossier image
+    const folderName = `${order}_${type}`;
+    if (type === 'Skill') {
+        folderType = 'Skills';
+    } else if (type === 'QTE') {
+        folderType = 'QTE';
+    } else if (type === 'Ultime') {
+        folderType = 'Ultime';
+    }
+    const folderPath = `static/images/Sung_Jinwoo/${folderType}/${folderName}/`;
+
+    // Vérifie si le dossier existe côté serveur (nécessite une route Flask dédiée)
+    let folderExists = false;
+    try {
+        const resp = await fetch(`/sjw/add_skill/check_image_folder_skill?type=${encodeURIComponent(type)}&order=${encodeURIComponent(order)}`);
+        folderExists = (await resp.json()).exists;
+    } catch (e) {
+        folderExists = false;
+    }
+
+    // Pré-remplit et affiche les infos dans la modale
+    document.getElementById('add-sjw-skill-overlay').style.display = 'flex';
+    document.querySelector('#add-sjw-skill-form input[name="name"]').value = name;
+    document.querySelector('#add-sjw-skill-form select[name="type"]').value = type;
+    document.querySelector('#add-sjw-skill-form input[name="order"]').value = order;
+
+    // Optionnel : affiche une alerte si le dossier n'existe pas
+    if (!folderExists) {
+        let overlay = document.createElement('div');
+        overlay.id = "upload-sjw-skill-images-overlay";
+        overlay.className = "edit-sjw-skill-overlay";
+        overlay.style.display = "flex";
+        overlay.innerHTML = `
+            <div class="edit-sjw-skill-popup">
+            <form id="upload-sjw-skill-images-form" enctype="multipart/form-data">
+                <h2>Uploader les images du skill (.zip)</h2>
+                <input type="file" name="images_zip" accept=".zip" required>
+                <input type="hidden" name="type" value="${type}">
+                <input type="hidden" name="order" value="${order}">
+                <div style="margin-top:16px;">
+                <button type="submit" class="admin-btn">Envoyer</button>
+                <button type="button" id="cancel-upload-sjw-skill-images" class="close-btn">&times;</button>
+                </div>
+            </form>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+
+        document.getElementById('cancel-upload-sjw-skill-images').onclick = function() {
+            overlay.remove();
+        };
+
+        document.getElementById('upload-sjw-skill-images-form').onsubmit = async function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            let resp = await fetch('/admin/upload_sjw_skill_images_zip', {
+                method: 'POST',
+                body: formData
+            });
+            let txt = await resp.text();
+            overlay.remove();
+            alert(txt);
+        };
+    }
+
+    // Après avoir affiché la modale et pré-rempli les champs :
+    const imageSelect = document.getElementById('sjw-skill-image-select');
+    imageSelect.innerHTML = '<option value="">Chargement...</option>';
+    try {
+        // On suppose que tu as une route Flask qui retourne la liste des images du dossier du skill
+        const resp = await fetch(`/SJW/skill_images?type=${encodeURIComponent(type)}&order=${encodeURIComponent(order)}`);
+        const images = await resp.json();
+        if (images.length > 0) {
+            imageSelect.innerHTML = images.map(img => `<option value="${img}">${img}</option>`).join('');
+        } else {
+            imageSelect.innerHTML = '<option value="">Aucune image trouvée</option>';
+        }
+    } catch (e) {
+        imageSelect.innerHTML = '<option value="">Erreur lors du chargement</option>';
+    }
+});
+
+// Fermeture de la modale
+document.getElementById('close-add-sjw-skill')?.addEventListener('click', function() {
+    document.getElementById('add-sjw-skill-overlay').style.display = 'none';
+});
+// Ferme la modale si clic en dehors du popup
+const addOverlaySJW = document.getElementById('add-sjw-skill-overlay');
+const addPopupSJW = document.getElementById('add-sjw-skill-menu');
+if (addOverlaySJW && addPopupSJW) {
+    addOverlaySJW.addEventListener('mousedown', function(e) {
+        if (e.target === addOverlaySJW) {
+            addOverlaySJW.style.display = 'none';
+        }
+    });
+}
+</script>

@@ -603,5 +603,35 @@ def SJW(app: Flask):
         images = sorted([f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))])
         return jsonify(images)
     
+    @app.route('/SJW/add_skill/check_image_folder_shadow')
+    @login_required
+    def check_image_folder_shadow():
+        type = request.args.get('type', '')
+        order = request.args.get('order', '')
+        folder_name = f"{order}_{type}"
+        if type == 'skill':
+            folder_type = 'Skills'
+        folder_path = os.path.join(
+            'static', 'images', 'Sung_Jinwoo', folder_type, folder_name
+        )
+        write_log(f"Vérification de l'existence du dossier : {folder_path}", log_level="INFO")
+        exists = os.path.isdir(folder_path)
+        return jsonify({'exists': exists, 'folder': folder_name})
+    
+    @app.route('/SJW/skill_images/<type>/<order>')
+    @login_required
+    def images_for_character(type, order):
+        # Sécurise les noms
+        type = type.replace('..', '').replace('/', '').replace('\\', '')
+        order = order.replace('..', '').replace('/', '').replace('\\', '')
+        if type == 'skill':
+            folder_type = 'Skills'
+        img_dir = os.path.join('static', 'images', 'Sung_Jinwoo', folder_type, order)
+        if not os.path.isdir(img_dir):
+            write_log(f"Le dossier d'images n'existe pas : {img_dir}", log_level="WARNING")
+            return jsonify([])
+        images = sorted([f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))])
+        return jsonify(images)
+    
 def focus_stats_equal(a, b):
     return set(normalize_focus_stats(a)) == set(normalize_focus_stats(b))

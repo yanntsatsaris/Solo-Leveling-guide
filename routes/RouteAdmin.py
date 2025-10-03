@@ -480,3 +480,84 @@ def admin_routes(app):
                     shutil.move(os.path.join(temp_extract, fname), os.path.join(target_folder, fname))
         shutil.rmtree(temp_extract)
         return "Images extraites et placées dans le dossier des armes.", 200
+    
+    @app.route('/admin/upload_sjw_skill_images_zip', methods=['POST'])
+    @login_required
+    def upload_sjw_skill_images_zip():
+        if not is_admin():
+            abort(403)
+        images_zip = request.files.get('images_zip')
+        order = request.form.get('order')
+        type = request.form.get('type')
+        if not images_zip or not order or not type:
+            return "Données manquantes", 400
+
+        # Détermine le dossier et le préfixe selon le type
+        if type == 'Skill':
+            folder_name = f"{order}_Skill"
+            prefix = f"{order}_Skill"
+            type_folder = 'Skills'
+        elif type == 'QTE':
+            folder_name = f"{order}_QTE"
+            prefix = f"{order}_QTE"
+            type_folder = 'QTE'
+        elif type == 'Ultime':
+            folder_name = f"{order}_Ultime"
+            prefix = f"{order}_Ultime"
+            type_folder = 'Ultime'
+        else:
+            return "Type de skill invalide", 400
+
+        base_folder = os.path.join('static', 'images', 'Sung_Jinwoo', type_folder)
+        target_folder = os.path.join(base_folder, folder_name)
+
+        # Crée le dossier de type si besoin
+        os.makedirs(base_folder, exist_ok=True)
+
+        # Extraction temporaire
+        temp_extract = os.path.join("tmp", "extract_zip")
+        if os.path.exists(temp_extract):
+            shutil.rmtree(temp_extract)
+        os.makedirs(temp_extract, exist_ok=True)
+
+        with zipfile.ZipFile(images_zip) as zf:
+            zf.extractall(temp_extract)
+
+        # Cherche un dossier dans le zip
+        subfolders = [f for f in os.listdir(temp_extract) if os.path.isdir(os.path.join(temp_extract, f))]
+        if subfolders:
+            # Il y a un dossier, on le renomme si besoin
+            src_folder = os.path.join(temp_extract, subfolders[0])
+            if subfolders[0] != folder_name:
+                os.rename(src_folder, os.path.join(temp_extract, folder_name))
+                src_folder = os.path.join(temp_extract, folder_name)
+            shutil.move(src_folder, target_folder)
+        else:
+            # Pas de dossier, on crée le dossier cible et on déplace les images
+            os.makedirs(target_folder, exist_ok=True)
+            for fname in os.listdir(temp_extract):
+                if fname.lower().endswith('.webp'):
+                    # Vérifie le nom principal du skill
+                    if fname.startswith(prefix):
+                        shutil.move(os.path.join(temp_extract, fname), os.path.join(target_folder, fname))
+                        continue
+                    # Vérifie le nom d'une gem associée
+                    # Pour Skill : 001_Water_Skill_...webp
+                    # Pour QTE   : 01_Dark_QTE_...webp
+                    # Pour Ultime: 01_Light_Ultime_...webp
+                    import re
+                    gem_pattern = None
+                    if type == 'Skill':
+                        gem_pattern = re.compile(rf"^{order}_(Water|Fire|Light|Dark|Wind)_Skill.*\.webp$", re.IGNORECASE)
+                    elif type == 'QTE':
+                        gem_pattern = re.compile(rf"^{order}_(Water|Fire|Light|Dark|Wind)_QTE.*\.webp$", re.IGNORECASE)
+                    elif type == 'Ultime':
+                        gem_pattern = re.compile(rf"^{order}_(Water|Fire|Light|Dark|Wind)_Ultime.*\.webp$", re.IGNORECASE)
+                    if gem_pattern and gem_pattern.match(fname):
+                        shutil.move(os.path.join(temp_extract, fname), os.path.join(target_folder, fname))
+                        continue
+                    # Si aucun des deux formats n'est respecté
+                    shutil.rmtree(temp_extract)
+                    return f"L'image '{fname}' doit commencer par '{prefix}' ou respecter le format gem : {order}_Type_{type}*.webp", 400
+        shutil.rmtree(temp_extract)
+        return f"Images extraites et placées dans le dossier {type_folder}/{folder_name}.", 200
