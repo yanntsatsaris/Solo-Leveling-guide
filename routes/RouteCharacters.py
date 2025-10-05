@@ -56,6 +56,7 @@ def render_tags(description, tags_list, base_path):
         tag_norm = normalize_tag(tag)
         for item in tags_list:
             tag_value = item.get('tag')
+            write_log(f"Comparing '{tag_value}' with '{tag}' -> '{normalize_tag(tag_value)}' vs '{tag_norm}'", log_level="INFO")
             if tag_value and normalize_tag(tag_value) == tag_norm:
                 return item
         return None
