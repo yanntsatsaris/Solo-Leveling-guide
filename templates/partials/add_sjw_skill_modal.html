@@ -172,12 +172,12 @@ document.getElementById('close-add-sjw-skill')?.addEventListener('click', functi
     document.getElementById('add-sjw-skill-overlay').style.display = 'none';
 });
 // Ferme la modale si clic en dehors du popup
-const addOverlaySJWSkills = document.getElementById('add-sjw-skill-overlay');
+const addOverlaySJW = document.getElementById('add-sjw-skill-overlay');
 const addPopupSJW = document.getElementById('add-sjw-skill-menu');
-if (addOverlaySJWSkills && addPopupSJW) {
-    addOverlaySJWSkills.addEventListener('mousedown', function(e) {
-        if (e.target === addOverlaySJWSkills) {
-            addOverlaySJWSkills.style.display = 'none';
+if (addOverlaySJW && addPopupSJW) {
+    addOverlaySJW.addEventListener('mousedown', function(e) {
+        if (e.target === addOverlaySJW) {
+            addOverlaySJW.style.display = 'none';
         }
     });
 }
