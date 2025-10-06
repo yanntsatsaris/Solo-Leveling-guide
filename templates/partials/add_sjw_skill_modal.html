@@ -327,69 +327,69 @@ function addGemField(order) {
     };
     gemCount++;
     updateAddGemBtn();
+
+    // Ajout dynamique des buffs
+    gemDiv.querySelector('.add-buff-btn').onclick = function() {
+        const buffsList = gemDiv.querySelector('.buffs-list');
+        const idx = buffsList.children.length;
+        const buffDiv = document.createElement('div');
+        buffDiv.className = 'buff-block';
+        buffDiv.innerHTML = `
+            <fieldset>
+                <legend>Buff #${idx+1}</legend>
+                <label>Nom :</label>
+                <input type="text" name="gems[${order}][buffs][${idx}][name]" required>
+                <label>Image :</label>
+                <select name="gems[${order}][buffs][${idx}][image]" class="gem-buff-image-select">
+                    <option value=""></option>
+                </select>
+                <label>Description :</label>
+                <textarea name="gems[${order}][buffs][${idx}][description]" rows="2"></textarea>
+                <button type="button" class="remove-buff-btn">Supprimer</button>
+            </fieldset>
+        `;
+        buffsList.appendChild(buffDiv);
+        fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
+            .then(resp => resp.json())
+            .then(images => {
+                const select = buffDiv.querySelector('.gem-buff-image-select');
+                select.innerHTML = ['<option value=""></option>'].concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
+            });
+        buffDiv.querySelector('.remove-buff-btn').onclick = () => buffDiv.remove();
+    };
+
+    // Ajout dynamique des debuffs
+    gemDiv.querySelector('.add-debuff-btn').onclick = function() {
+        const debuffsList = gemDiv.querySelector('.debuffs-list');
+        const idx = debuffsList.children.length;
+        const debuffDiv = document.createElement('div');
+        debuffDiv.className = 'debuff-block';
+        debuffDiv.innerHTML = `
+            <fieldset>
+                <legend>Debuff #${idx+1}</legend>
+                <label>Nom :</label>
+                <input type="text" name="gems[${order}][debuffs][${idx}][name]" required>
+                <label>Image :</label>
+                <select name="gems[${order}][debuffs][${idx}][image]" class="gem-debuff-image-select">
+                    <option value=""></option>
+                </select>
+                <label>Description :</label>
+                <textarea name="gems[${order}][debuffs][${idx}][description]" rows="2"></textarea>
+                <button type="button" class="remove-debuff-btn">Supprimer</button>
+            </fieldset>
+        `;
+        debuffsList.appendChild(debuffDiv);
+        fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
+            .then(resp => resp.json())
+            .then(images => {
+                const select = debuffDiv.querySelector('.gem-debuff-image-select');
+                select.innerHTML = ['<option value=""></option>'].concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
+            });
+        debuffDiv.querySelector('.remove-debuff-btn').onclick = () => debuffDiv.remove();
+    };
+    gemCount++;
+    updateAddGemBtn();
 }
-
-// Ajout dynamique des buffs
-gemDiv.querySelector('.add-buff-btn').onclick = function() {
-    const buffsList = gemDiv.querySelector('.buffs-list');
-    const idx = buffsList.children.length;
-    const buffDiv = document.createElement('div');
-    buffDiv.className = 'buff-block';
-    buffDiv.innerHTML = `
-        <fieldset>
-            <legend>Buff #${idx+1}</legend>
-            <label>Nom :</label>
-            <input type="text" name="gems[${order}][buffs][${idx}][name]" required>
-            <label>Image :</label>
-            <select name="gems[${order}][buffs][${idx}][image]" class="gem-buff-image-select">
-                <option value=""></option>
-            </select>
-            <label>Description :</label>
-            <textarea name="gems[${order}][buffs][${idx}][description]" rows="2"></textarea>
-            <button type="button" class="remove-buff-btn">Supprimer</button>
-        </fieldset>
-    `;
-    buffsList.appendChild(buffDiv);
-    fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
-        .then(resp => resp.json())
-        .then(images => {
-            const select = buffDiv.querySelector('.gem-buff-image-select');
-            select.innerHTML = ['<option value=""></option>'].concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
-        });
-    buffDiv.querySelector('.remove-buff-btn').onclick = () => buffDiv.remove();
-};
-
-// Ajout dynamique des debuffs
-gemDiv.querySelector('.add-debuff-btn').onclick = function() {
-    const debuffsList = gemDiv.querySelector('.debuffs-list');
-    const idx = debuffsList.children.length;
-    const debuffDiv = document.createElement('div');
-    debuffDiv.className = 'debuff-block';
-    debuffDiv.innerHTML = `
-        <fieldset>
-            <legend>Debuff #${idx+1}</legend>
-            <label>Nom :</label>
-            <input type="text" name="gems[${order}][debuffs][${idx}][name]" required>
-            <label>Image :</label>
-            <select name="gems[${order}][debuffs][${idx}][image]" class="gem-debuff-image-select">
-                <option value=""></option>
-            </select>
-            <label>Description :</label>
-            <textarea name="gems[${order}][debuffs][${idx}][description]" rows="2"></textarea>
-            <button type="button" class="remove-debuff-btn">Supprimer</button>
-        </fieldset>
-    `;
-    debuffsList.appendChild(debuffDiv);
-    fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
-        .then(resp => resp.json())
-        .then(images => {
-            const select = debuffDiv.querySelector('.gem-debuff-image-select');
-            select.innerHTML = ['<option value=""></option>'].concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
-        });
-    debuffDiv.querySelector('.remove-debuff-btn').onclick = () => debuffDiv.remove();
-};
-gemCount++;
-updateAddGemBtn();
 
 
 document.getElementById('add-sjw-skill-gem-btn').onclick = function() {
