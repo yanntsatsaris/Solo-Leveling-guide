@@ -517,7 +517,7 @@ def SJW(app: Flask):
                 else:
                     aimg = ""
 
-                db_artefact = next((a for a in current_artefacts if str(a['id']) == str(aid)), None) if aid : None
+                db_artefact = next((a for a in current_artefacts if str(a['id']) == str(aid)), None) if aid else None
                 if aid:
                     if db_artefact and (
                         (db_artefact['name'] or '') != (aname or '') or
@@ -552,7 +552,7 @@ def SJW(app: Flask):
                 cid = request.form.get(f"core_id_{set_idx}_{core_idx}")
                 cnumber = f"{core_idx+1:02d}"  # Ajoute cette ligne pour numéroter 01, 02, 03
                 cimg = cname + cnumber + ".webp"  # Utilise le nom du noyau et le numéro pour l'image
-                db_core = next((c for c in current_cores if str(c['id']) == str(cid)), None) if cid : None
+                db_core = next((c for c in current_cores if str(c['id']) == str(cid)), None) if cid else None
                 if cid:
                     if db_core and (
                         db_core['name'] != cname or
