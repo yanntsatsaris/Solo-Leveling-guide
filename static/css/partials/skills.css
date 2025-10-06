@@ -104,8 +104,6 @@
 .sjw-skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 24px;
-  margin: 24px 0;
   max-width: 1200px;
 }
 .sjw-skill-cell {
