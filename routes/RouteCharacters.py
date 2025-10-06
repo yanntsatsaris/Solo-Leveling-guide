@@ -742,6 +742,8 @@ def characters(app: Flask):
         rarity = request.form.get('rarity')
         type_ = request.form.get('type')
         image_folder = request.form.get('image_folder', '')
+        if image_folder is None or image_folder.strip() == "":
+            image_folder = f"{rarity}_{type_}_{alias}"
 
         sql_manager = ControleurSql()
         cursor = sql_manager.cursor
