@@ -296,7 +296,9 @@
   resize: vertical;
 }
 
-.sjw-skill-gem-block .remove-gem-btn {
+.sjw-skill-gem-block .remove-gem-btn,
+.sjw-skill-gem-block .remove-buff-btn,
+.sjw-skill-gem-block .remove-debuff-btn {
   background: #8000ff;
   color: #fff;
   border-radius: 6px;
@@ -308,7 +310,9 @@
   padding: 6px 16px;
   margin-top: 6px;
 }
-.sjw-skill-gem-block .remove-gem-btn:hover {
+.sjw-skill-gem-block .remove-gem-btn:hover,
+.sjw-skill-gem-block .remove-buff-btn:hover,
+.sjw-skill-gem-block .remove-debuff-btn:hover {
   background: #ffcc00;
   color: #121212;
 }
