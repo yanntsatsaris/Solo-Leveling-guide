@@ -34,9 +34,6 @@
                                                 {% if gem.image %}
                                                     <img src="{{ url_for('static', filename=gem.image) }}" alt="Gem Image">
                                                 {% endif %}
-                                                {% if gem.name %}
-                                                    <div class="sjw-gem-name">{{ gem.name }}</div>
-                                                {% endif %}
                                             </div>
                                         {% endfor %}
                                         {% for i in range(4 - (skill.gems|length)) %}
