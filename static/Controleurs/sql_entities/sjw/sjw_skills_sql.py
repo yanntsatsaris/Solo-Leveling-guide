@@ -14,10 +14,16 @@ class SJWSkillsSql:
             skill_id, skill_type, skill_order, skill_image = row
             if skill_type == 'Skill':
                 skill_type_folder = 'Skills'
-            if skill_type == 'QTE':
+                skill_order_str = f"{int(skill_order):03d}"  # 3 chiffres, ex: 001
+            elif skill_type == 'QTE':
                 skill_type_folder = 'QTE'
-            if skill_type == 'Ultime':
+                skill_order_str = f"{int(skill_order):02d}"  # 2 chiffres, ex: 01
+            elif skill_type == 'Ultime':
                 skill_type_folder = 'Ultime'
+                skill_order_str = f"{int(skill_order):02d}"  # 2 chiffres, ex: 01
+            else:
+                skill_type_folder = skill_type
+                skill_order_str = str(skill_order)
 
             # Traduction du skill
             self.cursor.execute("""
@@ -90,8 +96,8 @@ class SJWSkillsSql:
                     debuff_id, debuff_image, debuff_name, debuff_description = debuff_row
                     debuffs.append({
                         'id': debuff_id,
-                        'image': f"images/Sung_Jinwoo/{skill_type_folder}/{skill_order}_{skill_type}/{debuff_image}",
-                        'name': f"images/Sung_Jinwoo/{skill_type_folder}/{skill_order}_{skill_type}/{debuff_name}",
+                        'image': f"images/Sung_Jinwoo/{skill_type_folder}/{skill_order_str}_{skill_type}/{debuff_image}",
+                        'name': f"images/Sung_Jinwoo/{skill_type_folder}/{skill_order_str}_{skill_type}/{debuff_name}",
                         'description': debuff_description
                     })
 
@@ -99,7 +105,7 @@ class SJWSkillsSql:
                     'id': gem_id,
                     'type': gem_type,
                     'alias': gem_alias,
-                    'image': f"images/Sung_Jinwoo/{skill_type_folder}/{skill_order}_{skill_type}/{gem_image}",
+                    'image': f"images/Sung_Jinwoo/{skill_type_folder}/{skill_order_str}_{skill_type}/{gem_image}",
                     'name': gem_name,
                     'description': gem_description,
                     'break': gem_break,
@@ -111,7 +117,7 @@ class SJWSkillsSql:
                 'id': skill_id,
                 'type': skill_type,
                 'order': skill_order,
-                'image': f"images/Sung_Jinwoo/{skill_type_folder}/{skill_order}_{skill_type}/{skill_image}",
+                'image': f"images/Sung_Jinwoo/{skill_type_folder}/{skill_order_str}_{skill_type}/{skill_image}",
                 'name': name,
                 'description': description,
                 'gems': gems
