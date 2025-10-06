@@ -18,24 +18,34 @@
                 {% for tab in ['Skills', 'QTE', 'Ultime'] %}
                 <div class="sjw-inner-tab-content{% if loop.first %} active{% endif %}" id="sjw-inner-tab-{{ tab }}">
                     
-                    <div class="sjw-skill-images">
-                        {% set skills = character.skills | selectattr('type', 'equalto', tab) | list %}
-                        {% for skill in skills %}
-                            <div class="sjw-skill-block">
-                                {% if skill.image %}
-                                    <img src="{{ url_for('static', filename=skill.image) }}" alt="Skill Image" style="max-width:120px; margin:8px;">
-                                {% endif %}
-                                {% if skill.gems %}
+                    <div class="sjw-skills-grid-wrapper">
+                        <div class="sjw-skills-grid">
+                            {% set skills = character.skills | selectattr('type', 'equalto', tab) | list %}
+                            {% for skill in skills %}
+                                <div class="sjw-skill-cell">
+                                    <div class="sjw-skill-image-row">
+                                        {% if skill.image %}
+                                            <img src="{{ url_for('static', filename=skill.image) }}" alt="Skill Image">
+                                        {% endif %}
+                                    </div>
                                     <div class="sjw-gems-row">
-                                        {% for gem in skill.gems %}
-                                            {% if gem.image %}
-                                                <img src="{{ url_for('static', filename=gem.image) }}" alt="Gem Image" style="max-width:48px; margin:4px;">
-                                            {% endif %}
+                                        {% for gem in skill.gems[:4] %}
+                                            <div class="sjw-gem-cell">
+                                                {% if gem.image %}
+                                                    <img src="{{ url_for('static', filename=gem.image) }}" alt="Gem Image">
+                                                {% endif %}
+                                                {% if gem.name %}
+                                                    <div class="sjw-gem-name">{{ gem.name }}</div>
+                                                {% endif %}
+                                            </div>
+                                        {% endfor %}
+                                        {% for i in range(4 - (skill.gems|length)) %}
+                                            <div class="sjw-gem-cell sjw-gem-empty"></div>
                                         {% endfor %}
                                     </div>
-                                {% endif %}
-                            </div>
-                        {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
                     </div>
                     {% if skills|length == 0 %}
                         <p>Aucune compétence dans cette catégorie.</p>

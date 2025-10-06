@@ -50,10 +50,10 @@
   color: #121212;
 }
 .sjw-inner-tab-content {
-  display: none;
-  background: #1e1e1e;
-  border-radius: 0 0 8px 8px;
-  padding: 10px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 .sjw-inner-tab-content.active {
   display: block;
@@ -73,4 +73,16 @@
 .sjw-gems-row img {
   border-radius: 6px;
   box-shadow: 0 1px 4px #0002;
+}
+.sjw-skills-grid-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.sjw-skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+  margin: 24px 0;
+  max-width: 1200px;
 }
