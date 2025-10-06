@@ -107,3 +107,17 @@
   margin: 24px 0;
   max-width: 1200px;
 }
+.sjw-skill-image-row img {
+    max-width: 60px;    /* moitié de 120px */
+    max-height: 40px;   /* moitié de 80px */
+    border-radius: 8px;
+    box-shadow: 0 0 8px #8000ff44;
+}
+
+.sjw-gem-cell img {
+    max-width: 12px;    /* 4 fois moins que 48px */
+    max-height: 12px;   /* 4 fois moins que 48px */
+    margin-bottom: 6px;
+    border-radius: 6px;
+    box-shadow: 0 0 6px #ffcc0044;
+}
