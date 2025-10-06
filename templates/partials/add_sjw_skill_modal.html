@@ -86,6 +86,7 @@ document.getElementById('add-sjw-skill-btn')?.addEventListener('click', async fu
 
     // Construit le chemin du dossier image
     const folderName = `${order}_${type}`;
+    let folderType = '';
     if (type === 'Skill') {
         folderType = 'Skills';
     } else if (type === 'QTE') {
@@ -215,7 +216,7 @@ function checkGemBtnAvailability() {
 }
 
 // Sur changement du type, on vérifie la disponibilité du bouton
-document.querySelector('#add-sjw-skill-form select[name="type"]').addEventListener('change', checkGemBtnAvailability);
+document.querySelector('.add-sjw-skill-form select[name="type"]').addEventListener('change', checkGemBtnAvailability);
 
 // Appel initial au chargement de la modale
 checkGemBtnAvailability();
