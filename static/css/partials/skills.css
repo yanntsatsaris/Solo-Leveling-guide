@@ -71,7 +71,7 @@
   display: flex;
   flex-direction: row;
   background: #222;
-  min-height: 90px;
+  min-height: 75px;
   justify-content: space-between;
   width: 100%; /* Prend toute la largeur de la cellule */
 }
@@ -85,7 +85,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 80px;
+  min-height: 75px;
   position: relative;
 }
 .sjw-gem-cell:last-child {
@@ -115,11 +115,9 @@
 }
 
 .sjw-skill-image-row {
-    background: #181818;
     display: flex;
     justify-content: center; /* Centre horizontalement */
     align-items: center;
-    padding: 18px 0 10px 0;
     width: 100%; /* Prend toute la largeur de la cellule */
 }
 
