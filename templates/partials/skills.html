@@ -1,6 +1,12 @@
 <div id="skills" class="tab-content">
     <h2>Skills</h2>
     {% if character.alias == "SJW" %}
+        {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
+            <button id="add-sjw-skill-btn" class="admin-btn">
+                Ajouter une compétence
+            </button>
+            {% include 'partials/add_sjw_skill_modal.html' %}
+        {% endif %}
         <div class="sjw-inner-tabs">
             <div class="sjw-inner-tab-btns">
                 <div class="sjw-inner-tab-btn active" data-inner-tab="Skills">Skills</div>
@@ -8,12 +14,7 @@
                 <div class="sjw-inner-tab-btn" data-inner-tab="Ultime">Ultime</div>
             </div>
             <div class="sjw-inner-tab-contents">
-                {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
-                    <button id="add-sjw-skill-btn" class="admin-btn">
-                        Ajouter une compétence
-                    </button>
-                    {% include 'partials/add_sjw_skill_modal.html' %}
-                {% endif %}
+                
                 {% for tab in ['Skills', 'QTE', 'Ultime'] %}
                 <div class="sjw-inner-tab-content{% if loop.first %} active{% endif %}" id="sjw-inner-tab-{{ tab }}">
                     
