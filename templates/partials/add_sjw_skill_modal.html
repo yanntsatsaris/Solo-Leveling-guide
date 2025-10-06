@@ -58,7 +58,7 @@ document.getElementById('add-sjw-skill-btn')?.addEventListener('click', async fu
     let type = null;
     while (!["Skill", "QTE", "Ultime"].includes(type)) {
         type = prompt("Type du skill (Skill, QTE, Ultime) :");
-        if (type === null) return; // Annule si l'utilisateur annule le prompt
+        if (type === null) return; // Annule si l'utilisateur annule
         type = type.trim();
         if (!["Skill", "QTE", "Ultime"].includes(type)) {
             alert("Le type doit être exactement : Skill, QTE ou Ultime (respectez la casse).");
@@ -350,7 +350,6 @@ gemDiv.querySelector('.add-buff-btn').onclick = function() {
         </fieldset>
     `;
     buffsList.appendChild(buffDiv);
-    // Remplir le select d'image comme avant
     fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
         .then(resp => resp.json())
         .then(images => {
@@ -381,7 +380,6 @@ gemDiv.querySelector('.add-debuff-btn').onclick = function() {
         </fieldset>
     `;
     debuffsList.appendChild(debuffDiv);
-    // Remplir le select d'image comme avant
     fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
         .then(resp => resp.json())
         .then(images => {
@@ -392,7 +390,7 @@ gemDiv.querySelector('.add-debuff-btn').onclick = function() {
 };
 gemCount++;
 updateAddGemBtn();
-}
+
 
 document.getElementById('add-sjw-skill-gem-btn').onclick = function() {
     if (gemCount < maxGems) {
