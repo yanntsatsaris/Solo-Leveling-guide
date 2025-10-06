@@ -631,10 +631,92 @@ def SJW(app: Flask):
             abort(403)
 
         language = session.get('language', "EN-en")
+        name = request.form.get('name')
+        type = request.form.get('type')
+        order = request.form.get('order')
+        image = request.form.get('image')
+        description = request.form.get('description')
 
-        write_log(f"Skill SJW ajouté avec succès", log_level="INFO")
-        return redirect(url_for('inner_SJW'))
+        sql_manager = ControleurSql()
+        cursor = sql_manager.cursor
+        sjw_sql = SJWSql(cursor)
+        skills_sql = SJWSkillsSql(cursor)
 
+        # Récupère l'id du SJW
+        character_info = sjw_sql.get_sjw(language)
+        sjw_id = character_info['id']
+
+        # Ajoute le skill principal
+        skill_id = skills_sql.add_skill(
+            sjw_id=sjw_id,
+            type=type,
+            order=order,
+            image=image
+        )
+        # Ajoute la traduction du skill
+        skills_sql.add_skill_translation(
+            skill_id=skill_id,
+            language=language,
+            name=name,
+            description=description
+        )
+
+        # Ajout des gems si présentes (via SJWSkillsSql)
+        for i in range(4):
+            prefix = f"gems[{i}]"
+            if f"{prefix}[type]" in request.form:
+                gem_type = request.form.get(f"{prefix}[type]")
+                gem_alias = request.form.get(f"{prefix}[alias]")
+                gem_image = request.form.get(f"{prefix}[image]")
+                gem_order = request.form.get(f"{prefix}[order]")
+                gem_name = request.form.get(f"{prefix}[name]")
+                gem_description = request.form.get(f"{prefix}[description]")
+                gem_break = request.form.get(f"{prefix}[break]") == "on"
+                # Ajout gem principale via SJWSkillsSql
+                gem_id = skills_sql.add_skill_gem(
+                    skill_id=skill_id,
+                    type=gem_type,
+                    alias=gem_alias,
+                    image=gem_image,
+                    order=gem_order
+                )
+                # Traduction gem
+                skills_sql.add_skill_gem_translation(
+                    gem_id=gem_id,
+                    language=language,
+                    name=gem_name,
+                    description=gem_description
+                )
+                # Propriétés gem (break uniquement)
+                skills_sql.add_skill_gem_properties(
+                    gem_id=gem_id,
+                    break_value=gem_break
+                )
+                # Ajout des buffs multiples
+                buff_idx = 0
+                while f"{prefix}[buffs][{buff_idx}][name]" in request.form:
+                    buff_name = request.form.get(f"{prefix}[buffs][{buff_idx}][name]")
+                    buff_image = request.form.get(f"{prefix}[buffs][{buff_idx}][image]")
+                    buff_description = request.form.get(f"{prefix}[buffs][{buff_idx}][description]")
+                    buff_id = skills_sql.add_skill_gem_buff(gem_id, buff_image)
+                    skills_sql.add_skill_gem_buff_translation(buff_id, language, buff_name, buff_description)
+                    buff_idx += 1
+
+            # Ajout des debuffs multiples
+            debuff_idx = 0
+            while f"{prefix}[debuffs][{debuff_idx}][name]" in request.form:
+                debuff_name = request.form.get(f"{prefix}[debuffs][{debuff_idx}][name]")
+                debuff_image = request.form.get(f"{prefix}[debuffs][{debuff_idx}][image]")
+                debuff_description = request.form.get(f"{prefix}[debuffs][{debuff_idx}][description]")
+                debuff_id = skills_sql.add_skill_gem_debuff(gem_id, debuff_image)
+                skills_sql.add_skill_gem_debuff_translation(debuff_id, language, debuff_name, debuff_description)
+                debuff_idx += 1
+
+    sql_manager.conn.commit()
+    sql_manager.close()
+    write_log(f"Skill SJW ajouté avec succès (id={skill_id})", log_level="INFO")
+    return redirect(url_for('inner_SJW'))
+    
     @app.route('/SJW/skill_images')
     @login_required
     def skill_images():
