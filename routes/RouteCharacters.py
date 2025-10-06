@@ -150,6 +150,8 @@ def characters(app: Flask):
         for row in characters_data:
             char_id, char_type, char_rarity, char_alias, char_folder, char_name = row
             type_folder = f"SLA_Personnages_{char_type}"
+            if char_folder is None or char_folder.strip() == "":
+                char_folder = f"{char_rarity}_{char_type}_{char_alias}"
             base_path = f'static/images/Personnages/{type_folder}/{char_folder}'
             codex_png = f'{base_path}/{char_type}_{char_alias}_Codex.png'
             codex_webp = f'{base_path}/{char_type}_{char_alias}_Codex.webp'
