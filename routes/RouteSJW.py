@@ -129,7 +129,7 @@ def SJW(app: Flask):
         character_info = sjw_sql.get_sjw(language)
         folder = character_info['folder']
         base_path = f'images/{folder}'
-        character_info['image'] = f'images/{folder}/Sung_Jinwoo.png'
+        character_info['image'] = f'images/{folder}/SJW_Personnage.webp'
         
         weapon_types = set()
         rarities = set()
