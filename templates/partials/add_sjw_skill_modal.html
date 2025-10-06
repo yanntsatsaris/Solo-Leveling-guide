@@ -58,7 +58,7 @@ document.getElementById('add-sjw-skill-btn')?.addEventListener('click', async fu
     let type = null;
     while (!["Skill", "QTE", "Ultime"].includes(type)) {
         type = prompt("Type du skill (Skill, QTE, Ultime) :");
-        if (type === null) return; // Annule si l'utilisateur annule
+        if (type === null) return; // Annule si l'utilisateur annule le prompt
         type = type.trim();
         if (!["Skill", "QTE", "Ultime"].includes(type)) {
             alert("Le type doit être exactement : Skill, QTE ou Ultime (respectez la casse).");
@@ -253,13 +253,37 @@ function addGemField(order) {
             <label><input type="checkbox" class="gem-buff-check" name="gems[${order}][buff]"> Buff</label>
             <label><input type="checkbox" class="gem-debuff-check" name="gems[${order}][debuff]"> Debuff</label>
         </div>
-        <div class="gem-buffs-zone">
-            <button type="button" class="add-buff-btn">Ajouter un buff</button>
-            <div class="buffs-list"></div>
+        <div class="gem-buff-fields" style="display:none;">
+            <div class="gem-buff-name-field">
+                <label>Nom du Buff :</label>
+                <input type="text" name="gems[${order}][buff_name]">
+            </div>
+            <div class="gem-buff-image-field">
+                <label>Image du Buff :</label>
+                <select name="gems[${order}][buff_image]" class="gem-buff-image-select">
+                    <option value="">Chargement...</option>
+                </select>
+            </div>
+            <div class="gem-buff-description-field">
+                <label>Description du Buff :</label>
+                <textarea name="gems[${order}][buff_description]" rows="2"></textarea>
+            </div>
         </div>
-        <div class="gem-debuffs-zone">
-            <button type="button" class="add-debuff-btn">Ajouter un debuff</button>
-            <div class="debuffs-list"></div>
+        <div class="gem-debuff-fields" style="display:none;">
+            <div class="gem-debuff-name-field">
+                <label>Nom du Debuff :</label>
+                <input type="text" name="gems[${order}][debuff_name]">
+            </div>
+            <div class="gem-debuff-image-field">
+                <label>Image du Debuff :</label>
+                <select name="gems[${order}][debuff_image]" class="gem-debuff-image-select">
+                    <option value="">Chargement...</option>
+                </select>
+            </div>
+            <div class="gem-debuff-description-field">
+                <label>Description du Debuff :</label>
+                <textarea name="gems[${order}][debuff_description]" rows="2"></textarea>
+            </div>
         </div>
     </fieldset>
 `;
@@ -327,70 +351,7 @@ function addGemField(order) {
     };
     gemCount++;
     updateAddGemBtn();
-
-    // Ajout dynamique des buffs
-    gemDiv.querySelector('.add-buff-btn').onclick = function() {
-        const buffsList = gemDiv.querySelector('.buffs-list');
-        const idx = buffsList.children.length;
-        const buffDiv = document.createElement('div');
-        buffDiv.className = 'buff-block';
-        buffDiv.innerHTML = `
-            <fieldset>
-                <legend>Buff #${idx+1}</legend>
-                <label>Nom :</label>
-                <input type="text" name="gems[${order}][buffs][${idx}][name]" required>
-                <label>Image :</label>
-                <select name="gems[${order}][buffs][${idx}][image]" class="gem-buff-image-select">
-                    <option value=""></option>
-                </select>
-                <label>Description :</label>
-                <textarea name="gems[${order}][buffs][${idx}][description]" rows="2"></textarea>
-                <button type="button" class="remove-buff-btn">Supprimer</button>
-            </fieldset>
-        `;
-        buffsList.appendChild(buffDiv);
-        fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
-            .then(resp => resp.json())
-            .then(images => {
-                const select = buffDiv.querySelector('.gem-buff-image-select');
-                select.innerHTML = ['<option value=""></option>'].concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
-            });
-        buffDiv.querySelector('.remove-buff-btn').onclick = () => buffDiv.remove();
-    };
-
-    // Ajout dynamique des debuffs
-    gemDiv.querySelector('.add-debuff-btn').onclick = function() {
-        const debuffsList = gemDiv.querySelector('.debuffs-list');
-        const idx = debuffsList.children.length;
-        const debuffDiv = document.createElement('div');
-        debuffDiv.className = 'debuff-block';
-        debuffDiv.innerHTML = `
-            <fieldset>
-                <legend>Debuff #${idx+1}</legend>
-                <label>Nom :</label>
-                <input type="text" name="gems[${order}][debuffs][${idx}][name]" required>
-                <label>Image :</label>
-                <select name="gems[${order}][debuffs][${idx}][image]" class="gem-debuff-image-select">
-                    <option value=""></option>
-                </select>
-                <label>Description :</label>
-                <textarea name="gems[${order}][debuffs][${idx}][description]" rows="2"></textarea>
-                <button type="button" class="remove-debuff-btn">Supprimer</button>
-            </fieldset>
-        `;
-        debuffsList.appendChild(debuffDiv);
-        fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
-            .then(resp => resp.json())
-            .then(images => {
-                const select = debuffDiv.querySelector('.gem-debuff-image-select');
-                select.innerHTML = ['<option value=""></option>'].concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
-            });
-        debuffDiv.querySelector('.remove-debuff-btn').onclick = () => debuffDiv.remove();
-    };
-    gemCount++;
-    updateAddGemBtn();
 }
-
 
 document.getElementById('add-sjw-skill-gem-btn').onclick = function() {
     if (gemCount < maxGems) {
