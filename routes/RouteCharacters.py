@@ -224,6 +224,8 @@ def characters(app: Flask):
         char_description = row['character_translations_description']
 
         type_folder = f"SLA_Personnages_{char_type}"
+        if char_folder is None or char_folder.strip() == "":
+            char_folder = f"{char_rarity}_{char_type}_{char_alias}"
         personnage_png = f'static/images/Personnages/{type_folder}/{char_folder}/{char_type}_{char_alias}_Personnage.png'
         personnage_webp = f'static/images/Personnages/{type_folder}/{char_folder}/{char_type}_{char_alias}_Personnage.webp'
         if os.path.exists(personnage_webp):
