@@ -179,7 +179,7 @@ document.querySelector('.close-add-sjw-skill')?.addEventListener('click', functi
     document.getElementById('add-sjw-skill-overlay').style.display = 'none';
 });
 
-// Pour le select d'image principal
+// Pour le select d'image principale
 const imageSelect = document.querySelector('.sjw-skill-image-select');
 
 // Fermeture de la modale
@@ -222,7 +222,7 @@ document.querySelector('.add-sjw-skill-form select[name="type"]').addEventListen
 checkGemBtnAvailability();
 
 function updateAddGemBtn() {
-    document.getElementById('add-sjw-skill-gem-btn').style.display = (gemCount < maxGems) ? '' : 'none';
+    document.querySelector('.add-sjw-skill-gem-btn').style.display = (gemCount < maxGems) ? '' : 'none';
 }
 
 function addGemField(order) {
