@@ -9,13 +9,13 @@
         {% endif %}
         <div class="sjw-inner-tabs">
             <div class="sjw-inner-tab-btns">
-                <div class="sjw-inner-tab-btn active" data-inner-tab="Skills">Skills</div>
+                <div class="sjw-inner-tab-btn active" data-inner-tab="Skill">Skills</div>
                 <div class="sjw-inner-tab-btn" data-inner-tab="QTE">QTE</div>
                 <div class="sjw-inner-tab-btn" data-inner-tab="Ultime">Ultime</div>
             </div>
             <div class="sjw-inner-tab-contents">
                 
-                {% for tab in ['Skills', 'QTE', 'Ultime'] %}
+                {% for tab in ['Skill', 'QTE', 'Ultime'] %}
                 <div class="sjw-inner-tab-content{% if loop.first %} active{% endif %}" id="sjw-inner-tab-{{ tab }}">
                     
                     <div class="sjw-skills-grid-wrapper">
