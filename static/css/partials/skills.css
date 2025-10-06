@@ -73,6 +73,7 @@
   background: #222;
   min-height: 90px;
   justify-content: space-between;
+  width: 100%; /* Prend toute la largeur de la cellule */
 }
 .sjw-gems-row img {
   border-radius: 6px;
@@ -107,17 +108,36 @@
   margin: 24px 0;
   max-width: 1200px;
 }
+.sjw-skill-cell {
+    background: #232323;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 220px;
+    align-items: center; /* Ajouté pour centrer le contenu */
+}
+
+.sjw-skill-image-row {
+    background: #181818;
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center;
+    padding: 18px 0 10px 0;
+    width: 100%; /* Prend toute la largeur de la cellule */
+}
+
 .sjw-skill-image-row img {
-    max-width: 100px;    /* moitié de 120px */
-    max-height: auto;   /* moitié de 80px */
+    max-width: 60px;    /* moitié de 120px */
+    max-height: 40px;   /* moitié de 80px */
     border-radius: 8px;
-    box-shadow: 0 0 8px #8000ff44;
+    display: block;
+    margin: 0 auto; /* Centre l'image dans le bloc */
 }
 
 .sjw-gem-cell img {
-    max-width: 75px;    /* 4 fois moins que 48px */
-    max-height: auto;   /* 4 fois moins que 48px */
+    max-width: 12px;    /* 4 fois moins que 48px */
+    max-height: 12px;   /* 4 fois moins que 48px */
     margin-bottom: 6px;
     border-radius: 6px;
-    box-shadow: 0 0 6px #ffcc0044;
 }
