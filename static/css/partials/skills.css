@@ -115,7 +115,7 @@
 }
 
 .sjw-gem-cell img {
-    max-width: 25px;    /* 4 fois moins que 48px */
+    max-width: 75px;    /* 4 fois moins que 48px */
     max-height: auto;   /* 4 fois moins que 48px */
     margin-bottom: 6px;
     border-radius: 6px;
