@@ -517,7 +517,7 @@ def SJW(app: Flask):
                 else:
                     aimg = ""
 
-                db_artefact = next((a for a in current_artefacts if str(a['id']) == str(aid)), None) if aid else None
+                db_artefact = next((a for a in current_artefacts if str(a['id']) == str(aid)), None) if aid : None
                 if aid:
                     if db_artefact and (
                         (db_artefact['name'] or '') != (aname or '') or
@@ -552,7 +552,7 @@ def SJW(app: Flask):
                 cid = request.form.get(f"core_id_{set_idx}_{core_idx}")
                 cnumber = f"{core_idx+1:02d}"  # Ajoute cette ligne pour numéroter 01, 02, 03
                 cimg = cname + cnumber + ".webp"  # Utilise le nom du noyau et le numéro pour l'image
-                db_core = next((c for c in current_cores if str(c['id']) == str(cid)), None) if cid else None
+                db_core = next((c for c in current_cores if str(c['id']) == str(cid)), None) if cid : None
                 if cid:
                     if db_core and (
                         db_core['name'] != cname or
@@ -702,20 +702,20 @@ def SJW(app: Flask):
                     skills_sql.add_skill_gem_buff_translation(buff_id, language, buff_name, buff_description)
                     buff_idx += 1
 
-            # Ajout des debuffs multiples
-            debuff_idx = 0
-            while f"{prefix}[debuffs][{debuff_idx}][name]" in request.form:
-                debuff_name = request.form.get(f"{prefix}[debuffs][{debuff_idx}][name]")
-                debuff_image = request.form.get(f"{prefix}[debuffs][{debuff_idx}][image]")
-                debuff_description = request.form.get(f"{prefix}[debuffs][{debuff_idx}][description]")
-                debuff_id = skills_sql.add_skill_gem_debuff(gem_id, debuff_image)
-                skills_sql.add_skill_gem_debuff_translation(debuff_id, language, debuff_name, debuff_description)
-                debuff_idx += 1
+                # Ajout des debuffs multiples
+                debuff_idx = 0
+                while f"{prefix}[debuffs][{debuff_idx}][name]" in request.form:
+                    debuff_name = request.form.get(f"{prefix}[debuffs][{debuff_idx}][name]")
+                    debuff_image = request.form.get(f"{prefix}[debuffs][{debuff_idx}][image]")
+                    debuff_description = request.form.get(f"{prefix}[debuffs][{debuff_idx}][description]")
+                    debuff_id = skills_sql.add_skill_gem_debuff(gem_id, debuff_image)
+                    skills_sql.add_skill_gem_debuff_translation(debuff_id, language, debuff_name, debuff_description)
+                    debuff_idx += 1
 
-    sql_manager.conn.commit()
-    sql_manager.close()
-    write_log(f"Skill SJW ajouté avec succès (id={skill_id})", log_level="INFO")
-    return redirect(url_for('inner_SJW'))
+        sql_manager.conn.commit()
+        sql_manager.close()
+        write_log(f"Skill SJW ajouté avec succès (id={skill_id})", log_level="INFO")
+        return redirect(url_for('inner_SJW'))
     
     @app.route('/SJW/skill_images')
     @login_required
