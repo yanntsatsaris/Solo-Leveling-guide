@@ -203,7 +203,7 @@ const maxGems = 4;
 
 // Désactive le bouton d'ajout de gem si type = Ultime
 function checkGemBtnAvailability() {
-    const type = document.querySelector('#add-sjw-skill-form select[name="type"]').value;
+    const type = document.querySelector('.add-sjw-skill-form select[name="type"]').value;
     const addBtn = document.getElementById('add-sjw-skill-gem-btn');
     if (type === "Ultime") {
         addBtn.style.display = "none";
@@ -305,8 +305,8 @@ function addGemField(order) {
     container.appendChild(gemDiv);
 
     // Remplir le select d'image pour la gem
-    const skillType = document.querySelector('#add-sjw-skill-form select[name="type"]').value;
-    const skillOrder = document.querySelector('#add-sjw-skill-form input[name="order"]').value;
+    const skillType = document.querySelector('.add-sjw-skill-form select[name="type"]').value;
+    const skillOrder = document.querySelector('.add-sjw-skill-form input[name="order"]').value;
     fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
         .then(resp => resp.json())
         .then(images => {
