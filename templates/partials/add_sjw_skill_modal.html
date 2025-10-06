@@ -5,7 +5,7 @@
 >
   <div id="add-sjw-skill-menu" class="edit-sjw-skill-popup">
     <form
-      class="add-sjw-skill-form"
+      id="add-sjw-skill-form"
       method="POST"
       action="{{ url_for('add_sjw_skill') }}"
       enctype="multipart/form-data"
@@ -29,18 +29,19 @@
         <input type="number" name="order" min="1" required />
 
         <label>Image principale :</label>
-        <select name="image" class="sjw-skill-image-select"></select>
+        <select name="image" id="sjw-skill-image-select"></select>
 
         <label>Description :</label>
         <textarea name="description"></textarea>
         <div id="sjw-skill-gems-container"></div>
-        <button type="button" class="add-sjw-skill-gem-btn admin-btn" style="margin-top:10px;">Ajouter une gem</button>
+        <button type="button" id="add-sjw-skill-gem-btn" class="admin-btn" style="margin-top:10px;">Ajouter une gem</button>
       </div>
       <div style="display: flex; justify-content: space-between; margin-top: 18px">
         <button type="submit" class="admin-btn">Enregistrer</button>
         <button
           type="button"
-          class="close-add-sjw-skill close-btn"
+          id="close-add-sjw-skill"
+          class="close-btn"
           style="font-size: 22px"
         >
           &times;
@@ -86,7 +87,6 @@ document.getElementById('add-sjw-skill-btn')?.addEventListener('click', async fu
 
     // Construit le chemin du dossier image
     const folderName = `${order}_${type}`;
-    let folderType = '';
     if (type === 'Skill') {
         folderType = 'Skills';
     } else if (type === 'QTE') {
@@ -167,18 +167,6 @@ document.getElementById('add-sjw-skill-btn')?.addEventListener('click', async fu
     }
 });
 
-// Pour le bouton "Ajouter une gem"
-document.querySelector('.add-sjw-skill-gem-btn').onclick = function() {
-    if (gemCount < maxGems) {
-        addGemField(gemCount);
-    }
-}
-
-// Pour le bouton de fermeture
-document.querySelector('.close-add-sjw-skill')?.addEventListener('click', function() {
-    document.getElementById('add-sjw-skill-overlay').style.display = 'none';
-});
-
 // Fermeture de la modale
 document.getElementById('close-add-sjw-skill')?.addEventListener('click', function() {
     document.getElementById('add-sjw-skill-overlay').style.display = 'none';
@@ -200,7 +188,7 @@ const maxGems = 4;
 
 // Désactive le bouton d'ajout de gem si type = Ultime
 function checkGemBtnAvailability() {
-    const type = document.querySelector('.add-sjw-skill-form select[name="type"]').value;
+    const type = document.querySelector('#add-sjw-skill-form select[name="type"]').value;
     const addBtn = document.getElementById('add-sjw-skill-gem-btn');
     if (type === "Ultime") {
         addBtn.style.display = "none";
@@ -213,13 +201,13 @@ function checkGemBtnAvailability() {
 }
 
 // Sur changement du type, on vérifie la disponibilité du bouton
-document.querySelector('.add-sjw-skill-form select[name="type"]').addEventListener('change', checkGemBtnAvailability);
+document.querySelector('#add-sjw-skill-form select[name="type"]').addEventListener('change', checkGemBtnAvailability);
 
 // Appel initial au chargement de la modale
 checkGemBtnAvailability();
 
 function updateAddGemBtn() {
-    document.querySelector('.add-sjw-skill-gem-btn').style.display = (gemCount < maxGems) ? '' : 'none';
+    document.getElementById('add-sjw-skill-gem-btn').style.display = (gemCount < maxGems) ? '' : 'none';
 }
 
 function addGemField(order) {
@@ -302,8 +290,8 @@ function addGemField(order) {
     container.appendChild(gemDiv);
 
     // Remplir le select d'image pour la gem
-    const skillType = document.querySelector('.add-sjw-skill-form select[name="type"]').value;
-    const skillOrder = document.querySelector('.add-sjw-skill-form input[name="order"]').value;
+    const skillType = document.querySelector('#add-sjw-skill-form select[name="type"]').value;
+    const skillOrder = document.querySelector('#add-sjw-skill-form input[name="order"]').value;
     fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
         .then(resp => resp.json())
         .then(images => {
@@ -365,16 +353,9 @@ function addGemField(order) {
     updateAddGemBtn();
 }
 
-document.querySelector('.add-sjw-skill-gem-btn').onclick = function() {
+document.getElementById('add-sjw-skill-gem-btn').onclick = function() {
     if (gemCount < maxGems) {
         addGemField(gemCount);
     }
-}
-
-const addSkillForm = document.querySelector('.add-sjw-skill-form');
-if (addSkillForm) {
-    addSkillForm.addEventListener('submit', function(e) {
-        // ... ton code ...
-    });
 }
 </script>
