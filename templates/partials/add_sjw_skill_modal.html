@@ -87,6 +87,7 @@ document.getElementById('add-sjw-skill-btn')?.addEventListener('click', async fu
 
     // Construit le chemin du dossier image
     const folderName = `${order}_${type}`;
+    let folderType = '';
     if (type === 'Skill') {
         folderType = 'Skills';
     } else if (type === 'QTE') {
@@ -268,30 +269,18 @@ function addGemField(order) {
     // Remplir le select d'image pour la gem
     const skillType = document.querySelector('#add-sjw-skill-form select[name="type"]').value;
     const skillOrder = document.querySelector('#add-sjw-skill-form input[name="order"]').value;
+    const select = gemDiv.querySelector('.gem-image-select');
     fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
         .then(resp => resp.json())
         .then(images => {
-            const select = gemDiv.querySelector('.gem-image-select');
-            const buffSelect = gemDiv.querySelector('.gem-buff-image-select');
-            const debuffSelect = gemDiv.querySelector('.gem-debuff-image-select');
             if (images.length > 0) {
-                const opts = ['<option value=""></option>'].concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
-                select.innerHTML = opts;
-                buffSelect.innerHTML = opts;
-                debuffSelect.innerHTML = opts;
+                select.innerHTML = ['<option value=""></option>'].concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
             } else {
                 select.innerHTML = '<option value=""></option><option value="">Aucune image trouvée</option>';
-                buffSelect.innerHTML = '<option value=""></option><option value="">Aucune image trouvée</option>';
-                debuffSelect.innerHTML = '<option value=""></option><option value="">Aucune image trouvée</option>';
             }
         })
         .catch(() => {
-            const select = gemDiv.querySelector('.gem-image-select');
-            const buffSelect = gemDiv.querySelector('.gem-buff-image-select');
-            const debuffSelect = gemDiv.querySelector('.gem-debuff-image-select');
             select.innerHTML = '<option value="">Erreur lors du chargement</option>';
-            buffSelect.innerHTML = '<option value="">Erreur lors du chargement</option>';
-            debuffSelect.innerHTML = '<option value="">Erreur lors du chargement</option>';
         });
 
     // Affichage dynamique des champs buff/debuff
@@ -323,7 +312,7 @@ function addGemField(order) {
             </fieldset>
         `;
         buffsList.appendChild(buffDiv);
-        // Remplir le select d'image
+        // Remplir le select d'image pour CE buff
         fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
             .then(resp => resp.json())
             .then(images => {
@@ -354,7 +343,7 @@ function addGemField(order) {
             </fieldset>
         `;
         debuffsList.appendChild(debuffDiv);
-        // Remplir le select d'image
+        // Remplir le select d'image pour CE debuff
         fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
             .then(resp => resp.json())
             .then(images => {
