@@ -68,11 +68,32 @@
   text-align: center;
 }
 .sjw-gems-row {
-  margin-top: 4px;
+  display: flex;
+  flex-direction: row;
+  background: #222;
+  min-height: 90px;
+  justify-content: space-between;
 }
 .sjw-gems-row img {
   border-radius: 6px;
   box-shadow: 0 1px 4px #0002;
+}
+.sjw-gem-cell {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  border-right: 1px solid #333;
+  min-height: 80px;
+  position: relative;
+}
+.sjw-gem-cell:last-child {
+  border-right: none;
+}
+.sjw-gem-empty {
+  background: #222;
 }
 .sjw-skills-grid-wrapper {
   width: 100%;
