@@ -10,7 +10,7 @@
             <div class="sjw-inner-tab-contents">
                 {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
                     <button id="add-sjw-skill-btn" class="admin-btn">
-                        Ajouter une compétence ({{ tab }})
+                        Ajouter une compétence
                     </button>
                     {% include 'partials/add_sjw_skill_modal.html' %}
                 {% endif %}
