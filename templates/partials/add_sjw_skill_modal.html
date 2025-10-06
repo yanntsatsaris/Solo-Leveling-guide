@@ -368,7 +368,7 @@ function addGemField(order) {
     updateAddGemBtn();
 }
 
-document.getElementById('add-sjw-skill-gem-btn').onclick = function() {
+document.querySelector('.add-sjw-skill-gem-btn').onclick = function() {
     if (gemCount < maxGems) {
         addGemField(gemCount);
     }
