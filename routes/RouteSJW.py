@@ -724,13 +724,16 @@ def SJW(app: Flask):
     def skill_images():
         type = request.args.get('type', '').replace('..', '').replace('/', '').replace('\\', '')
         order = request.args.get('order', '').replace('..', '').replace('/', '').replace('\\', '')
+        write_log(f"Recherche des images pour le skill : type={type}, order={order}", log_level="INFO")
         folder_name = f"{order}_{type}"
+        write_log(f"Dossier d'images : {folder_name}", log_level="INFO")
         if type == 'Skill':
             folder_type = 'Skills'
         if type == 'QTE':
             folder_type = 'QTE'
         if type == 'Ultime':
             folder_type = 'Ultime'
+        write_log(f"Dossier de type : {folder_type}", log_level="INFO")
         img_dir = os.path.join('static', 'images', 'Sung_Jinwoo', folder_type, folder_name)
         if not os.path.isdir(img_dir):
             write_log(f"Le dossier d'images n'existe pas : {img_dir}", log_level="WARNING")
