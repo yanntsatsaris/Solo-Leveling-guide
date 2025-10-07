@@ -194,7 +194,6 @@
 .sjw-gem-bubble-img {
     width: 64px;
     height: 64px;
-    border-radius: 50%;
     object-fit: cover;
     box-shadow: 0 0 12px #ffcc0044;
     background: #232323;
