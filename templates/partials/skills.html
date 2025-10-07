@@ -74,13 +74,9 @@
                     if (skill && skill.gems) {
                         skill.gems.forEach(gem => {
                             const gemDiv = document.createElement('div');
-                            gemDiv.className = 'sjw-gem-sidebar-cell';
+                            gemDiv.className = 'sjw-gem-sidebar-bubble';
                             gemDiv.innerHTML = `
-                                <div>
-                                    ${gem.image ? `<img src="/static/${gem.image}" alt="Gem Image" class="sjw-gem-sidebar-img">` : ''}
-                                    <span class="sjw-gem-sidebar-name">${gem.name || ''}</span>
-                                </div>
-                                <div class="sjw-gem-sidebar-desc">${gem.description || ''}</div>
+                                ${gem.image ? `<img src="/static/${gem.image}" alt="Gem Image" class="sjw-gem-sidebar-img">` : ''}
                             `;
                             gemsList.appendChild(gemDiv);
                         });

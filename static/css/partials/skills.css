@@ -118,12 +118,15 @@
 }
 
 .sjw-gems-sidebar {
-    min-width: 220px;
+    min-width: 80px;
     background: #181818;
     border-radius: 10px;
     box-shadow: 0 2px 8px #0002;
     padding: 18px 12px;
     margin-left: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .sjw-gem-sidebar-cell {
@@ -134,11 +137,22 @@
     border-bottom: 1px solid #333;
     padding-bottom: 8px;
 }
+.sjw-gem-sidebar-bubble {
+    width: 48px;
+    height: 48px;
+    background: #232323;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #ffcc0044;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .sjw-gem-sidebar-img {
-    max-width: 32px;
-    max-height: 32px;
-    margin-right: 8px;
-    vertical-align: middle;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 6px #ffcc0044;
 }
 .sjw-gem-sidebar-name {
     font-weight: bold;
@@ -149,4 +163,11 @@
     font-size: 13px;
     color: #ccc;
     margin-top: 4px;
+}
+
+#sjw-gems-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
 }
