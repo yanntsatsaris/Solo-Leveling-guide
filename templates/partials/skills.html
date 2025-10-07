@@ -31,9 +31,9 @@
                                 </div>
                             {% endfor %}
                         </div>
-                        <div class="sjw-gems-sidebar" id="sjw-gems-sidebar" style="display:none;">
-                            <h3>Gems du skill</h3>
-                            <div id="sjw-gems-list"></div>
+                        <!-- Bulle flottante pour les gems -->
+                        <div id="sjw-gems-bubble" class="sjw-gems-bubble" style="display:none; position:absolute;">
+                            <div id="sjw-gems-bubble-list"></div>
                         </div>
                     </div>
                     {% if skills|length == 0 %}
@@ -55,36 +55,57 @@
                     document.getElementById('sjw-inner-tab-' + this.dataset.innerTab).classList.add('active');
                 });
             });
+        
+        });
 
-            // Gestion de l'affichage des gems à gauche
-            const skillCells = document.querySelectorAll('.sjw-skill-clickable');
-            const sidebar = document.getElementById('sjw-gems-sidebar');
-            const gemsList = document.getElementById('sjw-gems-list');
-            // Récupère les skills depuis le contexte Jinja
-            const allSkillsData = {{ character.skills|tojson }};
-            skillCells.forEach(cell => {
-                cell.addEventListener('click', function() {
-                    // Récupère l'onglet actif
-                    const activeTab = document.querySelector('.sjw-inner-tab-btn.active').dataset.innerTab;
-                    // Filtre les skills du bon type
-                    const skillsData = allSkillsData.filter(s => s.type === activeTab);
-                    const idx = parseInt(cell.dataset.skillIndex);
-                    const skill = skillsData[idx];
-                    gemsList.innerHTML = '';
-                    if (skill && skill.gems) {
-                        skill.gems.forEach(gem => {
-                            const gemDiv = document.createElement('div');
-                            gemDiv.className = 'sjw-gem-sidebar-bubble';
-                            gemDiv.innerHTML = `
-                                ${gem.image ? `<img src="/static/${gem.image}" alt="Gem Image" class="sjw-gem-sidebar-img">` : ''}
-                            `;
-                            gemsList.appendChild(gemDiv);
-                        });
-                        sidebar.style.display = '';
+        document.addEventListener("DOMContentLoaded", function() {
+        const skillCells = document.querySelectorAll('.sjw-skill-clickable');
+        const gemsBubble = document.getElementById('sjw-gems-bubble');
+        const gemsBubbleList = document.getElementById('sjw-gems-bubble-list');
+        const allSkillsData = {{ character.skills|tojson }};
+
+        skillCells.forEach(cell => {
+            cell.addEventListener('click', function(event) {
+                // Récupère l'onglet actif
+                const activeTab = document.querySelector('.sjw-inner-tab-btn.active').dataset.innerTab;
+                const skillsData = allSkillsData.filter(s => s.type === activeTab);
+                const idx = parseInt(cell.dataset.skillIndex);
+                const skill = skillsData[idx];
+                gemsBubbleList.innerHTML = '';
+                if (skill && skill.gems) {
+                    skill.gems.forEach(gem => {
+                        if (gem.image) {
+                            const img = document.createElement('img');
+                            img.src = "/static/" + gem.image;
+                            img.className = "sjw-gem-bubble-img";
+                            img.alt = "Gem Image";
+                            gemsBubbleList.appendChild(img);
+                        }
+                    });
+                    // Positionne la bulle à gauche du skill cliqué
+                    const rect = cell.getBoundingClientRect();
+                    const bubbleWidth = gemsBubble.offsetWidth || 120;
+                    const bubbleHeight = gemsBubble.offsetHeight || 200;
+                    let leftPosition = rect.left + window.scrollX - bubbleWidth - 16;
+                    if (leftPosition < 0) {
+                        leftPosition = rect.right + window.scrollX + 16;
                     }
-                });
+                    let topPosition = rect.top + window.scrollY + (rect.height / 2) - (bubbleHeight / 2);
+                    if (topPosition < 0) topPosition = 10;
+                    gemsBubble.style.top = `${topPosition}px`;
+                    gemsBubble.style.left = `${leftPosition}px`;
+                    gemsBubble.style.display = "flex";
+                }
             });
         });
+
+        // Ferme la bulle si on clique ailleurs
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.sjw-skill-clickable') && !e.target.closest('#sjw-gems-bubble')) {
+                gemsBubble.style.display = "none";
+            }
+        });
+    });
         </script>
     {% else %}
         {# Section classique pour les autres personnages #}

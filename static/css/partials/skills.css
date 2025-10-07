@@ -171,3 +171,32 @@
     gap: 18px;
     align-items: center;
 }
+
+.sjw-gems-bubble {
+    background: #181818;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px #0008;
+    padding: 18px 16px;
+    min-width: 80px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#sjw-gems-bubble-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+}
+
+.sjw-gem-bubble-img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 12px #ffcc0044;
+    background: #232323;
+    display: block;
+}
