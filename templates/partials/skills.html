@@ -113,73 +113,45 @@
     document.addEventListener("DOMContentLoaded", function() {
     const infoBubble = document.getElementById('sjw-info-bubble');
 
-    // Survol skill principal
-    document.querySelectorAll('.sjw-skill-cell').forEach((cell, idx) => {
-        cell.addEventListener('mouseenter', function(e) {
-            const activeTab = document.querySelector('.sjw-inner-tab-btn.active').dataset.innerTab;
-            const skillsData = allSkillsData.filter(s => s.type === activeTab);
-            const skill = skillsData[idx];
-            if (skill) {
-                infoBubble.innerHTML = `
-                    <strong>${skill.name || ''}</strong><br>
-                    <span>${skill.description || ''}</span>
-                `;
-                infoBubble.style.display = "block";
-                infoBubble.style.opacity = "1";
-                infoBubble.style.left = (e.clientX + 18) + "px";
-                infoBubble.style.top = (e.clientY + 18) + "px";
-            }
-        });
-        cell.addEventListener('mousemove', function(e) {
-            infoBubble.style.left = (e.clientX + 18) + "px";
-            infoBubble.style.top = (e.clientY + 18) + "px";
-        });
-        cell.addEventListener('mouseleave', function() {
-            infoBubble.style.display = "none";
-            infoBubble.style.opacity = "0";
-        });
-    });
+    function updateSkillHoverListeners() {
+        // Cible uniquement les skills visibles dans l'onglet actif
+        const activeContent = document.querySelector('.sjw-inner-tab-content.active');
+        if (!activeContent) return;
+        const skillCells = activeContent.querySelectorAll('.sjw-skill-cell');
+        const activeTab = document.querySelector('.sjw-inner-tab-btn.active').dataset.innerTab;
+        const skillsData = window.allSkillsData.filter(s => s.type === activeTab);
 
-    // Survol gem dans la bulle
-    document.getElementById('sjw-gems-bubble').addEventListener('mouseover', function(e) {
-        const img = e.target.closest('.sjw-gem-bubble-img');
-        if (img) {
-            // Trouve l'index de la gem
-            const gemIdx = Array.from(this.querySelectorAll('.sjw-gem-bubble-img')).indexOf(img);
-            // Récupère le skill actif
-            const activeTab = document.querySelector('.sjw-inner-tab-btn.active').dataset.innerTab;
-            const skillsData = allSkillsData.filter(s => s.type === activeTab);
-            // Trouve le skill sélectionné
-            const skillCells = document.querySelectorAll('.sjw-skill-clickable');
-            let selectedSkillIdx = null;
-            skillCells.forEach((cell, idx) => {
-                if (cell.classList.contains('selected')) selectedSkillIdx = idx;
-            });
-            // Si pas de classe selected, utilise la dernière bulle ouverte
-            if (selectedSkillIdx === null) {
-                selectedSkillIdx = parseInt(document.querySelector('.sjw-skill-clickable[data-skill-index]').dataset.skillIndex);
-            }
-            const skill = skillsData[selectedSkillIdx];
-            if (skill && skill.gems && skill.gems[gemIdx]) {
-                const gem = skill.gems[gemIdx];
-                infoBubble.innerHTML = `
-                    <strong>${gem.name || ''}</strong><br>
-                    <span>${gem.description || ''}</span>
-                `;
-                infoBubble.style.display = "block";
-                infoBubble.style.opacity = "1";
+        skillCells.forEach((cell, idx) => {
+            cell.onmouseenter = function(e) {
+                const skill = skillsData[idx];
+                if (skill) {
+                    infoBubble.innerHTML = `
+                        <strong>${skill.name || ''}</strong><br>
+                        <span>${skill.description || ''}</span>
+                    `;
+                    infoBubble.style.display = "block";
+                    infoBubble.style.opacity = "1";
+                    infoBubble.style.left = (e.clientX + 18) + "px";
+                    infoBubble.style.top = (e.clientY + 18) + "px";
+                }
+            };
+            cell.onmousemove = function(e) {
                 infoBubble.style.left = (e.clientX + 18) + "px";
                 infoBubble.style.top = (e.clientY + 18) + "px";
-            }
-        }
-    });
-    document.getElementById('sjw-gems-bubble').addEventListener('mousemove', function(e) {
-        infoBubble.style.left = (e.clientX + 18) + "px";
-        infoBubble.style.top = (e.clientY + 18) + "px";
-    });
-    document.getElementById('sjw-gems-bubble').addEventListener('mouseleave', function() {
-        infoBubble.style.display = "none";
-        infoBubble.style.opacity = "0";
+            };
+            cell.onmouseleave = function() {
+                infoBubble.style.display = "none";
+                infoBubble.style.opacity = "0";
+            };
+        });
+    }
+
+    // Met à jour les listeners au chargement et à chaque changement d'onglet
+    updateSkillHoverListeners();
+    document.querySelectorAll('.sjw-inner-tab-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            setTimeout(updateSkillHoverListeners, 50);
+        });
     });
 });
         </script>
