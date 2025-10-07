@@ -65,53 +65,57 @@
         });
 
         document.addEventListener("DOMContentLoaded", function() {
-        const skillCells = document.querySelectorAll('.sjw-skill-clickable');
-        const gemsBubble = document.getElementById('sjw-gems-bubble');
-        const gemsBubbleList = document.getElementById('sjw-gems-bubble-list');
-        const allSkillsData = window.allSkillsData;
+        function initSkillInteractions() {
+            const activeContent = document.querySelector('.sjw-inner-tab-content.active');
+            const skillCells = activeContent.querySelectorAll('.sjw-skill-clickable');
+            const gemsBubble = document.getElementById('sjw-gems-bubble');
+            const gemsBubbleList = document.getElementById('sjw-gems-bubble-list');
+            const allSkillsData = window.allSkillsData;
 
-        skillCells.forEach(cell => {
-            cell.addEventListener('click', function(event) {
-                // Récupère l'onglet actif
-                const activeTab = document.querySelector('.sjw-inner-tab-btn.active').dataset.innerTab;
-                const skillsData = allSkillsData.filter(s => s.type === activeTab);
-                const idx = parseInt(cell.dataset.skillIndex);
-                const skill = skillsData[idx];
-                gemsBubbleList.innerHTML = '';
-                if (skill && skill.gems) {
-                    skill.gems.forEach(gem => {
-                        if (gem.image_path) {
-                            const img = document.createElement('img');
-                            img.src = "/static/" + gem.image_path;
-                            img.className = "sjw-gem-bubble-img";
-                            img.alt = "Gem Image";
-                            gemsBubbleList.appendChild(img);
+            skillCells.forEach(cell => {
+                cell.addEventListener('click', function(event) {
+                    // Récupère l'onglet actif
+                    const activeTab = document.querySelector('.sjw-inner-tab-btn.active').dataset.innerTab;
+                    const skillsData = allSkillsData.filter(s => s.type === activeTab);
+                    const idx = parseInt(cell.dataset.skillIndex);
+                    const skill = skillsData[idx];
+                    gemsBubbleList.innerHTML = '';
+                    if (skill && skill.gems) {
+                        skill.gems.forEach(gem => {
+                            if (gem.image_path) {
+                                const img = document.createElement('img');
+                                img.src = "/static/" + gem.image_path;
+                                img.className = "sjw-gem-bubble-img";
+                                img.alt = "Gem Image";
+                                gemsBubbleList.appendChild(img);
+                            }
+                        });
+                        // Positionne la bulle à gauche du skill cliqué
+                        const rect = cell.getBoundingClientRect();
+                        const bubbleWidth = gemsBubble.offsetWidth || 120;
+                        const bubbleHeight = gemsBubble.offsetHeight || 200;
+                        let leftPosition = rect.left + window.scrollX - bubbleWidth - 16;
+                        if (leftPosition < 0) {
+                            leftPosition = rect.right + window.scrollX + 16;
                         }
-                    });
-                    // Positionne la bulle à gauche du skill cliqué
-                    const rect = cell.getBoundingClientRect();
-                    const bubbleWidth = gemsBubble.offsetWidth || 120;
-                    const bubbleHeight = gemsBubble.offsetHeight || 200;
-                    let leftPosition = rect.left + window.scrollX - bubbleWidth - 16;
-                    if (leftPosition < 0) {
-                        leftPosition = rect.right + window.scrollX + 16;
+                        let topPosition = rect.top + window.scrollY + (rect.height / 2) - (bubbleHeight / 2);
+                        if (topPosition < 0) topPosition = 10;
+                        gemsBubble.style.top = `${topPosition}px`;
+                        gemsBubble.style.left = `${leftPosition}px`;
+                        gemsBubble.style.display = "flex";
                     }
-                    let topPosition = rect.top + window.scrollY + (rect.height / 2) - (bubbleHeight / 2);
-                    if (topPosition < 0) topPosition = 10;
-                    gemsBubble.style.top = `${topPosition}px`;
-                    gemsBubble.style.left = `${leftPosition}px`;
-                    gemsBubble.style.display = "flex";
+                });
+            });
+
+            // Ferme la bulle si on clique ailleurs
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.sjw-skill-clickable') && !e.target.closest('#sjw-gems-bubble')) {
+                    gemsBubble.style.display = "none";
                 }
             });
-        });
+        }
 
-        // Ferme la bulle si on clique ailleurs
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.sjw-skill-clickable') && !e.target.closest('#sjw-gems-bubble')) {
-                gemsBubble.style.display = "none";
-            }
-        });
-    });
+    initSkillInteractions();
 
     document.addEventListener("DOMContentLoaded", function() {
     const infoBubble = document.getElementById('sjw-info-bubble');
