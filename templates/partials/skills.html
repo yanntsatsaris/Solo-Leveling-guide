@@ -61,9 +61,13 @@
             const sidebar = document.getElementById('sjw-gems-sidebar');
             const gemsList = document.getElementById('sjw-gems-list');
             // Récupère les skills depuis le contexte Jinja
-            const skillsData = {{ skills|tojson }};
+            const allSkillsData = {{ character.skills|tojson }};
             skillCells.forEach(cell => {
                 cell.addEventListener('click', function() {
+                    // Récupère l'onglet actif
+                    const activeTab = document.querySelector('.sjw-inner-tab-btn.active').dataset.innerTab;
+                    // Filtre les skills du bon type
+                    const skillsData = allSkillsData.filter(s => s.type === activeTab);
                     const idx = parseInt(cell.dataset.skillIndex);
                     const skill = skillsData[idx];
                     gemsList.innerHTML = '';
