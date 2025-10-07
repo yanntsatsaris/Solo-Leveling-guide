@@ -75,12 +75,13 @@
                     const skill = skillsData[idx];
                     gemsBubbleList.innerHTML = '';
                     if (skill && skill.gems) {
-                        skill.gems.forEach(gem => {
+                        skill.gems.forEach((gem, gemIdx) => {
                             if (gem.image_path) {
                                 const img = document.createElement('img');
                                 img.src = "/static/" + gem.image_path;
                                 img.className = "sjw-gem-bubble-img";
                                 img.alt = "Gem Image";
+                                img.dataset.gemIdx = gemIdx; // Ajoute l'index pour le mousehover
                                 gemsBubbleList.appendChild(img);
                             }
                         });
@@ -154,6 +155,35 @@
         });
     });
 });
+
+function updateGemHoverListeners(skill) {
+    const infoBubble = document.getElementById('sjw-info-bubble');
+    const gemImgs = document.querySelectorAll('.sjw-gem-bubble-img');
+    gemImgs.forEach(img => {
+        img.onmouseenter = function(e) {
+            const gemIdx = parseInt(img.dataset.gemIdx);
+            const gem = skill.gems[gemIdx];
+            if (gem) {
+                infoBubble.innerHTML = `
+                    <strong>${gem.name || ''}</strong><br>
+                    <span>${gem.description || ''}</span>
+                `;
+                infoBubble.style.display = "block";
+                infoBubble.style.opacity = "1";
+                infoBubble.style.left = (e.clientX + 18) + "px";
+                infoBubble.style.top = (e.clientY + 18) + "px";
+            }
+        };
+        img.onmousemove = function(e) {
+            infoBubble.style.left = (e.clientX + 18) + "px";
+            infoBubble.style.top = (e.clientY + 18) + "px";
+        };
+        img.onmouseleave = function() {
+            infoBubble.style.display = "none";
+            infoBubble.style.opacity = "0";
+        };
+    });
+}
         </script>
     {% else %}
         {# Section classique pour les autres personnages #}
