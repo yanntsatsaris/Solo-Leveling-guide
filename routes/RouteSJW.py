@@ -586,6 +586,7 @@ def SJW(app: Flask):
         current_skills = skills_sql.get_skills(char_id, language)
         existing_skill_ids = [str(s['id']) for s in current_skills]
         form_skill_ids = []
+        skill_modif = False
         skill_idx = 0
         while True:
             skill_id = request.form.get(f"skill_id_{skill_idx}")
@@ -611,6 +612,7 @@ def SJW(app: Flask):
                 ):
                     skills_sql.update_skill(skill_id, skill_type, skill_order, skill_image)
                     skills_sql.update_skill_translation(skill_id, language, skill_name, skill_description)
+                    skill_modif = True
                 form_skill_ids.append(skill_id)
             else:
                 # Ajout d'un nouveau skill
@@ -642,6 +644,7 @@ def SJW(app: Flask):
                     skills_sql.update_skill_gem(gem_id, gem_type, gem_alias, gem_image, gem_idx)
                     skills_sql.update_skill_gem_translation(gem_id, language, gem_name, gem_description)
                     skills_sql.update_skill_gem_properties(gem_id, gem_break)
+                    skill_modif = True
                 else:
                     # Ajout gem
                     gem_id = skills_sql.add_skill_gem(skill_id, gem_type, gem_alias, gem_image, gem_idx)
@@ -664,6 +667,7 @@ def SJW(app: Flask):
                     if buff_id:
                         skills_sql.update_skill_gem_buff(buff_id, buff_image)
                         skills_sql.update_skill_gem_buff_translation(buff_id, language, buff_name, buff_description)
+                        skill_modif = True
                     else:
                         buff_id = skills_sql.add_skill_gem_buff(gem_id, buff_image)
                         skills_sql.add_skill_gem_buff_translation(buff_id, language, buff_name, buff_description)
@@ -684,6 +688,7 @@ def SJW(app: Flask):
                     if debuff_id:
                         skills_sql.update_skill_gem_debuff(debuff_id, debuff_image)
                         skills_sql.update_skill_gem_debuff_translation(debuff_id, language, debuff_name, debuff_description)
+                        skill_modif = True
                     else:
                         debuff_id = skills_sql.add_skill_gem_debuff(gem_id, debuff_image)
                         skills_sql.add_skill_gem_debuff_translation(debuff_id, language, debuff_name, debuff_description)
@@ -697,7 +702,7 @@ def SJW(app: Flask):
         sql_manager.close()
 
         # Log global
-        if not (char_modif or set_modif):
+        if not (char_modif or set_modif or skill_modif):
             write_log(f"Aucune modification détectée pour le personnage {char_id}", log_level="INFO")
 
         return redirect(url_for('inner_SJW'))
