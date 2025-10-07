@@ -181,8 +181,6 @@ def SJW(app: Flask):
                 evolution['description'] = process_description(evolution['description'], all_tags, base_path)
         character_info['skills'] = skills
         
-        write_log(f"Compétences chargées : {skills}", log_level="INFO")
-        
         # Récupération des armes (avec évolutions)
         for weapon in weapons:
             weapon['stats_raw'] = weapon.get('stats', '')  # version brute
