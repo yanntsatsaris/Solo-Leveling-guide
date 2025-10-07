@@ -19,6 +19,7 @@
                 <div class="sjw-inner-tab-content{% if loop.first %} active{% endif %}" id="sjw-inner-tab-{{ tab }}">
                     <div class="sjw-skills-grid-wrapper">
                         <div class="sjw-skills-grid">
+                            {% set skills = character.skills | selectattr('type', 'equalto', tab) | list %}
                             {% for skill in skills %}
                                 <div class="sjw-skill-cell sjw-skill-clickable" data-skill-index="{{ loop.index0 }}">
                                     <div class="sjw-skill-image-row">
