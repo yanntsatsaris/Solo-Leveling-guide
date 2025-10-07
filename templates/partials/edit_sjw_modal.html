@@ -132,7 +132,7 @@
                 <option value="Ultime" {% if skill.type == "Ultime" %}selected{% endif %}>Ultime</option>
               </select>
               <label>Ordre d'affichage :</label>
-              <input type="number" name="skill_order_{{ loop.index0 }}" value="{{ skill.order }}" min="1" required />
+              <input type="text" name="skill_order_{{ loop.index0 }}" value="{{ skill.order }}" required />
               <label>Image principale :</label>
               <select name="skill_image_{{ loop.index0 }}" class="skill-image-select" data-current="{{ skill.image }}"></select>
               <label>Description :</label>
