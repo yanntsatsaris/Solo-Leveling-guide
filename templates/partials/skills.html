@@ -24,8 +24,8 @@
                             {% for skill in skills %}
                                 <div class="sjw-skill-cell sjw-skill-clickable" data-skill-index="{{ loop.index0 }}">
                                     <div class="sjw-skill-image-row">
-                                        {% if skill.image %}
-                                            <img src="{{ url_for('static', filename=skill.image) }}" alt="Skill Image">
+                                        {% if skill.image_path %}
+                                            <img src="{{ url_for('static', filename=skill.image_path) }}" alt="Skill Image">
                                         {% endif %}
                                     </div>
                                 </div>
@@ -75,9 +75,9 @@
                 gemsBubbleList.innerHTML = '';
                 if (skill && skill.gems) {
                     skill.gems.forEach(gem => {
-                        if (gem.image) {
+                        if (gem.image_path) {
                             const img = document.createElement('img');
-                            img.src = "/static/" + gem.image;
+                            img.src = "/static/" + gem.image_path;
                             img.className = "sjw-gem-bubble-img";
                             img.alt = "Gem Image";
                             gemsBubbleList.appendChild(img);

@@ -97,7 +97,7 @@ class SJWSkillsSql:
                     debuffs.append({
                         'id': debuff_id,
                         'image': f"images/Sung_Jinwoo/{skill_type_folder}/{skill_order_str}_{skill_type}/{debuff_image}",
-                        'name': f"images/Sung_Jinwoo/{skill_type_folder}/{skill_order_str}_{skill_type}/{debuff_name}",
+                        'name': debuff_name,
                         'description': debuff_description
                     })
 
@@ -105,7 +105,8 @@ class SJWSkillsSql:
                     'id': gem_id,
                     'type': gem_type,
                     'alias': gem_alias,
-                    'image': f"images/Sung_Jinwoo/{skill_type_folder}/{skill_order_str}_{skill_type}/{gem_image}",
+                    'image_path': f"images/Sung_Jinwoo/{skill_type_folder}/{skill_order_str}_{skill_type}/{gem_image}",
+                    'image': gem_image,
                     'name': gem_name,
                     'description': gem_description,
                     'break': gem_break,
@@ -117,7 +118,8 @@ class SJWSkillsSql:
                 'id': skill_id,
                 'type': skill_type,
                 'order': skill_order_str,
-                'image': f"images/Sung_Jinwoo/{skill_type_folder}/{skill_order_str}_{skill_type}/{skill_image}",
+                'image_path': f"images/Sung_Jinwoo/{skill_type_folder}/{skill_order_str}_{skill_type}/{skill_image}",
+                'image': skill_image,
                 'name': name,
                 'description': description,
                 'gems': gems
