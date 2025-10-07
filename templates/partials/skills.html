@@ -17,7 +17,6 @@
                 
                 {% for tab in ['Skill', 'QTE', 'Ultime'] %}
                 <div class="sjw-inner-tab-content{% if loop.first %} active{% endif %}" id="sjw-inner-tab-{{ tab }}">
-                    
                     <div class="sjw-skills-grid-wrapper">
                         <div class="sjw-skills-grid">
                             {% set skills = character.skills | selectattr('type', 'equalto', tab) | list %}
