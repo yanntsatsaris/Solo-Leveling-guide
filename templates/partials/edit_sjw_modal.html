@@ -153,7 +153,13 @@
                       <label>Alias :</label>
                       <input type="text" name="gems_{{ skill_idx }}_{{ gem_idx }}_alias" value="{{ gem.alias }}" required>
                       <label>Image :</label>
-                      <select name="gems_{{ skill_idx }}_{{ gem_idx }}_image" class="gem-image-select" data-current="{{ gem.image }}"></select>
+                      <select
+                        name="gems_{{ skill_idx }}_{{ gem_idx }}_image"
+                        class="gem-image-select"
+                        data-current="{{ gem.image }}"
+                        data-type="{{ skill.type }}"
+                        data-order="{{ skill.order }}"
+                      ></select>
                       <label>Nom :</label>
                       <input type="text" name="gems_{{ skill_idx }}_{{ gem_idx }}_name" value="{{ gem.name }}" required>
                       <label>Description :</label>
@@ -168,7 +174,13 @@
                               <label>Nom :</label>
                               <input type="text" name="gems_{{ loop.parent.parent.index0 }}_{{ loop.parent.index0 }}_buffs_{{ loop.index0 }}_name" value="{{ buff.name }}" required>
                               <label>Image :</label>
-                              <select name="gems_{{ loop.parent.parent.index0 }}_{{ loop.parent.index0 }}_buffs_{{ loop.index0 }}_image" class="gem-buff-image-select" data-current="{{ buff.image }}"></select>
+                              <select
+                                name="gems_{{ skill_idx }}_{{ gem_idx }}_buffs_{{ buff_idx }}_image"
+                                class="gem-buff-image-select"
+                                data-current="{{ buff.image }}"
+                                data-type="{{ skill.type }}"
+                                data-order="{{ skill.order }}"
+                              ></select>
                               <label>Description :</label>
                               <textarea name="gems_{{ loop.parent.parent.index0 }}_{{ loop.parent.index0 }}_buffs_{{ loop.index0 }}_description">{{ buff.description }}</textarea>
                             </fieldset>
@@ -185,7 +197,13 @@
                               <label>Nom :</label>
                               <input type="text" name="gems_{{ loop.parent.parent.index0 }}_{{ loop.parent.index0 }}_debuffs_{{ loop.index0 }}_name" value="{{ debuff.name }}" required>
                               <label>Image :</label>
-                              <select name="gems_{{ loop.parent.parent.index0 }}_{{ loop.parent.index0 }}_debuffs_{{ loop.index0 }}_image" class="gem-debuff-image-select" data-current="{{ debuff.image }}"></select>
+                              <select
+                                name="gems_{{ skill_idx }}_{{ gem_idx }}_debuffs_{{ debuff_idx }}_image"
+                                class="gem-debuff-image-select"
+                                data-current="{{ debuff.image }}"
+                                data-type="{{ skill.type }}"
+                                data-order="{{ skill.order }}"
+                              ></select>
                               <label>Description :</label>
                               <textarea name="gems_{{ loop.parent.parent.index0 }}_{{ loop.parent.index0 }}_debuffs_{{ loop.index0 }}_description">{{ debuff.description }}</textarea>
                             </fieldset>
@@ -950,7 +968,7 @@
 // Remplir les selects d'image pour chaque gem et buff/debuff existant
 document.querySelectorAll('.gem-image-select, .gem-buff-image-select, .gem-debuff-image-select').forEach(select => {
     const current = select.dataset.current || "";
-    fetch('/SJW/skill_images?...') // adapte l'URL selon le skill/gem
+    fetch(`/SJW/skill_images?type=${encodeURIComponent(select.dataset.type)}&order=${encodeURIComponent(select.dataset.order)}`)
         .then(resp => resp.json())
         .then(images => {
             select.innerHTML = ['<option value=""></option>']
