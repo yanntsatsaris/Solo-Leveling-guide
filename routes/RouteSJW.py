@@ -181,8 +181,6 @@ def SJW(app: Flask):
                 evolution['description'] = process_description(evolution['description'], all_tags, base_path)
         character_info['skills'] = skills
         
-        write_log(f"Compétences récupérées : {skills}", log_level="INFO")
-        
         # Récupération des armes (avec évolutions)
         for weapon in weapons:
             weapon['stats_raw'] = weapon.get('stats', '')  # version brute
@@ -740,6 +738,7 @@ def SJW(app: Flask):
             write_log(f"Le dossier d'images n'existe pas : {img_dir}", log_level="WARNING")
             return jsonify([])
         images = sorted([f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))])
+        write_log(f"Images trouvées : {images}", log_level="INFO")
         return jsonify(images)
     
 def focus_stats_equal(a, b):
