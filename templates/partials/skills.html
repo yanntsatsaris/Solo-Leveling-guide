@@ -21,6 +21,12 @@
                         <div class="sjw-skills-grid">
                             {% set skills = character.skills | selectattr('type', 'equalto', tab) | list %}
                             {% for skill in skills %}
+                                <div>
+                                    Onglet : {{ tab }}<br>
+                                    {% for skill in skills %}
+                                        Skill : {{ skill.name }} (type: {{ skill.type }})<br>
+                                    {% endfor %}
+                                </div>
                                 <div class="sjw-skill-cell sjw-skill-clickable" data-skill-index="{{ loop.index0 }}">
                                     <div class="sjw-skill-image-row">
                                         {% if skill.image_path %}
