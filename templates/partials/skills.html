@@ -44,6 +44,7 @@
         </div>
         <div id="sjw-info-bubble" class="sjw-info-bubble" style="display:none; position:absolute; z-index:1100;"></div>
         <script>
+        window.allSkillsData = {{ character.skills|tojson }};
         document.addEventListener("DOMContentLoaded", function() {
             const innerTabBtns = document.querySelectorAll('.sjw-inner-tab-btn');
             const innerTabContents = document.querySelectorAll('.sjw-inner-tab-content');
@@ -203,6 +204,3 @@
         {% endif %}
     {% endif %}
 </div>
-<script>
-window.allSkillsData = {{ character.skills|tojson }};
-</script>
