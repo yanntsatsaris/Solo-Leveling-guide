@@ -116,7 +116,7 @@ class SJWSkillsSql:
             skills.append({
                 'id': skill_id,
                 'type': skill_type,
-                'order': skill_order,
+                'order': skill_order_str,
                 'image': f"images/Sung_Jinwoo/{skill_type_folder}/{skill_order_str}_{skill_type}/{skill_image}",
                 'name': name,
                 'description': description,
