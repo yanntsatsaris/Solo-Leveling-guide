@@ -165,6 +165,8 @@
                       <label>Description :</label>
                       <textarea name="gems_{{ skill_idx }}_{{ gem_idx }}_description">{{ gem.description }}</textarea>
                       <label><input type="checkbox" name="gems_{{ skill_idx }}_{{ gem_idx }}_break" {% if gem.break %}checked{% endif %}> Break</label>
+                      <label><input type="checkbox" class="gem-buff-check" name="gems{{ skill_idx }}{{ gem_idx }}_buff"> Buff</label>
+                      <label><input type="checkbox" class="gem-debuff-check" name="gems{{ skill_idx }}{{ gem_idx }}_debuff"> Debuff</label>
                       <!-- Buffs -->
                       <div class="gem-buff-fields" style="{% if gem.buffs|length == 0 %}display:none;{% endif %}">
                         <div class="buffs-list">
