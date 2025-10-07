@@ -735,6 +735,7 @@ def SJW(app: Flask):
             folder_type = 'Ultime'
         write_log(f"Dossier de type : {folder_type}", log_level="INFO")
         img_dir = os.path.join('static', 'images', 'Sung_Jinwoo', folder_type, folder_name)
+        write_log(f"Chemin complet du dossier : {img_dir}", log_level="INFO")
         if not os.path.isdir(img_dir):
             write_log(f"Le dossier d'images n'existe pas : {img_dir}", log_level="WARNING")
             return jsonify([])
