@@ -134,7 +134,7 @@
               <label>Ordre d'affichage :</label>
               <input type="text" name="skill_order_{{ loop.index0 }}" value="{{ skill.order }}" required />
               <label>Image principale :</label>
-              <select name="skill_image_{{ loop.index0 }}" class="skill-image-select" data-current="{{ skill.image }}"></select>
+              <select name="skill_image_{{ loop.index0 }}" class="skill-image-select" data-current="{{ skill.image }}" data-type="{{ skill.type }}" data-order="{{ skill.order }}"></select>
               <label>Description :</label>
               <textarea name="skill_description_{{ loop.index0 }}">{{ skill.description }}</textarea>
               <input type="hidden" name="skill_id_{{ loop.index0 }}" value="{{ skill.id }}">
@@ -966,7 +966,7 @@
   }
 
 // Remplir les selects d'image pour chaque gem et buff/debuff existant
-document.querySelectorAll('.gem-image-select, .gem-buff-image-select, .gem-debuff-image-select').forEach(select => {
+document.querySelectorAll('.skill-image-select, .gem-image-select, .gem-buff-image-select, .gem-debuff-image-select').forEach(select => {
     const current = select.dataset.current || "";
     fetch(`/SJW/skill_images?type=${encodeURIComponent(select.dataset.type)}&order=${encodeURIComponent(select.dataset.order)}`)
         .then(resp => resp.json())
