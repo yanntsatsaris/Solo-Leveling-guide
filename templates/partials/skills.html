@@ -63,7 +63,7 @@
         const skillCells = document.querySelectorAll('.sjw-skill-clickable');
         const gemsBubble = document.getElementById('sjw-gems-bubble');
         const gemsBubbleList = document.getElementById('sjw-gems-bubble-list');
-        const allSkillsData = {{ character.skills|tojson }};
+        const allSkillsData = window.allSkillsData;
 
         skillCells.forEach(cell => {
             cell.addEventListener('click', function(event) {
@@ -202,3 +202,6 @@
         {% endif %}
     {% endif %}
 </div>
+<script>
+window.allSkillsData = {{ character.skills|tojson }};
+</script>
