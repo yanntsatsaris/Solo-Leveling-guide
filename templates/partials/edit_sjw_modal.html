@@ -957,12 +957,6 @@
       select.innerHTML = ['<option value=""></option>']
         .concat(images.map(img => `<option value="${img}"${img === current ? ' selected' : ''}>${img}</option>`)).join('');
     });
-    // Pour les skills
-    document.querySelectorAll('.skill-image-select').forEach(select => {
-      const current = select.dataset.current || "";
-      select.innerHTML = ['<option value=""></option>']
-        .concat(images.map(img => `<option value="${img}"${img === current ? ' selected' : ''}>${img}</option>`)).join('');
-    });
   }
 
 // Remplir les selects d'image pour chaque gem et buff/debuff existant
