@@ -123,41 +123,80 @@
             {% endif %}
             <div class="edit-skill-block">
               <label>Nom de la compétence :</label>
-              <input
-                type="text"
-                name="skill_name_{{ loop.index0 }}"
-                value="{{ skill.name }}"
-              />
+              <input type="text" name="skill_name_{{ loop.index0 }}" value="{{ skill.name }}" required />
+              <label>Type :</label>
+              <select name="skill_type_{{ loop.index0 }}" required>
+                <option value="Skill" {% if skill.type == "Skill" %}selected{% endif %}>Skill</option>
+                <option value="QTE" {% if skill.type == "QTE" %}selected{% endif %}>QTE</option>
+                <option value="Ultime" {% if skill.type == "Ultime" %}selected{% endif %}>Ultime</option>
+              </select>
+              <label>Ordre d'affichage :</label>
+              <input type="number" name="skill_order_{{ loop.index0 }}" value="{{ skill.order }}" min="1" required />
+              <label>Image principale :</label>
+              <select name="skill_image_{{ loop.index0 }}" class="skill-image-select" data-current="{{ skill.image }}"></select>
               <label>Description :</label>
-              <textarea name="skill_description_{{ loop.index0 }}">
-{{ skill.description_raw }}</textarea
-              >
-              <label>Tag :</label>
-              <input
-                type="text"
-                name="skill_tag_{{ loop.index0 }}"
-                value="{{ skill.tag }}"
-              />
-              <label>Image :</label>
-              <select name="skill_image_{{ loop.index0 }}" class="skill-image-select" data-current="{{ skill.image_name|default('') }}"></select>
-              <div class="checkbox-row">
-                <label>
-                  <input
-                    type="checkbox"
-                    name="skill_principal_{{ loop.index0 }}"
-                    {%
-                    if
-                    skill.principal
-                    %}checked{%
-                    endif
-                    %}
-                  />
-                  Principal
-                </label>
-              </div>
-              <label>Ordre :</label>
-              <input type="number" name="skill_order_{{ loop.index0 }}" value="{{ skill.order if skill.order is defined else loop.index0 }}" min="0" style="width:60px;">
+              <textarea name="skill_description_{{ loop.index0 }}">{{ skill.description }}</textarea>
               <input type="hidden" name="skill_id_{{ loop.index0 }}" value="{{ skill.id }}">
+              <div class="edit-skill-gems-container" id="edit-skill-gems-{{ loop.index0 }}">
+                {% for gem in skill.gems %}
+                  <div class="edit-skill-gem-block">
+                    <fieldset>
+                      <legend>Gem #{{ loop.index }}</legend>
+                      <label>Type :</label>
+                      <select name="gems_{{ loop.parent.index0 }}_{{ loop.index0 }}_type" required>
+                        {% for t in ["Dark", "Fire", "Light", "Neutre", "Water", "Wind"] %}
+                          <option value="{{ t }}" {% if gem.type == t %}selected{% endif %}>{{ t }}</option>
+                        {% endfor %}
+                      </select>
+                      <label>Alias :</label>
+                      <input type="text" name="gems_{{ loop.parent.index0 }}_{{ loop.index0 }}_alias" value="{{ gem.alias }}" required>
+                      <label>Image :</label>
+                      <select name="gems_{{ loop.parent.index0 }}_{{ loop.index0 }}_image" class="gem-image-select" data-current="{{ gem.image }}"></select>
+                      <label>Nom :</label>
+                      <input type="text" name="gems_{{ loop.parent.index0 }}_{{ loop.index0 }}_name" value="{{ gem.name }}" required>
+                      <label>Description :</label>
+                      <textarea name="gems_{{ loop.parent.index0 }}_{{ loop.index0 }}_description">{{ gem.description }}</textarea>
+                      <label><input type="checkbox" name="gems_{{ loop.parent.index0 }}_{{ loop.index0 }}_break" {% if gem.break %}checked{% endif %}> Break</label>
+                      <!-- Buffs -->
+                      <div class="gem-buff-fields" style="{% if gem.buffs|length == 0 %}display:none;{% endif %}">
+                        <div class="buffs-list">
+                          {% for buff in gem.buffs %}
+                            <fieldset>
+                              <legend>Buff #{{ loop.index }}</legend>
+                              <label>Nom :</label>
+                              <input type="text" name="gems_{{ loop.parent.parent.index0 }}_{{ loop.parent.index0 }}_buffs_{{ loop.index0 }}_name" value="{{ buff.name }}" required>
+                              <label>Image :</label>
+                              <select name="gems_{{ loop.parent.parent.index0 }}_{{ loop.parent.index0 }}_buffs_{{ loop.index0 }}_image" class="gem-buff-image-select" data-current="{{ buff.image }}"></select>
+                              <label>Description :</label>
+                              <textarea name="gems_{{ loop.parent.parent.index0 }}_{{ loop.parent.index0 }}_buffs_{{ loop.index0 }}_description">{{ buff.description }}</textarea>
+                            </fieldset>
+                          {% endfor %}
+                        </div>
+                        <button type="button" class="add-buff-btn admin-btn" style="margin-bottom:8px;">Ajouter un buff</button>
+                      </div>
+                      <!-- Debuffs -->
+                      <div class="gem-debuff-fields" style="{% if gem.debuffs|length == 0 %}display:none;{% endif %}">
+                        <div class="debuffs-list">
+                          {% for debuff in gem.debuffs %}
+                            <fieldset>
+                              <legend>Debuff #{{ loop.index }}</legend>
+                              <label>Nom :</label>
+                              <input type="text" name="gems_{{ loop.parent.parent.index0 }}_{{ loop.parent.index0 }}_debuffs_{{ loop.index0 }}_name" value="{{ debuff.name }}" required>
+                              <label>Image :</label>
+                              <select name="gems_{{ loop.parent.parent.index0 }}_{{ loop.parent.index0 }}_debuffs_{{ loop.index0 }}_image" class="gem-debuff-image-select" data-current="{{ debuff.image }}"></select>
+                              <label>Description :</label>
+                              <textarea name="gems_{{ loop.parent.parent.index0 }}_{{ loop.parent.index0 }}_debuffs_{{ loop.index0 }}_description">{{ debuff.description }}</textarea>
+                            </fieldset>
+                          {% endfor %}
+                        </div>
+                        <button type="button" class="add-debuff-btn admin-btn" style="margin-bottom:8px;">Ajouter un debuff</button>
+                      </div>
+                    </fieldset>
+                  </div>
+                {% endfor %}
+                <!-- Bouton pour ajouter une gem -->
+                <button type="button" class="add-gem-btn admin-btn" style="margin-top:10px;">Ajouter une gem</button>
+              </div>
             </div>
             {% if loop.index0 % 2 == 1 or loop.last %}
           </div>
@@ -577,85 +616,6 @@
     });
   }
 
-  // Ajout d'un passif
-  document.addEventListener("DOMContentLoaded", function() {
-    document.getElementById('add-blessing-btn')?.addEventListener('click', async function() {
-      const grid = document.getElementById('blessings-grid');
-      const index = grid.querySelectorAll('.edit-blessing-block').length;
-      // Récupère le dossier image du personnage
-      const folder = document.querySelector('#edit-sjw-form input[name="folder"]').value;
-      let images = [];
-      if (folder) {
-        try {
-          images = await fetch(`/SJW/images_for/${encodeURIComponent(folder)}`).then(r => r.json());
-        } catch (e) { images = []; }
-      }
-      const selectOptions = ['<option value=""></option>']
-        .concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
-      const row = document.createElement('div');
-      row.className = 'blessings-row';
-      row.innerHTML = `
-        <div class="edit-blessing-block">
-          <label>Nom du passif :</label>
-          <input type="text" name="blessing_name_${index}" value="" />
-          <label>Description :</label>
-          <textarea name="blessing_description_${index}"></textarea>
-          <label>Tag :</label>
-          <input type="text" name="blessing_tag_${index}" value="" />
-          <label>Image :</label>
-          <select name="blessing_image_${index}">${selectOptions}</select>
-          <div class="checkbox-row">
-            <label>
-              <input type="checkbox" name="blessing_principal_${index}" /> Principal
-            </label>
-            <label>
-              <input type="checkbox" name="blessing_hidden_${index}" /> Caché
-            </label>
-          </div>
-          <label>Ordre :</label>
-          <input type="number" name="blessing_order_${index}" value="${index}" min="0" style="width:60px;">
-        </div>
-      `;
-      grid.appendChild(row);
-    });
-
-    // Ajout d'une compétence
-    document.getElementById('add-skill-btn')?.addEventListener('click', async function() {
-      const grid = document.getElementById('skills-grid');
-      const index = grid.querySelectorAll('.edit-skill-block').length;
-      const folder = document.querySelector('#edit-sjw-form input[name="folder"]').value;
-      let images = [];
-      if (folder) {
-        try {
-          images = await fetch(`/SJW/images_for/${encodeURIComponent(folder)}`).then(r => r.json());
-        } catch (e) { images = []; }
-      }
-      const selectOptions = ['<option value=""></option>']
-        .concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
-      const row = document.createElement('div');
-      row.className = 'skills-row';
-      row.innerHTML = `
-        <div class="edit-skill-block">
-          <label>Nom de la compétence :</label>
-          <input type="text" name="skill_name_${index}" value="" />
-          <label>Description :</label>
-          <textarea name="skill_description_${index}"></textarea>
-          <label>Tag :</label>
-          <input type="text" name="skill_tag_${index}" value="" />
-          <label>Image :</label>
-          <select name="skill_image_${index}">${selectOptions}</select>
-          <div class="checkbox-row">
-            <label>
-              <input type="checkbox" name="skill_principal_${index}" /> Principal
-            </label>
-          </div>
-          <label>Ordre :</label>
-          <input type="number" name="skill_order_${index}" value="${index}" min="0" style="width:60px;">
-        </div>
-      `;
-      grid.appendChild(row);
-    });
-
     // Ajout d'une arme
     document.getElementById('add-weapon-btn')?.addEventListener('click', async function() {
       const grid = document.querySelector('#edit-tab-weapons');
@@ -852,7 +812,7 @@
             ${mainStatSelect}
             <label>Stats secondaires :</label>
             ${secondaryStatSelect}
-            <input type="hidden" name="artefact_id_${setOrderIndex}_${a_idx}" value="">
+            <input type="hidden" name="artefact_id_${setOrderIndex}_${a_idx}" value="${artefact.id if artefact.id is defined else ''}">
           </div>
         `;
       }
