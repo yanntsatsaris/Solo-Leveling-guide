@@ -582,6 +582,117 @@ def SJW(app: Flask):
                 set_modif = True
                 write_log(f"Suppression set {db_id} du personnage {char_id}", log_level="INFO")
 
+        skills_sql = SJWSkillsSql(cursor)
+        current_skills = skills_sql.get_skills(char_id, language)
+        existing_skill_ids = [str(s['id']) for s in current_skills]
+        form_skill_ids = []
+        skill_idx = 0
+        while True:
+            skill_id = request.form.get(f"skill_id_{skill_idx}")
+            skill_name = request.form.get(f"skill_name_{skill_idx}")
+            skill_type = request.form.get(f"skill_type_{skill_idx}")
+            skill_order = request.form.get(f"skill_order_{skill_idx}")
+            skill_image = request.form.get(f"skill_image_{skill_idx}")
+            skill_description = request.form.get(f"skill_description_{skill_idx}")
+
+            if skill_name is None:
+                break
+
+            db_skill = next((s for s in current_skills if str(s['id']) == str(skill_id)), None) if skill_id else None
+
+            if skill_id:
+                # Modification du skill existant
+                if db_skill and (
+                    db_skill['name'] != skill_name or
+                    db_skill['type'] != skill_type or
+                    db_skill['order'] != skill_order or
+                    db_skill['image'] != skill_image or
+                    db_skill['description'] != skill_description
+                ):
+                    skills_sql.update_skill(skill_id, skill_type, skill_order, skill_image)
+                    skills_sql.update_skill_translation(skill_id, language, skill_name, skill_description)
+                form_skill_ids.append(skill_id)
+            else:
+                # Ajout d'un nouveau skill
+                new_skill_id = skills_sql.add_skill(char_id, skill_type, skill_order, skill_image)
+                skills_sql.add_skill_translation(new_skill_id, language, skill_name, skill_description)
+                skill_id = new_skill_id
+                form_skill_ids.append(skill_id)
+
+            # --- Gems du skill ---
+            gem_idx = 0
+            while True:
+                gem_type = request.form.get(f"gems_{skill_idx}_{gem_idx}_type")
+                gem_alias = request.form.get(f"gems_{skill_idx}_{gem_idx}_alias")
+                gem_image = request.form.get(f"gems_{skill_idx}_{gem_idx}_image")
+                gem_name = request.form.get(f"gems_{skill_idx}_{gem_idx}_name")
+                gem_description = request.form.get(f"gems_{skill_idx}_{gem_idx}_description")
+                gem_break = request.form.get(f"gems_{skill_idx}_{gem_idx}_break") == "on"
+                if gem_type is None:
+                    break
+
+                # Recherche de la gem existante
+                db_gem = None
+                if db_skill and db_skill['gems'] and len(db_skill['gems']) > gem_idx:
+                    db_gem = db_skill['gems'][gem_idx]
+                gem_id = db_gem['id'] if db_gem else None
+
+                if gem_id:
+                    # Modification gem
+                    skills_sql.update_skill_gem(gem_id, gem_type, gem_alias, gem_image, gem_idx)
+                    skills_sql.update_skill_gem_translation(gem_id, language, gem_name, gem_description)
+                    skills_sql.update_skill_gem_properties(gem_id, gem_break)
+                else:
+                    # Ajout gem
+                    gem_id = skills_sql.add_skill_gem(skill_id, gem_type, gem_alias, gem_image, gem_idx)
+                    skills_sql.add_skill_gem_translation(gem_id, language, gem_name, gem_description)
+                    skills_sql.add_skill_gem_properties(gem_id, gem_break)
+
+                # --- Buffs ---
+                buff_idx = 0
+                while True:
+                    buff_name = request.form.get(f"gems_{skill_idx}_{gem_idx}_buffs_{buff_idx}_name")
+                    buff_image = request.form.get(f"gems_{skill_idx}_{gem_idx}_buffs_{buff_idx}_image")
+                    buff_description = request.form.get(f"gems_{skill_idx}_{gem_idx}_buffs_{buff_idx}_description")
+                    if buff_name is None:
+                        break
+                    # Recherche du buff existant
+                    db_buff = None
+                    if db_gem and db_gem['buffs'] and len(db_gem['buffs']) > buff_idx:
+                        db_buff = db_gem['buffs'][buff_idx]
+                    buff_id = db_buff['id'] if db_buff else None
+                    if buff_id:
+                        skills_sql.update_skill_gem_buff(buff_id, buff_image)
+                        skills_sql.update_skill_gem_buff_translation(buff_id, language, buff_name, buff_description)
+                    else:
+                        buff_id = skills_sql.add_skill_gem_buff(gem_id, buff_image)
+                        skills_sql.add_skill_gem_buff_translation(buff_id, language, buff_name, buff_description)
+                    buff_idx += 1
+
+                # --- Debuffs ---
+                debuff_idx = 0
+                while True:
+                    debuff_name = request.form.get(f"gems_{skill_idx}_{gem_idx}_debuffs_{debuff_idx}_name")
+                    debuff_image = request.form.get(f"gems_{skill_idx}_{gem_idx}_debuffs_{debuff_idx}_image")
+                    debuff_description = request.form.get(f"gems_{skill_idx}_{gem_idx}_debuffs_{debuff_idx}_description")
+                    if debuff_name is None:
+                        break
+                    db_debuff = None
+                    if db_gem and db_gem['debuffs'] and len(db_gem['debuffs']) > debuff_idx:
+                        db_debuff = db_gem['debuffs'][debuff_idx]
+                    debuff_id = db_debuff['id'] if db_debuff else None
+                    if debuff_id:
+                        skills_sql.update_skill_gem_debuff(debuff_id, debuff_image)
+                        skills_sql.update_skill_gem_debuff_translation(debuff_id, language, debuff_name, debuff_description)
+                    else:
+                        debuff_id = skills_sql.add_skill_gem_debuff(gem_id, debuff_image)
+                        skills_sql.add_skill_gem_debuff_translation(debuff_id, language, debuff_name, debuff_description)
+                    debuff_idx += 1
+
+                gem_idx += 1
+
+            skill_idx += 1
+
         sql_manager.conn.commit()
         sql_manager.close()
 
