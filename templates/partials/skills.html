@@ -43,6 +43,7 @@
                 {% endfor %}
             </div>
         </div>
+        <div id="sjw-info-bubble" class="sjw-info-bubble" style="display:none; position:absolute; z-index:1100;"></div>
         <script>
         document.addEventListener("DOMContentLoaded", function() {
             const innerTabBtns = document.querySelectorAll('.sjw-inner-tab-btn');
@@ -106,6 +107,79 @@
             }
         });
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+    const infoBubble = document.getElementById('sjw-info-bubble');
+
+    // Survol skill principal
+    document.querySelectorAll('.sjw-skill-cell').forEach((cell, idx) => {
+        cell.addEventListener('mouseenter', function(e) {
+            const activeTab = document.querySelector('.sjw-inner-tab-btn.active').dataset.innerTab;
+            const skillsData = allSkillsData.filter(s => s.type === activeTab);
+            const skill = skillsData[idx];
+            if (skill) {
+                infoBubble.innerHTML = `
+                    <strong>${skill.name || ''}</strong><br>
+                    <span>${skill.description || ''}</span>
+                `;
+                infoBubble.style.display = "block";
+                infoBubble.style.opacity = "1";
+                infoBubble.style.left = (e.clientX + 18) + "px";
+                infoBubble.style.top = (e.clientY + 18) + "px";
+            }
+        });
+        cell.addEventListener('mousemove', function(e) {
+            infoBubble.style.left = (e.clientX + 18) + "px";
+            infoBubble.style.top = (e.clientY + 18) + "px";
+        });
+        cell.addEventListener('mouseleave', function() {
+            infoBubble.style.display = "none";
+            infoBubble.style.opacity = "0";
+        });
+    });
+
+    // Survol gem dans la bulle
+    document.getElementById('sjw-gems-bubble').addEventListener('mouseover', function(e) {
+        const img = e.target.closest('.sjw-gem-bubble-img');
+        if (img) {
+            // Trouve l'index de la gem
+            const gemIdx = Array.from(this.querySelectorAll('.sjw-gem-bubble-img')).indexOf(img);
+            // Récupère le skill actif
+            const activeTab = document.querySelector('.sjw-inner-tab-btn.active').dataset.innerTab;
+            const skillsData = allSkillsData.filter(s => s.type === activeTab);
+            // Trouve le skill sélectionné
+            const skillCells = document.querySelectorAll('.sjw-skill-clickable');
+            let selectedSkillIdx = null;
+            skillCells.forEach((cell, idx) => {
+                if (cell.classList.contains('selected')) selectedSkillIdx = idx;
+            });
+            // Si pas de classe selected, utilise la dernière bulle ouverte
+            if (selectedSkillIdx === null) {
+                selectedSkillIdx = parseInt(document.querySelector('.sjw-skill-clickable[data-skill-index]').dataset.skillIndex);
+            }
+            const skill = skillsData[selectedSkillIdx];
+            if (skill && skill.gems && skill.gems[gemIdx]) {
+                const gem = skill.gems[gemIdx];
+                infoBubble.innerHTML = `
+                    <strong>${gem.name || ''}</strong><br>
+                    <span>${gem.description || ''}</span>
+                `;
+                infoBubble.style.display = "block";
+                infoBubble.style.opacity = "1";
+                infoBubble.style.left = (e.clientX + 18) + "px";
+                infoBubble.style.top = (e.clientY + 18) + "px";
+            }
+        }
+    });
+    document.getElementById('sjw-gems-bubble').addEventListener('mousemove', function(e) {
+        infoBubble.style.left = (e.clientX + 18) + "px";
+        infoBubble.style.top = (e.clientY + 18) + "px";
+    });
+    document.getElementById('sjw-gems-bubble').addEventListener('mouseleave', function() {
+        infoBubble.style.display = "none";
+        infoBubble.style.opacity = "0";
+    });
+});
         </script>
     {% else %}
         {# Section classique pour les autres personnages #}
