@@ -618,6 +618,8 @@
     });
   }
 
+  // Ajout d'un passif
+  document.addEventListener("DOMContentLoaded", function() {
     // Ajout d'une arme
     document.getElementById('add-weapon-btn')?.addEventListener('click', async function() {
       const grid = document.querySelector('#edit-tab-weapons');
@@ -664,6 +666,7 @@
       `;
       grid.appendChild(div);
     });
+  });
   
   // Ajout d'un set d'équipement
   document.getElementById('edit-equipment-select')?.addEventListener('click', function(e) {
@@ -944,35 +947,46 @@
     });
   }
 
-// Appelle la fonction à l'ouverture de la modale
-document.getElementById('edit-sjw-btn')?.addEventListener('click', fillImageSelects);
-// Ou si la modale s'ouvre autrement, appelle fillImageSelects() juste après l'ouverture
-document.addEventListener('change', function(e) {
-  // Limite à 4 stats secondaires
-  if (e.target.classList.contains('artefact-secondary-multiselect')) {
-    const select = e.target;
-    const selected = Array.from(select.selectedOptions).map(opt => opt.value);
-    if (selected.length > 4) {
-      select.options[select.selectedIndex].selected = false;
-      alert("Vous ne pouvez sélectionner que 4 stats secondaires maximum.");
-      return;
-    }
-    const inputName = select.dataset.target;
-    const input = select.parentElement.querySelector(`input[name="${inputName}"]`);
-    if (input) input.value = selected.join(', ');
-  }
-  // Limite à 6 stats à focus
-  if (e.target.classList.contains('eqset-focus-multiselect')) {
-    const select = e.target;
-    const selected = Array.from(select.selectedOptions).map(opt => opt.value);
-    if (selected.length > 6) {
-      select.options[select.selectedIndex].selected = false;
-      alert("Vous ne pouvez sélectionner que 6 stats à focus maximum.");
-      return;
-    }
-    const inputName = select.dataset.target;
-    const input = select.parentElement.querySelector(`input[name="${inputName}"]`);
-    if (input) input.value = selected.join(', ');
-  }
+// Remplir les selects d'image pour chaque gem et buff/debuff existant
+document.querySelectorAll('.gem-image-select, .gem-buff-image-select, .gem-debuff-image-select').forEach(select => {
+    const current = select.dataset.current || "";
+    fetch('/SJW/skill_images?...') // adapte l'URL selon le skill/gem
+        .then(resp => resp.json())
+        .then(images => {
+            select.innerHTML = ['<option value=""></option>']
+                .concat(images.map(img => `<option value="${img}"${img === current ? ' selected' : ''}>${img}</option>`)).join('');
+        });
 });
+
+  // Appelle la fonction à l'ouverture de la modale
+  document.getElementById('edit-sjw-btn')?.addEventListener('click', fillImageSelects);
+  // Ou si la modale s'ouvre autrement, appelle fillImageSelects() juste après l'ouverture
+  document.addEventListener('change', function(e) {
+    // Limite à 4 stats secondaires
+    if (e.target.classList.contains('artefact-secondary-multiselect')) {
+      const select = e.target;
+      const selected = Array.from(select.selectedOptions).map(opt => opt.value);
+      if (selected.length > 4) {
+        select.options[select.selectedIndex].selected = false;
+        alert("Vous ne pouvez sélectionner que 4 stats secondaires maximum.");
+        return;
+      }
+      const inputName = select.dataset.target;
+      const input = select.parentElement.querySelector(`input[name="${inputName}"]`);
+      if (input) input.value = selected.join(', ');
+    }
+    // Limite à 6 stats à focus
+    if (e.target.classList.contains('eqset-focus-multiselect')) {
+      const select = e.target;
+      const selected = Array.from(select.selectedOptions).map(opt => opt.value);
+      if (selected.length > 6) {
+        select.options[select.selectedIndex].selected = false;
+        alert("Vous ne pouvez sélectionner que 6 stats à focus maximum.");
+        return;
+      }
+      const inputName = select.dataset.target;
+      const input = select.parentElement.querySelector(`input[name="${inputName}"]`);
+      if (input) input.value = selected.join(', ');
+    }
+  });
 </script>
