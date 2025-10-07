@@ -95,39 +95,58 @@
   background: #222;
 }
 .sjw-skills-grid-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 32px;
 }
+
 .sjw-skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 24px;
+    margin: 24px 0;
+    max-width: 800px;
 }
 .sjw-skill-cell {
-    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+}
+.sjw-skill-cell:hover {
+    box-shadow: 0 0 12px #ffcc0044;
+}
+
+.sjw-gems-sidebar {
+    min-width: 220px;
+    background: #181818;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px #0002;
+    padding: 18px 12px;
+    margin-left: 12px;
+}
+
+.sjw-gem-sidebar-cell {
     display: flex;
     flex-direction: column;
-    min-height: 220px;
-    align-items: center; /* Ajouté pour centrer le contenu */
+    align-items: flex-start;
+    margin-bottom: 18px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 8px;
 }
-
-.sjw-skill-image-row {
-    display: flex;
-    justify-content: center; /* Centre horizontalement */
-    align-items: center;
-    width: 100%; /* Prend toute la largeur de la cellule */
+.sjw-gem-sidebar-img {
+    max-width: 32px;
+    max-height: 32px;
+    margin-right: 8px;
+    vertical-align: middle;
 }
-
-.sjw-skill-image-row img {
-    max-width: 100px;    /* moitié de 120px */
-    max-height: auto;   /* moitié de 80px */
-    border-radius: 8px;
-    display: block;
-    margin: 0 auto; /* Centre l'image dans le bloc */
+.sjw-gem-sidebar-name {
+    font-weight: bold;
+    color: #ffcc00;
+    margin-left: 4px;
 }
-
-.sjw-gem-cell img {
-    max-width: 75px;    /* 4 fois moins que 48px */
-    max-height: auto;   /* 4 fois moins que 48px */
+.sjw-gem-sidebar-desc {
+    font-size: 13px;
+    color: #ccc;
+    margin-top: 4px;
 }

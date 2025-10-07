@@ -22,26 +22,18 @@
                         <div class="sjw-skills-grid">
                             {% set skills = character.skills | selectattr('type', 'equalto', tab) | list %}
                             {% for skill in skills %}
-                                <div class="sjw-skill-cell">
+                                <div class="sjw-skill-cell sjw-skill-clickable" data-skill-index="{{ loop.index0 }}">
                                     <div class="sjw-skill-image-row">
                                         {% if skill.image %}
                                             <img src="{{ url_for('static', filename=skill.image) }}" alt="Skill Image">
                                         {% endif %}
                                     </div>
-                                    <div class="sjw-gems-row">
-                                        {% for gem in skill.gems[:4] %}
-                                            <div class="sjw-gem-cell">
-                                                {% if gem.image %}
-                                                    <img src="{{ url_for('static', filename=gem.image) }}" alt="Gem Image">
-                                                {% endif %}
-                                            </div>
-                                        {% endfor %}
-                                        {% for i in range(4 - (skill.gems|length)) %}
-                                            <div class="sjw-gem-cell sjw-gem-empty"></div>
-                                        {% endfor %}
-                                    </div>
                                 </div>
                             {% endfor %}
+                        </div>
+                        <div class="sjw-gems-sidebar" id="sjw-gems-sidebar" style="display:none;">
+                            <h3>Gems du skill</h3>
+                            <div id="sjw-gems-list"></div>
                         </div>
                     </div>
                     {% if skills|length == 0 %}
@@ -61,6 +53,35 @@
                     innerTabContents.forEach(tc => tc.classList.remove('active'));
                     this.classList.add('active');
                     document.getElementById('sjw-inner-tab-' + this.dataset.innerTab).classList.add('active');
+                });
+            });
+
+            // Gestion de l'affichage des gems à gauche
+            const skillCells = document.querySelectorAll('.sjw-skill-clickable');
+            const sidebar = document.getElementById('sjw-gems-sidebar');
+            const gemsList = document.getElementById('sjw-gems-list');
+            // Récupère les skills depuis le contexte Jinja
+            const skillsData = {{ skills|tojson }};
+            skillCells.forEach(cell => {
+                cell.addEventListener('click', function() {
+                    const idx = parseInt(cell.dataset.skillIndex);
+                    const skill = skillsData[idx];
+                    gemsList.innerHTML = '';
+                    if (skill && skill.gems) {
+                        skill.gems.forEach(gem => {
+                            const gemDiv = document.createElement('div');
+                            gemDiv.className = 'sjw-gem-sidebar-cell';
+                            gemDiv.innerHTML = `
+                                <div>
+                                    ${gem.image ? `<img src="/static/${gem.image}" alt="Gem Image" class="sjw-gem-sidebar-img">` : ''}
+                                    <span class="sjw-gem-sidebar-name">${gem.name || ''}</span>
+                                </div>
+                                <div class="sjw-gem-sidebar-desc">${gem.description || ''}</div>
+                            `;
+                            gemsList.appendChild(gemDiv);
+                        });
+                        sidebar.style.display = '';
+                    }
                 });
             });
         });
