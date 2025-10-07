@@ -119,6 +119,7 @@
       <div class="edit-tab-content" id="edit-tab-skills">
         <div class="skills-grid" id="skills-grid">
           {% for skill in character.skills %} {% if loop.index0 % 2 == 0 %}
+          {% set skill_idx = loop.index0 %}
           <div class="skills-row">
             {% endif %}
             <div class="edit-skill-block">
@@ -139,24 +140,25 @@
               <input type="hidden" name="skill_id_{{ loop.index0 }}" value="{{ skill.id }}">
               <div class="edit-skill-gems-container" id="edit-skill-gems-{{ loop.index0 }}">
                 {% for gem in skill.gems %}
+                {% set gem_idx = loop.index0 %}
                   <div class="edit-skill-gem-block">
                     <fieldset>
                       <legend>Gem #{{ loop.index }}</legend>
                       <label>Type :</label>
-                      <select name="gems_{{ loop.parent.index0 }}_{{ loop.index0 }}_type" required>
+                      <select name="gems_{{ skill_idx }}_{{ gem_idx }}_type" required>
                         {% for t in ["Dark", "Fire", "Light", "Neutre", "Water", "Wind"] %}
                           <option value="{{ t }}" {% if gem.type == t %}selected{% endif %}>{{ t }}</option>
                         {% endfor %}
                       </select>
                       <label>Alias :</label>
-                      <input type="text" name="gems_{{ loop.parent.index0 }}_{{ loop.index0 }}_alias" value="{{ gem.alias }}" required>
+                      <input type="text" name="gems_{{ skill_idx }}_{{ gem_idx }}_alias" value="{{ gem.alias }}" required>
                       <label>Image :</label>
-                      <select name="gems_{{ loop.parent.index0 }}_{{ loop.index0 }}_image" class="gem-image-select" data-current="{{ gem.image }}"></select>
+                      <select name="gems_{{ skill_idx }}_{{ gem_idx }}_image" class="gem-image-select" data-current="{{ gem.image }}"></select>
                       <label>Nom :</label>
-                      <input type="text" name="gems_{{ loop.parent.index0 }}_{{ loop.index0 }}_name" value="{{ gem.name }}" required>
+                      <input type="text" name="gems_{{ skill_idx }}_{{ gem_idx }}_name" value="{{ gem.name }}" required>
                       <label>Description :</label>
-                      <textarea name="gems_{{ loop.parent.index0 }}_{{ loop.index0 }}_description">{{ gem.description }}</textarea>
-                      <label><input type="checkbox" name="gems_{{ loop.parent.index0 }}_{{ loop.index0 }}_break" {% if gem.break %}checked{% endif %}> Break</label>
+                      <textarea name="gems_{{ skill_idx }}_{{ gem_idx }}_description">{{ gem.description }}</textarea>
+                      <label><input type="checkbox" name="gems_{{ skill_idx }}_{{ gem_idx }}_break" {% if gem.break %}checked{% endif %}> Break</label>
                       <!-- Buffs -->
                       <div class="gem-buff-fields" style="{% if gem.buffs|length == 0 %}display:none;{% endif %}">
                         <div class="buffs-list">
