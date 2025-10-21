@@ -9,7 +9,7 @@ conf = ControleurConf()
 log_file_path = conf.get_config('LOG', 'file')
 log_level_limit = conf.get_config('LOG', 'level').upper()
 if not log_file_path:
-    log_file_path = "logs/Solo-Leveling-guide.log"
+    log_file_path = "/var/log/Solo-Leveling-guide/Solo-Leveling-guide.log"
 log_file_path = os.path.abspath(log_file_path)
 log_dir = os.path.dirname(log_file_path)
 
@@ -51,5 +51,5 @@ def write_log(message, log_level=None, username=None):
         logger.log(log_levels[log_level], message)
     except Exception as e:
         print(f"Failed to write log: {e}")
-        with open("logs/error.log", "a") as error_log:
+        with open("/var/log/Solo-Leveling-guide/error.log", "a") as error_log:
             error_log.write(f"Failed to write log: {e}\n")
