@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, session, redirect, url_for, abort, flash, jsonify, current_app
+from flask import Blueprint, request, render_template, session, redirect, url_for, abort, flash, jsonify
 from flask_login import login_required
 from app import get_db
 from static.Controleurs.ControleurLog import write_log
@@ -210,3 +210,283 @@ def admin_create_core(color, number):
     db.conn.commit()
     write_log(f"Core '{color}{number}' créé avec succès.", log_level="INFO", username=session.get('username'))
     return {"success": True}, 200
+
+@admin_bp.route('/upload_panoplie_images', methods=['POST'])
+@login_required
+def upload_panoplie_images():
+    if not is_admin():
+        abort(403)
+    panoplie_name = request.form.get('panoplie_name')
+    if not panoplie_name:
+        return "Nom de panoplie manquant", 400
+
+    panoplie_name_raw = panoplie_name.replace(' ', '')
+    folder = os.path.join('static', 'images', 'Artefacts', panoplie_name.replace(' ', '_'))
+    errors = []
+    uploaded = 0
+
+    piece_numbers = {
+        "Casque": "01", "Plastron": "02", "Gants": "03", "Bottes": "04",
+        "Collier": "05", "Bracelet": "06", "Bague": "07", "Boucle d'oreille": "08"
+    }
+
+    for piece, num in piece_numbers.items():
+        field_name = f"file_{piece.replace(' ', '_')}"
+        file = request.files.get(field_name)
+        if file:
+            if not allowed_file(file.filename):
+                errors.append(f"{file.filename}: extension non autorisée")
+                continue
+            if not is_image_size_allowed(file.stream):
+                errors.append(f"{file.filename}: fichier trop volumineux")
+                continue
+            try:
+                verify_image(file.stream)
+                ext = os.path.splitext(file.filename)[1].lower()
+                new_filename = f"Artefact{num}_{panoplie_name_raw}{ext}"
+                save_image(file.stream, folder, new_filename)
+                uploaded += 1
+            except Exception as e:
+                errors.append(f"{file.filename}: {e}")
+
+    if uploaded == 0:
+        return "Aucun fichier reçu", 400
+    if errors:
+        return "Erreurs lors de l'upload :\n" + "\n".join(errors), 400
+    return "Images uploadées et vérifiées", 200
+
+@admin_bp.route('/upload_core_images', methods=['POST'])
+@login_required
+def upload_core_images():
+    if not is_admin():
+        abort(403)
+    core_color = request.form.get('core_color')
+    if not core_color:
+        return "Couleur du noyau manquante", 400
+
+    errors = []
+    uploaded = 0
+    for num in [1, 2, 3]:
+        field_name = f"file_{num}"
+        file = request.files.get(field_name)
+        if file and file.filename:
+            if not allowed_file(file.filename):
+                errors.append(f"{file.filename}: extension non autorisée")
+                continue
+            if not is_image_size_allowed(file.stream):
+                errors.append(f"{file.filename}: fichier trop volumineux")
+                continue
+            try:
+                verify_image(file.stream)
+                ext = ".webp"
+                filename = f"{core_color}{str(num).zfill(2)}{ext}"
+                folder = os.path.join('static', 'images', 'Noyaux')
+                save_image(file.stream, folder, filename)
+                uploaded += 1
+            except Exception as e:
+                errors.append(f"{file.filename}: {e}")
+
+    if uploaded == 0:
+        return "Aucun fichier reçu", 400
+    if errors:
+        return "Erreurs lors de l'upload :\n" + "\n".join(errors), 400
+    return "Images uploadées et vérifiées", 200
+
+@admin_bp.route('/upload_character_images_zip', methods=['POST'])
+@login_required
+def upload_character_images_zip():
+    if not is_admin():
+        abort(403)
+    images_zip = request.files.get('images_zip')
+    type_ = request.form.get('type')
+    alias = request.form.get('alias')
+    rarity = request.form.get('rarity')
+    if not images_zip or not type_ or not alias or not rarity:
+        return "Données manquantes", 400
+
+    type_folder = type_.replace(" ", "_")
+    alias_folder = alias.replace(" ", "_")
+    rarity_folder = rarity.replace(" ", "_")
+    folder_name = f"{rarity_folder}_{type_folder}_{alias_folder}"
+    base_folder = os.path.join('static', 'images', 'Personnages', f"SLA_Personnages_{type_folder}")
+    target_folder = os.path.join(base_folder, folder_name)
+
+    os.makedirs(base_folder, exist_ok=True)
+    temp_extract = os.path.join("tmp", "extract_zip")
+    if os.path.exists(temp_extract):
+        shutil.rmtree(temp_extract)
+    os.makedirs(temp_extract, exist_ok=True)
+
+    with zipfile.ZipFile(images_zip) as zf:
+        zf.extractall(temp_extract)
+
+    subfolders = [f for f in os.listdir(temp_extract) if os.path.isdir(os.path.join(temp_extract, f))]
+    if subfolders:
+        src_folder = os.path.join(temp_extract, subfolders[0])
+        if subfolders[0] != folder_name:
+            os.rename(src_folder, os.path.join(temp_extract, folder_name))
+            src_folder = os.path.join(temp_extract, folder_name)
+        shutil.move(src_folder, target_folder)
+    else:
+        os.makedirs(target_folder, exist_ok=True)
+        for fname in os.listdir(temp_extract):
+            if fname.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
+                if not fname.startswith(f"{type_folder}_{alias_folder}_"):
+                    shutil.rmtree(temp_extract)
+                    return f"Image '{fname}' doit commencer par '{type_folder}_{alias_folder}_'", 400
+                shutil.move(os.path.join(temp_extract, fname), os.path.join(target_folder, fname))
+    shutil.rmtree(temp_extract)
+    return "Images extraites et placées dans le dossier du personnage.", 200
+
+@admin_bp.route('/upload_shadow_images_zip', methods=['POST'])
+@login_required
+def upload_shadow_images_zip():
+    if not is_admin():
+        abort(403)
+    images_zip = request.files.get('images_zip')
+    alias = request.form.get('alias')
+    if not images_zip or not alias:
+        return "Données manquantes", 400
+
+    alias_folder = alias.replace(" ", "_")
+    folder_name = f"Shadow_{alias_folder}"
+    base_folder = os.path.join('static', 'images', 'Sung_Jinwoo', "Shadows")
+    target_folder = os.path.join(base_folder, folder_name)
+
+    os.makedirs(base_folder, exist_ok=True)
+    temp_extract = os.path.join("tmp", "extract_zip")
+    if os.path.exists(temp_extract):
+        shutil.rmtree(temp_extract)
+    os.makedirs(temp_extract, exist_ok=True)
+
+    with zipfile.ZipFile(images_zip) as zf:
+        zf.extractall(temp_extract)
+
+    subfolders = [f for f in os.listdir(temp_extract) if os.path.isdir(os.path.join(temp_extract, f))]
+    if subfolders:
+        src_folder = os.path.join(temp_extract, subfolders[0])
+        if subfolders[0] != folder_name:
+            os.rename(src_folder, os.path.join(temp_extract, folder_name))
+            src_folder = os.path.join(temp_extract, folder_name)
+        shutil.move(src_folder, target_folder)
+    else:
+        os.makedirs(target_folder, exist_ok=True)
+        for fname in os.listdir(temp_extract):
+            if fname.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
+                if not fname.startswith(f"{folder_name}_"):
+                    shutil.rmtree(temp_extract)
+                    return f"Image '{fname}' doit commencer par '{folder_name}_'", 400
+                shutil.move(os.path.join(temp_extract, fname), os.path.join(target_folder, fname))
+    shutil.rmtree(temp_extract)
+    return "Images extraites et placées dans le dossier des ombres.", 200
+
+@admin_bp.route('/upload_weapon_images_zip', methods=['POST'])
+@login_required
+def upload_weapon_images_zip():
+    if not is_admin():
+        abort(403)
+    images_zip = request.files.get('images_zip')
+    alias = request.form.get('alias')
+    type = request.form.get('type')
+    if not images_zip or not alias:
+        return "Données manquantes", 400
+
+    alias_folder = alias.replace(" ", "_")
+    folder_name = f"{type}_{alias_folder}"
+    base_folder = os.path.join('static', 'images', 'Sung_Jinwoo', "Armes")
+    target_folder = os.path.join(base_folder, folder_name)
+
+    os.makedirs(base_folder, exist_ok=True)
+    temp_extract = os.path.join("tmp", "extract_zip")
+    if os.path.exists(temp_extract):
+        shutil.rmtree(temp_extract)
+    os.makedirs(temp_extract, exist_ok=True)
+
+    with zipfile.ZipFile(images_zip) as zf:
+        zf.extractall(temp_extract)
+
+    subfolders = [f for f in os.listdir(temp_extract) if os.path.isdir(os.path.join(temp_extract, f))]
+    if subfolders:
+        src_folder = os.path.join(temp_extract, subfolders[0])
+        if subfolders[0] != folder_name:
+            os.rename(src_folder, os.path.join(temp_extract, folder_name))
+            src_folder = os.path.join(temp_extract, folder_name)
+        shutil.move(src_folder, target_folder)
+    else:
+        os.makedirs(target_folder, exist_ok=True)
+        for fname in os.listdir(temp_extract):
+            if fname.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
+                if not fname.startswith(f"{folder_name}_"):
+                    shutil.rmtree(temp_extract)
+                    return f"Image '{fname}' doit commencer par '{folder_name}_'", 400
+                shutil.move(os.path.join(temp_extract, fname), os.path.join(target_folder, fname))
+    shutil.rmtree(temp_extract)
+    return "Images extraites et placées dans le dossier des armes.", 200
+
+@admin_bp.route('/upload_sjw_skill_images_zip', methods=['POST'])
+@login_required
+def upload_sjw_skill_images_zip():
+    if not is_admin():
+        abort(403)
+    images_zip = request.files.get('images_zip')
+    order = request.form.get('order')
+    type = request.form.get('type')
+    if not images_zip or not order or not type:
+        return "Données manquantes", 400
+
+    if type == 'Skill':
+        folder_name = f"{order}_Skill"
+        prefix = f"{order}_Skill"
+        type_folder = 'Skills'
+    elif type == 'QTE':
+        folder_name = f"{order}_QTE"
+        prefix = f"{order}_QTE"
+        type_folder = 'QTE'
+    elif type == 'Ultime':
+        folder_name = f"{order}_Ultime"
+        prefix = f"{order}_Ultime"
+        type_folder = 'Ultime'
+    else:
+        return "Type de skill invalide", 400
+
+    base_folder = os.path.join('static', 'images', 'Sung_Jinwoo', type_folder)
+    target_folder = os.path.join(base_folder, folder_name)
+
+    os.makedirs(base_folder, exist_ok=True)
+    temp_extract = os.path.join("tmp", "extract_zip")
+    if os.path.exists(temp_extract):
+        shutil.rmtree(temp_extract)
+    os.makedirs(temp_extract, exist_ok=True)
+
+    with zipfile.ZipFile(images_zip) as zf:
+        zf.extractall(temp_extract)
+
+    subfolders = [f for f in os.listdir(temp_extract) if os.path.isdir(os.path.join(temp_extract, f))]
+    if subfolders:
+        src_folder = os.path.join(temp_extract, subfolders[0])
+        if subfolders[0] != folder_name:
+            os.rename(src_folder, os.path.join(temp_extract, folder_name))
+            src_folder = os.path.join(temp_extract, folder_name)
+        shutil.move(src_folder, target_folder)
+    else:
+        os.makedirs(target_folder, exist_ok=True)
+        for fname in os.listdir(temp_extract):
+            if fname.lower().endswith('.webp'):
+                if fname.startswith(prefix):
+                    shutil.move(os.path.join(temp_extract, fname), os.path.join(target_folder, fname))
+                    continue
+                import re
+                gem_pattern = None
+                if type == 'Skill':
+                    gem_pattern = re.compile(rf"^{order}_(Water|Fire|Light|Dark|Wind)_Skill.*\.webp$", re.IGNORECASE)
+                elif type == 'QTE':
+                    gem_pattern = re.compile(rf"^{order}_(Water|Fire|Light|Dark|Wind)_QTE.*\.webp$", re.IGNORECASE)
+                elif type == 'Ultime':
+                    gem_pattern = re.compile(rf"^{order}_(Water|Fire|Light|Dark|Wind)_Ultime.*\.webp$", re.IGNORECASE)
+                if gem_pattern and gem_pattern.match(fname):
+                    shutil.move(os.path.join(temp_extract, fname), os.path.join(target_folder, fname))
+                    continue
+                shutil.rmtree(temp_extract)
+                return f"L'image '{fname}' doit commencer par '{prefix}' ou respecter le format gem : {order}_Type_{type}*.webp", 400
+    shutil.rmtree(temp_extract)
+    return f"Images extraites et placées dans le dossier {type_folder}/{folder_name}.", 200
