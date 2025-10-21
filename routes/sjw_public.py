@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template, session, url_for
+from flask import Blueprint, render_template, session, url_for, current_app
+from app import get_db
 from static.Controleurs.ControleurLog import write_log
-from static.Controleurs.ControleurSql import ControleurSql
 from static.Controleurs.sql_entities.sjw_sql import SJWSql
 from static.Controleurs.sql_entities.sjw.sjw_skills_sql import SJWSkillsSql
 from static.Controleurs.sql_entities.sjw.sjw_shadows_sql import SJWShadowsSql
@@ -18,16 +18,16 @@ sjw_public_bp = Blueprint('sjw_public', __name__)
 def inner_SJW():
     write_log("Accès à la page SJW", log_level="INFO")
     language = session.get('language', "EN-en")
-    sql_manager = ControleurSql()
-    sjw_sql = SJWSql(sql_manager.cursor)
-    shadows_sql = SJWShadowsSql(sql_manager.cursor)
-    skills_sql = SJWSkillsSql(sql_manager.cursor)
-    weapons_sql = SJWWeaponsSql(sql_manager.cursor)
-    equipment_set_sql = SJWEquipmentSetSql(sql_manager.cursor)
-    blessings_sql = SJWBlessingsSql(sql_manager.cursor)
-    gems_sql = SJWGemsSql(sql_manager.cursor)
-    panoplies_sql = PanopliesSql(sql_manager.cursor)
-    cores_sql = CoresSql(sql_manager.cursor)
+    db = get_db()
+    sjw_sql = SJWSql(db.cursor)
+    shadows_sql = SJWShadowsSql(db.cursor)
+    skills_sql = SJWSkillsSql(db.cursor)
+    weapons_sql = SJWWeaponsSql(db.cursor)
+    equipment_set_sql = SJWEquipmentSetSql(db.cursor)
+    blessings_sql = SJWBlessingsSql(db.cursor)
+    gems_sql = SJWGemsSql(db.cursor)
+    panoplies_sql = PanopliesSql(db.cursor)
+    cores_sql = CoresSql(db.cursor)
 
     character_info = sjw_sql.get_sjw(language)
     folder = character_info['folder']
@@ -111,7 +111,6 @@ def inner_SJW():
     cores_effects = cores_sql.get_cores_effects(language)
     cores_names = sorted(list({c['color'] for c in cores_effects}))
 
-    sql_manager.close()
     weapon_types = sorted(list(weapon_types))
     rarities = sorted(list(rarities), reverse=True)
 
@@ -130,8 +129,8 @@ def inner_SJW():
 @sjw_public_bp.route('/SJW/shadow/<shadowAlias>')
 def shadow_details(shadowAlias):
     language = session.get('language', "EN-en")
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor
     sjw_sql = SJWSql(cursor)
     shadows_sql = SJWShadowsSql(cursor)
 
@@ -140,7 +139,6 @@ def shadow_details(shadowAlias):
     folder = character_info['folder']
 
     shadow = shadows_sql.get_shadow_details(sjw_id, shadowAlias, language, folder)
-    sql_manager.close()
     if not shadow:
         return "Shadow not found", 404
 
@@ -173,8 +171,8 @@ def shadow_details(shadowAlias):
 @sjw_public_bp.route('/SJW/weapon/<weaponAlias>')
 def weapon_details(weaponAlias):
     language = session.get('language', "EN-en")
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor
     sjw_sql = SJWSql(cursor)
     weapon_sql = SJWWeaponsSql(cursor)
 
@@ -182,7 +180,6 @@ def weapon_details(weaponAlias):
     folder = character_info['folder']
 
     weapon = weapon_sql.get_weapon_details(weaponAlias, language, folder)
-    sql_manager.close()
     if not weapon:
         return "Weapon not found", 404
 

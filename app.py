@@ -1,5 +1,6 @@
-from flask import Flask, session, redirect, request
+from flask import Flask, session, redirect, request, g
 from flask_login import LoginManager
+from static.Controleurs.ControleurSql import ControleurSql
 
 # Import Blueprints
 from routes.RouteHome import home_bp
@@ -23,6 +24,17 @@ app.secret_key = conf.get_config('APP', 'secret_key')
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.user_loader(user_loader)
+
+def get_db():
+    if 'db' not in g:
+        g.db = ControleurSql()
+    return g.db
+
+@app.teardown_appcontext
+def teardown_db(exception):
+    db = g.pop('db', None)
+    if db is not None:
+        db.close()
 
 write_log("Application démarrée", log_level="INFO")
 

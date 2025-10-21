@@ -1,10 +1,10 @@
 import os
 import glob
-from flask import Blueprint, session, request, redirect, abort, jsonify, url_for
+from flask import Blueprint, session, request, redirect, abort, jsonify, url_for, current_app
 from flask_login import login_required
+from app import get_db
 from routes.utils import *
 from static.Controleurs.ControleurLog import write_log
-from static.Controleurs.ControleurSql import ControleurSql
 from static.Controleurs.sql_entities.characters_sql import CharactersSql
 from static.Controleurs.sql_entities.characters.passives_sql import PassivesSql
 from static.Controleurs.sql_entities.characters.evolutions_sql import EvolutionsSql
@@ -28,8 +28,8 @@ def edit_character(char_id):
     type_ = request.form.get('type')
     char_folder = request.form.get('image_folder')
 
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor
 
     characters_sql = CharactersSql(cursor)
     current_character = characters_sql.get_character_full(char_id, language)
@@ -380,8 +380,7 @@ def edit_character(char_id):
             set_modif = True
             write_log(f"Suppression set {db_id} du personnage {char_id}", log_level="INFO")
 
-    sql_manager.conn.commit()
-    sql_manager.close()
+    db.conn.commit()
 
     if not (char_modif or passif_modif or skill_modif or weapon_modif or evo_modif or set_modif):
         write_log(f"Aucune modification détectée pour le personnage {char_id}", log_level="INFO")
@@ -416,8 +415,8 @@ def add_character():
     if image_folder is None or image_folder.strip() == "":
         image_folder = f"{rarity}_{type_}_{alias}"
 
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor
 
     characters_sql = CharactersSql(cursor)
     char_id = characters_sql.add_character(
@@ -553,8 +552,7 @@ def add_character():
             write_log(f"Ajout noyau {cname} au set {set_name}", log_level="INFO")
         set_idx += 1
 
-    sql_manager.conn.commit()
-    sql_manager.close()
+    db.conn.commit()
 
     write_log(f"Ajout complet du personnage {char_id} ({alias})", log_level="INFO")
     return redirect(url_for('characters_public.character_details', alias=alias))

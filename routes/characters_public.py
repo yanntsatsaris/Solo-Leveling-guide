@@ -1,8 +1,8 @@
 import os
 import glob
-from flask import Blueprint, render_template, url_for, session
+from flask import Blueprint, render_template, url_for, session, current_app
+from app import get_db
 from static.Controleurs.ControleurLog import write_log
-from static.Controleurs.ControleurSql import ControleurSql
 from static.Controleurs.sql_entities.characters_sql import CharactersSql
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
 from static.Controleurs.sql_entities.characters.passives_sql import PassivesSql
@@ -21,17 +21,16 @@ def inner_characters():
     if not language:
         return "Language not set", 400
 
-    sql_manager = ControleurSql()
-    characters_sql = CharactersSql(sql_manager.cursor)
+    db = get_db()
+    characters_sql = CharactersSql(db.cursor)
     characters_data = characters_sql.get_characters(language)
-    panoplies_sql = PanopliesSql(sql_manager.cursor)
-    cores_sql = CoresSql(sql_manager.cursor)
+    panoplies_sql = PanopliesSql(db.cursor)
+    cores_sql = CoresSql(db.cursor)
 
     panoplies_effects = panoplies_sql.get_panoplies_effects(language)
     panoplies_names = sorted(list({p['set_name'] for p in panoplies_effects}))
     cores_effects = cores_sql.get_cores_effects(language)
     cores_names = sorted(list({c['color'] for c in cores_effects}))
-    sql_manager.close()
 
     images = []
     character_types = set()
@@ -78,19 +77,18 @@ def character_details(alias):
     if not language:
         return "Language not set", 400
 
-    sql_manager = ControleurSql()
-    characters_sql = CharactersSql(sql_manager.cursor)
-    passives_sql = PassivesSql(sql_manager.cursor)
-    evolutions_sql = EvolutionsSql(sql_manager.cursor)
-    skills_sql = SkillsSql(sql_manager.cursor)
-    weapons_sql = WeaponsSql(sql_manager.cursor)
-    equipment_set_sql = EquipmentSetSql(sql_manager.cursor)
-    panoplies_sql = PanopliesSql(sql_manager.cursor)
-    cores_sql = CoresSql(sql_manager.cursor)
+    db = get_db()
+    characters_sql = CharactersSql(db.cursor)
+    passives_sql = PassivesSql(db.cursor)
+    evolutions_sql = EvolutionsSql(db.cursor)
+    skills_sql = SkillsSql(db.cursor)
+    weapons_sql = WeaponsSql(db.cursor)
+    equipment_set_sql = EquipmentSetSql(db.cursor)
+    panoplies_sql = PanopliesSql(db.cursor)
+    cores_sql = CoresSql(db.cursor)
 
     row = characters_sql.get_character_details(language, alias)
     if not row:
-        sql_manager.close()
         return "Character not found", 404
 
     char_id = row['characters_id']
@@ -184,7 +182,6 @@ def character_details(alias):
     cores_names = sorted(list({c['color'] for c in cores_effects}))
     if cores_effects is None:
         cores_effects = []
-    sql_manager.close()
 
     return render_template(
         'character_details.html',

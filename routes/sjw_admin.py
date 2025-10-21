@@ -1,10 +1,10 @@
 import os
 import glob
-from flask import Blueprint, session, request, redirect, abort, jsonify, url_for
+from flask import Blueprint, session, request, redirect, abort, jsonify, url_for, current_app
 from flask_login import login_required
+from app import get_db
 from routes.utils import *
 from static.Controleurs.ControleurLog import write_log
-from static.Controleurs.ControleurSql import ControleurSql
 from static.Controleurs.sql_entities.sjw_sql import SJWSql
 from static.Controleurs.sql_entities.sjw.sjw_skills_sql import SJWSkillsSql
 from static.Controleurs.sql_entities.sjw.sjw_shadows_sql import SJWShadowsSql
@@ -33,8 +33,8 @@ def add_shadow():
     name = request.form.get('name')
     alias = request.form.get('alias')
     description = request.form.get('description')
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor
     sjw_sql = SJWSql(cursor)
     character_info = sjw_sql.get_sjw(language)
     sjw_id = character_info['id']
@@ -58,8 +58,7 @@ def add_shadow():
     if not new_shadow_id:
         return "Error adding shadow", 500
 
-    sql_manager.conn.commit()
-    sql_manager.close()
+    db.conn.commit()
 
     write_log(f"Ombre {new_shadow_id} ({alias}) ajoutée avec succès", log_level="INFO")
     return redirect(url_for('sjw_public.shadow_details', shadowAlias=alias))
@@ -87,8 +86,8 @@ def add_weapon():
     type = request.form.get('type')
     rarity = request.form.get('rarity')
     description = request.form.get('description')
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor
     sjw_sql = SJWSql(cursor)
     character_info = sjw_sql.get_sjw(language)
     sjw_id = character_info['id']
@@ -118,8 +117,7 @@ def add_weapon():
     if not new_weapon_id:
         return "Error adding weapon", 500
 
-    sql_manager.conn.commit()
-    sql_manager.close()
+    db.conn.commit()
 
     write_log(f"Arme {new_weapon_id} ({alias}) ajoutée avec succès", log_level="INFO")
     return redirect(url_for('sjw_public.weapon_details', weaponAlias=alias))
@@ -135,8 +133,8 @@ def edit_sjw():
     alias = request.form.get('alias')
     description = request.form.get('description')
     char_folder = request.form.get('folder')
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor
 
     sjw_sql = SJWSql(cursor)
     current_character = sjw_sql.get_sjw(language)
@@ -379,8 +377,7 @@ def edit_sjw():
             gem_idx += 1
         skill_idx += 1
 
-    sql_manager.conn.commit()
-    sql_manager.close()
+    db.conn.commit()
 
     if not (char_modif or set_modif or skill_modif):
         write_log(f"Aucune modification détectée pour le personnage {char_id}", log_level="INFO")
@@ -428,8 +425,8 @@ def add_sjw_skill():
     image = request.form.get('image')
     description = request.form.get('description')
 
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor
     sjw_sql = SJWSql(cursor)
     skills_sql = SJWSkillsSql(cursor)
 
@@ -494,8 +491,7 @@ def add_sjw_skill():
                 skills_sql.add_skill_gem_debuff_translation(debuff_id, language, debuff_name, debuff_description)
                 debuff_idx += 1
 
-    sql_manager.conn.commit()
-    sql_manager.close()
+    db.conn.commit()
     write_log(f"Skill SJW ajouté avec succès (id={skill_id})", log_level="INFO")
     return redirect(url_for('sjw_public.inner_SJW'))
 
