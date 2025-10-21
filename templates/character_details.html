@@ -13,13 +13,13 @@
 {% endblock %}
 
 {% block content %}
-    <div class="layout" style="background-image: url('{{ url_for('static', filename='images/Background/BG_' ~ character.type ~ '.webp') }}');">
-        <div class="image-column">
+    <article class="layout" style="background-image: url('{{ url_for('static', filename='images/Background/BG_' ~ character.type ~ '.webp') }}');">
+        <section class="image-column">
             <div class="character-image">
                 <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}" />
             </div>
-        </div>
-        <div class="content-column">
+        </section>
+        <section class="content-column">
             <div class="container">
                 <h1>{{ character.name }}</h1>
                 {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
@@ -30,7 +30,7 @@
                 <div class="character-image">
                     <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}" />
                 </div>
-                <div class="character-info">
+                <section class="character-info">
                     <div class="tabs-and-content">
                         <div class="tabs">
                             <div class="tab active" data-tab="description">Description</div>
@@ -56,25 +56,20 @@
                         {% include 'partials/skills.html' %}
                         {% include 'partials/artefacts.html' %}
                     </div>
-                </div>
+                </section>
             </div>
-        </div>
-    </div>
+        </section>
+    </article>
 {% endblock %}
 
 {% block scripts %}
-    <script id="equipmentSetsData" type="application/json">
-        {% if character.equipment_sets and character.equipment_sets|length > 0 %}
-            {{ character.equipment_sets|tojson }}
-        {% else %}
-            []
-        {% endif %}
-    </script>
-    <script id="equipmentSetsEffectsData" type="application/json">
-        {{ panoplies_effects|tojson }}
-    </script>
-    <script id="coresEffectsData" type="application/json">
-        {{ cores_effects | tojson }}
+    <script>
+        // Injecte les données dynamiques pour la page de détails du personnage
+        initializeCharacterData({
+            equipmentSets: {{ character.equipment_sets|tojson if character.equipment_sets else [] }},
+            panopliesEffects: {{ panoplies_effects|tojson }},
+            coresEffects: {{ cores_effects|tojson }}
+        });
     </script>
     <script src="{{ url_for('static', filename='js/character_details.js') }}"></script>
 {% endblock %}

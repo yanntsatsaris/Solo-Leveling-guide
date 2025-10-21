@@ -7,27 +7,32 @@
     width: fit-content;
 }
 
-table {
-    border-collapse: collapse;
+#character-grid {
+    list-style-type: none;
+    padding: 0;
     margin: 0 auto;
     width: 100%;
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-td {
+#character-grid li {
     padding: 10px;
     text-align: center;
     vertical-align: top;
+    flex-basis: 10%; /* 10 items per row */
 }
 
-td p {
+#character-grid p {
     margin: 5px 0 0 0;
     font-size: 0.9rem;
     text-align: center;
     width: 100%;
 }
 
-table img {
+#character-grid img {
     display: block;
     margin: 10px auto;
     width: 150px;
@@ -37,7 +42,7 @@ table img {
     transition: transform 0.3s ease;
 }
 
-table img:hover {
+#character-grid img:hover {
     transform: scale(1.1);
 }
 
@@ -76,23 +81,31 @@ table img:hover {
   cursor: pointer;
 }
 
-.character-table {
-  width: 100%;
-  text-align: center
-}
-
 #add-character-btn {
   display: block;
   margin: 0 auto 18px auto;
   text-align: center;
 }
 
+@media (max-width: 1600px) {
+    #character-grid li {
+        flex-basis: 12.5%; /* 8 items per row */
+    }
+}
+
+@media (max-width: 1200px) {
+    #character-grid li {
+        flex-basis: 20%; /* 5 items per row */
+    }
+}
+
 @media (max-width: 768px) {
-    table img {
+    #character-grid img {
         width: 120px;
     }
-    td {
+    #character-grid li {
         padding: 8px;
+        flex-basis: 25%; /* 4 items per row */
     }
 }
 
@@ -102,66 +115,11 @@ table img:hover {
         margin: 0 auto;
         padding: 10px;
     }
-    table {
-        width: 100%;
-    }
-    table img {
+    #character-grid img {
         width: 100px;
     }
-    td {
+    #character-grid li {
         padding: 5px;
-        flex: 1 1 50%;
-        max-width: 50%;
-        box-sizing: border-box;
-    }
-    td img {
-        margin: 0 auto;
-        display: block;
-    }
-    td p {
-        margin: 5px auto 0 auto;
-        font-size: 0.9rem;
-        text-align: center;
-        width: 100%;
-    }
-    tr {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-}
-
-@media (max-height: 480px) {
-    .container {
-        width: 90%;
-        margin: 0 auto;
-        padding: 15px;
-    }
-    table {
-        width: 100%;
-    }
-    table img {
-        width: 120px;
-    }
-    td {
-        padding: 8px;
-        flex: 1 1 20%;
-        max-width: 20%;
-        box-sizing: border-box;
-    }
-    td img {
-        margin: 0 auto;
-        display: block;
-    }
-    td p {
-        margin: 5px auto 0 auto;
-        font-size: 0.8rem;
-        text-align: center;
-        width: 100%;
-    }
-    tr {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-basis: 50%; /* 2 items per row */
     }
 }
