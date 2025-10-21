@@ -1,6 +1,5 @@
-from flask import Blueprint, request, render_template, session, redirect, url_for, abort, flash, jsonify
+from flask import Blueprint, request, render_template, session, redirect, url_for, abort, flash, jsonify, g
 from flask_login import login_required
-from app import get_db
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
 from static.Controleurs.sql_entities.cores_sql import CoresSql
@@ -26,7 +25,7 @@ def admin_panoplie():
     write_log("Accès à la gestion des effets de panoplie", log_level="INFO", username=session.get('username'))
 
     language = session.get('language', 'FR-fr')
-    db = get_db()
+    db = g.db
     cursor = db.cursor
     panoplies_sql = PanopliesSql(cursor)
     panoplies = panoplies_sql.get_panoplies(language)
@@ -54,7 +53,7 @@ def admin_panoplie():
 def api_get_panoplie(panoplie_name):
     if not is_admin():
         abort(403)
-    db = get_db()
+    db = g.db
     cursor = db.cursor
     panoplies_sql = PanopliesSql(cursor)
     data = panoplies_sql.get_panoplie_all_languages(panoplie_name)
@@ -65,7 +64,7 @@ def api_get_panoplie(panoplie_name):
 def admin_edit_panoplie(panoplie_name):
     if not is_admin():
         abort(403)
-    db = get_db()
+    db = g.db
     cursor = db.cursor
     panoplies_sql = PanopliesSql(cursor)
 
@@ -87,7 +86,7 @@ def admin_edit_panoplie(panoplie_name):
 def admin_create_panoplie(panoplie_name):
     if not is_admin():
         abort(403)
-    db = get_db()
+    db = g.db
     cursor = db.cursor
     panoplies_sql = PanopliesSql(cursor)
 
@@ -131,7 +130,7 @@ def admin_cores():
         abort(403)
     write_log("Accès à la gestion des cores", log_level="INFO", username=session.get('username'))
     language = session.get('language', 'FR-fr')
-    db = get_db()
+    db = g.db
     cursor = db.cursor
     cores_sql = CoresSql(cursor)
     cores = cores_sql.get_all_cores(language=language)
@@ -156,7 +155,7 @@ def admin_cores():
 def api_get_core(color, number):
     if not is_admin():
         abort(403)
-    db = get_db()
+    db = g.db
     cursor = db.cursor
     cores_sql = CoresSql(cursor)
     data = {}
@@ -170,7 +169,7 @@ def api_get_core(color, number):
 def admin_edit_core(color, number):
     if not is_admin():
         abort(403)
-    db = get_db()
+    db = g.db
     cursor = db.cursor
     cores_sql = CoresSql(cursor)
 
@@ -192,7 +191,7 @@ def admin_edit_core(color, number):
 def admin_create_core(color, number):
     if not is_admin():
         abort(403)
-    db = get_db()
+    db = g.db
     cursor = db.cursor
     cores_sql = CoresSql(cursor)
 

@@ -1,5 +1,4 @@
-from flask import Blueprint, render_template, session, url_for, current_app
-from app import get_db
+from flask import Blueprint, render_template, session, url_for, current_app, g
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.sjw_sql import SJWSql
 from static.Controleurs.sql_entities.sjw.sjw_skills_sql import SJWSkillsSql
@@ -18,7 +17,7 @@ sjw_public_bp = Blueprint('sjw_public', __name__)
 def inner_SJW():
     write_log("Accès à la page SJW", log_level="INFO")
     language = session.get('language', "EN-en")
-    db = get_db()
+    db = g.db
     sjw_sql = SJWSql(db.cursor)
     shadows_sql = SJWShadowsSql(db.cursor)
     skills_sql = SJWSkillsSql(db.cursor)
@@ -129,7 +128,7 @@ def inner_SJW():
 @sjw_public_bp.route('/SJW/shadow/<shadowAlias>')
 def shadow_details(shadowAlias):
     language = session.get('language', "EN-en")
-    db = get_db()
+    db = g.db
     cursor = db.cursor
     sjw_sql = SJWSql(cursor)
     shadows_sql = SJWShadowsSql(cursor)
@@ -171,7 +170,7 @@ def shadow_details(shadowAlias):
 @sjw_public_bp.route('/SJW/weapon/<weaponAlias>')
 def weapon_details(weaponAlias):
     language = session.get('language', "EN-en")
-    db = get_db()
+    db = g.db
     cursor = db.cursor
     sjw_sql = SJWSql(cursor)
     weapon_sql = SJWWeaponsSql(cursor)

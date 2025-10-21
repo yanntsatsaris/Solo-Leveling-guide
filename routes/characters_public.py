@@ -1,7 +1,6 @@
 import os
 import glob
-from flask import Blueprint, render_template, url_for, session, current_app
-from app import get_db
+from flask import Blueprint, render_template, url_for, session, current_app, g
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.characters_sql import CharactersSql
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
@@ -21,7 +20,7 @@ def inner_characters():
     if not language:
         return "Language not set", 400
 
-    db = get_db()
+    db = g.db
     characters_sql = CharactersSql(db.cursor)
     characters_data = characters_sql.get_characters(language)
     panoplies_sql = PanopliesSql(db.cursor)
@@ -77,7 +76,7 @@ def character_details(alias):
     if not language:
         return "Language not set", 400
 
-    db = get_db()
+    db = g.db
     characters_sql = CharactersSql(db.cursor)
     passives_sql = PassivesSql(db.cursor)
     evolutions_sql = EvolutionsSql(db.cursor)

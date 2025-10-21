@@ -1,8 +1,7 @@
 import os
 import glob
-from flask import Blueprint, session, request, redirect, abort, jsonify, url_for, current_app
+from flask import Blueprint, session, request, redirect, abort, jsonify, url_for, current_app, g
 from flask_login import login_required
-from app import get_db
 from routes.utils import *
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.characters_sql import CharactersSql
@@ -28,7 +27,7 @@ def edit_character(char_id):
     type_ = request.form.get('type')
     char_folder = request.form.get('image_folder')
 
-    db = get_db()
+    db = g.db
     cursor = db.cursor
 
     characters_sql = CharactersSql(cursor)
@@ -415,7 +414,7 @@ def add_character():
     if image_folder is None or image_folder.strip() == "":
         image_folder = f"{rarity}_{type_}_{alias}"
 
-    db = get_db()
+    db = g.db
     cursor = db.cursor
 
     characters_sql = CharactersSql(cursor)

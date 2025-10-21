@@ -1,8 +1,7 @@
 import os
 import glob
-from flask import Blueprint, session, request, redirect, abort, jsonify, url_for, current_app
+from flask import Blueprint, session, request, redirect, abort, jsonify, url_for, current_app, g
 from flask_login import login_required
-from app import get_db
 from routes.utils import *
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.sjw_sql import SJWSql
@@ -33,7 +32,7 @@ def add_shadow():
     name = request.form.get('name')
     alias = request.form.get('alias')
     description = request.form.get('description')
-    db = get_db()
+    db = g.db
     cursor = db.cursor
     sjw_sql = SJWSql(cursor)
     character_info = sjw_sql.get_sjw(language)
@@ -86,7 +85,7 @@ def add_weapon():
     type = request.form.get('type')
     rarity = request.form.get('rarity')
     description = request.form.get('description')
-    db = get_db()
+    db = g.db
     cursor = db.cursor
     sjw_sql = SJWSql(cursor)
     character_info = sjw_sql.get_sjw(language)
@@ -133,7 +132,7 @@ def edit_sjw():
     alias = request.form.get('alias')
     description = request.form.get('description')
     char_folder = request.form.get('folder')
-    db = get_db()
+    db = g.db
     cursor = db.cursor
 
     sjw_sql = SJWSql(cursor)
@@ -425,7 +424,7 @@ def add_sjw_skill():
     image = request.form.get('image')
     description = request.form.get('description')
 
-    db = get_db()
+    db = g.db
     cursor = db.cursor
     sjw_sql = SJWSql(cursor)
     skills_sql = SJWSkillsSql(cursor)
