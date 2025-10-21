@@ -3,10 +3,12 @@ from flask_login import LoginManager
 
 from routes.RouteHome import home
 from routes.RouteGame_contents import game_contents
-from routes.RouteCharacters import characters
 from routes.RouteGuides import guides
-from routes.RouteSJW import SJW
 from routes.RouteUsers import users
+from routes.sjw_public import sjw_public_routes
+from routes.sjw_admin import sjw_admin_routes
+from routes.characters_public import characters_public_routes
+from routes.characters_admin import characters_admin_routes
 from routes.RouteAdmin import admin_routes
 
 # Importer le contrôleur de configuration
@@ -36,10 +38,12 @@ def set_language():
 # Enregistrer les routes
 home(app)
 game_contents(app)
-characters(app)
 guides(app)
-SJW(app)
 users(app)
+sjw_public_routes(app)
+sjw_admin_routes(app)
+characters_public_routes(app)
+characters_admin_routes(app)
 admin_routes(app)
 
 

@@ -1,0 +1,6 @@
+Flask
+Flask-Login
+python-ldap
+passlib
+psycopg2-binary
+Pillow
