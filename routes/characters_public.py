@@ -1,6 +1,7 @@
 import os
 import glob
 from flask import Blueprint, render_template, url_for, session, current_app, g
+from app import cache
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.characters_sql import CharactersSql
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
@@ -15,6 +16,7 @@ from routes.utils import process_description
 characters_public_bp = Blueprint('characters_public', __name__)
 
 @characters_public_bp.route('/characters')
+@cache.cached(timeout=3600, key_prefix='characters_list_%s')
 def inner_characters():
     language = session.get('language', "EN-en")
     if not language:
@@ -70,6 +72,7 @@ def inner_characters():
     )
 
 @characters_public_bp.route('/characters/<alias>')
+@cache.cached(timeout=3600, key_prefix='character_details_%s')
 def character_details(alias):
     write_log(f"Accès aux détails du personnage: {alias}", log_level="INFO")
     language = session.get('language', "EN-en")

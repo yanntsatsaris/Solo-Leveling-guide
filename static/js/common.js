@@ -212,3 +212,30 @@ function moveTooltip(tooltip, event) {
     tooltip.style.left = `${event.pageX + 15}px`;
     tooltip.style.top = `${event.pageY + 15}px`;
 }
+
+// Lazy Loading pour les images
+document.addEventListener("DOMContentLoaded", function() {
+    const lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+
+    if ("IntersectionObserver" in window) {
+        let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    let lazyImage = entry.target;
+                    lazyImage.src = lazyImage.dataset.src;
+                    lazyImage.classList.remove("lazy");
+                    lazyImageObserver.unobserve(lazyImage);
+                }
+            });
+        });
+
+        lazyImages.forEach(function(lazyImage) {
+            lazyImageObserver.observe(lazyImage);
+        });
+    } else {
+        // Fallback pour les anciens navigateurs
+        lazyImages.forEach(function(lazyImage) {
+            lazyImage.src = lazyImage.dataset.src;
+        });
+    }
+});

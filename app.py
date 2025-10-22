@@ -1,5 +1,6 @@
 from flask import Flask, session, redirect, request, g
 from flask_login import LoginManager
+from flask_caching import Cache
 from static.Controleurs.ControleurSql import ControleurSql
 
 # Import Blueprints
@@ -20,6 +21,9 @@ from static.Controleurs.ControleurUser import user_loader
 app = Flask(__name__)
 conf = ControleurConf()
 app.secret_key = conf.get_config('APP', 'secret_key')
+
+# Cache configuration
+cache = Cache(app, config={'CACHE_TYPE': 'SimpleCache'})
 
 login_manager = LoginManager()
 login_manager.init_app(app)

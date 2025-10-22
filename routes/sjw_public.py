@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, session, url_for, current_app, g
+from app import cache
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.sjw_sql import SJWSql
 from static.Controleurs.sql_entities.sjw.sjw_skills_sql import SJWSkillsSql
@@ -14,6 +15,7 @@ from routes.utils import process_description
 sjw_public_bp = Blueprint('sjw_public', __name__)
 
 @sjw_public_bp.route('/SJW')
+@cache.cached(timeout=3600, key_prefix='sjw_details_%s')
 def inner_SJW():
     write_log("Accès à la page SJW", log_level="INFO")
     language = session.get('language', "EN-en")
@@ -126,6 +128,7 @@ def inner_SJW():
     )
 
 @sjw_public_bp.route('/SJW/shadow/<shadowAlias>')
+@cache.cached(timeout=3600, key_prefix='shadow_details_%s')
 def shadow_details(shadowAlias):
     language = session.get('language', "EN-en")
     db = g.db
@@ -168,6 +171,7 @@ def shadow_details(shadowAlias):
     return render_template('shadow_details.html', shadow=shadow)
 
 @sjw_public_bp.route('/SJW/weapon/<weaponAlias>')
+@cache.cached(timeout=3600, key_prefix='weapon_details_%s')
 def weapon_details(weaponAlias):
     language = session.get('language', "EN-en")
     db = g.db

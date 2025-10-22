@@ -35,7 +35,7 @@
         {% for image in images %}
         <li data-type="{{ image.type }}" data-rarity="{{ image.rarity }}">
             <a href="{{ url_for('characters_public.character_details', alias=image.alias) }}">
-                <img src="{{ url_for('static', filename=image.path) }}" alt="{{ image.name }}" />
+                <img class="lazy" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==" data-src="{{ url_for('static', filename=image.path) }}" alt="{{ image.name }}" />
             </a>
             <p hidden>{{ image.name }}</p>
         </li>

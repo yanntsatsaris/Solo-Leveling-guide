@@ -2,6 +2,7 @@ import os
 import glob
 from flask import Blueprint, session, request, redirect, abort, jsonify, url_for, current_app, g
 from flask_login import login_required
+from app import cache
 from routes.utils import *
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.sjw_sql import SJWSql
@@ -58,6 +59,9 @@ def add_shadow():
         return "Error adding shadow", 500
 
     db.conn.commit()
+
+    cache.delete('sjw_details_FR-fr')
+    cache.delete('sjw_details_EN-en')
 
     write_log(f"Ombre {new_shadow_id} ({alias}) ajoutée avec succès", log_level="INFO")
     return redirect(url_for('sjw_public.shadow_details', shadowAlias=alias))
@@ -117,6 +121,9 @@ def add_weapon():
         return "Error adding weapon", 500
 
     db.conn.commit()
+
+    cache.delete('sjw_details_FR-fr')
+    cache.delete('sjw_details_EN-en')
 
     write_log(f"Arme {new_weapon_id} ({alias}) ajoutée avec succès", log_level="INFO")
     return redirect(url_for('sjw_public.weapon_details', weaponAlias=alias))
@@ -380,6 +387,10 @@ def edit_sjw():
 
     if not (char_modif or set_modif or skill_modif):
         write_log(f"Aucune modification détectée pour le personnage {char_id}", log_level="INFO")
+    else:
+        # Invalider le cache de la page SJW
+        cache.delete('sjw_details_FR-fr')
+        cache.delete('sjw_details_EN-en')
 
     return redirect(url_for('sjw_public.inner_SJW'))
 
@@ -491,6 +502,10 @@ def add_sjw_skill():
                 debuff_idx += 1
 
     db.conn.commit()
+
+    cache.delete('sjw_details_FR-fr')
+    cache.delete('sjw_details_EN-en')
+
     write_log(f"Skill SJW ajouté avec succès (id={skill_id})", log_level="INFO")
     return redirect(url_for('sjw_public.inner_SJW'))
 

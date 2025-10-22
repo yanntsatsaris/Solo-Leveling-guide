@@ -2,6 +2,7 @@ import os
 import glob
 from flask import Blueprint, session, request, redirect, abort, jsonify, url_for, current_app, g
 from flask_login import login_required
+from app import cache
 from routes.utils import *
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.characters_sql import CharactersSql
@@ -383,6 +384,11 @@ def edit_character(char_id):
 
     if not (char_modif or passif_modif or skill_modif or weapon_modif or evo_modif or set_modif):
         write_log(f"Aucune modification détectée pour le personnage {char_id}", log_level="INFO")
+    else:
+        # Invalider le cache
+        cache.delete('characters_list_FR-fr')
+        cache.delete('characters_list_EN-en')
+        cache.delete(f'character_details_{alias}')
 
     return redirect(url_for('characters_public.character_details', alias=alias))
 
@@ -552,6 +558,10 @@ def add_character():
         set_idx += 1
 
     db.conn.commit()
+
+    # Invalider le cache de la liste des personnages
+    cache.delete('characters_list_FR-fr')
+    cache.delete('characters_list_EN-en')
 
     write_log(f"Ajout complet du personnage {char_id} ({alias})", log_level="INFO")
     return redirect(url_for('characters_public.character_details', alias=alias))
