@@ -17,10 +17,14 @@ from routes.sjw_admin import sjw_admin_bp
 from static.Controleurs.ControleurConf import ControleurConf
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.ControleurUser import user_loader
+from static.Controleurs.ControleurMail import configure_mail
 
 app = Flask(__name__)
 conf = ControleurConf()
 app.secret_key = conf.get_config('APP', 'secret_key')
+
+# Mail configuration
+configure_mail(app)
 
 # Cache configuration
 cache = Cache(app, config={'CACHE_TYPE': 'SimpleCache'})

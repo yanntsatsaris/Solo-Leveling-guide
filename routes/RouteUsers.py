@@ -1,4 +1,6 @@
-from flask import Blueprint, request, jsonify, session, render_template, redirect, url_for, abort
+from flask import Blueprint, request, jsonify, session, render_template, redirect, url_for, abort, current_app
+from itsdangerous import URLSafeTimedSerializer
+from static.Controleurs.ControleurMail import send_email
 from static.Controleurs.ControleurLdap import ControleurLdap
 from static.Controleurs.ControleurConf import ControleurConf
 from static.Controleurs.ControleurLog import write_log
@@ -19,6 +21,72 @@ def is_hashed(password):
         r'^\{SHA\}', r'^\{SSHA\}', r'^\{MD5\}', r'^\{CRYPT\}', r'^\{SMD5\}'
     ]
     return any(re.match(pattern, password) for pattern in hash_patterns)
+
+def get_reset_token(username, salt='password-reset-salt'):
+    serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
+    return serializer.dumps(username, salt=salt)
+
+def verify_reset_token(token, salt='password-reset-salt', max_age=3600):
+    serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
+    try:
+        username = serializer.loads(token, salt=salt, max_age=max_age)
+    except:
+        return None
+    return username
+
+@users_bp.route('/forgot-password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        identifier = request.form.get('identifier')
+        ldap = ControleurLdap()
+
+        # Déterminer si l'identifiant est un email ou un username
+        if '@' in identifier:
+            # Recherche par email
+            # NOTE: Cette fonctionnalité dépend de la capacité à rechercher par email dans LDAP
+            # Ce qui n'est pas implémenté dans ControleurLdap.py. On se concentre sur l'username.
+            # Pour une future amélioration, il faudrait ajouter une méthode search_by_email.
+            return render_template('forgot_password.html', error="La recherche par e-mail n'est pas encore supportée.")
+        else:
+            # Recherche par nom d'utilisateur
+            user_info = ldap.get_user_info(identifier)
+            if user_info:
+                username = user_info['uid'][0].decode()
+                email = user_info['mail'][0].decode()
+                token = get_reset_token(username)
+                reset_url = url_for('users.reset_password', token=token, _external=True)
+                send_email(
+                    to=email,
+                    subject='Réinitialisation de votre mot de passe',
+                    template='emails/reset_password.html',
+                    username=username,
+                    reset_url=reset_url
+                )
+                return render_template('forgot_password.html', message="Un e-mail de réinitialisation a été envoyé.")
+            else:
+                return render_template('forgot_password.html', error="Utilisateur non trouvé.")
+
+    return render_template('forgot_password.html')
+
+@users_bp.route('/reset-password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    username = verify_reset_token(token)
+    if not username:
+        return 'Le lien de réinitialisation est invalide ou a expiré.', 400
+
+    if request.method == 'POST':
+        new_password = request.form.get('password')
+        hashed_password = ldap_salted_sha1.hash(new_password)
+
+        ldap = ControleurLdap()
+        users_ldap = UsersLdap(ldap)
+        if users_ldap.update_user(username, {'userPassword': hashed_password}):
+            # Idéalement, informer l'utilisateur sur la page de connexion
+            return redirect(url_for('users.login'))
+        else:
+            return 'Erreur lors de la mise à jour du mot de passe.', 500
+
+    return render_template('reset_password.html', token=token)
 
 @users_bp.route('/login', methods=['POST'])
 def login():

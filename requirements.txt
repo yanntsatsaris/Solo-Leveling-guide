@@ -5,3 +5,4 @@ passlib
 psycopg2-binary
 Pillow
 Flask-Caching
+Flask-Mail
