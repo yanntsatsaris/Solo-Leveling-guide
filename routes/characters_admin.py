@@ -2,7 +2,7 @@ import os
 import glob
 from flask import Blueprint, session, request, redirect, abort, jsonify, url_for, current_app, g
 from flask_login import login_required
-from app import cache
+from extensions import cache
 from routes.utils import *
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.characters_sql import CharactersSql

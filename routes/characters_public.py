@@ -1,7 +1,7 @@
 import os
 import glob
 from flask import Blueprint, render_template, url_for, session, current_app, g
-from app import cache
+from extensions import cache
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.characters_sql import CharactersSql
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql

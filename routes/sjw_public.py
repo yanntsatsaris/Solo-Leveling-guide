@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, session, url_for, current_app, g
-from app import cache
+from extensions import cache
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.sjw_sql import SJWSql
 from static.Controleurs.sql_entities.sjw.sjw_skills_sql import SJWSkillsSql

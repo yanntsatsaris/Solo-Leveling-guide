@@ -1,18 +1,7 @@
 from flask import Flask, session, redirect, request, g
 from flask_login import LoginManager
-from flask_caching import Cache
+from extensions import cache
 from static.Controleurs.ControleurSql import ControleurSql
-
-# Import Blueprints
-from routes.RouteHome import home_bp
-from routes.RouteGame_contents import game_contents_bp
-from routes.RouteGuides import guides_bp
-from routes.RouteUsers import users_bp
-from routes.RouteAdmin import admin_bp
-from routes.characters_public import characters_public_bp
-from routes.characters_admin import characters_admin_bp
-from routes.sjw_public import sjw_public_bp
-from routes.sjw_admin import sjw_admin_bp
 
 from static.Controleurs.ControleurConf import ControleurConf
 from static.Controleurs.ControleurLog import write_log
@@ -26,17 +15,17 @@ app.secret_key = conf.get_config('APP', 'secret_key')
 # Mail configuration
 configure_mail(app)
 
-# Cache configuration
-cache = Cache(app, config={'CACHE_TYPE': 'SimpleCache'})
+# Initialize extensions
+cache.init_app(app, config={'CACHE_TYPE': 'SimpleCache'})
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.user_loader(user_loader)
 
-def get_db():
+@app.before_request
+def init_db():
     if 'db' not in g:
         g.db = ControleurSql()
-    return g.db
 
 @app.teardown_appcontext
 def teardown_db(exception):
@@ -53,7 +42,18 @@ def set_language():
         session['language'] = language
     return redirect(request.referrer or '/')
 
-# Register Blueprints
+# Import and Register Blueprints
+# We import here to avoid circular dependencies
+from routes.RouteHome import home_bp
+from routes.RouteGame_contents import game_contents_bp
+from routes.RouteGuides import guides_bp
+from routes.RouteUsers import users_bp
+from routes.RouteAdmin import admin_bp
+from routes.characters_public import characters_public_bp
+from routes.characters_admin import characters_admin_bp
+from routes.sjw_public import sjw_public_bp
+from routes.sjw_admin import sjw_admin_bp
+
 app.register_blueprint(home_bp)
 app.register_blueprint(game_contents_bp)
 app.register_blueprint(guides_bp)
