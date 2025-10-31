@@ -17,6 +17,8 @@ configure_mail(app)
 
 # Initialize extensions
 cache.init_app(app, config={'CACHE_TYPE': 'SimpleCache'})
+with app.app_context():
+    cache.clear()
 
 login_manager = LoginManager()
 login_manager.init_app(app)
