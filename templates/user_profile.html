@@ -23,8 +23,8 @@
         {% if is_admin and user.uid[0].decode() == session['username'] %}
         <hr />
         <h3>Administration</h3>
-        <a href="{{ url_for('admin_bp.admin_panoplie') }}" class="admin-btn">Gérer les panoplies</a>
-        <a href="{{ url_for('admin_bp.admin_cores') }}" class="admin-btn">Gérer les noyaux et effets</a>
+        <a href="{{ url_for('admin.admin_panoplie') }}" class="admin-btn">Gérer les panoplies</a>
+        <a href="{{ url_for('admin.admin_cores') }}" class="admin-btn">Gérer les noyaux et effets</a>
         <!-- Ajoute d'autres liens d'administration ici -->
         {% endif %}
     </div>
