@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Blueprint, render_template
 
-def guides(app: Flask):
-    @app.route('/guides')
-    def inner_guides():
-        return render_template('guides.html')
+guides_bp = Blueprint('guides', __name__, url_prefix='/guides')
+
+@guides_bp.route('/')
+def inner_guides():
+    return render_template('guides.html')

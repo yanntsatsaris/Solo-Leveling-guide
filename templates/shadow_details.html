@@ -1,128 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ shadow.name }} - Solo Leveling Arise</title>
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{{ url_for('static', filename='images/icon-onglet.png') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/shadow_details.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/review.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/skills.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/weapons.css') }}"
-    />
-  </head>
-  <body
-    class="{% if shadow.alias %}background-image{% endif %}"
-    style="{% if shadow.alias %}background-image: url('{{ url_for('static', filename='images/Background/BG_Dark.webp') }}');{% endif %}"
-  >
-    {% include 'navbar.html' %}
+{% extends 'base.html' %}
 
-    <!-- Conteneur principal divisé en deux colonnes -->
-    <div class="layout">
-      <!-- Colonne pour l'image -->
-      <div class="image-column">
-        <div class="shadow-image">
-          <img
-            src="{{ url_for('static', filename=shadow.image) }}"
-            alt="{{ shadow.name }}"
-          />
-        </div>
-      </div>
+{% block title %}{{ shadow.name }} - Solo Leveling Arise{% endblock %}
 
-      <!-- Colonne pour le contenu principal -->
-      <div class="content-column">
-        <div class="container">
-          <h1>{{ shadow.name }}</h1>
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/shadow_details.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/review.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/skills.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/weapons.css') }}" />
+{% endblock %}
 
-          <!-- Image du personnage (affichée sous le type sur téléphone) -->
-          <div class="shadow-image">
-            <img
-              src="{{ url_for('static', filename=shadow.image) }}"
-              alt="{{ shadow.name }}"
-            />
-          </div>
-          <!-- Conteneur pour les onglets et le contenu -->
-          <div class="shadow-info">
-            <div class="tabs-and-content">
-              <!-- Système d'onglets -->
-              <div class="tabs">
-                <div class="tab active" data-tab="review">Review</div>
-                <div class="tab" data-tab="skills">Skills</div>
-                <div class="tab" data-tab="weapon">Weapon</div>
-              </div>
-
-              <!-- Contenu des onglets -->
-              <div class="tab-content active" id="review">
-                <h2>Review</h2>
-                <p>{{ shadow.description|safe }}</p>
-              </div>
-
-              <div class="tab-content" id="skills">
-                <h2>Skills</h2>
-                {% if shadow.skills %}
-                <ul>
-                  {% for skill in shadow.skills %}
-                  <li>
-                    <h3>{{ skill.name }}</h3>
-                    <img
-                      src="{{ url_for('static', filename=skill.image) }}"
-                      alt="{{ skill.name }}"
-                    />
-                    <p>{{ skill.description|safe }}</p>
-                  </li>
-                  {% endfor %}
-                </ul>
-                {% else %}
-                <p>No skills available for this shadow.</p>
-                {% endif %}
-              </div>
-
-              <div class="tab-content" id="weapon">
-                <h2>Weapon</h2>
-                {% if shadow.weapon %}
-                <h3>{{ shadow.weapon.name }}</h3>
-                <img
-                  src="{{ url_for('static', filename=shadow.weapon.image) }}"
-                  alt="{{ shadow.weapon.name }}"
-                />
-                <p>{{ shadow.weapon.stats|safe }}</p>
-
-                <h3>Weapon Evolutions</h3>
-                {% if shadow.weapon.evolutions %}
-                <ul>
-                  {% for evolution in shadow.weapon.evolutions %}
-                  <li>
-                    <h4>{{ evolution.name }}</h4>
-                    <p>{{ evolution.description|safe }}</p>
-                  </li>
-                  {% endfor %}
-                </ul>
-                {% else %}
-                <p>No evolutions available for this weapon.</p>
-                {% endif %} {% else %}
-                <p>No weapon available for this shadow.</p>
-                {% endif %}
-              </div>
+{% block content %}
+    <div class="layout" style="background-image: url('{{ url_for('static', filename='images/Background/BG_Dark.webp') }}');">
+        <div class="image-column">
+            <div class="shadow-image">
+                <img src="{{ url_for('static', filename=shadow.image) }}" alt="{{ shadow.name }}" />
             </div>
-          </div>
         </div>
-      </div>
+        <div class="content-column">
+            <div class="container">
+                <h1>{{ shadow.name }}</h1>
+                <div class="shadow-image">
+                    <img src="{{ url_for('static', filename=shadow.image) }}" alt="{{ shadow.name }}" />
+                </div>
+                <div class="shadow-info">
+                    <div class="tabs-and-content">
+                        <div class="tabs">
+                            <div class="tab active" data-tab="review">Review</div>
+                            <div class="tab" data-tab="skills">Skills</div>
+                            <div class="tab" data-tab="weapon">Weapon</div>
+                        </div>
+                        <div class="tab-content active" id="review">
+                            <h2>Review</h2>
+                            <p>{{ shadow.description|safe }}</p>
+                        </div>
+                        <div class="tab-content" id="skills">
+                            <h2>Skills</h2>
+                            {% if shadow.skills %}
+                            <ul>
+                                {% for skill in shadow.skills %}
+                                <li>
+                                    <h3>{{ skill.name }}</h3>
+                                    <img src="{{ url_for('static', filename=skill.image) }}" alt="{{ skill.name }}" />
+                                    <p>{{ skill.description|safe }}</p>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            <p>No skills available for this shadow.</p>
+                            {% endif %}
+                        </div>
+                        <div class="tab-content" id="weapon">
+                            <h2>Weapon</h2>
+                            {% if shadow.weapon %}
+                            <h3>{{ shadow.weapon.name }}</h3>
+                            <img src="{{ url_for('static', filename=shadow.weapon.image) }}" alt="{{ shadow.weapon.name }}" />
+                            <p>{{ shadow.weapon.stats|safe }}</p>
+                            <h3>Weapon Evolutions</h3>
+                            {% if shadow.weapon.evolutions %}
+                            <ul>
+                                {% for evolution in shadow.weapon.evolutions %}
+                                <li>
+                                    <h4>{{ evolution.name }}</h4>
+                                    <p>{{ evolution.description|safe }}</p>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                            {% else %}
+                            <p>No evolutions available for this weapon.</p>
+                            {% endif %}
+                            {% else %}
+                            <p>No weapon available for this shadow.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+{% endblock %}
+
+{% block scripts %}
     <script src="{{ url_for('static', filename='js/character_details.js') }}"></script>
-  </body>
-</html>
+{% endblock %}

@@ -8,9 +8,12 @@ from logging.handlers import WatchedFileHandler
 conf = ControleurConf()
 log_file_path = conf.get_config('LOG', 'file')
 log_level_limit = conf.get_config('LOG', 'level').upper()
+# Use a local logs directory as a fallback
 if not log_file_path:
-    log_file_path = "/var/log/Solo-Leveling-guide/Solo-Leveling-guide.log"
-log_file_path = os.path.abspath(log_file_path)
+    # We determine the project root by going up from the current file's directory
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+    log_file_path = os.path.join(project_root, "logs", "app.log")
+
 log_dir = os.path.dirname(log_file_path)
 
 if not os.path.exists(log_dir):

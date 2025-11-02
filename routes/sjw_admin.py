@@ -1,0 +1,529 @@
+import os
+import glob
+from flask import Blueprint, session, request, redirect, abort, jsonify, url_for, current_app, g
+from flask_login import login_required
+from extensions import cache
+from routes.utils import *
+from static.Controleurs.ControleurLog import write_log
+from static.Controleurs.sql_entities.sjw_sql import SJWSql
+from static.Controleurs.sql_entities.sjw.sjw_skills_sql import SJWSkillsSql
+from static.Controleurs.sql_entities.sjw.sjw_shadows_sql import SJWShadowsSql
+from static.Controleurs.sql_entities.sjw.sjw_weapons_sql import SJWWeaponsSql
+from static.Controleurs.sql_entities.sjw.sjw_equipment_set_sql import SJWEquipmentSetSql
+
+sjw_admin_bp = Blueprint('sjw_admin', __name__)
+
+@sjw_admin_bp.route('/SJW/add_shadow/check_image_folder_shadow')
+@login_required
+def check_image_folder_shadow():
+    alias = request.args.get('alias', '').replace(' ', '_')
+    folder_name = f"Shadow_{alias}"
+    folder_path = os.path.join('static', 'images', 'Sung_Jinwoo', 'Shadows', folder_name)
+    write_log(f"Vérification de l'existence du dossier : {folder_path}", log_level="INFO")
+    exists = os.path.isdir(folder_path)
+    return jsonify({'exists': exists, 'folder': folder_name})
+
+@sjw_admin_bp.route('/SJW/add_shadow', methods=['POST'])
+@login_required
+def add_shadow():
+    if not session.get('username') or not session.get('rights') or not ('Admin' in session['rights'] or 'SuperAdmin' in session['rights']):
+        abort(403)
+
+    language = session.get('language', "EN-en")
+    name = request.form.get('name')
+    alias = request.form.get('alias')
+    description = request.form.get('description')
+    db = g.db
+    cursor = db.cursor
+    sjw_sql = SJWSql(cursor)
+    character_info = sjw_sql.get_sjw(language)
+    sjw_id = character_info['id']
+
+    shadow_sql = SJWShadowsSql(cursor)
+    new_shadow_id = shadow_sql.add_shadow(sjw_id, alias, name, description, language)
+    write_log(f"Nouvelle ombre ajoutée avec l'ID {new_shadow_id} ({alias})", log_level="INFO")
+
+    for evo_idx in range(5):
+        evolution_id = request.form.get(f"shadows_evolutions_{evo_idx}_evolution_id")
+        if not evolution_id or len(evolution_id) > 10:
+            evolution_id = f"A{evo_idx}"
+        edesc = request.form.get(f'evolution_description_{evo_idx}')
+        evo_type = "passive"
+        evo_range = None
+        evo_number =  evo_idx
+        if evolution_id and edesc:
+            shadow_sql.add_evolution(new_shadow_id, evo_number, evolution_id, edesc, evo_type, evo_range, language)
+            write_log(f"  - Évolution ajoutée : {evolution_id}", log_level="INFO")
+
+    if not new_shadow_id:
+        return "Error adding shadow", 500
+
+    db.conn.commit()
+
+    cache.delete('sjw_details_FR-fr')
+    cache.delete('sjw_details_EN-en')
+
+    write_log(f"Ombre {new_shadow_id} ({alias}) ajoutée avec succès", log_level="INFO")
+    return redirect(url_for('sjw_public.shadow_details', shadowAlias=alias))
+
+@sjw_admin_bp.route('/SJW/add_weapon/check_image_folder_weapon')
+@login_required
+def check_image_folder_weapon():
+    alias = request.args.get('alias', '').replace(' ', '_')
+    type = request.args.get('type')
+    folder_name = f"{type}_{alias}"
+    folder_path = os.path.join('static', 'images', 'Sung_Jinwoo', 'Armes', folder_name)
+    write_log(f"Vérification de l'existence du dossier : {folder_path}", log_level="INFO")
+    exists = os.path.isdir(folder_path)
+    return jsonify({'exists': exists, 'folder': folder_name})
+
+@sjw_admin_bp.route('/SJW/add_weapon', methods=['POST'])
+@login_required
+def add_weapon():
+    if not session.get('username') or not session.get('rights') or not ('Admin' in session['rights'] or 'SuperAdmin' in session['rights']):
+        abort(403)
+
+    language = session.get('language', "EN-en")
+    name = request.form.get('name')
+    alias = request.form.get('alias')
+    type = request.form.get('type')
+    rarity = request.form.get('rarity')
+    description = request.form.get('description')
+    db = g.db
+    cursor = db.cursor
+    sjw_sql = SJWSql(cursor)
+    character_info = sjw_sql.get_sjw(language)
+    sjw_id = character_info['id']
+    tag = None
+
+    weapon_sql = SJWWeaponsSql(cursor)
+    new_weapon_id = weapon_sql.add_weapon(sjw_id, alias, name, description, type, rarity, tag, language)
+    write_log(f"Nouvelle arme ajoutée avec l'ID {new_weapon_id} ({alias})", log_level="INFO")
+
+    for evo_idx in range(5):
+        evolution_id = request.form.get(f"shadows_evolutions_{evo_idx}_evolution_id")
+        if not evolution_id or len(evolution_id) > 10:
+            evolution_id = f"A{evo_idx}" if evo_idx != 6 else "A6-10"
+        edesc = request.form.get(f'evolution_description_{evo_idx}')
+        if evo_idx == 6:
+            evo_type = "stat"
+            evo_range = "6-10"
+            evo_number = None
+        else:
+            evo_type = "passives"
+            evo_range = None
+            evo_number = evo_idx
+        if evolution_id and edesc:
+            weapon_sql.add_evolution(new_weapon_id, evo_number, evolution_id, edesc, evo_type, evo_range, language)
+            write_log(f"  - Évolution ajoutée : {evolution_id}", log_level="INFO")
+
+    if not new_weapon_id:
+        return "Error adding weapon", 500
+
+    db.conn.commit()
+
+    cache.delete('sjw_details_FR-fr')
+    cache.delete('sjw_details_EN-en')
+
+    write_log(f"Arme {new_weapon_id} ({alias}) ajoutée avec succès", log_level="INFO")
+    return redirect(url_for('sjw_public.weapon_details', weaponAlias=alias))
+
+@sjw_admin_bp.route('/SJW/edit', methods=['POST'])
+@login_required
+def edit_sjw():
+    if not session.get('rights') or not any(right in session['rights'] for right in ['Admin', 'SuperAdmin']):
+        return "Access denied", 403
+
+    language = session.get('language', "EN-en")
+    name = request.form.get('name')
+    alias = request.form.get('alias')
+    description = request.form.get('description')
+    char_folder = request.form.get('folder')
+    db = g.db
+    cursor = db.cursor
+
+    sjw_sql = SJWSql(cursor)
+    current_character = sjw_sql.get_sjw(language)
+
+    char_id = current_character['id']
+
+    char_modif = False
+    if (
+        (current_character['name'] or '') != (name or '') or
+        current_character['alias'] != alias or
+        (current_character['description'] or '') != (description or '')
+    ):
+        sjw_sql.update_sjw(
+            sjw_id=char_id,
+            alias=alias,
+            name=name,
+            description=description,
+            language=language
+        )
+        char_modif = True
+        write_log(f"Modification personnage {char_id} ({alias})", log_level="INFO")
+
+    equipment_set_sql = SJWEquipmentSetSql(cursor)
+    current_sets = equipment_set_sql.get_equipment_sets_full(char_id, language)
+    existing_set_ids = [str(s['id']) for s in current_sets]
+    form_set_ids = []
+    set_modif = False
+    set_idx = 0
+    while True:
+        set_name = request.form.get(f"eqset_name_{set_idx}")
+        if set_name is None:
+            break
+        set_desc = request.form.get(f"eqset_description_{set_idx}")
+        set_focus = request.form.get(f"eqset_focus_stats_{set_idx}")
+        set_order = request.form.get(f"eqset_order_{set_idx}")
+        set_id = request.form.get(f"eqset_id_{set_idx}")
+        db_set = next((s for s in current_sets if str(s['id']) == str(set_id)), None) if set_id else None
+        if set_id:
+            if db_set and (
+                (db_set['name'] or '') != (set_name or '') or
+                (db_set['description'] or '') != (set_desc or '') or
+                not focus_stats_equal(db_set['focus_stats'], set_focus) or
+                (str(db_set['order']) or '') != (str(set_order) or '')
+            ):
+                equipment_set_sql.update_equipment_set(set_id, char_id, set_name, set_desc, set_focus, set_order, language)
+                set_modif = True
+                write_log(f"Modification set {set_id} du personnage {char_id}", log_level="INFO")
+            form_set_ids.append(set_id)
+        else:
+            set_id = equipment_set_sql.add_equipment_set(char_id, set_name, set_desc, set_focus, set_order, language)
+            set_modif = True
+            write_log(f"Ajout set {set_id} au personnage {char_id}", log_level="INFO")
+            form_set_ids.append(set_id)
+
+        current_artefacts = db_set['artefacts'] if set_id and db_set and 'artefacts' in db_set else []
+        existing_artefact_ids = [str(a['id']) for a in current_artefacts]
+        form_artefact_ids = []
+        for artefact_idx in range(8):
+            aname = request.form.get(f"artefact_name_{set_idx}_{artefact_idx}")
+            aset = request.form.get(f"artefact_set_{set_idx}_{artefact_idx}")
+            amain = request.form.get(f"artefact_main_stat_{set_idx}_{artefact_idx}")
+            asec = request.form.get(f"artefact_secondary_stats_{set_idx}_{artefact_idx}")
+            aid = request.form.get(f"artefact_id_{set_idx}_{artefact_idx}")
+
+            aset_folder = (aset or '').replace(' ', '_')
+            artefact_folder = os.path.join('static', 'images', 'Artefacts', aset_folder)
+            pattern = os.path.join(artefact_folder, f"Artefact0{artefact_idx + 1}_*")
+            found_images = glob.glob(pattern)
+            if found_images:
+                aimg = os.path.basename(found_images[0])
+            else:
+                aimg = ""
+
+            db_artefact = next((a for a in current_artefacts if str(a['id']) == str(aid)), None) if aid else None
+            if aid:
+                if db_artefact and (
+                    (db_artefact['name'] or '') != (aname or '') or
+                    (db_artefact['set'] or '') != (aset or '') or
+                    (db_artefact['image_name'] or '') != (aimg or '') or
+                    (db_artefact['main_stat'] or '') != (amain or '') or
+                    normalize_stats(db_artefact['secondary_stats']) != normalize_stats(asec)
+                ):
+                    equipment_set_sql.update_artefact(aid, set_id, aname, aset, aimg, amain, asec, language)
+                    set_modif = True
+                    write_log(f"Modification artefact {aid} du set {set_id}", log_level="INFO")
+                form_artefact_ids.append(aid)
+            else:
+                new_aid = equipment_set_sql.add_artefact(set_id, aname, aset, aimg, amain, asec, language)
+                set_modif = True
+                write_log(f"Ajout artefact {new_aid} au set {set_id}", log_level="INFO")
+                form_artefact_ids.append(new_aid)
+        for db_id in existing_artefact_ids:
+            if str(db_id) not in form_artefact_ids:
+                equipment_set_sql.delete_artefact(db_id)
+                set_modif = True
+                write_log(f"Suppression artefact {db_id} du set {set_id}", log_level="INFO")
+
+        current_cores = db_set['cores'] if set_id and db_set and 'cores' in db_set else []
+        existing_core_ids = [str(c['id']) for c in current_cores]
+        form_core_ids = []
+        for core_idx in range(3):
+            cname = request.form.get(f"core_name_{set_idx}_{core_idx}")
+            cmain = request.form.get(f"core_main_stat_{set_idx}_{core_idx}")
+            csec = request.form.get(f"core_secondary_stat_{set_idx}_{core_idx}")
+            cid = request.form.get(f"core_id_{set_idx}_{core_idx}")
+            cnumber = f"{core_idx+1:02d}"
+            cimg = cname + cnumber + ".webp"
+            db_core = next((c for c in current_cores if str(c['id']) == str(cid)), None) if cid else None
+            if cid:
+                if db_core and (
+                    db_core['name'] != cname or
+                    db_core['main_stat'] != cmain or
+                    db_core['secondary_stat'] != csec or
+                    str(db_core.get('number', '')) != cnumber
+                ):
+                    equipment_set_sql.update_core(cid, set_id, cname, cimg, cmain, csec, cnumber, language)
+                    set_modif = True
+                    write_log(f"Modification noyau {cid} du set {set_id}", log_level="INFO")
+                form_core_ids.append(cid)
+            else:
+                new_cid = equipment_set_sql.add_core(set_id, cname, cimg, cmain, csec, cnumber, language)
+                set_modif = True
+                write_log(f"Ajout noyau {new_cid} au set {set_id}", log_level="INFO")
+                form_core_ids.append(new_cid)
+        for db_id in existing_core_ids:
+            if str(db_id) not in form_core_ids:
+                equipment_set_sql.delete_core(db_id)
+                set_modif = True
+                write_log(f"Suppression noyau {db_id} du set {set_id}", log_level="INFO")
+        set_idx += 1
+    for db_id in existing_set_ids:
+        if str(db_id) not in form_set_ids:
+            equipment_set_sql.delete_equipment_set(db_id)
+            set_modif = True
+            write_log(f"Suppression set {db_id} du personnage {char_id}", log_level="INFO")
+
+    skills_sql = SJWSkillsSql(cursor)
+    current_skills = skills_sql.get_skills(char_id, language)
+    existing_skill_ids = [str(s['id']) for s in current_skills]
+    form_skill_ids = []
+    skill_modif = False
+    skill_idx = 0
+    while True:
+        skill_id = request.form.get(f"skill_id_{skill_idx}")
+        skill_name = request.form.get(f"skill_name_{skill_idx}")
+        skill_type = request.form.get(f"skill_type_{skill_idx}")
+        skill_order = request.form.get(f"skill_order_{skill_idx}")
+        skill_image = request.form.get(f"skill_image_{skill_idx}")
+        skill_description = request.form.get(f"skill_description_{skill_idx}")
+
+        if skill_name is None:
+            break
+
+        db_skill = next((s for s in current_skills if str(s['id']) == str(skill_id)), None) if skill_id else None
+
+        if skill_id:
+            if db_skill and (
+                db_skill['name'] != skill_name or
+                db_skill['type'] != skill_type or
+                db_skill['order'] != skill_order or
+                db_skill['image'] != skill_image or
+                db_skill['description'] != skill_description
+            ):
+                skills_sql.update_skill(skill_id, skill_type, skill_order, skill_image)
+                skills_sql.update_skill_translation(skill_id, language, skill_name, skill_description)
+                skill_modif = True
+            form_skill_ids.append(skill_id)
+        else:
+            new_skill_id = skills_sql.add_skill(char_id, skill_type, skill_order, skill_image)
+            skills_sql.add_skill_translation(new_skill_id, language, skill_name, skill_description)
+            skill_id = new_skill_id
+            form_skill_ids.append(skill_id)
+
+        gem_idx = 0
+        while True:
+            gem_type = request.form.get(f"gems_{skill_idx}_{gem_idx}_type")
+            if gem_type is None:
+                break
+            gem_alias = request.form.get(f"gems_{skill_idx}_{gem_idx}_alias")
+            gem_image = request.form.get(f"gems_{skill_idx}_{gem_idx}_image")
+            gem_name = request.form.get(f"gems_{skill_idx}_{gem_idx}_name")
+            gem_description = request.form.get(f"gems_{skill_idx}_{gem_idx}_description")
+            gem_break = request.form.get(f"gems_{skill_idx}_{gem_idx}_break") == "on"
+
+            db_gem = None
+            if db_skill and db_skill['gems'] and len(db_skill['gems']) > gem_idx:
+                db_gem = db_skill['gems'][gem_idx]
+            gem_id = db_gem['id'] if db_gem else None
+
+            if gem_id:
+                skills_sql.update_skill_gem(gem_id, gem_type, gem_alias, gem_image, gem_idx)
+                skills_sql.update_skill_gem_translation(gem_id, language, gem_name, gem_description)
+                skills_sql.update_skill_gem_properties(gem_id, gem_break)
+                skill_modif = True
+            else:
+                gem_id = skills_sql.add_skill_gem(skill_id, gem_type, gem_alias, gem_image, gem_idx)
+                skills_sql.add_skill_gem_translation(gem_id, language, gem_name, gem_description)
+                skills_sql.add_skill_gem_properties(gem_id, gem_break)
+
+            buff_idx = 0
+            while True:
+                buff_name = request.form.get(f"gems_{skill_idx}_{gem_idx}_buffs_{buff_idx}_name")
+                if buff_name is None:
+                    break
+                buff_image = request.form.get(f"gems_{skill_idx}_{gem_idx}_buffs_{buff_idx}_image")
+                buff_description = request.form.get(f"gems_{skill_idx}_{gem_idx}_buffs_{buff_idx}_description")
+
+                db_buff = None
+                if db_gem and db_gem['buffs'] and len(db_gem['buffs']) > buff_idx:
+                    db_buff = db_gem['buffs'][buff_idx]
+                buff_id = db_buff['id'] if db_buff else None
+                if buff_id:
+                    skills_sql.update_skill_gem_buff(buff_id, buff_image)
+                    skills_sql.update_skill_gem_buff_translation(buff_id, language, buff_name, buff_description)
+                    skill_modif = True
+                else:
+                    buff_id = skills_sql.add_skill_gem_buff(gem_id, buff_image)
+                    skills_sql.add_skill_gem_buff_translation(buff_id, language, buff_name, buff_description)
+                buff_idx += 1
+
+            debuff_idx = 0
+            while True:
+                debuff_name = request.form.get(f"gems_{skill_idx}_{gem_idx}_debuffs_{debuff_idx}_name")
+                if debuff_name is None:
+                    break
+                debuff_image = request.form.get(f"gems_{skill_idx}_{gem_idx}_debuffs_{debuff_idx}_image")
+                debuff_description = request.form.get(f"gems_{skill_idx}_{gem_idx}_debuffs_{debuff_idx}_description")
+                db_debuff = None
+                if db_gem and db_gem['debuffs'] and len(db_gem['debuffs']) > debuff_idx:
+                    db_debuff = db_gem['debuffs'][debuff_idx]
+                debuff_id = db_debuff['id'] if db_debuff else None
+                if debuff_id:
+                    skills_sql.update_skill_gem_debuff(debuff_id, debuff_image)
+                    skills_sql.update_skill_gem_debuff_translation(debuff_id, language, debuff_name, debuff_description)
+                    skill_modif = True
+                else:
+                    debuff_id = skills_sql.add_skill_gem_debuff(gem_id, debuff_image)
+                    skills_sql.add_skill_gem_debuff_translation(debuff_id, language, debuff_name, debuff_description)
+                debuff_idx += 1
+            gem_idx += 1
+        skill_idx += 1
+
+    db.conn.commit()
+
+    if not (char_modif or set_modif or skill_modif):
+        write_log(f"Aucune modification détectée pour le personnage {char_id}", log_level="INFO")
+    else:
+        # Invalider le cache de la page SJW
+        cache.delete('sjw_details_FR-fr')
+        cache.delete('sjw_details_EN-en')
+
+    return redirect(url_for('sjw_public.inner_SJW'))
+
+@sjw_admin_bp.route('/SJW/images_for/<folder>')
+@login_required
+def images_for_SJW(folder):
+    folder = folder.replace('..', '').replace('/', '').replace('\\', '')
+    img_dir = os.path.join('static', 'images', folder)
+    if not os.path.isdir(img_dir):
+        write_log(f"Le dossier d'images n'existe pas : {img_dir}", log_level="WARNING")
+        return jsonify([])
+    images = sorted([f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))])
+    return jsonify(images)
+
+@sjw_admin_bp.route('/SJW/add_skill/check_image_folder_skill')
+@login_required
+def check_image_folder_skill():
+    type = request.args.get('type', '')
+    order = request.args.get('order', '')
+    folder_name = f"{order}_{type}"
+    if type == 'Skill':
+        folder_type = 'Skills'
+    if type == 'QTE':
+        folder_type = 'QTE'
+    if type == 'Ultime':
+        folder_type = 'Ultime'
+    folder_path = os.path.join('static', 'images', 'Sung_Jinwoo', folder_type, folder_name)
+    write_log(f"Vérification de l'existence du dossier : {folder_path}", log_level="INFO")
+    exists = os.path.isdir(folder_path)
+    return jsonify({'exists': exists, 'folder': folder_name})
+
+@sjw_admin_bp.route('/SJW/add_sjw_skill', methods=['POST'])
+@login_required
+def add_sjw_skill():
+    if not session.get('username') or not session.get('rights') or not ('Admin' in session['rights'] or 'SuperAdmin' in session['rights']):
+        abort(403)
+
+    language = session.get('language', "EN-en")
+    name = request.form.get('name')
+    type = request.form.get('type')
+    order = request.form.get('order')
+    image = request.form.get('image')
+    description = request.form.get('description')
+
+    db = g.db
+    cursor = db.cursor
+    sjw_sql = SJWSql(cursor)
+    skills_sql = SJWSkillsSql(cursor)
+
+    character_info = sjw_sql.get_sjw(language)
+    sjw_id = character_info['id']
+
+    skill_id = skills_sql.add_skill(
+        sjw_id=sjw_id,
+        type=type,
+        order=order,
+        image=image
+    )
+    skills_sql.add_skill_translation(
+        skill_id=skill_id,
+        language=language,
+        name=name,
+        description=description
+    )
+
+    for i in range(4):
+        prefix = f"gems[{i}]"
+        if f"{prefix}[type]" in request.form:
+            gem_type = request.form.get(f"{prefix}[type]")
+            gem_alias = request.form.get(f"{prefix}[alias]")
+            gem_image = request.form.get(f"{prefix}[image]")
+            gem_order = request.form.get(f"{prefix}[order]")
+            gem_name = request.form.get(f"{prefix}[name]")
+            gem_description = request.form.get(f"{prefix}[description]")
+            gem_break = request.form.get(f"{prefix}[break]") == "on"
+            gem_id = skills_sql.add_skill_gem(
+                skill_id=skill_id,
+                type=gem_type,
+                alias=gem_alias,
+                image=gem_image,
+                order=gem_order
+            )
+            skills_sql.add_skill_gem_translation(
+                gem_id=gem_id,
+                language=language,
+                name=gem_name,
+                description=gem_description
+            )
+            skills_sql.add_skill_gem_properties(
+                gem_id=gem_id,
+                break_value=gem_break
+            )
+            buff_idx = 0
+            while f"{prefix}[buffs][{buff_idx}][name]" in request.form:
+                buff_name = request.form.get(f"{prefix}[buffs][{buff_idx}][name]")
+                buff_image = request.form.get(f"{prefix}[buffs][{buff_idx}][image]")
+                buff_description = request.form.get(f"{prefix}[buffs][{buff_idx}][description]")
+                buff_id = skills_sql.add_skill_gem_buff(gem_id, buff_image)
+                skills_sql.add_skill_gem_buff_translation(buff_id, language, buff_name, buff_description)
+                buff_idx += 1
+
+            debuff_idx = 0
+            while f"{prefix}[debuffs][{debuff_idx}][name]" in request.form:
+                debuff_name = request.form.get(f"{prefix}[debuffs][{debuff_idx}][name]")
+                debuff_image = request.form.get(f"{prefix}[debuffs][{debuff_idx}][image]")
+                debuff_description = request.form.get(f"{prefix}[debuffs][{debuff_idx}][description]")
+                debuff_id = skills_sql.add_skill_gem_debuff(gem_id, debuff_image)
+                skills_sql.add_skill_gem_debuff_translation(debuff_id, language, debuff_name, debuff_description)
+                debuff_idx += 1
+
+    db.conn.commit()
+
+    cache.delete('sjw_details_FR-fr')
+    cache.delete('sjw_details_EN-en')
+
+    write_log(f"Skill SJW ajouté avec succès (id={skill_id})", log_level="INFO")
+    return redirect(url_for('sjw_public.inner_SJW'))
+
+@sjw_admin_bp.route('/SJW/skill_images')
+@login_required
+def skill_images():
+    type = request.args.get('type', '').replace('..', '').replace('/', '').replace('\\', '')
+    order = request.args.get('order', '').replace('..', '').replace('/', '').replace('\\', '')
+    folder_name = f"{order}_{type}"
+    if type == 'Skill':
+        folder_type = 'Skills'
+    if type == 'QTE':
+        folder_type = 'QTE'
+    if type == 'Ultime':
+        folder_type = 'Ultime'
+    img_dir = os.path.join('static', 'images', 'Sung_Jinwoo', folder_type, folder_name)
+    if not os.path.isdir(img_dir):
+        write_log(f"Le dossier d'images n'existe pas : {img_dir}", log_level="WARNING")
+        return jsonify([])
+    images = sorted([f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))])
+    return jsonify(images)

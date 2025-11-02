@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        .email-header {
+            background-color: #000000;
+            padding: 20px;
+            text-align: center;
+        }
+        .email-header h1 {
+            color: #ffcc00;
+            margin: 0;
+        }
+        .email-body {
+            padding: 30px;
+            line-height: 1.6;
+        }
+        .email-footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+        .button {
+            display: inline-block;
+            background-color: #ffcc00;
+            color: #121212;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <h1>Solo Leveling Arise Guide</h1>
+        </div>
+        <div class="email-body">
+            {% block content %}{% endblock %}
+        </div>
+        <div class="email-footer">
+            <p>&copy; {{ now()|strftime('%Y') }} Solo Leveling Arise Guide. Tous droits réservés.</p>
+        </div>
+    </div>
+</body>
+</html>

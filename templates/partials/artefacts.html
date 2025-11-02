@@ -1,187 +1,37 @@
-{% set titles = { 'FR-fr': { 'set_description': 'Description du set',
-'focus_stats': 'Stats à Focus', 'artefacts': 'Artefacts', 'cores': 'Noyaux',
-'no_artefact': 'Aucun artefact équipé pour ce personnage.', 'no_core': 'Aucun
-noyau équipé pour ce personnage.' }, 'EN-en': { 'set_description': 'Set
-Description', 'focus_stats': 'Focus Stats', 'artefacts': 'Artifacts', 'cores':
-'Cores', 'no_artefact': 'No artifact equipped for this character.', 'no_core':
-'No core equipped for this character.' } } %} {% set lang = language if language
-in titles else 'EN-en' %}
-
-<div id="artefacts" class="tab-content">
-  <div class="equipment-set-description">
-    <h3>{{ titles[lang]['set_description'] }}</h3>
-    <p class="equipment-set-description-text">
-      {% if character.equipment_sets and character.equipment_sets[0].description %}
-        {{ character.equipment_sets[0].description|safe }}
-      {% endif %}
-    </p>
-  </div>
-  <!-- Affichage des statistiques à focus -->
-  <div class="focus-stats">
-    <h3 hidden>{{ titles[lang]['focus_stats'] }}</h3>
-    <ul class="focus-stats-list">
-      {% if character.equipment_sets and character.equipment_sets|length > 0 %}
-      {% for stat in character.equipment_sets[0].focus_stats %}
-      <li>{{ stat }}</li>
-      {% endfor %} {% else %}
-      <li>{{ titles[lang]['no_artefact'] }}</li>
-      {% endif %}
-    </ul>
-  </div>
-
-  <h2>{{ titles[lang]['artefacts'] }}</h2>
-
-  <!-- Liste des artefacts -->
-  <div class="artefacts-container">
-    {% if character.equipment_sets and
-    character.equipment_sets[0].artefacts|length > 0 %}
-    <!-- Colonne gauche -->
-    <div class="artefacts-column">
-      {% for artefact in character.equipment_sets[0].artefacts[:4] %}
-      <div class="artefact-item" data-set="{{ artefact.set }}">
-        <div class="artefact-item-content">
-          <img
-            src="{{ url_for('static', filename=artefact.image) }}"
-            alt="{{ artefact.name }}"
-            class="artefact-image"
-            onmouseover="showSetEffects('{{ artefact.set }}', event)"
-            onmouseout="hideSetEffects()"
-          />
-          <div>
-            <div class="stat-main">
-              <div class="stat-container">
-                <span>{{ artefact.main_stat }}</span>
-                <img
-                  src="{{ url_for('static', filename='images/Stats_Principale.png') }}"
-                  alt="Statistique Principale"
-                />
-              </div>
-            </div>
-            <div class="stat-secondary-container">
-              {% for stat in artefact.secondary_stats %}
-              <div class="stat-secondary">
-                <div class="stat-container">
-                  <span>{{ stat }}</span>
-                  <img
-                    src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}"
-                    alt="Statistique Secondaire"
-                  />
-                </div>
-              </div>
-              {% endfor %}
-            </div>
-          </div>
+<!-- partials/artefacts.html -->
+<div id="tab-artefacts" class="tab-content">
+  <div class="equipment-set-details">
+    <div class="set-description-and-focus">
+        <div class="equipment-set-description">
+            <h3>Description du Set</h3>
+            <p class="equipment-set-description-text"></p>
         </div>
-      </div>
-      <pre>{{ artefact | tojson }}</pre>
-      {% endfor %}
-    </div>
-
-    <!-- Colonne droite -->
-    <div class="artefacts-column">
-      {% for artefact in character.equipment_sets[0].artefacts[4:] %}
-      <div class="artefact-item" data-set="{{ artefact.set }}">
-        <div class="artefact-item-content">
-          <img
-            src="{{ url_for('static', filename=artefact.image) }}"
-            alt="{{ artefact.name }}"
-            class="artefact-image"
-            onmouseover="showSetEffects('{{ artefact.set }}', event)"
-            onmouseout="hideSetEffects()"
-          />
-          <div>
-            <div class="stat-main">
-              <div class="stat-container">
-                <span>{{ artefact.main_stat }}</span>
-                <img
-                  src="{{ url_for('static', filename='images/Stats_Principale.png') }}"
-                  alt="Statistique Principale"
-                />
-              </div>
-            </div>
-            <div class="stat-secondary-container">
-              {% for stat in artefact.secondary_stats %}
-              <div class="stat-secondary">
-                <div class="stat-container">
-                  <span>{{ stat }}</span>
-                  <img
-                    src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}"
-                    alt="Statistique Secondaire"
-                  />
-                </div>
-              </div>
-              {% endfor %}
-            </div>
-          </div>
+        <div class="focus-stats">
+            <h3>Stats à Focus</h3>
+            <ul class="focus-stats-list"></ul>
         </div>
-      </div>
-      <pre>{{ artefact | tojson }}</pre>
-      {% endfor %}
     </div>
-    {% else %}
-    <p>{{ titles[lang]['no_artefact'] }}</p>
-    {% endif %}
+    <div class="artefacts-display">
+        <h3>Artefacts</h3>
+        <div class="artefacts-container">
+            <!-- Les artefacts seront injectés ici par JS -->
+        </div>
+    </div>
+    <div class="cores-display">
+        <h3>Noyaux</h3>
+        <div class="cores-container">
+            <!-- Les noyaux seront injectés ici par JS -->
+        </div>
+    </div>
   </div>
+</div>
 
-  <!-- Conteneur pour afficher les effets de la panoplie -->
-  <div
-    id="set-effects"
-    class="effects-container"
-    style="display: none; position: absolute"
-  >
+<!-- Conteneurs pour les popups d'effets (tooltips) -->
+<div id="set-effects" class="effects-container" style="display: none; position: absolute;">
     <h3></h3>
     <ul id="set-effects-list"></ul>
-  </div>
-
-  <!-- Section des noyaux -->
-  <div class="cores-section">
-    <h2>{{ titles[lang]['cores'] }}</h2>
-    <div class="cores-container">
-      {% if character.equipment_sets and
-      character.equipment_sets[0].cores|length > 0 %} {% for core in
-      character.equipment_sets[0].cores %}
-      <div class="core-item">
-        <img
-          src="{{ url_for('static', filename=core.image) }}"
-          alt="{{ core.name }}"
-          class="core-image"
-          onmouseover="showCoreEffect('{{ core.color }}', '{{ core.number }}', event)"
-          onmouseout="hideCoreEffect()"
-        />
-        <div class="stats">
-          <div class="stat-main">
-            <div class="stat-container">
-              <span>{{ core.main_stat }}</span>
-              <img
-                src="{{ url_for('static', filename='images/Stats_Principale.png') }}"
-                alt="Statistique Principale"
-              />
-            </div>
-          </div>
-          <div class="stat-secondary">
-            <div class="stat-container">
-              <span>{{ core.secondary_stat }}</span>
-              <img
-                src="{{ url_for('static', filename='images/Stats_Secondaire.png') }}"
-                alt="Statistique Secondaire"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      {% endfor %} {% else %}
-      <p>{{ titles[lang]['no_core'] }}</p>
-      {% endif %}
-    </div>
-  </div>
-
-  <!-- Ajoute le conteneur de bulle pour les effets de core -->
-  <div
-    id="core-effect-bubble"
-    class="effects-container"
-    style="display: none; position: absolute"
-  >
+</div>
+<div id="core-effect-bubble" class="effects-container" style="display: none; position: absolute;">
     <h3 id="core-effect-title"></h3>
     <div id="core-effect-description"></div>
-  </div>
 </div>

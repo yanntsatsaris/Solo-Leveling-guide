@@ -1,2 +1,10 @@
 data/solo.sql
 data/import.py
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Log files
+logs/
+*.log

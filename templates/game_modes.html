@@ -1,109 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Solo Leveling Arise : Game Modes</title>
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{{ url_for('static', filename='images/icon-onglet.png') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/game_modes.css') }}"
-    />
-  </head>
-  <body>
-    {% include 'navbar.html' %}
-    <div class="container">
-      <h1>Game Modes</h1>
-      <p>Explore the various game modes available in Solo Leveling Arise.</p>
-      <div class="image-container">
-        <img
-          src="{{ url_for('static', filename='images/Menus/MenuDuJeu1.webp') }}"
-          alt="Menu du Jeu"
-          class="menu-image"
-        />
-        <!-- Zone 1 -->
-        <div class="hotspot hotspot-1">
-          <div class="tooltip-container">
-            <span class="tooltip">Story</span>
-          </div>
-        </div>
-        <!-- Zone 2 -->
-        <div class="hotspot hotspot-2">
-          <div class="tooltip-container">
-            <span class="tooltip">Archives</span>
-          </div>
-        </div>
-        <!-- Zone 3 -->
-        <div class="hotspot hotspot-3">
-          <div class="tooltip-container">
-            <span class="tooltip">Trials</span>
-          </div>
-        </div>
-        <!-- Zone 4 -->
-        <div class="hotspot hotspot-4">
-          <div class="tooltip-container">
-            <span class="tooltip">Gates</span>
-          </div>
-        </div>
-        <!-- Zone 6 -->
-        <div class="hotspot hotspot-6">
-          <div class="tooltip-container">
-            <span class="tooltip">Dungeon</span>
-          </div>
-        </div>
-        <!-- Zone 7 -->
-        <div class="hotspot hotspot-7">
-          <div class="tooltip-container">
-            <span class="tooltip">Chaos</span>
-          </div>
-        </div>
-        <!-- Zone 8 -->
-        <div class="hotspot hotspot-8">
-          <div class="tooltip-container">
-            <span class="tooltip">Limited Events</span>
-          </div>
-        </div>
-        <!-- Zone 9 -->
-        <div class="hotspot hotspot-9">
-          <div class="tooltip-container">
-            <span class="tooltip">Speedrun</span>
-          </div>
-        </div>
-        <!-- Zone 10 -->
-        <div class="hotspot hotspot-10">
-          <div class="tooltip-container">
-            <span class="tooltip">Guild Boss</span>
-          </div>
-        </div>
-        <!-- Zone 11 -->
-        <div class="hotspot hotspot-11">
-          <div class="tooltip-container">
-            <span class="tooltip">POD</span>
-          </div>
-        </div>
-        <!-- Zone 12 -->
-        <div class="hotspot hotspot-12">
-          <div class="tooltip-container">
-            <span class="tooltip">WOBL</span>
-          </div>
-        </div>
-        <!-- Zone 13 -->
-        <div class="hotspot hotspot-13">
-          <div class="tooltip-container">
-            <span class="tooltip">Simulation</span>
-          </div>
-        </div>
-        <!-- Zone 14 -->
-        <div class="hotspot hotspot-14">
-          <div class="tooltip-container">
-            <span class="tooltip">Limited Raid</span>
-          </div>
-        </div>
-      </div>
+{% extends 'base.html' %}
+
+{% block title %}Solo Leveling Arise : Game Modes{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/game_modes.css') }}" />
+{% endblock %}
+
+{% block content %}
+    <h1>Game Modes</h1>
+    <p>Explore the various game modes available in Solo Leveling Arise.</p>
+    <div class="image-container">
+        <img src="{{ url_for('static', filename='images/Menus/MenuDuJeu1.webp') }}" alt="Menu du Jeu" class="menu-image" />
+        <div class="hotspot hotspot-1"><div class="tooltip-container"><span class="tooltip">Story</span></div></div>
+        <div class="hotspot hotspot-2"><div class="tooltip-container"><span class="tooltip">Archives</span></div></div>
+        <div class="hotspot hotspot-3"><div class="tooltip-container"><span class="tooltip">Trials</span></div></div>
+        <div class="hotspot hotspot-4"><div class="tooltip-container"><span class="tooltip">Gates</span></div></div>
+        <div class="hotspot hotspot-6"><div class="tooltip-container"><span class="tooltip">Dungeon</span></div></div>
+        <div class="hotspot hotspot-7"><div class="tooltip-container"><span class="tooltip">Chaos</span></div></div>
+        <div class="hotspot hotspot-8"><div class="tooltip-container"><span class="tooltip">Limited Events</span></div></div>
+        <div class="hotspot hotspot-9"><div class="tooltip-container"><span class="tooltip">Speedrun</span></div></div>
+        <div class="hotspot hotspot-10"><div class="tooltip-container"><span class="tooltip">Guild Boss</span></div></div>
+        <div class="hotspot hotspot-11"><div class="tooltip-container"><span class="tooltip">POD</span></div></div>
+        <div class="hotspot hotspot-12"><div class="tooltip-container"><span class="tooltip">WOBL</span></div></div>
+        <div class="hotspot hotspot-13"><div class="tooltip-container"><span class="tooltip">Simulation</span></div></div>
+        <div class="hotspot hotspot-14"><div class="tooltip-container"><span class="tooltip">Limited Raid</span></div></div>
     </div>
-  </body>
-</html>
+{% endblock %}
