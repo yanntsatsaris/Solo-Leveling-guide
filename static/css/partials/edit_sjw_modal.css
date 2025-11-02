@@ -1,34 +1,29 @@
-/* Overlay */
-.edit-sjw-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(18, 18, 18, 0.85); /* fond sombre plus marqué */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
+/* static/css/partials/edit_sjw_modal.css */
 
-/* Popup */
-.edit-sjw-popup {
+.edit-sjw-overlay {
   background: #1e1e1e;
-  padding: 12px 9px; /* padding réduit de moitié */
+  padding: 12px 9px;
   border-radius: 12px;
-  min-width: 1400px; /* largeur doublée */
-  max-width: 2400px; /* largeur doublée */
+  min-width: 1400px;
+  max-width: 2400px;
   min-height: 650px;
   max-height: 95vh;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  position: relative;
-  overflow-y: auto;
   color: #fff;
   font-family: Arial, sans-serif;
+  border: 1px solid #444;
 }
 
-/* Titre */
+.edit-sjw-overlay::backdrop {
+  background: rgba(18, 18, 18, 0.85);
+}
+
+.edit-sjw-popup {
+  position: relative;
+  overflow-y: auto;
+  height: 100%;
+}
+
 .edit-sjw-popup h2 {
   color: #ffcc00;
   text-align: center;
@@ -40,7 +35,6 @@
   color: #ffcc00;
 }
 
-/* Onglets */
 .edit-tabs {
   display: flex;
   justify-content: center;
@@ -69,7 +63,6 @@
   color: #121212;
 }
 
-/* Contenu des onglets */
 .edit-tab-content {
   display: none;
   background-color: #232323;
@@ -83,7 +76,6 @@
   display: block;
 }
 
-/* Champs du formulaire */
 .edit-sjw-popup label {
   display: block;
   margin-bottom: 2px;
@@ -116,7 +108,6 @@
   margin: 18px 0;
 }
 
-/* Boutons */
 .admin-btn {
   background-color: #ffcc00;
   color: #121212;
@@ -145,7 +136,6 @@
   cursor: pointer;
 }
 
-/* Sélecteur de set */
 #edit-equipment-select {
   background-color: #1e1e1e;
   color: #ffcc00;
@@ -164,7 +154,6 @@
   color: #121212;
 }
 
-/* Evolutions */
 .evolutions-grid {
   display: flex;
   flex-direction: column;
@@ -184,8 +173,6 @@
   margin-bottom: 6px;
 }
 
-/* Pour la grille d'évolutions dans les armes */
-/* filepath: c:\Users\yann\Documents\Projet\Solo-Leveling-guide\static\css\partials\edit_character_modal.css */
 .edit-shadow-evolution-block {
   flex: 1;
   background: #232323;
@@ -204,7 +191,6 @@
   margin-bottom: 6px;
 }
 
-/* Passives et Skills */
 .passives-grid,
 .skills-grid {
   display: flex;
@@ -227,7 +213,6 @@
   margin-bottom: 6px;
 }
 
-/* Checkbox styles */
 .checkbox-row {
   display: flex;
   gap: 10px;
@@ -243,7 +228,6 @@
   gap: 3px;
 }
 
-/* Artefacts en deux colonnes */
 .artefacts-row {
   display: flex;
   gap: 12px;
@@ -261,7 +245,6 @@
   display: block;
 }
 
-/* Optionnel : pour que les artefacts soient bien espacés et alignés */
 .edit-artefact-block {
   background: #232323;
   padding: 5px;
@@ -269,7 +252,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Bouton Ajouter */
 .add-btn {
   margin: 12px 0 0 0;
   padding: 4px 14px;
@@ -284,7 +266,6 @@
   background: #ffe066;
 }
 
-/* Pour le responsive si besoin */
 @media (max-width: 900px) {
   .edit-sjw-popup {
     min-width: 95vw;
