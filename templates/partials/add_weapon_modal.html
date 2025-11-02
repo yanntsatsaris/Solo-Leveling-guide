@@ -1,7 +1,6 @@
-<div
+<dialog
   id="add-weapon-overlay"
   class="edit-weapon-overlay"
-  style="display: none"
 >
   <div id="add-weapon-menu" class="edit-weapon-popup">
     <form
@@ -59,22 +58,19 @@
       </div> <!-- Fermeture de edit-tab-content -->
     </form>
   </div> <!-- Fermeture de edit-weapon-popup -->
-</div> <!-- Fermeture de edit-weapon-overlay -->
+</dialog> <!-- Fermeture de edit-weapon-overlay -->
 <script>
     // Fermeture de la modale
+    const addWeaponDialog = document.getElementById('add-weapon-overlay');
     document.getElementById('close-add-weapon')?.addEventListener('click', function() {
-        document.getElementById('add-weapon-overlay').style.display = 'none';
+        addWeaponDialog.close();
     });
     // Ferme la modale si clic en dehors du popup
-    const addOverlayWeapon = document.getElementById('add-weapon-overlay');
-    const addPopupWeapon = document.getElementById('add-weapon-menu');
-    if (addOverlayWeapon && addPopupWeapon) {
-        addOverlayWeapon.addEventListener('mousedown', function(e) {
-        if (e.target === addOverlayWeapon) {
-            addOverlayWeapon.style.display = 'none';
+    addWeaponDialog?.addEventListener('click', function(e) {
+        if (e.target === addWeaponDialog) {
+            addWeaponDialog.close();
         }
-        });
-    }
+    });
     document.getElementById('add-weapon-btn')?.addEventListener('click', async function() {
         // Demande les infos de base
         const name = prompt("Nom de l'arme :");
@@ -103,7 +99,7 @@
         }
 
         // Ouvre la modale d'ajout
-        document.getElementById('add-weapon-overlay').style.display = 'flex';
+        addWeaponDialog.showModal();
 
         // Pré-remplit les champs
         document.querySelector('#add-weapon-form input[name="name"]').value = name;

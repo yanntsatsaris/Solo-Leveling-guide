@@ -1,7 +1,6 @@
-<div
+<dialog
   id="add-shadow-overlay"
   class="edit-shadow-overlay"
-  style="display: none"
 >
   <div id="add-shadow-menu" class="edit-shadow-popup">
     <form
@@ -55,89 +54,75 @@
       </div> <!-- Fermeture de edit-tab-content -->
     </form>
   </div> <!-- Fermeture de edit-shadow-popup -->
-</div> <!-- Fermeture de edit-shadow-overlay -->
+</dialog> <!-- Fermeture de edit-shadow-overlay -->
 <script>
-    // Fermeture de la modale
+    const addShadowDialog = document.getElementById('add-shadow-overlay');
     document.getElementById('close-add-shadow')?.addEventListener('click', function() {
-        document.getElementById('add-shadow-overlay').style.display = 'none';
+        addShadowDialog.close();
     });
-    // Ferme la modale si clic en dehors du popup
-    const addOverlayShadow = document.getElementById('add-shadow-overlay');
-    const addPopupShadow = document.getElementById('add-shadow-menu');
-    if (addOverlayShadow && addPopupShadow) {
-        addOverlayShadow.addEventListener('mousedown', function(e) {
-        if (e.target === addOverlayShadow) {
-            addOverlayShadow.style.display = 'none';
+    addShadowDialog?.addEventListener('click', function(e) {
+        if (e.target === addShadowDialog) {
+            addShadowDialog.close();
         }
-        });
-    }
+    });
     document.getElementById('add-shadow-btn')?.addEventListener('click', async function() {
-        // Demande les infos de base
         const name = prompt("Nom de l'ombre :");
         if (!name) return;
         const alias = prompt("Alias de l'ombre :");
         if (!alias) return;
 
-        // Construit le chemin du dossier image
-        // On suppose que tu veux remplacer les espaces par des underscores
         const aliasFolder = alias.replace(/ /g, "_");
         const folderName = `Shadow_${aliasFolder}`;
         const folderPath = `static/images/Sung_Jinwoo/Shadows/${folderName}/`;
 
-        // Vérifie si le dossier existe côté serveur (nécessite une route Flask dédiée)
         let folderExists = false;
         try {
-        const resp = await fetch(`/SJW/add_shadow/check_image_folder_shadow?alias=${encodeURIComponent(alias)}`);
-        folderExists = (await resp.json()).exists;
+            const resp = await fetch(`/SJW/add_shadow/check_image_folder_shadow?alias=${encodeURIComponent(alias)}`);
+            folderExists = (await resp.json()).exists;
         } catch (e) {
-        // Si la vérification échoue, on continue quand même
-        folderExists = false;
+            folderExists = false;
         }
 
-        // Ouvre la modale d'ajout
-        document.getElementById('add-shadow-overlay').style.display = 'flex';
+        addShadowDialog.showModal();
 
-        // Pré-remplit les champs
         document.querySelector('#add-shadow-form input[name="name"]').value = name;
         document.querySelector('#add-shadow-form input[name="alias"]').value = alias;
 
-        // Optionnel : affiche une alerte si le dossier n'existe pas
         if (!folderExists) {
-        let overlay = document.createElement('div');
-        overlay.id = "upload-shadow-images-overlay";
-        overlay.className = "edit-shadow-overlay";
-        overlay.style.display = "flex";
-        overlay.innerHTML = `
-            <div class="edit-shadow-popup">
-            <form id="upload-shadow-images-form" enctype="multipart/form-data">
-                <h2>Uploader les images de l'ombre (.zip)</h2>
-                <input type="file" name="images_zip" accept=".zip" required>
-                <input type="hidden" name="alias" value="${alias}">
-                <div style="margin-top:16px;">
-                <button type="submit" class="admin-btn">Envoyer</button>
-                <button type="button" id="cancel-upload-shadow-images" class="close-btn">&times;</button>
+            let overlay = document.createElement('div');
+            overlay.id = "upload-shadow-images-overlay";
+            overlay.className = "edit-shadow-overlay";
+            overlay.style.display = "flex";
+            overlay.innerHTML = `
+                <div class="edit-shadow-popup">
+                <form id="upload-shadow-images-form" enctype="multipart/form-data">
+                    <h2>Uploader les images de l'ombre (.zip)</h2>
+                    <input type="file" name="images_zip" accept=".zip" required>
+                    <input type="hidden" name="alias" value="${alias}">
+                    <div style="margin-top:16px;">
+                    <button type="submit" class="admin-btn">Envoyer</button>
+                    <button type="button" id="cancel-upload-shadow-images" class="close-btn">&times;</button>
+                    </div>
+                </form>
                 </div>
-            </form>
-            </div>
-        `;
-        document.body.appendChild(overlay);
+            `;
+            document.body.appendChild(overlay);
 
-        document.getElementById('cancel-upload-shadow-images').onclick = function() {
-            overlay.remove();
-        };
+            document.getElementById('cancel-upload-shadow-images').onclick = function() {
+                overlay.remove();
+            };
 
-        document.getElementById('upload-shadow-images-form').onsubmit = async function(e) {
-            e.preventDefault();
-            let formData = new FormData(this);
-            let resp = await fetch('/admin/upload_shadow_images_zip', {
-            method: 'POST',
-            body: formData
-            });
-            let txt = await resp.text();
-            overlay.remove();
-            alert(txt);
-            // Optionnel : recharger ou réinitialiser le formulaire
-        };
+            document.getElementById('upload-shadow-images-form').onsubmit = async function(e) {
+                e.preventDefault();
+                let formData = new FormData(this);
+                let resp = await fetch('/admin/upload_shadow_images_zip', {
+                    method: 'POST',
+                    body: formData
+                });
+                let txt = await resp.text();
+                overlay.remove();
+                alert(txt);
+            };
         }
     });
 </script>

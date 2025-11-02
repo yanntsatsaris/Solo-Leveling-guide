@@ -1,7 +1,6 @@
-<div
+<dialog
   id="edit-sjw-overlay"
   class="edit-sjw-overlay"
-  style="display: none"
 >
   <div id="edit-sjw-menu" class="edit-sjw-popup">
     <form
@@ -498,7 +497,7 @@
       </div>
     </form>
   </div>
-</div>
+</dialog>
 <script>
   // Liste des noms de panoplies récupérée depuis Flask
   const panopliesList = [
@@ -631,15 +630,20 @@
   }
 
   // Fermeture de la modale si clic en dehors du popup
-  const overlay = document.getElementById('edit-sjw-overlay');
-  const popup = document.getElementById('edit-sjw-menu');
-  if (overlay && popup) {
-    overlay.addEventListener('mousedown', function(e) {
-      if (e.target === overlay) {
-        overlay.style.display = 'none';
+  const editSjwDialog = document.getElementById('edit-sjw-overlay');
+  editSjwDialog?.addEventListener('click', function(e) {
+      if (e.target === editSjwDialog) {
+          editSjwDialog.close();
       }
-    });
-  }
+  });
+
+  document.getElementById('close-edit-sjw')?.addEventListener('click', function() {
+    editSjwDialog.close();
+  });
+
+  document.getElementById('edit-sjw-btn')?.addEventListener('click', function() {
+    editSjwDialog.showModal();
+  });
 
   // Ajout d'un passif
   document.addEventListener("DOMContentLoaded", function() {

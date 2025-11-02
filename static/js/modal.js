@@ -1,16 +1,26 @@
-function initializeModal(openButtonId, overlayId, closeButtonId) {
+function initializeModal(openButtonId, dialogId, closeButtonId) {
     const openBtn = document.getElementById(openButtonId);
-    const overlay = document.getElementById(overlayId);
+    const dialog = document.getElementById(dialogId);
     const closeBtn = document.getElementById(closeButtonId);
 
-    if (openBtn && overlay) {
-        openBtn.onclick = function () {
-            overlay.style.display = "flex";
-        };
+    if (openBtn && dialog) {
+        openBtn.addEventListener('click', () => {
+            dialog.showModal();
+        });
     }
-    if (closeBtn && overlay) {
-        closeBtn.onclick = function () {
-            overlay.style.display = "none";
-        };
+
+    if (closeBtn && dialog) {
+        closeBtn.addEventListener('click', () => {
+            dialog.close();
+        });
+    }
+
+    // Ferme la modale si on clique en dehors
+    if (dialog) {
+        dialog.addEventListener('click', (event) => {
+            if (event.target === dialog) {
+                dialog.close();
+            }
+        });
     }
 }

@@ -1,7 +1,6 @@
-<div
+<dialog
   id="add-sjw-skill-overlay"
   class="edit-sjw-skill-overlay"
-  style="display: none"
 >
   <div id="add-sjw-skill-menu" class="edit-sjw-skill-popup">
     <form
@@ -49,7 +48,7 @@
       </div>
     </form>
   </div>
-</div>
+</dialog>
 <script>
 document.getElementById('add-sjw-skill-btn')?.addEventListener('click', async function() {
     // Demande les infos de base
@@ -107,7 +106,7 @@ document.getElementById('add-sjw-skill-btn')?.addEventListener('click', async fu
     }
 
     // Pré-remplit et affiche les infos dans la modale
-    document.getElementById('add-sjw-skill-overlay').style.display = 'flex';
+    document.getElementById('add-sjw-skill-overlay').showModal();
     document.querySelector('#add-sjw-skill-form input[name="name"]').value = name;
     document.querySelector('#add-sjw-skill-form select[name="type"]').value = type;
     document.querySelector('#add-sjw-skill-form input[name="order"]').value = order;
@@ -169,19 +168,16 @@ document.getElementById('add-sjw-skill-btn')?.addEventListener('click', async fu
 });
 
 // Fermeture de la modale
+const addSjwSkillDialog = document.getElementById('add-sjw-skill-overlay');
 document.getElementById('close-add-sjw-skill')?.addEventListener('click', function() {
-    document.getElementById('add-sjw-skill-overlay').style.display = 'none';
+    addSjwSkillDialog.close();
 });
 // Ferme la modale si clic en dehors du popup
-const addOverlaySJW = document.getElementById('add-sjw-skill-overlay');
-const addPopupSJW = document.getElementById('add-sjw-skill-menu');
-if (addOverlaySJW && addPopupSJW) {
-    addOverlaySJW.addEventListener('mousedown', function(e) {
-        if (e.target === addOverlaySJW) {
-            addOverlaySJW.style.display = 'none';
-        }
-    });
-}
+addSjwSkillDialog?.addEventListener('click', function(e) {
+    if (e.target === addSjwSkillDialog) {
+        addSjwSkillDialog.close();
+    }
+});
 
 const gemTypes = ["Dark", "Fire", "Light", "Neutre", "Water", "Wind"];
 let gemCount = 0;
