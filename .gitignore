@@ -1,2 +1,7 @@
-data/solo.sql
-data/import.py
+# Python
+__pycache__/
+*.pyc
+
+# Logs
+logs/
+*.log

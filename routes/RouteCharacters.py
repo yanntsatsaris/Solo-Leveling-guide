@@ -1,7 +1,9 @@
 import os
 import glob
-from flask import Blueprint, render_template, url_for, session, request, redirect, abort, jsonify
+from flask import Blueprint, render_template, url_for, session, request, redirect, abort, jsonify, current_app
 from flask_login import login_required
+
+from extensions import cache
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.db import get_db
 
@@ -24,7 +26,14 @@ from .utils import (
 
 characters_bp = Blueprint('characters', __name__)
 
+def make_cache_key(*args, **kwargs):
+    """Crée une clé de cache unique basée sur l'URL et la langue."""
+    path = request.path
+    lang = session.get('language', 'EN-en')
+    return f"{path}_{lang}"
+
 @characters_bp.route('/characters')
+@cache.cached(timeout=3600, key_prefix=make_cache_key)
 def inner_characters():
     # Récupérer la langue sélectionnée
     language = session.get('language', "EN-en")  # Valeur par défaut si aucune langue n'est sélectionnée
@@ -84,6 +93,7 @@ def inner_characters():
     )
 
 @characters_bp.route('/characters/<alias>')
+@cache.cached(timeout=3600, key_prefix=make_cache_key)
 def character_details(alias):
     write_log(f"Accès aux détails du personnage: {alias}", log_level="INFO")
     language = session.get('language', "EN-en")
@@ -599,6 +609,17 @@ def edit_character(char_id):
     # Log global
     if not (char_modif or passif_modif or skill_modif or weapon_modif or evo_modif or set_modif):
         write_log(f"Aucune modification détectée pour le personnage {char_id}", log_level="INFO")
+    else:
+        # Invalider le cache pour la page de détails du personnage et la liste des personnages
+        with current_app.test_request_context():
+            # Invalider pour chaque langue
+            for lang in ['FR-fr', 'EN-en']:
+                session['language'] = lang
+                # Clé pour la page de détails
+                cache.delete(f"/characters/{alias}_{lang}")
+                # Clé pour la liste des personnages
+                cache.delete(f"/characters_{lang}")
+        write_log(f"Cache invalidé pour le personnage {alias} et la liste des personnages.", log_level="INFO")
 
     return redirect(url_for('characters.character_details', alias=alias))
 
@@ -785,6 +806,13 @@ def add_character():
         set_idx += 1
 
     db.commit()
+
+    # Invalider le cache pour la liste des personnages
+    with current_app.test_request_context():
+        for lang in ['FR-fr', 'EN-en']:
+            session['language'] = lang
+            cache.delete(f"/characters_{lang}")
+    write_log(f"Cache invalidé pour la liste des personnages après l'ajout de {alias}.", log_level="INFO")
 
     write_log(f"Ajout complet du personnage {char_id} ({alias})", log_level="INFO")
     return redirect(url_for('characters.character_details', alias=alias))
