@@ -1,14 +1,11 @@
-import json
 import os
-import re
-import unicodedata
 import glob
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.ControleurSql import ControleurSql
 from static.Controleurs.sql_entities.sjw_sql import SJWSql
 from static.Controleurs.sql_entities.sjw.sjw_skills_sql import SJWSkillsSql
 from static.Controleurs.sql_entities.sjw.sjw_shadows_sql import SJWShadowsSql
-from static.Controleurs.sql_entities.sjw.sjw_weapons_sql import SJWWeaponsSql
+from static.Controleleus.sql_entities.sjw.sjw_weapons_sql import SJWWeaponsSql
 from static.Controleurs.sql_entities.sjw.sjw_equipment_set_sql import SJWEquipmentSetSql
 from static.Controleurs.sql_entities.sjw.sjw_blessings_sql import SJWBlessingsSql
 from static.Controleurs.sql_entities.sjw.sjw_gems_sql import SJWGemsSql
@@ -16,97 +13,12 @@ from static.Controleurs.sql_entities.cores_sql import CoresSql
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
 from flask import Flask, render_template, session , request, redirect, url_for, jsonify, abort
 from flask_login import login_required
-
-def normalize_focus_stats(val):
-    if isinstance(val, list):
-        # Si la liste contient une seule chaîne avec des virgules, découpe-la
-        if len(val) == 1 and isinstance(val[0], str) and ',' in val[0]:
-            return sorted([v.strip() for v in val[0].split(',') if v.strip()])
-        return sorted([v.strip() for v in val if v])
-    if isinstance(val, str):
-        return sorted([v.strip() for v in val.split(',') if v.strip()])
-    return []
-
-def normalize_stats(val):
-    if isinstance(val, list):
-        return ','.join([v.strip() for v in val if v])
-    if isinstance(val, str):
-        return ','.join([v.strip() for v in val.split(',') if v.strip()])
-    return ''
-
-def normalize_text(val):
-    if val is None:
-        return ''
-    # Unifie les retours à la ligne et supprime les espaces superflus
-    return val.replace('\r\n', '\n').replace('\r', '\n').strip()
-
-def render_tags(description, tags_list, base_path):
-
-    def normalize_tag(tag):
-        # Remplace tous les types d'apostrophes par une apostrophe simple
-        tag = tag.replace("’", "'").replace("`", "'").replace("´", "'")
-        # Supprime les accents et met en minuscule
-        return ''.join(
-            c for c in unicodedata.normalize('NFD', tag)
-            if unicodedata.category(c) != 'Mn'
-        ).lower().strip()
-
-    def find_tag(tag):
-        tag_norm = normalize_tag(tag)
-        for item in tags_list:
-            tag_value = item.get('tag')
-            if tag_value and normalize_tag(tag_value) == tag_norm:
-                return item
-        return None
-
-    def replacer(match):
-        tag_raw = match.group(1)
-        parts = tag_raw.split('|')
-        tag = parts[0].strip()
-        only_img = len(parts) > 1 and parts[1].strip().lower() == 'img'
-        tag_info = find_tag(tag)
-        if tag_info and tag_info.get('image'):
-            img_path = tag_info['image']
-            if not img_path.startswith('images/'):
-                img_url = url_for('static', filename=f"{base_path}/{img_path}")
-            else:
-                img_url = url_for('static', filename=img_path)
-            img_html = f"<img src='{img_url}' alt='{tag_info.get('tag', tag)}' class='tag-img'>"
-            if only_img:
-                return img_html
-            else:
-                return f"{img_html} [{tag_info.get('tag', tag)}]"
-        return match.group(0)
-
-    result = re.sub(r"\[([^\]]+)\]", replacer, description).replace("\n", "<br>")
-    return result
-
-def update_image_paths(description, base_path):
-    """
-    Met à jour les chemins des images dans une description en ajoutant un cache-busting.
-    """
-    if not description:
-        return description
-    updated_description = description
-    if f"src='{url_for('static', filename=base_path)}/" not in description:
-        updated_description = description.replace(
-            "src='",
-            f"src='{url_for('static', filename=base_path)}/"
-        )
-    return updated_description.replace("\n", "<br>")
-
-def process_description(description, tags_list, base_path):
-    if not description:
-        return description
-    if re.search(r"<img\s+src=.*?>\s*\[[^\]]+\]", description):
-        return update_image_paths(description, base_path)
-    elif re.search(r"\[[^\]]+\]", description):
-        return render_tags(description, tags_list, base_path)
-    else:
-        return description.replace("\n", "<br>")
-
-def none_to_empty(val):
-    return "None" if val == "" else val
+from .utils import (
+    normalize_focus_stats,
+    normalize_stats,
+    process_description,
+    focus_stats_equal,
+)
 
 def SJW(app: Flask):
     @app.route('/SJW')
@@ -851,6 +763,3 @@ def SJW(app: Flask):
             return jsonify([])
         images = sorted([f for f in os.listdir(img_dir) if f.lower().endswith(('.webp', '.png', '.jpg', '.jpeg'))])
         return jsonify(images)
-    
-def focus_stats_equal(a, b):
-    return set(normalize_focus_stats(a)) == set(normalize_focus_stats(b))
