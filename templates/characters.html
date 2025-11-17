@@ -68,7 +68,7 @@
         <tr>
           {% for image in images %}
           <td data-type="{{ image.type }}" data-rarity="{{ image.rarity }}">
-            <a href="{{ url_for('character_details', alias=image.alias) }}">
+            <a href="{{ url_for('characters.character_details', alias=image.alias) }}">
               <img
                 src="{{ url_for('static', filename=image.path) }}"
                 alt="{{ image.name }}"

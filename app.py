@@ -1,13 +1,13 @@
 from flask import Flask, session, redirect, request
 from flask_login import LoginManager
 
-from routes.RouteHome import home
-from routes.RouteGame_contents import game_contents
-from routes.RouteCharacters import characters
-from routes.RouteGuides import guides
-from routes.RouteSJW import SJW
-from routes.RouteUsers import users
-from routes.RouteAdmin import admin_routes
+from routes.RouteHome import home_bp
+from routes.RouteGame_contents import game_contents_bp
+from routes.RouteCharacters import characters_bp
+from routes.RouteGuides import guides_bp
+from routes.RouteSJW import sjw_bp
+from routes.RouteUsers import users_bp
+from routes.RouteAdmin import admin_bp
 
 # Importer le contrôleur de configuration
 from static.Controleurs.ControleurConf import ControleurConf
@@ -34,13 +34,13 @@ def set_language():
     return redirect(request.referrer or '/')  # Rediriger vers la page précédente
 
 # Enregistrer les routes
-home(app)
-game_contents(app)
-characters(app)
-guides(app)
-SJW(app)
-users(app)
-admin_routes(app)
+app.register_blueprint(home_bp)
+app.register_blueprint(game_contents_bp)
+app.register_blueprint(characters_bp)
+app.register_blueprint(guides_bp)
+app.register_blueprint(sjw_bp)
+app.register_blueprint(users_bp)
+app.register_blueprint(admin_bp)
 
 
 if __name__ == '__main__':
