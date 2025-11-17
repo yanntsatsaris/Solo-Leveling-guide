@@ -1,20 +1,15 @@
-from flask import request, render_template, session, redirect, url_for, abort, flash, jsonify
+from flask import request, render_template, session, redirect, url_for, abort, jsonify
 from flask_login import login_required
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
 from static.Controleurs.sql_entities.cores_sql import CoresSql
 from static.Controleurs.ControleurSql import ControleurSql
 from static.Controleurs.ControleurImages import (
-    allowed_file, is_image_size_allowed, verify_image, save_image, rename_image, get_image_format
+    allowed_file, is_image_size_allowed, verify_image, save_image
 )
 import glob
 import os
-import zipfile
-import shutil
-
-def is_admin():
-    rights = session.get('rights', [])
-    return 'Admin' in rights or 'SuperAdmin' in rights
+from .utils import is_admin, extract_zip
 
 def admin_routes(app):
     @app.route('/admin/panoplie', methods=['GET', 'POST'])
@@ -351,35 +346,16 @@ def admin_routes(app):
         # Crée le dossier de type si besoin
         os.makedirs(base_folder, exist_ok=True)
 
-        # Extraction temporaire
-        temp_extract = os.path.join("tmp", "extract_zip")
-        if os.path.exists(temp_extract):
-            shutil.rmtree(temp_extract)
-        os.makedirs(temp_extract, exist_ok=True)
+        try:
+            extract_zip(
+                images_zip,
+                target_folder,
+                folder_name,
+                file_prefix_check=f"{type_folder}_{alias_folder}_"
+            )
+        except ValueError as e:
+            return str(e), 400
 
-        with zipfile.ZipFile(images_zip) as zf:
-            zf.extractall(temp_extract)
-
-        # Cherche un dossier dans le zip
-        subfolders = [f for f in os.listdir(temp_extract) if os.path.isdir(os.path.join(temp_extract, f))]
-        if subfolders:
-            # Il y a un dossier, on le renomme si besoin
-            src_folder = os.path.join(temp_extract, subfolders[0])
-            if subfolders[0] != folder_name:
-                os.rename(src_folder, os.path.join(temp_extract, folder_name))
-                src_folder = os.path.join(temp_extract, folder_name)
-            shutil.move(src_folder, target_folder)
-        else:
-            # Pas de dossier, on crée le dossier cible et on déplace les images
-            os.makedirs(target_folder, exist_ok=True)
-            for fname in os.listdir(temp_extract):
-                if fname.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
-                    # Vérifie le nom
-                    if not fname.startswith(f"{type_folder}_{alias_folder}_"):
-                        shutil.rmtree(temp_extract)
-                        return f"Image '{fname}' doit commencer par '{type_folder}_{alias_folder}_'", 400
-                    shutil.move(os.path.join(temp_extract, fname), os.path.join(target_folder, fname))
-        shutil.rmtree(temp_extract)
         return "Images extraites et placées dans le dossier du personnage.", 200
     
     @app.route('/admin/upload_shadow_images_zip', methods=['POST'])
@@ -400,35 +376,16 @@ def admin_routes(app):
         # Crée le dossier de type si besoin
         os.makedirs(base_folder, exist_ok=True)
 
-        # Extraction temporaire
-        temp_extract = os.path.join("tmp", "extract_zip")
-        if os.path.exists(temp_extract):
-            shutil.rmtree(temp_extract)
-        os.makedirs(temp_extract, exist_ok=True)
+        try:
+            extract_zip(
+                images_zip,
+                target_folder,
+                folder_name,
+                file_prefix_check=f"{folder_name}_"
+            )
+        except ValueError as e:
+            return str(e), 400
 
-        with zipfile.ZipFile(images_zip) as zf:
-            zf.extractall(temp_extract)
-
-        # Cherche un dossier dans le zip
-        subfolders = [f for f in os.listdir(temp_extract) if os.path.isdir(os.path.join(temp_extract, f))]
-        if subfolders:
-            # Il y a un dossier, on le renomme si besoin
-            src_folder = os.path.join(temp_extract, subfolders[0])
-            if subfolders[0] != folder_name:
-                os.rename(src_folder, os.path.join(temp_extract, folder_name))
-                src_folder = os.path.join(temp_extract, folder_name)
-            shutil.move(src_folder, target_folder)
-        else:
-            # Pas de dossier, on crée le dossier cible et on déplace les images
-            os.makedirs(target_folder, exist_ok=True)
-            for fname in os.listdir(temp_extract):
-                if fname.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
-                    # Vérifie le nom
-                    if not fname.startswith(f"{folder_name}_"):
-                        shutil.rmtree(temp_extract)
-                        return f"Image '{fname}' doit commencer par '{folder_name}_'", 400
-                    shutil.move(os.path.join(temp_extract, fname), os.path.join(target_folder, fname))
-        shutil.rmtree(temp_extract)
         return "Images extraites et placées dans le dossier des ombres.", 200
     
     @app.route('/admin/upload_weapon_images_zip', methods=['POST'])
@@ -450,35 +407,16 @@ def admin_routes(app):
         # Crée le dossier de type si besoin
         os.makedirs(base_folder, exist_ok=True)
 
-        # Extraction temporaire
-        temp_extract = os.path.join("tmp", "extract_zip")
-        if os.path.exists(temp_extract):
-            shutil.rmtree(temp_extract)
-        os.makedirs(temp_extract, exist_ok=True)
+        try:
+            extract_zip(
+                images_zip,
+                target_folder,
+                folder_name,
+                file_prefix_check=f"{folder_name}_"
+            )
+        except ValueError as e:
+            return str(e), 400
 
-        with zipfile.ZipFile(images_zip) as zf:
-            zf.extractall(temp_extract)
-
-        # Cherche un dossier dans le zip
-        subfolders = [f for f in os.listdir(temp_extract) if os.path.isdir(os.path.join(temp_extract, f))]
-        if subfolders:
-            # Il y a un dossier, on le renomme si besoin
-            src_folder = os.path.join(temp_extract, subfolders[0])
-            if subfolders[0] != folder_name:
-                os.rename(src_folder, os.path.join(temp_extract, folder_name))
-                src_folder = os.path.join(temp_extract, folder_name)
-            shutil.move(src_folder, target_folder)
-        else:
-            # Pas de dossier, on crée le dossier cible et on déplace les images
-            os.makedirs(target_folder, exist_ok=True)
-            for fname in os.listdir(temp_extract):
-                if fname.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
-                    # Vérifie le nom
-                    if not fname.startswith(f"{folder_name}_"):
-                        shutil.rmtree(temp_extract)
-                        return f"Image '{fname}' doit commencer par '{folder_name}_'", 400
-                    shutil.move(os.path.join(temp_extract, fname), os.path.join(target_folder, fname))
-        shutil.rmtree(temp_extract)
         return "Images extraites et placées dans le dossier des armes.", 200
     
     @app.route('/admin/upload_sjw_skill_images_zip', methods=['POST'])
@@ -514,50 +452,31 @@ def admin_routes(app):
         # Crée le dossier de type si besoin
         os.makedirs(base_folder, exist_ok=True)
 
-        # Extraction temporaire
-        temp_extract = os.path.join("tmp", "extract_zip")
-        if os.path.exists(temp_extract):
-            shutil.rmtree(temp_extract)
-        os.makedirs(temp_extract, exist_ok=True)
+        def custom_file_check(filename):
+            import re
+            if filename.startswith(prefix):
+                return True
+            gem_pattern = None
+            if type == 'Skill':
+                gem_pattern = re.compile(rf"^{order}_(Water|Fire|Light|Dark|Wind)_Skill.*\.webp$", re.IGNORECASE)
+            elif type == 'QTE':
+                gem_pattern = re.compile(rf"^{order}_(Water|Fire|Light|Dark|Wind)_QTE.*\.webp$", re.IGNORECASE)
+            elif type == 'Ultime':
+                gem_pattern = re.compile(rf"^{order}_(Water|Fire|Light|Dark|Wind)_Ultime.*\.webp$", re.IGNORECASE)
 
-        with zipfile.ZipFile(images_zip) as zf:
-            zf.extractall(temp_extract)
+            if gem_pattern and gem_pattern.match(filename):
+                return True
 
-        # Cherche un dossier dans le zip
-        subfolders = [f for f in os.listdir(temp_extract) if os.path.isdir(os.path.join(temp_extract, f))]
-        if subfolders:
-            # Il y a un dossier, on le renomme si besoin
-            src_folder = os.path.join(temp_extract, subfolders[0])
-            if subfolders[0] != folder_name:
-                os.rename(src_folder, os.path.join(temp_extract, folder_name))
-                src_folder = os.path.join(temp_extract, folder_name)
-            shutil.move(src_folder, target_folder)
-        else:
-            # Pas de dossier, on crée le dossier cible et on déplace les images
-            os.makedirs(target_folder, exist_ok=True)
-            for fname in os.listdir(temp_extract):
-                if fname.lower().endswith('.webp'):
-                    # Vérifie le nom principal du skill
-                    if fname.startswith(prefix):
-                        shutil.move(os.path.join(temp_extract, fname), os.path.join(target_folder, fname))
-                        continue
-                    # Vérifie le nom d'une gem associée
-                    # Pour Skill : 001_Water_Skill_...webp
-                    # Pour QTE   : 01_Dark_QTE_...webp
-                    # Pour Ultime: 01_Light_Ultime_...webp
-                    import re
-                    gem_pattern = None
-                    if type == 'Skill':
-                        gem_pattern = re.compile(rf"^{order}_(Water|Fire|Light|Dark|Wind)_Skill.*\.webp$", re.IGNORECASE)
-                    elif type == 'QTE':
-                        gem_pattern = re.compile(rf"^{order}_(Water|Fire|Light|Dark|Wind)_QTE.*\.webp$", re.IGNORECASE)
-                    elif type == 'Ultime':
-                        gem_pattern = re.compile(rf"^{order}_(Water|Fire|Light|Dark|Wind)_Ultime.*\.webp$", re.IGNORECASE)
-                    if gem_pattern and gem_pattern.match(fname):
-                        shutil.move(os.path.join(temp_extract, fname), os.path.join(target_folder, fname))
-                        continue
-                    # Si aucun des deux formats n'est respecté
-                    shutil.rmtree(temp_extract)
-                    return f"L'image '{fname}' doit commencer par '{prefix}' ou respecter le format gem : {order}_Type_{type}*.webp", 400
-        shutil.rmtree(temp_extract)
+            raise ValueError(f"L'image '{filename}' doit commencer par '{prefix}' ou respecter le format gem : {order}_Type_{type}*.webp")
+
+        try:
+            extract_zip(
+                images_zip,
+                target_folder,
+                folder_name,
+                file_prefix_check=custom_file_check
+            )
+        except ValueError as e:
+            return str(e), 400
+
         return f"Images extraites et placées dans le dossier {type_folder}/{folder_name}.", 200
