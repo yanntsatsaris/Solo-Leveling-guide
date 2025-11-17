@@ -1,4 +1,6 @@
 import ldap
+from ldap.filter import escape_filter_chars
+from ldap.dn import escape_dn_chars
 from .ControleurConf import ControleurConf
 from .ControleurLog import write_log
 
@@ -23,7 +25,8 @@ class ControleurLdap:
         try:
             self.bind_as_root()
             search_base = self.config.get_config('LDAP', 'base_dn')
-            search_filter = f"(uid={username})"
+            safe_username = escape_filter_chars(username)
+            search_filter = f"(uid={safe_username})"
             result = self.conn.search_s(search_base, ldap.SCOPE_SUBTREE, search_filter)
 
             if not result:
@@ -45,7 +48,8 @@ class ControleurLdap:
         try:
             self.bind_as_root()
             search_base = self.config.get_config('LDAP', 'base_dn')
-            search_filter = f"(uid={username})"
+            safe_username = escape_filter_chars(username)
+            search_filter = f"(uid={safe_username})"
             result = self.conn.search_s(search_base, ldap.SCOPE_SUBTREE, search_filter)
             if result:
                 write_log("Utilisateur trouvé")
@@ -107,7 +111,8 @@ class ControleurLdap:
         try:
             self.bind_as_root()
             base_dn = self.config.get_config('LDAP', 'base_dn')
-            dn = f'uid={username},dmdName=users,{base_dn}'
+            safe_username = escape_dn_chars(username)
+            dn = f'uid={safe_username},dmdName=users,{base_dn}'
             mod_attrs = [(ldap.MOD_ADD, attribute, value.encode('utf-8'))]
             self.conn.modify_s(dn, mod_attrs)
             write_log(f"Attribut {attribute} ajouté pour l'utilisateur {username}")
@@ -120,7 +125,8 @@ class ControleurLdap:
         try:
             self.bind_as_root()
             base_dn = self.config.get_config('LDAP', 'base_dn')
-            dn = f'uid={username},dmdName=users,{base_dn}'
+            safe_username = escape_dn_chars(username)
+            dn = f'uid={safe_username},dmdName=users,{base_dn}'
             mod_attrs = [(ldap.MOD_REPLACE, attribute, value.encode('utf-8'))]
             self.conn.modify_s(dn, mod_attrs)
             write_log(f"Attribut {attribute} remplacer pour l'utilisateur {username}")
@@ -144,7 +150,8 @@ class ControleurLdap:
         try:
             self.bind_as_root()
             base_dn = self.config.get_config('LDAP', 'base_dn')
-            dn = f'uid={username},{base_dn}'
+            safe_username = escape_dn_chars(username)
+            dn = f'uid={safe_username},{base_dn}'
             self.conn.delete_s(dn)
             write_log(f"Utilisateur {username} supprimé de la base LDAP")
             return True
@@ -175,7 +182,8 @@ class ControleurLdap:
         try:
             self.bind_as_root()
             base_dn = self.config.get_config('LDAP', 'base_dn')
-            search_filter = f"(uid={username})"
+            safe_username = escape_filter_chars(username)
+            search_filter = f"(uid={safe_username})"
             result = self.conn.search_s(base_dn, ldap.SCOPE_SUBTREE, search_filter)
             if result:
                 entry = result[0][1]
