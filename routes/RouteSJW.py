@@ -5,7 +5,7 @@ from static.Controleurs.ControleurSql import ControleurSql
 from static.Controleurs.sql_entities.sjw_sql import SJWSql
 from static.Controleurs.sql_entities.sjw.sjw_skills_sql import SJWSkillsSql
 from static.Controleurs.sql_entities.sjw.sjw_shadows_sql import SJWShadowsSql
-from static.Controleleus.sql_entities.sjw.sjw_weapons_sql import SJWWeaponsSql
+from static.Controleurs.sql_entities.sjw.sjw_weapons_sql import SJWWeaponsSql
 from static.Controleurs.sql_entities.sjw.sjw_equipment_set_sql import SJWEquipmentSetSql
 from static.Controleurs.sql_entities.sjw.sjw_blessings_sql import SJWBlessingsSql
 from static.Controleurs.sql_entities.sjw.sjw_gems_sql import SJWGemsSql
