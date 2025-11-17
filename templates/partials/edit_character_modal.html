@@ -7,7 +7,7 @@
     <form
       id="edit-character-form"
       method="POST"
-      action="{{ url_for('edit_character', char_id=character.id) }}"
+      action="{{ url_for('characters.edit_character', char_id=character.id) }}"
     >
       <h2 style="text-align: center; color: #ffcc00">Modifier le personnage</h2>
       <div class="edit-tabs">

@@ -99,7 +99,7 @@
           <td data-type="{{ weapon.type }}" data-rarity="{{ weapon.rarity }}">
             <div class="weapon-card-codex">
               {% if weapon.alias %}
-              <a href="{{ url_for('weapon_details', weaponAlias=weapon.alias) }}">
+              <a href="{{ url_for('sjw.weapon_details', weaponAlias=weapon.alias) }}">
                 <img
                   src="{{ url_for('static', filename=weapon.codex) }}"
                   alt="{{ weapon.name or 'Weapon Image' }}"
