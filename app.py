@@ -13,10 +13,12 @@ from routes.RouteAdmin import admin_bp
 from static.Controleurs.ControleurConf import ControleurConf
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.ControleurUser import user_loader
+from static.Controleurs import db
 
 app = Flask(__name__)
 conf = ControleurConf()
 app.secret_key = conf.get_config('APP', 'secret_key')
+db.init_app(app)
 
 # Configuration de Flask-Login
 login_manager = LoginManager()

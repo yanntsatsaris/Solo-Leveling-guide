@@ -3,7 +3,7 @@ from flask_login import login_required
 from static.Controleurs.ControleurLog import write_log
 from static.Controleurs.sql_entities.panoplies_sql import PanopliesSql
 from static.Controleurs.sql_entities.cores_sql import CoresSql
-from static.Controleurs.ControleurSql import ControleurSql
+from static.Controleurs.db import get_db
 from static.Controleurs.ControleurImages import (
     allowed_file, is_image_size_allowed, verify_image, save_image
 )
@@ -21,8 +21,8 @@ def admin_panoplie():
     write_log("Accès à la gestion des effets de panoplie", log_level="INFO", username=session.get('username'))
 
     language = session.get('language', 'FR-fr')
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor()
     panoplies_sql = PanopliesSql(cursor)
     panoplies = panoplies_sql.get_panoplies(language)
 
@@ -46,7 +46,6 @@ def admin_panoplie():
             'image': img_path
         })
 
-    sql_manager.close()
     return render_template('admin_panoplie.html', panoplies=panoplies_with_img)
 
 @admin_bp.route('/admin/panoplie/api/<panoplie_name>')
@@ -54,11 +53,10 @@ def admin_panoplie():
 def api_get_panoplie(panoplie_name):
     if not is_admin():
         abort(403)
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor()
     panoplies_sql = PanopliesSql(cursor)
     data = panoplies_sql.get_panoplie_all_languages(panoplie_name)
-    sql_manager.close()
     return data
 
 @admin_bp.route('/admin/panoplie/<panoplie_name>', methods=['POST'])
@@ -66,8 +64,8 @@ def api_get_panoplie(panoplie_name):
 def admin_edit_panoplie(panoplie_name):
     if not is_admin():
         abort(403)
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor()
     panoplies_sql = PanopliesSql(cursor)
 
     # Parcours tous les champs du formulaire
@@ -82,8 +80,7 @@ def admin_edit_panoplie(panoplie_name):
             value = value.replace('\r\n', '\n').replace('\r', '\n')
             panoplies_sql.update_panoplie_effect(panoplie_name, lang, pieces, value)
 
-    sql_manager.conn.commit()
-    sql_manager.close()
+    db.commit()
     write_log(f"Panoplie '{panoplie_name}' mise à jour avec succès.", log_level="INFO", username=session.get('username'))
     return redirect(url_for('admin.admin_panoplie'))
 
@@ -92,8 +89,8 @@ def admin_edit_panoplie(panoplie_name):
 def admin_create_panoplie(panoplie_name):
     if not is_admin():
         abort(403)
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor()
     panoplies_sql = PanopliesSql(cursor)
 
     # Récupère les données du formulaire (PUT => JSON)
@@ -103,7 +100,6 @@ def admin_create_panoplie(panoplie_name):
 
     # Vérifie si la panoplie existe déjà
     if panoplies_sql.panoplie_exists(panoplie_name):
-        sql_manager.close()
         return {"error": "Panoplie already exists"}, 400
 
     # Création de la panoplie
@@ -115,8 +111,7 @@ def admin_create_panoplie(panoplie_name):
             set_bonus_id = panoplies_sql.create_panoplie_set_bonus(panoplie_id, int(pieces))
             panoplies_sql.create_panoplie_set_bonus_translation(set_bonus_id, lang, effect)
 
-    sql_manager.conn.commit()
-    sql_manager.close()
+    db.commit()
     write_log(f"Panoplie '{panoplie_name}' créée avec succès.", log_level="INFO", username=session.get('username'))
     return {"success": True}, 200
 
@@ -141,8 +136,8 @@ def admin_cores():
         abort(403)
     write_log("Accès à la gestion des cores", log_level="INFO", username=session.get('username'))
     language = session.get('language', 'FR-fr')
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor()
     cores_sql = CoresSql(cursor)
     cores = cores_sql.get_all_cores(language=language)
 
@@ -159,7 +154,6 @@ def admin_cores():
             'image': img_path
         })
 
-    sql_manager.close()
     return render_template('admin_cores.html', cores=cores_with_img)
 
 @admin_bp.route('/admin/cores/api/<color>/<number>')
@@ -167,14 +161,13 @@ def admin_cores():
 def api_get_core(color, number):
     if not is_admin():
         abort(403)
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor()
     cores_sql = CoresSql(cursor)
     data = {}
     for lang in ['FR-fr', 'EN-en']:
         effect = cores_sql.get_core_effect(color, str(number).zfill(2), lang)
         data[lang] = effect
-    sql_manager.close()
     return jsonify(data)
 
 @admin_bp.route('/admin/cores/<color>/<number>', methods=['POST'])
@@ -182,8 +175,8 @@ def api_get_core(color, number):
 def admin_edit_core(color, number):
     if not is_admin():
         abort(403)
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor()
     cores_sql = CoresSql(cursor)
 
     # Parcours tous les champs du formulaire
@@ -197,8 +190,7 @@ def admin_edit_core(color, number):
             value = value.replace('\r\n', '\n').replace('\r', '\n')
             cores_sql.update_core_effect(color, str(number).zfill(2), lang, value)
 
-    sql_manager.conn.commit()
-    sql_manager.close()
+    db.commit()
     write_log(
         f"Core '{color}{str(number).zfill(2)}' modifié avec succès.",
         log_level="INFO",
@@ -211,8 +203,8 @@ def admin_edit_core(color, number):
 def admin_create_core(color, number):
     if not is_admin():
         abort(403)
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor()
     cores_sql = CoresSql(cursor)
 
     data = request.get_json()
@@ -221,7 +213,6 @@ def admin_create_core(color, number):
 
     # Vérifie si le core existe déjà
     if cores_sql.core_exists(color, number):
-        sql_manager.close()
         return {"error": "Core already exists"}, 400
 
     # Création du core
@@ -229,8 +220,7 @@ def admin_create_core(color, number):
     for lang in ['FR-fr', 'EN-en']:
         cores_sql.create_core_translation(core_id, lang, names.get(lang, ""), effects.get(lang, ""))
 
-    sql_manager.conn.commit()
-    sql_manager.close()
+    db.commit()
     write_log(f"Core '{color}{number}' créé avec succès.", log_level="INFO", username=session.get('username'))
     return {"success": True}, 200
 

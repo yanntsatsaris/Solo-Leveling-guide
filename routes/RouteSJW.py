@@ -1,7 +1,7 @@
 import os
 import glob
 from static.Controleurs.ControleurLog import write_log
-from static.Controleurs.ControleurSql import ControleurSql
+from static.Controleurs.db import get_db
 from static.Controleurs.sql_entities.sjw_sql import SJWSql
 from static.Controleurs.sql_entities.sjw.sjw_skills_sql import SJWSkillsSql
 from static.Controleurs.sql_entities.sjw.sjw_shadows_sql import SJWShadowsSql
@@ -26,16 +26,17 @@ sjw_bp = Blueprint('sjw', __name__)
 def inner_SJW():
     write_log("Accès à la page SJW", log_level="INFO")
     language = session.get('language', "EN-en")
-    sql_manager = ControleurSql()
-    sjw_sql = SJWSql(sql_manager.cursor)
-    shadows_sql = SJWShadowsSql(sql_manager.cursor)
-    skills_sql = SJWSkillsSql(sql_manager.cursor)
-    weapons_sql = SJWWeaponsSql(sql_manager.cursor)
-    equipment_set_sql = SJWEquipmentSetSql(sql_manager.cursor)
-    blessings_sql = SJWBlessingsSql(sql_manager.cursor)
-    gems_sql = SJWGemsSql(sql_manager.cursor)
-    panoplies_sql = PanopliesSql(sql_manager.cursor)
-    cores_sql = CoresSql(sql_manager.cursor)
+    db = get_db()
+    cursor = db.cursor()
+    sjw_sql = SJWSql(cursor)
+    shadows_sql = SJWShadowsSql(cursor)
+    skills_sql = SJWSkillsSql(cursor)
+    weapons_sql = SJWWeaponsSql(cursor)
+    equipment_set_sql = SJWEquipmentSetSql(cursor)
+    blessings_sql = SJWBlessingsSql(cursor)
+    gems_sql = SJWGemsSql(cursor)
+    panoplies_sql = PanopliesSql(cursor)
+    cores_sql = CoresSql(cursor)
 
     # Récupération des infos principales
     character_info = sjw_sql.get_sjw(language)
@@ -127,7 +128,6 @@ def inner_SJW():
     cores_effects = cores_sql.get_cores_effects(language)
     cores_names = sorted(list({c['color'] for c in cores_effects}))
 
-    sql_manager.close()
     weapon_types = sorted(list(weapon_types))
     rarities = sorted(list(rarities), reverse=True)
 
@@ -146,8 +146,8 @@ def inner_SJW():
 @sjw_bp.route('/SJW/shadow/<shadowAlias>')
 def shadow_details(shadowAlias):
     language = session.get('language', "EN-en")
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor()
     sjw_sql = SJWSql(cursor)
     shadows_sql = SJWShadowsSql(cursor)
 
@@ -157,7 +157,6 @@ def shadow_details(shadowAlias):
 
     # Récupère toutes les infos de la shadow via la BDD
     shadow = shadows_sql.get_shadow_details(sjw_id, shadowAlias, language, folder)
-    sql_manager.close()
     if not shadow:
         return "Shadow not found", 404
 
@@ -213,8 +212,8 @@ def add_shadow():
     name = request.form.get('name')
     alias = request.form.get('alias')
     description = request.form.get('description')
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor()
     sjw_sql = SJWSql(cursor)
     character_info = sjw_sql.get_sjw(language)
     sjw_id = character_info['id']
@@ -238,8 +237,7 @@ def add_shadow():
     if not new_shadow_id:
         return "Error adding shadow", 500
 
-    sql_manager.conn.commit()
-    sql_manager.close()
+    db.commit()
 
     write_log(f"Ombre {new_shadow_id} ({alias}) ajoutée avec succès", log_level="INFO")
     return redirect(url_for('sjw.shadow_details', shadowAlias=alias))
@@ -247,8 +245,8 @@ def add_shadow():
 @sjw_bp.route('/SJW/weapon/<weaponAlias>')
 def weapon_details(weaponAlias):
     language = session.get('language', "EN-en")
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor()
     sjw_sql = SJWSql(cursor)
     weapon_sql = SJWWeaponsSql(cursor)
 
@@ -258,7 +256,6 @@ def weapon_details(weaponAlias):
 
     # Récupère toutes les infos de l'arme via la BDD
     weapon = weapon_sql.get_weapon_details(weaponAlias, language, folder)
-    sql_manager.close()
     if not weapon:
         return "Weapon not found", 404
 
@@ -301,8 +298,8 @@ def add_weapon():
     type = request.form.get('type')
     rarity = request.form.get('rarity')
     description = request.form.get('description')
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor()
     sjw_sql = SJWSql(cursor)
     character_info = sjw_sql.get_sjw(language)
     sjw_id = character_info['id']
@@ -332,8 +329,7 @@ def add_weapon():
     if not new_weapon_id:
         return "Error adding weapon", 500
 
-    sql_manager.conn.commit()
-    sql_manager.close()
+    db.commit()
     
     write_log(f"Arme {new_weapon_id} ({alias}) ajoutée avec succès", log_level="INFO")
     return redirect(url_for('sjw.weapon_details', weaponAlias=alias))
@@ -350,8 +346,8 @@ def edit_sjw():
     alias = request.form.get('alias')
     description = request.form.get('description')
     char_folder = request.form.get('folder')
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor()
 
     sjw_sql = SJWSql(cursor)
     current_character = sjw_sql.get_sjw(language)
@@ -610,8 +606,7 @@ def edit_sjw():
 
         skill_idx += 1
 
-    sql_manager.conn.commit()
-    sql_manager.close()
+    db.commit()
 
     # Log global
     if not (char_modif or set_modif or skill_modif):
@@ -665,8 +660,8 @@ def add_sjw_skill():
     image = request.form.get('image')
     description = request.form.get('description')
 
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor()
     sjw_sql = SJWSql(cursor)
     skills_sql = SJWSkillsSql(cursor)
 
@@ -740,8 +735,7 @@ def add_sjw_skill():
                 skills_sql.add_skill_gem_debuff_translation(debuff_id, language, debuff_name, debuff_description)
                 debuff_idx += 1
 
-    sql_manager.conn.commit()
-    sql_manager.close()
+    db.commit()
     write_log(f"Skill SJW ajouté avec succès (id={skill_id})", log_level="INFO")
     return redirect(url_for('sjw.inner_SJW'))
     
