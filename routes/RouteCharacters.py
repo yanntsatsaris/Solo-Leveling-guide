@@ -3,7 +3,7 @@ import glob
 from flask import Blueprint, render_template, url_for, session, request, redirect, abort, jsonify
 from flask_login import login_required
 from static.Controleurs.ControleurLog import write_log
-from static.Controleurs.ControleurSql import ControleurSql
+from static.Controleurs.db import get_db
 
 # Import des entités SQL segmentées
 from static.Controleurs.sql_entities.characters_sql import CharactersSql
@@ -32,18 +32,18 @@ def inner_characters():
         return "Language not set", 400
 
     # --- Utilisation du contrôleur SQL segmenté ---
-    sql_manager = ControleurSql()
-    characters_sql = CharactersSql(sql_manager.cursor)
+    db = get_db()
+    cursor = db.cursor()
+    characters_sql = CharactersSql(cursor)
 
     characters_data = characters_sql.get_characters(language)
-    panoplies_sql = PanopliesSql(sql_manager.cursor)
-    cores_sql = CoresSql(sql_manager.cursor)
+    panoplies_sql = PanopliesSql(cursor)
+    cores_sql = CoresSql(cursor)
 
     panoplies_effects = panoplies_sql.get_panoplies_effects(language)
     panoplies_names = sorted(list({p['set_name'] for p in panoplies_effects}))
     cores_effects = cores_sql.get_cores_effects(language)
     cores_names = sorted(list({c['color'] for c in cores_effects}))
-    sql_manager.close()
 
     images = []
     character_types = set()
@@ -90,19 +90,19 @@ def character_details(alias):
     if not language:
         return "Language not set", 400
 
-    sql_manager = ControleurSql()
-    characters_sql = CharactersSql(sql_manager.cursor)
-    passives_sql = PassivesSql(sql_manager.cursor)
-    evolutions_sql = EvolutionsSql(sql_manager.cursor)
-    skills_sql = SkillsSql(sql_manager.cursor)
-    weapons_sql = WeaponsSql(sql_manager.cursor)
-    equipment_set_sql = EquipmentSetSql(sql_manager.cursor)
-    panoplies_sql = PanopliesSql(sql_manager.cursor)
-    cores_sql = CoresSql(sql_manager.cursor)  # Ajout du contrôleur cores
+    db = get_db()
+    cursor = db.cursor()
+    characters_sql = CharactersSql(cursor)
+    passives_sql = PassivesSql(cursor)
+    evolutions_sql = EvolutionsSql(cursor)
+    skills_sql = SkillsSql(cursor)
+    weapons_sql = WeaponsSql(cursor)
+    equipment_set_sql = EquipmentSetSql(cursor)
+    panoplies_sql = PanopliesSql(cursor)
+    cores_sql = CoresSql(cursor)  # Ajout du contrôleur cores
 
     row = characters_sql.get_character_details(language, alias)
     if not row:
-        sql_manager.close()
         return "Character not found", 404
 
     char_id = row['characters_id']
@@ -200,7 +200,6 @@ def character_details(alias):
     cores_names = sorted(list({c['color'] for c in cores_effects}))
     if cores_effects is None:
         cores_effects = []
-    sql_manager.close()
 
     return render_template(
         'character_details.html',
@@ -227,8 +226,8 @@ def edit_character(char_id):
     type_ = request.form.get('type')
     char_folder = request.form.get('image_folder')
 
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor()
 
     characters_sql = CharactersSql(cursor)
     current_character = characters_sql.get_character_full(char_id, language)
@@ -595,8 +594,7 @@ def edit_character(char_id):
             set_modif = True
             write_log(f"Suppression set {db_id} du personnage {char_id}", log_level="INFO")
 
-    sql_manager.conn.commit()
-    sql_manager.close()
+    db.commit()
 
     # Log global
     if not (char_modif or passif_modif or skill_modif or weapon_modif or evo_modif or set_modif):
@@ -635,8 +633,8 @@ def add_character():
     if image_folder is None or image_folder.strip() == "":
         image_folder = f"{rarity}_{type_}_{alias}"
 
-    sql_manager = ControleurSql()
-    cursor = sql_manager.cursor
+    db = get_db()
+    cursor = db.cursor()
 
     characters_sql = CharactersSql(cursor)
     # Ajoute le personnage principal
@@ -786,8 +784,7 @@ def add_character():
             write_log(f"Ajout noyau {cname} au set {set_name}", log_level="INFO")
         set_idx += 1
 
-    sql_manager.conn.commit()
-    sql_manager.close()
+    db.commit()
 
     write_log(f"Ajout complet du personnage {char_id} ({alias})", log_level="INFO")
     return redirect(url_for('characters.character_details', alias=alias))
