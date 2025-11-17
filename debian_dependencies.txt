@@ -1,0 +1,3 @@
+# Dépendances système pour Debian/Ubuntu à installer avec apt-get
+# Exécutez la commande suivante pour les installer :
+sudo apt-get update && sudo apt-get install -y libldap2-dev libsasl2-dev libssl-dev
