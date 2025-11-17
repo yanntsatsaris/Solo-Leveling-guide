@@ -11,31 +11,31 @@
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/character_details.css') }}"
+      href="{{ asset_url_for('static', filename='css/character_details.css') }}"
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/edit_character_modal.css') }}"
+      href="{{ asset_url_for('static', filename='css/partials/edit_character_modal.css') }}"
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/review.css') }}"
+      href="{{ asset_url_for('static', filename='css/partials/review.css') }}"
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/weapons.css') }}"
+      href="{{ asset_url_for('static', filename='css/partials/weapons.css') }}"
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/passives.css') }}"
+      href="{{ asset_url_for('static', filename='css/partials/passives.css') }}"
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/skills.css') }}"
+      href="{{ asset_url_for('static', filename='css/partials/skills.css') }}"
     />
     <link
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/artefacts.css') }}"
+      href="{{ asset_url_for('static', filename='css/partials/artefacts.css') }}"
     />
   </head>
   <body
@@ -147,6 +147,6 @@
     <script id="coresEffectsData" type="application/json">
       {{ cores_effects | tojson }}
     </script>
-    <script src="{{ url_for('static', filename='js/character_details.js') }}"></script>
+    <script src="{{ asset_url_for('static', filename='js/character_details.js') }}"></script>
   </body>
 </html>

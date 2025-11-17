@@ -1,6 +1,8 @@
 from flask import Flask, session, redirect, request
+from flask_caching import Cache
 from flask_login import LoginManager
 
+from extensions import cache
 from routes.RouteHome import home_bp
 from routes.RouteGame_contents import game_contents_bp
 from routes.RouteCharacters import characters_bp
@@ -8,6 +10,7 @@ from routes.RouteGuides import guides_bp
 from routes.RouteSJW import sjw_bp
 from routes.RouteUsers import users_bp
 from routes.RouteAdmin import admin_bp
+from routes.utils import asset_url_for
 
 # Importer le contrôleur de configuration
 from static.Controleurs.ControleurConf import ControleurConf
@@ -18,6 +21,12 @@ from static.Controleurs import db
 app = Flask(__name__)
 conf = ControleurConf()
 app.secret_key = conf.get_config('APP', 'secret_key')
+
+# Configuration du cache
+app.config['CACHE_TYPE'] = 'SimpleCache'  # Utilise un cache en mémoire
+app.config['CACHE_DEFAULT_TIMEOUT'] = 3600  # Durée de vie par défaut du cache en secondes (1 heure)
+cache.init_app(app)
+
 db.init_app(app)
 
 # Configuration de Flask-Login
@@ -26,6 +35,10 @@ login_manager.init_app(app)
 login_manager.user_loader(user_loader)
 
 write_log("Application démarrée", log_level="INFO")
+
+@app.context_processor
+def inject_asset_url():
+    return dict(asset_url_for=asset_url_for)
 
 @app.route('/set-language', methods=['POST'])
 def set_language():

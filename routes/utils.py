@@ -3,6 +3,7 @@ import unicodedata
 import re
 from flask import url_for
 import os
+import os
 import zipfile
 import shutil
 
@@ -122,3 +123,12 @@ def extract_zip(zip_file, target_folder, expected_folder_name, file_prefix_check
                 shutil.move(os.path.join(temp_extract, fname), os.path.join(target_folder, fname))
 
     shutil.rmtree(temp_extract)
+
+def asset_url_for(endpoint, filename):
+    """Génère une URL pour un fichier statique avec un timestamp pour le cache-busting."""
+    static_folder = 'static'  # Assurez-vous que cela correspond à votre dossier statique
+    file_path = os.path.join(static_folder, filename)
+    if os.path.exists(file_path):
+        timestamp = int(os.path.getmtime(file_path))
+        return url_for(endpoint, filename=filename, v=timestamp)
+    return url_for(endpoint, filename=filename)
