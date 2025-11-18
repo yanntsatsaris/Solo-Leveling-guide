@@ -1,109 +1,183 @@
-{% extends "base.html" %} {% block title %}Contenus du jeu{% endblock %} {%
-block head %} {{ super() }}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/game_contents.css') }}"
-/>
-<link
-  rel="icon"
-  type="image/png"
-  href="{{ url_for('static', filename='images/icon-onglet.png') }}"
-/>
-{% endblock %} {% block content %}
-<div class="background-container">
-  <div class="background-image"></div>
-  <div class="layout">
-    <div class="grid-container">
-      <div class="grid">
-        <div class="hotspot hotspot-1" onclick="window.location.href='{{ url_for('game_contents.game_modes') }}'">
-          <span class="hotspot-text">Modes de jeu</span>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solo Leveling Arise : Game Contents</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ url_for('static', filename='images/icon-onglet.png') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/game_contents.css') }}"
+    />
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+    <div class="container">
+      <h1>Game Contents</h1>
+      <p>Explore the various game contents available in Solo Leveling Arise.</p>
+      <div class="image-container">
+        <img
+          src="{{ url_for('static', filename='images/Menus/MenuDuJeu2.webp') }}"
+          alt="Menu du Jeu"
+          class="menu-image"
+        />
+        <!-- Zone 1 -->
+        <div class="hotspot hotspot-1" onclick="window.location.href='{{ url_for('game_modes') }}'">
+          <span class="tooltip">Games Modes</span>
         </div>
-        <div class="hotspot hotspot-2" onclick="window.location.href='{{ url_for('sjw.inner_SJW') }}'">
-            <span class="hotspot-text">Sung Jinwoo</span>
-          </div>
-          <div class="hotspot hotspot-3" onclick="window.location.href='{{ url_for('characters.inner_characters') }}'">
-            <span class="hotspot-text">Chasseurs</span>
-          </div>
-          <div class="hotspot hotspot-4" onclick="window.location.href='{{ url_for('sjw.inner_SJW') }}?tab=shadows'">
-            <span class="hotspot-text">Ombres</span>
-          </div>
-          <div class="hotspot hotspot-5" onclick="window.location.href='{{ url_for('sjw.inner_SJW') }}?tab=monarchs'">
-            <span class="hotspot-text">Monarques</span>
-          </div>
+        <!-- Zone 2 -->
+        <div class="hotspot hotspot-2" onclick="window.location.href='{{ url_for('inner_SJW') }}'">
+          <span class="tooltip">Sung jinwoo</span>
+        </div>
+        <!-- Zone 3 -->
+        <div class="hotspot hotspot-3" onclick="window.location.href='{{ url_for('inner_characters') }}'">
+          <span class="tooltip">Hunters</span>
+        </div>
+        <!-- Zone 4 -->
+        <div class="hotspot hotspot-4" onclick="window.location.href='{{ url_for('inner_SJW') }}?tab=shadows'">
+          <span class="tooltip">Shadows</span>
+        </div>
+        <!-- Zone 5 -->
+        <div class="hotspot hotspot-5" onclick="window.location.href='{{ url_for('inner_SJW') }}?tab=monarchs'">
+          <span class="tooltip">Monarch</span>
+        </div>
+        <!-- Zone 6 -->
         <div class="hotspot hotspot-6">
-          <span class="hotspot-text">Instance de donjons</span>
+          <span class="tooltip">Weapon</span>
         </div>
+        <!-- Zone 7 -->
         <div class="hotspot hotspot-7">
-          <span class="hotspot-text">Portes</span>
+          <span class="tooltip">Artefacts</span>
         </div>
+        <!-- Zone 8 -->
         <div class="hotspot hotspot-8">
-          <span class="hotspot-text">Statistiques</span>
+          <span class="tooltip">Cores</span>
         </div>
+        <!-- Zone 9 -->
         <div class="hotspot hotspot-9">
-          <span class="hotspot-text">Bénédictions</span>
+          <span class="tooltip">Summon</span>
         </div>
+        <!-- Zone 10 -->
         <div class="hotspot hotspot-10">
-          <span class="hotspot-text">Codex</span>
+          <span class="tooltip">Shop</span>
         </div>
+        <!-- Zone 11 -->
         <div class="hotspot hotspot-11">
-          <span class="hotspot-text">Compétences</span>
+          <span class="tooltip">Challenges</span>
         </div>
+        <!-- Zone 12 -->
         <div class="hotspot hotspot-12">
-          <span class="hotspot-text">Groupes</span>
+          <span class="tooltip">Missions</span>
         </div>
+        <!-- Zone 13 -->
         <div class="hotspot hotspot-13">
-          <span class="hotspot-text">Réalisations</span>
+          <span class="tooltip">Achivements</span>
         </div>
+        <!-- Zone 14 -->
         <div class="hotspot hotspot-14">
-          <span class="hotspot-text">Titres</span>
+          <span class="tooltip">Codex</span>
         </div>
+        <!-- Zone 15 -->
         <div class="hotspot hotspot-15">
-          <span class="hotspot-text">Collection</span>
+          <span class="tooltip">Manage Teams</span>
         </div>
+        <!-- Zone 16 -->
         <div class="hotspot hotspot-16">
-          <span class="hotspot-text">Artefacts</span>
+          <span class="tooltip">Bounds</span>
         </div>
+        <!-- Zone 17 -->
         <div class="hotspot hotspot-17">
-          <span class="hotspot-text">Armes</span>
+          <span class="tooltip">Crafting</span>
         </div>
+        <!-- Zone 18 -->
         <div class="hotspot hotspot-18">
-          <span class="hotspot-text">Boutique</span>
+          <span class="tooltip">Fusion</span>
         </div>
+        <!-- Zone 19 -->
         <div class="hotspot hotspot-19">
-          <span class="hotspot-text">Passe de chasseur</span>
+          <span class="tooltip">Mining</span>
         </div>
+        <!-- Zone 20 -->
         <div class="hotspot hotspot-20">
-          <span class="hotspot-text">Quotidiennes</span>
+          <span class="tooltip">Bounty</span>
         </div>
+        <!-- Zone 21 -->
         <div class="hotspot hotspot-21">
-          <span class="hotspot-text">Pack</span>
+          <span class="tooltip">Armory</span>
         </div>
+        <!-- Zone 22 -->
         <div class="hotspot hotspot-22">
-          <span class="hotspot-text">Événement</span>
+          <span class="tooltip">Hunter Preview</span>
         </div>
+        <!-- Zone 23 -->
         <div class="hotspot hotspot-23">
-          <span class="hotspot-text">Courriers</span>
+          <span class="tooltip">Battle Tier</span>
         </div>
+        <!-- Zone 24 -->
         <div class="hotspot hotspot-24">
-          <span class="hotspot-text">Amis</span>
+          <span class="tooltip">Skill Research</span>
         </div>
-        <div class="hotspot hotspot-25" onclick="window.location.href='{{ url_for('sjw.inner_SJW') }}?tab=gems'">
-          <span class="hotspot-text">Gemmes</span>
+        <!-- Zone 25 -->
+        <div class="hotspot hotspot-25" onclick="window.location.href='{{ url_for('inner_SJW') }}?tab=gems'">
+          <span class="tooltip">Gems</span>
         </div>
+        <!-- Zone 26 -->
         <div class="hotspot hotspot-26">
-            <span class="hotspot-text">Guilde</span>
+          <span class="tooltip">Challenge medals</span>
         </div>
+        <!-- Zone 27 -->
         <div class="hotspot hotspot-27">
-            <span class="hotspot-text">Atelier</span>
+          <span class="tooltip">Costumes Codex</span>
         </div>
-        <div class="hotspot hotspot-28">
-            <span class="hotspot-text">Missions</span>
+        <!-- Zone 28 -->
+        <a href="https://forum.netmarble.com/slv_en" target="_blank" class="hotspot hotspot-28">
+          <span class="tooltip">Forum</span>
+        </a>
+        <!-- Zone 29 -->
+        <div class="hotspot hotspot-29" onclick="window.location.href='{{ url_for('inner_guides') }}'">
+          <span class="tooltip">Get Essences Stones to read ingame</span>
         </div>
-        <div class="hotspot hotspot-29" onclick="window.location.href='{{ url_for('guides.inner_guides') }}'">
-            <span class="hotspot-text">Guides</span>
+        <!-- Zone 30 -->
+        <div class="hotspot hotspot-30">
+          <span class="tooltip">Announcement</span>
+        </div>
+        <!-- Zone 31 -->
+        <div class="hotspot hotspot-31">
+          <span class="tooltip">Mail</span>
+        </div>
+        <!-- Zone 32 -->
+        <div class="hotspot hotspot-32">
+          <span class="tooltip">Bag</span>
+        </div>
+        <!-- Zone 33 -->
+        <div class="hotspot hotspot-33">
+          <span class="tooltip">Hunter pass</span>
+        </div>
+        <!-- Zone 34 -->
+        <div class="hotspot hotspot-34">
+          <span class="tooltip">Connexion</span>
+        </div>
+        <!-- Zone 35 -->
+        <div class="hotspot hotspot-35">
+          <span class="tooltip">Event</span>
+        </div>
+        <!-- Zone 36 -->
+        <div class="hotspot hotspot-36">
+          <span class="tooltip">Ranking</span>
+        </div>
+        <!-- Zone 37 -->
+        <div class="hotspot hotspot-37">
+          <span class="tooltip">Guild</span>
+        </div>
+        <!-- Zone 38 -->
+        <div class="hotspot hotspot-38">
+          <span class="tooltip">Settings</span>
         </div>
       </div>
     </div>
-  </div>
-</div>
-{% endblock %}
+  </body>
+</html>
