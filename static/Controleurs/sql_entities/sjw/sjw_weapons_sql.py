@@ -129,7 +129,7 @@ class SJWWeaponsSql:
 
     def get_evolutions(self, weapon_id, language, folder=None, weapon_folder=None):
         self.cursor.execute("""
-            SELECT e.sjw_weapon_evolutions_id, e.sjw_weapon_evolutions_number, e.sjw_weapon_evolutions_range, e.sjw_weapon_evolutions_type,
+            SELECT e.sjw_weapon_evolutions_id, e.sjw_weapon_evolutions_number, e.sjw_weapon_evolutions_range, e.sjw_weapon_evolutions_type, e.sjw_weapon_evolutions_evolution_id,
                    t.sjw_weapon_evolution_translations_description
             FROM sjw_weapon_evolutions e
             LEFT JOIN sjw_weapon_evolution_translations t
@@ -143,7 +143,8 @@ class SJWWeaponsSql:
                 'number': row[1],
                 'range': row[2],
                 'type': row[3],
-                'description': row[4],
+                'evolution_id': row[4],
+                'description': row[5],
                 # Pour une image d'évolution :
                 # 'image': f'images/{folder}/Armes/{weapon_folder}/Evolutions/{row[?]}' if folder and weapon_folder else row[?]
             }
