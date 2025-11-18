@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block content %}
+<div class="container">
     <h1>Characters</h1>
     {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
         <button id="add-character-btn" class="admin-btn">
@@ -48,14 +49,11 @@
                     </a>
                     <p hidden>{{ image.name }}</p>
                 </td>
-                {% if loop.index % 10 == 0 %}
-        </tr>
-        <tr>
-            {% endif %}
             {% endfor %}
         </tr>
     </table>
-    {% include 'partials/add_character_modal.html' %}
+</div>
+{% include 'partials/add_character_modal.html' %}
 {% endblock %}
 
 {% block body_js %}

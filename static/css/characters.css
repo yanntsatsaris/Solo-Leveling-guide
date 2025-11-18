@@ -24,8 +24,13 @@ body {
 table {
   border-collapse: collapse;
   margin: 0 auto; /* Centre le tableau horizontalement */
-  width: 100%; /* S'assure que le tableau occupe toute la largeur disponible */
-  text-align: center;
+}
+
+/* Transformer la ligne du tableau en conteneur flex */
+tr {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 /* Style pour les cellules du tableau */
@@ -180,12 +185,6 @@ p {
     text-align: center; /* Centre le texte */
     width: 100%; /* S'assure que le texte occupe toute la largeur de la cellule */
   }
-
-  tr {
-    display: flex;
-    flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
-    justify-content: center; /* Centre les images sur la ligne */
-  }
 }
 
 /* Pour les écrans en mode paysage */
@@ -221,11 +220,5 @@ p {
     font-size: 0.8rem; /* Réduit légèrement la taille du texte */
     text-align: center; /* Centre le texte */
     width: 100%; /* S'assure que le texte occupe toute la largeur de la cellule */
-  }
-
-  tr {
-    display: flex;
-    flex-wrap: wrap; /* Permet de passer à la ligne suivante si nécessaire */
-    justify-content: center; /* Centre les images sur la ligne */
   }
 }
