@@ -41,7 +41,10 @@
             <input type="text" name="username" placeholder="Nom d'utilisateur" required>
             <input type="password" name="password" placeholder="Mot de passe" required>
             <button type="submit">Se connecter</button>
-            <button type="button" id="show-register" class="switch-btn">Créer un compte</button>
+            <div class="form-links">
+                <a href="{{ url_for('forgot_password') }}" class="forgot-password-link">Mot de passe oublié ?</a>
+                <button type="button" id="show-register" class="switch-btn">Créer un compte</button>
+            </div>
             <div id="login-error" class="form-error"></div>
         </form>
         <form id="register-form" style="display:none;">

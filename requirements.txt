@@ -3,3 +3,6 @@ Flask-Login
 Flask-Caching
 psycopg2-binary
 python-ldap
+Flask-Mail
+passlib
+Pillow

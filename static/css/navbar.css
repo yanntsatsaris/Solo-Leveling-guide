@@ -296,6 +296,23 @@
     margin-top: 6px;
     min-height: 18px;
 }
+
+.form-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.forgot-password-link {
+    color: #ffcc00;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+}
 .username-link {
     color: #ffcc00;
     font-weight: bold;
