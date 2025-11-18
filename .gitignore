@@ -5,3 +5,6 @@ __pycache__/
 # Logs
 logs/
 *.log
+
+import.py
+*.sql
