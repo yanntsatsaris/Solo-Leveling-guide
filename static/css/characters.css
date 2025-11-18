@@ -126,7 +126,6 @@ p {
 /* Pour les écrans de taille moyenne (tablettes) */
 @media (max-width: 768px) {
   .container {
-    width: 90%; /* Réduit la largeur pour s'adapter aux écrans plus petits */
   }
 
   table img {
@@ -192,7 +191,6 @@ p {
 /* Pour les écrans en mode paysage */
 @media (max-height: 480px) {
   .container {
-    width: 90%; /* Adapte la largeur à l'écran en mode paysage */
     margin: 0 auto; /* Centre le conteneur */
     padding: 15px; /* Ajuste le padding pour maximiser l'espace */
   }

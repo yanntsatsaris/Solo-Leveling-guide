@@ -1,17 +1,16 @@
-{% extends "base.html" %} {% block title %}Contenus du jeu{% endblock %} {%
-block head %} {{ super() }}
+{% extends "base.html" %}
+{% block title %}Contenus du jeu{% endblock %}
+
+{% block head_css %}
 <link
   rel="stylesheet"
-  href="{{ url_for('static', filename='css/game_contents.css') }}"
+  href="{{ asset_url_for('static', filename='css/game_contents.css') }}"
 />
-<link
-  rel="icon"
-  type="image/png"
-  href="{{ url_for('static', filename='images/icon-onglet.png') }}"
-/>
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 <div class="background-container">
-  <div class="background-image"></div>
+  <div class="background-image" style="background-image: url('{{ url_for('static', filename='images/Background/BG_Dark.webp') }}');"></div>
   <div class="layout">
     <div class="grid-container">
       <div class="grid">
