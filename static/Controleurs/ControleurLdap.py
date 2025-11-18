@@ -202,3 +202,51 @@ class ControleurLdap:
             write_log("Déconnexion LDAP réussie")
         except ldap.LDAPError as e:
             write_log("Erreur lors de la déconnexion LDAP: " + str(e), 'ERROR')
+
+    def get_user_by_uid(self, uid):
+        """
+        Récupère les informations d'un utilisateur par son UID.
+        """
+        try:
+            self.bind_as_root()
+            search_base = self.config.get_config('LDAP', 'base_dn')
+            safe_uid = escape_filter_chars(uid)
+            search_filter = f"(uid={safe_uid})"
+            result = self.conn.search_s(search_base, ldap.SCOPE_SUBTREE, search_filter)
+            if result:
+                return result[0][1]  # Retourne le dictionnaire d'attributs
+            return None
+        except ldap.LDAPError as e:
+            write_log(f"Erreur lors de la recherche de l'utilisateur par UID ({uid}): {e}", 'ERROR')
+            return None
+
+    def get_user_dn_by_email(self, email):
+        """
+        Récupère le DN d'un utilisateur par son adresse e-mail.
+        """
+        try:
+            self.bind_as_root()
+            search_base = self.config.get_config('LDAP', 'base_dn')
+            safe_email = escape_filter_chars(email)
+            search_filter = f"(mail={safe_email})"
+            result = self.conn.search_s(search_base, ldap.SCOPE_SUBTREE, search_filter)
+            if result:
+                return result[0][0]  # Retourne le DN de l'utilisateur
+            return None
+        except ldap.LDAPError as e:
+            write_log(f"Erreur lors de la recherche de DN par e-mail ({email}): {e}", 'ERROR')
+            return None
+
+    def update_user_password(self, user_dn, new_password):
+        """
+        Met à jour le mot de passe d'un utilisateur via son DN.
+        """
+        try:
+            self.bind_as_root()
+            mod_list = [(ldap.MOD_REPLACE, 'userPassword', new_password.encode('utf-8'))]
+            self.conn.modify_s(user_dn, mod_list)
+            write_log(f"Mot de passe mis à jour pour le DN : {user_dn}")
+            return True
+        except ldap.LDAPError as e:
+            write_log(f"Erreur lors de la mise à jour du mot de passe pour {user_dn}: {e}", 'ERROR')
+            return False

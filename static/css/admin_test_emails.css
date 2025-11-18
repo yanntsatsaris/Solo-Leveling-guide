@@ -1,0 +1,119 @@
+/* Fond et police */
+body {
+  background-color: #121212;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Conteneur du formulaire */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 24px;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  margin: 70px auto;
+  width: fit-content;
+  min-width: 340px;
+  max-width: 700px;
+}
+
+/* Titre */
+h1 {
+  color: #ffcc00;
+  text-align: center;
+  text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff;
+  margin-bottom: 24px;
+}
+
+/* Paragraphe descriptif */
+p {
+    color: #cccccc;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Groupe de formulaire */
+.form-group {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #ffcc00;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #8000ff;
+    background: #121212;
+    color: #ffcc00;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+.form-group small {
+    display: block;
+    margin-top: 5px;
+    color: #aaaaaa;
+    font-size: 0.9em;
+}
+
+/* Bouton */
+.btn {
+  background-color: #ffcc00;
+  color: #121212;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 32px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+  width: 100%;
+}
+
+.btn:hover {
+  background-color: #8000ff;
+  color: #fff;
+}
+
+/* Alertes Flash */
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.alert-success {
+    color: #dff0d8;
+    background-color: #3c763d;
+    border-color: #d6e9c6;
+}
+
+.alert-danger {
+    color: #f2dede;
+    background-color: #a94442;
+    border-color: #ebccd1;
+}
+
+.alert-warning {
+    color: #fcf8e3;
+    background-color: #8a6d3b;
+    border-color: #faebcc;
+}

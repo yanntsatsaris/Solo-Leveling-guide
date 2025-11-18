@@ -125,4 +125,5 @@ def user_profile(username):
         return redirect(url_for('users.user_profile', username=username))
 
     is_admin = my_max >= RIGHTS_ORDER.index('Admin')
-    return render_template('user_profile.html', user=user_info, is_admin=is_admin)
+    is_super_admin = 'SuperAdmin' in my_rights
+    return render_template('user_profile.html', user=user_info, is_admin=is_admin, is_super_admin=is_super_admin)

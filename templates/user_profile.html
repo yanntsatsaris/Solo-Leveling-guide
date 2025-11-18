@@ -35,7 +35,12 @@
       <h3>Administration</h3>
       <a href="/admin/panoplie" class="admin-btn">Gérer les panoplies</a>
       <a href="/admin/cores" class="admin-btn">Gérer les noyaux et effets</a>
-      <!-- Ajoute d'autres liens d'administration ici -->
+      {% endif %}
+
+      {% if is_super_admin and user.uid[0].decode() == session['username'] %}
+      <hr />
+      <h3>Super Administration</h3>
+      <a href="{{ url_for('admin.admin_test_emails') }}" class="admin-btn">Tester les E-mails</a>
       {% endif %}
     </div>
     <script>

@@ -10,6 +10,14 @@ from static.Controleurs.ControleurImages import (
 import glob
 import os
 from .utils import is_admin, extract_zip
+from static.Controleurs.ControleurMail import send_password_reset_email
+from flask import flash
+from itsdangerous import URLSafeTimedSerializer
+from flask import current_app
+
+def is_super_admin():
+    rights = session.get('rights', [])
+    return 'SuperAdmin' in rights
 
 admin_bp = Blueprint('admin', __name__)
 
@@ -467,3 +475,40 @@ def upload_sjw_skill_images_zip():
         return str(e), 400
 
     return f"Images extraites et placées dans le dossier {type_folder}/{folder_name}.", 200
+
+@admin_bp.route('/admin/test-emails', methods=['GET', 'POST'])
+@login_required
+def admin_test_emails():
+    if not is_super_admin():
+        abort(403)
+
+    if request.method == 'POST':
+        email_type = request.form.get('email_type')
+        recipients = request.form.get('recipients')
+
+        if not recipients:
+            flash("Veuillez saisir au moins une adresse e-mail.", "danger")
+            return redirect(url_for('admin.admin_test_emails'))
+
+        recipient_list = [email.strip() for email in recipients.split(',')]
+
+        if email_type == 'reset_password':
+            try:
+                # On génère un token factice juste pour l'exemple
+                s = URLSafeTimedSerializer(current_app.secret_key)
+                token = s.dumps("test@example.com", salt='password-reset-salt')
+                reset_url = url_for('reset_password', token=token, _external=True)
+
+                for recipient in recipient_list:
+                    send_password_reset_email(recipient, reset_url)
+
+                flash(f"E-mail de test '{email_type}' envoyé à {', '.join(recipient_list)}.", "success")
+            except Exception as e:
+                flash(f"Erreur lors de l'envoi de l'e-mail : {e}", "danger")
+
+        else:
+            flash("Type d'e-mail non reconnu.", "warning")
+
+        return redirect(url_for('admin.admin_test_emails'))
+
+    return render_template('admin_test_emails.html')

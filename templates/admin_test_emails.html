@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tester l'envoi d'e-mails - Admin</title>
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/admin_test_emails.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon-onglet.png') }}">
+</head>
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="form-container">
+        <h1>Tester l'envoi d'e-mails</h1>
+        <p>Cette page permet d'envoyer des e-mails de test pour vérifier la configuration SMTP et le rendu des templates.</p>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('admin.admin_test_emails') }}">
+            <div class="form-group">
+                <label for="email_type">Type d'e-mail à envoyer</label>
+                <select id="email_type" name="email_type">
+                    <option value="reset_password">Réinitialisation de mot de passe</option>
+                    <!-- Ajouter d'autres types d'e-mails ici à l'avenir -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="recipients">Destinataires</label>
+                <input type="text" id="recipients" name="recipients" placeholder="email1@example.com, email2@example.com" required>
+                <small>Séparez plusieurs adresses e-mail par une virgule.</small>
+            </div>
+
+            <button type="submit" class="btn">Envoyer l'e-mail de test</button>
+        </form>
+    </div>
+</body>
+</html>
