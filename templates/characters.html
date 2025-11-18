@@ -1,124 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Solo Leveling Arise : Characters</title>
-    <link
-      rel="stylesheet"
-      href="{{ asset_url_for('static', filename='css/characters.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ asset_url_for('static', filename='css/partials/add_character_modal.css') }}"
-    />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{{ url_for('static', filename='images/icon-onglet.png') }}"
-    />
-  </head>
-  <body>
-    {% include 'navbar.html' %}
-    <div class="container">
-      <h1>Characters</h1>
-      {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
-      <button id="add-character-btn" class="admin-btn">
-        Ajouter un personnage
-      </button>
-      {% endif %}
-      <p>
+{% extends 'base.html' %}
+
+{% block title %}Characters{% endblock %}
+
+{% block head_css %}
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/characters.css') }}" />
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/add_character_modal.css') }}" />
+{% endblock %}
+
+{% block content %}
+    <h1>Characters</h1>
+    {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
+        <button id="add-character-btn" class="admin-btn">
+            Ajouter un personnage
+        </button>
+    {% endif %}
+    <p>
         Discover the characters from Solo Leveling Arise.
-      </p>
-      <div
-        class="character-types"
-      >
-        <button
-          class="type-button"
-          data-type="All"
-        >
-          All
+    </p>
+    <div class="character-types">
+        <button class="type-button" data-type="All">
+            All
         </button>
         {% for type in character_types %}
-        <button class="type-button" data-type="{{ type }}">
-          <img src="{{ url_for('static', filename='images/Types/Type_' ~ type ~ '.webp') }}"
-               alt="{{ type }}" />
-        </button>
+            <button class="type-button" data-type="{{ type }}">
+                <img src="{{ url_for('static', filename='images/Types/Type_' ~ type ~ '.webp') }}"
+                     alt="{{ type }}" />
+            </button>
         {% endfor %}
-      </div>
-      <div
-        class="rarity-filters"
-      >
-        <button
-          class="rarity-button"
-          data-rarity="All"
-        >
-          All
+    </div>
+    <div class="rarity-filters">
+        <button class="rarity-button" data-rarity="All">
+            All
         </button>
         {% for rarity in rarities %}
-        <button
-          class="rarity-button"
-          data-rarity="{{ rarity }}"
-        >
-          {{ rarity }}
-        </button>
+            <button class="rarity-button" data-rarity="{{ rarity }}">
+                {{ rarity }}
+            </button>
         {% endfor %}
-      </div>
-      <table id="character-table">
-        <tr>
-          {% for image in images %}
-          <td data-type="{{ image.type }}" data-rarity="{{ image.rarity }}">
-            <a href="{{ url_for('characters.character_details', alias=image.alias) }}">
-              <img
-                src="{{ url_for('static', filename=image.path) }}"
-                alt="{{ image.name }}"
-              />
-            </a>
-            <p hidden>{{ image.name }}</p>
-          </td>
-          {% if loop.index % 10 == 0 %}
-        </tr>
-        <tr>
-          {% endif %} {% endfor %}
-        </tr>
-      </table>
     </div>
+    <table id="character-table">
+        <tr>
+            {% for image in images %}
+                <td data-type="{{ image.type }}" data-rarity="{{ image.rarity }}">
+                    <a href="{{ url_for('characters.character_details', alias=image.alias) }}">
+                        <img src="{{ url_for('static', filename=image.path) }}"
+                             alt="{{ image.name }}" />
+                    </a>
+                    <p hidden>{{ image.name }}</p>
+                </td>
+                {% if loop.index % 10 == 0 %}
+        </tr>
+        <tr>
+            {% endif %}
+            {% endfor %}
+        </tr>
+    </table>
     {% include 'partials/add_character_modal.html' %}
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const typeButtons = document.querySelectorAll(".type-button");
-        const rarityButtons = document.querySelectorAll(".rarity-button");
-        const characterCells = document.querySelectorAll("#character-table td");
+{% endblock %}
 
-        let selectedType = "All";
-        let selectedRarity = "All";
-
-        function filterCharacters() {
-          characterCells.forEach((cell) => {
-            const matchesType =
-              selectedType === "All" ||
-              cell.getAttribute("data-type") === selectedType;
-            const matchesRarity =
-              selectedRarity === "All" ||
-              cell.getAttribute("data-rarity") === selectedRarity;
-            cell.style.display = matchesType && matchesRarity ? "" : "none";
-          });
-        }
-
-        typeButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            selectedType = button.getAttribute("data-type");
-            filterCharacters();
-          });
-        });
-
-        rarityButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            selectedRarity = button.getAttribute("data-rarity");
-            filterCharacters();
-          });
-        });
-      });
-    </script>
-  </body>
-</html>
+{% block body_js %}
+    <script src="{{ asset_url_for('static', filename='js/characters.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solo Leveling Arise : {% block title %}Welcome{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/style.css') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon-onglet.png') }}" />
+    {% block head_css %}{% endblock %}
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+    {% block body_js %}{% endblock %}
+</body>
+</html>

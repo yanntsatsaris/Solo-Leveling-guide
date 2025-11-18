@@ -1,30 +1,24 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Gestion des Panoplies</title>
+{% extends 'base.html' %}
+
+{% block title %}Gestion des Panoplies{% endblock %}
+
+{% block head_css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin_panoplie.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/edit_panoplie_modal.css') }}">
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{{ url_for('static', filename='images/icon-onglet.png') }}"
-    />
-</head>
-<body>
-    {% include 'navbar.html' %}
-    <div class="container">
-        <h1>Gestion des Panoplies</h1>
-        <div style="text-align:center; margin-bottom: 24px;">
-            <button id="create-panoplie-btn" class="admin-btn">Créer une nouvelle panoplie</button>
-        </div>
-        <table>
-            <tr>
-                <th>Image</th>
-                <th>Nom</th>
-                <th>Nom affiché</th>
-            </tr>
-            {% for panoplie in panoplies %}
+{% endblock %}
+
+{% block content %}
+    <h1>Gestion des Panoplies</h1>
+    <div style="text-align:center; margin-bottom: 24px;">
+        <button id="create-panoplie-btn" class="admin-btn">Créer une nouvelle panoplie</button>
+    </div>
+    <table>
+        <tr>
+            <th>Image</th>
+            <th>Nom</th>
+            <th>Nom affiché</th>
+        </tr>
+        {% for panoplie in panoplies %}
             <tr>
                 <td>
                     {% if panoplie.image %}
@@ -38,286 +32,11 @@
                 <td>{{ panoplie.name }}</td>
                 <td>{{ panoplie.display_name }}</td>
             </tr>
-            {% endfor %}
-        </table>
-    </div>
+        {% endfor %}
+    </table>
     {% include 'partials/edit_panoplie_modal.html' %}
-    <script>
-document.addEventListener("DOMContentLoaded", function() {
-  document.querySelectorAll('a[data-panoplie-name]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const panoplieName = this.getAttribute('data-panoplie-name');
-      fetch(`/admin/panoplie/api/${panoplieName}`)
-        .then(resp => resp.json())
-        .then(data => {
-          const langDiv = document.getElementById('edit-panoplie-languages');
-          langDiv.innerHTML = '';
-          for (const [lang, trans] of Object.entries(data.translations)) {
-            langDiv.innerHTML += `
-              <fieldset>
-                <legend>${lang}</legend>
-                <label>Nom affiché :</label>
-                <input type="text" name="display_name_${lang}" value="${trans.display_name || ''}" required>
-                <h4>Effets</h4>
-                <div>
-                  ${(data.effects[lang] || []).map(effect =>
-                    `<div class="effect-row"><b>${effect.pieces} pièces :</b>
-                      <textarea name="effect_${lang}_${effect.pieces}" class="effect-input">${effect.effect || ''}</textarea>
-                    </div>`
-                  ).join('')}
-                </div>
-              </fieldset>
-            `;
-          }
-          document.getElementById('edit-panoplie-overlay').style.display = 'flex';
-          document.getElementById('edit-panoplie-form').action = `/admin/panoplie/${panoplieName}`;
-          document.getElementById('edit-panoplie-form').setAttribute('data-mode', 'edit');
-          autoResizeAllTextareas();
-        });
-    });
-  });
+{% endblock %}
 
-  // Fermer la modale en cliquant sur la croix
-  document.getElementById('close-edit-panoplie').onclick = function() {
-    document.getElementById('edit-panoplie-overlay').style.display = 'none';
-  };
-
-  // Fermer la modale en cliquant en dehors du menu
-  document.getElementById('edit-panoplie-overlay').addEventListener('mousedown', function(e) {
-    if (e.target === this) {
-      this.style.display = 'none';
-    }
-  });
-
-  // Fermer la modale avec la touche Échap
-  document.addEventListener('keydown', function(e) {
-    if (e.key === "Escape") {
-      document.getElementById('edit-panoplie-overlay').style.display = 'none';
-    }
-  });
-
-  // Création d'une nouvelle panoplie
-  document.getElementById('create-panoplie-btn').onclick = async function() {
-    let name = prompt("Nom interne de la nouvelle panoplie ?");
-    if (!name) return;
-
-    // Vérifie si la panoplie existe déjà
-    let exists = false;
-    {% for panoplie in panoplies %}
-      if ("{{ panoplie.name|e }}" === name) exists = true;
-    {% endfor %}
-    if (exists) {
-      alert("Une panoplie avec ce nom existe déjà !");
-      return;
-    }
-
-    // Demande combien de pièces (2, 4 ou 8)
-    let pieces = prompt("Combien de pièces pour cette panoplie ? (2, 4 ou 8)");
-    if (!pieces || !["2", "4", "8"].includes(pieces.trim())) {
-      alert("Réponse invalide. Il faut répondre 2, 4 ou 8.");
-      return;
-    }
-    pieces = parseInt(pieces.trim(), 10);
-
-    // Si 2 ou 4 pièces, demander le type
-    let type = "";
-    if (pieces === 2 || pieces === 4) {
-      type = prompt("La panoplie est composée de pièces d'armure ou d'accessoire ? (armure/accessoire)");
-      if (!["armure", "accessoire"].includes(type.trim().toLowerCase())) {
-        alert("Réponse invalide. Il faut répondre 'armure' ou 'accessoire'.");
-        return;
-      }
-      type = type.trim().toLowerCase();
-    }
-
-    // Vérifie la présence d'au moins une image Artefact02 ou Artefact05
-    let name_folder = name.replace(/ /g, "_");
-    let imgCheck = await fetch(`/admin/panoplie/check_image/${encodeURIComponent(name)}`).then(r => r.json());
-    if (!imgCheck.exists) {
-      if (confirm("Aucune image trouvée pour cette panoplie. Voulez-vous uploader des images maintenant ?")) {
-        document.getElementById('edit-panoplie-overlay').style.display = 'none'; // Ferme le menu modal
-        let piecesToUpload = [];
-        if (pieces === 8) {
-          piecesToUpload = allPieces;
-        } else if (pieces === 4) {
-          if (type === "armure") {
-            piecesToUpload = piecesArmure;
-          } else if (type === "accessoire") {
-            piecesToUpload = piecesAccessoire;
-          }
-        }
-
-        // Génère le HTML des inputs
-        let inputsHtml = piecesToUpload.map(piece => `
-          <div style="margin-bottom:12px;">
-            <label>${piece} :</label>
-            <input type="file" name="file_${piece.replace(/ /g, "_")}" accept=".webp,.png,.jpg,.jpeg" required>
-          </div>
-        `).join('');
-        let overlay = document.createElement('div');
-        overlay.id = "upload-panoplie-overlay";
-        overlay.className = "edit-panoplie-overlay";
-        overlay.style.display = "flex";
-        overlay.innerHTML = `
-          <div class="edit-panoplie-popup">
-            <form id="upload-panoplie-img-form" enctype="multipart/form-data">
-              <h2>Uploader les images de la panoplie</h2>
-              ${inputsHtml}
-              <input type="hidden" name="panoplie_name" value="${name}">
-              <div style="margin-top:16px;">
-                <button type="submit" class="admin-btn">Envoyer</button>
-                <button type="button" id="cancel-upload-panoplie" class="close-btn">&times;</button>
-              </div>
-            </form>
-          </div>
-        `;
-        document.body.appendChild(overlay);
-
-        document.getElementById('cancel-upload-panoplie').onclick = function() {
-          overlay.remove();
-        };
-
-        document.getElementById('upload-panoplie-img-form').onsubmit = async function(e) {
-          e.preventDefault();
-          let formData = new FormData(this);
-          let resp = await fetch('/admin/upload_panoplie_images', {
-            method: 'POST',
-            body: formData
-          });
-          let txt = await resp.text();
-          overlay.remove();
-
-          // Réaffiche le menu de création pour saisir les effets
-          document.getElementById('edit-panoplie-form').setAttribute('data-mode', 'create');
-          const langDiv = document.getElementById('edit-panoplie-languages');
-          langDiv.innerHTML = '';
-          ['FR-fr', 'EN-en'].forEach(function(lang) {
-            let effectsHtml = '';
-            if (pieces >= 2) {
-              effectsHtml += `
-                <div class="effect-row"><b>2 pièces :</b>
-                  <textarea name="effect_${lang}_2" class="effect-input"></textarea>
-                </div>`;
-            }
-            if (pieces >= 4) {
-              effectsHtml += `
-                <div class="effect-row"><b>4 pièces :</b>
-                  <textarea name="effect_${lang}_4" class="effect-input"></textarea>
-                </div>`;
-            }
-            if (pieces === 8) {
-              effectsHtml += `
-                <div class="effect-row"><b>8 pièces :</b>
-                  <textarea name="effect_${lang}_8" class="effect-input"></textarea>
-                </div>`;
-            }
-            langDiv.innerHTML += `
-              <fieldset>
-                <legend>${lang}</legend>
-                <label>Nom affiché :</label>
-                <input type="text" name="display_name_${lang}" value="" required>
-                <h4>Effets</h4>
-                <div>
-                  ${effectsHtml}
-                </div>
-              </fieldset>
-            `;
-          });
-          document.getElementById('edit-panoplie-overlay').style.display = 'flex';
-          document.getElementById('edit-panoplie-form').action = `/admin/panoplie/${encodeURIComponent(name)}`;
-          autoResizeAllTextareas();
-        };
-        return;
-      } else {
-        return;
-      }
-    }
-
-    document.getElementById('edit-panoplie-form').setAttribute('data-mode', 'create');
-
-    // Prépare le menu d'édition vide pour FR et EN
-    const langDiv = document.getElementById('edit-panoplie-languages');
-    langDiv.innerHTML = '';
-    ['FR-fr', 'EN-en'].forEach(function(lang) {
-      let effectsHtml = '';
-      if (pieces >= 2) {
-        effectsHtml += `
-          <div class="effect-row"><b>2 pièces :</b>
-            <textarea name="effect_${lang}_2" class="effect-input"></textarea>
-          </div>`;
-      }
-      if (pieces >= 4) {
-        effectsHtml += `
-          <div class="effect-row"><b>4 pièces :</b>
-            <textarea name="effect_${lang}_4" class="effect-input"></textarea>
-          </div>`;
-      }
-      if (pieces === 8) {
-        effectsHtml += `
-          <div class="effect-row"><b>8 pièces :</b>
-            <textarea name="effect_${lang}_8" class="effect-input"></textarea>
-          </div>`;
-      }
-      langDiv.innerHTML += `
-        <fieldset>
-          <legend>${lang}</legend>
-          <label>Nom affiché :</label>
-          <input type="text" name="display_name_${lang}" value="" required>
-          <h4>Effets</h4>
-          <div>
-            ${effectsHtml}
-          </div>
-        </fieldset>
-      `;
-    });
-    document.getElementById('edit-panoplie-overlay').style.display = 'flex';
-    document.getElementById('edit-panoplie-form').action = `/admin/panoplie/${encodeURIComponent(name)}`;
-    autoResizeAllTextareas();
-  };
-});
-
-document.getElementById('edit-panoplie-form').onsubmit = async function(e) {
-  const mode = this.getAttribute('data-mode');
-  if (mode === "edit") return; // édition classique (POST)
-  e.preventDefault();
-  const url = this.action;
-  const display_names = {};
-  const effects = {};
-  document.querySelectorAll('#edit-panoplie-languages fieldset').forEach(fs => {
-    const lang = fs.querySelector('legend').textContent;
-    display_names[lang] = fs.querySelector(`input[name="display_name_${lang}"]`).value;
-    effects[lang] = {};
-    fs.querySelectorAll('textarea.effect-input').forEach(area => {
-      const match = area.name.match(/^effect_([A-Za-z\-]+)_(\d+)$/);
-      if (match) {
-        effects[lang][match[2]] = area.value;
-      }
-    });
-  });
-  const resp = await fetch(url, {
-    method: "PUT",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({display_names, effects})
-  });
-  if (resp.ok) {
-    location.reload();
-  } else {
-    alert("Erreur lors de la création de la panoplie.");
-  }
-};
-
-const piecesArmure = ["Casque", "Plastron", "Gants", "Bottes"];
-const piecesAccessoire = ["Collier", "Bracelet", "Bague", "Boucle d'oreille"];
-const allPieces = [...piecesArmure, ...piecesAccessoire];
-
-function autoResizeAllTextareas() {
-  document.querySelectorAll("textarea.effect-input").forEach(function(el) {
-    el.style.height = "auto";
-    el.style.height = (el.scrollHeight) + "px";
-  });
-}
-document.addEventListener("DOMContentLoaded", autoResizeAllTextareas);
-</script>
-</body>
-</html>
+{% block body_js %}
+    <script src="{{ asset_url_for('static', filename='js/admin_panoplie.js') }}"></script>
+{% endblock %}
