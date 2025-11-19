@@ -56,6 +56,19 @@ def admin_panoplie():
 
     return render_template('admin_panoplie.html', panoplies=panoplies_with_img)
 
+@admin_bp.route('/admin/panoplies/api')
+@login_required
+def api_get_panoplies():
+    if not is_admin():
+        abort(403)
+    db = get_db()
+    cursor = db.cursor()
+    panoplies_sql = PanopliesSql(cursor)
+    panoplies = panoplies_sql.get_panoplies(session.get('language', 'FR-fr'))
+    # We only need the names for the check
+    panoplie_names = [{'name': p[0]} for p in panoplies]
+    return jsonify(panoplie_names)
+
 @admin_bp.route('/admin/panoplie/api/<panoplie_name>')
 @login_required
 def api_get_panoplie(panoplie_name):
