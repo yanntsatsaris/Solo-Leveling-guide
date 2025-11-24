@@ -176,21 +176,16 @@ section.cores-section {
 
 .cores-container {
   display: flex;
-  gap: 5px; /* Ajoute un espacement entre les noyaux */
-  justify-content: center; /* Répartit les noyaux sur la ligne */
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 article.core-item {
   display: flex;
   flex-direction: row;
   align-items: center;
-  text-align: center;
-  gap: 20px;
-  padding: 10px;
-  border-radius: 8px;
-  background-color: transparent;
-  width: calc(33.33% - 20px);
-  box-sizing: border-box;
+  gap: 10px;
 }
 
 /* Style pour les images des noyaux */
@@ -199,16 +194,14 @@ article.core-item {
   height: 100px;
   border-radius: 8px;
   object-fit: contain;
-  margin-bottom: 10px;
 }
 
 /* Conteneur des statistiques des noyaux */
 article.core-item .stats {
   display: flex;
-  flex-direction: row; /* Aligne les stats côte-à-côte */
-  align-items: center; /* Centre verticalement */
+  flex-direction: row;
+  align-items: center;
   gap: 5px;
-  flex: 1;
 }
 
 /* Dimensionnement des images de stats pour les noyaux */
