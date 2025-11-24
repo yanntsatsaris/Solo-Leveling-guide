@@ -1,129 +1,104 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block title %}Sung Jinwoo{% endblock %}
 
 {% block head_css %}
-    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/SJW.css') }}" />
-    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/edit_sjw_modal.css') }}" />
-    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/add_shadow_modal.css') }}" />
-    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/add_weapon_modal.css') }}" />
-    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/add_sjw_skill_modal.css') }}" />
-    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/review.css') }}" />
-    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/weapons.css') }}" />
-    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/passives.css') }}" />
-    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/skills.css') }}" />
-    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/gems.css') }}" />
-    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/shadows.css') }}" />
-    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/monarchs.css') }}" />
-    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/artefacts.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/SJW.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/edit_sjw_modal.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/add_shadow_modal.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/add_weapon_modal.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/add_sjw_skill_modal.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/review.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/weapons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/passives.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/skills.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/gems.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/shadows.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/monarchs.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/artefacts.css') }}">
+{% endblock %}
+
+{% block body_attributes %}
+class="{% if character.alias %}background-image{% endif %}" style="{% if character.alias %}background-image: url('{{ url_for('static', filename='images/Background/BG_Dark.webp') }}');{% endif %}"
 {% endblock %}
 
 {% block content %}
-    <div class="layout">
-      <!-- Colonne pour l'image -->
-      <div class="image-column">
+<div class="layout">
+    <!-- Colonne pour l'image -->
+    <div class="image-column">
         <div class="character-image">
-          <img
-            src="{{ url_for('static', filename=character.image) }}"
-            alt="{{ character.name }}"
-          />
+            <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}">
         </div>
-      </div>
-
-      <!-- Colonne pour le contenu principal -->
-      <div class="content-column">
-        <div class="container">
-          <h1>{{ character.name }}</h1>
-          {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
-            <button id="edit-sjw-btn" class="admin-btn">
-              Modifier Sung Jinwoo
-            </button>
-            {% include 'partials/edit_sjw_modal.html' %}
-          {% endif %}
-          <!-- Image du personnage (affichée sous le type sur téléphone) -->
-          <div class="character-image">
-            <img
-              src="{{ url_for('static', filename=character.image) }}"
-              alt="{{ character.name }}"
-            />
-          </div>
-
-          <!-- Conteneur pour les onglets et le contenu -->
-          <div class="character-info">
-            <div class="tabs-and-content">
-              <!-- Système d'onglets -->
-              <div class="tabs">
-                <div class="tab" data-tab="description">
-                  {% if language == "FR-fr" %}Description{% else %}Description{%
-                  endif %}
-                </div>
-                <div class="tab" data-tab="weapons">
-                  {% if language == "FR-fr" %}Armes{% else %}Weapons{% endif %}
-                </div>
-                <div class="tab" data-tab="passives">
-                  {% if language == "FR-fr" %}Bénédictions{% else %}Blessings{%
-                  endif %}
-                </div>
-                <div class="tab" data-tab="skills">
-                  {% if language == "FR-fr" %}Compétences{% else %}Skills{%
-                  endif %}
-                </div>
-                <div class="tab" data-tab="gems">
-                  {% if language == "FR-fr" %}Gemmes{% else %}Gems{% endif %}
-                </div>
-                <div class="tab" data-tab="shadows">
-                  {% if language == "FR-fr" %}Ombres{% else %}Shadows{% endif %}
-                </div>
-                <div class="tab" data-tab="monarchs">
-                  {% if language == "FR-fr" %}Monarques{% else %}Monarchs{%
-                  endif %}
-                </div>
-                <div class="tab" data-tab="artefacts" id="artefacts-tab">
-                  {% if language == "FR-fr" %}Artefacts{% else %}Artefacts{%
-                  endif %}
-                </div>
-                <div class="tab" id="dropdown-tab">
-                  <select id="equipment-select">
-                    {% if character.equipment_sets and
-                    character.equipment_sets|length > 0 %} {% for set in
-                    character.equipment_sets %}
-                    <option value="{{ loop.index0 }}">
-                      {{ set.set_name }}
-                    </option>
-                    {% endfor %} {% else %}
-                    <option disabled>Aucun set équipé</option>
-                    {% endif %}
-                  </select>
-                </div>
-              </div>
-
-              <!-- Contenu des onglets -->
-              {% include 'partials/review.html' %} {% include
-              'partials/weapons.html' %} {% include 'partials/passives.html' %}
-              {% include 'partials/skills.html' %} {% include
-              'partials/gems.html' %} {% include 'partials/shadows.html' %} {%
-              include 'partials/monarchs.html' %} {% include
-              'partials/artefacts.html' %}
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
+
+    <!-- Colonne pour le contenu principal -->
+    <div class="content-column">
+        <div class="container">
+            <h1>{{ character.name }}</h1>
+            {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
+                <button id="edit-sjw-btn" class="admin-btn">Modifier Sung Jinwoo</button>
+                {% include 'partials/edit_sjw_modal.html' %}
+            {% endif %}
+            <!-- Image du personnage (affichée sous le type sur téléphone) -->
+            <div class="character-image">
+                <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}">
+            </div>
+
+            <!-- Conteneur pour les onglets et le contenu -->
+            <div class="character-info">
+                <div class="tabs-and-content">
+                    <!-- Système d'onglets -->
+                    <div class="tabs">
+                        <div class="tab" data-tab="description">{% if language == "FR-fr" %}Description{% else %}Description{% endif %}</div>
+                        <div class="tab" data-tab="weapons">{% if language == "FR-fr" %}Armes{% else %}Weapons{% endif %}</div>
+                        <div class="tab" data-tab="passives">{% if language == "FR-fr" %}Bénédictions{% else %}Blessings{% endif %}</div>
+                        <div class="tab" data-tab="skills">{% if language == "FR-fr" %}Compétences{% else %}Skills{% endif %}</div>
+                        <div class="tab" data-tab="gems">{% if language == "FR-fr" %}Gemmes{% else %}Gems{% endif %}</div>
+                        <div class="tab" data-tab="shadows">{% if language == "FR-fr" %}Ombres{% else %}Shadows{% endif %}</div>
+                        <div class="tab" data-tab="monarchs">{% if language == "FR-fr" %}Monarques{% else %}Monarchs{% endif %}</div>
+                        <div class="tab" data-tab="artefacts" id="artefacts-tab">{% if language == "FR-fr" %}Artefacts{% else %}Artefacts{% endif %}</div>
+                        <div class="tab" id="dropdown-tab">
+                            <select id="equipment-select">
+                                {% if character.equipment_sets and character.equipment_sets|length > 0 %}
+                                    {% for set in character.equipment_sets %}
+                                        <option value="{{ loop.index0 }}">{{ set.set_name }}</option>
+                                    {% endfor %}
+                                {% else %}
+                                    <option disabled>Aucun set équipé</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Contenu des onglets -->
+                    {% include 'partials/review.html' %}
+                    {% include 'partials/weapons.html' %}
+                    {% include 'partials/passives.html' %}
+                    {% include 'partials/skills.html' %}
+                    {% include 'partials/gems.html' %}
+                    {% include 'partials/shadows.html' %}
+                    {% include 'partials/monarchs.html' %}
+                    {% include 'partials/artefacts.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block body_js %}
     <script id="equipmentSetsData" type="application/json">
-      {% if character.equipment_sets and character.equipment_sets|length > 0 %}
-          {{ character.equipment_sets|tojson }}
-      {% else %}
-          []
-      {% endif %}
+        {% if character.equipment_sets and character.equipment_sets|length > 0 %}
+            {{ character.equipment_sets|tojson }}
+        {% else %}
+            []
+        {% endif %}
     </script>
     <script id="equipmentSetsEffectsData" type="application/json">
-      {{ panoplies_effects|tojson }}
+        {{ panoplies_effects|tojson }}
     </script>
     <script id="coresEffectsData" type="application/json">
-      {{ cores_effects|tojson }}
+        {{ cores_effects|tojson }}
     </script>
-    <script src="{{ asset_url_for('static', filename='js/SJW.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/SJW.js') }}"></script>
 {% endblock %}
