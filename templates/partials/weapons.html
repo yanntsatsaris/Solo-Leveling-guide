@@ -1,13 +1,13 @@
-<div id="weapons" class="tab-content">
+<section id="weapons" class="tab-content">
   <h2>Armes</h2>
   {% if character.weapon and character.weapon|length > 0 %}
     {% if character.weapon|length == 1 %}
       <!-- Affichage pour une seule arme -->
       <div class="weapons-container">
         {% for weapon in character.weapon %}
-        <div class="weapon-card">
+        <article class="weapon-card">
           <!-- Conteneur pour l'image et les stats -->
-          <div class="weapon-header">
+          <header class="weapon-header">
             <div class="weapon-image">
               <img
                 src="{{ url_for('static', filename=weapon.image) }}"
@@ -18,11 +18,11 @@
               <strong>{{ weapon.name }}</strong>
               <p>{{ weapon.stats|safe }}</p>
             </div>
-          </div>
+          </header>
 
           <!-- Section des évolutions -->
           {% if weapon.evolutions and weapon.evolutions|length > 0 %}
-          <div class="weapon-evolutions">
+          <section class="weapon-evolutions">
             <h3>Évolutions</h3>
             <ul>
               {% for evolution in weapon.evolutions %}
@@ -49,11 +49,11 @@
               {% endif %}
               {% endfor %}
             </ul>
-          </div>
+          </section>
           {% else %}
           <p>Aucune évolution disponible pour cette arme.</p>
           {% endif %}
-        </div>
+        </article>
         {% endfor %}
       </div>
     {% else %}
@@ -97,7 +97,7 @@
         <tr>
           {% for weapon in character.weapon %}
           <td data-type="{{ weapon.type }}" data-rarity="{{ weapon.rarity }}">
-            <div class="weapon-card-codex">
+            <article class="weapon-card-codex">
               {% if weapon.alias %}
               <a href="{{ url_for('sjw.weapon_details', weaponAlias=weapon.alias) }}">
                 <img
@@ -115,7 +115,7 @@
               {% if weapon.stats %}
               <p class="weapon-description">{{ weapon.stats|safe }}</p>
               {% endif %}
-            </div>
+            </article>
           </td>
           {% if loop.index % 4 == 0 %}
           </tr><tr>
@@ -127,7 +127,7 @@
   {% else %}
   <p>Aucune arme disponible pour ce personnage.</p>
   {% endif %}
-</div>
+</section>
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         const typeButtons = document.querySelectorAll(".weapon-type-button");

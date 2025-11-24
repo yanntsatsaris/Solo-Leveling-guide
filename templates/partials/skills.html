@@ -1,4 +1,4 @@
-<div id="skills" class="tab-content">
+<section id="skills" class="tab-content">
     <h2>Skills</h2>
     {% if character.alias == "SJW" %}
         {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
@@ -7,27 +7,27 @@
             </button>
             {% include 'partials/add_sjw_skill_modal.html' %}
         {% endif %}
-        <div class="sjw-inner-tabs">
-            <div class="sjw-inner-tab-btns">
+        <section class="sjw-inner-tabs">
+            <nav class="sjw-inner-tab-btns">
                 <div class="sjw-inner-tab-btn active" data-inner-tab="Skill">Skills</div>
                 <div class="sjw-inner-tab-btn" data-inner-tab="QTE">QTE</div>
                 <div class="sjw-inner-tab-btn" data-inner-tab="Ultime">Ultime</div>
-            </div>
+            </nav>
             <div class="sjw-inner-tab-contents">
                 
                 {% for tab in ['Skill', 'QTE', 'Ultime'] %}
-                <div class="sjw-inner-tab-content{% if loop.first %} active{% endif %}" id="sjw-inner-tab-{{ tab }}">
+                <section class="sjw-inner-tab-content{% if loop.first %} active{% endif %}" id="sjw-inner-tab-{{ tab }}">
                     <div class="sjw-skills-grid-wrapper">
                         <div class="sjw-skills-grid">
                             {% set skills = character.skills | selectattr('type', 'equalto', tab) | list %}
                             {% for skill in skills %}
-                                <div class="sjw-skill-cell sjw-skill-clickable" data-skill-index="{{ loop.index0 }}">
+                                <article class="sjw-skill-cell sjw-skill-clickable" data-skill-index="{{ loop.index0 }}">
                                     <div class="sjw-skill-image-row">
                                         {% if skill.image_path %}
                                             <img src="{{ url_for('static', filename=skill.image_path) }}" alt="Skill Image">
                                         {% endif %}
                                     </div>
-                                </div>
+                                </article>
                             {% endfor %}
                         </div>
                         <!-- Bulle flottante pour les gems -->
@@ -38,10 +38,10 @@
                     {% if skills|length == 0 %}
                         <p>Aucune compétence dans cette catégorie.</p>
                     {% endif %}
-                </div>
+                </section>
                 {% endfor %}
             </div>
-        </div>
+        </section>
         <div id="sjw-info-bubble" class="sjw-info-bubble" style="display:none; position:absolute; z-index:1100;"></div>
         <script>
         window.allSkillsData = {{ character.skills|tojson }};
@@ -190,7 +190,7 @@ function updateGemHoverListeners(skill) {
         {# Section classique pour les autres personnages #}
         {% if character.skills and character.skills|length > 0 %}
             {% for skill in character.skills %}
-                <div class="skill {% if skill.principal %}principal{% endif %}">
+                <article class="skill {% if skill.principal %}principal{% endif %}">
                     {% if skill.image %}
                         <img src="{{ url_for('static', filename=skill.image) }}" alt="{{ skill.name or 'Skill Image' }}">
                     {% endif %}
@@ -200,10 +200,10 @@ function updateGemHoverListeners(skill) {
                         {% endif %}
                         <p>{{ skill.description|safe }}</p>
                     </div>
-                </div>
+                </article>
             {% endfor %}
         {% else %}
             <p>Informations sur les skills du personnage.</p>
         {% endif %}
     {% endif %}
-</div>
+</section>

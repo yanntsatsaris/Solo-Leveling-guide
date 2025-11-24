@@ -4,7 +4,7 @@
   position: relative; /* Définit le conteneur comme parent pour les éléments positionnés */
 }
 
-.artefact-item {
+article.artefact-item {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
@@ -12,7 +12,7 @@
 }
 
 /* Style pour la statistique principale */
-.artefact-item .stat-main {
+article.artefact-item .stat-main {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,7 +70,7 @@
 }
 
 /* Conteneur pour chaque artefact */
-.artefact-item {
+article.artefact-item {
   display: flex;
   flex-direction: column;
   margin-bottom: 1px; /* Réduit l'espacement entre les artefacts */
@@ -169,7 +169,7 @@
 }
 
 /* Section des noyaux */
-.cores-section {
+section.cores-section {
   margin-top: 20px;
 }
 
@@ -179,7 +179,7 @@
   justify-content: center; /* Répartit les noyaux sur la ligne */
 }
 
-.core-item {
+article.core-item {
   display: flex;
   flex-direction: row; /* Place l'image et les stats côte à côte */
   align-items: flex-start; /* Aligne l'image et les stats en haut */
@@ -204,7 +204,7 @@
 }
 
 /* Texte positionné au-dessus de l'image */
-.core-item .stat-container {
+article.core-item .stat-container {
   position: relative; /* Définit le conteneur comme un parent positionné */
   display: inline-block;
   text-align: center;
@@ -212,7 +212,7 @@
   height: auto;
 }
 
-.core-item .stat-main span {
+article.core-item .stat-main span {
   position: absolute; /* Positionne le texte par rapport au conteneur parent */
   top: 50%; /* Centre verticalement */
   left: 50%; /* Centre horizontalement */
@@ -225,14 +225,14 @@
 }
 
 /* Image des statistiques principales des noyaux */
-.core-item .stat-main img {
+article.core-item .stat-main img {
   width: 150px; /* Définit la largeur à 150px */
   height: auto; /* Conserve les proportions */
   display: block;
 }
 
 /* Conteneur pour chaque statistique secondaire */
-.core-item .stat-secondary {
+article.core-item .stat-secondary {
   display: flex;
   justify-content: center; /* Centre le contenu horizontalement */
   align-items: center; /* Centre verticalement le texte et l'image */
@@ -245,7 +245,7 @@
 }
 
 /* Texte positionné au centre de l'image secondaire */
-.core-item .stat-secondary span {
+article.core-item .stat-secondary span {
   position: absolute; /* Positionne le texte par rapport au conteneur parent */
   top: 50%; /* Centre verticalement */
   left: 50%; /* Centre horizontalement */
@@ -258,7 +258,7 @@
 }
 
 /* Image des statistiques secondaires */
-.core-item .stat-secondary img {
+article.core-item .stat-secondary img {
   width: 120px; /* Augmente la taille de l'image */
   height: auto; /* Conserve les proportions */
   display: block;
@@ -266,7 +266,7 @@
 }
 
 /* Conteneur des statistiques des noyaux */
-.core-item .stats {
+article.core-item .stats {
   display: flex;
   flex-direction: column; /* Aligne les stats verticalement */
   gap: 5px; /* Réduit l'espacement entre les stats principales et secondaires */
@@ -275,7 +275,7 @@
 }
 
 /* Conteneur pour chaque statistique principale et secondaire */
-.core-item .stats-container {
+.stats-container {
   display: flex;
   position: relative;
   flex-direction: column; /* Aligne le contenu verticalement */
@@ -288,7 +288,7 @@
 }
 
 /* Texte positionné au-dessus de l'image */
-.core-item .stat-container span {
+article.core-item .stat-container span {
   position: absolute;
   top: 50%; /* Centre verticalement */
   left: 50%; /* Centre horizontalement */
@@ -301,7 +301,7 @@
 }
 
 /* Style pour la statistique principale */
-.core-item .stat-main {
+article.core-item .stat-main {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -422,7 +422,7 @@
   }
 
   /* Chaque core-item */
-  .core-item {
+  article.core-item {
     display: flex;
     flex-direction: row; /* Place chaque core-item sur une ligne */
     align-items: center; /* Centre le contenu verticalement */
@@ -442,7 +442,7 @@
   }
 
   /* Conteneur des statistiques */
-  .core-item .stats {
+  article.core-item .stats {
     display: flex;
     flex-direction: column; /* Aligne les stats verticalement */
     gap: 1px; /* Ajoute un espacement entre les stats */
@@ -456,13 +456,13 @@
   }
 
   /* Réduit la taille de la police pour les statistiques principales des artefacts et cores */
-  .core-item .stat-main span,
+  article.core-item .stat-main span,
   .artefact-item-content .stat-main span {
     font-size: 8px; /* Réduit la taille de la police */
   }
 
   /* Réduit la taille de la police pour les statistiques secondaires des artefacts et cores */
-  .core-item .stat-secondary span,
+  article.core-item .stat-secondary span,
   .artefact-item-content .stat-secondary span {
     font-size: 8px; /* Réduit la taille de la police */
   }
@@ -537,7 +537,7 @@
     justify-content: center; /* Centre les noyaux horizontalement */
   }
 
-  .core-item {
+  article.core-item {
     width: calc(50% - 20px); /* Définit 2 éléments par ligne */
     padding: 10px; /* Ajoute un padding interne */
     border-radius: 8px; /* Arrondit légèrement les coins */

@@ -1,11 +1,11 @@
-.skill {
+article.skill {
   display: flex;
   align-items: flex-start; /* Aligne le texte et l'image en haut */
   margin-bottom: 20px; /* Ajoute un espacement entre les skills */
 }
 
 /* Images dans les descriptions des skills */
-.skill img {
+article.skill img {
   height: 1em; /* Définit la hauteur des images à la taille de la police */
   width: auto; /* Maintient les proportions de l'image */
   vertical-align: -0.2em; /* Ajuste légèrement la position verticale */
@@ -14,22 +14,22 @@
 }
 
 /* Images à côté du nom des skills */
-.skill > img {
+article.skill > img {
   height: 50px; /* Définit la hauteur des images à la taille de la police */
   width: auto; /* Maintient les proportions de l'image */
   margin-right: 10px; /* Ajoute un espacement entre l'image et le texte */
 }
 
 /* Texte des descriptions des skills */
-.skill p {
+article.skill p {
   text-align: justify; /* Justifie le texte */
   margin: 0; /* Supprime les marges inutiles */
 }
 
-.sjw-inner-tabs {
+section.sjw-inner-tabs {
   margin-bottom: 1em;
 }
-.sjw-inner-tab-btns {
+nav.sjw-inner-tab-btns {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
@@ -49,10 +49,10 @@
   background: #ffcc00;
   color: #121212;
 }
-.sjw-inner-tab-content {
+section.sjw-inner-tab-content {
   display: none;
 }
-.sjw-inner-tab-content.active {
+section.sjw-inner-tab-content.active {
   display: block;
 }
 .sjw-skill-images {
@@ -106,11 +106,11 @@
     margin: 24px 0;
     max-width: 800px;
 }
-.sjw-skill-cell {
+article.sjw-skill-cell {
     cursor: pointer;
     transition: box-shadow 0.2s;
 }
-.sjw-skill-cell:hover {
+article.sjw-skill-cell:hover {
     box-shadow: 0 0 12px #ffcc0044;
 }
 
