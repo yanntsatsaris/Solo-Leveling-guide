@@ -8,9 +8,9 @@
     <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon-onglet.png') }}" />
     {% block head_css %}{% endblock %}
 </head>
-<body>
+<body {% block body_attributes %}{% endblock %}>
     {% include 'navbar.html' %}
-    <main class="container">
+    <main>
         {% block content %}{% endblock %}
     </main>
     {% block body_js %}{% endblock %}
