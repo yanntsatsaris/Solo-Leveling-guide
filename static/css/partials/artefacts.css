@@ -1,6 +1,7 @@
 .artefacts-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 20px;
   position: relative; /* Définit le conteneur comme parent pour les éléments positionnés */
 }
 
@@ -199,9 +200,9 @@
 /* Conteneur des statistiques des noyaux */
 .core-item .stats {
   display: flex;
-  flex-direction: row; /* Aligne la stat principale et les stats secondaires horizontalement */
-  align-items: center;
-  gap: 5px;
+  flex-direction: column; /* Aligne la stat principale et les stats secondaires verticalement */
+  align-items: flex-start; /* Aligne à gauche comme les artefacts */
+  gap: 2px;
 }
 
 /* Conteneur pour les statistiques secondaires des noyaux */
