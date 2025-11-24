@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'admin_base.html' %}
 
 {% block title %}Tester l'envoi d'e-mails - Admin{% endblock %}
 
@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/admin_test_emails.css') }}">
 {% endblock %}
 
-{% block content %}
+{% block admin_content %}
     <div class="form-container">
         <h1>Tester l'envoi d'e-mails</h1>
         <p>Cette page permet d'envoyer des e-mails de test pour vérifier la configuration SMTP et le rendu des templates.</p>

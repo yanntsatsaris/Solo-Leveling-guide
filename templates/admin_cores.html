@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'admin_base.html' %}
 
 {% block title %}Gestion des Noyaux{% endblock %}
 
@@ -7,35 +7,33 @@
     <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/edit_cores_modal.css') }}">
 {% endblock %}
 
-{% block content %}
-    <div class="container">
-        <h1>Gestion des Noyaux</h1>
-        <div style="text-align:center; margin-bottom: 24px;">
-            <button id="create-core-btn" class="admin-btn">Créer un nouveau noyaux</button>
-        </div>
-        <table>
-            <tr>
-                <th>Image</th>
-                <th>Couleur</th>
-                <th>Numero</th>
-            </tr>
-            {% for core in cores %}
-            <tr>
-                <td>
-                    {% if core.image %}
-                        <a href="#" data-core-name="{{ core.color }}">
-                            <img src="{{ core.image }}" alt="{{ core.color }}">
-                        </a>
-                    {% else %}
-                        <span style="color:#ff3333;">Aucune image</span>
-                    {% endif %}
-                </td>
-                <td>{{ core.color }}</td>
-                <td>{{ core.number }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+{% block admin_content %}
+    <h1>Gestion des Noyaux</h1>
+    <div style="text-align:center; margin-bottom: 24px;">
+        <button id="create-core-btn" class="admin-btn">Créer un nouveau noyaux</button>
     </div>
+    <table>
+        <tr>
+            <th>Image</th>
+            <th>Couleur</th>
+            <th>Numero</th>
+        </tr>
+        {% for core in cores %}
+        <tr>
+            <td>
+                {% if core.image %}
+                    <a href="#" data-core-name="{{ core.color }}">
+                        <img src="{{ core.image }}" alt="{{ core.color }}">
+                    </a>
+                {% else %}
+                    <span style="color:#ff3333;">Aucune image</span>
+                {% endif %}
+            </td>
+            <td>{{ core.color }}</td>
+            <td>{{ core.number }}</td>
+        </tr>
+        {% endfor %}
+    </table>
     {% include 'partials/edit_cores_modal.html' %}
 {% endblock %}
 
