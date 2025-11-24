@@ -1,106 +1,93 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block title %}{{ weapon.name }}{% endblock %}
 
 {% block head_css %}
-    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/weapon_details.css') }}" />
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/weapon_details.css') }}">
+{% endblock %}
+
+{% block body_attributes %}
+class="{% if weapon.type %}background-image{% endif %}" style="{% if weapon.type %}background-image: url('{{ url_for('static', filename='images/Background/BG_' ~ weapon.type ~ '.webp') }}');{% endif %}"
 {% endblock %}
 
 {% block content %}
-    <!-- Conteneur principal divisé en deux colonnes -->
-    <div class="layout">
-      <!-- Colonne pour l'image -->
-      <div class="image-column">
+<!-- Conteneur principal divisé en deux colonnes -->
+<div class="layout">
+    <!-- Colonne pour l'image -->
+    <div class="image-column">
         <div class="weapon-image">
-          <img
-            src="{{ url_for('static', filename=weapon.image) }}"
-            alt="{{ weapon.name }}"
-          />
+            <img src="{{ url_for('static', filename=weapon.image) }}" alt="{{ weapon.name }}">
         </div>
-      </div>
-
-      <!-- Colonne pour le contenu principal -->
-      <div class="content-column">
-        <div class="container">
-          <h1>{{ weapon.name }}</h1>
-
-          <!-- Image du personnage (affichée sous le type sur téléphone) -->
-          <div class="weapon-image">
-            <img
-              src="{{ url_for('static', filename=weapon.image) }}"
-              alt="{{ weapon.name }}"
-            />
-          </div>
-          <!-- Conteneur pour les onglets et le contenu -->
-          <div class="weapon-info">
-            <div class="tabs-and-content">
-              <!-- Système d'onglets -->
-              <div class="tabs">
-                <div class="tab active" data-tab="review">Review</div>
-                <div class="tab" data-tab="skills">Skills</div>
-              </div>
-
-              <!-- Contenu des onglets -->
-              <div class="tab-content active" id="review">
-                <h2>Review</h2>
-                <p>{{ weapon.description|safe }}</p>
-                <!-- Section des évolutions -->
-                {% if weapon.evolutions and weapon.evolutions|length > 0 %}
-                <div class="weapon-evolutions">
-                  <h3>Évolutions</h3>
-                  <ul>
-                    {% for evolution in weapon.evolutions %}
-                    {% if evolution.range %}
-                    <!-- Afficher les évolutions groupées (A06-A10) -->
-                    <li>
-                      <img
-                        src="{{ url_for('static', filename='images/Advancement/' + evolution.evolution_id + '.webp') }}"
-                        alt="{{ evolution.evolution_id }}"
-                        class="weapon-evolution-image weapon-evolution-range"
-                      />
-                      <span>{{ evolution.description|safe }}</span>
-                    </li>
-                    {% else %}
-                    <!-- Afficher les évolutions individuelles (A01 à A05) -->
-                    <li>
-                      <img
-                        src="{{ url_for('static', filename='images/Advancement/' + evolution.evolution_id + '.webp') }}"
-                        alt="{{ evolution.evolution_id }}"
-                        class="weapon-evolution-image"
-                      />
-                      <span>{{ evolution.description|safe }}</span>
-                    </li>
-                    {% endif %}
-                    {% endfor %}
-                  </ul>
-                </div>
-                {% else %}
-                <p>Aucune évolution disponible pour cette arme.</p>
-                {% endif %}
-              </div>
-
-              <div class="tab-content" id="skills">
-                <h2>Skills</h2>
-                {% if weapon.skills %}
-                <ul>
-                  {% for skill in weapon.skills %}
-                  <li>
-                    <h3>{{ skill.name }}</h3>
-                    <img
-                      src="{{ url_for('static', filename=skill.image) }}"
-                      alt="{{ skill.name }}"
-                    />
-                    <p>{{ skill.description|safe }}</p>
-                  </li>
-                  {% endfor %}
-                </ul>
-                {% else %}
-                <p>No skills available for this weapon.</p>
-                {% endif %}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
+
+    <!-- Colonne pour le contenu principal -->
+    <div class="content-column">
+        <div class="container">
+            <h1>{{ weapon.name }}</h1>
+
+            <!-- Image du personnage (affichée sous le type sur téléphone) -->
+            <div class="weapon-image">
+                <img src="{{ url_for('static', filename=weapon.image) }}" alt="{{ weapon.name }}">
+            </div>
+            <!-- Conteneur pour les onglets et le contenu -->
+            <div class="weapon-info">
+                <div class="tabs-and-content">
+                    <!-- Système d'onglets -->
+                    <div class="tabs">
+                        <div class="tab active" data-tab="review">Review</div>
+                        <div class="tab" data-tab="skills">Skills</div>
+                    </div>
+
+                    <!-- Contenu des onglets -->
+                    <div class="tab-content active" id="review">
+                        <h2>Review</h2>
+                        <p>{{ weapon.description|safe }}</p>
+                        <!-- Section des évolutions -->
+                        {% if weapon.evolutions and weapon.evolutions|length > 0 %}
+                        <div class="weapon-evolutions">
+                            <h3>Évolutions</h3>
+                            <ul>
+                                {% for evolution in weapon.evolutions %}
+                                {% if evolution.range %}
+                                <!-- Afficher les évolutions groupées (A06-A10) -->
+                                <li>
+                                    <img src="{{ url_for('static', filename='images/Advancement/' ~ evolution.evolution_id ~ '.webp') }}" alt="{{ evolution.evolution_id }}" class="weapon-evolution-image weapon-evolution-range">
+                                    <span>{{ evolution.description|safe }}</span>
+                                </li>
+                                {% else %}
+                                <!-- Afficher les évolutions individuelles (A01 à A05) -->
+                                <li>
+                                    <img src="{{ url_for('static', filename='images/Advancement/' ~ evolution.evolution_id ~ '.webp') }}" alt="{{ evolution.evolution_id }}" class="weapon-evolution-image">
+                                    <span>{{ evolution.description|safe }}</span>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% else %}
+                        <p>Aucune évolution disponible pour cette arme.</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="tab-content" id="skills">
+                        <h2>Skills</h2>
+                        {% if weapon.skills %}
+                        <ul>
+                            {% for skill in weapon.skills %}
+                            <li>
+                                <h3>{{ skill.name }}</h3>
+                                <img src="{{ url_for('static', filename=skill.image) }}" alt="{{ skill.name }}">
+                                <p>{{ skill.description|safe }}</p>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <p>No skills available for this weapon.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
