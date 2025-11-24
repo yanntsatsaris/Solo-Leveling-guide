@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tester l'envoi d'e-mails - Admin</title>
-    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/admin_test_emails.css') }}">
-    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/icon-onglet.png') }}">
-</head>
-<body>
-    {% include 'navbar.html' %}
+{% extends 'base.html' %}
 
+{% block title %}Tester l'envoi d'e-mails - Admin{% endblock %}
+
+{% block head_css %}
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/admin_test_emails.css') }}">
+{% endblock %}
+
+{% block content %}
     <div class="form-container">
         <h1>Tester l'envoi d'e-mails</h1>
         <p>Cette page permet d'envoyer des e-mails de test pour vérifier la configuration SMTP et le rendu des templates.</p>
@@ -40,5 +37,4 @@
             <button type="submit" class="btn">Envoyer l'e-mail de test</button>
         </form>
     </div>
-</body>
-</html>
+{% endblock %}

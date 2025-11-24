@@ -1,72 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Solo Leveling Arise : Sung Jinwoo</title>
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{{ url_for('static', filename='images/icon-onglet.png') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/SJW.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/edit_sjw_modal.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/add_shadow_modal.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/add_weapon_modal.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/add_sjw_skill_modal.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/review.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/weapons.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/passives.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/skills.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/gems.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/shadows.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/monarchs.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/partials/artefacts.css') }}"
-    />
-  </head>
-  <body
-    class="{% if character.alias %}background-image{% endif %}"
-    style="{% if character.alias %}background-image: url('{{ url_for('static', filename='images/Background/BG_Dark.webp') }}');{% endif %}"
-  >
-    {% include 'navbar.html' %}
+{% extends 'base.html' %}
+
+{% block title %}Sung Jinwoo{% endblock %}
+
+{% block head_css %}
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/SJW.css') }}" />
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/edit_sjw_modal.css') }}" />
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/add_shadow_modal.css') }}" />
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/add_weapon_modal.css') }}" />
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/add_sjw_skill_modal.css') }}" />
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/review.css') }}" />
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/weapons.css') }}" />
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/passives.css') }}" />
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/skills.css') }}" />
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/gems.css') }}" />
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/shadows.css') }}" />
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/monarchs.css') }}" />
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/artefacts.css') }}" />
+{% endblock %}
+
+{% block content %}
     <div class="layout">
       <!-- Colonne pour l'image -->
       <div class="image-column">
@@ -157,7 +109,9 @@
         </div>
       </div>
     </div>
+{% endblock %}
 
+{% block body_js %}
     <script id="equipmentSetsData" type="application/json">
       {% if character.equipment_sets and character.equipment_sets|length > 0 %}
           {{ character.equipment_sets|tojson }}
@@ -171,6 +125,5 @@
     <script id="coresEffectsData" type="application/json">
       {{ cores_effects|tojson }}
     </script>
-    <script src="{{ url_for('static', filename='js/SJW.js') }}"></script>
-  </body>
-</html>
+    <script src="{{ asset_url_for('static', filename='js/SJW.js') }}"></script>
+{% endblock %}

@@ -1,25 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ weapon.name }} - Solo Leveling Arise</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/weapon_details.css') }}"
-    />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{{ url_for('static', filename='images/icon-onglet.png') }}"
-    />
-  </head>
-  <body
-    class="{% if weapon.type %}background-image{% endif %}"
-    style="{% if weapon.type %}background-image: url('{{ url_for('static', filename='images/Background/BG_' ~ weapon.type ~ '.webp') }}');{% endif %}">
-    {% include 'navbar.html' %}
+{% extends 'base.html' %}
 
-    
+{% block title %}{{ weapon.name }}{% endblock %}
+
+{% block head_css %}
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/weapon_details.css') }}" />
+{% endblock %}
+
+{% block content %}
     <!-- Conteneur principal divisé en deux colonnes -->
     <div class="layout">
       <!-- Colonne pour l'image -->
@@ -116,5 +103,4 @@
         </div>
       </div>
     </div>
-  </body>
-</html>
+{% endblock %}
