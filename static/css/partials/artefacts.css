@@ -4,7 +4,7 @@
   position: relative; /* Définit le conteneur comme parent pour les éléments positionnés */
 }
 
-article.artefact-item {
+.artefact-item {
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
@@ -12,7 +12,7 @@ article.artefact-item {
 }
 
 /* Style pour la statistique principale */
-article.artefact-item .stat-main {
+.artefact-item .stat-main {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -70,7 +70,7 @@ article.artefact-item .stat-main {
 }
 
 /* Conteneur pour chaque artefact */
-article.artefact-item {
+.artefact-item {
   display: flex;
   flex-direction: column;
   margin-bottom: 1px; /* Réduit l'espacement entre les artefacts */
@@ -170,7 +170,7 @@ article.artefact-item {
 }
 
 /* Section des noyaux */
-section.cores-section {
+.cores-section {
   margin-top: 20px;
 }
 
@@ -181,9 +181,9 @@ section.cores-section {
   flex-wrap: wrap;
 }
 
-article.core-item {
+.core-item {
   display: flex;
-  flex-direction: row;
+  flex-direction: row; /* Aligne l'image du noyau et le bloc de stats horizontalement */
   align-items: center;
   gap: 10px;
 }
@@ -197,20 +197,27 @@ article.core-item {
 }
 
 /* Conteneur des statistiques des noyaux */
-article.core-item .stats {
+.core-item .stats {
   display: flex;
-  flex-direction: row;
+  flex-direction: row; /* Aligne la stat principale et les stats secondaires horizontalement */
   align-items: center;
   gap: 5px;
 }
 
+/* Conteneur pour les statistiques secondaires des noyaux */
+.core-item .stat-secondary-container {
+    display: flex;
+    flex-direction: column; /* Empile les deux stats secondaires verticalement */
+    gap: 1px;
+}
+
 /* Dimensionnement des images de stats pour les noyaux */
-article.core-item .stat-main img {
+.core-item .stat-main img {
   width: 150px;
   height: auto;
 }
 
-article.core-item .stat-secondary img {
+.core-item .stat-secondary img {
   width: 120px;
   height: auto;
 }
@@ -316,7 +323,7 @@ article.core-item .stat-secondary img {
   }
 
   /* Chaque core-item */
-  article.core-item {
+  .core-item {
     display: flex;
     flex-direction: row; /* Place chaque core-item sur une ligne */
     align-items: center; /* Centre le contenu verticalement */
@@ -336,7 +343,7 @@ article.core-item .stat-secondary img {
   }
 
   /* Conteneur des statistiques */
-  article.core-item .stats {
+  .core-item .stats {
     display: flex;
     flex-direction: column; /* Aligne les stats verticalement */
     gap: 1px; /* Ajoute un espacement entre les stats */
@@ -424,7 +431,7 @@ article.core-item .stat-secondary img {
     justify-content: center; /* Centre les noyaux horizontalement */
   }
 
-  article.core-item {
+  .core-item {
     width: calc(50% - 20px); /* Définit 2 éléments par ligne */
     padding: 10px; /* Ajoute un padding interne */
     border-radius: 8px; /* Arrondit légèrement les coins */
