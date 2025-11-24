@@ -1,21 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Solo Leveling Arise : Guides</title>
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{{ url_for('static', filename='images/icon-onglet.png') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/index.css') }}"
-    />
-  </head>
-  <body>
-    {% include 'navbar.html' %}
+{% extends 'base.html' %}
+
+{% block title %}Guides{% endblock %}
+
+{% block head_css %}
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/index.css') }}" />
+{% endblock %}
+
+{% block content %}
     <div class="container">
       <h1>Guides</h1>
       <p
@@ -29,5 +20,4 @@
         Find useful guides to help you progress in Solo Leveling Arise.
       </p>
     </div>
-  </body>
-</html>
+{% endblock %}

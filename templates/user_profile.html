@@ -1,22 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mon compte - {{ user.uid[0].decode() if user.uid and user.uid[0] is not none else '' }}</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/user_profile.css') }}"
-    />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="{{ url_for('static', filename='images/icon-onglet.png') }}"
-    />
-  </head>
+{% extends 'base.html' %}
 
-  <body>
-    {% include 'navbar.html' %}
+{% block title %}Mon compte - {{ user.uid[0].decode() if user.uid and user.uid[0] is not none else '' }}{% endblock %}
+
+{% block head_css %}
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/user_profile.css') }}" />
+{% endblock %}
+
+{% block content %}
     <div class="user-profile-container">
       <h2>Mon compte : {{ user.uid[0].decode() if user.uid and user.uid[0] is not none else '' }}</h2>
       <form method="POST" id="profile-form" autocomplete="off">
@@ -43,84 +33,8 @@
       <a href="{{ url_for('admin.admin_test_emails') }}" class="admin-btn">Tester les E-mails</a>
       {% endif %}
     </div>
-    <script>
-document.addEventListener("DOMContentLoaded", function() {
-  const emailInput = document.getElementById('profile_email');
-  const pwdInput = document.getElementById('password');
-  const pwdConfirmInput = document.getElementById('password_confirm');
-  const submitBtn = document.getElementById('profile-submit');
-  const errorDiv = document.getElementById('profile-error');
-  const form = document.getElementById('profile-form');
+{% endblock %}
 
-  let emailTouched = false;
-  let pwdTouched = false;
-  let pwdConfirmTouched = false;
-
-  function updateProfileError() {
-    let errorMsg = "";
-    const strictEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
-    // Vérification email
-    if (emailTouched) {
-      if (!strictEmail.test(emailInput.value)) {
-        errorMsg += "Adresse mail invalide.<br>";
-        emailInput.classList.add('input-error');
-      } else {
-        emailInput.classList.remove('input-error');
-      }
-    } else {
-      emailInput.classList.remove('input-error');
-    }
-
-    // Vérification mot de passe
-    const pwd = pwdInput.value;
-    const confirm = pwdConfirmInput.value;
-    if ((pwdTouched || pwdConfirmTouched) && (pwd || confirm)) {
-      if (pwd !== confirm) {
-        errorMsg += "Les mots de passe ne correspondent pas.";
-        pwdConfirmInput.classList.add('input-error');
-      } else {
-        pwdConfirmInput.classList.remove('input-error');
-      }
-    } else {
-      pwdConfirmInput.classList.remove('input-error');
-    }
-
-    // Désactive le bouton si erreur
-    if (
-      (emailTouched && !strictEmail.test(emailInput.value)) ||
-      ((pwdTouched || pwdConfirmTouched) && pwd !== confirm)
-    ) {
-      submitBtn.disabled = true;
-    } else {
-      submitBtn.disabled = false;
-    }
-
-    errorDiv.innerHTML = errorMsg;
-  }
-
-  emailInput.addEventListener('input', function() {
-    emailTouched = true;
-    updateProfileError();
-  });
-  pwdInput.addEventListener('input', function() {
-    pwdTouched = true;
-    updateProfileError();
-  });
-  pwdConfirmInput.addEventListener('input', function() {
-    pwdConfirmTouched = true;
-    updateProfileError();
-  });
-
-  form.onsubmit = function(e) {
-    updateProfileError();
-    if (submitBtn.disabled) {
-      e.preventDefault();
-    }
-  };
-
-  // Pas de check initial pour ne rien afficher tant que l'utilisateur n'a rien fait
-});
-    </script>
-  </body>
-</html>
+{% block body_js %}
+    <script src="{{ asset_url_for('static', filename='js/user_profile.js') }}"></script>
+{% endblock %}
