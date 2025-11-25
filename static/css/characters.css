@@ -6,61 +6,57 @@ body {
   padding: 0;
 }
 
-/* Style pour le conteneur */
-.container {
+/* Style pour le conteneur principal */
+main.container {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centre le contenu horizontalement */
-  justify-content: center; /* Centre le contenu verticalement si nécessaire */
+  align-items: center;
   padding: 20px;
   background-color: #1e1e1e;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   margin: 70px auto;
-  width: fit-content; /* Adapte la largeur à la taille du tableau */
+  width: fit-content;
 }
 
-/* Style pour le tableau */
-table {
-  border-collapse: collapse;
-  margin: 0 auto; /* Centre le tableau horizontalement */
-}
-
-/* Transformer la ligne du tableau en conteneur flex */
-tr {
+/* Style pour la grille de personnages (remplace <table>) */
+#character-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-/* Style pour les cellules du tableau */
-td {
+/* Style pour chaque élément de la grille (remplace <td>) */
+#character-grid li {
   padding: 10px;
-  text-align: center; /* Centre le contenu dans les cellules */
-  vertical-align: top; /* Aligne le texte en haut de la cellule */
+  text-align: center;
+  vertical-align: top;
 }
 
 /* Centrer le texte sous l'image */
-td p {
-  margin: 5px 0 0 0; /* Réduit l'espacement au-dessus du texte */
-  font-size: 0.9rem; /* Réduit légèrement la taille du texte */
-  text-align: center; /* Centre le texte sous l'image */
-  width: 100%; /* S'assure que le texte occupe toute la largeur de la cellule */
+#character-grid li p {
+  margin: 5px 0 0 0;
+  font-size: 0.9rem;
+  text-align: center;
+  width: 100%;
 }
 
 /* Style pour les images */
-table img {
+#character-grid img {
   display: block;
-  margin: 10px auto; /* Centre les images dans leurs cellules */
+  margin: 10px auto;
   width: 150px;
   height: auto;
-  border-radius: 8px; /* Ajoute des coins arrondis aux images */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre aux images */
-  transition: transform 0.3s ease; /* Ajoute un effet au survol */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
 }
 
-table img:hover {
-  transform: scale(1.1); /* Agrandit légèrement l'image au survol */
+#character-grid img:hover {
+  transform: scale(1.1);
 }
 
 /* Style pour le titre */
@@ -71,20 +67,21 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* Style pour le paragraphe */
-p {
+/* Style pour le paragraphe d'introduction */
+main.container > p {
   color: #ffcc00;
   font-weight: bold;
   text-align: center;
   margin-top: 20px;
 }
 
-.character-type {
+/* Conteneurs pour les filtres (remplace .character-types et .rarity-filters divs) */
+.character-types, .rarity-filters {
     text-align: center;
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
-.type-button {
+.type-button, .rarity-button {
   margin: 5px;
   padding: 10px 20px;
   background-color: #1e1e1e;
@@ -94,29 +91,9 @@ p {
   cursor: pointer;
 }
 
-.type-button img{
+.type-button img {
   height: 20px;
   width: 20px;
-}
-
-.rarity-filter {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.rarity-button {
-  margin: 5px;
-  padding: 10px 20px;
-  background-color: #1e1e1e;
-  color: #ffcc00;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.character-table {
-  width: 100%;
-  text-align: center
 }
 
 /* Centrer le bouton "Ajouter un personnage" */
@@ -130,95 +107,80 @@ p {
 
 /* Pour les écrans de taille moyenne (tablettes) */
 @media (max-width: 768px) {
-  .container {
+  #character-grid img {
+    width: 120px;
   }
 
-  table img {
-    width: 120px; /* Réduit la taille des images */
-  }
-
-  td {
-    padding: 8px; /* Réduit l'espacement des cellules */
-  }
-
-  #set-options {
-    font-size: 0.8rem; /* Réduit la taille du texte */
-    min-width: 120px; /* Réduit la largeur minimale */
-  }
-
-  #set-options li {
-    padding: 6px 10px; /* Réduit l'espacement interne */
+  #character-grid li {
+    padding: 8px;
   }
 }
 
 /* Pour les écrans de petite taille (téléphones) */
 @media (max-width: 480px) {
-  .container {
-    width: 95%; /* Réduit légèrement la largeur du conteneur */
-    margin: 0 auto; /* Centre le conteneur */
-    padding: 10px; /* Réduit le padding */
+  main.container {
+    width: 95%;
+    margin: 0 auto;
+    padding: 10px;
   }
 
-  table {
-    width: 100%; /* S'assure que le tableau occupe toute la largeur */
+  #character-grid {
+    width: 100%;
   }
 
-  table img {
-    width: 100px; /* Réduit encore la taille des images */
+  #character-grid img {
+    width: 100px;
   }
 
-  td {
-    padding: 5px; /* Réduit l'espacement dans les cellules */
-    flex: 1 1 50%; /* Chaque image occupe environ 50% de la largeur */
-    max-width: 50%; /* Limite la largeur maximale */
-    box-sizing: border-box; /* Inclut le padding dans la largeur */
+  #character-grid li {
+    padding: 5px;
+    flex: 1 1 50%;
+    max-width: 50%;
+    box-sizing: border-box;
   }
 
-  td img {
-    margin: 0 auto; /* Centre l'image horizontalement */
-    display: block; /* S'assure que l'image est un bloc centré */
+  #character-grid li img {
+    margin: 0 auto;
   }
 
-  td p {
-    margin: 5px auto 0 auto; /* Centre le texte sous l'image */
-    font-size: 0.9rem; /* Réduit légèrement la taille du texte */
-    text-align: center; /* Centre le texte */
-    width: 100%; /* S'assure que le texte occupe toute la largeur de la cellule */
+  #character-grid li p {
+    margin: 5px auto 0 auto;
+    font-size: 0.9rem;
+    text-align: center;
+    width: 100%;
   }
 }
 
 /* Pour les écrans en mode paysage */
 @media (max-height: 480px) {
-  .container {
-    margin: 0 auto; /* Centre le conteneur */
-    padding: 15px; /* Ajuste le padding pour maximiser l'espace */
+  main.container {
+    margin: 0 auto;
+    padding: 15px;
   }
 
-  table {
-    width: 100%; /* S'assure que le tableau occupe toute la largeur */
+  #character-grid {
+    width: 100%;
   }
 
-  table img {
-    width: 120px; /* Adapte la taille des images pour le mode paysage */
-    height: auto; /* Conserve les proportions */
+  #character-grid img {
+    width: 120px;
   }
 
-  td {
-    padding: 8px; /* Ajuste l'espacement dans les cellules */
-    flex: 1 1 20%; /* Chaque image occupe environ 33% de la largeur */
-    max-width: 20%; /* Limite la largeur maximale à 33% */
-    box-sizing: border-box; /* Inclut le padding dans la largeur */
+  #character-grid li {
+    padding: 8px;
+    flex: 1 1 20%;
+    max-width: 20%;
+    box-sizing: border-box;
   }
 
-  td img {
-    margin: 0 auto; /* Centre l'image horizontalement */
-    display: block; /* S'assure que l'image est un bloc centré */
+  #character-grid li img {
+    margin: 0 auto;
   }
 
-  td p {
-    margin: 5px auto 0 auto; /* Centre le texte sous l'image */
-    font-size: 0.8rem; /* Réduit légèrement la taille du texte */
-    text-align: center; /* Centre le texte */
-    width: 100%; /* S'assure que le texte occupe toute la largeur de la cellule */
+  #character-grid li p {
+    margin: 5px auto 0 auto;
+    font-size: 0.8rem;
+    text-align: center;
+    width: 100%;
   }
 }

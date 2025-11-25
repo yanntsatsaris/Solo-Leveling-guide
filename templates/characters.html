@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<main class="container">
     <h1>Characters</h1>
     {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
         <button id="add-character-btn" class="admin-btn">
@@ -18,7 +18,7 @@
     <p>
         Discover the characters from Solo Leveling Arise.
     </p>
-    <div class="character-types">
+    <nav class="character-types">
         <button class="type-button" data-type="All">
             All
         </button>
@@ -28,8 +28,8 @@
                      alt="{{ type }}" />
             </button>
         {% endfor %}
-    </div>
-    <div class="rarity-filters">
+    </nav>
+    <nav class="rarity-filters">
         <button class="rarity-button" data-rarity="All">
             All
         </button>
@@ -38,21 +38,19 @@
                 {{ rarity }}
             </button>
         {% endfor %}
-    </div>
-    <table id="character-table">
-        <tr>
-            {% for image in images %}
-                <td data-type="{{ image.type }}" data-rarity="{{ image.rarity }}">
-                    <a href="{{ url_for('characters.character_details', alias=image.alias) }}">
-                        <img src="{{ url_for('static', filename=image.path) }}"
-                             alt="{{ image.name }}" />
-                    </a>
-                    <p hidden>{{ image.name }}</p>
-                </td>
-            {% endfor %}
-        </tr>
-    </table>
-</div>
+    </nav>
+    <ul id="character-grid">
+        {% for image in images %}
+            <li data-type="{{ image.type }}" data-rarity="{{ image.rarity }}">
+                <a href="{{ url_for('characters.character_details', alias=image.alias) }}">
+                    <img src="{{ url_for('static', filename=image.path) }}"
+                         alt="{{ image.name }}" />
+                </a>
+                <p hidden>{{ image.name }}</p>
+            </li>
+        {% endfor %}
+    </ul>
+</main>
 {% include 'partials/add_character_modal.html' %}
 {% endblock %}
 
