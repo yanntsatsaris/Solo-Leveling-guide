@@ -36,13 +36,6 @@
   align-items: center; /* Centre le contenu verticalement */
 }
 
-/* Image de la statistique principale */
-.artefact-item-content .stat-main img {
-  width: 150px; /* Taille de l'image principale */
-  height: auto; /* Conserve les proportions */
-  display: block;
-}
-
 /* Conteneur pour les statistiques secondaires */
 .artefact-item-content .stat-secondary-container {
   display: flex;
@@ -63,12 +56,6 @@
   margin: 0; /* Supprime l'espacement vertical entre les stats secondaires */
 }
 
-/* Image des statistiques secondaires */
-.artefact-item-content .stat-secondary img {
-  width: 120px; /* Taille des images secondaires */
-  height: auto; /* Conserve les proportions */
-}
-
 /* Conteneur pour chaque artefact */
 .artefact-item {
   display: flex;
@@ -85,34 +72,35 @@
   margin-right: 10px; /* Ajoute un espacement à droite */
 }
 
-/* Conteneur pour le texte et l'image */
-.artefact-item-content .stat-container {
+/* Conteneur générique pour le texte et l'image (utilisé par artefacts ET noyaux) */
+.stat-container {
   position: relative;
   display: inline-block;
   text-align: center;
-  width: auto; /* Permet aux images de définir leur propre largeur */
+  width: auto;
   height: auto;
 }
 
-/* Texte positionné au-dessus de l'image */
-.artefact-item-content .stat-container span {
+/* Texte positionné au-dessus de l'image (utilisé par artefacts ET noyaux) */
+.stat-container span {
   position: absolute;
-  top: 50%; /* Centre verticalement */
-  left: 50%; /* Centre horizontalement */
-  transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
-  color: white; /* Couleur du texte */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
   font-weight: bold;
-  font-size: 12px; /* Réduit légèrement la taille du texte */
-  z-index: 2; /* Assure que le texte est au-dessus de l'image */
-  text-shadow: 1px 1px 2px black; /* Ajoute une ombre pour améliorer la lisibilité */
+  font-size: 12px;
+  z-index: 2;
+  text-shadow: 1px 1px 2px black;
 }
 
-/* Image de fond */
-.artefact-item-content .stat-container img {
-  width: 100%; /* S'adapte à la largeur du conteneur */
-  height: auto; /* Conserve les proportions */
+/* Image de fond pour les stats */
+.stat-container img {
+  width: 100%;
+  height: auto;
   display: block;
 }
+
 
 /* Style pour la bulle des effets de panoplie */
 #set-effects {
@@ -175,186 +163,86 @@
 
 .cores-container {
   display: flex;
-  gap: 5px; /* Ajoute un espacement entre les noyaux */
-  justify-content: center; /* Répartit les noyaux sur la ligne */
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .core-item {
   display: flex;
-  flex-direction: row; /* Place l'image et les stats côte à côte */
-  align-items: flex-start; /* Aligne l'image et les stats en haut */
-  text-align: center;
-  gap: 20px; /* Ajoute un espacement entre l'image et les stats */
-  padding: 10px; /* Ajoute un padding interne */
-  border-radius: 8px; /* Coins arrondis */
-  background-color: transparent; /* Supprime le fond */
-  width: calc(
-    33.33% - 20px
-  ); /* Permet d'afficher 3 éléments par ligne avec un espacement */
-  box-sizing: border-box; /* Inclut le padding dans la largeur */
+  flex-direction: row; /* Aligne l'image du noyau et le bloc de stats horizontalement */
+  align-items: center;
+  gap: 10px;
 }
 
 /* Style pour les images des noyaux */
 .core-image {
-  width: 100px; /* Taille fixe pour la largeur */
-  height: 100px; /* Taille fixe pour la hauteur */
-  border-radius: 8px; /* Arrondit légèrement les coins */
-  object-fit: contain; /* Conserve les proportions de l'image */
-  margin-bottom: 10px; /* Ajoute un espacement en bas */
-}
-
-/* Texte positionné au-dessus de l'image */
-.core-item .stat-container {
-  position: relative; /* Définit le conteneur comme un parent positionné */
-  display: inline-block;
-  text-align: center;
-  width: 100%; /* Permet aux images de définir leur propre largeur */
-  height: auto;
-}
-
-.core-item .stat-main span {
-  position: absolute; /* Positionne le texte par rapport au conteneur parent */
-  top: 50%; /* Centre verticalement */
-  left: 50%; /* Centre horizontalement */
-  transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
-  color: white; /* Couleur du texte */
-  font-weight: bold;
-  font-size: 12px; /* Taille du texte */
-  z-index: 2; /* Assure que le texte est au-dessus de l'image */
-  text-shadow: 1px 1px 2px black; /* Ajoute une ombre pour améliorer la lisibilité */
-}
-
-/* Image des statistiques principales des noyaux */
-.core-item .stat-main img {
-  width: 150px; /* Définit la largeur à 150px */
-  height: auto; /* Conserve les proportions */
-  display: block;
-}
-
-/* Conteneur pour chaque statistique secondaire */
-.core-item .stat-secondary {
-  display: flex;
-  justify-content: center; /* Centre le contenu horizontalement */
-  align-items: center; /* Centre verticalement le texte et l'image */
-  flex-direction: column; /* Place le texte et l'image en colonne */
-  width: 120px; /* Définit une largeur fixe correspondant à celle de l'image */
-  height: auto; /* Définit une hauteur fixe correspondant à celle de l'image */
-  text-align: center; /* Centre le texte */
-  position: relative; /* Permet de positionner le texte au centre */
-  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
-}
-
-/* Texte positionné au centre de l'image secondaire */
-.core-item .stat-secondary span {
-  position: absolute; /* Positionne le texte par rapport au conteneur parent */
-  top: 50%; /* Centre verticalement */
-  left: 50%; /* Centre horizontalement */
-  transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
-  color: white; /* Couleur du texte */
-  font-weight: bold;
-  font-size: 12px; /* Ajuste la taille du texte */
-  z-index: 2; /* Assure que le texte est au-dessus de l'image */
-  text-shadow: 1px 1px 2px black; /* Ajoute une ombre pour améliorer la lisibilité */
-}
-
-/* Image des statistiques secondaires */
-.core-item .stat-secondary img {
-  width: 120px; /* Augmente la taille de l'image */
-  height: auto; /* Conserve les proportions */
-  display: block;
-  border-radius: 8px; /* Ajoute un léger arrondi aux coins */
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: contain;
 }
 
 /* Conteneur des statistiques des noyaux */
 .core-item .stats {
   display: flex;
-  flex-direction: column; /* Aligne les stats verticalement */
-  gap: 5px; /* Réduit l'espacement entre les stats principales et secondaires */
-  text-align: left; /* Aligne le texte à gauche */
-  flex: 1; /* Permet aux stats de prendre toute la largeur restante */
+  flex-direction: column; /* Aligne la stat principale et les stats secondaires verticalement */
+  align-items: flex-start; /* Aligne à gauche comme les artefacts */
+  gap: 2px;
 }
 
-/* Conteneur pour chaque statistique principale et secondaire */
-.core-item .stats-container {
-  display: flex;
-  position: relative;
-  flex-direction: column; /* Aligne le contenu verticalement */
-  text-align: center;
-  align-items: center; /* Centre le contenu horizontalement */
-  width: 100%; /* Prend toute la largeur disponible */
-  padding: 10px; /* Ajoute un padding interne */
-  border-radius: 8px; /* Coins arrondis */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
+/* Conteneur pour les statistiques secondaires des noyaux */
+.core-item .stat-secondary-container {
+    display: flex;
+    flex-direction: column; /* Empile les deux stats secondaires verticalement */
+    gap: 1px;
 }
 
-/* Texte positionné au-dessus de l'image */
-.core-item .stat-container span {
-  position: absolute;
-  top: 50%; /* Centre verticalement */
-  left: 50%; /* Centre horizontalement */
-  transform: translate(-50%, -50%); /* Ajuste pour centrer parfaitement */
-  color: white; /* Couleur du texte */
-  font-weight: bold;
-  font-size: 12px; /* Réduit légèrement la taille du texte */
-  z-index: 2; /* Assure que le texte est au-dessus de l'image */
-  text-shadow: 1px 1px 2px black; /* Ajoute une ombre pour améliorer la lisibilité */
+/* Dimensionnement des images de stats pour les noyaux */
+.core-item .stat-main img {
+  width: 150px;
+  height: auto;
 }
 
-/* Style pour la statistique principale */
-.core-item .stat-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column; /* Aligne le texte et l'image verticalement */
-  width: 150px; /* Permet à l'image principale de définir sa largeur */
-  height: auto; /* Ajuste automatiquement la hauteur */
-  background: none; /* Supprime le fond */
-  color: white;
-  font-weight: bold;
-  text-transform: uppercase;
-  font-family: "Arial Black", sans-serif;
-  font-size: 20px;
-  letter-spacing: 2px;
-  margin: 5px 0; /* Réduit l'espacement vertical autour de la statistique principale */
-  text-align: center; /* Centre le contenu */
-  margin-bottom: 2px; /* Réduit l'espace entre la statistique principale et les secondaires */
+.core-item .stat-secondary img {
+  width: 120px;
+  height: auto;
 }
+
 
 /* Encadré pour les statistiques à focus */
 .focus-stats {
   text-align: center;
   margin-bottom: 20px;
-  padding: 15px; /* Ajoute un padding interne */
-  border: 2px solid #ffcc00; /* Bordure dorée */
-  border-radius: 8px; /* Coins arrondis */
-  background-color: rgba(255, 204, 0, 0.1); /* Fond légèrement doré */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre pour un effet visuel */
+  padding: 15px;
+  border: 2px solid #ffcc00;
+  border-radius: 8px;
+  background-color: rgba(255, 204, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Liste des statistiques à focus */
 .focus-stats-list {
   display: flex;
-  flex-wrap: wrap; /* Permet de répartir les éléments sur plusieurs lignes */
-  justify-content: center; /* Centre les éléments horizontalement */
-  gap: 10px; /* Ajoute un espacement entre les éléments */
-  list-style-type: none; /* Supprime les puces de la liste */
-  padding: 0; /* Supprime le padding par défaut */
-  margin: 0; /* Supprime les marges par défaut */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 /* Élément individuel des statistiques */
 .focus-stats-list li {
-  background-color: #1e1e1e; /* Fond sombre */
-  color: #ffcc00; /* Texte doré */
+  background-color: #1e1e1e;
+  color: #ffcc00;
   font-weight: bold;
-  border-radius: 8px; /* Arrondit les coins */
+  border-radius: 8px;
   text-align: center;
-  padding: 10px; /* Ajoute un padding interne */
-  width: calc(
-    33.33% - 20px
-  ); /* Chaque élément prend 1/3 de la largeur moins l'espacement */
-  box-sizing: border-box; /* Inclut le padding dans la largeur totale */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Ajoute une ombre légère */
+  padding: 10px;
+  width: calc(33.33% - 20px);
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Bulle d'effet pour les noyaux */
@@ -405,11 +293,11 @@
 }
 
 .equipment-set-description-text img {
-    height: 1em; /* Définit la hauteur des images à la taille de la police */
-    width: auto; /* Maintient les proportions de l'image */
-    vertical-align: -0.2em; /* Ajuste légèrement la position verticale */
-    display: inline; /* S'assure que les images restent dans le flux du texte */
-    margin: 0; /* Supprime tout espacement supplémentaire */
+    height: 1em;
+    width: auto;
+    vertical-align: -0.2em;
+    display: inline;
+    margin: 0;
 }
 
 
@@ -456,14 +344,7 @@
   }
 
   /* Réduit la taille de la police pour les statistiques principales des artefacts et cores */
-  .core-item .stat-main span,
-  .artefact-item-content .stat-main span {
-    font-size: 8px; /* Réduit la taille de la police */
-  }
-
-  /* Réduit la taille de la police pour les statistiques secondaires des artefacts et cores */
-  .core-item .stat-secondary span,
-  .artefact-item-content .stat-secondary span {
+  .stat-container span {
     font-size: 8px; /* Réduit la taille de la police */
   }
 
@@ -475,9 +356,9 @@
     object-fit: contain;
   }
 
-  /* Réduit également les images secondaires des artefacts */
+  /* Taille des images secondaires des artefacts sur mobile */
   .artefact-item-content .stat-secondary img {
-    width: 80px; /* Réduit la largeur des images secondaires */
+    width: 80px;
     height: auto; /* Conserve les proportions */
   }
 

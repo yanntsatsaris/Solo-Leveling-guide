@@ -1,8 +1,8 @@
-<div id="passives" class="tab-content">
+<section id="passives" class="tab-content">
     <h2>Passifs</h2>
     {% if character.passives and character.passives|length > 0 %}
         {% for passive in character.passives %}
-            <div class="passive {% if passive.principal %}principal{% endif %}">
+            <article class="passive {% if passive.principal %}principal{% endif %}">
                 {% if passive.image %}
                     <img src="{{ url_for('static', filename=passive.image) }}" alt="{{ passive.name or 'Passive Image' }}">
                 {% endif %}
@@ -12,9 +12,9 @@
                     {% endif %}
                     <p>{{ passive.description|safe }}</p>
                 </div>
-            </div>
+            </article>
         {% endfor %}
     {% else %}
         <p>Informations sur les passifs du personnage.</p>
     {% endif %}
-</div>
+</section>
