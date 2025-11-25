@@ -1,7 +1,6 @@
 .artefacts-container {
   display: flex;
-  justify-content: flex-start;
-  gap: 20px;
+  justify-content: space-between;
   position: relative; /* Définit le conteneur comme parent pour les éléments positionnés */
 }
 
@@ -362,17 +361,17 @@
     font-size: 8px; /* Réduit la taille de la police */
   }
 
-  /* Réduit la taille des images des artefacts */
+  /* Taille des images des artefacts sur mobile */
   .artefact-image {
-    min-width: 50px; /* Réduit la largeur de l'image */
-    height: 65px; /* Réduit la hauteur de l'image */
+    width: 65px;
+    height: 65px;
     border-radius: 4px;
     object-fit: contain;
   }
 
-  /* Réduit également les images secondaires des artefacts */
+  /* Taille des images secondaires des artefacts sur mobile */
   .artefact-item-content .stat-secondary img {
-    width: 80px; /* Réduit la largeur des images secondaires */
+    width: 120px; /* Taille originale */
     height: auto; /* Conserve les proportions */
   }
 
