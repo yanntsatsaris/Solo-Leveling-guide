@@ -1,10 +1,10 @@
-<div id="description" class="tab-content active">
+<section id="description" class="tab-content active">
   <h2>Description</h2>
   <p>{{ character.description }}</p>
 
   {% if character.evolutions and character.evolutions|length > 0 %}
   <h3>Évolutions</h3>
-  <div class="evolutions">
+  <section class="evolutions">
     <ul>
       {% for evolution in character.evolutions %} {% if evolution.range %}
       <!-- Afficher les évolutions groupées (A06-A10) -->
@@ -28,8 +28,8 @@
       </li>
       {% endif %} {% endfor %}
     </ul>
-  </div>
+  </section>
   {% else %}
   <p>Aucune évolution disponible pour ce personnage.</p>
   {% endif %}
-</div>
+</section>

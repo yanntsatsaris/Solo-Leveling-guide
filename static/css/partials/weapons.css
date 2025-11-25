@@ -9,7 +9,7 @@
 }
 
 /* Conteneur de la carte de l'arme */
-.weapon-card {
+article.weapon-card {
   display: flex;
   flex-direction: column; /* Organise les éléments en colonne */
   gap: 20px; /* Ajoute un espacement entre les sections */
@@ -17,7 +17,7 @@
 }
 
 /* Conteneur pour l'image et les stats */
-.weapon-header {
+header.weapon-header {
   display: flex; /* Aligne l'image et les stats horizontalement */
   align-items: flex-start; /* Aligne les éléments en haut */
   gap: 20px; /* Ajoute un espacement entre l'image et les stats */
@@ -56,14 +56,14 @@
 }
 
 /* Section des évolutions */
-.weapon-evolutions {
+section.weapon-evolutions {
   margin-top: 20px; /* Espace au-dessus de la section */
   padding: 15px; /* Ajoute un padding interne */
   border-radius: 8px; /* Coins arrondis */
 }
 
 /* Titre des évolutions */
-.weapon-evolutions h3 {
+section.weapon-evolutions h3 {
   color: #ffcc00; /* Couleur dorée pour le titre */
   font-size: 18px; /* Taille du texte */
   margin-bottom: 15px; /* Espace sous le titre */
@@ -71,48 +71,48 @@
 }
 
 /* Liste des évolutions */
-.weapon-evolutions ul {
+section.weapon-evolutions ul {
   list-style-type: none; /* Supprime les puces */
   padding: 0; /* Supprime le padding interne */
   margin: 0; /* Supprime les marges */
 }
 
 /* Élément individuel de la liste */
-.weapon-evolutions li {
+section.weapon-evolutions li {
   display: flex;
   flex-direction: column; /* Place l'image au-dessus du texte */
   align-items: left; /* Centre le contenu horizontalement */
   text-align: left; /* Centre le texte */
 }
 
-.weapon-evolutions li img {
+section.weapon-evolutions li img {
   margin-bottom: 10px; /* Ajoute un espacement entre l'image et le texte */
   margin-right: 0; /* Supprime l'espacement à droite */
 }
 
-.weapon-evolutions li span {
+section.weapon-evolutions li span {
   text-align: left; /* Centre le texte sous l'image */
 }
 
 /* Dernier élément sans marge */
-.weapon-evolutions li:last-child {
+section.weapon-evolutions li:last-child {
   margin-bottom: 0; /* Supprime l'espace sous le dernier élément */
 }
 
 /* Image des évolutions */
-.weapon-evolutions li img {
+section.weapon-evolutions li img {
   margin-right: 10px; /* Espace entre l'image et le texte */
   border-radius: 8px; /* Coins arrondis pour les images */
 }
 
 /* Texte des évolutions */
-.weapon-evolutions li span {
+section.weapon-evolutions li span {
   color: #b3b3b3; /* Couleur grise pour le texte */
   font-style: italic; /* Texte en italique */
 }
 
 /* Images dans les descriptions (dans les balises <span>) */
-.weapon-evolutions li span img {
+section.weapon-evolutions li span img {
   height: 1em; /* Définit la hauteur des images à la taille de la police */
   width: auto; /* Maintient les proportions de l'image */
   vertical-align: -0.2em; /* Ajuste légèrement la position verticale pour aligner avec le texte */
@@ -121,7 +121,7 @@
 }
 
 /* Identifiant des évolutions */
-.weapon-evolutions li strong {
+section.weapon-evolutions li strong {
   color: #ffcc00; /* Couleur dorée pour les identifiants */
   font-weight: bold; /* Texte en gras */
   margin-right: 5px; /* Espace entre l'identifiant et le texte */
@@ -153,7 +153,7 @@
   padding: 10px;
 }
 
-.weapon-card-codex {
+article.weapon-card-codex {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -162,7 +162,7 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.weapon-card-codex img {
+article.weapon-card-codex img {
   width: 150px;
   height: auto;
   border-radius: 8px;
@@ -179,7 +179,7 @@
   margin-top: 5px;
 }
 
-.weapon-card-codex img:hover {
+article.weapon-card-codex img:hover {
   transform: scale(1.1); /* Agrandit légèrement l'image au survol */
 }
 
@@ -234,7 +234,7 @@
     display: inline; /* S'assure que les images restent dans le flux du texte */
     margin: 0; /* Supprime tout espacement supplémentaire */
   }
-  .weapon-header {
+  header.weapon-header {
     flex-direction: column; /* Passe en colonne sur les petits écrans */
     align-items: center; /* Centre les éléments horizontalement */
     text-align: center; /* Centre le texte */
@@ -255,24 +255,24 @@
   }
 
   /* Affichage des évolutions */
-  .weapon-evolutions li {
+  section.weapon-evolutions li {
     display: flex;
     flex-direction: column; /* Place l'image au-dessus du texte */
     align-items: center; /* Centre le contenu horizontalement */
     text-align: center; /* Centre le texte */
   }
 
-  .weapon-evolutions li img {
+  section.weapon-evolutions li img {
     margin-bottom: 10px; /* Ajoute un espacement entre l'image et le texte */
     margin-right: 0; /* Supprime l'espacement à droite */
   }
 
-  .weapon-evolutions li span {
+  section.weapon-evolutions li span {
     text-align: center; /* Centre le texte sous l'image */
   }
 
   /* Images dans les descriptions (dans les balises <span>) */
-  .weapon-evolutions li span img {
+  section.weapon-evolutions li span img {
     height: 1em; /* Définit la hauteur des images à la taille de la police */
     width: auto; /* Maintient les proportions de l'image */
     vertical-align: -0.2em; /* Ajuste légèrement la position verticale pour aligner avec le texte */
@@ -280,7 +280,7 @@
     margin: 0; /* Supprime tout espacement supplémentaire */
   }
   /* Supprimer les puces des listes des évolutions */
-  .weapon-evolutions ul {
+  section.weapon-evolutions ul {
     list-style-type: none; /* Supprime les puces */
     padding: 0; /* Supprime le padding interne */
     margin: 0; /* Supprime les marges */

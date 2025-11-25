@@ -1,11 +1,11 @@
 /* Images dans les descriptions des passifs */
-.passive {
+article.passive {
     display: flex;
     align-items: flex-start;
     margin-bottom: 20px;
 }
 
-.passive img {
+article.passive img {
     height: 1em; /* Définit la hauteur des images à la taille de la police */
     width: auto; /* Maintient les proportions de l'image */
     vertical-align: -0.2em; /* Ajuste légèrement la position verticale */
@@ -14,7 +14,7 @@
 }
 
 /* Images à côté du nom des passifs */
-.passive > img {
+article.passive > img {
     min-height: 50px; /* Définit la hauteur des images à la taille de la police */
     max-width: 50px;
     height: auto;
@@ -23,7 +23,7 @@
 }
 
 /* Texte des descriptions des passifs */
-.passive p {
+article.passive p {
     text-align: justify; /* Justifie le texte */
     margin: 0; /* Supprime les marges inutiles */
 }
