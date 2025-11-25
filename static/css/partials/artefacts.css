@@ -348,10 +348,10 @@
     font-size: 8px; /* Réduit la taille de la police */
   }
 
-  /* Taille des images des artefacts sur mobile */
+  /* Réduit la taille des images des artefacts */
   .artefact-image {
-    width: 65px;
-    height: 65px;
+    min-width: 50px; /* Réduit la largeur de l'image */
+    height: 65px; /* Réduit la hauteur de l'image */
     border-radius: 4px;
     object-fit: contain;
   }
