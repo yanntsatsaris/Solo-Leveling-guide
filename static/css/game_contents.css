@@ -1,12 +1,12 @@
 html,
 body {
-  margin: 0; /* Supprime les marges par défaut */
-  padding: 0; /* Supprime les paddings par défaut */
-  height: 100%; /* S'assure que le body et le html occupent toute la hauteur */
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 body {
-  height: 100vh; /* Prend toute la hauteur de la fenêtre */
+  height: 100vh;
   margin: 0;
   padding: 0;
   background-color: #121212;
@@ -14,7 +14,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
-p {
+main > .container > p {
   color: #ffcc00;
   font-weight: bold;
   text-align: center;
@@ -22,38 +22,47 @@ p {
 }
 
 .menu-image {
-  display: block; /* Affiche l'image comme un bloc */
-  margin: 0 auto; /* Centre l'image horizontalement */
-  max-width: 100%; /* S'assure que l'image ne dépasse pas la largeur du conteneur */
-  height: auto; /* Conserve les proportions de l'image */
-  border-radius: 8px; /* Ajoute des coins arrondis */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.container {
-  display: flex; /* Active Flexbox pour le conteneur */
-  flex-direction: column; /* Aligne les éléments verticalement */
-  justify-content: center; /* Centre verticalement */
-  align-items: center; /* Centre horizontalement */
-  margin: 70px auto; /* Centre le conteneur horizontalement */
-  padding: 10px; /* Ajoute un espacement interne */
+main > .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 70px auto;
+  padding: 10px;
   background-color: #1e1e1e;
-  border-radius: 8px; /* Coins arrondis */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre subtile */
-  overflow: hidden; /* Empêche le contenu de dépasser du conteneur */
-  box-sizing: border-box; /* Inclut les bordures et le padding dans la largeur totale */
-  width: fit-content; /* Adapte la largeur du conteneur à son contenu (l'image) */
-  max-width: 770px; /* Empêche le conteneur de dépasser la largeur de l'écran */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  box-sizing: border-box;
+  width: fit-content;
+  max-width: 770px;
 }
 
-.image-container {
-  position: relative; /* Permet de positionner les hotspots par rapport à l'image */
-  display: inline-block; /* Adapte la taille du conteneur à l'image */
+section.image-container {
+  position: relative;
+  display: inline-block;
 }
 
 .hotspot {
-  position: absolute; /* Positionne les zones par rapport au conteneur */
-  cursor: pointer; /* Change le curseur pour indiquer une interaction */
+  position: absolute;
+  cursor: pointer;
+}
+
+/* Reset styles for button hotspots to make them invisible */
+button.hotspot {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
 }
 
 .hotspot:hover {
@@ -62,14 +71,14 @@ p {
     0,
     128,
     0.5
-  ); /* Couleur violette semi-transparente */
-  border-color: #800080; /* Bordure violette */
+  );
+  border-color: #800080;
 }
 
 .tooltip {
-  display: none; /* Cache la description par défaut */
+  display: none;
   position: absolute;
-  top: 100%; /* Positionne la description sous la zone */
+  top: 100%;
   left: 50%;
   transform: translateX(-50%);
   background-color: #1e1e1e;
@@ -77,45 +86,44 @@ p {
   padding: 5px 10px;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  white-space: nowrap; /* Empêche le texte de passer à la ligne */
+  white-space: nowrap;
   z-index: 10;
 }
 
 .hotspot:hover .tooltip {
-  display: block; /* Affiche la description au survol */
+  display: block;
 }
 
 .hotspot a {
-  display: block; /* Permet au lien de remplir toute la zone du hotspot */
-  text-decoration: none; /* Supprime le soulignement du lien */
-  color: inherit; /* Utilise la couleur du texte par défaut */
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
 
 .hotspot a:hover {
-  color: #ffcc00; /* Change la couleur du texte au survol */
+  color: #ffcc00;
 }
 
 /* Positionnement des hotspots */
 .hotspot-1 {
-  top: 12.1%; /* Position verticale */
-  left: 3.5%; /* Position horizontale */
-  width: 75%; /* Augmente la largeur de la zone */
-  height: 8.2%; /* Réduit la hauteur de la zone */
+  top: 12.1%;
+  left: 3.5%;
+  width: 75%;
+  height: 8.2%;
 }
 
 .hotspot-2 {
-  top: 21.3%; /* Position verticale */
-  left: 3.5%; /* Position horizontale */
-  width: 23%; /* Largeur de la zone */
-  height: 12.4%; /* Hauteur de la zone */
+  top: 21.3%;
+  left: 3.5%;
+  width: 23%;
+  height: 12.4%;
 }
 
-/* Positionnement des hotspots */
 .hotspot-3 {
-  top: 21.3%; /* Position verticale */
-  left: 29%; /* Position horizontale */
-  width: 23%; /* Largeur de la zone */
-  height: 12.4%; /* Hauteur de la zone */
+  top: 21.3%;
+  left: 29%;
+  width: 23%;
+  height: 12.4%;
 }
 
 .hotspot-4 {
@@ -365,10 +373,9 @@ p {
 
 @media (max-width: 768px) {
   .hotspot {
-    border: 2px solid #800080; /* Bordure violette */
+    border: 2px solid #800080;
   }
 }
-
 
 .background-image {
   background-size: cover;

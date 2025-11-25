@@ -12,126 +12,126 @@
 <div class="container">
   <h1>Contenus du jeu</h1>
   <p>Explorez les différents contenus de jeu disponibles dans Solo Leveling Arise.</p>
-  <div class="image-container">
+  <section class="image-container">
     <img
       src="{{ url_for('static', filename='images/Menus/MenuDuJeu2.webp') }}"
       alt="Menu du Jeu"
       class="menu-image"
     />
-    <div class="hotspot hotspot-1" onclick="window.location.href='{{ url_for('game_contents.game_modes') }}'">
+    <button class="hotspot hotspot-1" onclick="window.location.href='{{ url_for('game_contents.game_modes') }}'">
         <span class="tooltip">Modes de jeu</span>
-    </div>
-    <div class="hotspot hotspot-2" onclick="window.location.href='{{ url_for('sjw.inner_SJW') }}'">
+    </button>
+    <button class="hotspot hotspot-2" onclick="window.location.href='{{ url_for('sjw.inner_SJW') }}'">
         <span class="tooltip">Sung Jinwoo</span>
-    </div>
-    <div class="hotspot hotspot-3" onclick="window.location.href='{{ url_for('characters.inner_characters') }}'">
+    </button>
+    <button class="hotspot hotspot-3" onclick="window.location.href='{{ url_for('characters.inner_characters') }}'">
         <span class="tooltip">Chasseurs</span>
-    </div>
-    <div class="hotspot hotspot-4" onclick="window.location.href='{{ url_for('sjw.inner_SJW') }}?tab=shadows'">
+    </button>
+    <button class="hotspot hotspot-4" onclick="window.location.href='{{ url_for('sjw.inner_SJW') }}?tab=shadows'">
         <span class="tooltip">Ombres</span>
-    </div>
-    <div class="hotspot hotspot-5" onclick="window.location.href='{{ url_for('sjw.inner_SJW') }}?tab=monarchs'">
+    </button>
+    <button class="hotspot hotspot-5" onclick="window.location.href='{{ url_for('sjw.inner_SJW') }}?tab=monarchs'">
         <span class="tooltip">Monarques</span>
-    </div>
-    <div class="hotspot hotspot-6">
+    </button>
+    <span class="hotspot hotspot-6">
         <span class="tooltip">Armes</span>
-    </div>
-    <div class="hotspot hotspot-7">
+    </span>
+    <span class="hotspot hotspot-7">
         <span class="tooltip">Artefacts</span>
-    </div>
-    <div class="hotspot hotspot-8">
+    </span>
+    <span class="hotspot hotspot-8">
         <span class="tooltip">Cœurs</span>
-    </div>
-    <div class="hotspot hotspot-9">
+    </span>
+    <span class="hotspot hotspot-9">
         <span class="tooltip">Invocation</span>
-    </div>
-    <div class="hotspot hotspot-10">
+    </span>
+    <span class="hotspot hotspot-10">
         <span class="tooltip">Boutique</span>
-    </div>
-    <div class="hotspot hotspot-11">
+    </span>
+    <span class="hotspot hotspot-11">
         <span class="tooltip">Défis</span>
-    </div>
-    <div class="hotspot hotspot-12">
+    </span>
+    <span class="hotspot hotspot-12">
         <span class="tooltip">Missions</span>
-    </div>
-    <div class="hotspot hotspot-13">
+    </span>
+    <span class="hotspot hotspot-13">
         <span class="tooltip">Succès</span>
-    </div>
-    <div class="hotspot hotspot-14">
+    </span>
+    <span class="hotspot hotspot-14">
         <span class="tooltip">Codex</span>
-    </div>
-    <div class="hotspot hotspot-15">
+    </span>
+    <span class="hotspot hotspot-15">
         <span class="tooltip">Gérer les équipes</span>
-    </div>
-    <div class="hotspot hotspot-16">
+    </span>
+    <span class="hotspot hotspot-16">
         <span class="tooltip">Liens</span>
-    </div>
-    <div class="hotspot hotspot-17">
+    </span>
+    <span class="hotspot hotspot-17">
         <span class="tooltip">Artisanat</span>
-    </div>
-    <div class="hotspot hotspot-18">
+    </span>
+    <span class="hotspot hotspot-18">
         <span class="tooltip">Fusion</span>
-    </div>
-    <div class="hotspot hotspot-19">
+    </span>
+    <span class="hotspot hotspot-19">
         <span class="tooltip">Minage</span>
-    </div>
-    <div class="hotspot hotspot-20">
+    </span>
+    <span class="hotspot hotspot-20">
         <span class="tooltip">Prime</span>
-    </div>
-    <div class="hotspot hotspot-21">
+    </span>
+    <span class="hotspot hotspot-21">
         <span class="tooltip">Armurerie</span>
-    </div>
-    <div class="hotspot hotspot-22">
+    </span>
+    <span class="hotspot hotspot-22">
         <span class="tooltip">Aperçu du chasseur</span>
-    </div>
-    <div class="hotspot hotspot-23">
+    </span>
+    <span class="hotspot hotspot-23">
         <span class="tooltip">Niveau de combat</span>
-    </div>
-    <div class="hotspot hotspot-24">
+    </span>
+    <span class="hotspot hotspot-24">
         <span class="tooltip">Recherche de compétences</span>
-    </div>
-    <div class="hotspot hotspot-25" onclick="window.location.href='{{ url_for('sjw.inner_SJW') }}?tab=gems'">
+    </span>
+    <button class="hotspot hotspot-25" onclick="window.location.href='{{ url_for('sjw.inner_SJW') }}?tab=gems'">
         <span class="tooltip">Gemmes</span>
-    </div>
-    <div class="hotspot hotspot-26">
+    </button>
+    <span class="hotspot hotspot-26">
         <span class="tooltip">Médailles de défi</span>
-    </div>
-    <div class="hotspot hotspot-27">
+    </span>
+    <span class="hotspot hotspot-27">
         <span class="tooltip">Codex des costumes</span>
-    </div>
+    </span>
     <a href="https://forum.netmarble.com/slv_en" target="_blank" class="hotspot hotspot-28">
         <span class="tooltip">Forum</span>
     </a>
-    <div class="hotspot hotspot-29" onclick="window.location.href='{{ url_for('guides.inner_guides') }}'">
+    <button class="hotspot hotspot-29" onclick="window.location.href='{{ url_for('guides.inner_guides') }}'">
         <span class="tooltip">Obtenir des pierres d'essence à lire en jeu</span>
-    </div>
-    <div class="hotspot hotspot-30">
+    </button>
+    <span class="hotspot hotspot-30">
         <span class="tooltip">Annonce</span>
-    </div>
-    <div class="hotspot hotspot-31">
+    </span>
+    <span class="hotspot hotspot-31">
         <span class="tooltip">Courrier</span>
-    </div>
-    <div class="hotspot hotspot-32">
+    </span>
+    <span class="hotspot hotspot-32">
         <span class="tooltip">Sac</span>
-    </div>
-    <div class="hotspot hotspot-33">
+    </span>
+    <span class="hotspot hotspot-33">
         <span class="tooltip">Passe de chasseur</span>
-    </div>
-    <div class="hotspot hotspot-34">
+    </span>
+    <span class="hotspot hotspot-34">
         <span class="tooltip">Connexion</span>
-    </div>
-    <div class="hotspot hotspot-35">
+    </span>
+    <span class="hotspot hotspot-35">
         <span class="tooltip">Événement</span>
-    </div>
-    <div class="hotspot hotspot-36">
+    </span>
+    <span class="hotspot hotspot-36">
         <span class="tooltip">Classement</span>
-    </div>
-    <div class="hotspot hotspot-37">
+    </span>
+    <span class="hotspot hotspot-37">
         <span class="tooltip">Guilde</span>
-    </div>
-    <div class="hotspot hotspot-38">
+    </span>
+    <span class="hotspot hotspot-38">
         <span class="tooltip">Paramètres</span>
-    </div>
-</div>
-</div>
+    </span>
+  </section>
+</main>
 {% endblock %}
