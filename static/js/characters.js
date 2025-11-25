@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const typeButtons = document.querySelectorAll(".type-button");
   const rarityButtons = document.querySelectorAll(".rarity-button");
-  const characterCells = document.querySelectorAll("#character-table td");
+  const characterCells = document.querySelectorAll("#character-grid li");
 
   let selectedType = "All";
   let selectedRarity = "All";
