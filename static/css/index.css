@@ -7,7 +7,7 @@ body {
 }
 
 /* Conteneur principal */
-.container {
+main > .container {
     max-width: 600px;
     margin: 70px auto;
     padding: 20px;
@@ -50,7 +50,7 @@ button:hover {
 
 /* Media Queries pour les petits écrans (tablettes et téléphones) */
 @media (max-width: 768px) {
-    .container {
+    main > .container {
         width: 90%; /* Réduit la largeur pour s'adapter aux petits écrans */
         margin: 20px auto;
     }
