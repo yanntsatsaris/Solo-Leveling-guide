@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-<main class="container">
+<div class="container">
     <h1>Characters</h1>
     {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
         <button id="add-character-btn" class="admin-btn">
