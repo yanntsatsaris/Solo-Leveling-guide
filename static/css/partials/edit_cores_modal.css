@@ -1,42 +1,56 @@
-/* Overlay de la modale */
-.edit-core-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+/* Fond de la modale (overlay) */
+#edit-core-modal::backdrop {
   background: rgba(18, 18, 18, 0.85);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-/* Popup centrale */
-.edit-core-popup {
+/* Conteneur principal de la modale */
+#edit-core-modal {
   background: #1e1e1e;
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(128,0,255,0.25);
+  border: 1px solid #444;
+  box-shadow: 0 8px 32px rgba(128, 0, 255, 0.25);
   padding: 32px 28px 24px 28px;
   min-width: 340px;
   max-width: 1000px;
   width: 100%;
   color: #ffcc00;
-  position: relative;
 }
 
-.edit-core-popup h2 {
+#edit-core-modal article {
+  display: flex;
+  flex-direction: column;
+}
+
+/* En-tête */
+#edit-core-modal header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+#edit-core-modal header h2 {
   color: #ffcc00;
   text-align: center;
-  margin-bottom: 18px;
+  margin: 0;
+  flex-grow: 1;
   text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff;
 }
 
-.edit-core-popup label {
+/* Contenu du formulaire */
+#edit-core-modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+#edit-core-modal label {
   font-weight: bold;
   color: #ffcc00;
   margin-top: 10px;
   display: block;
 }
 
-.edit-core-popup input[type="text"] {
+#edit-core-modal input[type="text"] {
   width: 100%;
   padding: 8px 14px;
   border-radius: 8px;
@@ -48,7 +62,7 @@
   box-sizing: border-box;
 }
 
-.edit-core-popup fieldset {
+#edit-core-modal fieldset {
   border: 1.5px solid #8000ff;
   border-radius: 8px;
   margin-bottom: 18px;
@@ -56,7 +70,7 @@
   background: #232323;
 }
 
-.edit-core-popup legend {
+#edit-core-modal legend {
   color: #ffcc00;
   font-weight: bold;
   padding: 0 10px;
@@ -65,13 +79,13 @@
   text-shadow: 0 0 8px #8000ff;
 }
 
-.edit-core-popup h4 {
+#edit-core-modal h4 {
   color: #ffcc00;
   margin: 14px 0 8px 0;
   font-size: 1em;
 }
 
-.edit-core-popup .effect-input {
+#edit-core-modal .effect-input {
   width: 70%;
   margin-left: 8px;
   background: #181818;
@@ -82,34 +96,28 @@
   font-size: 1em;
 }
 
-.edit-core-popup .effect-input:focus {
+#edit-core-modal .effect-input:focus {
   outline: none;
   border-color: #ffcc00;
   background: #232323;
 }
 
-.edit-core-popup textarea.effect-input {
+#edit-core-modal textarea.effect-input {
   width: 70%;
   min-height: 38px;
   max-height: 120px;
-  margin-left: 8px;
-  background: #181818;
-  color: #ffcc00;
-  border: 1px solid #8000ff;
-  border-radius: 6px;
-  padding: 6px 10px;
-  font-size: 1em;
   resize: vertical;
-  box-sizing: border-box;
 }
 
-.edit-core-popup textarea.effect-input:focus {
-  outline: none;
-  border-color: #ffcc00;
-  background: #232323;
+/* Pied de page et boutons */
+#edit-core-modal footer {
+  display: flex;
+  justify-content: flex-end; /* Aligner le bouton à droite */
+  align-items: center;
+  margin-top: 18px;
 }
 
-.edit-core-popup .admin-btn {
+#edit-core-modal .admin-btn {
   background-color: #ffcc00;
   color: #121212;
   border: none;
@@ -121,30 +129,24 @@
   transition: background 0.3s, color 0.3s;
 }
 
-.edit-core-popup .admin-btn:hover {
+#edit-core-modal .admin-btn:hover {
   background-color: #8000ff;
   color: #fff;
 }
 
-.edit-core-popup .close-btn {
+#edit-core-modal .close-btn {
   background: none;
   border: none;
   color: #ff3333;
   font-size: 2em;
   cursor: pointer;
-  margin-left: 12px;
+  line-height: 1;
+  padding: 0;
   transition: color 0.2s;
 }
 
-.edit-core-popup .close-btn:hover {
+#edit-core-modal .close-btn:hover {
   color: #8000ff;
-}
-
-.edit-core-actions {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 18px;
 }
 
 .effect-row {
@@ -159,10 +161,11 @@
   display: inline-block;
 }
 
+/* Responsive */
 @media (max-width: 600px) {
-  .edit-core-popup {
+  #edit-core-modal {
     min-width: 90vw;
     max-width: 98vw;
-    padding: 12px 4vw 12px 4vw;
+    padding: 12px 4vw;
   }
 }

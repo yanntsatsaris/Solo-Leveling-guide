@@ -1,53 +1,53 @@
-/* Overlay */
-.edit-character-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+/* Fond de la modale (overlay) */
+#add-character-modal::backdrop {
   background: rgba(18, 18, 18, 0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
 }
 
-/* Popup */
-.edit-character-popup {
+/* Conteneur principal de la modale */
+#add-character-modal {
   background: #1e1e1e;
   padding: 12px 9px;
   border-radius: 12px;
+  border: 1px solid #444;
   min-width: 1400px;
   max-width: 2400px;
   min-height: 650px;
   max-height: 95vh;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  position: relative;
-  overflow-y: auto;
   color: #fff;
   font-family: Arial, sans-serif;
 }
 
-/* Titre */
-.edit-character-popup h2 {
+#add-character-modal article {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* En-tête */
+#add-character-modal header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+#add-character-modal header h2 {
   color: #ffcc00;
   text-align: center;
   text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff;
+  margin: 0;
+  flex-grow: 1;
 }
 
-.edit-character-title {
-  text-align: center;
-  color: #ffcc00;
-}
-
-/* Onglets */
-.edit-tabs {
+/* Navigation par onglets */
+#add-character-modal nav.edit-tabs {
   display: flex;
   justify-content: center;
   gap: 10px;
 }
 
-.edit-tab {
+#add-character-modal .edit-tab {
   padding: 10px 24px;
   cursor: pointer;
   background-color: #1e1e1e;
@@ -58,42 +58,44 @@
   transition: background-color 0.3s, color 0.3s;
 }
 
-.edit-tab.active {
+#add-character-modal .edit-tab.active {
   background-color: #ffcc00;
   color: #121212;
   box-shadow: 0 2px 8px rgba(255, 204, 0, 0.15);
 }
 
-.edit-tab:hover {
+#add-character-modal .edit-tab:hover {
   background-color: #ffcc00;
   color: #121212;
 }
 
 /* Contenu des onglets */
-.edit-tab-content {
+#add-character-modal section.edit-tab-content {
   display: none;
   background-color: #232323;
   color: #fff;
   padding: 24px;
   border-radius: 0 0 12px 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow-y: auto;
+  flex-grow: 1;
 }
 
-.edit-tab-content.active {
+#add-character-modal section.edit-tab-content.active {
   display: block;
 }
 
-/* Champs du formulaire */
-.edit-character-popup label {
+/* Champs de formulaire */
+#add-character-modal label {
   display: block;
   margin-bottom: 2px;
   color: #ffcc00;
   font-weight: bold;
 }
 
-.edit-character-popup input,
-.edit-character-popup textarea,
-.edit-character-popup select {
+#add-character-modal input,
+#add-character-modal textarea,
+#add-character-modal select {
   width: 100%;
   margin-top: 1.5px;
   padding: 5px;
@@ -105,18 +107,23 @@
   box-sizing: border-box;
 }
 
-.edit-character-popup textarea {
+#add-character-modal textarea {
   min-height: 60px;
   resize: vertical;
 }
 
-.edit-character-popup hr {
+#add-character-modal hr {
   border: none;
   border-top: 1px solid #444;
   margin: 18px 0;
 }
 
-/* Boutons */
+/* Pied de page et boutons */
+#add-character-modal footer {
+  margin-top: 18px;
+  text-align: right;
+}
+
 .admin-btn {
   background-color: #ffcc00;
   color: #121212;
@@ -135,14 +142,12 @@
 }
 
 .close-btn {
-  position: absolute;
-  top: 12px;
-  right: 18px;
   background: none;
   border: none;
   font-size: 28px;
   color: #ffcc00;
   cursor: pointer;
+  line-height: 1;
 }
 
 /* Sélecteur de set */
@@ -164,18 +169,20 @@
   color: #121212;
 }
 
-/* Evolutions */
-.evolutions-grid {
+/* Grilles (Evolutions, Passifs, Skills) */
+.evolutions-grid, .passives-grid, .skills-grid {
   display: flex;
   flex-direction: column;
   gap: 6px;
   margin-top: 2px;
 }
-.evolutions-row {
+
+.evolutions-row, .passives-row, .skills-row {
   display: flex;
   gap: 7px;
 }
-.edit-evolution-block {
+
+.edit-evolution-block, .edit-weapon-evolution-block, .edit-passive-block, .edit-skill-block {
   flex: 1;
   background: #232323;
   padding: 5px;
@@ -184,40 +191,7 @@
   margin-bottom: 6px;
 }
 
-/* Pour la grille d'évolutions dans les armes */
-.edit-weapon-evolution-block {
-  flex: 1;
-  background: #232323;
-  padding: 5px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  margin-bottom: 6px;
-}
-
-/* Passives et Skills */
-.passives-grid,
-.skills-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 2px;
-}
-.passives-row,
-.skills-row {
-  display: flex;
-  gap: 7px;
-}
-.edit-passive-block,
-.edit-skill-block {
-  flex: 1;
-  background: #232323;
-  padding: 5px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  margin-bottom: 6px;
-}
-
-/* Checkbox styles */
+/* Checkbox */
 .checkbox-row {
   display: flex;
   gap: 10px;
@@ -225,6 +199,7 @@
   margin-top: 3px;
   margin-bottom: 3px;
 }
+
 .checkbox-row label {
   font-weight: normal;
   color: #ffcc00;
@@ -233,25 +208,19 @@
   gap: 3px;
 }
 
-/* Artefacts en deux colonnes */
+/* Artefacts */
 .artefacts-row {
   display: flex;
   gap: 12px;
 }
+
 .artefacts-col {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-.edit-artefact-block label:first-child {
-  color: #ffcc00;
-  font-weight: bold;
-  margin-bottom: 2px;
-  display: block;
-}
 
-/* Optionnel : pour que les artefacts soient bien espacés et alignés */
 .edit-artefact-block {
   background: #232323;
   padding: 5px;
@@ -259,7 +228,14 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* Bouton Ajouter */
+.edit-artefact-block label:first-child {
+  color: #ffcc00;
+  font-weight: bold;
+  margin-bottom: 2px;
+  display: block;
+}
+
+/* Bouton "Ajouter" */
 .add-btn {
   margin: 12px 0 0 0;
   padding: 4px 14px;
@@ -274,15 +250,15 @@
   background: #ffe066;
 }
 
-/* Pour le responsive si besoin */
+/* Responsive */
 @media (max-width: 900px) {
-  .edit-character-popup {
+  #add-character-modal {
     min-width: 95vw;
     max-width: 98vw;
     min-height: 400px;
     padding: 2px 1vw;
   }
-  .edit-tabs {
+  #add-character-modal nav.edit-tabs {
     flex-wrap: wrap;
     gap: 1px;
   }
