@@ -1,16 +1,14 @@
-<div
-  id="edit-panoplie-overlay"
-  class="edit-panoplie-overlay"
-  style="display: none"
->
-  <div id="edit-panoplie-menu" class="edit-panoplie-popup">
-    <form id="edit-panoplie-form" method="POST" action="">
+<dialog id="edit-panoplie-modal">
+  <article>
+    <header>
       <h2>Modifier la panoplie</h2>
-      <div id="edit-panoplie-languages"></div>
-      <div class="edit-panoplie-actions">
+      <button type="button" class="close-btn" data-close-modal>&times;</button>
+    </header>
+    <form id="edit-panoplie-form" method="POST" action="">
+      <section id="edit-panoplie-languages"></section>
+      <footer>
         <button type="submit" class="admin-btn">Enregistrer</button>
-        <button type="button" id="close-edit-panoplie" class="close-btn">&times;</button>
-      </div>
+      </footer>
     </form>
-  </div>
-</div>
+  </article>
+</dialog>

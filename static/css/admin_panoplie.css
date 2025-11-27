@@ -7,28 +7,17 @@ body {
   padding: 0;
 }
 
-/* Conteneur principal */
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 24px;
-  background-color: #1e1e1e;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-  margin: 70px auto;
-  width: fit-content;
-  min-width: 340px;
-  max-width: 700px;
+/* En-tête de la page */
+header {
+  text-align: center;
+  margin-bottom: 24px;
 }
 
 /* Titre */
 h1 {
   color: #ffcc00;
-  text-align: center;
   text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 /* Tableau */
@@ -42,23 +31,23 @@ table {
   overflow: hidden;
 }
 
-th, td {
-  padding: 12px 10px;
-  text-align: center;
-  vertical-align: middle;
-}
-
-th {
+thead th {
   background: #8000ff;
   color: #fff;
   font-size: 1.1em;
+  padding: 12px 10px;
 }
 
-tr:nth-child(even) {
+tbody td {
+  padding: 12px 10px;
+  vertical-align: middle;
+}
+
+tbody tr:nth-child(even) {
   background: #181818;
 }
 
-tr:nth-child(odd) {
+tbody tr:nth-child(odd) {
   background: #232323;
 }
 
@@ -83,6 +72,7 @@ table img:hover {
   color: #ff3333;
   font-style: italic;
 }
+
 /* Boutons */
 .admin-btn {
   background-color: #ffcc00;
@@ -101,7 +91,7 @@ table img:hover {
   color: #fff;
 }
 
-/* Overlay et modal d'upload */
+/* Overlay pour l'upload d'image */
 #upload-panoplie-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -112,39 +102,12 @@ table img:hover {
   justify-content: center;
 }
 
-.edit-panoplie-overlay {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(18, 18, 18, 0.85);
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.edit-panoplie-popup {
-  background: #1e1e1e;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(128,0,255,0.25);
-  padding: 32px 28px 24px 28px;
-  min-width: 340px;
-  max-width: 1000px;
-  width: 100%;
-  color: #ffcc00;
-  position: relative;
-}
-
 /* Responsive */
 @media (max-width: 600px) {
-  .container {
-    min-width: 90vw;
-    max-width: 98vw;
-    padding: 10px;
-  }
   table img {
     width: 80px;
   }
-  th, td {
+  thead th, tbody td {
     padding: 8px 4px;
     font-size: 0.95em;
   }
