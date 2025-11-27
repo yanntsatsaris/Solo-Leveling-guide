@@ -9,8 +9,7 @@ class CoresSql:
         query = """
             SELECT ce.cores_effects_color, ce.cores_effects_number, cet.core_effect_translations_name, cet.core_effect_translations_effect
             FROM cores_effects ce
-            JOIN core_effect_translations cet ON cet.core_effect_translations_cores_effects_id = ce.cores_effects_id
-            WHERE cet.core_effect_translations_language = %s
+            LEFT JOIN core_effect_translations cet ON cet.core_effect_translations_cores_effects_id = ce.cores_effects_id AND cet.core_effect_translations_language = %s
         """
         self.cursor.execute(query, (language,))
         return [

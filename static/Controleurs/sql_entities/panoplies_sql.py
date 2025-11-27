@@ -20,10 +20,9 @@ class PanopliesSql:
         self.cursor.execute("""
             SELECT p.panoplies_name, pt.panoplie_translations_display_name, psb.panoplie_set_bonus_pieces_required, psbt.panoplie_set_bonus_translations_effect
             FROM panoplies p
-            JOIN panoplie_translations pt ON pt.panoplie_translations_panoplies_id = p.panoplies_id
-            JOIN panoplie_set_bonus psb ON psb.panoplie_set_bonus_panoplies_id = p.panoplies_id
-            JOIN panoplie_set_bonus_translations psbt ON psbt.panoplie_set_bonus_translations_panoplie_set_bonus_id = psb.panoplie_set_bonus_id
-            WHERE pt.panoplie_translations_language = %s AND psbt.panoplie_set_bonus_translations_language = %s
+            LEFT JOIN panoplie_translations pt ON pt.panoplie_translations_panoplies_id = p.panoplies_id AND pt.panoplie_translations_language = %s
+            LEFT JOIN panoplie_set_bonus psb ON psb.panoplie_set_bonus_panoplies_id = p.panoplies_id
+            LEFT JOIN panoplie_set_bonus_translations psbt ON psbt.panoplie_set_bonus_translations_panoplie_set_bonus_id = psb.panoplie_set_bonus_id AND psbt.panoplie_set_bonus_translations_language = %s
         """, (language, language))
         return [
             {
