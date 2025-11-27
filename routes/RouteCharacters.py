@@ -23,6 +23,13 @@ from .utils import (
     process_description,
     focus_stats_equal,
 )
+from .data_loader import (
+    ARTEFACT_MAIN_STATS,
+    SECONDARY_STATS_OPTIONS,
+    FOCUS_STATS_OPTIONS,
+    CORE_MAIN_STATS,
+    CORE_SECONDARY_STATS
+)
 
 characters_bp = Blueprint('characters', __name__)
 
@@ -30,7 +37,7 @@ def make_cache_key(*args, **kwargs):
     """Crée une clé de cache unique basée sur l'URL et la langue."""
     path = request.path
     lang = session.get('language', 'EN-en')
-    return f"{path}_{lang}"
+    return f"{path}_{lang}_v2"
 
 @characters_bp.route('/characters')
 @cache.cached(timeout=3600, key_prefix=make_cache_key)
@@ -44,44 +51,57 @@ def inner_characters():
     db = get_db()
     cursor = db.cursor()
     characters_sql = CharactersSql(cursor)
-
     characters_data = characters_sql.get_characters(language)
+
     panoplies_sql = PanopliesSql(cursor)
     cores_sql = CoresSql(cursor)
 
-    panoplies_effects = panoplies_sql.get_panoplies_effects(language)
+    panoplies_effects = panoplies_sql.get_panoplies_effects(language) or []
     panoplies_names = sorted(list({p['set_name'] for p in panoplies_effects}))
-    cores_effects = cores_sql.get_cores_effects(language)
+    cores_effects = cores_sql.get_cores_effects(language) or []
     cores_names = sorted(list({c['color'] for c in cores_effects}))
 
     images = []
     character_types = set()
     rarities = set()
 
-    for row in characters_data:
-        char_id, char_type, char_rarity, char_alias, char_folder, char_name = row
-        type_folder = f"SLA_Personnages_{char_type}"
-        if char_folder is None or char_folder.strip() == "":
-            char_folder = f"{char_rarity}_{char_type}_{char_alias}"
-        base_path = f'static/images/Personnages/{type_folder}/{char_folder}'
-        codex_png = f'{base_path}/{char_type}_{char_alias}_Codex.png'
-        codex_webp = f'{base_path}/{char_type}_{char_alias}_Codex.webp'
-        if os.path.exists(codex_webp):
-            image_path = codex_webp.replace('static/', '')
-        else:
-            image_path = codex_png.replace('static/', '')
-        images.append({
-            'path': image_path,
-            'name': char_name,
-            'alias': char_alias,
-            'type': char_type,
-            'rarity': char_rarity
-        })
-        character_types.add(char_type)
-        rarities.add(char_rarity)
+    if characters_data:
+        for row in characters_data:
+            char_id, char_type, char_rarity, char_alias, char_folder, char_name = row
 
-    character_types = sorted(character_types)
-    rarities = sorted(rarities, reverse=True)
+            # --- Validation des données essentielles ---
+            if not all([char_type, char_rarity, char_alias, char_name]):
+                continue
+
+            type_folder = f"SLA_Personnages_{char_type}"
+            if char_folder is None or char_folder.strip() == "":
+                char_folder = f"{char_rarity}_{char_type}_{char_alias}"
+            base_path = f'static/images/Personnages/{type_folder}/{char_folder}'
+            codex_png = f'{base_path}/{char_type}_{char_alias}_Codex.png'
+            codex_webp = f'{base_path}/{char_type}_{char_alias}_Codex.webp'
+
+            image_path = None
+            if os.path.exists(codex_webp):
+                image_path = codex_webp.replace('static/', '')
+            elif os.path.exists(codex_png):
+                image_path = codex_png.replace('static/', '')
+
+            # --- Validation de l'existence de l'image ---
+            if not image_path:
+                continue
+
+            images.append({
+                'path': image_path,
+                'name': char_name,
+                'alias': char_alias,
+                'type': char_type,
+                'rarity': char_rarity
+            })
+            if char_type: character_types.add(char_type)
+            if char_rarity: rarities.add(char_rarity)
+
+    character_types = sorted(list(character_types))
+    rarities = sorted(list(rarities), reverse=True)
 
     return render_template(
         'characters.html',
@@ -89,7 +109,12 @@ def inner_characters():
         character_types=character_types,
         rarities=rarities,
         panoplies_list=panoplies_names,
-        cores_list=cores_names  # Passage à la vue
+        cores_list=cores_names,
+        artefact_main_stats=ARTEFACT_MAIN_STATS,
+        secondary_stats_options=SECONDARY_STATS_OPTIONS,
+        focus_stats_options=FOCUS_STATS_OPTIONS,
+        core_main_stats=CORE_MAIN_STATS,
+        core_secondary_stats=CORE_SECONDARY_STATS
     )
 
 @characters_bp.route('/characters/<alias>')

@@ -8,17 +8,20 @@
 {% endblock %}
 
 {% block admin_content %}
-    <h1>Gestion des Panoplies</h1>
-    <div style="text-align:center; margin-bottom: 24px;">
+    <header>
+        <h1>Gestion des Panoplies</h1>
         <button id="create-panoplie-btn" class="admin-btn">Créer une nouvelle panoplie</button>
-    </div>
+    </header>
     <table>
-        <tr>
-            <th>Image</th>
-            <th>Nom</th>
-            <th>Nom affiché</th>
-        </tr>
-        {% for panoplie in panoplies %}
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Nom</th>
+                <th>Nom affiché</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for panoplie in panoplies %}
             <tr>
                 <td>
                     {% if panoplie.image %}
@@ -26,13 +29,14 @@
                             <img src="{{ panoplie.image }}" alt="{{ panoplie.display_name }}">
                         </a>
                     {% else %}
-                        <span style="color:#ff3333;">Aucune image</span>
+                        <span class="no-image">Aucune image</span>
                     {% endif %}
                 </td>
                 <td>{{ panoplie.name }}</td>
                 <td>{{ panoplie.display_name }}</td>
             </tr>
-        {% endfor %}
+            {% endfor %}
+        </tbody>
     </table>
     {% include 'partials/edit_panoplie_modal.html' %}
 {% endblock %}
