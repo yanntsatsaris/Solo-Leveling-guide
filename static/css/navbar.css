@@ -4,16 +4,15 @@
   padding: 10px 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
-  justify-content: space-between; /* Sépare les éléments à gauche et à droite */
+  justify-content: space-between;
   align-items: center;
-  position: fixed; /* Rend la navbar fixe */
-  top: 0; /* Positionne la navbar en haut de la page */
-  left: 0; /* Positionne la navbar à gauche */
-  width: 100%; /* S'assure que la navbar prend toute la largeur */
-  z-index: 1000; /* Place la navbar au-dessus des autres éléments */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
-/* Liste des liens */
 .navbar ul {
   list-style: none;
   margin: 0;
@@ -22,14 +21,12 @@
   justify-content: center;
 }
 
-/* Liens individuels */
 .navbar ul li {
   display: inline-block;
-  padding: 15px 20px; /* Ajuste l'espace autour du texte */
+  padding: 15px 20px;
   position: relative;
 }
 
-/* Style des liens */
 .navbar ul li a {
   text-decoration: none;
   color: #ffffff;
@@ -39,35 +36,32 @@
   text-align: center;
 }
 
-/* Effet hover et lien actif */
 .navbar ul li a:hover,
 .navbar ul li a.active {
-  color: #ffffff; /* Texte blanc */
-  text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff; /* Glow violet sur le texte */
+  color: #ffffff;
+  text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff;
 }
 
-/* Rectangle sous le lien actif ou au survol */
 .navbar ul li a:hover::after,
 .navbar ul li a.active::after {
   content: "";
   display: block;
-  width: 80%; /* Réduit la largeur du rectangle à 80% de la cellule */
-  height: 3px; /* Réduit la hauteur du rectangle */
-  background-color: #ffffff; /* Rectangle blanc */
+  width: 80%;
+  height: 3px;
+  background-color: #ffffff;
   position: absolute;
-  bottom: 5px; /* Légèrement au-dessus du bord inférieur */
-  left: 10%; /* Centre le rectangle horizontalement */
+  bottom: 5px;
+  left: 10%;
   border-radius: 2px;
-  box-shadow: 0 0 10px 2px #8000ff; /* Glow violet sur le rectangle */
+  box-shadow: 0 0 10px 2px #8000ff;
   transition: all 0.3s ease-in-out;
 }
 
-/* Logo utilisateur */
 .user-logo {
   display: flex;
   align-items: center;
-  margin-left: auto; /* Ajoute un espacement automatique à gauche */
-  margin-right: 30px; /* Ajoute un espacement fixe à droite */
+  margin-left: auto;
+  margin-right: 30px;
 }
 
 .user-logo img {
@@ -78,53 +72,54 @@
   transition: transform 0.3s ease;
 }
 
-/* Style pour le <select> dans la navbar */
 .language-switch select {
-  appearance: none; /* Supprime le style par défaut du navigateur */
-  -webkit-appearance: none; /* Compatibilité avec Safari */
-  -moz-appearance: none; /* Compatibilité avec Firefox */
-  background-color: #1e1e1e; /* Fond sombre */
-  color: #ffcc00; /* Texte doré */
-  border: 1px solid #ffcc00; /* Bordure dorée */
-  border-radius: 8px; /* Coins arrondis */
-  padding: 5px 10px; /* Espacement interne */
-  font-size: 16px; /* Taille du texte */
-  font-family: Arial, sans-serif; /* Police */
-  cursor: pointer; /* Curseur cliquable */
-  width: auto; /* Ajuste automatiquement la largeur */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Transition pour les interactions */
+  appearance: none;
+  background-color: #1e1e1e;
+  color: #ffcc00;
+  border: 1px solid #ffcc00;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  width: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Style pour le <select> lorsqu'il est survolé */
 .language-switch select:hover {
-  background-color: #ffcc00; /* Fond doré */
-  color: #121212; /* Texte sombre */
+  background-color: #ffcc00;
+  color: #121212;
 }
 
-/* Empêcher le surlignage jaune du <select> lorsqu'il est actif */
 .language-switch select:focus {
-  outline: none; /* Supprime le contour par défaut */
-  background-color: #1e1e1e; /* Garde le fond sombre */
-  color: #ffcc00; /* Garde le texte doré */
-  box-shadow: none; /* Supprime l'effet de glow */
+  outline: none;
+  background-color: #1e1e1e;
+  color: #ffcc00;
+  box-shadow: none;
 }
 
 .user-logo img:hover {
-  transform: scale(1.1); /* Agrandit légèrement le logo au survol */
+  transform: scale(1.1);
 }
 
-/* Ajoute dans navbar.css pour le style */
 .user-info {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-right: 30px;
 }
-.username {
+
+.username-link {
     color: #ffcc00;
     font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
 }
+
+.username-link:hover {
+    color: #8000ff;
+}
+
 .logout-btn {
     background: #ffcc00;
     color: #222;
@@ -135,105 +130,104 @@
     font-weight: bold;
     transition: background 0.2s;
 }
+
 .logout-btn:hover {
     background: #ffe066;
 }
 
-/* Responsive Design */
-
-/* Pour les écrans de taille moyenne (tablettes) */
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column; /* Empile les éléments verticalement */
+    flex-direction: column;
     position: static;
     align-items: center;
   }
-
   .navbar ul {
-    flex-direction: column; /* Les liens sont empilés verticalement */
-    width: 100%; /* Prend toute la largeur */
+    flex-direction: column;
+    width: 100%;
   }
-
   .navbar ul li {
-    padding: 10px 0; /* Réduit l'espace autour des liens */
+    padding: 10px 0;
   }
-
   .user-logo {
-    margin-top: 10px; /* Ajoute un espace entre les liens et le logo utilisateur */
+    margin-top: 10px;
   }
 }
 
-/* Pour les écrans de petite taille (téléphones) */
 @media (max-width: 480px) {
   .navbar ul li {
-    padding: 8px 0; /* Réduit encore l'espace autour des liens */
+    padding: 8px 0;
   }
-
   .user-logo img {
-    width: 30px; /* Réduit la taille du logo utilisateur */
+    width: 30px;
     height: 30px;
   }
 }
 
-/* Overlay centré et au premier plan */
-.user-menu-overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100vw; height: 100vh;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
-
 /* Popup centrée : style Solo Leveling */
 .user-menu-popup {
-    background: #1e1e1e; /* Fond sombre comme la navbar */
+    background: #1e1e1e;
     padding: 32px 24px 24px 24px;
     border-radius: 16px;
-    box-shadow: 0 4px 24px rgba(128,0,255,0.25); /* Glow violet */
+    box-shadow: 0 4px 24px rgba(128,0,255,0.25);
     min-width: 320px;
-    position: relative;
-    display: flex;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none; /* Crucial pour <dialog> si on veut utiliser flex quand ouvert */
     flex-direction: column;
     align-items: stretch;
-    border: 2px solid #8000ff; /* Bordure violette */
+    border: 2px solid #8000ff;
+    margin: 0;
+    z-index: 1001;
 }
 
-/* Titres */
+.user-menu-popup[open] {
+    display: flex;
+}
+
+.user-menu-popup::backdrop {
+    background: rgba(0, 0, 0, 0.7);
+}
+
 .user-menu-popup h3 {
     margin-top: 0;
     margin-bottom: 16px;
     text-align: center;
-    color: #ffcc00; /* Titre doré */
+    color: #ffcc00;
     text-shadow: 0 0 10px #8000ff;
     font-weight: bold;
     letter-spacing: 1px;
 }
 
-/* Inputs et boutons */
 .user-menu-popup input {
     display: block;
     width: 100%;
     margin-bottom: 12px;
-    padding: 8px 16px; /* Ajoute du padding à gauche et à droite */
+    padding: 8px 16px;
     font-size: 1em;
     border-radius: 8px;
     border: 1px solid #8000ff;
-    background: #121212; /* Fond sombre */
-    color: #ffcc00; /* Texte doré */
+    background: #121212;
+    color: #ffcc00;
     box-shadow: 0 2px 8px rgba(128,0,255,0.10);
     transition: border 0.2s, background 0.2s;
-    box-sizing: border-box; /* S'assure que le padding ne déborde pas */
+    box-sizing: border-box;
 }
+
 .user-menu-popup input:focus {
-    border-color: #ffcc00; /* Bordure dorée au focus */
+    border-color: #ffcc00;
     background: #222;
     outline: none;
 }
 
-/* Boutons principaux : "Créer" et "Se connecter" en jaune sans gradient */
+.user-menu-popup button {
+    cursor: pointer;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1em;
+}
+
 .user-menu-popup button[type="submit"] {
     background: #ffcc00;
     color: #222;
@@ -242,12 +236,12 @@
     box-shadow: 0 2px 8px rgba(255,204,0,0.15);
     transition: background 0.2s, color 0.2s;
 }
+
 .user-menu-popup button[type="submit"]:hover {
     background: #ffe066;
     color: #1e1e1e;
 }
 
-/* Boutons switch */
 .user-menu-popup .switch-btn {
     background: #222;
     color: #ffcc00;
@@ -255,12 +249,12 @@
     box-shadow: none;
     font-weight: normal;
 }
+
 .user-menu-popup .switch-btn:hover {
     background: #8000ff;
     color: #fff;
 }
 
-/* Bouton de fermeture */
 .close-btn {
     position: absolute;
     top: 8px;
@@ -275,7 +269,6 @@
     text-shadow: 0 0 10px #ffcc00;
 }
 
-/* Responsive pour le popup */
 @media (max-width: 480px) {
     .user-menu-popup {
         min-width: 90vw;
@@ -283,13 +276,11 @@
     }
 }
 
-/* Classe pour les champs avec erreur */
 .input-error {
     border: 2px solid #ff3333 !important;
     box-shadow: 0 0 4px #ff3333;
 }
 
-/* Classe pour les messages d'erreur */
 .form-error {
     color: #ff3333;
     font-size: 0.95em;
@@ -312,13 +303,4 @@
 
 .forgot-password-link:hover {
     text-decoration: underline;
-}
-.username-link {
-    color: #ffcc00;
-    font-weight: bold;
-    text-decoration: underline;
-    cursor: pointer;
-}
-.username-link:hover {
-    color: #8000ff;
 }
