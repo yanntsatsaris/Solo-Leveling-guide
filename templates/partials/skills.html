@@ -9,12 +9,11 @@
         {% endif %}
         <section class="sjw-inner-tabs">
             <nav class="sjw-inner-tab-btns">
-                <div class="sjw-inner-tab-btn active" data-inner-tab="Skill">Skills</div>
-                <div class="sjw-inner-tab-btn" data-inner-tab="QTE">QTE</div>
-                <div class="sjw-inner-tab-btn" data-inner-tab="Ultime">Ultime</div>
+                <button type="button" class="sjw-inner-tab-btn active" data-inner-tab="Skill">Skills</button>
+                <button type="button" class="sjw-inner-tab-btn" data-inner-tab="QTE">QTE</button>
+                <button type="button" class="sjw-inner-tab-btn" data-inner-tab="Ultime">Ultime</button>
             </nav>
             <div class="sjw-inner-tab-contents">
-                
                 {% for tab in ['Skill', 'QTE', 'Ultime'] %}
                 <section class="sjw-inner-tab-content{% if loop.first %} active{% endif %}" id="sjw-inner-tab-{{ tab }}">
                     <div class="sjw-skills-grid-wrapper">
@@ -24,16 +23,16 @@
                                 <article class="sjw-skill-cell sjw-skill-clickable" data-skill-index="{{ loop.index0 }}">
                                     <div class="sjw-skill-image-row">
                                         {% if skill.image_path %}
-                                            <img src="{{ url_for('static', filename=skill.image_path) }}" alt="Skill Image">
+                                            <img src="{{ asset_url_for('static', filename=skill.image_path) }}" alt="Skill Image">
                                         {% endif %}
                                     </div>
                                 </article>
                             {% endfor %}
                         </div>
                         <!-- Bulle flottante pour les gems -->
-                        <div id="sjw-gems-bubble" class="sjw-gems-bubble" style="display:none; position:absolute;">
+                        <aside id="sjw-gems-bubble" class="sjw-gems-bubble" style="display:none; position:absolute;">
                             <div id="sjw-gems-bubble-list"></div>
-                        </div>
+                        </aside>
                     </div>
                     {% if skills|length == 0 %}
                         <p>Aucune compétence dans cette catégorie.</p>
@@ -42,159 +41,21 @@
                 {% endfor %}
             </div>
         </section>
-        <div id="sjw-info-bubble" class="sjw-info-bubble" style="display:none; position:absolute; z-index:1100;"></div>
+        <aside id="sjw-info-bubble" class="sjw-info-bubble" style="display:none; position:absolute; z-index:1100;"></aside>
+        
         <script>
-        window.allSkillsData = {{ character.skills|tojson }};
-        document.addEventListener("DOMContentLoaded", function() {
-            const innerTabBtns = document.querySelectorAll('.sjw-inner-tab-btn');
-            const innerTabContents = document.querySelectorAll('.sjw-inner-tab-content');
-            innerTabBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    innerTabBtns.forEach(b => b.classList.remove('active'));
-                    innerTabContents.forEach(tc => tc.classList.remove('active'));
-                    this.classList.add('active');
-                    document.getElementById('sjw-inner-tab-' + this.dataset.innerTab).classList.add('active');
-                });
-            });
-        
-        });
-        
-        function initSkillInteractions() {
-            const activeContent = document.querySelector('.sjw-inner-tab-content.active');
-            const skillCells = activeContent.querySelectorAll('.sjw-skill-clickable');
-            const gemsBubble = document.getElementById('sjw-gems-bubble');
-            const gemsBubbleList = document.getElementById('sjw-gems-bubble-list');
-            const allSkillsData = window.allSkillsData;
-
-            skillCells.forEach(cell => {
-                cell.addEventListener('click', function(event) {
-                    // Récupère l'onglet actif
-                    const activeTab = document.querySelector('.sjw-inner-tab-btn.active').dataset.innerTab;
-                    const skillsData = allSkillsData.filter(s => s.type === activeTab);
-                    const idx = parseInt(cell.dataset.skillIndex);
-                    const skill = skillsData[idx];
-                    gemsBubbleList.innerHTML = '';
-                    if (skill && skill.gems) {
-                        skill.gems.forEach((gem, gemIdx) => {
-                            if (gem.image_path) {
-                                const img = document.createElement('img');
-                                img.src = "/static/" + gem.image_path;
-                                img.className = "sjw-gem-bubble-img";
-                                img.alt = "Gem Image";
-                                img.dataset.gemIdx = gemIdx; // Ajoute l'index pour le mousehover
-                                gemsBubbleList.appendChild(img);
-                            }
-                        });
-                        // Positionne la bulle à gauche du skill cliqué
-                        const rect = cell.getBoundingClientRect();
-                        const bubbleWidth = gemsBubble.offsetWidth || 120;
-                        const bubbleHeight = gemsBubble.offsetHeight || 200;
-                        let leftPosition = rect.left + window.scrollX - bubbleWidth - 16;
-                        if (leftPosition < 0) {
-                            leftPosition = rect.right + window.scrollX + 16;
-                        }
-                        let topPosition = rect.top + window.scrollY + (rect.height / 2) - (bubbleHeight / 2);
-                        if (topPosition < 0) topPosition = 10;
-                        gemsBubble.style.top = `${topPosition}px`;
-                        gemsBubble.style.left = `${leftPosition}px`;
-                        gemsBubble.style.display = "flex";
-                        updateGemHoverListeners(skill); // Ajoute le mousehover sur les gems
-                    }
-                });
-            });
-
-            // Ferme la bulle si on clique ailleurs
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.sjw-skill-clickable') && !e.target.closest('#sjw-gems-bubble')) {
-                    gemsBubble.style.display = "none";
-                }
-            });
-        }
-    initSkillInteractions();
-
-    document.addEventListener("DOMContentLoaded", function() {
-    const infoBubble = document.getElementById('sjw-info-bubble');
-
-    function updateSkillHoverListeners() {
-        // Cible uniquement les skills visibles dans l'onglet actif
-        const activeContent = document.querySelector('.sjw-inner-tab-content.active');
-        if (!activeContent) return;
-        const skillCells = activeContent.querySelectorAll('.sjw-skill-cell');
-        const activeTab = document.querySelector('.sjw-inner-tab-btn.active').dataset.innerTab;
-        const skillsData = window.allSkillsData.filter(s => s.type === activeTab);
-
-        skillCells.forEach((cell, idx) => {
-            cell.onmouseenter = function(e) {
-                const skill = skillsData[idx];
-                if (skill) {
-                    infoBubble.innerHTML = `
-                        <strong>${skill.name || ''}</strong><br>
-                        <span>${skill.description || ''}</span>
-                    `;
-                    infoBubble.style.display = "block";
-                    infoBubble.style.opacity = "1";
-                    infoBubble.style.left = (e.clientX + 18) + "px";
-                    infoBubble.style.top = (e.clientY + 18) + "px";
-                }
-            };
-            cell.onmousemove = function(e) {
-                infoBubble.style.left = (e.clientX + 18) + "px";
-                infoBubble.style.top = (e.clientY + 18) + "px";
-            };
-            cell.onmouseleave = function() {
-                infoBubble.style.display = "none";
-                infoBubble.style.opacity = "0";
-            };
-        });
-    }
-
-    // Met à jour les listeners au chargement et à chaque changement d'onglet
-    updateSkillHoverListeners();
-    document.querySelectorAll('.sjw-inner-tab-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            setTimeout(updateSkillHoverListeners, 50);
-        });
-    });
-});
-
-function updateGemHoverListeners(skill) {
-    const infoBubble = document.getElementById('sjw-info-bubble');
-    const gemImgs = document.querySelectorAll('.sjw-gem-bubble-img');
-    gemImgs.forEach(img => {
-        img.onmouseenter = function(e) {
-            const gemIdx = parseInt(img.dataset.gemIdx);
-            const gem = skill.gems[gemIdx];
-            if (gem) {
-                infoBubble.innerHTML = `
-                    <strong>${gem.name || ''}</strong><br>
-                    <span>${gem.description || ''}</span>
-                `;
-                infoBubble.style.display = "block";
-                infoBubble.style.opacity = "1";
-                infoBubble.style.left = (e.clientX + 18) + "px";
-                infoBubble.style.top = (e.clientY + 18) + "px";
-            }
-        };
-        img.onmousemove = function(e) {
-            infoBubble.style.left = (e.clientX + 18) + "px";
-            infoBubble.style.top = (e.clientY + 18) + "px";
-        };
-        img.onmouseleave = function() {
-            infoBubble.style.display = "none";
-            infoBubble.style.opacity = "0";
-        };
-    });
-}
+            window.allSkillsData = {{ character.skills|tojson }};
         </script>
+        <script src="{{ asset_url_for('static', filename='js/partials/sjw_skills.js') }}"></script>
     {% else %}
         {# Section classique pour les autres personnages #}
         {% if character.skills and character.skills|length > 0 %}
             {% for skill in character.skills %}
                 <article class="skill {% if skill.principal %}principal{% endif %}">
                     {% if skill.image %}
-                        <img src="{{ url_for('static', filename=skill.image) }}" alt="{{ skill.name or 'Skill Image' }}">
+                        <img src="{{ asset_url_for('static', filename=skill.image) }}" alt="{{ skill.name or 'Skill Image' }}">
                     {% endif %}
-                    <div>
+                    <div class="skill-details">
                         {% if skill.name %}
                             <strong>{{ skill.name }}</strong><br>
                         {% endif %}

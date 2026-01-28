@@ -13,40 +13,43 @@
 {% endblock %}
 
 {% block body_attributes %}
-class="{% if character.type %}background-image{% endif %}" style="{% if character.type %}background-image: url('{{ url_for('static', filename='images/Background/BG_' ~ character.type ~ '.webp') }}');{% endif %}"
+class="{% if character.type %}background-image{% endif %}" style="{% if character.type %}background-image: url('{{ asset_url_for('static', filename='images/Background/BG_' ~ character.type ~ '.webp') }}');{% endif %}"
 {% endblock %}
 
 {% block content %}
 <article class="character-sheet">
     <aside class="character-portrait">
         <div class="character-image">
-            <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}">
+            <img src="{{ asset_url_for('static', filename=character.image) }}" alt="{{ character.name }}">
         </div>
     </aside>
 
-    <div class="content-column">
+    <section class="content-column">
         <div class="container">
-            <h1>{{ character.name }}</h1>
-            {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
-                <button id="edit-character-btn" class="admin-btn">Modifier le personnage</button>
-                {% include 'partials/edit_character_modal.html' %}
-            {% endif %}
+            <header>
+                <h1>{{ character.name }}</h1>
+                {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
+                    <button id="edit-character-btn" class="admin-btn">Modifier le personnage</button>
+                    {% include 'partials/edit_character_modal.html' %}
+                {% endif %}
+            </header>
+
             <p style="text-align: center; color: #ffcc00; font-weight: bold" hidden>Type: {{ character.type }}</p>
 
             <div class="character-image">
-                <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}">
+                <img src="{{ asset_url_for('static', filename=character.image) }}" alt="{{ character.name }}">
             </div>
 
             <section class="character-info">
                 <div class="tabs-and-content">
                     <nav class="tabs">
-                        <div class="tab active" data-tab="description">{% if language == "FR-fr" %}Description{% else %}Description{% endif %}</div>
-                        <div class="tab" data-tab="weapons">{% if language == "FR-fr" %}Armes{% else %}Weapons{% endif %}</div>
-                        <div class="tab" data-tab="passives">{% if language == "FR-fr" %}Passifs{% else %}Passives{% endif %}</div>
-                        <div class="tab" data-tab="skills">{% if language == "FR-fr" %}Compétences{% else %}Skills{% endif %}</div>
-                        <div class="tab" data-tab="artefacts" id="artefacts-tab">{% if language == "FR-fr" %}Artefacts{% else %}Artefacts{% endif %}</div>
-                        <div class="tab" id="dropdown-tab">
-                            <select id="equipment-select">
+                        <button class="tab active" data-tab="description">{% if language == "FR-fr" %}Description{% else %}Description{% endif %}</button>
+                        <button class="tab" data-tab="weapons">{% if language == "FR-fr" %}Armes{% else %}Weapons{% endif %}</button>
+                        <button class="tab" data-tab="passives">{% if language == "FR-fr" %}Passifs{% else %}Passives{% endif %}</button>
+                        <button class="tab" data-tab="skills">{% if language == "FR-fr" %}Compétences{% else %}Skills{% endif %}</button>
+                        <button class="tab" id="artefacts-tab" data-tab="artefacts">{% if language == "FR-fr" %}Artefacts{% else %}Artefacts{% endif %}</button>
+                        <div class="tab dropdown-container" id="dropdown-tab">
+                            <select id="equipment-select" aria-label="{% if language == 'FR-fr' %}Sélectionner un set d'équipement{% else %}Select equipment set{% endif %}">
                                 {% if character.equipment_sets and character.equipment_sets|length > 0 %}
                                     {% for set in character.equipment_sets %}
                                         <option value="{{ loop.index0 }}">{{ set.set_name }}</option>
@@ -67,7 +70,7 @@ class="{% if character.type %}background-image{% endif %}" style="{% if characte
                 </div>
             </section>
         </div>
-    </div>
+    </section>
 </article>
 {% endblock %}
 

@@ -6,11 +6,11 @@
     'purple': {'FR-fr': 'Violette', 'EN-en': 'Purple'}
 } %}
 
-<div id="gems" class="tab-content">
+<section id="gems" class="tab-content">
   <h2>Gems</h2>
   <div class="gems-image-container" style="position: relative; display: inline-block">
     <img
-      src="{{ url_for('static', filename='images/Sung_Jinwoo/Gemmes.webp') }}"
+      src="{{ asset_url_for('static', filename='images/Sung_Jinwoo/Gemmes.webp') }}"
       alt="Gems"
       style="max-width: 100%"
     />
@@ -21,20 +21,14 @@
           onmouseenter="showGemTooltip('{{ color }}-{{ i }}')"
           onmouseleave="hideGemTooltip('{{ color }}-{{ i }}')"
         >
-          <div class="gem-tooltip" id="gem-tooltip-{{ color }}-{{ i }}">
+          <aside class="gem-tooltip" id="gem-tooltip-{{ color }}-{{ i }}">
             <strong>{{ color_labels[color][language] }}</strong><br />
             {{ stat }}
-          </div>
+          </aside>
         </div>
       {% endfor %}
     {% endfor %}
   </div>
-</div>
-<script>
-  function showGemTooltip(idx) {
-    document.getElementById("gem-tooltip-" + idx).style.display = "block";
-  }
-  function hideGemTooltip(idx) {
-    document.getElementById("gem-tooltip-" + idx).style.display = "none";
-  }
-</script>
+</section>
+
+<script src="{{ asset_url_for('static', filename='js/partials/gems_tooltips.js') }}"></script>

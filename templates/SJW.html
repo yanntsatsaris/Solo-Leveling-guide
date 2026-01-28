@@ -3,62 +3,65 @@
 {% block title %}Sung Jinwoo{% endblock %}
 
 {% block head_css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/SJW.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/edit_sjw_modal.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/add_shadow_modal.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/add_weapon_modal.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/add_sjw_skill_modal.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/review.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/weapons.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/passives.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/skills.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/gems.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/shadows.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/monarchs.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/partials/artefacts.css') }}">
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/SJW.css') }}">
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/edit_sjw_modal.css') }}">
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/add_shadow_modal.css') }}">
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/add_weapon_modal.css') }}">
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/add_sjw_skill_modal.css') }}">
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/review.css') }}">
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/weapons.css') }}">
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/passives.css') }}">
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/skills.css') }}">
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/gems.css') }}">
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/shadows.css') }}">
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/monarchs.css') }}">
+    <link rel="stylesheet" href="{{ asset_url_for('static', filename='css/partials/artefacts.css') }}">
 {% endblock %}
 
 {% block body_attributes %}
-class="{% if character.alias %}background-image{% endif %}" style="{% if character.alias %}background-image: url('{{ url_for('static', filename='images/Background/BG_Dark.webp') }}');{% endif %}"
+class="{% if character.alias %}background-image{% endif %}" style="{% if character.alias %}background-image: url('{{ asset_url_for('static', filename='images/Background/BG_Dark.webp') }}');{% endif %}"
 {% endblock %}
 
 {% block content %}
-<div class="layout">
+<article class="layout character-sheet">
     <!-- Colonne pour l'image -->
-    <div class="image-column">
+    <aside class="image-column character-portrait">
         <div class="character-image">
-            <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}">
+            <img src="{{ asset_url_for('static', filename=character.image) }}" alt="{{ character.name }}">
         </div>
-    </div>
+    </aside>
 
     <!-- Colonne pour le contenu principal -->
-    <div class="content-column">
+    <section class="content-column">
         <div class="container">
-            <h1>{{ character.name }}</h1>
-            {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
-                <button id="edit-sjw-btn" class="admin-btn">Modifier Sung Jinwoo</button>
-                {% include 'partials/edit_sjw_modal.html' %}
-            {% endif %}
+            <header>
+                <h1>{{ character.name }}</h1>
+                {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
+                    <button id="edit-sjw-btn" class="admin-btn">Modifier Sung Jinwoo</button>
+                    {% include 'partials/edit_sjw_modal.html' %}
+                {% endif %}
+            </header>
+
             <!-- Image du personnage (affichée sous le type sur téléphone) -->
             <div class="character-image">
-                <img src="{{ url_for('static', filename=character.image) }}" alt="{{ character.name }}">
+                <img src="{{ asset_url_for('static', filename=character.image) }}" alt="{{ character.name }}">
             </div>
 
             <!-- Conteneur pour les onglets et le contenu -->
-            <div class="character-info">
+            <section class="character-info">
                 <div class="tabs-and-content">
                     <!-- Système d'onglets -->
-                    <div class="tabs">
-                        <div class="tab" data-tab="description">{% if language == "FR-fr" %}Description{% else %}Description{% endif %}</div>
-                        <div class="tab" data-tab="weapons">{% if language == "FR-fr" %}Armes{% else %}Weapons{% endif %}</div>
-                        <div class="tab" data-tab="passives">{% if language == "FR-fr" %}Bénédictions{% else %}Blessings{% endif %}</div>
-                        <div class="tab" data-tab="skills">{% if language == "FR-fr" %}Compétences{% else %}Skills{% endif %}</div>
-                        <div class="tab" data-tab="gems">{% if language == "FR-fr" %}Gemmes{% else %}Gems{% endif %}</div>
-                        <div class="tab" data-tab="shadows">{% if language == "FR-fr" %}Ombres{% else %}Shadows{% endif %}</div>
-                        <div class="tab" data-tab="monarchs">{% if language == "FR-fr" %}Monarques{% else %}Monarchs{% endif %}</div>
-                        <div class="tab" data-tab="artefacts" id="artefacts-tab">{% if language == "FR-fr" %}Artefacts{% else %}Artefacts{% endif %}</div>
-                        <div class="tab" id="dropdown-tab">
-                            <select id="equipment-select">
+                    <nav class="tabs">
+                        <button class="tab" data-tab="description">{% if language == "FR-fr" %}Description{% else %}Description{% endif %}</button>
+                        <button class="tab" data-tab="weapons">{% if language == "FR-fr" %}Armes{% else %}Weapons{% endif %}</button>
+                        <button class="tab" data-tab="passives">{% if language == "FR-fr" %}Bénédictions{% else %}Blessings{% endif %}</button>
+                        <button class="tab" data-tab="skills">{% if language == "FR-fr" %}Compétences{% else %}Skills{% endif %}</button>
+                        <button class="tab" data-tab="gems">{% if language == "FR-fr" %}Gemmes{% else %}Gems{% endif %}</button>
+                        <button class="tab" data-tab="shadows">{% if language == "FR-fr" %}Ombres{% else %}Shadows{% endif %}</button>
+                        <button class="tab" data-tab="monarchs">{% if language == "FR-fr" %}Monarques{% else %}Monarchs{% endif %}</button>
+                        <button class="tab" data-tab="artefacts" id="artefacts-tab">{% if language == "FR-fr" %}Artefacts{% else %}Artefacts{% endif %}</button>
+                        <div class="tab dropdown-container" id="dropdown-tab">
+                            <select id="equipment-select" aria-label="{% if language == 'FR-fr' %}Sélectionner un set d'équipement{% else %}Select equipment set{% endif %}">
                                 {% if character.equipment_sets and character.equipment_sets|length > 0 %}
                                     {% for set in character.equipment_sets %}
                                         <option value="{{ loop.index0 }}">{{ set.set_name }}</option>
@@ -68,7 +71,7 @@ class="{% if character.alias %}background-image{% endif %}" style="{% if charact
                                 {% endif %}
                             </select>
                         </div>
-                    </div>
+                    </nav>
 
                     <!-- Contenu des onglets -->
                     {% include 'partials/review.html' %}
@@ -80,10 +83,10 @@ class="{% if character.alias %}background-image{% endif %}" style="{% if charact
                     {% include 'partials/monarchs.html' %}
                     {% include 'partials/artefacts.html' %}
                 </div>
-            </div>
+            </section>
         </div>
-    </div>
-</div>
+    </section>
+</article>
 {% endblock %}
 
 {% block body_js %}
@@ -100,5 +103,5 @@ class="{% if character.alias %}background-image{% endif %}" style="{% if charact
     <script id="coresEffectsData" type="application/json">
         {{ cores_effects|tojson }}
     </script>
-    <script src="{{ url_for('static', filename='js/SJW.js') }}"></script>
+    <script src="{{ asset_url_for('static', filename='js/SJW.js') }}"></script>
 {% endblock %}

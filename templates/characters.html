@@ -24,7 +24,7 @@
         </button>
         {% for type in character_types %}
             <button class="type-button" data-type="{{ type }}">
-                <img src="{{ url_for('static', filename='images/Types/Type_' ~ type ~ '.webp') }}"
+                <img src="{{ asset_url_for('static', filename='images/Types/Type_' ~ type ~ '.webp') }}"
                      alt="{{ type }}" />
             </button>
         {% endfor %}
@@ -43,7 +43,7 @@
         {% for image in images %}
             <li data-type="{{ image.type }}" data-rarity="{{ image.rarity }}">
                 <a href="{{ url_for('characters.character_details', alias=image.alias) }}">
-                    <img src="{{ url_for('static', filename=image.path) }}"
+                    <img src="{{ asset_url_for('static', filename=image.path) }}"
                          alt="{{ image.name }}" />
                 </a>
                 <p hidden>{{ image.name }}</p>
