@@ -7,14 +7,17 @@
 {% endblock %}
 
 {% block admin_content %}
-    <div class="form-container">
+<article class="form-container">
+    <header>
         <h1>Tester l'envoi d'e-mails</h1>
+    </header>
+    <section>
         <p>Cette page permet d'envoyer des e-mails de test pour vérifier la configuration SMTP et le rendu des templates.</p>
 
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}
                 {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                    <div class="alert alert-{{ category }}" role="alert">{{ message }}</div>
                 {% endfor %}
             {% endif %}
         {% endwith %}
@@ -36,5 +39,6 @@
 
             <button type="submit" class="btn">Envoyer l'e-mail de test</button>
         </form>
-    </div>
+    </section>
+</article>
 {% endblock %}

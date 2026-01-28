@@ -1,143 +1,58 @@
-<div
-  id="add-shadow-overlay"
-  class="edit-shadow-overlay"
-  style="display: none"
->
-  <div id="add-shadow-menu" class="edit-shadow-popup">
+<dialog id="add-shadow-modal" class="add-shadow-overlay">
+  <article class="add-shadow-content">
+    <header>
+      <h2 class="edit-shadow-title">Ajouter une ombre</h2>
+      <button type="button" class="close-add-shadow" aria-label="Fermer">&times;</button>
+    </header>
     <form
       id="add-shadow-form"
       method="POST"
       action="{{ url_for('sjw.add_shadow') }}"
     >
-      <h2 class="edit-shadow-title">Ajouter une ombre</h2>
-      <div class="edit-tabs">
-        <div class="edit-tab active" data-tab="main">Infos principales</div>
-      </div>
-      <div class="edit-tab-content active" id="edit-tab-main">
-        <label>Nom :</label>
-        <input type="text" name="name" required />
-        <label>Alias :</label>
-        <input type="text" name="alias" required />
-        <label>Description :</label>
-        <textarea name="description"></textarea>
+      <nav class="edit-tabs">
+        <button type="button" class="edit-tab active" data-tab="main">Infos principales</button>
+      </nav>
+      <section class="edit-tab-content active" id="edit-tab-main">
+        <div class="add-form-group">
+          <label>Nom :</label>
+          <input type="text" name="name" required />
+        </div>
+        <div class="add-form-group">
+          <label>Alias :</label>
+          <input type="text" name="alias" required />
+        </div>
+        <div class="add-form-group">
+          <label>Description :</label>
+          <textarea name="description"></textarea>
+        </div>
         <input type="hidden" name="image_folder" value="">
 
         <h4 class="evolutions-title">Évolutions de l'ombre</h4>
         <div class="evolutions-grid">
           {% set total_evos = 5 %}
           {% for i in range(total_evos) %}
-            {% if i % 2 == 0 %}
-            <div class="evolutions-row">
-            {% endif %}
+            {% if i % 2 == 0 %}<div class="evolutions-row">{% endif %}
               <div class="edit-evolution-block">
-                <label>Évolution : {{ 'A' ~ i  }}</label>
+                <label>Évolution : {{ 'A' ~ i }}</label>
                 <textarea name="shadow_evolution_description_{{ i }}"></textarea>
-                <input type="hidden" name="shadow_evolutions_{{ i }}_evolution_id"
-                  value="{{ 'A' ~ i }}">
+                <input type="hidden" name="shadow_evolutions_{{ i }}_evolution_id" value="{{ 'A' ~ i }}">
                 <input type="hidden" name="shadow_evolutions_id_{{ i }}" value="">
               </div>
-            {% if i % 2 == 1 or i == total_evos - 1 %}
-            </div>
-            {% endif %}
+            {% if i % 2 == 1 or i == total_evos - 1 %}</div>{% endif %}
           {% endfor %}
         </div>
-        <div style="display: flex; justify-content: space-between; margin-top: 18px">
-          <button type="submit" class="admin-btn">Enregistrer</button>
-          <button
-            type="button"
-            id="close-add-shadow"
-            class="close-btn"
-            style="font-size: 22px"
-          >
-            &times;
-          </button>
-        </div>
-      </div> <!-- Fermeture de edit-tab-content -->
+      </section>
+      <footer>
+        <button type="submit" class="add-submit-btn">Enregistrer</button>
+      </footer>
     </form>
-  </div> <!-- Fermeture de edit-shadow-popup -->
-</div> <!-- Fermeture de edit-shadow-overlay -->
+  </article>
+</dialog>
+
 <script>
-    // Fermeture de la modale
-    document.getElementById('close-add-shadow')?.addEventListener('click', function() {
-        document.getElementById('add-shadow-overlay').style.display = 'none';
-    });
-    // Ferme la modale si clic en dehors du popup
-    const addOverlayShadow = document.getElementById('add-shadow-overlay');
-    const addPopupShadow = document.getElementById('add-shadow-menu');
-    if (addOverlayShadow && addPopupShadow) {
-        addOverlayShadow.addEventListener('mousedown', function(e) {
-        if (e.target === addOverlayShadow) {
-            addOverlayShadow.style.display = 'none';
-        }
-        });
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof initializeAddShadowModal === 'function') {
+      initializeAddShadowModal();
     }
-    document.getElementById('add-shadow-btn')?.addEventListener('click', async function() {
-        // Demande les infos de base
-        const name = prompt("Nom de l'ombre :");
-        if (!name) return;
-        const alias = prompt("Alias de l'ombre :");
-        if (!alias) return;
-
-        // Construit le chemin du dossier image
-        // On suppose que tu veux remplacer les espaces par des underscores
-        const aliasFolder = alias.replace(/ /g, "_");
-        const folderName = `Shadow_${aliasFolder}`;
-        const folderPath = `static/images/Sung_Jinwoo/Shadows/${folderName}/`;
-
-        // Vérifie si le dossier existe côté serveur (nécessite une route Flask dédiée)
-        let folderExists = false;
-        try {
-        const resp = await fetch(`/SJW/add_shadow/check_image_folder_shadow?alias=${encodeURIComponent(alias)}`);
-        folderExists = (await resp.json()).exists;
-        } catch (e) {
-        // Si la vérification échoue, on continue quand même
-        folderExists = false;
-        }
-
-        // Ouvre la modale d'ajout
-        document.getElementById('add-shadow-overlay').style.display = 'flex';
-
-        // Pré-remplit les champs
-        document.querySelector('#add-shadow-form input[name="name"]').value = name;
-        document.querySelector('#add-shadow-form input[name="alias"]').value = alias;
-
-        // Optionnel : affiche une alerte si le dossier n'existe pas
-        if (!folderExists) {
-        let overlay = document.createElement('div');
-        overlay.id = "upload-shadow-images-overlay";
-        overlay.className = "edit-shadow-overlay";
-        overlay.style.display = "flex";
-        overlay.innerHTML = `
-            <div class="edit-shadow-popup">
-            <form id="upload-shadow-images-form" enctype="multipart/form-data">
-                <h2>Uploader les images de l'ombre (.zip)</h2>
-                <input type="file" name="images_zip" accept=".zip" required>
-                <input type="hidden" name="alias" value="${alias}">
-                <div style="margin-top:16px;">
-                <button type="submit" class="admin-btn">Envoyer</button>
-                <button type="button" id="cancel-upload-shadow-images" class="close-btn">&times;</button>
-                </div>
-            </form>
-            </div>
-        `;
-        document.body.appendChild(overlay);
-
-        document.getElementById('cancel-upload-shadow-images').onclick = function() {
-            overlay.remove();
-        };
-
-        document.getElementById('upload-shadow-images-form').onsubmit = async function(e) {
-            e.preventDefault();
-            let formData = new FormData(this);
-            let resp = await fetch('/admin/upload_shadow_images_zip', {
-            method: 'POST',
-            body: formData
-            });
-            let txt = await resp.text();
-            overlay.remove();
-            alert(txt);
-            // Optionnel : recharger ou réinitialiser le formulaire
-        };
-        }
-    });
+  });
 </script>

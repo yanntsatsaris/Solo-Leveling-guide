@@ -89,4 +89,7 @@ class="{% if character.type %}background-image{% endif %}" style="{% if characte
         {{ cores_effects | tojson }}
     </script>
     <script src="{{ asset_url_for('static', filename='js/character_details.js') }}"></script>
+    {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
+        <script src="{{ asset_url_for('static', filename='js/partials/edit_character_modal.js') }}"></script>
+    {% endif %}
 {% endblock %}

@@ -163,31 +163,35 @@
   }
 }
 
-/* Popup centrée : style Solo Leveling */
-.user-menu-popup {
+/* Modal style using <dialog> */
+dialog.user-menu-popup {
     background: #1e1e1e;
     padding: 32px 24px 24px 24px;
     border-radius: 16px;
     box-shadow: 0 4px 24px rgba(128,0,255,0.25);
     min-width: 320px;
+    border: 2px solid #8000ff;
+    margin: auto;
+    color: #ffffff;
+    z-index: 1001;
+    /* Reset dialog defaults */
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: none; /* Crucial pour <dialog> si on veut utiliser flex quand ouvert */
+    top: 0; right: 0; bottom: 0; left: 0;
+}
+
+/* Hide by default, show only when open */
+dialog.user-menu-popup:not([open]) {
+    display: none !important;
+}
+
+dialog.user-menu-popup[open] {
+    display: flex;
     flex-direction: column;
     align-items: stretch;
-    border: 2px solid #8000ff;
-    margin: 0;
-    z-index: 1001;
 }
 
-.user-menu-popup[open] {
-    display: flex;
-}
-
-.user-menu-popup::backdrop {
-    background: rgba(0, 0, 0, 0.7);
+dialog.user-menu-popup::backdrop {
+    background: rgba(0, 0, 0, 0.85);
 }
 
 .user-menu-popup h3 {
@@ -270,7 +274,7 @@
 }
 
 @media (max-width: 480px) {
-    .user-menu-popup {
+    dialog.user-menu-popup {
         min-width: 90vw;
         padding: 16px 8px 16px 8px;
     }

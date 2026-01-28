@@ -104,4 +104,8 @@ class="{% if character.alias %}background-image{% endif %}" style="{% if charact
         {{ cores_effects|tojson }}
     </script>
     <script src="{{ asset_url_for('static', filename='js/SJW.js') }}"></script>
+    {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
+        <script src="{{ asset_url_for('static', filename='js/partials/edit_sjw_modal.js') }}"></script>
+        <script src="{{ asset_url_for('static', filename='js/partials/add_shadow_modal.js') }}"></script>
+    {% endif %}
 {% endblock %}
