@@ -164,30 +164,32 @@
 }
 
 /* Modal style using <dialog> */
-dialog.user-menu-popup {
+#user-menu-dialog {
     background: #1e1e1e;
     padding: 32px 24px 24px 24px;
     border-radius: 16px;
     box-shadow: 0 4px 24px rgba(128,0,255,0.25);
     min-width: 320px;
     border: 2px solid #8000ff;
-    margin: auto;
     color: #ffffff;
     z-index: 1001;
-    /* Reset dialog defaults */
-    position: fixed;
-    top: 0; right: 0; bottom: 0; left: 0;
-}
-
-/* Hide by default, show only when open */
-dialog.user-menu-popup:not([open]) {
+    /* Force hide and move out of flow when closed */
     display: none !important;
+    position: fixed !important;
+    top: -9999px !important;
+    left: -9999px !important;
 }
 
-dialog.user-menu-popup[open] {
-    display: flex;
+/* Specific state for when it's open as a modal */
+#user-menu-dialog[open] {
+    display: flex !important;
     flex-direction: column;
     align-items: stretch;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
 }
 
 dialog.user-menu-popup::backdrop {
@@ -274,7 +276,7 @@ dialog.user-menu-popup::backdrop {
 }
 
 @media (max-width: 480px) {
-    dialog.user-menu-popup {
+    #user-menu-dialog {
         min-width: 90vw;
         padding: 16px 8px 16px 8px;
     }

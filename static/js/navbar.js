@@ -9,12 +9,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const loginError = document.getElementById('login-error');
     const registerError = document.getElementById('register-error');
     const logoutBtn = document.getElementById('logout-btn');
+    const languageSelect = document.getElementById('language-select');
+    const languageForm = document.getElementById('language-form');
 
     const newEmail = document.getElementById('new_email');
     const createBtn = document.getElementById('create-btn');
 
     if (userBtn && userDialog) {
         userBtn.addEventListener('click', () => {
+            userDialog.removeAttribute('hidden');
             userDialog.showModal();
         });
     }
@@ -22,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (closeBtn && userDialog) {
         closeBtn.addEventListener('click', () => {
             userDialog.close();
+            userDialog.setAttribute('hidden', '');
         });
     }
 
@@ -95,11 +99,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    if (languageSelect && languageForm) {
+        languageSelect.addEventListener('change', () => {
+            languageForm.submit();
+        });
+    }
+
     // Close when clicking outside the dialog content
     if (userDialog) {
         userDialog.addEventListener('click', (event) => {
             if (event.target === userDialog) {
                 userDialog.close();
+                userDialog.setAttribute('hidden', '');
             }
         });
     }

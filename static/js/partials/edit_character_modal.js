@@ -228,12 +228,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fermeture de la modale
     if (closeBtn && modal) {
-        closeBtn.onclick = () => modal.close();
+        closeBtn.onclick = () => {
+            modal.close();
+            modal.setAttribute('hidden', '');
+        };
     }
     if (modal) {
         modal.addEventListener('click', (event) => {
             if (event.target === modal) {
                 modal.close();
+                modal.setAttribute('hidden', '');
             }
         });
     }
@@ -248,7 +252,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         document.getElementById('edit-character-btn')?.addEventListener('click', () => {
             initialFormData = serializeForm(form);
-            if (modal) modal.showModal();
+            if (modal) {
+                modal.removeAttribute('hidden');
+                modal.showModal();
+            }
             fillImageSelects();
         });
         form.addEventListener('submit', function(e) {

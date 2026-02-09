@@ -12,3 +12,8 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
+
+/* Global dialog behavior */
+dialog:not([open]) {
+    display: none !important;
+}

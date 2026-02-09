@@ -25,19 +25,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (editBtn && modal) {
         editBtn.addEventListener('click', () => {
+            modal.removeAttribute('hidden');
             modal.showModal();
             fillImageSelects();
         });
     }
 
     if (closeBtn && modal) {
-        closeBtn.onclick = () => modal.close();
+        closeBtn.onclick = () => {
+            modal.close();
+            modal.setAttribute('hidden', '');
+        };
     }
 
     if (modal) {
         modal.addEventListener('click', (event) => {
             if (event.target === modal) {
                 modal.close();
+                modal.setAttribute('hidden', '');
             }
         });
     }

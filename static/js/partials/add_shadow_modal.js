@@ -22,7 +22,10 @@ function initializeAddShadowModal() {
                 folderExists = false;
             }
 
-            if (modal) modal.showModal();
+            if (modal) {
+                modal.removeAttribute('hidden');
+                modal.showModal();
+            }
 
             document.querySelector('#add-shadow-form input[name="name"]').value = name;
             document.querySelector('#add-shadow-form input[name="alias"]').value = alias;
@@ -67,13 +70,17 @@ function initializeAddShadowModal() {
     }
 
     if (closeBtn && modal) {
-        closeBtn.onclick = () => modal.close();
+        closeBtn.onclick = () => {
+            modal.close();
+            modal.setAttribute('hidden', '');
+        };
     }
 
     if (modal) {
         modal.addEventListener('click', (event) => {
             if (event.target === modal) {
                 modal.close();
+                modal.setAttribute('hidden', '');
             }
         });
     }
