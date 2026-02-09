@@ -205,8 +205,7 @@
               <div class="edit-form-group">
                 <label>Stats à focus :</label>
                 <select multiple size="6" class="eqset-focus-multiselect" data-target="eqset_focus_stats_{{ set_idx }}">
-                  {% set focusStatsOptions = ["ATK", "DEF", "HP", "CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX", "MP Regen%", "DMG RES"] %}
-                  {% for stat in focusStatsOptions %}<option value="{{ stat }}" {% if eqSet.focus_stats is defined and stat in eqSet.focus_stats %}selected{% endif %}>{{ stat }}</option>{% endfor %}
+                  {% for stat in focus_stats_options %}<option value="{{ stat }}" {% if eqSet.focus_stats is defined and stat in eqSet.focus_stats %}selected{% endif %}>{{ stat }}</option>{% endfor %}
                 </select>
                 <input type="text" name="eqset_focus_stats_{{ set_idx }}" value="{{ eqSet.focus_stats|join(', ') if eqSet.focus_stats else '' }}" readonly style="margin-top:4px;">
               </div>
@@ -219,7 +218,6 @@
                     {% set artefact = eqSet.artefacts[a_idx] if eqSet.artefacts|length > a_idx else {} %}
                     <div class="edit-artefact-block">
                       <label>
-                        {% set artefact_types = {'FR-fr': ['Casque', 'Plastron', 'Gants', 'Bottes', 'Collier', 'Bracelet', 'Bague', "Boucle d'oreille"], 'EN-en': ['Helmet', 'Chestplate', 'Gloves', 'Boots', 'Necklace', 'Bracelet', 'Ring', 'Earring']} %}
                         {{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}
                       </label>
                       <input type="hidden" name="artefact_name_{{ set_idx }}_{{ a_idx }}" value="{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}">
@@ -232,13 +230,12 @@
                       <select name="artefact_main_stat_{{ set_idx }}_{{ a_idx }}">
                         <option value=""></option>
                         {% set artefact_label = artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] %}
-                        {% set main_stats = {"Casque": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"], "Plastron": ["DEF", "DEF%"], "Gants": ["ATK", "ATK%"], "Bottes": ["CRIT DMG", "DEF", "DEF%", "HP", "HP%"], "Collier": ["HP", "HP%"], "Bracelet": ["ELEM DMG", "LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"], "Bague": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"], "Boucle d'oreille": ["MP MAX"]}[artefact_label] %}
+                        {% set main_stats = artefact_main_stats[artefact_label] if artefact_main_stats and artefact_label in artefact_main_stats else [] %}
                         {% for stat in main_stats %}<option value="{{ stat }}" {% if artefact.main_stat == stat %}selected{% endif %}>{{ stat }}</option>{% endfor %}
                       </select>
                       <label>Stats secondaires :</label>
                       <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}">
-                        {% set secondary_stats = ["ATK", "ATK%", "ATK% +3/4", "DEF", "DEF%", "DEF% +3/4", "HP", "HP%", "HP% +3/4", "CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX", "MP Regen%", "DMG RES"] %}
-                        {% for stat in secondary_stats %}<option value="{{ stat }}" {% if artefact.secondary_stats is defined and stat in artefact.secondary_stats %}selected{% endif %}>{{ stat }}</option>{% endfor %}
+                        {% for stat in secondary_stats_options %}<option value="{{ stat }}" {% if artefact.secondary_stats is defined and stat in artefact.secondary_stats %}selected{% endif %}>{{ stat }}</option>{% endfor %}
                       </select>
                       <input type="text" name="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.secondary_stats|join(', ') if artefact.secondary_stats is defined else '' }}" readonly style="margin-top:4px;">
                       <input type="hidden" name="artefact_id_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.id if artefact.id is defined else '' }}">
@@ -260,13 +257,12 @@
                       <select name="artefact_main_stat_{{ set_idx }}_{{ a_idx }}">
                         <option value=""></option>
                         {% set artefact_label = artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] %}
-                        {% set main_stats = {"Casque": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"], "Plastron": ["DEF", "DEF%"], "Gants": ["ATK", "ATK%"], "Bottes": ["CRIT DMG", "DEF", "DEF%", "HP", "HP%"], "Collier": ["HP", "HP%"], "Bracelet": ["ELEM DMG", "LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"], "Bague": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"], "Boucle d'oreille": ["MP MAX"]}[artefact_label] %}
+                    {% set main_stats = artefact_main_stats[artefact_label] if artefact_main_stats and artefact_label in artefact_main_stats else [] %}
                         {% for stat in main_stats %}<option value="{{ stat }}" {% if artefact.main_stat == stat %}selected{% endif %}>{{ stat }}</option>{% endfor %}
                       </select>
                       <label>Stats secondaires :</label>
                       <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}">
-                        {% set secondary_stats = ["ATK", "ATK%", "ATK% +3/4", "DEF", "DEF%", "DEF% +3/4", "HP", "HP%", "HP% +3/4", "CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX", "MP Regen%", "DMG RES"] %}
-                        {% for stat in secondary_stats %}<option value="{{ stat }}" {% if artefact.secondary_stats is defined and stat in artefact.secondary_stats %}selected{% endif %}>{{ stat }}</option>{% endfor %}
+                    {% for stat in secondary_stats_options %}<option value="{{ stat }}" {% if artefact.secondary_stats is defined and stat in artefact.secondary_stats %}selected{% endif %}>{{ stat }}</option>{% endfor %}
                       </select>
                       <input type="text" name="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.secondary_stats|join(', ') if artefact.secondary_stats is defined else '' }}" readonly style="margin-top:4px;">
                       <input type="hidden" name="artefact_id_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.id if artefact.id is defined else '' }}">
@@ -276,8 +272,6 @@
               </div>
               <hr>
               <h4>Noyaux du set</h4>
-              {% set coreMainStats = {"01": ["ATK", "ATK%"], "02": ["DEF", "DEF%"], "03": ["HP", "HP%"]} %}
-              {% set coreSecondaryStats = {"01": ["CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"], "02": ["CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"], "03": ["CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"]} %}
               {% for c_idx in range(3) %}
                 {% set core = eqSet.cores[c_idx] if eqSet.cores|length > c_idx else {} %}
                 <div class="edit-core-block">
@@ -290,12 +284,12 @@
                   <label>Stat principale :</label>
                   <select name="core_main_stat_{{ set_idx }}_{{ c_idx }}">
                     <option value=""></option>
-                    {% for stat in coreMainStats[core_number] %}<option value="{{ stat }}" {% if core.main_stat == stat %}selected{% endif %}>{{ stat }}</option>{% endfor %}
+                    {% for stat in core_main_stats[core_number] %}<option value="{{ stat }}" {% if core.main_stat == stat %}selected{% endif %}>{{ stat }}</option>{% endfor %}
                   </select>
                   <label>Stat secondaire :</label>
                   <select name="core_secondary_stat_{{ set_idx }}_{{ c_idx }}">
                     <option value=""></option>
-                    {% for stat in coreSecondaryStats[core_number] %}<option value="{{ stat }}" {% if core.secondary_stat == stat %}selected{% endif %}>{{ stat }}</option>{% endfor %}
+                    {% for stat in core_secondary_stats[core_number] %}<option value="{{ stat }}" {% if core.secondary_stat == stat %}selected{% endif %}>{{ stat }}</option>{% endfor %}
                   </select>
                   <input type="hidden" name="core_id_{{ set_idx }}_{{ c_idx }}" value="{{ core.id if core.id is defined else '' }}">
                 </div>

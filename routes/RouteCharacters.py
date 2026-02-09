@@ -24,6 +24,7 @@ from .utils import (
     focus_stats_equal,
 )
 from .data_loader import (
+    ARTEFACT_TYPES,
     ARTEFACT_MAIN_STATS,
     SECONDARY_STATS_OPTIONS,
     FOCUS_STATS_OPTIONS,
@@ -110,6 +111,7 @@ def inner_characters():
         rarities=rarities,
         panoplies_list=panoplies_names,
         cores_list=cores_names,
+        artefact_types=ARTEFACT_TYPES,
         artefact_main_stats=ARTEFACT_MAIN_STATS,
         secondary_stats_options=SECONDARY_STATS_OPTIONS,
         focus_stats_options=FOCUS_STATS_OPTIONS,
@@ -243,7 +245,13 @@ def character_details(alias):
         panoplies_effects=panoplies_effects,
         cores_effects=cores_effects,  # Passage à la vue
         panoplies_list=panoplies_names,
-        cores_list=cores_names  # Passage à la vue
+        cores_list=cores_names,  # Passage à la vue
+        artefact_types=ARTEFACT_TYPES,
+        artefact_main_stats=ARTEFACT_MAIN_STATS,
+        secondary_stats_options=SECONDARY_STATS_OPTIONS,
+        focus_stats_options=FOCUS_STATS_OPTIONS,
+        core_main_stats=CORE_MAIN_STATS,
+        core_secondary_stats=CORE_SECONDARY_STATS
     )
 
 @characters_bp.route('/characters/edit/<int:char_id>', methods=['POST'])

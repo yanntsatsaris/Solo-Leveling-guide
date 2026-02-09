@@ -1,5 +1,10 @@
 # routes/data_loader.py
 
+ARTEFACT_TYPES = {
+    'FR-fr': ['Casque', 'Plastron', 'Gants', 'Bottes', 'Collier', 'Bracelet', 'Bague', "Boucle d'oreille"],
+    'EN-en': ['Helmet', 'Chestplate', 'Gloves', 'Boots', 'Necklace', 'Bracelet', 'Ring', 'Earring']
+}
+
 ARTEFACT_MAIN_STATS = {
     "Casque": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
     "Plastron": ["DEF", "DEF%"],
