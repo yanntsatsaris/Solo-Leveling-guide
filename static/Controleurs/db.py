@@ -9,15 +9,11 @@ def get_db():
         database = conf.get_config('PSQL', 'database')
         user = conf.get_config('PSQL', 'user')
         password = conf.get_config('PSQL', 'password')
-        host = conf.get_config('PSQL', 'host')
-        port = conf.get_config('PSQL', 'port')
         write_log("Connexion à la base de données SQL", log_level="DEBUG")
         g.db = psycopg2.connect(
             dbname=database,
             user=user,
-            password=password,
-            host=host,
-            port=port
+            password=password
         )
     return g.db
 

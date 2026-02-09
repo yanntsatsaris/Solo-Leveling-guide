@@ -17,3 +17,22 @@ body {
 dialog:not([open]) {
     display: none !important;
 }
+
+/* Admin Buttons */
+.admin-btn {
+    background-color: #ffcc00;
+    color: #121212;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 32px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    font-family: Arial, sans-serif;
+}
+
+.admin-btn:hover {
+    background-color: #8000ff;
+    color: #fff;
+}
