@@ -33,23 +33,7 @@ dialog.edit-sjw-overlay::backdrop {
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
 
-.close-edit-sjw {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 28px;
-    background: none;
-    border: none;
-    color: #ffcc00;
-    cursor: pointer;
-    transition: color 0.3s, transform 0.2s;
-    z-index: 10;
-}
 
-.close-edit-sjw:hover {
-    color: #fff;
-    transform: scale(1.1);
-}
 
 .edit-sjw-content h2 {
     margin-top: 0;

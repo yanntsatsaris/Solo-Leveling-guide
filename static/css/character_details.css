@@ -226,14 +226,16 @@ nav.tabs {
   color: #ffcc00; /* Texte doré */
   border: 1px solid #ffcc00; /* Bordure dorée */
   border-radius: 8px; /* Arrondi */
-  padding: 5px 15px;
+  padding: 8px 15px;
   font-size: inherit; /* Taille du texte héritée */
   font-family: inherit; /* Police héritée */
   cursor: pointer; /* Curseur cliquable */
-  width: 100%; /* Prend toute la largeur disponible */
+  width: auto; /* Laisse le select prendre la largeur nécessaire */
+  min-width: 180px; /* S'assure qu'il y a de la place pour le texte */
   box-sizing: border-box; /* Inclut le padding dans la largeur */
   transition: background-color 0.3s ease, color 0.3s ease; /* Transition pour les interactions */
-  text-align: center;
+  line-height: 1.2;
+  display: block;
 }
 
 /* Style pour le <select> lorsqu'il est survolé */
@@ -376,7 +378,7 @@ nav.tabs {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    text-align: center;
+    line-height: normal;
   }
 }
 
