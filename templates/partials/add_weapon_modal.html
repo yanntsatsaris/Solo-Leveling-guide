@@ -1,29 +1,42 @@
-<div
-  id="add-weapon-overlay"
-  class="edit-weapon-overlay"
-  style="display: none"
+<dialog
+  id="add-weapon-modal"
+  class="add-weapon-overlay"
+  hidden
 >
-  <div id="add-weapon-menu" class="edit-weapon-popup">
+  <article id="add-weapon-menu" class="add-weapon-content">
+    <header>
+      <h2 class="modal-title">Ajouter une arme</h2>
+      <button type="button" class="close-add-weapon" aria-label="Fermer">&times;</button>
+    </header>
     <form
       id="add-weapon-form"
       method="POST"
       action="{{ url_for('sjw.add_weapon') }}"
     >
-      <h2 class="edit-weapon-title">Ajouter une arme</h2>
-      <div class="edit-tabs">
-        <div class="edit-tab active" data-tab="main">Infos principales</div>
-      </div>
-      <div class="edit-tab-content active" id="edit-tab-main">
-        <label>Nom :</label>
-        <input type="text" name="name" required />
-        <label>Alias :</label>
-        <input type="text" name="alias" required />
-        <label>Type :</label>
-        <input type="text" name="type" required />
-        <label>Rareté :</label>
-        <input type="text" name="rarity" required />
-        <label>Description :</label>
-        <textarea name="description"></textarea>
+      <nav class="edit-tabs">
+        <button type="button" class="edit-tab active" data-tab="main">Infos principales</button>
+      </nav>
+      <section class="edit-tab-content active" id="add-weapon-tab-main">
+        <div class="add-form-group">
+          <label>Nom :</label>
+          <input type="text" name="name" required />
+        </div>
+        <div class="add-form-group">
+          <label>Alias :</label>
+          <input type="text" name="alias" required />
+        </div>
+        <div class="add-form-group">
+          <label>Type :</label>
+          <input type="text" name="type" required />
+        </div>
+        <div class="add-form-group">
+          <label>Rareté :</label>
+          <input type="text" name="rarity" required />
+        </div>
+        <div class="add-form-group">
+          <label>Description :</label>
+          <textarea name="description"></textarea>
+        </div>
         <input type="hidden" name="image_folder" value="">
 
         <h4 class="evolutions-title">Évolutions de l'arme</h4>
@@ -45,38 +58,32 @@
             {% endif %}
           {% endfor %}
         </div>
-        <div style="display: flex; justify-content: space-between; margin-top: 18px">
-          <button type="submit" class="admin-btn">Enregistrer</button>
-          <button
-            type="button"
-            id="close-add-weapon"
-            class="close-btn"
-            style="font-size: 22px"
-          >
-            &times;
-          </button>
-        </div>
-      </div> <!-- Fermeture de edit-tab-content -->
+        <footer>
+          <button type="submit" class="add-submit-btn">Enregistrer</button>
+        </footer>
+      </section>
     </form>
-  </div> <!-- Fermeture de edit-weapon-popup -->
-</div> <!-- Fermeture de edit-weapon-overlay -->
+  </article>
+</dialog>
+
 <script>
-    // Fermeture de la modale
-    document.getElementById('close-add-weapon')?.addEventListener('click', function() {
-        document.getElementById('add-weapon-overlay').style.display = 'none';
+    // Gestion de la modale avec Dialog API
+    const addWeaponModal = document.getElementById('add-weapon-modal');
+    const closeAddWeaponBtn = document.querySelector('.close-add-weapon');
+
+    closeAddWeaponBtn?.addEventListener('click', () => {
+        addWeaponModal.close();
+        addWeaponModal.setAttribute('hidden', '');
     });
-    // Ferme la modale si clic en dehors du popup
-    const addOverlayWeapon = document.getElementById('add-weapon-overlay');
-    const addPopupWeapon = document.getElementById('add-weapon-menu');
-    if (addOverlayWeapon && addPopupWeapon) {
-        addOverlayWeapon.addEventListener('mousedown', function(e) {
-        if (e.target === addOverlayWeapon) {
-            addOverlayWeapon.style.display = 'none';
+
+    addWeaponModal?.addEventListener('click', (e) => {
+        if (e.target === addWeaponModal) {
+            addWeaponModal.close();
+            addWeaponModal.setAttribute('hidden', '');
         }
-        });
-    }
+    });
+
     document.getElementById('add-weapon-btn')?.addEventListener('click', async function() {
-        // Demande les infos de base
         const name = prompt("Nom de l'arme :");
         if (!name) return;
         const alias = prompt("Alias de l'arme :");
@@ -86,69 +93,47 @@
         const rarity = prompt("Rareté de l'arme (SSR, SR, R) :");
         if (!rarity) return;
 
-        // Construit le chemin du dossier image
-        // On suppose que tu veux remplacer les espaces par des underscores
-        const aliasFolder = alias.replace(/ /g, "_");
-        const folderName = `${type}_${aliasFolder}`;
-        const folderPath = `static/images/Sung_Jinwoo/Armes/${folderName}/`;
-
-        // Vérifie si le dossier existe côté serveur (nécessite une route Flask dédiée)
         let folderExists = false;
         try {
-        const resp = await fetch(`/SJW/add_weapon/check_image_folder_weapon?alias=${encodeURIComponent(alias)}&type=${encodeURIComponent(type)}`);
-        folderExists = (await resp.json()).exists;
+            const resp = await fetch(`/SJW/add_weapon/check_image_folder_weapon?alias=${encodeURIComponent(alias)}&type=${encodeURIComponent(type)}`);
+            folderExists = (await resp.json()).exists;
         } catch (e) {
-        // Si la vérification échoue, on continue quand même
-        folderExists = false;
+            folderExists = false;
         }
 
-        // Ouvre la modale d'ajout
-        document.getElementById('add-weapon-overlay').style.display = 'flex';
+        // Ouvrir le modal
+        addWeaponModal.removeAttribute('hidden');
+        addWeaponModal.showModal();
 
-        // Pré-remplit les champs
+        // Pré-remplir
         document.querySelector('#add-weapon-form input[name="name"]').value = name;
         document.querySelector('#add-weapon-form input[name="alias"]').value = alias;
         document.querySelector('#add-weapon-form input[name="type"]').value = type;
         document.querySelector('#add-weapon-form input[name="rarity"]').value = rarity;
 
-        // Optionnel : affiche une alerte si le dossier n'existe pas
         if (!folderExists) {
-        let overlay = document.createElement('div');
-        overlay.id = "upload-weapon-images-overlay";
-        overlay.className = "edit-weapon-overlay";
-        overlay.style.display = "flex";
-        overlay.innerHTML = `
-            <div class="edit-weapon-popup">
-            <form id="upload-weapon-images-form" enctype="multipart/form-data">
-                <h2>Uploader les images de l'arme (.zip)</h2>
-                <input type="file" name="images_zip" accept=".zip" required>
-                <input type="hidden" name="alias" value="${alias}">
-                <input type="hidden" name="type" value="${type}">
-                <div style="margin-top:16px;">
-                <button type="submit" class="admin-btn">Envoyer</button>
-                <button type="button" id="cancel-upload-weapon-images" class="close-btn">&times;</button>
-                </div>
-            </form>
-            </div>
-        `;
-        document.body.appendChild(overlay);
-
-        document.getElementById('cancel-upload-weapon-images').onclick = function() {
-            overlay.remove();
-        };
-
-        document.getElementById('upload-weapon-images-form').onsubmit = async function(e) {
-            e.preventDefault();
-            let formData = new FormData(this);
-            let resp = await fetch('/admin/upload_weapon_images_zip', {
-            method: 'POST',
-            body: formData
-            });
-            let txt = await resp.text();
-            overlay.remove();
-            alert(txt);
-            // Optionnel : recharger ou réinitialiser le formulaire
-        };
+            // Logique d'upload simplifiée pour l'exemple
+            const upload = confirm("Dossier d'images introuvable. Voulez-vous uploader un .zip d'images ?");
+            if (upload) {
+                // Créer un input file temporaire
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.zip';
+                input.onchange = async (e) => {
+                    const file = e.target.files[0];
+                    const formData = new FormData();
+                    formData.append('images_zip', file);
+                    formData.append('alias', alias);
+                    formData.append('type', type);
+                    const resp = await fetch('/admin/upload_weapon_images_zip', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const txt = await resp.text();
+                    alert(txt);
+                };
+                input.click();
+            }
         }
     });
 </script>

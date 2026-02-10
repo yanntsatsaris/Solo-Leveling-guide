@@ -1,244 +1,140 @@
-/* Overlay */
-.edit-weapon-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(18, 18, 18, 0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+dialog.add-weapon-overlay {
+    border: none;
+    padding: 0;
+    background: transparent;
+    max-width: 95vw;
+    max-height: 95vh;
 }
 
-/* Popup */
-.edit-weapon-popup {
-  background: #1e1e1e;
-  padding: 12px 9px;
-  border-radius: 12px;
-  min-width: 1400px;
-  max-width: 2400px;
-  min-height: 650px;
-  max-height: 95vh;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  position: relative;
-  overflow-y: auto;
-  color: #fff;
-  font-family: Arial, sans-serif;
+dialog.add-weapon-overlay:not([open]) {
+    display: none !important;
 }
 
-/* Titre */
-.edit-weapon-popup h2 {
-  color: #ffcc00;
-  text-align: center;
-  text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff;
+dialog.add-weapon-overlay[open] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.edit-weapon-title {
-  text-align: center;
-  color: #ffcc00;
+dialog.add-weapon-overlay::backdrop {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Onglets */
-.edit-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+.add-weapon-content {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    padding: 30px;
+    border-radius: 12px;
+    border: 2px solid #444;
+    width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
 
-.edit-tab {
-  padding: 10px 24px;
-  cursor: pointer;
-  background-color: #1e1e1e;
-  color: #fff;
-  border: none;
-  border-radius: 8px 8px 0 0;
-  font-weight: bold;
-  transition: background-color 0.3s, color 0.3s;
+.close-add-weapon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: #ffcc00;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.2s;
+    z-index: 10;
 }
 
-.edit-tab.active {
-  background-color: #ffcc00;
-  color: #121212;
-  box-shadow: 0 2px 8px rgba(255, 204, 0, 0.15);
+.close-add-weapon:hover {
+    color: #fff;
+    transform: scale(1.1);
 }
 
-.edit-tab:hover {
-  background-color: #ffcc00;
-  color: #121212;
+.add-weapon-content h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #ffcc00;
+    text-align: center;
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-/* Contenu des onglets */
-.edit-tab-content {
-  display: none;
-  background-color: #232323;
-  color: #fff;
-  padding: 24px;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+.add-form-group {
+    margin-bottom: 20px;
 }
 
-.edit-tab-content.active {
-  display: block;
+.add-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ffcc00;
+    font-size: 14px;
+    font-weight: bold;
 }
 
-/* Champs du formulaire */
-.edit-weapon-popup label {
-  display: block;
-  margin-bottom: 2px;
-  color: #ffcc00;
-  font-weight: bold;
+.add-weapon-content input,
+.add-weapon-content select,
+.add-weapon-content textarea {
+    width: 100%;
+    padding: 10px;
+    background-color: #121212;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 16px;
+    box-sizing: border-box;
+    font-family: inherit;
 }
 
-.edit-weapon-popup input,
-.edit-weapon-popup textarea,
-.edit-weapon-popup select {
-  width: 100%;
-  margin-top: 1.5px;
-  padding: 5px;
-  border-radius: 6px;
-  border: 1px solid #444;
-  background: #333;
-  color: #fff;
-  font-size: 14px;
-  box-sizing: border-box;
+.add-weapon-content textarea {
+    height: 80px;
+    resize: vertical;
 }
 
-.edit-weapon-popup textarea {
-  min-height: 60px;
-  resize: vertical;
+.add-weapon-content input:focus,
+.add-weapon-content select:focus,
+.add-weapon-content textarea:focus {
+    border-color: #ffcc00;
+    box-shadow: 0 0 5px rgba(255, 204, 0, 0.3);
+    outline: none;
 }
 
-.edit-weapon-popup hr {
-  border: none;
-  border-top: 1px solid #444;
-  margin: 18px 0;
+.add-submit-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #ffcc00;
+    color: #1a1a1a;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    text-transform: uppercase;
+    margin-top: 20px;
 }
 
-/* Boutons */
-.admin-btn {
-  background-color: #ffcc00;
-  color: #121212;
-  border: none;
-  border-radius: 8px;
-  padding: 12px 32px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s, color 0.3s;
+.add-submit-btn:hover {
+    background-color: #e6b800;
 }
 
-.admin-btn:hover {
-  background-color: #8000ff;
-  color: #fff;
-}
-
-.close-btn {
-  position: absolute;
-  top: 12px;
-  right: 18px;
-  background: none;
-  border: none;
-  font-size: 28px;
-  color: #ffcc00;
-  cursor: pointer;
-}
-
-/* Evolutions */
+/* Grids */
 .evolutions-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
+
 .evolutions-row {
-  display: flex;
-  gap: 7px;
+    display: flex;
+    gap: 15px;
 }
+
 .edit-evolution-block {
-  flex: 1;
-  background: #232323;
-  padding: 5px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  margin-bottom: 6px;
-}
-
-/* Pour la grille d'évolutions dans les armes */
-.edit-weapon-evolution-block {
-  flex: 1;
-  background: #232323;
-  padding: 5px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  margin-bottom: 6px;
-}
-
-/* Passives et Skills */
-.passives-grid,
-.skills-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 2px;
-}
-.passives-row,
-.skills-row {
-  display: flex;
-  gap: 7px;
-}
-.edit-passive-block,
-.edit-skill-block {
-  flex: 1;
-  background: #232323;
-  padding: 5px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  margin-bottom: 6px;
-}
-
-/* Checkbox styles */
-.checkbox-row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-top: 3px;
-  margin-bottom: 3px;
-}
-.checkbox-row label {
-  font-weight: normal;
-  color: #ffcc00;
-  display: flex;
-  align-items: center;
-  gap: 3px;
-}
-
-/* Bouton Ajouter */
-.add-btn {
-  margin: 12px 0 0 0;
-  padding: 4px 14px;
-  font-size: 18px;
-  background: #ffcc00;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.add-btn:hover {
-  background: #ffe066;
-}
-
-/* Pour le responsive si besoin */
-@media (max-width: 900px) {
-  .edit-weapon-popup {
-    min-width: 95vw;
-    max-width: 98vw;
-    min-height: 400px;
-    padding: 2px 1vw;
-  }
-  .edit-tabs {
-    flex-wrap: wrap;
-    gap: 1px;
-  }
+    background: #222;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    flex: 1;
 }

@@ -25,12 +25,12 @@ dialog.edit-character-overlay::backdrop {
     color: #e0e0e0;
     padding: 30px;
     border-radius: 12px;
-    border: 2px solid #8000ff;
+    border: 2px solid #444;
     width: 900px;
     max-height: 90vh;
     overflow-y: auto;
     position: relative;
-    box-shadow: 0 0 30px rgba(128, 0, 255, 0.3);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
 
 .close-edit-character {
@@ -59,7 +59,6 @@ dialog.edit-character-overlay::backdrop {
     font-size: 28px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    text-shadow: 0 0 10px rgba(128, 0, 255, 0.5);
 }
 
 /* Tabs */
@@ -81,6 +80,8 @@ dialog.edit-character-overlay::backdrop {
     border-radius: 6px 6px 0 0;
     white-space: nowrap;
     transition: all 0.3s;
+    font-family: inherit;
+    font-size: 14px;
 }
 
 .edit-tab:hover {
@@ -89,9 +90,10 @@ dialog.edit-character-overlay::backdrop {
 }
 
 .edit-tab.active {
-    background: #8000ff;
-    color: #fff;
-    border-color: #8000ff;
+    background: #ffcc00;
+    color: #1a1a1a;
+    border-color: #ffcc00;
+    font-weight: bold;
 }
 
 .edit-tab-content {
@@ -175,6 +177,7 @@ dialog.edit-character-overlay::backdrop {
     gap: 5px;
     color: #fff;
     cursor: pointer;
+    font-size: 14px;
 }
 
 /* Buttons */
@@ -186,6 +189,7 @@ dialog.edit-character-overlay::backdrop {
     border-radius: 4px;
     cursor: pointer;
     margin-top: 10px;
+    font-family: inherit;
 }
 
 .add-btn:hover {

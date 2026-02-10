@@ -1,396 +1,140 @@
-/* Overlay */
-.edit-sjw-skill-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(18, 18, 18, 0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+dialog#add-sjw-skill-modal {
+    border: none;
+    padding: 0;
+    background: transparent;
+    max-width: 95vw;
+    max-height: 95vh;
 }
 
-/* Popup */
-.edit-sjw-skill-popup {
-  background: #1e1e1e;
-  padding: 12px 9px;
-  border-radius: 12px;
-  min-width: 1400px;
-  max-width: 2400px;
-  min-height: 650px;
-  max-height: 95vh;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-  position: relative;
-  overflow-y: auto;
-  color: #fff;
-  font-family: Arial, sans-serif;
+dialog#add-sjw-skill-modal:not([open]) {
+    display: none !important;
 }
 
-/* Titre */
-.edit-sjw-skill-popup h2 {
-  color: #ffcc00;
-  text-align: center;
-  text-shadow: 0 0 10px #8000ff, 0 0 20px #8000ff;
+dialog#add-sjw-skill-modal[open] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.edit-sjw-skill-title {
-  text-align: center;
-  color: #ffcc00;
+dialog#add-sjw-skill-modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
-/* Onglets */
-.edit-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
+.add-sjw-skill-content {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    padding: 30px;
+    border-radius: 12px;
+    border: 2px solid #444;
+    width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
 
-.edit-tab {
-  padding: 10px 24px;
-  cursor: pointer;
-  background-color: #1e1e1e;
-  color: #fff;
-  border: none;
-  border-radius: 8px 8px 0 0;
-  font-weight: bold;
-  transition: background-color 0.3s, color 0.3s;
+.close-add-sjw-skill {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: #ffcc00;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.2s;
+    z-index: 10;
 }
 
-.edit-tab.active {
-  background-color: #ffcc00;
-  color: #121212;
-  box-shadow: 0 2px 8px rgba(255, 204, 0, 0.15);
+.close-add-sjw-skill:hover {
+    color: #fff;
+    transform: scale(1.1);
 }
 
-.edit-tab:hover {
-  background-color: #ffcc00;
-  color: #121212;
+.add-sjw-skill-content h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #ffcc00;
+    text-align: center;
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
-/* Contenu des onglets */
-.edit-tab-content {
-  display: none;
-  background-color: #232323;
-  color: #fff;
-  padding: 24px;
-  border-radius: 0 0 12px 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+.add-form-group {
+    margin-bottom: 15px;
 }
 
-.edit-tab-content.active {
-  display: block;
+.add-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #ffcc00;
+    font-weight: bold;
+    font-size: 14px;
 }
 
-/* Champs du formulaire */
-.edit-sjw-skill-popup label {
-  display: block;
-  margin-bottom: 2px;
-  color: #ffcc00;
-  font-weight: bold;
+.add-sjw-skill-content input,
+.add-sjw-skill-content select,
+.add-sjw-skill-content textarea {
+    width: 100%;
+    padding: 10px;
+    background-color: #121212;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 16px;
+    box-sizing: border-box;
+    font-family: inherit;
 }
 
-.edit-sjw-skill-popup input,
-.edit-sjw-skill-popup textarea,
-.edit-sjw-skill-popup select {
-  width: 100%;
-  margin-top: 1.5px;
-  padding: 5px;
-  border-radius: 6px;
-  border: 1px solid #444;
-  background: #333;
-  color: #fff;
-  font-size: 14px;
-  box-sizing: border-box;
+.add-sjw-skill-content textarea {
+    height: 100px;
+    resize: vertical;
 }
 
-.edit-sjw-skill-popup textarea {
-  min-height: 60px;
-  resize: vertical;
+.add-sjw-skill-content input:focus,
+.add-sjw-skill-content select:focus,
+.add-sjw-skill-content textarea:focus {
+    border-color: #ffcc00;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 204, 0, 0.3);
 }
 
-.edit-sjw-skill-popup hr {
-  border: none;
-  border-top: 1px solid #444;
-  margin: 18px 0;
-}
-
-/* Boutons */
 .admin-btn {
-  background-color: #ffcc00;
-  color: #121212;
-  border: none;
-  border-radius: 8px;
-  padding: 12px 32px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.3s, color 0.3s;
+    background-color: #ffcc00;
+    color: #121212;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 32px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 10px;
 }
 
 .admin-btn:hover {
-  background-color: #8000ff;
-  color: #fff;
+    background-color: #8000ff;
+    color: #fff;
 }
 
-.close-btn {
-  position: absolute;
-  top: 12px;
-  right: 18px;
-  background: none;
-  border: none;
-  font-size: 28px;
-  color: #ffcc00;
-  cursor: pointer;
+/* Skills/Gems specific */
+.edit-skill-gem-block {
+    background: #222;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    margin-bottom: 15px;
 }
 
-/* Evolutions */
-.evolutions-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 2px;
-}
-.evolutions-row {
-  display: flex;
-  gap: 7px;
-}
-.edit-evolution-block {
-  flex: 1;
-  background: #232323;
-  padding: 5px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  margin-bottom: 6px;
+.edit-skill-gem-block fieldset {
+    border: 1px solid #444;
+    border-radius: 6px;
+    padding: 15px;
 }
 
-/* Pour la grille d'évolutions dans les armes */
-.edit-sjw-skill-evolution-block {
-  flex: 1;
-  background: #232323;
-  padding: 5px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  margin-bottom: 6px;
-}
-
-/* Passives et Skills */
-.passives-grid,
-.skills-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 2px;
-}
-.passives-row,
-.skills-row {
-  display: flex;
-  gap: 7px;
-}
-.edit-passive-block,
-.edit-skill-block {
-  flex: 1;
-  background: #232323;
-  padding: 5px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  margin-bottom: 6px;
-}
-
-/* Checkbox styles */
-.checkbox-row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  margin-top: 3px;
-  margin-bottom: 3px;
-}
-.checkbox-row label {
-  font-weight: normal;
-  color: #ffcc00;
-  display: flex;
-  align-items: center;
-  gap: 3px;
-}
-
-/* Bouton Ajouter */
-.add-btn {
-  margin: 12px 0 0 0;
-  padding: 4px 14px;
-  font-size: 18px;
-  background: #ffcc00;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.add-btn:hover {
-  background: #ffe066;
-}
-
-/* Gems Fieldset */
-.edit-sjw-skill-gem-fieldset {
-  border: 1.5px solid #444;
-  border-radius: 10px;
-  background: #232323;
-  margin-bottom: 14px;
-  padding: 14px 16px 10px 16px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-  position: relative;
-}
-.edit-sjw-skill-gem-fieldset legend {
-  color: #ffcc00;
-  font-weight: bold;
-  font-size: 1.1em;
-  padding: 0 8px;
-  letter-spacing: 1px;
-  text-shadow: 0 0 6px #8000ff44;
-}
-
-.gem-fields-row {
-  display: flex;
-  gap: 18px;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
-  width: 100%;
-}
-
-.gem-fields-row > div {
-  flex: 1 1 0;
-  min-width: 0;
-}
-
-.gem-type-field,
-.gem-alias-field,
-.gem-image-field,
-.gem-name-field,
-.gem-description-field,
-.gem-buff-name-field,
-.gem-buff-image-field,
-.gem-buff-description-field,
-.gem-debuff-name-field,
-.gem-debuff-image-field,
-.gem-debuff-description-field {
-  flex: 1 1 0;
-  min-width: 0;
-}
-
-.sjw-skill-gem-block label {
-  color: #ffcc00;
-  font-weight: bold;
-  margin-bottom: 2px;
-  display: block;
-}
-
-.sjw-skill-gem-block input,
-.sjw-skill-gem-block select,
-.sjw-skill-gem-block textarea {
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.sjw-skill-gem-block textarea {
-  min-height: 38px;
-  resize: vertical;
-}
-
-.sjw-skill-gem-block .remove-gem-btn,
-.sjw-skill-gem-block .remove-buff-btn,
-.sjw-skill-gem-block .remove-debuff-btn {
-  background: #8000ff;
-  color: #fff;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s;
-  padding: 6px 16px;
-  margin-top: 6px;
-}
-.sjw-skill-gem-block .remove-gem-btn:hover,
-.sjw-skill-gem-block .remove-buff-btn:hover,
-.sjw-skill-gem-block .remove-debuff-btn:hover {
-  background: #ffcc00;
-  color: #121212;
-}
-
-.gem-buff-fields,
-.gem-debuff-fields {
-  background: #292929;
-  border-radius: 7px;
-  margin-top: 10px;
-  padding: 10px 12px 8px 12px;
-  border: 1px dashed #555;
-}
-
-.gem-buff-fields label,
-.gem-debuff-fields label {
-  color: #80ff80;
-  font-weight: bold;
-}
-
-.gem-debuff-fields label {
-  color: #ff8080;
-}
-
-.gem-buff-fields textarea,
-.gem-debuff-fields textarea {
-  background: #222;
-  color: #fff;
-  border: 1px solid #444;
-  border-radius: 5px;
-  padding: 4px;
-  font-size: 13px;
-  margin-top: 2px;
-  margin-bottom: 4px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-.gem-buff-fields select,
-.gem-debuff-fields select {
-  background: #333;
-  color: #fff;
-  border: 1px solid #444;
-  border-radius: 6px;
-  padding: 5px;
-  font-size: 14px;
-  margin-top: 1.5px;
-  margin-bottom: 4px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Checkbox row for gems */
-.gem-fields-row label {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-weight: bold;
-  color: #ffcc00;
-  margin-bottom: 0;
-  margin-right: 18px;
-}
-
-.gem-fields-row label input[type="checkbox"] {
-  margin: 0 4px 0 0;
-  accent-color: #ffcc00;
-  vertical-align: middle;
-}
-
-/* Pour le responsive si besoin */
-@media (max-width: 900px) {
-  .edit-sjw-skill-popup {
-    min-width: 95vw;
-    max-width: 98vw;
-    min-height: 400px;
-    padding: 2px 1vw;
-  }
-  .edit-tabs {
-    flex-wrap: wrap;
-    gap: 1px;
-  }
+.edit-skill-gem-block legend {
+    color: #ffcc00;
+    font-weight: bold;
+    padding: 0 10px;
 }
