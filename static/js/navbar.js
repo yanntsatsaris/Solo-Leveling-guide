@@ -13,7 +13,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const languageForm = document.getElementById('language-form');
 
     const newEmail = document.getElementById('new_email');
+    const newPassword = document.querySelector('input[name="new_password"]');
+    const confirmPassword = document.querySelector('input[name="confirm_password"]');
     const createBtn = document.getElementById('create-btn');
+
+    function validateRegisterForm() {
+        if (!newEmail || !newPassword || !confirmPassword || !createBtn) return;
+        const emailValid = newEmail.value.includes('@');
+        const passwordsMatch = newPassword.value === confirmPassword.value && newPassword.value !== '';
+        createBtn.disabled = !(emailValid && passwordsMatch);
+    }
+
+    if (newEmail) newEmail.addEventListener('input', validateRegisterForm);
+    if (newPassword) newPassword.addEventListener('input', validateRegisterForm);
+    if (confirmPassword) confirmPassword.addEventListener('input', validateRegisterForm);
 
     if (userBtn && userDialog) {
         userBtn.addEventListener('click', () => {
@@ -40,12 +53,6 @@ document.addEventListener('DOMContentLoaded', function() {
         showLogin.addEventListener('click', () => {
             registerForm.style.display = 'none';
             loginForm.style.display = 'block';
-        });
-    }
-
-    if (newEmail && createBtn) {
-        newEmail.addEventListener('input', () => {
-            createBtn.disabled = !newEmail.value.includes('@');
         });
     }
 

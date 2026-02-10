@@ -199,6 +199,7 @@ nav.tabs {
   background-color: #1e1e1e; /* Couleur de fond par défaut */
   color: #ffcc00; /* Couleur du texte par défaut */
   cursor: pointer; /* Curseur pour indiquer qu'il est cliquable */
+  padding: 0; /* Supprime le padding pour que le select prenne toute la place */
 }
 
 /* Empêcher le changement de couleur lorsqu'il est actif */
@@ -215,20 +216,16 @@ nav.tabs {
 
 /* Style pour le conteneur du <select> */
 #equipment-select {
-  appearance: none; /* Supprime le style par défaut du navigateur */
-  -webkit-appearance: none; /* Compatibilité avec Safari */
-  -moz-appearance: none; /* Compatibilité avec Firefox */
   background-color: #1e1e1e; /* Fond sombre */
   color: #ffcc00; /* Texte doré */
   border: 1px solid #ffcc00; /* Bordure dorée */
-  border-radius: 8px; /* Coins arrondis */
-  padding: 1px 5px; /* Espacement interne */
-  font-size: 16px; /* Taille du texte */
-  font-family: Arial, sans-serif; /* Police */
+  border-radius: 0; /* Pas d'arrondi pour qu'il s'aligne avec le tab */
+  padding: 10px 20px; /* Espacement identique aux autres onglets */
+  font-size: inherit; /* Taille du texte héritée */
+  font-family: inherit; /* Police héritée */
   cursor: pointer; /* Curseur cliquable */
   width: 100%; /* Prend toute la largeur disponible */
-  max-width: 300px; /* Largeur maximale */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre */
+  box-sizing: border-box; /* Inclut le padding dans la largeur */
   transition: background-color 0.3s ease, color 0.3s ease; /* Transition pour les interactions */
 }
 
@@ -366,9 +363,9 @@ nav.tabs {
     background-color: #1e1e1e; /* Fond sombre */
     color: #ffcc00; /* Texte doré */
     border: 1px solid #ffcc00; /* Bordure dorée */
-    border-radius: 8px; /* Coins arrondis */
-    padding: 1px 5px; /* Espacement interne */
-    font-size: 16px; /* Taille du texte */
+    border-radius: 0; /* Pas d'arrondi */
+    padding: 10px 20px; /* Espacement uniforme */
+    font-size: inherit; /* Taille héritée */
   }
 }
 
