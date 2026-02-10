@@ -115,10 +115,10 @@ dialog.add-character-overlay::backdrop {
     font-size: 14px;
 }
 
-.add-form-group input[type="text"],
-.add-form-group input[type="number"],
-.add-form-group select,
-.add-form-group textarea {
+.add-character-content input[type="text"],
+.add-character-content input[type="number"],
+.add-character-content select,
+.add-character-content textarea {
     width: 100%;
     padding: 10px;
     background-color: #121212;
@@ -127,13 +127,20 @@ dialog.add-character-overlay::backdrop {
     color: #fff;
     font-size: 16px;
     box-sizing: border-box;
+    font-family: inherit;
 }
 
-.add-form-group input:focus,
-.add-form-group select:focus,
-.add-form-group textarea:focus {
+.add-character-content textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+.add-character-content input:focus,
+.add-character-content select:focus,
+.add-character-content textarea:focus {
     border-color: #ffcc00;
     outline: none;
+    box-shadow: 0 0 5px rgba(255, 204, 0, 0.3);
 }
 
 /* Grids */

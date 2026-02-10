@@ -115,10 +115,10 @@ dialog.edit-character-overlay::backdrop {
     font-size: 14px;
 }
 
-.edit-form-group input[type="text"],
-.edit-form-group input[type="number"],
-.edit-form-group select,
-.edit-form-group textarea {
+.edit-character-content input[type="text"],
+.edit-character-content input[type="number"],
+.edit-character-content select,
+.edit-character-content textarea {
     width: 100%;
     padding: 10px;
     background-color: #121212;
@@ -127,18 +127,20 @@ dialog.edit-character-overlay::backdrop {
     color: #fff;
     font-size: 16px;
     box-sizing: border-box;
+    font-family: inherit;
 }
 
-.edit-form-group textarea {
+.edit-character-content textarea {
     height: 80px;
     resize: vertical;
 }
 
-.edit-form-group input:focus,
-.edit-form-group select:focus,
-.edit-form-group textarea:focus {
+.edit-character-content input:focus,
+.edit-character-content select:focus,
+.edit-character-content textarea:focus {
     border-color: #ffcc00;
     outline: none;
+    box-shadow: 0 0 5px rgba(255, 204, 0, 0.3);
 }
 
 /* Grids */
