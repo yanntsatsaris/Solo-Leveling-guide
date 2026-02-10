@@ -6,7 +6,7 @@
   <article id="add-sjw-skill-menu" class="add-sjw-skill-content">
     <header>
       <h2 class="modal-title">Ajouter un skill SJW</h2>
-      <button type="button" class="close-add-sjw-skill" aria-label="Fermer">&times;</button>
+      <button type="button" class="close-modal" data-close-modal aria-label="Fermer">&times;</button>
     </header>
     <form
       id="add-sjw-skill-form"
@@ -60,10 +60,10 @@
 <script>
 (function() {
     const addSjwSkillModal = document.getElementById('add-sjw-skill-modal');
-    const closeBtn = document.querySelector('.close-add-sjw-skill');
+    const closeBtns = addSjwSkillModal.querySelectorAll('.close-modal, [data-close-modal]');
     const form = document.getElementById('add-sjw-skill-form');
 
-    closeBtn?.addEventListener('click', () => {
+    closeBtns.forEach(btn => btn.addEventListener('click', () => {
         addSjwSkillModal.close();
         addSjwSkillModal.setAttribute('hidden', '');
     });

@@ -38,13 +38,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const editPanoplieModal = document.getElementById('edit-panoplie-modal');
 
     // Fermer la modale en cliquant sur la croix
-    const closeBtn = document.querySelector('#edit-panoplie-modal .close-btn');
-    if (closeBtn) {
-        closeBtn.onclick = function () {
+    const closeBtns = document.querySelectorAll('#edit-panoplie-modal .close-modal, #edit-panoplie-modal [data-close-modal]');
+    closeBtns.forEach(btn => {
+        btn.onclick = function () {
             editPanoplieModal.close();
             editPanoplieModal.setAttribute('hidden', '');
         };
-    }
+    });
 
     // Fermer la modale en cliquant en dehors du menu
     if (editPanoplieModal) {

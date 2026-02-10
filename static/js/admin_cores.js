@@ -35,13 +35,13 @@ document.addEventListener("DOMContentLoaded", function() {
   const editCoreModal = document.getElementById('edit-core-modal');
 
   // Fermer la modale en cliquant sur la croix
-  const closeBtn = document.querySelector('#edit-core-modal .close-btn');
-  if (closeBtn) {
-    closeBtn.onclick = function() {
+  const closeBtns = document.querySelectorAll('#edit-core-modal .close-modal, #edit-core-modal [data-close-modal]');
+  closeBtns.forEach(btn => {
+    btn.onclick = function() {
       editCoreModal.close();
       editCoreModal.setAttribute('hidden', '');
     };
-  }
+  });
 
   // Fermer la modale en cliquant en dehors du menu
   if (editCoreModal) {

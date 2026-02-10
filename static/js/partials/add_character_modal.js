@@ -56,7 +56,7 @@ function reindexEqsetOptions() {
 
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('add-character-modal');
-    const closeBtn = document.querySelector('.close-add-character');
+    const closeBtns = modal?.querySelectorAll('.close-modal, [data-close-modal]');
 
     // Gestion des onglets
     document.querySelectorAll('#add-character-modal .edit-tab').forEach(tab => {
@@ -205,11 +205,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Fermeture de la modale
-    if (closeBtn && modal) {
-        closeBtn.onclick = () => {
-            modal.close();
-            modal.setAttribute('hidden', '');
-        };
+    if (closeBtns && modal) {
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modal.close();
+                modal.setAttribute('hidden', '');
+            });
+        });
     }
     if (modal) {
         modal.addEventListener('click', (event) => {

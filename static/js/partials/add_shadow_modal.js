@@ -1,6 +1,6 @@
 function initializeAddShadowModal() {
     const modal = document.getElementById('add-shadow-modal');
-    const closeBtn = document.querySelector('.close-add-shadow');
+    const closeBtns = modal?.querySelectorAll('.close-modal, [data-close-modal]');
     const addShadowBtn = document.getElementById('add-shadow-btn');
     const form = document.getElementById('add-shadow-form');
 
@@ -69,11 +69,13 @@ function initializeAddShadowModal() {
         });
     }
 
-    if (closeBtn && modal) {
-        closeBtn.onclick = () => {
-            modal.close();
-            modal.setAttribute('hidden', '');
-        };
+    if (closeBtns && modal) {
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modal.close();
+                modal.setAttribute('hidden', '');
+            });
+        });
     }
 
     if (modal) {

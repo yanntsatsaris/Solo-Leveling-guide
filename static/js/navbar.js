@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     const userBtn = document.getElementById('user-btn');
     const userDialog = document.getElementById('user-menu-dialog');
-    const closeBtn = document.getElementById('close-user-menu');
+    const closeBtns = userDialog?.querySelectorAll('.close-modal, [data-close-modal]');
     const loginForm = document.getElementById('login-form');
     const registerForm = document.getElementById('register-form');
     const showRegister = document.getElementById('show-register');
@@ -35,11 +35,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    if (closeBtn && userDialog) {
-        closeBtn.addEventListener('click', () => {
+    if (closeBtns && userDialog) {
+        closeBtns.forEach(btn => btn.addEventListener('click', () => {
             userDialog.close();
             userDialog.setAttribute('hidden', '');
-        });
+        }));
     }
 
     if (showRegister) {

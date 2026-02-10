@@ -20,7 +20,7 @@ function initializeEditSjwModalData(data) {
 
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('edit-sjw-modal');
-    const closeBtn = document.querySelector('.close-edit-sjw');
+    const closeBtns = modal?.querySelectorAll('.close-modal, [data-close-modal]');
     const editBtn = document.getElementById('edit-sjw-btn');
 
     if (editBtn && modal) {
@@ -31,11 +31,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    if (closeBtn && modal) {
-        closeBtn.onclick = () => {
-            modal.close();
-            modal.setAttribute('hidden', '');
-        };
+    if (closeBtns && modal) {
+        closeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modal.close();
+                modal.setAttribute('hidden', '');
+            });
+        });
     }
 
     if (modal) {

@@ -2,7 +2,7 @@
   <article class="edit-character-content">
     <header>
       <h2 class="modal-title">Modifier le personnage</h2>
-      <button type="button" class="close-edit-character" aria-label="Fermer">&times;</button>
+      <button type="button" class="close-modal" data-close-modal aria-label="Fermer">&times;</button>
     </header>
     <form
       id="edit-character-form"
@@ -210,7 +210,7 @@
                         {{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}
                       </label>
                       <input type="hidden" name="artefact_name_{{ set_idx }}_{{ a_idx }}" value="{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}">
-                      <label>Pannoplie :</label>
+                      <label>Panoplie :</label>
                       <select name="artefact_set_{{ set_idx }}_{{ a_idx }}">
                         <option value=""></option>
                         {% for panoplie in panoplies_list %}<option value="{{ panoplie }}" {% if artefact.set == panoplie %}selected{% endif %}>{{ panoplie }}</option>{% endfor %}
@@ -237,7 +237,7 @@
                     <div class="edit-artefact-block">
                       <label>{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}</label>
                       <input type="hidden" name="artefact_name_{{ set_idx }}_{{ a_idx }}" value="{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}">
-                      <label>Pannoplie :</label>
+                      <label>Panoplie :</label>
                       <select name="artefact_set_{{ set_idx }}_{{ a_idx }}">
                         <option value=""></option>
                         {% for panoplie in panoplies_list %}<option value="{{ panoplie }}" {% if artefact.set == panoplie %}selected{% endif %}>{{ panoplie }}</option>{% endfor %}

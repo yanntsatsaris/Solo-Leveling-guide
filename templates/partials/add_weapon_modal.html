@@ -6,7 +6,7 @@
   <article id="add-weapon-menu" class="add-weapon-content">
     <header>
       <h2 class="modal-title">Ajouter une arme</h2>
-      <button type="button" class="close-add-weapon" aria-label="Fermer">&times;</button>
+      <button type="button" class="close-modal" data-close-modal aria-label="Fermer">&times;</button>
     </header>
     <form
       id="add-weapon-form"
@@ -69,9 +69,9 @@
 <script>
     // Gestion de la modale avec Dialog API
     const addWeaponModal = document.getElementById('add-weapon-modal');
-    const closeAddWeaponBtn = document.querySelector('.close-add-weapon');
+    const closeAddWeaponBtns = addWeaponModal.querySelectorAll('.close-modal, [data-close-modal]');
 
-    closeAddWeaponBtn?.addEventListener('click', () => {
+    closeAddWeaponBtns.forEach(btn => btn.addEventListener('click', () => {
         addWeaponModal.close();
         addWeaponModal.setAttribute('hidden', '');
     });
