@@ -1,388 +1,305 @@
-<div
-  id="add-sjw-skill-overlay"
-  class="edit-sjw-skill-overlay"
-  style="display: none"
+<dialog
+  id="add-sjw-skill-modal"
+  class="add-sjw-skill-overlay"
+  hidden
 >
-  <div id="add-sjw-skill-menu" class="edit-sjw-skill-popup">
+  <article id="add-sjw-skill-menu" class="add-sjw-skill-content">
+    <header>
+      <h2 class="modal-title">Ajouter un skill SJW</h2>
+      <button type="button" class="close-modal" data-close-modal aria-label="Fermer">&times;</button>
+    </header>
     <form
       id="add-sjw-skill-form"
       method="POST"
       action="{{ url_for('sjw.add_sjw_skill') }}"
-      enctype="multipart/form-data"
     >
-      <h2 class="edit-sjw-skill-title">Ajouter un skill SJW</h2>
-      <div class="edit-tabs">
-        <div class="edit-tab active" data-tab="main">Infos principales</div>
-      </div>
-      <div class="edit-tab-content active" id="edit-tab-main">
-        <label>Nom :</label>
-        <input type="text" name="name" required />
+      <nav class="edit-tabs">
+        <button type="button" class="edit-tab active" data-tab="main">Infos principales</button>
+      </nav>
+      <section class="edit-tab-content active" id="add-sjw-skill-tab-main">
+        <div class="add-form-group">
+          <label>Nom :</label>
+          <input type="text" name="name" required />
+        </div>
 
-        <label>Type :</label>
-        <select name="type" required>
-          <option value="Skill">Skill</option>
-          <option value="QTE">QTE</option>
-          <option value="Ultime">Ultime</option>
-        </select>
+        <div class="add-form-group">
+          <label>Type :</label>
+          <select name="type" id="add-sjw-skill-type" required>
+            <option value="Skill">Skill</option>
+            <option value="QTE">QTE</option>
+            <option value="Ultime">Ultime</option>
+          </select>
+        </div>
 
-        <label>Ordre d'affichage :</label>
-        <input type="number" name="order" min="1" required />
+        <div class="add-form-group">
+          <label>Ordre d'affichage :</label>
+          <input type="number" name="order" id="add-sjw-skill-order" min="1" required />
+        </div>
 
-        <label>Image principale :</label>
-        <select name="image" id="sjw-skill-image-select"></select>
+        <div class="add-form-group">
+          <label>Image principale :</label>
+          <select name="image" id="sjw-skill-image-select"></select>
+        </div>
 
-        <label>Description :</label>
-        <textarea name="description"></textarea>
+        <div class="add-form-group">
+          <label>Description :</label>
+          <textarea name="description"></textarea>
+        </div>
+
         <div id="sjw-skill-gems-container"></div>
         <button type="button" id="add-sjw-skill-gem-btn" class="admin-btn" style="margin-top:10px;">Ajouter une gem</button>
-      </div>
-      <div style="display: flex; justify-content: space-between; margin-top: 18px">
-        <button type="submit" class="admin-btn">Enregistrer</button>
-        <button
-          type="button"
-          id="close-add-sjw-skill"
-          class="close-btn"
-          style="font-size: 22px"
-        >
-          &times;
-        </button>
-      </div>
+
+        <footer>
+          <button type="submit" class="admin-btn">Enregistrer</button>
+        </footer>
+      </section>
     </form>
-  </div>
-</div>
+  </article>
+</dialog>
+
 <script>
-document.getElementById('add-sjw-skill-btn')?.addEventListener('click', async function() {
-    // Demande les infos de base
-    const name = prompt("Nom du skill :");
-    if (!name) return;
-    let type = null;
-    while (!["Skill", "QTE", "Ultime"].includes(type)) {
-        type = prompt("Type du skill (Skill, QTE, Ultime) :");
-        if (type === null) return; // Annule si l'utilisateur annule
-        type = type.trim();
-        if (!["Skill", "QTE", "Ultime"].includes(type)) {
-            alert("Le type doit être exactement : Skill, QTE ou Ultime (respectez la casse).");
-        }
-    }
-    let order = null;
-    if (type === "Skill") {
-        while (!/^\d{3}$/.test(order)) {
-            order = prompt("Ordre d'affichage (3 chiffres, ex : 001, 010, 123) :");
-            if (order === null) return;
-            order = order.trim();
-            if (!/^\d{3}$/.test(order)) {
-                alert("Pour un Skill, l'ordre doit être exactement 3 chiffres (ex : 001, 010, 123).");
-            }
-        }
-    } else {
-        while (!/^\d{2}$/.test(order)) {
-            order = prompt(`Ordre d'affichage (2 chiffres, ex : 01, 02, 10) :`);
-            if (order === null) return;
-            order = order.trim();
-            if (!/^\d{2}$/.test(order)) {
-                alert("Pour un QTE ou Ultime, l'ordre doit être exactement 2 chiffres (ex : 01, 02, 10).");
-            }
-        }
-    }
+(function() {
+    const addSjwSkillModal = document.getElementById('add-sjw-skill-modal');
+    const closeBtns = addSjwSkillModal.querySelectorAll('.close-modal, [data-close-modal]');
+    const form = document.getElementById('add-sjw-skill-form');
 
-    // Construit le chemin du dossier image
-    const folderName = `${order}_${type}`;
-    let folderType = '';
-    if (type === 'Skill') {
-        folderType = 'Skills';
-    } else if (type === 'QTE') {
-        folderType = 'QTE';
-    } else if (type === 'Ultime') {
-        folderType = 'Ultime';
-    }
-    const folderPath = `static/images/Sung_Jinwoo/${folderType}/${folderName}/`;
+    closeBtns.forEach(btn => btn.addEventListener('click', () => {
+        addSjwSkillModal.close();
+        addSjwSkillModal.setAttribute('hidden', '');
+    });
 
-    // Vérifie si le dossier existe côté serveur (nécessite une route Flask dédiée)
-    let folderExists = false;
-    try {
-        const resp = await fetch(`/SJW/add_skill/check_image_folder_skill?type=${encodeURIComponent(type)}&order=${encodeURIComponent(order)}`);
-        folderExists = (await resp.json()).exists;
-    } catch (e) {
-        folderExists = false;
-    }
-
-    // Pré-remplit et affiche les infos dans la modale
-    document.getElementById('add-sjw-skill-overlay').style.display = 'flex';
-    document.querySelector('#add-sjw-skill-form input[name="name"]').value = name;
-    document.querySelector('#add-sjw-skill-form select[name="type"]').value = type;
-    document.querySelector('#add-sjw-skill-form input[name="order"]').value = order;
-
-    // Optionnel : affiche une alerte si le dossier n'existe pas
-    if (!folderExists) {
-        let overlay = document.createElement('div');
-        overlay.id = "upload-sjw-skill-images-overlay";
-        overlay.className = "edit-sjw-skill-overlay";
-        overlay.style.display = "flex";
-        overlay.innerHTML = `
-            <div class="edit-sjw-skill-popup">
-            <form id="upload-sjw-skill-images-form" enctype="multipart/form-data">
-                <h2>Uploader les images du skill (.zip)</h2>
-                <input type="file" name="images_zip" accept=".zip" required>
-                <input type="hidden" name="type" value="${type}">
-                <input type="hidden" name="order" value="${order}">
-                <div style="margin-top:16px;">
-                <button type="submit" class="admin-btn">Envoyer</button>
-                <button type="button" id="cancel-upload-sjw-skill-images" class="close-btn">&times;</button>
-                </div>
-            </form>
-            </div>
-        `;
-        document.body.appendChild(overlay);
-
-        document.getElementById('cancel-upload-sjw-skill-images').onclick = function() {
-            overlay.remove();
-        };
-
-        document.getElementById('upload-sjw-skill-images-form').onsubmit = async function(e) {
-            e.preventDefault();
-            let formData = new FormData(this);
-            let resp = await fetch('/admin/upload_sjw_skill_images_zip', {
-                method: 'POST',
-                body: formData
-            });
-            let txt = await resp.text();
-            overlay.remove();
-            alert(txt);
-        };
-    }
-
-    // Après avoir affiché la modale et pré-rempli les champs :
-    const imageSelect = document.getElementById('sjw-skill-image-select');
-    imageSelect.innerHTML = '<option value="">Chargement...</option>';
-    try {
-        // On suppose que tu as une route Flask qui retourne la liste des images du dossier du skill
-        const resp = await fetch(`/SJW/skill_images?type=${encodeURIComponent(type)}&order=${encodeURIComponent(order)}`);
-        const images = await resp.json();
-        if (images.length > 0) {
-            imageSelect.innerHTML = ['<option value=""></option>'].concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
-        } else {
-            imageSelect.innerHTML = '<option value=""></option><option value="">Aucune image trouvée</option>';
-        }
-    } catch (e) {
-        imageSelect.innerHTML = '<option value="">Erreur lors du chargement</option>';
-    }
-});
-
-// Fermeture de la modale
-document.getElementById('close-add-sjw-skill')?.addEventListener('click', function() {
-    document.getElementById('add-sjw-skill-overlay').style.display = 'none';
-});
-// Ferme la modale si clic en dehors du popup
-const addOverlaySJW = document.getElementById('add-sjw-skill-overlay');
-const addPopupSJW = document.getElementById('add-sjw-skill-menu');
-if (addOverlaySJW && addPopupSJW) {
-    addOverlaySJW.addEventListener('mousedown', function(e) {
-        if (e.target === addOverlaySJW) {
-            addOverlaySJW.style.display = 'none';
+    addSjwSkillModal?.addEventListener('click', (e) => {
+        if (e.target === addSjwSkillModal) {
+            addSjwSkillModal.close();
+            addSjwSkillModal.setAttribute('hidden', '');
         }
     });
-}
 
-const gemTypes = ["Dark", "Fire", "Light", "Neutre", "Water", "Wind"];
-let gemCount = 0;
-const maxGems = 4;
+    document.getElementById('add-sjw-skill-btn')?.addEventListener('click', async function() {
+        const name = prompt("Nom du skill :");
+        if (!name) return;
+        let type = null;
+        while (!["Skill", "QTE", "Ultime"].includes(type)) {
+            type = prompt("Type du skill (Skill, QTE, Ultime) :");
+            if (type === null) return;
+            type = type.trim();
+        }
+        let order = null;
+        if (type === "Skill") {
+            while (!/^\d{3}$/.test(order)) {
+                order = prompt("Ordre d'affichage (3 chiffres, ex : 001, 010, 123) :");
+                if (order === null) return;
+                order = order.trim();
+            }
+        } else {
+            while (!/^\d{2}$/.test(order)) {
+                order = prompt(`Ordre d'affichage (2 chiffres, ex : 01, 02, 10) :`);
+                if (order === null) return;
+                order = order.trim();
+            }
+        }
 
-// Désactive le bouton d'ajout de gem si type = Ultime
-function checkGemBtnAvailability() {
-    const type = document.querySelector('#add-sjw-skill-form select[name="type"]').value;
-    const addBtn = document.getElementById('add-sjw-skill-gem-btn');
-    if (type === "Ultime") {
-        addBtn.style.display = "none";
-        // Supprime tous les gems déjà ajoutés
-        document.getElementById('sjw-skill-gems-container').innerHTML = "";
-        gemCount = 0;
-    } else {
-        updateAddGemBtn();
+        let folderExists = false;
+        try {
+            const resp = await fetch(`/SJW/add_skill/check_image_folder_skill?type=${encodeURIComponent(type)}&order=${encodeURIComponent(order)}`);
+            folderExists = (await resp.json()).exists;
+        } catch (e) {
+            folderExists = false;
+        }
+
+        addSjwSkillModal.removeAttribute('hidden');
+        addSjwSkillModal.showModal();
+
+        form.querySelector('input[name="name"]').value = name;
+        form.querySelector('select[name="type"]').value = type;
+        form.querySelector('input[name="order"]').value = order;
+
+        if (!folderExists) {
+            if (confirm("Dossier d'images introuvable. Voulez-vous uploader un .zip d'images ?")) {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.zip';
+                input.onchange = async (e) => {
+                    const file = e.target.files[0];
+                    const formData = new FormData();
+                    formData.append('images_zip', file);
+                    formData.append('type', type);
+                    formData.append('order', order);
+                    const resp = await fetch('/admin/upload_sjw_skill_images_zip', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    const txt = await resp.text();
+                    alert(txt);
+                    loadImages(type, order);
+                };
+                input.click();
+            }
+        }
+
+        loadImages(type, order);
+    });
+
+    async function loadImages(type, order) {
+        const imageSelect = document.getElementById('sjw-skill-image-select');
+        imageSelect.innerHTML = '<option value="">Chargement...</option>';
+        try {
+            const resp = await fetch(`/SJW/skill_images?type=${encodeURIComponent(type)}&order=${encodeURIComponent(order)}`);
+            const images = await resp.json();
+            if (images.length > 0) {
+                imageSelect.innerHTML = ['<option value=""></option>'].concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
+            } else {
+                imageSelect.innerHTML = '<option value=""></option><option value="">Aucune image trouvée</option>';
+            }
+        } catch (e) {
+            imageSelect.innerHTML = '<option value="">Erreur lors du chargement</option>';
+        }
     }
-}
 
-// Sur changement du type, on vérifie la disponibilité du bouton
-document.querySelector('#add-sjw-skill-form select[name="type"]').addEventListener('change', checkGemBtnAvailability);
+    const gemTypes = ["Dark", "Fire", "Light", "Neutre", "Water", "Wind"];
+    let gemCount = 0;
+    const maxGems = 4;
 
-// Appel initial au chargement de la modale
-checkGemBtnAvailability();
+    function checkGemBtnAvailability() {
+        const type = form.querySelector('select[name="type"]').value;
+        const addBtn = document.getElementById('add-sjw-skill-gem-btn');
+        if (type === "Ultime") {
+            addBtn.style.display = "none";
+            document.getElementById('sjw-skill-gems-container').innerHTML = "";
+            gemCount = 0;
+        } else {
+            addBtn.style.display = (gemCount < maxGems) ? '' : 'none';
+        }
+    }
 
-function updateAddGemBtn() {
-    document.getElementById('add-sjw-skill-gem-btn').style.display = (gemCount < maxGems) ? '' : 'none';
-}
+    form.querySelector('select[name="type"]').addEventListener('change', checkGemBtnAvailability);
 
-function addGemField(order) {
-    const container = document.getElementById('sjw-skill-gems-container');
-    const gemDiv = document.createElement('div');
-    gemDiv.className = 'sjw-skill-gem-block';
-    gemDiv.style.marginBottom = '10px';
-    gemDiv.innerHTML = `
-    <fieldset class="edit-sjw-skill-gem-fieldset">
-        <legend>Gem #${order+1}</legend>
-        <div class="gem-fields-row">
-            <div class="gem-type-field">
+    document.getElementById('add-sjw-skill-gem-btn').onclick = function() {
+        if (gemCount < maxGems) {
+            addGemField(gemCount);
+        }
+    };
+
+    function addGemField(order) {
+        const container = document.getElementById('sjw-skill-gems-container');
+        const gemDiv = document.createElement('div');
+        gemDiv.className = 'edit-skill-gem-block';
+        gemDiv.innerHTML = `
+        <fieldset>
+            <legend>Gem #${order+1}</legend>
+            <div class="add-form-group">
                 <label>Type :</label>
                 <select name="gems[${order}][type]" required>
                     ${gemTypes.map(t => `<option value="${t}">${t}</option>`).join('')}
                 </select>
             </div>
-            <div class="gem-alias-field">
+            <div class="add-form-group">
                 <label>Alias :</label>
                 <input type="text" name="gems[${order}][alias]" required>
             </div>
-            <div class="gem-image-field">
+            <div class="add-form-group">
                 <label>Image :</label>
                 <select name="gems[${order}][image]" class="gem-image-select" required>
                     <option value="">Chargement...</option>
                 </select>
             </div>
-        </div>
-        <div class="gem-fields-row">
-            <div class="gem-name-field">
+            <div class="add-form-group">
                 <label>Nom :</label>
                 <input type="text" name="gems[${order}][name]" required>
             </div>
-            <div class="gem-description-field">
+            <div class="add-form-group">
                 <label>Description :</label>
-                <textarea name="gems[${order}][description]" rows="2"></textarea>
+                <textarea name="gems[${order}][description]"></textarea>
             </div>
+            <div class="checkbox-row">
+                <label><input type="checkbox" name="gems[${order}][break]"> Break</label>
+                <label><input type="checkbox" class="gem-buff-check"> Buff</label>
+                <label><input type="checkbox" class="gem-debuff-check"> Debuff</label>
+            </div>
+            <div class="gem-buff-fields" style="display:none;">
+                <div class="buffs-list"></div>
+                <button type="button" class="add-buff-btn admin-btn">Ajouter un buff</button>
+            </div>
+            <div class="gem-debuff-fields" style="display:none;">
+                <div class="debuffs-list"></div>
+                <button type="button" class="add-debuff-btn admin-btn">Ajouter un debuff</button>
+            </div>
+            <button type="button" class="remove-gem-btn admin-btn">Supprimer cette gem</button>
             <input type="hidden" name="gems[${order}][order]" value="${order}">
-            <button type="button" class="remove-gem-btn admin-btn">Supprimer</button>
-        </div>
-        <div class="gem-fields-row">
-            <label><input type="checkbox" name="gems[${order}][break]"> Break</label>
-            <label><input type="checkbox" class="gem-buff-check" name="gems[${order}][buff]"> Buff</label>
-            <label><input type="checkbox" class="gem-debuff-check" name="gems[${order}][debuff]"> Debuff</label>
-        </div>
-        <div class="gem-buff-fields" style="display:none;">
-            <div class="buffs-list"></div>
-            <button type="button" class="add-buff-btn admin-btn" style="margin-bottom:8px;">Ajouter un buff</button>
-        </div>
-        <div class="gem-debuff-fields" style="display:none;">
-            <div class="debuffs-list"></div>
-            <button type="button" class="add-debuff-btn admin-btn" style="margin-bottom:8px;">Ajouter un debuff</button>
-        </div>
-    </fieldset>
-`;
-    container.appendChild(gemDiv);
+        </fieldset>`;
+        container.appendChild(gemDiv);
 
-    // Remplir le select d'image pour la gem
-    const skillType = document.querySelector('#add-sjw-skill-form select[name="type"]').value;
-    const skillOrder = document.querySelector('#add-sjw-skill-form input[name="order"]').value;
-    const select = gemDiv.querySelector('.gem-image-select');
-    fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
-        .then(resp => resp.json())
-        .then(images => {
-            if (images.length > 0) {
-                select.innerHTML = ['<option value=""></option>'].concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
-            } else {
-                select.innerHTML = '<option value=""></option><option value="">Aucune image trouvée</option>';
-            }
-        })
-        .catch(() => {
-            select.innerHTML = '<option value="">Erreur lors du chargement</option>';
-        });
+        const skillType = form.querySelector('select[name="type"]').value;
+        const skillOrder = form.querySelector('input[name="order"]').value;
+        const select = gemDiv.querySelector('.gem-image-select');
 
-    // Affichage dynamique des champs buff/debuff
-    gemDiv.querySelector('.gem-buff-check').addEventListener('change', function() {
-        gemDiv.querySelector('.gem-buff-fields').style.display = this.checked ? '' : 'none';
-    });
-    gemDiv.querySelector('.gem-debuff-check').addEventListener('change', function() {
-        gemDiv.querySelector('.gem-debuff-fields').style.display = this.checked ? '' : 'none';
-    });
-
-    // Ajout dynamique des buffs
-    gemDiv.querySelector('.add-buff-btn').onclick = function() {
-        const buffsList = gemDiv.querySelector('.buffs-list');
-        const idx = buffsList.children.length;
-        const buffDiv = document.createElement('div');
-        buffDiv.className = 'buff-block';
-        buffDiv.innerHTML = `
-            <fieldset>
-                <legend>Buff #${idx+1}</legend>
-                <label>Nom :</label>
-                <input type="text" name="gems[${order}][buffs][${idx}][name]" required>
-                <label>Image :</label>
-                <select name="gems[${order}][buffs][${idx}][image]" class="gem-buff-image-select">
-                    <option value=""></option>
-                </select>
-                <label>Description :</label>
-                <textarea name="gems[${order}][buffs][${idx}][description]" rows="2"></textarea>
-                <button type="button" class="remove-buff-btn">Supprimer</button>
-            </fieldset>
-        `;
-        buffsList.appendChild(buffDiv);
-        // Remplir le select d'image pour CE buff
         fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
             .then(resp => resp.json())
             .then(images => {
-                const select = buffDiv.querySelector('.gem-buff-image-select');
                 select.innerHTML = ['<option value=""></option>'].concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
             });
-        buffDiv.querySelector('.remove-buff-btn').onclick = () => buffDiv.remove();
-    };
 
-    // Ajout dynamique des debuffs
-    gemDiv.querySelector('.add-debuff-btn').onclick = function() {
-        const debuffsList = gemDiv.querySelector('.debuffs-list');
-        const idx = debuffsList.children.length;
-        const debuffDiv = document.createElement('div');
-        debuffDiv.className = 'debuff-block';
-        debuffDiv.innerHTML = `
-            <fieldset>
-                <legend>Debuff #${idx+1}</legend>
-                <label>Nom :</label>
-                <input type="text" name="gems[${order}][debuffs][${idx}][name]" required>
-                <label>Image :</label>
-                <select name="gems[${order}][debuffs][${idx}][image]" class="gem-debuff-image-select">
-                    <option value=""></option>
-                </select>
-                <label>Description :</label>
-                <textarea name="gems[${order}][debuffs][${idx}][description]" rows="2"></textarea>
-                <button type="button" class="remove-debuff-btn">Supprimer</button>
-            </fieldset>
-        `;
-        debuffsList.appendChild(debuffDiv);
-        // Remplir le select d'image pour CE debuff
-        fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
-            .then(resp => resp.json())
-            .then(images => {
-                const select = debuffDiv.querySelector('.gem-debuff-image-select');
-                select.innerHTML = ['<option value=""></option>'].concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
-            });
-        debuffDiv.querySelector('.remove-debuff-btn').onclick = () => debuffDiv.remove();
-    };
-
-    // Suppression de la gem
-    gemDiv.querySelector('.remove-gem-btn').onclick = function() {
-        gemDiv.remove();
-        gemCount--;
-        updateAddGemBtn();
-        // Réattribue les ordres et noms
-        Array.from(container.children).forEach((div, idx) => {
-            div.querySelector('legend').textContent = `Gem #${idx+1}`;
-            div.querySelector('input[type="hidden"]').value = idx;
-            div.querySelector('select[name^="gems"][name$="[type]"]').name = `gems[${idx}][type]`;
-            div.querySelector('input[type="text"][name^="gems"][name$="[alias]"]').name = `gems[${idx}][alias]`;
-            div.querySelector('select[name^="gems"][name$="[image]"]').name = `gems[${idx}][image]`;
-            div.querySelector('input[name^="gems"][name$="[name]"]').name = `gems[${idx}][name]`;
-            div.querySelector('textarea[name^="gems"][name$="[description]"]').name = `gems[${idx}][description]`;
-            // Buff/Debuff
-            div.querySelector('input[name^="gems"][name$="[buff_name]"]').name = `gems[${idx}][buff_name]`;
-            div.querySelector('select[name^="gems"][name$="[buff_image]"]').name = `gems[${idx}][buff_image]`;
-            div.querySelector('textarea[name^="gems"][name$="[buff_description]"]').name = `gems[${idx}][buff_description]`;
-            div.querySelector('input[name^="gems"][name$="[debuff_name]"]').name = `gems[${idx}][debuff_name]`;
-            div.querySelector('select[name^="gems"][name$="[debuff_image]"]').name = `gems[${idx}][debuff_image]`;
-            div.querySelector('textarea[name^="gems"][name$="[debuff_description]"]').name = `gems[${idx}][debuff_description]`;
+        gemDiv.querySelector('.gem-buff-check').addEventListener('change', function() {
+            gemDiv.querySelector('.gem-buff-fields').style.display = this.checked ? '' : 'none';
         });
-    };
-    gemCount++;
-    updateAddGemBtn();
-}
+        gemDiv.querySelector('.gem-debuff-check').addEventListener('change', function() {
+            gemDiv.querySelector('.gem-debuff-fields').style.display = this.checked ? '' : 'none';
+        });
 
-document.getElementById('add-sjw-skill-gem-btn').onclick = function() {
-    if (gemCount < maxGems) {
-        addGemField(gemCount);
+        gemDiv.querySelector('.add-buff-btn').onclick = function() {
+            const list = gemDiv.querySelector('.buffs-list');
+            const bIdx = list.children.length;
+            const bDiv = document.createElement('div');
+            bDiv.innerHTML = `
+                <fieldset>
+                    <legend>Buff #${bIdx+1}</legend>
+                    <label>Nom :</label>
+                    <input type="text" name="gems[${order}][buffs][${bIdx}][name]" required>
+                    <label>Image :</label>
+                    <select name="gems[${order}][buffs][${bIdx}][image]" class="gem-buff-image-select"></select>
+                    <label>Description :</label>
+                    <textarea name="gems[${order}][buffs][${bIdx}][description]"></textarea>
+                    <button type="button" class="remove-item-btn">Supprimer</button>
+                </fieldset>`;
+            list.appendChild(bDiv);
+            fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
+                .then(r => r.json()).then(imgs => {
+                    bDiv.querySelector('.gem-buff-image-select').innerHTML = ['<option value=""></option>'].concat(imgs.map(i => `<option value="${i}">${i}</option>`)).join('');
+                });
+            bDiv.querySelector('.remove-item-btn').onclick = () => bDiv.remove();
+        };
+
+        gemDiv.querySelector('.add-debuff-btn').onclick = function() {
+            const list = gemDiv.querySelector('.debuffs-list');
+            const dIdx = list.children.length;
+            const dDiv = document.createElement('div');
+            dDiv.innerHTML = `
+                <fieldset>
+                    <legend>Debuff #${dIdx+1}</legend>
+                    <label>Nom :</label>
+                    <input type="text" name="gems[${order}][debuffs][${dIdx}][name]" required>
+                    <label>Image :</label>
+                    <select name="gems[${order}][debuffs][${dIdx}][image]" class="gem-debuff-image-select"></select>
+                    <label>Description :</label>
+                    <textarea name="gems[${order}][debuffs][${dIdx}][description]"></textarea>
+                    <button type="button" class="remove-item-btn">Supprimer</button>
+                </fieldset>`;
+            list.appendChild(dDiv);
+            fetch(`/SJW/skill_images?type=${encodeURIComponent(skillType)}&order=${encodeURIComponent(skillOrder)}`)
+                .then(r => r.json()).then(imgs => {
+                    dDiv.querySelector('.gem-debuff-image-select').innerHTML = ['<option value=""></option>'].concat(imgs.map(i => `<option value="${i}">${i}</option>`)).join('');
+                });
+            dDiv.querySelector('.remove-item-btn').onclick = () => dDiv.remove();
+        };
+
+        gemDiv.querySelector('.remove-gem-btn').onclick = () => {
+            gemDiv.remove();
+            gemCount--;
+            checkGemBtnAvailability();
+        };
+
+        gemCount++;
+        checkGemBtnAvailability();
     }
-}
+})();
 </script>

@@ -10,7 +10,7 @@
           <header class="weapon-header">
             <div class="weapon-image">
               <img
-                src="{{ url_for('static', filename=weapon.image) }}"
+                src="{{ asset_url_for('static', filename=weapon.image) }}"
                 alt="{{ weapon.name }}"
               />
             </div>
@@ -30,7 +30,7 @@
               <!-- Afficher les évolutions groupées (A06-A10) -->
               <li>
                 <img
-                  src="{{ url_for('static', filename='images/Advancement/' ~ evolution.evolution_id ~ '.webp') }}"
+                  src="{{ asset_url_for('static', filename='images/Advancement/' ~ evolution.evolution_id ~ '.webp') }}"
                   alt="{{ evolution.evolution_id }}"
                   class="weapon-evolution-image weapon-evolution-range"
                 />
@@ -40,7 +40,7 @@
               <!-- Afficher les évolutions individuelles (A01 à A05) -->
               <li>
                 <img
-                  src="{{ url_for('static', filename='images/Advancement/' ~ evolution.evolution_id ~ '.webp') }}"
+                  src="{{ asset_url_for('static', filename='images/Advancement/' ~ evolution.evolution_id ~ '.webp') }}"
                   alt="{{ evolution.evolution_id }}"
                   class="weapon-evolution-image"
                 />
@@ -64,103 +64,65 @@
         </button>
         {% include 'partials/add_weapon_modal.html' %}
       {% endif %}
-      <div class="weapon-type">
-        <button class="weapon-type-button" data-type="All">
-          All
-        </button>
-        {% for type in weapon_types %}
-        <button class="weapon-type-button" data-type="{{ type }}">
-          <img src="{{ url_for('static', filename='images/Types/Type_' ~ type ~ '.webp') }}"
-               alt="{{ type }}"/>
-        </button>
-        {% endfor %}
-      </div>
-      <div
-        class="weapon-rarity-filters"
-      >
-        <button
-          class="weapon-rarity-button"
-          data-rarity="All"
-        >
-          All
-        </button>
-        {% for rarity in rarities %}
-        <button
-          class="weapon-rarity-button"
-          data-rarity="{{ rarity }}"
-        >
-          {{ rarity }}
-        </button>
-        {% endfor %}
-      </div>
+
+      <nav class="weapon-filters">
+        <section class="weapon-type">
+          <button class="weapon-type-button" data-type="All">All</button>
+          {% for type in weapon_types %}
+          <button class="weapon-type-button" data-type="{{ type }}">
+            <img src="{{ asset_url_for('static', filename='images/Types/Type_' ~ type ~ '.webp') }}"
+                 alt="{{ type }}"/>
+          </button>
+          {% endfor %}
+        </section>
+
+        <section class="weapon-rarity-filters">
+          <button class="weapon-rarity-button" data-rarity="All">All</button>
+          {% for rarity in rarities %}
+          <button class="weapon-rarity-button" data-rarity="{{ rarity }}">
+            {{ rarity }}
+          </button>
+          {% endfor %}
+        </section>
+      </nav>
+
       <table id="weapons-table">
-        <tr>
+        <tbody>
           {% for weapon in character.weapon %}
-          <td data-type="{{ weapon.type }}" data-rarity="{{ weapon.rarity }}">
-            <article class="weapon-card-codex">
-              {% if weapon.alias %}
-              <a href="{{ url_for('sjw.weapon_details', weaponAlias=weapon.alias) }}">
+            {% if loop.index0 % 4 == 0 %}
+              <tr>
+            {% endif %}
+            <td data-type="{{ weapon.type }}" data-rarity="{{ weapon.rarity }}">
+              <article class="weapon-card-codex">
+                {% if weapon.alias %}
+                <a href="{{ url_for('sjw.weapon_details', weaponAlias=weapon.alias) }}">
+                  <img
+                    src="{{ asset_url_for('static', filename=weapon.codex) }}"
+                    alt="{{ weapon.name or 'Weapon Image' }}"
+                  />
+                </a>
+                {% else %}
                 <img
-                  src="{{ url_for('static', filename=weapon.codex) }}"
+                  src="{{ asset_url_for('static', filename=weapon.codex) }}"
                   alt="{{ weapon.name or 'Weapon Image' }}"
                 />
-              </a>
-              {% else %}
-              <img
-                src="{{ url_for('static', filename=weapon.codex) }}"
-                alt="{{ weapon.name or 'Weapon Image' }}"
-              />
-              {% endif %}
-              <p hidden class="weapon-name">{{ weapon.name }}</p>
-              {% if weapon.stats %}
-              <p class="weapon-description">{{ weapon.stats|safe }}</p>
-              {% endif %}
-            </article>
-          </td>
-          {% if loop.index % 4 == 0 %}
-          </tr><tr>
-          {% endif %}
+                {% endif %}
+                <p hidden class="weapon-name">{{ weapon.name }}</p>
+                {% if weapon.stats %}
+                <p class="weapon-description">{{ weapon.stats|safe }}</p>
+                {% endif %}
+              </article>
+            </td>
+            {% if (loop.index0 + 1) % 4 == 0 or loop.last %}
+              </tr>
+            {% endif %}
           {% endfor %}
-        </tr>
+        </tbody>
       </table>
     {% endif %}
   {% else %}
-  <p>Aucune arme disponible pour ce personnage.</p>
+    <p>Aucune arme disponible pour ce personnage.</p>
   {% endif %}
 </section>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const typeButtons = document.querySelectorAll(".weapon-type-button");
-        const rarityButtons = document.querySelectorAll(".weapon-rarity-button");
-        const weaponCells = document.querySelectorAll("#weapons-table td");
 
-        let selectedType = "All";
-        let selectedRarity = "All";
-
-        function filterWeapons() {
-          weaponCells.forEach((cell) => {
-            const matchesType =
-              selectedType === "All" ||
-              cell.getAttribute("data-type") === selectedType;
-            const matchesRarity =
-              selectedRarity === "All" ||
-              cell.getAttribute("data-rarity") === selectedRarity;
-            cell.style.display = matchesType && matchesRarity ? "" : "none";
-          });
-        }
-
-        typeButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            selectedType = button.getAttribute("data-type");
-            filterWeapons();
-          });
-        });
-
-        rarityButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            selectedRarity = button.getAttribute("data-rarity");
-            filterWeapons();
-          });
-        });
-      });
-    </script>
+<script src="{{ asset_url_for('static', filename='js/partials/weapons_filter.js') }}"></script>

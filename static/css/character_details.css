@@ -140,6 +140,10 @@ nav.tabs {
   border: none; /* Supprime les bordures */
   transition: background-color 0.3s ease;
   text-align: center;
+  font-family: inherit;
+  font-size: inherit;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .tab.active {

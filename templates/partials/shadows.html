@@ -1,4 +1,4 @@
-<div id="shadows" class="tab-content">
+<section id="shadows" class="tab-content">
   <h2>Shadows</h2>
   {% if session.username and session.rights and ('Admin' in session.rights or 'SuperAdmin' in session.rights) %}
     <button id="add-shadow-btn" class="admin-btn" type="button">
@@ -8,35 +8,37 @@
   {% endif %}
   {% if character.shadows and character.shadows|length > 0 %}
   <table id="shadows-table">
-    <tr>
+    <tbody>
       {% for shadow in character.shadows %}
-      <td>
-        <div class="shadow-card">
-          {% if shadow.codex %}
-              <a href="{{ url_for('sjw.shadow_details', shadowAlias=shadow.alias) }}">
+        {% if loop.index0 % 4 == 0 %}
+          <tr>
+        {% endif %}
+        <td>
+          <article class="shadow-card">
+            {% if shadow.codex %}
+                <a href="{{ url_for('sjw.shadow_details', shadowAlias=shadow.alias) }}">
+                  <img
+                    src="{{ asset_url_for('static', filename=shadow.codex) }}"
+                    alt="{{ shadow.name or 'shadow Image' }}"
+                  />
+                </a>
+            {% else %}
                 <img
-                  src="{{ url_for('static', filename=shadow.codex) }}"
+                  src="{{ asset_url_for('static', filename=shadow.codex) }}"
                   alt="{{ shadow.name or 'shadow Image' }}"
                 />
-              </a>
-              {% else %}
-              <img
-                src="{{ url_for('static', filename=shadow.codex) }}"
-                alt="{{ shadow.name or 'shadow Image' }}"
-              />
-              {% endif %}
-          <p class="shadow-name" hidden>{{ shadow.name }}</p>
-          <p class="shadow-description" hidden>{{ shadow.description|safe }}</p>
-        </div>
-      </td>
-      {% if loop.index % 4 == 0 %}
-      <!-- Change 5 to the number of columns you want per row -->
-    </tr>
-    <tr>
-      {% endif %} {% endfor %}
-    </tr>
+            {% endif %}
+            <p class="shadow-name" hidden>{{ shadow.name }}</p>
+            <p class="shadow-description" hidden>{{ shadow.description|safe }}</p>
+          </article>
+        </td>
+        {% if (loop.index0 + 1) % 4 == 0 or loop.last %}
+          </tr>
+        {% endif %}
+      {% endfor %}
+    </tbody>
   </table>
   {% else %}
   <p class="no-shadows">No shadows available for this character.</p>
   {% endif %}
-</div>
+</section>

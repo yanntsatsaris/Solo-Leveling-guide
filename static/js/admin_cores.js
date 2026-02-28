@@ -23,31 +23,35 @@ document.addEventListener("DOMContentLoaded", function() {
               </fieldset>
             `;
           });
-          document.getElementById('edit-core-overlay').style.display = 'flex';
+          const modal = document.getElementById('edit-core-modal');
+          modal.removeAttribute('hidden');
+          modal.showModal();
           document.getElementById('edit-core-form').action = `/admin/cores/${encodeURIComponent(color)}/${number}`;
           autoResizeAllTextareas();
         });
     });
   });
 
+  const editCoreModal = document.getElementById('edit-core-modal');
+
   // Fermer la modale en cliquant sur la croix
-  document.getElementById('close-edit-core').onclick = function() {
-    document.getElementById('edit-core-overlay').style.display = 'none';
-  };
+  const closeBtns = document.querySelectorAll('#edit-core-modal .close-modal, #edit-core-modal [data-close-modal]');
+  closeBtns.forEach(btn => {
+    btn.onclick = function() {
+      editCoreModal.close();
+      editCoreModal.setAttribute('hidden', '');
+    };
+  });
 
   // Fermer la modale en cliquant en dehors du menu
-  document.getElementById('edit-core-overlay').addEventListener('mousedown', function(e) {
-    if (e.target === this) {
-      this.style.display = 'none';
-    }
-  });
-
-  // Fermer la modale avec la touche Échap
-  document.addEventListener('keydown', function(e) {
-    if (e.key === "Escape") {
-      document.getElementById('edit-core-overlay').style.display = 'none';
-    }
-  });
+  if (editCoreModal) {
+    editCoreModal.addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.close();
+        this.setAttribute('hidden', '');
+      }
+    });
+  }
 
   // Création d'un nouveau core
   document.getElementById('create-core-btn').onclick = async function() {
@@ -155,7 +159,9 @@ document.addEventListener("DOMContentLoaded", function() {
         `;
       });
     });
-    document.getElementById('edit-core-overlay').style.display = 'flex';
+    const modal = document.getElementById('edit-core-modal');
+    modal.removeAttribute('hidden');
+    modal.showModal();
     document.getElementById('edit-core-form').action = `/admin/cores/${encodeURIComponent(color)}`;
     autoResizeAllTextareas();
   }

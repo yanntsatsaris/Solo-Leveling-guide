@@ -103,9 +103,7 @@ body {
   flex: 1;
   min-height: 500px; /* Ajuste la hauteur minimale */
   width: 100%; /* Définit une largeur par défaut */
-  max-width: 900px; /* Fixe une largeur maximale constante */
   margin: 0 auto; /* Centre le conteneur horizontalement */
-  margin-left: 20px; /* Ajoute un espace entre l'image et les onglets */
   box-sizing: border-box; /* Inclut le padding dans la largeur */
 }
 
@@ -128,7 +126,7 @@ p {
 /* Onglets */
 .tabs {
   display: flex;
-  justify-content: center; /* Centre les onglets horizontalement */
+  justify-content: flex-start; /* Aligne les onglets à gauche */
   background-color: #1e1e1e;
   padding: 10px 0; /* Ajoute un peu de padding pour l'espacement vertical */
 }
@@ -141,6 +139,10 @@ p {
   border: none; /* Supprime les bordures */
   transition: background-color 0.3s ease;
   text-align: center;
+  font-family: inherit;
+  font-size: inherit;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .tab.active {
@@ -202,7 +204,7 @@ p {
   color: #ffcc00; /* Texte doré */
   border: 1px solid #ffcc00; /* Bordure dorée */
   border-radius: 8px; /* Coins arrondis */
-  padding: 1px 5px; /* Espacement interne */
+  padding: 2px 3px; /* Espacement interne */
   font-size: 16px; /* Taille du texte */
   font-family: Arial, sans-serif; /* Police */
   cursor: pointer; /* Curseur cliquable */

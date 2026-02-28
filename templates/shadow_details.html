@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block body_attributes %}
-class="{% if shadow.alias %}background-image{% endif %}" style="{% if shadow.alias %}background-image: url('{{ url_for('static', filename='images/Background/BG_Dark.webp') }}');{% endif %}"
+class="{% if shadow.alias %}background-image{% endif %}" style="{% if shadow.alias %}background-image: url('{{ asset_url_for('static', filename='images/Background/BG_Dark.webp') }}');{% endif %}"
 {% endblock %}
 
 {% block content %}
@@ -19,7 +19,7 @@ class="{% if shadow.alias %}background-image{% endif %}" style="{% if shadow.ali
     <!-- Colonne pour l'image -->
     <div class="image-column">
         <div class="shadow-image">
-            <img src="{{ url_for('static', filename=shadow.image) }}" alt="{{ shadow.name }}">
+            <img src="{{ asset_url_for('static', filename=shadow.image) }}" alt="{{ shadow.name }}">
         </div>
     </div>
 
@@ -30,7 +30,7 @@ class="{% if shadow.alias %}background-image{% endif %}" style="{% if shadow.ali
 
             <!-- Image du personnage (affichée sous le type sur téléphone) -->
             <div class="shadow-image">
-                <img src="{{ url_for('static', filename=shadow.image) }}" alt="{{ shadow.name }}">
+                <img src="{{ asset_url_for('static', filename=shadow.image) }}" alt="{{ shadow.name }}">
             </div>
             <!-- Conteneur pour les onglets et le contenu -->
             <div class="shadow-info">
@@ -55,7 +55,7 @@ class="{% if shadow.alias %}background-image{% endif %}" style="{% if shadow.ali
                             {% for skill in shadow.skills %}
                             <li>
                                 <h3>{{ skill.name }}</h3>
-                                <img src="{{ url_for('static', filename=skill.image) }}" alt="{{ skill.name }}">
+                                <img src="{{ asset_url_for('static', filename=skill.image) }}" alt="{{ skill.name }}">
                                 <p>{{ skill.description|safe }}</p>
                             </li>
                             {% endfor %}
@@ -69,7 +69,7 @@ class="{% if shadow.alias %}background-image{% endif %}" style="{% if shadow.ali
                         <h2>Weapon</h2>
                         {% if shadow.weapon %}
                         <h3>{{ shadow.weapon.name }}</h3>
-                        <img src="{{ url_for('static', filename=shadow.weapon.image) }}" alt="{{ shadow.weapon.name }}">
+                        <img src="{{ asset_url_for('static', filename=shadow.weapon.image) }}" alt="{{ shadow.weapon.name }}">
                         <p>{{ shadow.weapon.stats|safe }}</p>
 
                         <h3>Weapon Evolutions</h3>

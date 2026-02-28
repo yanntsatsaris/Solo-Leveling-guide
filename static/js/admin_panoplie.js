@@ -25,7 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
       </fieldset>
     `;
                     }
-                    document.getElementById('edit-panoplie-overlay').style.display = 'flex';
+                    const modal = document.getElementById('edit-panoplie-modal');
+                    modal.removeAttribute('hidden');
+                    modal.showModal();
                     document.getElementById('edit-panoplie-form').action = `/admin/panoplie/${panoplieName}`;
                     document.getElementById('edit-panoplie-form').setAttribute('data-mode', 'edit');
                     autoResizeAllTextareas();
@@ -33,24 +35,26 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    const editPanoplieModal = document.getElementById('edit-panoplie-modal');
+
     // Fermer la modale en cliquant sur la croix
-    document.getElementById('close-edit-panoplie').onclick = function () {
-        document.getElementById('edit-panoplie-overlay').style.display = 'none';
-    };
+    const closeBtns = document.querySelectorAll('#edit-panoplie-modal .close-modal, #edit-panoplie-modal [data-close-modal]');
+    closeBtns.forEach(btn => {
+        btn.onclick = function () {
+            editPanoplieModal.close();
+            editPanoplieModal.setAttribute('hidden', '');
+        };
+    });
 
     // Fermer la modale en cliquant en dehors du menu
-    document.getElementById('edit-panoplie-overlay').addEventListener('mousedown', function (e) {
-        if (e.target === this) {
-            this.style.display = 'none';
-        }
-    });
-
-    // Fermer la modale avec la touche Échap
-    document.addEventListener('keydown', function (e) {
-        if (e.key === "Escape") {
-            document.getElementById('edit-panoplie-overlay').style.display = 'none';
-        }
-    });
+    if (editPanoplieModal) {
+        editPanoplieModal.addEventListener('click', function (e) {
+            if (e.target === this) {
+                this.close();
+                this.setAttribute('hidden', '');
+            }
+        });
+    }
 
     // Création d'une nouvelle panoplie
     document.getElementById('create-panoplie-btn').onclick = async function () {
@@ -180,7 +184,9 @@ document.addEventListener("DOMContentLoaded", function () {
       </fieldset>
     `;
                     });
-                    document.getElementById('edit-panoplie-overlay').style.display = 'flex';
+                    const modal = document.getElementById('edit-panoplie-modal');
+                    modal.removeAttribute('hidden');
+                    modal.showModal();
                     document.getElementById('edit-panoplie-form').action = `/admin/panoplie/${encodeURIComponent(name)}`;
                     autoResizeAllTextareas();
                 };
@@ -227,7 +233,9 @@ document.addEventListener("DOMContentLoaded", function () {
 </fieldset>
 `;
         });
-        document.getElementById('edit-panoplie-overlay').style.display = 'flex';
+        const modal = document.getElementById('edit-panoplie-modal');
+        modal.removeAttribute('hidden');
+        modal.showModal();
         document.getElementById('edit-panoplie-form').action = `/admin/panoplie/${encodeURIComponent(name)}`;
         autoResizeAllTextareas();
     };

@@ -1,1009 +1,326 @@
-<div
-  id="edit-sjw-overlay"
-  class="edit-sjw-overlay"
-  style="display: none"
->
-  <div id="edit-sjw-menu" class="edit-sjw-popup">
+<dialog id="edit-sjw-modal" class="edit-sjw-overlay" hidden>
+  <article class="edit-sjw-content">
+    <header>
+      <h2 class="modal-title">Modifier Sung Jinwoo</h2>
+      <button type="button" class="close-modal" data-close-modal aria-label="Fermer">&times;</button>
+    </header>
     <form
       id="edit-sjw-form"
       method="POST"
       action="{{ url_for('sjw.edit_sjw') }}"
     >
-      <h2 style="text-align: center; color: #ffcc00">Modifier le personnage</h2>
-      <div class="edit-tabs">
-        <div class="edit-tab active" data-tab="main">Infos principales</div>
-        <div class="edit-tab" data-tab="blessings">Bénédictions</div>
-        <div class="edit-tab" data-tab="skills">Compétences</div>
-        <div class="edit-tab" data-tab="gems">Gemmes</div>
-        <div class="edit-tab" data-tab="artefacts">Artefacts</div>
-      </div>
-      <!-- Onglet Infos principales -->
-      <div class="edit-tab-content active" id="edit-tab-main">
-        <label>Nom :</label>
-        <input type="text" name="name" value="{{ character.name }}" required />
-        <label>Alias :</label>
-        <input
-          type="text"
-          name="alias"
-          value="{{ character.alias }}"
-          required
-        />
-        <label>Description :</label>
-        <textarea name="description">{{ character.description }}</textarea>
-        <input type="hidden" name="folder" value="{{ character.folder }}">
+      <nav class="edit-tabs">
+        <button type="button" class="edit-tab active" data-tab="main">Infos principales</button>
+        <button type="button" class="edit-tab" data-tab="blessings">Bénédictions</button>
+        <button type="button" class="edit-tab" data-tab="skills">Compétences</button>
+        <button type="button" class="edit-tab" data-tab="gems">Gemmes</button>
+        <button type="button" class="edit-tab" data-tab="artefacts">Artefacts</button>
+      </nav>
 
-        <!-- <h4 style="margin-top: 28px">Évolutions du personnage</h4>
-        <div class="evolutions-grid">
-          {% set total_evos = 7 %} {% for i in range(total_evos) %} {% if i % 2
-          == 0 %}
-          <div class="evolutions-row">
-            {% endif %}
-            <div class="edit-evolution-block">
-              <label>Évolution : {{ 'A' ~ i if not i == 6 else 'A6-10' }}</label>
-              <textarea name="character_evolution_description_{{ i }}">{{ character.evolutions[i].description_raw if character.evolutions|length > i else '' }}</textarea>
-              <input type="hidden" name="character_evolutions_{{ i }}_evolution_id"
-  value="{% if character.evolutions|length > i and character.evolutions[i].evolution_id %}
-           {{ character.evolutions[i].evolution_id }}
-         {% else %}
-           {{ 'A' ~ i if not i == 6 else 'A6-10' }}
-         {% endif %}">
-              <input type="hidden" name="character_evolutions_id_{{ i }}" value="{{ character.evolutions[i].id if character.evolutions|length > i else '' }}">
-            </div>
-            {% if i % 2 == 1 or i == total_evos - 1 %}
-          </div>
-          {% endif %} {% endfor %}
-        </div> -->
-      </div>
-      <!-- Onglet Bénédictions -->
-      <div class="edit-tab-content" id="edit-tab-blessings">
-        <div class="blessings-grid" id="blessings-grid">
-          {% for blessing in character.blessings_all %} {% if loop.index0 % 2 == 0 %}
-          <div class="blessings-row">
-            {% endif %}
-            <!-- Exemple pour un bénédiction, à appliquer aussi pour skills, weapons, etc. -->
-            <div class="edit-blessing-block">
-              <label>Nom du bénédiction :</label>
-              <input
-                type="text"
-                name="blessing_name_{{ loop.index0 }}"
-                value="{{ blessing.name }}"
-              />
-              <label>Description :</label>
-              <textarea name="blessing_description_{{ loop.index0 }}">{{ blessing.description_raw }}</textarea>
-              <label>Tag :</label>
-              <input
-                type="text"
-                name="blessing_tag_{{ loop.index0 }}"
-                value="{{ blessing.tag }}"
-              />
-              <label>Image :</label>
-              <select name="blessing_image_{{ loop.index0 }}" class="blessing-image-select" data-current="{{ blessing.image_name|default('') }}"></select>
-              <div class="checkbox-row">
-                <label>
-                  <input
-                    type="checkbox"
-                    name="blessing_principal_{{ loop.index0 }}"
-                    {%
-                    if
-                    blessing.principal
-                    %}checked{%
-                    endif
-                    %}
-                  />
-                  Principal
-                </label>
-                <label>
-                  <input
-                    type="checkbox"
-                    name="blessing_hidden_{{ loop.index0 }}"
-                    {%
-                    if
-                    blessing.hidden
-                    %}checked{%
-                    endif
-                    %}
-                  />
-                  Caché
-                </label>
-              </div>
-              <label>Ordre :</label>
-              <input type="number" name="blessing_order_{{ loop.index0 }}" value="{{ blessing.order if blessing.order is defined else loop.index0 }}" min="0" style="width:60px;">
-              <input type="hidden" name="blessing_id_{{ loop.index0 }}" value="{{ blessing.id }}">
-            </div>
-            {% if loop.index0 % 2 == 1 or loop.last %}
-          </div>
-          {% endif %} {% endfor %}
+      <section class="edit-tab-content active" id="edit-tab-main">
+        <div class="edit-form-group">
+          <label>Nom :</label>
+          <input type="text" name="name" value="{{ character.name }}" required />
         </div>
-      </div>
-      <!-- Onglet Compétences -->
-      <div class="edit-tab-content" id="edit-tab-skills">
+        <div class="edit-form-group">
+          <label>Alias :</label>
+          <input type="text" name="alias" value="{{ character.alias }}" required />
+        </div>
+        <div class="edit-form-group">
+          <label>Description :</label>
+          <textarea name="description">{{ character.description }}</textarea>
+        </div>
+        <input type="hidden" name="folder" value="{{ character.folder }}">
+      </section>
+
+      <section class="edit-tab-content" id="edit-tab-blessings">
+        <div class="blessings-grid" id="blessings-grid">
+          {% for blessing in character.blessings_all %}
+            {% if loop.index0 % 2 == 0 %}<div class="blessings-row">{% endif %}
+              <div class="edit-blessing-block">
+                <div class="edit-form-group">
+                  <label>Nom de la bénédiction :</label>
+                  <input type="text" name="blessing_name_{{ loop.index0 }}" value="{{ blessing.name }}" />
+                </div>
+                <div class="edit-form-group">
+                  <label>Description :</label>
+                  <textarea name="blessing_description_{{ loop.index0 }}">{{ blessing.description_raw }}</textarea>
+                </div>
+                <div class="edit-form-group">
+                  <label>Tag :</label>
+                  <input type="text" name="blessing_tag_{{ loop.index0 }}" value="{{ blessing.tag }}" />
+                </div>
+                <div class="edit-form-group">
+                  <label>Image :</label>
+                  <select name="blessing_image_{{ loop.index0 }}" class="blessing-image-select" data-current="{{ blessing.image_name|default('') }}"></select>
+                </div>
+                <div class="checkbox-row">
+                  <label><input type="checkbox" name="blessing_principal_{{ loop.index0 }}" {% if blessing.principal %}checked{% endif %} /> Principal</label>
+                  <label><input type="checkbox" name="blessing_hidden_{{ loop.index0 }}" {% if blessing.hidden %}checked{% endif %} /> Caché</label>
+                </div>
+                <div class="edit-form-group">
+                  <label>Ordre :</label>
+                  <input type="number" name="blessing_order_{{ loop.index0 }}" value="{{ blessing.order if blessing.order is defined else loop.index0 }}" min="0" style="width:60px;">
+                </div>
+                <input type="hidden" name="blessing_id_{{ loop.index0 }}" value="{{ blessing.id }}">
+              </div>
+            {% if loop.index0 % 2 == 1 or loop.last %}</div>{% endif %}
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="edit-tab-content" id="edit-tab-skills">
         <div class="skills-grid" id="skills-grid">
-          {% for skill in character.skills %} {% if loop.index0 % 2 == 0 %}
-          {% set skill_idx = loop.index0 %}
-          <div class="skills-row">
+          {% for skill in character.skills %}
+            {% if loop.index0 % 2 == 0 %}
+              {% set skill_idx = loop.index0 %}
+              <div class="skills-row">
             {% endif %}
             <div class="edit-skill-block">
-              <label>Nom de la compétence :</label>
-              <input type="text" name="skill_name_{{ loop.index0 }}" value="{{ skill.name }}" required />
-              <label>Type :</label>
-              <select name="skill_type_{{ loop.index0 }}" required>
-                <option value="Skill" {% if skill.type == "Skill" %}selected{% endif %}>Skill</option>
-                <option value="QTE" {% if skill.type == "QTE" %}selected{% endif %}>QTE</option>
-                <option value="Ultime" {% if skill.type == "Ultime" %}selected{% endif %}>Ultime</option>
-              </select>
-              <label>Ordre d'affichage :</label>
-              <input type="text" name="skill_order_{{ loop.index0 }}" value="{{ skill.order }}" required />
-              <label>Image principale :</label>
-              <select name="skill_image_{{ loop.index0 }}" class="skill-image-select" data-current="{{ skill.image }}" data-type="{{ skill.type }}" data-order="{{ skill.order }}"></select>
-              <label>Description :</label>
-              <textarea name="skill_description_{{ loop.index0 }}">{{ skill.description }}</textarea>
+              <div class="edit-form-group">
+                <label>Nom de la compétence :</label>
+                <input type="text" name="skill_name_{{ loop.index0 }}" value="{{ skill.name }}" required />
+              </div>
+              <div class="edit-form-group">
+                <label>Type :</label>
+                <select name="skill_type_{{ loop.index0 }}" required>
+                  <option value="Skill" {% if skill.type == "Skill" %}selected{% endif %}>Skill</option>
+                  <option value="QTE" {% if skill.type == "QTE" %}selected{% endif %}>QTE</option>
+                  <option value="Ultime" {% if skill.type == "Ultime" %}selected{% endif %}>Ultime</option>
+                </select>
+              </div>
+              <div class="edit-form-group">
+                <label>Ordre d'affichage :</label>
+                <input type="text" name="skill_order_{{ loop.index0 }}" value="{{ skill.order }}" required />
+              </div>
+              <div class="edit-form-group">
+                <label>Image principale :</label>
+                <select name="skill_image_{{ loop.index0 }}" class="skill-image-select" data-current="{{ skill.image }}" data-type="{{ skill.type }}" data-order="{{ skill.order }}"></select>
+              </div>
+              <div class="edit-form-group">
+                <label>Description :</label>
+                <textarea name="skill_description_{{ loop.index0 }}">{{ skill.description }}</textarea>
+              </div>
               <input type="hidden" name="skill_id_{{ loop.index0 }}" value="{{ skill.id }}">
+
               <div class="edit-skill-gems-container" id="edit-skill-gems-{{ loop.index0 }}">
                 {% for gem in skill.gems %}
-                {% set gem_idx = loop.index0 %}
+                  {% set gem_idx = loop.index0 %}
                   <div class="edit-skill-gem-block">
                     <fieldset>
                       <legend>Gem #{{ loop.index }}</legend>
                       <label>Type :</label>
                       <select name="gems_{{ skill_idx }}_{{ gem_idx }}_type" required>
-                        {% for t in ["Dark", "Fire", "Light", "Neutre", "Water", "Wind"] %}
-                          <option value="{{ t }}" {% if gem.type == t %}selected{% endif %}>{{ t }}</option>
-                        {% endfor %}
+                        {% for t in ["Dark", "Fire", "Light", "Neutre", "Water", "Wind"] %}<option value="{{ t }}" {% if gem.type == t %}selected{% endif %}>{{ t }}</option>{% endfor %}
                       </select>
                       <label>Alias :</label>
                       <input type="text" name="gems_{{ skill_idx }}_{{ gem_idx }}_alias" value="{{ gem.alias }}" required>
                       <label>Image :</label>
-                      <select
-                        name="gems_{{ skill_idx }}_{{ gem_idx }}_image"
-                        class="gem-image-select"
-                        data-current="{{ gem.image }}"
-                        data-type="{{ skill.type }}"
-                        data-order="{{ skill.order }}"
-                      ></select>
+                      <select name="gems_{{ skill_idx }}_{{ gem_idx }}_image" class="gem-image-select" data-current="{{ gem.image }}" data-type="{{ skill.type }}" data-order="{{ skill.order }}"></select>
                       <label>Nom :</label>
                       <input type="text" name="gems_{{ skill_idx }}_{{ gem_idx }}_name" value="{{ gem.name }}" required>
                       <label>Description :</label>
                       <textarea name="gems_{{ skill_idx }}_{{ gem_idx }}_description">{{ gem.description }}</textarea>
-                      
                       <div class="gem-fields-row">
                         <label><input type="checkbox" name="gems_{{ skill_idx }}_{{ gem_idx }}_break" {% if gem.break %}checked{% endif %}> Break</label>
                         <label><input type="checkbox" class="gem-buff-check" name="gems{{ skill_idx }}{{ gem_idx }}_buff"> Buff</label>
                         <label><input type="checkbox" class="gem-debuff-check" name="gems{{ skill_idx }}{{ gem_idx }}_debuff"> Debuff</label>
                       </div>
-                      <!-- Buffs -->
                       <div class="gem-buff-fields" style="{% if gem.buffs|length == 0 %}display:none;{% endif %}">
                         <div class="buffs-list">
                           {% for buff in gem.buffs %}
                             <fieldset>
                               <legend>Buff #{{ loop.index }}</legend>
                               <label>Nom :</label>
-                              <input type="text" name="gems_{{ loop.parent.parent.index0 }}_{{ loop.parent.index0 }}_buffs_{{ loop.index0 }}_name" value="{{ buff.name }}" required>
+                              <input type="text" name="gems_{{ skill_idx }}_{{ gem_idx }}_buffs_{{ loop.index0 }}_name" value="{{ buff.name }}" required>
                               <label>Image :</label>
-                              <select
-                                name="gems_{{ skill_idx }}_{{ gem_idx }}_buffs_{{ buff_idx }}_image"
-                                class="gem-buff-image-select"
-                                data-current="{{ buff.image }}"
-                                data-type="{{ skill.type }}"
-                                data-order="{{ skill.order }}"
-                              ></select>
+                              <select name="gems_{{ skill_idx }}_{{ gem_idx }}_buffs_{{ loop.index0 }}_image" class="gem-buff-image-select" data-current="{{ buff.image }}" data-type="{{ skill.type }}" data-order="{{ skill.order }}"></select>
                               <label>Description :</label>
-                              <textarea name="gems_{{ loop.parent.parent.index0 }}_{{ loop.parent.index0 }}_buffs_{{ loop.index0 }}_description">{{ buff.description }}</textarea>
+                              <textarea name="gems_{{ skill_idx }}_{{ gem_idx }}_buffs_{{ loop.index0 }}_description">{{ buff.description }}</textarea>
                             </fieldset>
                           {% endfor %}
                         </div>
-                        <button type="button" class="add-buff-btn admin-btn" style="margin-bottom:8px;">Ajouter un buff</button>
+                        <button type="button" class="add-buff-btn admin-btn">Ajouter un buff</button>
                       </div>
-                      <!-- Debuffs -->
                       <div class="gem-debuff-fields" style="{% if gem.debuffs|length == 0 %}display:none;{% endif %}">
                         <div class="debuffs-list">
                           {% for debuff in gem.debuffs %}
                             <fieldset>
                               <legend>Debuff #{{ loop.index }}</legend>
                               <label>Nom :</label>
-                              <input type="text" name="gems_{{ loop.parent.parent.index0 }}_{{ loop.parent.index0 }}_debuffs_{{ loop.index0 }}_name" value="{{ debuff.name }}" required>
+                              <input type="text" name="gems_{{ skill_idx }}_{{ gem_idx }}_debuffs_{{ loop.index0 }}_name" value="{{ debuff.name }}" required>
                               <label>Image :</label>
-                              <select
-                                name="gems_{{ skill_idx }}_{{ gem_idx }}_debuffs_{{ debuff_idx }}_image"
-                                class="gem-debuff-image-select"
-                                data-current="{{ debuff.image }}"
-                                data-type="{{ skill.type }}"
-                                data-order="{{ skill.order }}"
-                              ></select>
+                              <select name="gems_{{ skill_idx }}_{{ gem_idx }}_debuffs_{{ loop.index0 }}_image" class="gem-debuff-image-select" data-current="{{ debuff.image }}" data-type="{{ skill.type }}" data-order="{{ skill.order }}"></select>
                               <label>Description :</label>
-                              <textarea name="gems_{{ loop.parent.parent.index0 }}_{{ loop.parent.index0 }}_debuffs_{{ loop.index0 }}_description">{{ debuff.description }}</textarea>
+                              <textarea name="gems_{{ skill_idx }}_{{ gem_idx }}_debuffs_{{ loop.index0 }}_description">{{ debuff.description }}</textarea>
                             </fieldset>
                           {% endfor %}
                         </div>
-                        <button type="button" class="add-debuff-btn admin-btn" style="margin-bottom:8px;">Ajouter un debuff</button>
+                        <button type="button" class="add-debuff-btn admin-btn">Ajouter un debuff</button>
                       </div>
                     </fieldset>
                   </div>
                 {% endfor %}
-                <!-- Bouton pour ajouter une gem -->
-                <button type="button" class="add-gem-btn admin-btn" style="margin-top:10px;">Ajouter une gem</button>
+                <button type="button" class="add-gem-btn admin-btn">Ajouter une gem</button>
               </div>
             </div>
-            {% if loop.index0 % 2 == 1 or loop.last %}
-          </div>
-          {% endif %} {% endfor %}
+            {% if loop.index0 % 2 == 1 or loop.last %}</div>{% endif %}
+          {% endfor %}
         </div>
-      </div>
-      <!-- Onglet Gemmes -->
-      <div class="edit-tab-content" id="edit-tab-gems">
+      </section>
+
+      <section class="edit-tab-content" id="edit-tab-gems">
         <div class="gems-grid" id="gems-grid">
-          {% set gem_colors = [
-            {'name': 'Rouge', 'key': 'red', 'stats': ['ATK', 'ATK%']},
-            {'name': 'Bleu', 'key': 'blue', 'stats': ['HP', 'HP%']},
-            {'name': 'Vert', 'key': 'green', 'stats': ['DEF', 'DEF%']},
-            {'name': 'Jaune', 'key': 'yellow', 'stats': ['CRIT DMG', 'PRECI']},
-            {'name': 'Violet', 'key': 'purple', 'stats': ['SPD', 'MP CONS']}
-          ] %}
+          {% set gem_colors = [{'name': 'Rouge', 'key': 'red', 'stats': ['ATK', 'ATK%']}, {'name': 'Bleu', 'key': 'blue', 'stats': ['HP', 'HP%']}, {'name': 'Vert', 'key': 'green', 'stats': ['DEF', 'DEF%']}, {'name': 'Jaune', 'key': 'yellow', 'stats': ['CRIT DMG', 'PRECI']}, {'name': 'Violet', 'key': 'purple', 'stats': ['SPD', 'MP CONS']}] %}
           {% for gem in gem_colors %}
             <div class="edit-gem-block">
               <label>{{ gem.name }}</label>
               <select name="gem_stat_{{ gem.key }}">
                 <option value=""></option>
-                {% for stat in gem.stats %}
-                  <option value="{{ stat }}"
-                    {% if character.gems and character.gems[gem.key] == stat %}selected{% endif %}
-                  >{{ stat }}</option>
-                {% endfor %}
+                {% for stat in gem.stats %}<option value="{{ stat }}" {% if character.gems and character.gems[gem.key] == stat %}selected{% endif %}>{{ stat }}</option>{% endfor %}
               </select>
             </div>
           {% endfor %}
         </div>
-      </div>
-      <!-- Onglet Artefacts avec sélecteur de set -->
-      <div class="edit-tab-content" id="edit-tab-artefacts">
-        <div style="display: flex; align-items: center; gap: 12px">
+      </section>
+
+      <section class="edit-tab-content" id="edit-tab-artefacts">
+        <div class="edit-form-group">
           <label for="edit-equipment-select">Sélectionner le set :</label>
           <select id="edit-equipment-select">
-            {% for set in character.equipment_sets %}
-              <option value="{{ loop.index0 }}" data-order="{{ set.order if set.order is defined else loop.index0 }}" data-original-index="{{ loop.index0 }}">{{ set.set_name }}</option>
-            {% endfor %}
-            <option value="add_new_set" style="color: #ff6600">
-              + Ajouter un nouveau set
-            </option>
+            {% for set in character.equipment_sets %}<option value="{{ loop.index0 }}" data-order="{{ set.order if set.order is defined else loop.index0 }}" data-original-index="{{ loop.index0 }}">{{ set.set_name }}</option>{% endfor %}
+            <option value="add_new_set">+ Ajouter un nouveau set</option>
           </select>
         </div>
         <div id="edit-artefacts-fields">
           {% for eqSet in character.equipment_sets %}
-  {% set set_idx = loop.index0 %}
-  <div class="edit-eqset-block" id="eqset-block-{{ set_idx }}" data-original-index="{{ set_idx }}" style="display: {{ 'block' if set_idx == 0 else 'none' }};">
-    <h4>Set : {{ eqSet.set_name }}</h4>
-    <input type="hidden" name="eqset_name_{{ set_idx }}" value="{{ eqSet.set_name }}">
-    <label>Description :</label>
-    <textarea name="eqset_description_{{ set_idx }}">{{ eqSet.description_raw or eqSet.description }}</textarea>
-    <label>Stats à focus :</label>
-    <select multiple size="6" class="eqset-focus-multiselect" data-target="eqset_focus_stats_{{ set_idx }}">
-      {% set focusStatsOptions = [
-        "ATK",
-        "DEF",
-        "HP",
-        "CRIT HIT",
-        "CRIT DMG",
-        "DMG INC",
-        "DEF PEN",
-        "MP CONS",
-        "MP MAX",
-        "MP Regen%",
-        "DMG RES"
-      ] %}
-      {% for stat in focusStatsOptions %}
-        <option value="{{ stat }}" {% if eqSet.focus_stats is defined and stat in eqSet.focus_stats %}selected{% endif %}>{{ stat }}</option>
-      {% endfor %}
-    </select>
-    <input type="text" name="eqset_focus_stats_{{ set_idx }}" value="{{ eqSet.focus_stats|join(', ') if eqSet.focus_stats else '' }}" readonly style="margin-top:4px;">
-    <input type="hidden" name="eqset_id_{{ set_idx }}" value="{{ eqSet.id }}">
-    <input type="hidden" name="eqset_order_{{ set_idx }}" value="{{ eqSet.order if eqSet.order is defined else set_idx }}">
-    <h4>Artefacts du set</h4>
-    <div class="artefacts-row" style="display: flex;">
-      <div class="artefacts-col" style="flex: 1;">
-        {% for a_idx in range(4) %}
-          {% set artefact = eqSet.artefacts[a_idx] if eqSet.artefacts|length > a_idx else {} %}
-          <div class="edit-artefact-block">
-            <label>
-              {% set artefact_types = {
-                'FR-fr': ['Casque', 'Plastron', 'Gants', 'Bottes', 'Collier', 'Bracelet', 'Bague', "Boucle d'oreille"],
-                'EN-en': ['Helmet', 'Chestplate', 'Gloves', 'Boots', 'Necklace', 'Bracelet', 'Ring', 'Earring']
-              } %}
-              {{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}
-            </label>
-            <input type="hidden" name="artefact_name_{{ set_idx }}_{{ a_idx }}" value="{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}">
-            <label>Pannoplie :</label>
-            <select name="artefact_set_{{ set_idx }}_{{ a_idx }}">
-              <option value=""></option>
-              {% for panoplie in panoplies_list %}
-                <option value="{{ panoplie }}" {% if artefact.set == panoplie %}selected{% endif %}>{{ panoplie }}</option>
+            {% set set_idx = loop.index0 %}
+            <div class="edit-eqset-block" id="eqset-block-{{ set_idx }}" data-original-index="{{ set_idx }}" style="display: {{ 'block' if set_idx == 0 else 'none' }};">
+              <h4>Set : {{ eqSet.set_name }}</h4>
+              <input type="hidden" name="eqset_name_{{ set_idx }}" value="{{ eqSet.set_name }}">
+              <div class="edit-form-group">
+                <label>Description :</label>
+                <textarea name="eqset_description_{{ set_idx }}">{{ eqSet.description_raw or eqSet.description }}</textarea>
+              </div>
+              <div class="edit-form-group">
+                <label>Stats à focus :</label>
+                <select multiple size="6" class="eqset-focus-multiselect" data-target="eqset_focus_stats_{{ set_idx }}">
+                  {% for stat in focus_stats_options %}<option value="{{ stat }}" {% if eqSet.focus_stats is defined and stat in eqSet.focus_stats %}selected{% endif %}>{{ stat }}</option>{% endfor %}
+                </select>
+                <input type="text" name="eqset_focus_stats_{{ set_idx }}" value="{{ eqSet.focus_stats|join(', ') if eqSet.focus_stats else '' }}" readonly style="margin-top:4px;">
+              </div>
+              <input type="hidden" name="eqset_id_{{ set_idx }}" value="{{ eqSet.id }}">
+              <input type="hidden" name="eqset_order_{{ set_idx }}" value="{{ eqSet.order if eqSet.order is defined else set_idx }}">
+              <h4>Artefacts du set</h4>
+              <div class="artefacts-row" style="display: flex; gap: 20px;">
+                <div class="artefacts-col" style="flex: 1;">
+                  {% for a_idx in range(4) %}
+                    {% set artefact = eqSet.artefacts[a_idx] if eqSet.artefacts|length > a_idx else {} %}
+                    <div class="edit-artefact-block">
+                      <label>
+                        {{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}
+                      </label>
+                      <input type="hidden" name="artefact_name_{{ set_idx }}_{{ a_idx }}" value="{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}">
+                      <label>Panoplie :</label>
+                      <select name="artefact_set_{{ set_idx }}_{{ a_idx }}">
+                        <option value=""></option>
+                        {% for panoplie in panoplies_list %}<option value="{{ panoplie }}" {% if artefact.set == panoplie %}selected{% endif %}>{{ panoplie }}</option>{% endfor %}
+                      </select>
+                      <label>Stat principale :</label>
+                      <select name="artefact_main_stat_{{ set_idx }}_{{ a_idx }}">
+                        <option value=""></option>
+                        {% set artefact_label = artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] %}
+                        {% set main_stats = artefact_main_stats[artefact_label] if artefact_main_stats and artefact_label in artefact_main_stats else [] %}
+                        {% for stat in main_stats %}<option value="{{ stat }}" {% if artefact.main_stat == stat %}selected{% endif %}>{{ stat }}</option>{% endfor %}
+                      </select>
+                      <label>Stats secondaires :</label>
+                      <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}">
+                        {% for stat in secondary_stats_options %}<option value="{{ stat }}" {% if artefact.secondary_stats is defined and stat in artefact.secondary_stats %}selected{% endif %}>{{ stat }}</option>{% endfor %}
+                      </select>
+                      <input type="text" name="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.secondary_stats|join(', ') if artefact.secondary_stats is defined else '' }}" readonly style="margin-top:4px;">
+                      <input type="hidden" name="artefact_id_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.id if artefact.id is defined else '' }}">
+                    </div>
+                  {% endfor %}
+                </div>
+                <div class="artefacts-col" style="flex: 1;">
+                  {% for a_idx in range(4, 8) %}
+                    {% set artefact = eqSet.artefacts[a_idx] if eqSet.artefacts|length > a_idx else {} %}
+                    <div class="edit-artefact-block">
+                      <label>{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}</label>
+                      <input type="hidden" name="artefact_name_{{ set_idx }}_{{ a_idx }}" value="{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}">
+                      <label>Panoplie :</label>
+                      <select name="artefact_set_{{ set_idx }}_{{ a_idx }}">
+                        <option value=""></option>
+                        {% for panoplie in panoplies_list %}<option value="{{ panoplie }}" {% if artefact.set == panoplie %}selected{% endif %}>{{ panoplie }}</option>{% endfor %}
+                      </select>
+                      <label>Stat principale :</label>
+                      <select name="artefact_main_stat_{{ set_idx }}_{{ a_idx }}">
+                        <option value=""></option>
+                        {% set artefact_label = artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] %}
+                    {% set main_stats = artefact_main_stats[artefact_label] if artefact_main_stats and artefact_label in artefact_main_stats else [] %}
+                        {% for stat in main_stats %}<option value="{{ stat }}" {% if artefact.main_stat == stat %}selected{% endif %}>{{ stat }}</option>{% endfor %}
+                      </select>
+                      <label>Stats secondaires :</label>
+                      <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}">
+                    {% for stat in secondary_stats_options %}<option value="{{ stat }}" {% if artefact.secondary_stats is defined and stat in artefact.secondary_stats %}selected{% endif %}>{{ stat }}</option>{% endfor %}
+                      </select>
+                      <input type="text" name="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.secondary_stats|join(', ') if artefact.secondary_stats is defined else '' }}" readonly style="margin-top:4px;">
+                      <input type="hidden" name="artefact_id_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.id if artefact.id is defined else '' }}">
+                    </div>
+                  {% endfor %}
+                </div>
+              </div>
+              <hr>
+              <h4>Noyaux du set</h4>
+              {% for c_idx in range(3) %}
+                {% set core = eqSet.cores[c_idx] if eqSet.cores|length > c_idx else {} %}
+                <div class="edit-core-block">
+                  <label>Nom du noyau :</label>
+                  <select name="core_name_{{ set_idx }}_{{ c_idx }}">
+                    <option value=""></option>
+                    {% for cor in cores_list %}<option value="{{ cor }}" {% if core.name == cor %}selected{% endif %}>{{ cor }}</option>{% endfor %}
+                  </select>
+                  {% set core_number = "%02d"|format(c_idx + 1) %}
+                  <label>Stat principale :</label>
+                  <select name="core_main_stat_{{ set_idx }}_{{ c_idx }}">
+                    <option value=""></option>
+                    {% for stat in core_main_stats[core_number] %}<option value="{{ stat }}" {% if core.main_stat == stat %}selected{% endif %}>{{ stat }}</option>{% endfor %}
+                  </select>
+                  <label>Stat secondaire :</label>
+                  <select name="core_secondary_stat_{{ set_idx }}_{{ c_idx }}">
+                    <option value=""></option>
+                    {% for stat in core_secondary_stats[core_number] %}<option value="{{ stat }}" {% if core.secondary_stat == stat %}selected{% endif %}>{{ stat }}</option>{% endfor %}
+                  </select>
+                  <input type="hidden" name="core_id_{{ set_idx }}_{{ c_idx }}" value="{{ core.id if core.id is defined else '' }}">
+                </div>
+                <hr>
               {% endfor %}
-            </select>
-            <label>Stat principale :</label>
-            <select name="artefact_main_stat_{{ set_idx }}_{{ a_idx }}">
-              <option value=""></option>
-              {% set artefact_label = artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] %}
-              {% set main_stats = {
-                "Casque": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
-                "Plastron": ["DEF", "DEF%"],
-                "Gants": ["ATK", "ATK%"],
-                "Bottes": ["CRIT DMG", "DEF", "DEF%", "HP", "HP%"],
-                "Collier": ["HP", "HP%"],
-                "Bracelet": ["ELEM DMG", "LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"],
-                "Bague": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
-                "Boucle d'oreille": ["MP MAX"],
-                "Helmet": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
-                "Chestplate": ["DEF", "DEF%"],
-                "Gloves": ["ATK", "ATK%"],
-                "Boots": ["CRIT DMG", "DEF", "DEF%", "HP", "HP%"],
-                "Necklace": ["HP", "HP%"],
-                "Bracelet": ["ELEM DMG", "LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"],
-                "Ring": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
-                "Earring": ["MP MAX"]
-              }[artefact_label] %}
-              {% for stat in main_stats %}
-                <option value="{{ stat }}" {% if artefact.main_stat == stat %}selected{% endif %}>{{ stat }}</option>
-              {% endfor %}
-            </select>
-            <label>Stats secondaires :</label>
-            <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}">
-              {% set secondary_stats = [
-                "ATK", "ATK%", "ATK% +3/4",
-                "DEF", "DEF%", "DEF% +3/4",
-                "HP", "HP%", "HP% +3/4",
-                "CRIT HIT",
-                "CRIT DMG",
-                "DMG INC",
-                "DEF PEN",
-                "MP CONS",
-                "MP MAX",
-                "MP Regen%",
-                "DMG RES"
-              ] %}
-              {% for stat in secondary_stats %}
-                <option value="{{ stat }}" {% if artefact.secondary_stats is defined and stat in artefact.secondary_stats %}selected{% endif %}>{{ stat }}</option>
-              {% endfor %}
-            </select>
-            <input type="text" name="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.secondary_stats|join(', ') if artefact.secondary_stats is defined else '' }}" readonly style="margin-top:4px;">
-            <input type="hidden" name="artefact_id_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.id if artefact.id is defined else '' }}">
-          </div>
-        {% endfor %}
-      </div>
-      <div class="artefacts-col" style="flex: 1;">
-        {% for a_idx in range(4, 8) %}
-          {% set artefact = eqSet.artefacts[a_idx] if eqSet.artefacts|length > a_idx else {} %}
-          <div class="edit-artefact-block">
-            <label>
-              {% set artefact_types = {
-                'FR-fr': ['Casque', 'Plastron', 'Gants', 'Bottes', 'Collier', 'Bracelet', 'Bague', "Boucle d'oreille"],
-                'EN-en': ['Helmet', 'Chestplate', 'Gloves', 'Boots', 'Necklace', 'Bracelet', 'Ring', 'Earring']
-              } %}
-              {{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}
-            </label>
-            <input type="hidden" name="artefact_name_{{ set_idx }}_{{ a_idx }}" value="{{ artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] }}">
-            <label>Pannoplie :</label>
-            <select name="artefact_set_{{ set_idx }}_{{ a_idx }}">
-              <option value=""></option>
-              {% for panoplie in panoplies_list %}
-                <option value="{{ panoplie }}" {% if artefact.set == panoplie %}selected{% endif %}>{{ panoplie }}</option>
-              {% endfor %}
-            </select>
-            <label>Stat principale :</label>
-            <select name="artefact_main_stat_{{ set_idx }}_{{ a_idx }}">
-              <option value=""></option>
-              {% set artefact_label = artefact_types[language][a_idx] if language in artefact_types else artefact_types['FR-fr'][a_idx] %}
-              {% set main_stats = {
-                "Casque": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
-                "Plastron": ["DEF", "DEF%"],
-                "Gants": ["ATK", "ATK%"],
-                "Bottes": ["CRIT DMG", "DEF", "DEF%", "HP", "HP%"],
-                "Collier": ["HP", "HP%"],
-                "Bracelet": ["ELEM DMG", "LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"],
-                "Bague": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
-                "Boucle d'oreille": ["MP MAX"],
-                "Helmet": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
-                "Chestplate": ["DEF", "DEF%"],
-                "Gloves": ["ATK", "ATK%"],
-                "Boots": ["CRIT DMG", "DEF", "DEF%", "HP", "HP%"],
-                "Necklace": ["HP", "HP%"],
-                "Bracelet": ["ELEM DMG", "LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"],
-                "Ring": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
-                "Earring": ["MP MAX"]
-              }[artefact_label] %}
-              {% for stat in main_stats %}
-                <option value="{{ stat }}" {% if artefact.main_stat == stat %}selected{% endif %}>{{ stat }}</option>
-              {% endfor %}
-            </select>
-            <label>Stats secondaires :</label>
-            <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}">
-              {% set secondary_stats = [
-                "ATK", "ATK%", "ATK% +3/4",
-                "DEF", "DEF%", "DEF% +3/4",
-                "HP", "HP%", "HP% +3/4",
-                "CRIT HIT",
-                "CRIT DMG",
-                "DMG INC",
-                "DEF PEN",
-                "MP CONS",
-                "MP MAX",
-                "MP Regen%",
-                "DMG RES"
-              ] %}
-              {% for stat in secondary_stats %}
-                <option value="{{ stat }}" {% if artefact.secondary_stats is defined and stat in artefact.secondary_stats %}selected{% endif %}>{{ stat }}</option>
-              {% endfor %}
-            </select>
-            <input type="text" name="artefact_secondary_stats_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.secondary_stats|join(', ') if artefact.secondary_stats is defined else '' }}" readonly style="margin-top:4px;">
-            <input type="hidden" name="artefact_id_{{ set_idx }}_{{ a_idx }}" value="{{ artefact.id if artefact.id is defined else '' }}">
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-    <hr>
-    <h4>Noyaux du set</h4>
-    {% set coreMainStats = {
-      "01": ["ATK", "ATK%"],
-      "02": ["DEF", "DEF%"],
-      "03": ["HP", "HP%"]
-    } %}
-    
-    {% set coreSecondaryStats = {
-      "01": ["CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],
-      "02": ["CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],
-      "03": ["CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"]
-    } %}
-    {% for c_idx in range(3) %}
-      {% set core = eqSet.cores[c_idx] if eqSet.cores|length > c_idx else {} %}
-      <div class="edit-core-block">
-        <label>Nom du noyau :</label>
-        <select name="core_name_{{ set_idx }}_{{ c_idx }}">
-              <option value=""></option>
-              {% for cor in cores_list %}
-                <option value="{{ cor }}" {% if core.name == cor %}selected{% endif %}>{{ cor }}</option>
-              {% endfor %}
-            </select>
-        {% set core_number = "%02d"|format(c_idx + 1) %}
-        <label>Stat principale :</label>
-        <select name="core_main_stat_{{ set_idx }}_{{ c_idx }}">
-          <option value=""></option>
-          {% for stat in coreMainStats[core_number] %}
-            <option value="{{ stat }}" {% if core.main_stat == stat %}selected{% endif %}>{{ stat }}</option>
-          {% endfor %}
-        </select>
-        <label>Stat secondaire :</label>
-        <select name="core_secondary_stat_{{ set_idx }}_{{ c_idx }}">
-          <option value=""></option>
-          {% for stat in coreSecondaryStats[core_number] %}
-            <option value="{{ stat }}" {% if core.secondary_stat == stat %}selected{% endif %}>{{ stat }}</option>
-          {% endfor %}
-        </select>
-        <input type="hidden" name="core_id_{{ set_idx }}_{{ c_idx }}" value="{{ core.id if core.id is defined else '' }}">
-      </div>
-      <hr>
-    {% endfor %}
-  </div>
-{% endfor %}
-        </div>
-      </div>
-      <div
-        style="display: flex; justify-content: space-between; margin-top: 18px"
-      >
-        <button type="submit" class="admin-btn">Enregistrer</button>
-        <button
-          type="button"
-          id="close-edit-sjw"
-          class="close-btn"
-          style="font-size: 22px"
-        >
-          &times;
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-<script>
-  // Liste des noms de panoplies récupérée depuis Flask
-  const panopliesList = [
-    {% for panoplie in panoplies_list %}
-      "{{ panoplie }}"{% if not loop.last %},{% endif %}
-    {% endfor %}
-  ];
-  const artefactMainStats = {
-    "Casque": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
-    "Plastron": ["DEF", "DEF%"],
-    "Gants": ["ATK", "ATK%"],
-    "Bottes": ["CRIT DMG", "DEF", "DEF%", "HP", "HP%"],
-    "Collier": ["HP", "HP%"],
-    "Bracelet": ["ELEM DMG", "LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"],
-    "Bague": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
-    "Boucle d'oreille": ["MP MAX"],
-    "Helmet": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
-    "Chestplate": ["DEF", "DEF%"],
-    "Gloves": ["ATK", "ATK%"],
-    "Boots": ["CRIT DMG", "DEF", "DEF%", "HP", "HP%"],
-    "Necklace": ["HP", "HP%"],
-    "Bracelet": ["ELEM DMG", "LIGHT DMG", "WATER DMG", "FIRE DMG", "WIND DMG", "DARK DMG"],
-    "Ring": ["ATK", "ATK%", "DEF", "DEF%", "HP", "HP%"],
-    "Earring": ["MP MAX"]
-  };
-  const secondaryStatsOptions = [
-    "ATK", "ATK%", "ATK% +3/4",
-    "DEF", "DEF%", "DEF% +3/4",
-    "HP", "HP%", "HP% +3/4",
-    "CRIT HIT",
-    "CRIT DMG",
-    "DMG INC",
-    "DEF PEN",
-    "MP CONS",
-    "MP MAX",
-    "MP Regen %",
-    "DMG RES"
-  ];
-  const focusStatsOptions = [
-    "ATK",
-    "DEF",
-    "HP",
-    "CRIT HIT",
-    "CRIT DMG",
-    "DMG INC",
-    "DEF PEN",
-    "MP CONS",
-    "MP MAX",
-    "MP Regen%",
-    "DMG RES"
-  ];
-  const coresList = [
-    {% for core in cores_list %}
-      "{{ core }}"{% if not loop.last %},{% endif %}
-    {% endfor %}
-  ];
-  const coreMainStats = {
-    "01": ["ATK", "ATK%"],
-    "02": ["DEF", "DEF%"],
-    "03": ["HP", "HP%"]
-  };
-  const coreSecondaryStats = {
-    "01": ["CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],
-    "02": ["CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"],
-    "03": ["CRIT HIT", "CRIT DMG", "DMG INC", "DEF PEN", "MP CONS", "MP MAX"]
-  };
-  // Gestion des onglets
-  document.querySelectorAll('.edit-tab').forEach(tab => {
-    tab.addEventListener('click', function() {
-      document.querySelectorAll('.edit-tab').forEach(t => t.classList.remove('active'));
-      document.querySelectorAll('.edit-tab-content').forEach(c => c.classList.remove('active'));
-      tab.classList.add('active');
-      document.getElementById('edit-tab-' + tab.dataset.tab).classList.add('active');
-    });
-  });
-
-  // Sélecteur pour afficher le bon bloc de set à modifier dans l'onglet artefacts
-  document.getElementById('edit-equipment-select')?.addEventListener('change', function(e) {
-    const idx = this.value;
-    document.querySelectorAll('.edit-eqset-block').forEach((block) => {
-      block.style.display = (block.id === `eqset-block-${idx}`) ? 'block' : 'none';
-    });
-  });
-
-  // Onglet actif par défaut (infos principales)
-  document.addEventListener("DOMContentLoaded", () => {
-    const tabs = document.querySelectorAll(".edit-tab");
-    const tabContents = document.querySelectorAll(".edit-tab-content");
-    tabs.forEach((tab, idx) => {
-      if (tab.classList.contains("active")) {
-        tabContents[idx].classList.add("active");
-      } else {
-        tabContents[idx].classList.remove("active");
-      }
-    });
-    tabs.forEach((tab, idx) => {
-      tab.addEventListener("click", () => {
-        tabs.forEach((t) => t.classList.remove("active"));
-        tabContents.forEach((tc) => tc.classList.remove("active"));
-        tab.classList.add("active");
-        tabContents[idx].classList.add("active");
-      });
-    });
-  });
-
-  // Sauvegarde l'état initial du formulaire à l'ouverture
-  let initialFormData = null;
-  const form = document.getElementById('edit-sjw-form');
-  if (form) {
-    function serializeForm(form) {
-      const formData = new FormData(form);
-      return Array.from(formData.entries()).sort();
-    }
-    document.getElementById('edit-sjw-btn')?.addEventListener('click', () => {
-      initialFormData = serializeForm(form);
-    });
-    form.addEventListener('submit', function(e) {
-      Array.from(form.elements).forEach(el => {
-        if (el.value === "None") {
-          el.value = null;
-        }
-      });
-      const currentFormData = serializeForm(form);
-      if (initialFormData && JSON.stringify(initialFormData) === JSON.stringify(currentFormData)) {
-        e.preventDefault();
-        alert("Aucune modification détectée.");
-        return false;
-      }
-    });
-  }
-
-  // Fermeture de la modale si clic en dehors du popup
-  const overlay = document.getElementById('edit-sjw-overlay');
-  const popup = document.getElementById('edit-sjw-menu');
-  if (overlay && popup) {
-    overlay.addEventListener('mousedown', function(e) {
-      if (e.target === overlay) {
-        overlay.style.display = 'none';
-      }
-    });
-  }
-
-  // Ajout d'un passif
-  document.addEventListener("DOMContentLoaded", function() {
-    // Ajout d'une arme
-    document.getElementById('add-weapon-btn')?.addEventListener('click', async function() {
-      const grid = document.querySelector('#edit-tab-weapons');
-      const index = grid.querySelectorAll('.edit-weapon-block').length;
-      let images = [];
-      const folder = document.querySelector('#edit-sjw-form input[name="folder"]').value;
-      if (folder) {
-        try {
-          images = await fetch(`/SJW/images_for/${encodeURIComponent(folder)}`).then(r => r.json());
-        } catch (e) { images = []; }
-      }
-      const selectOptions = ['<option value=""></option>']
-        .concat(images.map(img => `<option value="${img}">${img}</option>`)).join('');
-      const div = document.createElement('div');
-      div.className = 'edit-weapon-block';
-      div.innerHTML = `
-        <label>Nom de l'arme :</label>
-        <input type="text" name="weapon_name_${index}" value="" />
-        <label>Alias de l'arme :</label>
-        <input type="text" name="weapon_alias_${index}" value="" />
-        <label>Type :</label>
-        <input type="text" name="weapon_type_${index}" value="" />
-        <label>Stats :</label>
-        <textarea name="weapon_stats_${index}"></textarea>
-        <label>Tag :</label>
-        <input type="text" name="weapon_tag_${index}" value="" />
-        <label>Principal :</label>
-        <input type="checkbox" name="weapon_principal_${index}" />
-        <input type="hidden" name="weapon_id_${index}" value="">
-        <h4 style="margin-top: 18px">Évolutions de l'arme</h4>
-        <div class="evolutions-grid">
-          ${Array.from({length: 7}).map((_, i) => `
-            ${i % 2 === 0 ? '<div class="evolutions-row">' : ''}
-            <div class="edit-weapon-evolution-block">
-              <label>Évolution : ${i === 6 ? 'A6-10' : 'A' + i}</label>
-              <textarea name="weapon_evolution_description_${index}_${i}"></textarea>
-              <input type="hidden" name="weapon_evolutions_${index}_${i}_evolution_id" value="${i === 6 ? 'A6-10' : 'A' + i}">
-              <input type="hidden" name="weapon_evolutions_id_${index}_${i}" value="">
             </div>
-            ${(i % 2 === 1 || i === 6) ? '</div>' : ''}
-          `).join('')}
+          {% endfor %}
         </div>
-        <hr />
-      `;
-      grid.appendChild(div);
-    });
-  });
-  
-  // Ajout d'un set d'équipement
-  document.getElementById('edit-equipment-select')?.addEventListener('click', function(e) {
-    if (this.value === "add_new_set") {
-      const setName = prompt("Nom du nouveau set :");
-      if (!setName) {
-        this.value = 0;
-        return;
-      }
-      // Récupère toutes les options sauf "add_new_set"
-      const options = Array.from(this.options).filter(opt => opt.value !== "add_new_set");
-      const setCount = options.length;
-      let setOrder;
-      do {
-        setOrder = prompt(`Ordre d'affichage du set (entrez un chiffre entre 1 et ${setCount + 1}) :`);
-        if (setOrder === null) { // Annulation
-          this.value = 0;
-          return;
-        }
-        if (setOrder.trim() === "") {
-          setOrder = setCount + 1; // Valeur max si vide
-          break;
-        }
-        setOrder = Number(setOrder);
-      } while (!Number.isInteger(setOrder) || setOrder < 1 || setOrder > setCount + 1);
+      </section>
 
-      // Pour l'insertion, on veut l'index (0-based)
-      const setOrderIndex = setOrder - 1;
+      <footer>
+        <button type="submit" class="edit-submit-btn">Enregistrer</button>
+      </footer>
+    </form>
+  </article>
+</dialog>
 
-      // Incrémente data-order de tous les sets >= setOrderIndex
-      options.forEach(opt => {
-        const optOrder = opt.dataset.order !== undefined && opt.dataset.order !== ""
-          ? Number(opt.dataset.order)
-          : Number.MAX_SAFE_INTEGER;
-        if (optOrder >= setOrderIndex) {
-          opt.dataset.order = optOrder + 1;
-          // Mets aussi à jour le champ caché d'ordre dans le bloc correspondant
-          const block = document.getElementById(`eqset-block-${opt.value}`);
-          if (block) {
-            const orderInput = block.querySelector(`input[name="eqset_order_${opt.value}"]`);
-            if (orderInput) orderInput.value = Number(opt.dataset.order) + 1;
-          }
-        }
-      });
-
-      // Création de la nouvelle option
-      const option = document.createElement('option');
-      option.value = setOrderIndex;
-      option.textContent = setName;
-      option.dataset.order = setOrderIndex;
-
-      // Trouver la bonne position d'insertion selon l'ordre
-      const select = this;
-      const addNewSetOption = select.querySelector('option[value="add_new_set"]');
-      const setOptions = Array.from(select.options).filter(opt => opt !== addNewSetOption);
-
-      let insertPos = 0;
-      if (setOptions.length > 0) {
-        insertPos = setOptions.filter(opt => {
-          const optOrder = opt.dataset.order !== undefined && opt.dataset.order !== ""
-            ? Number(opt.dataset.order)
-            : Number.MAX_SAFE_INTEGER;
-          return optOrder < setOrderIndex;
-        }).length;
-      }
-      select.insertBefore(option, setOptions[insertPos] || addNewSetOption);
-      select.value = setOrderIndex;
-
-      // Crée le bloc HTML du nouveau set
-      const fields = document.getElementById('edit-artefacts-fields');
-      const div = document.createElement('div');
-      div.className = 'edit-eqset-block';
-      div.id = `eqset-block-${setOrderIndex}`;
-      div.style.display = 'block';
-      const focusStatsSelect = `
-        <select multiple size="6" class="eqset-focus-multiselect" data-target="eqset_focus_stats_${setOrderIndex}">
-          ${focusStatsOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
-        </select>
-        <input type="text" name="eqset_focus_stats_${setOrderIndex}" value="" readonly style="margin-top:4px;">
-      `;
-      let artefactsCol1 = '';
-      for (let a_idx = 0; a_idx < 4; a_idx++) {
-        const artefactLabel = artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx];
-        const mainStatOptions = artefactMainStats[artefactLabel] || [];
-        const mainStatSelect = `
-          <select name="artefact_main_stat_${setOrderIndex}_${a_idx}">
-            <option value=""></option>
-            ${mainStatOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
-          </select>
-        `;
-        const secondaryStatSelect = `
-          <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_${setOrderIndex}_${a_idx}">
-            ${secondaryStatsOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
-          </select>
-          <input type="text" name="artefact_secondary_stats_${setOrderIndex}_${a_idx}" value="" readonly style="margin-top:4px;">
-        `;
-        const panoplieSelect = `
-          <select name="artefact_set_${setOrderIndex}_${a_idx}">
-            <option value=""></option>
-            ${panopliesList.map(p => `<option value="${p}">${p}</option>`).join('')}
-          </select>
-        `;
-        artefactsCol1 += `
-          <div class="edit-artefact-block">
-            <label>${artefactLabel}</label>
-            <input type="hidden" name="artefact_name_${setOrderIndex}_${a_idx}" value="${artefactLabel}">
-            <label>Pannoplie :</label>
-            ${panoplieSelect}
-            <label>Stat principale :</label>
-            ${mainStatSelect}
-            <label>Stats secondaires :</label>
-            ${secondaryStatSelect}
-            <input type="hidden" name="artefact_id_${setOrderIndex}_${a_idx}" value="">
-          </div>
-        `;
-      }
-
-      let artefactsCol2 = '';
-      for (let a_idx = 4; a_idx < 8; a_idx++) {
-        const artefactLabel = artefactTypeLabels[currentLang] ? artefactTypeLabels[currentLang][a_idx] : artefactTypeLabels["FR-fr"][a_idx];
-        const mainStatOptions = artefactMainStats[artefactLabel] || [];
-        const mainStatSelect = `
-          <select name="artefact_main_stat_${setOrderIndex}_${a_idx}">
-            <option value=""></option>
-            ${mainStatOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
-          </select>
-        `;
-        const secondaryStatSelect = `
-          <select multiple size="6" class="artefact-secondary-multiselect" data-target="artefact_secondary_stats_${setOrderIndex}_${a_idx}">
-            ${secondaryStatsOptions.map(stat => `<option value="${stat}">${stat}</option>`).join('')}
-          </select>
-          <input type="text" name="artefact_secondary_stats_${setOrderIndex}_${a_idx}" value="" readonly style="margin-top:4px;">
-        `;
-        const panoplieSelect = `
-          <select name="artefact_set_${setOrderIndex}_${a_idx}">
-            <option value=""></option>
-            ${panopliesList.map(p => `<option value="${p}">${p}</option>`).join('')}
-          </select>
-        `;
-        artefactsCol2 += `
-          <div class="edit-artefact-block">
-            <label>${artefactLabel}</label>
-            <input type="hidden" name="artefact_name_${setOrderIndex}_${a_idx}" value="${artefactLabel}">
-            <label>Pannoplie :</label>
-            ${panoplieSelect}
-            <label>Stat principale :</label>
-            ${mainStatSelect}
-            <label>Stats secondaires :</label>
-            ${secondaryStatSelect}
-            <input type="hidden" name="artefact_id_${setOrderIndex}_${a_idx}" value="">
-          </div>
-        `;
-      }
-      let coresHtml = '';
-      for (let coreIdx = 0; coreIdx < 3; coreIdx++) {
-        const coreNumber = `${coreIdx + 1}`.padStart(2, "0"); // "01", "02", "03"
-        const coreNameSelect = `
-          <select name="core_name_${setOrderIndex}_${coreIdx}">
-            <option value=""></option>
-            ${coresList.map(c => `<option value="${c}">${c}</option>`).join('')}
-          </select>
-        `;
-        const coreMainStatSelect = `
-          <select name="core_main_stat_${setOrderIndex}_${coreIdx}">
-            <option value=""></option>
-            ${coreMainStats[coreNumber].map(stat => `<option value="${stat}">${stat}</option>`).join('')}
-          </select>
-        `;
-        const coreSecondaryStatSelect = `
-          <select name="core_secondary_stat_${setOrderIndex}_${coreIdx}">
-            <option value=""></option>
-            ${coreSecondaryStats[coreNumber].map(stat => `<option value="${stat}">${stat}</option>`).join('')}
-          </select>
-        `;
-        coresHtml += `
-          <div class="edit-core-block">
-            <label>Nom du noyau :</label>
-            ${coreNameSelect}
-            <label>Stat principale :</label>
-            ${coreMainStatSelect}
-            <label>Stat secondaire :</label>
-            ${coreSecondaryStatSelect}
-            <input type="hidden" name="core_id_${setOrderIndex}_${coreIdx}" value="">
-          </div>
-          <hr>
-        `;
-      }
-      div.innerHTML = `
-        <h4>Set : ${setName}</h4>
-        <input type="hidden" name="eqset_name_${setOrderIndex}" value="${setName}">
-        <input type="hidden" name="eqset_id_${setOrderIndex}" value="">
-        <label>Description :</label>
-        <textarea name="eqset_description_${setOrderIndex}"></textarea>
-        <label>Stats à focus :</label>
-        ${focusStatsSelect}
-        <input type="hidden" name="eqset_order_${setOrderIndex}" value="${setOrder}">
-        <h4>Artefacts du set</h4>
-        <div class="artefacts-row" style="display: flex;">
-          <div class="artefacts-col" style="flex: 1;">
-            ${artefactsCol1}
-          </div>
-          <div class="artefacts-col" style="flex: 1;">
-            ${artefactsCol2}
-          </div>
-        </div>
-        <hr>
-        <h4>Noyaux du set</h4>
-        ${coresHtml}
-      `;
-      const blocks = Array.from(fields.querySelectorAll('.edit-eqset-block'));
-      if (insertPos < blocks.length) {
-        fields.insertBefore(div, blocks[insertPos]);
-      } else {
-        fields.appendChild(div);
-      }
-      reindexEqsetBlocks();
-      reindexEqsetOptions();
-    }
-  });
-
-  function reindexEqsetBlocks() {
-    const fields = document.getElementById('edit-artefacts-fields');
-    const blocks = Array.from(fields.querySelectorAll('.edit-eqset-block'));
-    blocks.forEach((block, idx) => {
-      block.id = `eqset-block-${idx}`;
-      // Met à jour tous les champs du bloc
-      block.querySelectorAll('[name]').forEach(input => {
-        input.name = input.name.replace(/_(\d+)(?:_(\d+))?/, function(_, oldIdx, subIdx) {
-          if (typeof subIdx !== "undefined") {
-            return `_${idx}_${subIdx}`;
-          }
-          return `_${idx}`;
-        });
-        if (input.name === `eqset_order_${idx}`) {
-          input.value = idx + 1;
-        }
-      });
-    });
-  }
-
-  function reindexEqsetOptions() {
-    const select = document.getElementById('edit-equipment-select');
-    const addNewSetOption = select.querySelector('option[value="add_new_set"]');
-    const options = Array.from(select.options).filter(opt => opt !== addNewSetOption);
-    options.forEach((option, idx) => {
-      option.value = idx;
-      option.dataset.order = idx;
-    });
-  }
-
-  // Dictionnaire des types d'artefacts par langue
-  const artefactTypeLabels = {
-    "FR-fr": ["Casque", "Plastron", "Gants", "Bottes", "Collier", "Bracelet", "Bague", "Boucle d'oreille"],
-    "EN-en": ["Helmet", "Chestplate", "Gloves", "Boots", "Necklace", "Bracelet", "Ring", "Earring"]
-  };
-  // Détecte la langue courante (à adapter selon ton contexte)
-  const currentLang = "{{ language if language is defined else 'FR-fr' }}";
-
-  async function fillImageSelects() {
-    const folder = document.querySelector('#edit-sjw-form input[name="folder"]').value;
-    let images = [];
-    if (folder) {
-      try {
-        images = await fetch(`/SJW/images_for/${encodeURIComponent(folder)}`).then(r => r.json());
-      } catch (e) { images = []; }
-    }
-    // Pour les passifs
-    document.querySelectorAll('.blessing-image-select').forEach(select => {
-      const current = select.dataset.current || "";
-      select.innerHTML = ['<option value=""></option>']
-        .concat(images.map(img => `<option value="${img}"${img === current ? ' selected' : ''}>${img}</option>`)).join('');
-    });
-  }
-
-// Remplir les selects d'image pour chaque gem et buff/debuff existant
-document.querySelectorAll('.skill-image-select, .gem-image-select, .gem-buff-image-select, .gem-debuff-image-select').forEach(select => {
-    const current = select.dataset.current || "";
-    fetch(`/SJW/skill_images?type=${encodeURIComponent(select.dataset.type)}&order=${encodeURIComponent(select.dataset.order)}`)
-        .then(resp => resp.json())
-        .then(images => {
-            select.innerHTML = ['<option value=""></option>']
-                .concat(images.map(img => `<option value="${img}"${img === current ? ' selected' : ''}>${img}</option>`)).join('');
-        });
-});
-
-  // Appelle la fonction à l'ouverture de la modale
-  document.getElementById('edit-sjw-btn')?.addEventListener('click', fillImageSelects);
-  // Ou si la modale s'ouvre autrement, appelle fillImageSelects() juste après l'ouverture
-  document.addEventListener('change', function(e) {
-    // Limite à 4 stats secondaires
-    if (e.target.classList.contains('artefact-secondary-multiselect')) {
-      const select = e.target;
-      const selected = Array.from(select.selectedOptions).map(opt => opt.value);
-      if (selected.length > 4) {
-        select.options[select.selectedIndex].selected = false;
-        alert("Vous ne pouvez sélectionner que 4 stats secondaires maximum.");
-        return;
-      }
-      const inputName = select.dataset.target;
-      const input = select.parentElement.querySelector(`input[name="${inputName}"]`);
-      if (input) input.value = selected.join(', ');
-    }
-    // Limite à 6 stats à focus
-    if (e.target.classList.contains('eqset-focus-multiselect')) {
-      const select = e.target;
-      const selected = Array.from(select.selectedOptions).map(opt => opt.value);
-      if (selected.length > 6) {
-        select.options[select.selectedIndex].selected = false;
-        alert("Vous ne pouvez sélectionner que 6 stats à focus maximum.");
-        return;
-      }
-      const inputName = select.dataset.target;
-      const input = select.parentElement.querySelector(`input[name="${inputName}"]`);
-      if (input) input.value = selected.join(', ');
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modalData = {
+      panopliesList: {{ panoplies_list|tojson if panoplies_list else '[]' }},
+      artefactMainStats: {{ artefact_main_stats|tojson if artefact_main_stats else '{}' }},
+      secondaryStatsOptions: {{ secondary_stats_options|tojson if secondary_stats_options else '[]' }},
+      focusStatsOptions: {{ focus_stats_options|tojson if focus_stats_options else '[]' }},
+      coresList: {{ cores_list|tojson if cores_list else '[]' }},
+      coreMainStats: {{ core_main_stats|tojson if core_main_stats else '{}' }},
+      coreSecondaryStats: {{ core_secondary_stats|tojson if core_secondary_stats else '{}' }},
+      currentLang: "{{ language if language is defined else 'FR-fr' }}"
+    };
+    if (typeof initializeEditSjwModalData === 'function') {
+      initializeEditSjwModalData(modalData);
     }
   });
 </script>

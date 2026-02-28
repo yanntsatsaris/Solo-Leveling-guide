@@ -1,202 +1,63 @@
-<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+<header>
+    <nav class="navbar">
+        <ul>
+            <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+            <li><a href="/game-contents" class="{% if request.path.startswith('/game-contents') %}active{% endif %}">Game Contents</a></li>
+            <li><a href="/SJW" class="{% if request.path.startswith('/SJW') %}active{% endif %}">Sung Jinwoo</a></li>
+            <li>
+                <a href="/characters" class="{% if request.path.startswith('/characters') %}active{% endif %}">
+                    Characters
+                </a>
+            </li>
+            <li><a href="/guides" class="{% if request.path == '/guides' %}active{% endif %}">Guides</a></li>
+            <li>
+                <div class="language-switch">
+                    <form method="POST" action="/set-language" id="language-form">
+                        <select name="language" id="language-select">
+                            <option value="FR-fr" {% if session.get('language', 'EN-en') == 'FR-fr' %}selected{% endif %}>Français</option>
+                            <option value="EN-en" {% if session.get('language', 'EN-en') == 'EN-en' %}selected{% endif %}>English</option>
+                        </select>
+                    </form>
+                </div>
+            </li>
+        </ul>
+        {% if session.get('username') %}
+        <div class="user-info">
+            <a href="/user/{{ session.get('username') }}" class="username-link">{{ session.get('username') }}</a>
+            <button id="logout-btn" class="logout-btn">Déconnexion</button>
+        </div>
+        {% else %}
+        <div class="user-logo">
+            <img src="{{ asset_url_for('static', filename='images/utilisateur-noir.jpg') }}" alt="User" id="user-btn" style="cursor:pointer;" />
+        </div>
+        {% endif %}
+    </nav>
+</header>
 
-<nav class="navbar">
-    <ul>
-        <li><a href="/" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
-        <li><a href="/game-contents" class="{% if request.path.startswith('/game-contents') %}active{% endif %}">Game Contents</a></li>
-        <li><a href="/SJW" class="{% if request.path.startswith('/SJW') %}active{% endif %}">Sung Jinwoo</a></li>
-        <li>
-            <a href="/characters" class="{% if request.path.startswith('/characters') %}active{% endif %}">
-                Characters
-            </a>
-        </li>
-        <li><a href="/guides" class="{% if request.path == '/guides' %}active{% endif %}">Guides</a></li>
-        <li>
-            <div class="language-switch">
-                <form method="POST" action="/set-language">
-                    <select name="language" onchange="this.form.submit()">
-                        <option value="FR-fr" {% if session.get('language', 'EN-en') == 'FR-fr' %}selected{% endif %}>Français</option>
-                        <option value="EN-en" {% if session.get('language', 'EN-en') == 'EN-en' %}selected{% endif %}>English</option>
-                    </select>
-                </form>
-            </div>
-        </li>
-    </ul>
-    {% if session.get('username') %}
-    <div class="user-info">
-        <a href="/user/{{ session.get('username') }}" class="username-link">{{ session.get('username') }}</a>
-        <button id="logout-btn" class="logout-btn">Déconnexion</button>
-    </div>
-    {% else %}
-    <div class="user-logo">
-        <img src="{{ url_for('static', filename='images/utilisateur-noir.jpg') }}" alt="User" id="user-btn" style="cursor:pointer;" />
-    </div>
-    {% endif %}
-</nav>
+<!-- Dialog moved outside of header to prevent any layout inheritance issues -->
+<dialog id="user-menu-dialog" class="user-menu-popup" hidden>
+    <form id="login-form">
+        <h3>Connexion</h3>
+        <input type="text" name="username" placeholder="Nom d'utilisateur" required>
+        <input type="password" name="password" placeholder="Mot de passe" required>
+        <button type="submit">Se connecter</button>
+        <div class="form-links">
+            <a href="{{ url_for('forgot_password') }}" class="forgot-password-link">Mot de passe oublié ?</a>
+            <button type="button" id="show-register" class="switch-btn">Créer un compte</button>
+        </div>
+        <div id="login-error" class="form-error"></div>
+    </form>
+    <form id="register-form" style="display:none;">
+        <h3>Créer un compte</h3>
+        <input type="text" name="new_username" placeholder="Nom d'utilisateur" required>
+        <input type="email" name="new_email" id="new_email" placeholder="Adresse mail" required>
+        <input type="password" name="new_password" placeholder="Mot de passe" required>
+        <input type="password" name="confirm_password" placeholder="Confirmer le mot de passe" required>
+        <button type="submit" id="create-btn" disabled>Créer</button>
+        <button type="button" id="show-login" class="switch-btn">Déjà un compte ?</button>
+        <div id="register-error" class="form-error"></div>
+    </form>
+    <button type="button" id="close-user-menu" class="close-modal" data-close-modal>&times;</button>
+</dialog>
 
-<div id="user-menu-overlay" class="user-menu-overlay" style="display:none;">
-    <div id="user-menu" class="user-menu-popup">
-        <form id="login-form">
-            <h3>Connexion</h3>
-            <input type="text" name="username" placeholder="Nom d'utilisateur" required>
-            <input type="password" name="password" placeholder="Mot de passe" required>
-            <button type="submit">Se connecter</button>
-            <div class="form-links">
-                <a href="{{ url_for('forgot_password') }}" class="forgot-password-link">Mot de passe oublié ?</a>
-                <button type="button" id="show-register" class="switch-btn">Créer un compte</button>
-            </div>
-            <div id="login-error" class="form-error"></div>
-        </form>
-        <form id="register-form" style="display:none;">
-            <h3>Créer un compte</h3>
-            <input type="text" name="new_username" placeholder="Nom d'utilisateur" required>
-            <input type="email" name="new_email" id="new_email" placeholder="Adresse mail" required>
-            <input type="password" name="new_password" placeholder="Mot de passe" required>
-            <input type="password" name="confirm_password" placeholder="Confirmer le mot de passe" required>
-            <button type="submit" id="create-btn" disabled>Créer</button>
-            <button type="button" id="show-login" class="switch-btn">Déjà un compte ?</button>
-            <div id="register-error" class="form-error"></div>
-        </form>
-        <button type="button" id="close-user-menu" class="close-btn">&times;</button>
-    </div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-    // Affichage/masquage des formulaires
-    const userBtn = document.getElementById('user-btn');
-    const closeBtn = document.getElementById('close-user-menu');
-    const showRegister = document.getElementById('show-register');
-    const showLogin = document.getElementById('show-login');
-    const loginForm = document.getElementById('login-form');
-    const registerForm = document.getElementById('register-form');
-    const overlay = document.getElementById('user-menu-overlay');
-    const emailInput = document.getElementById('new_email');
-    const createBtn = document.getElementById('create-btn');
-    const registerError = document.getElementById('register-error');
-    const loginError = document.getElementById('login-error');
-
-    if (userBtn) userBtn.onclick = function() {
-        overlay.style.display = 'flex';
-        loginForm.style.display = 'block';
-        registerForm.style.display = 'none';
-    };
-    if (closeBtn) closeBtn.onclick = function() {
-        overlay.style.display = 'none';
-    };
-    if (showRegister) showRegister.onclick = function() {
-        loginForm.style.display = 'none';
-        registerForm.style.display = 'block';
-    };
-    if (showLogin) showLogin.onclick = function() {
-        registerForm.style.display = 'none';
-        loginForm.style.display = 'block';
-    };
-
-    // Formulaire d'inscription
-    let emailTouched = false;
-    let confirmTouched = false;
-
-    if (emailInput) {
-        emailInput.addEventListener('input', function() {
-            emailTouched = true;
-            updateRegisterError();
-        });
-    }
-    const confirmInput = document.getElementById('register-form').querySelector('input[name="confirm_password"]');
-    if (confirmInput) {
-        confirmInput.addEventListener('input', function() {
-            confirmTouched = true;
-            updateRegisterError();
-        });
-    }
-
-    function updateRegisterError() {
-        let errorMsg = "";
-        // Vérification email
-        const strictEmail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-        if (emailTouched && !strictEmail.test(emailInput.value)) {
-            errorMsg += "Adresse mail invalide.<br>";
-            createBtn.disabled = true;
-            emailInput.classList.add('input-error');
-        } else {
-            emailInput.classList.remove('input-error');
-        }
-        // Vérification mot de passe
-        const pwd = document.getElementById('register-form').new_password.value;
-        const confirm = confirmInput.value;
-        if (confirmTouched && pwd !== confirm) {
-            errorMsg += "Les mots de passe ne correspondent pas.";
-            createBtn.disabled = true;
-            confirmInput.classList.add('input-error');
-        } else {
-            confirmInput.classList.remove('input-error');
-        }
-        // Si tout est bon, on active le bouton
-        if (
-            strictEmail.test(emailInput.value) &&
-            pwd === confirm &&
-            pwd.length > 0 &&
-            confirm.length > 0
-        ) {
-            createBtn.disabled = false;
-        }
-        registerError.innerHTML = errorMsg;
-    }
-
-    if (registerForm) registerForm.onsubmit = function(e) {
-        e.preventDefault();
-        updateRegisterError();
-        if (createBtn.disabled) return;
-        registerError.textContent = ""; // Reset
-        const pwd = this.new_password.value;
-        const confirm = this.confirm_password.value;
-        if (pwd !== confirm) {
-            registerError.textContent = "Les mots de passe ne correspondent pas.";
-            return;
-        }
-        fetch('/register', {
-            method: 'POST',
-            body: new FormData(this)
-        }).then(r => r.json()).then(data => {
-            if(data.success) {
-                location.reload();
-            } else {
-                registerError.textContent = data.error;
-                registerForm.style.display = 'block';
-            }
-        });
-    };
-
-    // Formulaire de connexion
-    if (loginForm) loginForm.onsubmit = function(e) {
-        e.preventDefault();
-        loginError.textContent = ""; // Reset
-        fetch('/login', {
-            method: 'POST',
-            body: new FormData(this)
-        }).then(r => r.json()).then(data => {
-            if(data.success) {
-                location.reload();
-            } else {
-                loginError.textContent = data.error;
-                loginForm.style.display = 'block';
-            }
-        });
-    };
-
-    // Déconnexion
-    const logoutBtn = document.getElementById('logout-btn');
-    if (logoutBtn) {
-        logoutBtn.onclick = function() {
-            fetch('/logout')
-                .then (r => r.json())
-                .then(data => {
-                    if(data.success) {
-                        location.reload();
-                    }
-                });
-        };
-    }
-});
-</script>
+<script src="{{ asset_url_for('static', filename='js/navbar.js') }}"></script>

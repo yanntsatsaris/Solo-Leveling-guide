@@ -19,6 +19,14 @@ from .utils import (
     process_description,
     focus_stats_equal,
 )
+from .data_loader import (
+    ARTEFACT_TYPES,
+    ARTEFACT_MAIN_STATS,
+    SECONDARY_STATS_OPTIONS,
+    FOCUS_STATS_OPTIONS,
+    CORE_MAIN_STATS,
+    CORE_SECONDARY_STATS
+)
 
 sjw_bp = Blueprint('sjw', __name__)
 
@@ -140,7 +148,13 @@ def inner_SJW():
         panoplies_list=panoplies_names,
         cores_list=cores_names,  # Passage à la vue
         weapon_types=weapon_types,
-        rarities=rarities
+        rarities=rarities,
+        artefact_types=ARTEFACT_TYPES,
+        artefact_main_stats=ARTEFACT_MAIN_STATS,
+        secondary_stats_options=SECONDARY_STATS_OPTIONS,
+        focus_stats_options=FOCUS_STATS_OPTIONS,
+        core_main_stats=CORE_MAIN_STATS,
+        core_secondary_stats=CORE_SECONDARY_STATS
     )
 
 @sjw_bp.route('/SJW/shadow/<shadowAlias>')

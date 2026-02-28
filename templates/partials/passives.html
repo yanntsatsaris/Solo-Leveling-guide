@@ -4,7 +4,7 @@
         {% for passive in character.passives %}
             <article class="passive {% if passive.principal %}principal{% endif %}">
                 {% if passive.image %}
-                    <img src="{{ url_for('static', filename=passive.image) }}" alt="{{ passive.name or 'Passive Image' }}">
+                    <img src="{{ asset_url_for('static', filename=passive.image) }}" alt="{{ passive.name or 'Passive Image' }}">
                 {% endif %}
                 <div>
                     {% if passive.name %}

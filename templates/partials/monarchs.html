@@ -1,20 +1,20 @@
-<div id="monarchs" class="tab-content">
+<section id="monarchs" class="tab-content">
     <h2>Monarchs</h2>
     {% if character.monarchs and character.monarchs|length > 0 %}
         {% for monarch in character.monarchs %}
-            <div class="monarch {% if monarch.principal == 'True' %}principal{% endif %}">
+            <article class="monarch {% if monarch.principal == 'True' %}principal{% endif %}">
                 {% if monarch.image %}
-                    <img src="{{ url_for('static', filename=monarch.image) }}" alt="{{ monarch.name or 'Passive Image' }}">
+                    <img src="{{ asset_url_for('static', filename=monarch.image) }}" alt="{{ monarch.name or 'Passive Image' }}">
                 {% endif %}
-                <div>
+                <div class="monarch-details">
                     {% if monarch.name %}
                         <strong>{{ monarch.name }}</strong><br>
                     {% endif %}
                     <p>{{ monarch.description|safe }}</p>
                 </div>
-            </div>
+            </article>
         {% endfor %}
     {% else %}
         <p>Informations sur les monarchs du personnage.</p>
     {% endif %}
-</div>
+</section>

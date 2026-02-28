@@ -1,8 +1,8 @@
-<dialog id="add-character-modal">
-  <article>
+<dialog id="add-character-modal" class="add-character-overlay" hidden>
+  <article class="add-character-content">
     <header>
       <h2 class="modal-title">Ajouter un personnage</h2>
-      <button type="button" class="close-btn" data-close-modal>&times;</button>
+      <button type="button" class="close-modal" data-close-modal aria-label="Fermer">&times;</button>
     </header>
     <form
       id="add-character-form"
@@ -18,16 +18,26 @@
       </nav>
 
       <section class="edit-tab-content active" id="edit-tab-main">
-        <label>Nom :</label>
-        <input type="text" name="name" required />
-        <label>Alias :</label>
-        <input type="text" name="alias" required />
-        <label>Type :</label>
-        <input type="text" name="type" required />
-        <label>Rareté :</label>
-        <input type="text" name="rarity" required />
-        <label>Description :</label>
-        <textarea name="description"></textarea>
+        <div class="add-form-group">
+          <label>Nom :</label>
+          <input type="text" name="name" required />
+        </div>
+        <div class="add-form-group">
+          <label>Alias :</label>
+          <input type="text" name="alias" required />
+        </div>
+        <div class="add-form-group">
+          <label>Type :</label>
+          <input type="text" name="type" required />
+        </div>
+        <div class="add-form-group">
+          <label>Rareté :</label>
+          <input type="text" name="rarity" required />
+        </div>
+        <div class="add-form-group">
+          <label>Description :</label>
+          <textarea name="description"></textarea>
+        </div>
         <input type="hidden" name="image_folder" value="">
 
         <h4>Évolutions du personnage</h4>
@@ -59,13 +69,21 @@
       <section class="edit-tab-content" id="edit-tab-weapons">
         {% for weapon_idx in range(1) %}
           <div class="edit-weapon-block">
-            <label>Nom de l'arme :</label>
-            <input type="text" name="weapon_name_{{ weapon_idx }}" />
-            <label>Stats :</label>
-            <textarea name="weapon_stats_{{ weapon_idx }}"></textarea>
-            <label>Tag :</label>
-            <input type="text" name="weapon_tag_{{ weapon_idx }}" />
-            <label>Principal : <input type="checkbox" name="weapon_principal_{{ weapon_idx }}" /></label>
+            <div class="add-form-group">
+              <label>Nom de l'arme :</label>
+              <input type="text" name="weapon_name_{{ weapon_idx }}" />
+            </div>
+            <div class="add-form-group">
+              <label>Stats :</label>
+              <textarea name="weapon_stats_{{ weapon_idx }}"></textarea>
+            </div>
+            <div class="add-form-group">
+              <label>Tag :</label>
+              <input type="text" name="weapon_tag_{{ weapon_idx }}" />
+            </div>
+            <div class="add-form-group">
+              <label>Principal : <input type="checkbox" name="weapon_principal_{{ weapon_idx }}" /></label>
+            </div>
             <input type="hidden" name="weapon_id_{{ weapon_idx }}" value="">
             <h4>Évolutions de l'arme</h4>
             <div class="evolutions-grid">
@@ -86,7 +104,7 @@
       </section>
 
       <section class="edit-tab-content" id="edit-tab-artefacts">
-        <div>
+        <div class="add-form-group">
           <label for="add-equipment-select">Sélectionner le set :</label>
           <select id="add-equipment-select">
             <option value="add_new_set" class="add-new-set-option">+ Ajouter un nouveau set</option>
@@ -96,7 +114,7 @@
       </section>
 
       <footer>
-        <button type="submit" class="admin-btn">Enregistrer</button>
+        <button type="submit" class="add-submit-btn">Enregistrer</button>
       </footer>
     </form>
   </article>
@@ -105,17 +123,13 @@
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const modalData = {
-      panopliesList: [
-        {% for panoplie in panoplies_list %}"{{ panoplie }}"{% if not loop.last %},{% endif %}{% endfor %}
-      ],
-      artefactMainStats: {{ artefact_main_stats|tojson }},
-      secondaryStatsOptions: {{ secondary_stats_options|tojson }},
-      focusStatsOptions: {{ focus_stats_options|tojson }},
-      coresList: [
-        {% for core in cores_list %}"{{ core }}"{% if not loop.last %},{% endif %}{% endfor %}
-      ],
-      coreMainStats: {{ core_main_stats|tojson }},
-      coreSecondaryStats: {{ core_secondary_stats|tojson }},
+      panopliesList: {{ panoplies_list|tojson if panoplies_list else '[]' }},
+      artefactMainStats: {{ artefact_main_stats|tojson if artefact_main_stats else '{}' }},
+      secondaryStatsOptions: {{ secondary_stats_options|tojson if secondary_stats_options else '[]' }},
+      focusStatsOptions: {{ focus_stats_options|tojson if focus_stats_options else '[]' }},
+      coresList: {{ cores_list|tojson if cores_list else '[]' }},
+      coreMainStats: {{ core_main_stats|tojson if core_main_stats else '{}' }},
+      coreSecondaryStats: {{ core_secondary_stats|tojson if core_secondary_stats else '{}' }},
       currentLang: "{{ language if language is defined else 'FR-fr' }}"
     };
     if (typeof initializeAddCharacterModalData === 'function') {

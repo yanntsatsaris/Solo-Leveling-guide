@@ -12,7 +12,7 @@ const artefactTypeLabels = {
     "EN-en": ["Helmet", "Chestplate", "Gloves", "Boots", "Necklace", "Bracelet", "Ring", "Earring"]
 };
 
-function initializeAddCharacterModalData(data) {
+function initializeEditCharacterModalData(data) {
     Object.assign(panopliesList, data.panopliesList || []);
     Object.assign(artefactMainStats, data.artefactMainStats || {});
     Object.assign(secondaryStatsOptions, data.secondaryStatsOptions || []);
@@ -24,7 +24,7 @@ function initializeAddCharacterModalData(data) {
 }
 
 function reindexEqsetBlocks() {
-    const fields = document.getElementById('add-artefacts-fields');
+    const fields = document.getElementById('edit-artefacts-fields');
     if (!fields) return;
     const blocks = Array.from(fields.querySelectorAll('.edit-eqset-block'));
     blocks.forEach((block, idx) => {
@@ -44,7 +44,7 @@ function reindexEqsetBlocks() {
 }
 
 function reindexEqsetOptions() {
-    const select = document.getElementById('add-equipment-select');
+    const select = document.getElementById('edit-equipment-select');
     if (!select) return;
     const addNewSetOption = select.querySelector('option[value="add_new_set"]');
     const options = Array.from(select.options).filter(opt => opt !== addNewSetOption);
@@ -55,22 +55,22 @@ function reindexEqsetOptions() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('add-character-modal');
+    const modal = document.getElementById('edit-character-modal');
     const closeBtns = modal?.querySelectorAll('.close-modal, [data-close-modal]');
 
     // Gestion des onglets
-    document.querySelectorAll('#add-character-modal .edit-tab').forEach(tab => {
+    document.querySelectorAll('#edit-character-modal .edit-tab').forEach(tab => {
         tab.addEventListener('click', function() {
-            document.querySelectorAll('#add-character-modal .edit-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('#add-character-modal .edit-tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('#edit-character-modal .edit-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('#edit-character-modal .edit-tab-content').forEach(c => c.classList.remove('active'));
             tab.classList.add('active');
-            const targetContent = document.getElementById('add-character-modal').querySelector('#edit-tab-' + tab.dataset.tab);
+            const targetContent = document.getElementById('edit-character-modal').querySelector('#edit-tab-' + tab.dataset.tab);
             if (targetContent) targetContent.classList.add('active');
         });
     });
 
     // Sélecteur pour afficher le bon bloc de set à modifier dans l'onglet artefacts
-    document.getElementById('add-equipment-select')?.addEventListener('change', function(e) {
+    document.getElementById('edit-equipment-select')?.addEventListener('change', function(e) {
         if (this.value === "add_new_set") {
             handleAddNewSet(this);
         } else {
@@ -96,7 +96,23 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         setOrder = parseInt(setOrder) || (setCount + 1);
+        if (setOrder < 1) setOrder = 1;
+        if (setOrder > setCount + 1) setOrder = setCount + 1;
+
         const setOrderIndex = setOrder - 1;
+
+        // Shift existing orders
+        options.forEach(opt => {
+            const optOrder = parseInt(opt.dataset.order);
+            if (optOrder >= setOrderIndex) {
+                opt.dataset.order = optOrder + 1;
+                const block = document.getElementById(`eqset-block-${opt.value}`);
+                if (block) {
+                    const orderInput = block.querySelector(`input[name="eqset_order_${opt.value}"]`);
+                    if (orderInput) orderInput.value = parseInt(opt.dataset.order) + 1;
+                }
+            }
+        });
 
         const option = document.createElement('option');
         option.value = setOrderIndex;
@@ -108,12 +124,13 @@ document.addEventListener('DOMContentLoaded', () => {
         select.value = setOrderIndex;
 
         // Create HTML block
-        const fields = document.getElementById('add-artefacts-fields');
+        const fields = document.getElementById('edit-artefacts-fields');
         const div = document.createElement('div');
         div.className = 'edit-eqset-block';
         div.id = `eqset-block-${setOrderIndex}`;
         div.style.display = 'block';
 
+        // Hide other blocks
         document.querySelectorAll('.edit-eqset-block').forEach(b => b.style.display = 'none');
 
         const focusStatsSelect = `
@@ -183,11 +200,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <h4>Set : ${setName}</h4>
             <input type="hidden" name="eqset_name_${setOrderIndex}" value="${setName}">
             <input type="hidden" name="eqset_id_${setOrderIndex}" value="">
-            <div class="add-form-group">
+            <div class="edit-form-group">
                 <label>Description :</label>
                 <textarea name="eqset_description_${setOrderIndex}"></textarea>
             </div>
-            <div class="add-form-group">
+            <div class="edit-form-group">
                 <label>Stats à focus :</label>
                 ${focusStatsSelect}
             </div>
@@ -199,7 +216,12 @@ document.addEventListener('DOMContentLoaded', () => {
             ${coresHtml}
         `;
 
-        fields.appendChild(div);
+        const blocks = Array.from(fields.querySelectorAll('.edit-eqset-block'));
+        if (setOrderIndex < blocks.length) {
+            fields.insertBefore(div, blocks[setOrderIndex]);
+        } else {
+            fields.appendChild(div);
+        }
         reindexEqsetBlocks();
         reindexEqsetOptions();
     }
@@ -222,17 +244,69 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Ajout d'un passif
-    document.getElementById('add-passive-btn')?.addEventListener('click', async function() {
-        const grid = document.getElementById('passives-grid');
-        const index = grid.querySelectorAll('.edit-passive-block').length;
-        const folderInput = document.querySelector('#add-character-form input[name="image_folder"]');
-        const typeInput = document.querySelector('#add-character-form input[name="type"]');
+    // Sauvegarde l'état initial du formulaire à l'ouverture
+    let initialFormData = null;
+    const form = document.getElementById('edit-character-form');
+    if (form) {
+        function serializeForm(form) {
+            const formData = new FormData(form);
+            return Array.from(formData.entries()).sort();
+        }
+        document.getElementById('edit-character-btn')?.addEventListener('click', () => {
+            initialFormData = serializeForm(form);
+            if (modal) {
+                modal.removeAttribute('hidden');
+                modal.showModal();
+            }
+            fillImageSelects();
+        });
+        form.addEventListener('submit', function(e) {
+            Array.from(form.elements).forEach(el => {
+                if (el.value === "None") {
+                    el.value = null;
+                }
+            });
+            const currentFormData = serializeForm(form);
+            if (initialFormData && JSON.stringify(initialFormData) === JSON.stringify(currentFormData)) {
+                e.preventDefault();
+                alert("Aucune modification détectée.");
+                return false;
+            }
+        });
+    }
+
+    async function fillImageSelects() {
+        const folderInput = document.querySelector('#edit-character-form input[name="image_folder"]');
+        const typeInput = document.querySelector('#edit-character-form input[name="type"]');
         if (!folderInput || !typeInput) return;
         const folder = folderInput.value;
         const type = typeInput.value;
         const typeFolder = type.replace(/ /g, "_");
+        let images = [];
+        if (folder && typeFolder) {
+            try {
+                images = await fetch(`/characters/images_for/${encodeURIComponent(typeFolder)}/${encodeURIComponent(folder)}`).then(r => r.json());
+            } catch (e) { images = []; }
+        }
+        document.querySelectorAll('.passive-image-select').forEach(select => {
+            const current = select.dataset.current || "";
+            select.innerHTML = ['<option value=""></option>']
+                .concat(images.map(img => `<option value="${img}"${img === current ? ' selected' : ''}>${img}</option>`)).join('');
+        });
+        document.querySelectorAll('.skill-image-select').forEach(select => {
+            const current = select.dataset.current || "";
+            select.innerHTML = ['<option value=""></option>']
+                .concat(images.map(img => `<option value="${img}"${img === current ? ' selected' : ''}>${img}</option>`)).join('');
+        });
+    }
 
+    // Ajout d'un passif
+    document.getElementById('add-passive-btn')?.addEventListener('click', async function() {
+        const grid = document.getElementById('passives-grid');
+        const index = grid.querySelectorAll('.edit-passive-block').length;
+        const folder = document.querySelector('#edit-character-form input[name="image_folder"]').value;
+        const type = document.querySelector('#edit-character-form input[name="type"]').value;
+        const typeFolder = type.replace(/ /g, "_");
         let images = [];
         if (folder && typeFolder) {
             try {
@@ -272,13 +346,9 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('add-skill-btn')?.addEventListener('click', async function() {
         const grid = document.getElementById('skills-grid');
         const index = grid.querySelectorAll('.edit-skill-block').length;
-        const folderInput = document.querySelector('#add-character-form input[name="image_folder"]');
-        const typeInput = document.querySelector('#add-character-form input[name="type"]');
-        if (!folderInput || !typeInput) return;
-        const folder = folderInput.value;
-        const type = typeInput.value;
+        const folder = document.querySelector('#edit-character-form input[name="image_folder"]').value;
+        const type = document.querySelector('#edit-character-form input[name="type"]').value;
         const typeFolder = type.replace(/ /g, "_");
-
         let images = [];
         if (folder && typeFolder) {
             try {
@@ -309,83 +379,6 @@ document.addEventListener('DOMContentLoaded', () => {
       </div>
     `;
         grid.appendChild(row);
-    });
-
-    document.getElementById('add-character-btn')?.addEventListener('click', async function() {
-        const name = prompt("Nom du personnage :");
-        if (!name) return;
-        const alias = prompt("Alias du personnage :");
-        if (!alias) return;
-        const type = prompt("Type du personnage :");
-        if (!type) return;
-        const rarity = prompt("Rareté du personnage :");
-        if (!rarity) return;
-
-        const typeFolder = type.replace(/ /g, "_");
-        const aliasFolder = alias.replace(/ /g, "_");
-        const rarityFolder = rarity.replace(/ /g, "_");
-        const folderName = `${rarityFolder}_${typeFolder}_${aliasFolder}`;
-
-        let folderExists = false;
-        try {
-            const resp = await fetch(`/characters/add/check_image_folder?type=${encodeURIComponent(type)}&alias=${encodeURIComponent(alias)}&rarity=${encodeURIComponent(rarity)}`);
-            const data = await resp.json();
-            folderExists = data.exists;
-        } catch (e) {
-            folderExists = false;
-        }
-
-        if (modal) {
-            modal.removeAttribute('hidden');
-            modal.showModal();
-        }
-
-        document.querySelector('#add-character-form input[name="name"]').value = name;
-        document.querySelector('#add-character-form input[name="alias"]').value = alias;
-        document.querySelector('#add-character-form input[name="type"]').value = type;
-        document.querySelector('#add-character-form input[name="rarity"]').value = rarity;
-
-        let hiddenInput = document.querySelector('#add-character-form input[name="image_folder"]');
-        if (hiddenInput) hiddenInput.value = folderExists ? folderName : "";
-
-        if (!folderExists) {
-            let uploadOverlay = document.createElement('dialog');
-            uploadOverlay.id = "upload-character-images-overlay";
-            uploadOverlay.className = "add-character-content"; // Reuse some styles
-            uploadOverlay.innerHTML = `
-                <form id="upload-character-images-form" enctype="multipart/form-data">
-                    <h2>Uploader les images du personnage (.zip)</h2>
-                    <input type="file" name="images_zip" accept=".zip" required>
-                    <input type="hidden" name="type" value="${type}">
-                    <input type="hidden" name="alias" value="${alias}">
-                    <input type="hidden" name="rarity" value="${rarity}">
-                    <div style="margin-top:16px; display:flex; justify-content: space-between;">
-                        <button type="submit" class="admin-btn">Envoyer</button>
-                        <button type="button" id="cancel-upload-character-images" class="close-btn">&times;</button>
-                    </div>
-                </form>
-            `;
-            document.body.appendChild(uploadOverlay);
-            uploadOverlay.showModal();
-
-            document.getElementById('cancel-upload-character-images').onclick = function() {
-                uploadOverlay.close();
-                uploadOverlay.remove();
-            };
-
-            document.getElementById('upload-character-images-form').onsubmit = async function(e) {
-                e.preventDefault();
-                let formData = new FormData(this);
-                let resp = await fetch('/admin/upload_character_images_zip', {
-                    method: 'POST',
-                    body: formData
-                });
-                let txt = await resp.text();
-                uploadOverlay.close();
-                uploadOverlay.remove();
-                alert(txt);
-            };
-        }
     });
 
     document.addEventListener('change', function(e) {

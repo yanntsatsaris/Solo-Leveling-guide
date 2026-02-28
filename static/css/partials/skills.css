@@ -44,6 +44,8 @@ nav.sjw-inner-tab-btns {
   border-radius: 6px 6px 0 0;
   font-weight: bold;
   transition: background 0.2s, color 0.2s;
+  font-family: inherit;
+  font-size: inherit;
 }
 .sjw-inner-tab-btn.active {
   background: #ffcc00;
